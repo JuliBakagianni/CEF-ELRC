@@ -1,3 +1,7 @@
+CEF-ELRC
+===================
+Public repository of the CEF-ELRC project based on the META-SHARE software
+
 META-SHARE SOFTWARE
 ===================
 
@@ -65,3 +69,4 @@ License and Used Third-Party Software
 -------------------------------------
 
 See the LICENSE and NOTICE files.
+=======
