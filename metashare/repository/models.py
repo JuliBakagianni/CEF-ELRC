@@ -504,7 +504,7 @@ class validationInfoType_model(SchemaModel):
 
     __schema_name__ = 'validationInfoType'
     __schema_fields__ = (
-      # ( u'validated', u'validated', REQUIRED ),
+      ( u'validated', u'validated', REQUIRED ),
       # ( u'validationType', u'validationType', OPTIONAL ),
       # ( u'validationMode', u'validationMode', OPTIONAL ),
       # ( u'validationModeDetails', u'validationModeDetails', OPTIONAL ),
