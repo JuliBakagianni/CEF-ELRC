@@ -23,7 +23,8 @@ from metashare.stats.model_utils import saveLRStats, DELETE_STAT, UPDATE_STAT
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 from metashare.recommendations.models import ResourceCountPair, \
     ResourceCountDict
-
+from metashare.repository.language_choices import LANGUAGEID_CHOICES, \
+    LANGUAGENAME_CHOICES, LANGUAGENAME_TO_LANGUAGEID
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -3432,13 +3433,16 @@ class languageInfoType_model(SchemaModel):
     }
 
     languageId = XmlCharField(
-      verbose_name='Language id', 
+      verbose_name='Language id',
       help_text='The identifier of the language that is included in the ' \
       'resource or supported by the tool/service; an autocompletion mech' \
       'anism with values from the ISO 639 is provided in the editor, but' \
       ' the values can be subsequently edited for further specification ' \
       '(according to the IETF BCP47 guidelines)',
-      max_length=100, )
+      max_length=100,
+      editable=False,
+      choices=LANGUAGEID_CHOICES['choices'])
+
 
     languageName = XmlCharField(
       verbose_name='Language name', 
@@ -3447,7 +3451,8 @@ class languageInfoType_model(SchemaModel):
       'tion mechanism with values from the ISO 639 is provided in the ed' \
       'itor, but the values can be subsequently edited for further speci' \
       'fication (according to the IETF BCP47 guidelines)',
-      max_length=100, )
+      max_length=100,
+      choices=LANGUAGENAME_CHOICES['choices'])
 
     languageScript = XmlCharField(
       verbose_name='Language script', 
@@ -3490,6 +3495,18 @@ class languageInfoType_model(SchemaModel):
     back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
 
     back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        """
+        Overrides the predefined save() method to assign the corresponding value to
+        the languageId field. This value is taken from the LANGUAGENAME_TO_LANGUAGEID
+        dictionary, which maps the the languageName values to languageId values.
+        """
+        if self.languageName:
+            self.languageId = LANGUAGENAME_TO_LANGUAGEID[self.languageName]
+
+        # Call save() method from super class with all arguments.
+        super(languageInfoType_model, self).save(*args, **kwargs)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
