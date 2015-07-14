@@ -2817,7 +2817,7 @@ class personInfoType_model(actorInfoType_model):
 
 DISTRIBUTIONINFOTYPE_AVAILABILITY_CHOICES = _make_choices_from_list([
   u'available-unrestrictedUse', u'available-restrictedUse',
-  u'notAvailableThroughMetaShare',u'underNegotiation', 
+  u'availableThroughOtherDistributor',u'underNegotiation',
 ])
 
 # pylint: disable-msg=C0103
@@ -2836,8 +2836,8 @@ class distributionInfoType_model(SchemaModel):
       ( u'licenceInfo', u'licenceinfotype_model_set', OPTIONAL ),
       ( 'iprHolder/personInfo', 'iprHolder', OPTIONAL ),
       ( 'iprHolder/organizationInfo', 'iprHolder', OPTIONAL ),
-      ( u'availabilityEndDate', u'availabilityEndDate', OPTIONAL ),
-      ( u'availabilityStartDate', u'availabilityStartDate', OPTIONAL ),
+      # ( u'availabilityEndDate', u'availabilityEndDate', OPTIONAL ),
+      # ( u'availabilityStartDate', u'availabilityStartDate', OPTIONAL ),
     )
     __schema_classes__ = {
       u'licenceInfo': "licenceInfoType_model",
@@ -2870,19 +2870,19 @@ class distributionInfoType_model(SchemaModel):
       ' the META-SHARE network.',
       blank=True, null=True, related_name="iprHolder_%(class)s_related", )
 
-    availabilityEndDate = models.DateField(
-      verbose_name='Availability end date', 
-      help_text='Specifies the end date of availability of a resource - ' \
-      'only for cases where a resource is available for a restricted tim' \
-      'e period.',
-      blank=True, null=True, )
-
-    availabilityStartDate = models.DateField(
-      verbose_name='Availability start date', 
-      help_text='Specifies the start date of availability of a resource ' \
-      '- only for cases where a resource is available for a restricted t' \
-      'ime period.',
-      blank=True, null=True, )
+    # availabilityEndDate = models.DateField(
+    #   verbose_name='Availability end date',
+    #   help_text='Specifies the end date of availability of a resource - ' \
+    #   'only for cases where a resource is available for a restricted tim' \
+    #   'e period.',
+    #   blank=True, null=True, )
+    #
+    # availabilityStartDate = models.DateField(
+    #   verbose_name='Availability start date',
+    #   help_text='Specifies the start date of availability of a resource ' \
+    #   '- only for cases where a resource is available for a restricted t' \
+    #   'ime period.',
+    #   blank=True, null=True, )
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -2935,20 +2935,19 @@ class membershipInfoType_model(SchemaModel):
 
 LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
   u'CC-BY', u'CC-BY-NC', u'CC-BY-NC-ND', u'CC-BY-NC-SA', u'CC-BY-ND',
-  u'CC-BY-SA',u'CC-ZERO', u'MS-C-NoReD', u'MS-C-NoReD-FF', u'MS-C-NoReD-ND',
-  u'MS-C-NoReD-ND-FF',u'MS-NC-NoReD', u'MS-NC-NoReD-FF', u'MS-NC-NoReD-ND',
+  u'CC-BY-SA',u'CC-ZERO', u'MS-NoReD', u'MS-NoReD-FF', u'MS-NoReD-ND',
+  u'MS-NoReD-ND-FF',u'MS-NC-NoReD', u'MS-NC-NoReD-FF', u'MS-NC-NoReD-ND',
   u'MS-NC-NoReD-ND-FF',u'MSCommons-BY', u'MSCommons-BY-NC',
-  u'MSCommons-BY-NC-ND',u'MSCommons-BY-NC-SA', u'MSCommons-BY-ND',
-  u'MSCommons-BY-SA',u'CLARIN_ACA', u'CLARIN_ACA-NC', u'CLARIN_PUB',
-  u'CLARIN_RES',u'ELRA_END_USER', u'ELRA_EVALUATION', u'ELRA_VAR', u'AGPL',
-  u'ApacheLicence_2.0',u'BSD', u'BSD-style', u'GFDL', u'GPL', u'LGPL',
-  u'Princeton_Wordnet',u'proprietary', u'underNegotiation', u'other', 
+  u'MSCommons-BY-NC-ND', u'AGPL', u'ApacheLicence_2.0',u'BSD',
+  u'BSD-style', u'GFDL', u'GPL', u'LGPL', u'Princeton_Wordnet',
+  u'proprietary', u'underNegotiation', u'other',
+  u'openForReuseWithRestrictions', u'termsOfService',
 ])
 
 LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES = _make_choices_from_list([
-  u'informLicensor', u'redeposit', u'onlyMSmembers',
-  u'academic-nonCommercialUse',u'evaluationUse', u'commercialUse',
-  u'attribution',u'shareAlike', u'noDerivatives', u'noRedistribution',
+  u'informLicensor', u'redeposit', u'academic-nonCommercialUse',
+  u'evaluationUse', u'commercialUse', u'attribution',
+  u'shareAlike', u'noDerivatives', u'noRedistribution',
   u'other',
 ])
 
@@ -2978,6 +2977,7 @@ class licenceInfoType_model(SchemaModel):
     __schema_fields__ = (
       ( u'licence', u'licence', REQUIRED ),
       ( u'restrictionsOfUse', u'restrictionsOfUse', OPTIONAL ),
+      ( u'termsOfServiceText', u'termsOfServiceText', OPTIONAL ),
       ( u'distributionAccessMedium', u'distributionAccessMedium', RECOMMENDED ),
       ( u'downloadLocation', u'downloadLocation', OPTIONAL ),
       ( u'executionLocation', u'executionLocation', OPTIONAL ),
@@ -3013,6 +3013,22 @@ class licenceInfoType_model(SchemaModel):
       max_length=1 + len(LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES['choices']) / 4,
       choices=LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES['choices'],
       )
+
+    termsOfServiceText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
+      default_retriever=best_lang_value_retriever,
+      verbose_name='Terms of service text',
+      max_val_length=10000,
+      help_text='Used to provide a free text description of the terms as' \
+      'sociated with a web service (e.g. time and space restrictions, et' \
+      'c.).',
+      blank=True)
+
+    termsOfServiceURL = models.URLField(
+      verbose_name='Terms of service URL',
+      help_text='Used to provide a hyperlink to a url describing the ter' \
+      'ms of service for the language resource.',
+      blank=True,
+    )
 
     distributionAccessMedium = MultiSelectField(
       verbose_name='Distribution access medium', 
