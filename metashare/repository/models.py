@@ -359,8 +359,10 @@ class identificationInfoType_model(SchemaModel):
       ( u'description', u'description', REQUIRED ),
       ( u'resourceShortName', u'resourceShortName', OPTIONAL ),
       ( u'url', u'url', RECOMMENDED ),
-      ( u'metaShareId', u'metaShareId', REQUIRED ),
+      # ( u'metaShareId', u'metaShareId', REQUIRED ),
       ( u'identifier', u'identifier', OPTIONAL ),
+      ( u'PID', u'PID', RECOMMENDED),
+      ( u'ISLRN', u'ISLRN', RECOMMENDED ),
     )
 
     resourceName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
@@ -398,18 +400,31 @@ class identificationInfoType_model(SchemaModel):
       'ment etc.) is located',
       blank=True, )
 
-    metaShareId = XmlCharField(
-      verbose_name='Meta share id', 
-      help_text='An unambiguous referent to the resource within META-SHA' \
-      'RE; it reflects to the unique system id provided automatically by' \
-      ' the MetaShare software',
-      max_length=100, default="NOT_DEFINED_FOR_V2", )
+    # metaShareId = XmlCharField(
+    #   verbose_name='Meta share id',
+    #   help_text='An unambiguous referent to the resource within META-SHA' \
+    #   'RE; it reflects to the unique system id provided automatically by' \
+    #   ' the MetaShare software',
+    #   max_length=100, default="NOT_DEFINED_FOR_V2", )
 
     identifier = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=1, max_length=100), 
       verbose_name='Identifier', 
       help_text='A reference to the resource like a pid or an internal i' \
       'dentifier used by the resource provider',
       blank=True, validators=[validate_matches_xml_char_production], )
+
+    PID = models.URLField(editable=False,
+        help_text='To be used for CLARIN-EL '
+        'purposes; automatically assigned by the '
+        'system and thus not viewable on the editor; '
+        'at a later stage, we might consider having it '
+        'also editable for PIDs assigned by other entities')
+
+    ISLRN = XmlCharField(
+      verbose_name='Islrn',
+      help_text='Reference to the unique ISLRN number',
+      blank=True, max_length=17,
+      validators=[validate_matches_xml_char_production], )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -462,17 +477,17 @@ class versionInfoType_model(SchemaModel):
         formatstring = u'{} {} {}'
         return self.unicode_(formatstring, formatargs)
 
-VALIDATIONINFOTYPE_VALIDATIONTYPE_CHOICES = _make_choices_from_list([
-  u'formal', u'content', 
-])
+# VALIDATIONINFOTYPE_VALIDATIONTYPE_CHOICES = _make_choices_from_list([
+#   u'formal', u'content',
+# ])
+#
+# VALIDATIONINFOTYPE_VALIDATIONMODE_CHOICES = _make_choices_from_list([
+#   u'manual', u'automatic', u'mixed', u'interactive',
+# ])
 
-VALIDATIONINFOTYPE_VALIDATIONMODE_CHOICES = _make_choices_from_list([
-  u'manual', u'automatic', u'mixed', u'interactive', 
-])
-
-VALIDATIONINFOTYPE_VALIDATIONEXTENT_CHOICES = _make_choices_from_list([
-  u'full', u'partial', 
-])
+# VALIDATIONINFOTYPE_VALIDATIONEXTENT_CHOICES = _make_choices_from_list([
+#   u'full', u'partial',
+# ])
 
 # pylint: disable-msg=C0103
 class validationInfoType_model(SchemaModel):
@@ -489,97 +504,97 @@ class validationInfoType_model(SchemaModel):
 
     __schema_name__ = 'validationInfoType'
     __schema_fields__ = (
-      ( u'validated', u'validated', REQUIRED ),
-      ( u'validationType', u'validationType', OPTIONAL ),
-      ( u'validationMode', u'validationMode', OPTIONAL ),
-      ( u'validationModeDetails', u'validationModeDetails', OPTIONAL ),
-      ( u'validationExtent', u'validationExtent', OPTIONAL ),
-      ( u'validationExtentDetails', u'validationExtentDetails', OPTIONAL ),
-      ( u'sizePerValidation', u'sizePerValidation', OPTIONAL ),
-      ( 'validationReport/documentUnstructured', 'validationReport', OPTIONAL ),
-      ( 'validationReport/documentInfo', 'validationReport', OPTIONAL ),
-      ( u'validationTool', u'validationTool', OPTIONAL ),
-      ( 'validator/personInfo', 'validator', OPTIONAL ),
-      ( 'validator/organizationInfo', 'validator', OPTIONAL ),
+      # ( u'validated', u'validated', REQUIRED ),
+      # ( u'validationType', u'validationType', OPTIONAL ),
+      # ( u'validationMode', u'validationMode', OPTIONAL ),
+      # ( u'validationModeDetails', u'validationModeDetails', OPTIONAL ),
+      # ( u'validationExtent', u'validationExtent', OPTIONAL ),
+      # ( u'validationExtentDetails', u'validationExtentDetails', OPTIONAL ),
+      # ( u'sizePerValidation', u'sizePerValidation', OPTIONAL ),
+      # ( 'validationReport/documentUnstructured', 'validationReport', OPTIONAL ),
+      # ( 'validationReport/documentInfo', 'validationReport', OPTIONAL ),
+      # ( u'validationTool', u'validationTool', OPTIONAL ),
+      # ( 'validator/personInfo', 'validator', OPTIONAL ),
+      # ( 'validator/organizationInfo', 'validator', OPTIONAL ),
     )
-    __schema_classes__ = {
-      u'documentInfo': "documentInfoType_model",
-      u'documentUnstructured': "documentUnstructuredString_model",
-      u'organizationInfo': "organizationInfoType_model",
-      u'personInfo': "personInfoType_model",
-      u'sizePerValidation': "sizeInfoType_model",
-      u'validationTool': "targetResourceInfoType_model",
-    }
+    # __schema_classes__ = {
+    #   u'documentInfo': "documentInfoType_model",
+    #   u'documentUnstructured': "documentUnstructuredString_model",
+    #   u'organizationInfo': "organizationInfoType_model",
+    #   u'personInfo': "personInfoType_model",
+    #   u'sizePerValidation': "sizeInfoType_model",
+    #   u'validationTool': "targetResourceInfoType_model",
+    # }
 
     validated = MetaBooleanField(
       verbose_name='Validated', 
       help_text='Specifies the validation status of the resource',
       )
 
-    validationType = models.CharField(
-      verbose_name='Validation type', 
-      help_text='Specifies the type of the validation that have been per' \
-      'formed',
-      blank=True, 
-      max_length=20,
-      choices=sorted(VALIDATIONINFOTYPE_VALIDATIONTYPE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    validationMode = models.CharField(
-      verbose_name='Validation mode', 
-      help_text='Specifies the validation methodology applied',
-      blank=True, 
-      max_length=20,
-      choices=sorted(VALIDATIONINFOTYPE_VALIDATIONMODE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    validationModeDetails = XmlCharField(
-      verbose_name='Validation mode details', 
-      help_text='Textual field for additional information on validation',
-      blank=True, max_length=500, )
-
-    validationExtent = models.CharField(
-      verbose_name='Validation extent', 
-      help_text='The resource coverage in terms of validated data',
-      blank=True, 
-      max_length=20,
-      choices=sorted(VALIDATIONINFOTYPE_VALIDATIONEXTENT_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    validationExtentDetails = XmlCharField(
-      verbose_name='Validation extent details', 
-      help_text='Provides information on size or other details of partia' \
-      'lly validated data; to be used if only part of the resource has b' \
-      'een validated and as an alternative to SizeInfo if the validated ' \
-      'part cannot be counted otherwise',
-      blank=True, max_length=500, )
-
-    sizePerValidation = models.OneToOneField("sizeInfoType_model", 
-      verbose_name='Size per validation', 
-      help_text='Specifies the size of the validated part of a resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    validationReport = models.ForeignKey("documentationInfoType_model", 
-      verbose_name='Validation report', 
-      help_text='A short account of the validation details or a bibliogr' \
-      'aphic reference to a document with detailed information on the va' \
-      'lidation process and results',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    validationTool = models.ForeignKey("targetResourceInfoType_model", 
-      verbose_name='Validation tool', 
-      help_text='The name, the identifier or the url of the tool used fo' \
-      'r the validation of the resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    validator = models.ManyToManyField("actorInfoType_model", 
-      verbose_name='Validator', 
-      help_text='Groups information on the person(s) or the organization' \
-      '(s) that validated the resource',
-      blank=True, null=True, related_name="validator_%(class)s_related", )
+    # validationType = models.CharField(
+    #   verbose_name='Validation type',
+    #   help_text='Specifies the type of the validation that have been per' \
+    #   'formed',
+    #   blank=True,
+    #   max_length=20,
+    #   choices=sorted(VALIDATIONINFOTYPE_VALIDATIONTYPE_CHOICES['choices'],
+    #                  key=lambda choice: choice[1].lower()),
+    #   )
+    #
+    # validationMode = models.CharField(
+    #   verbose_name='Validation mode',
+    #   help_text='Specifies the validation methodology applied',
+    #   blank=True,
+    #   max_length=20,
+    #   choices=sorted(VALIDATIONINFOTYPE_VALIDATIONMODE_CHOICES['choices'],
+    #                  key=lambda choice: choice[1].lower()),
+    #   )
+    #
+    # validationModeDetails = XmlCharField(
+    #   verbose_name='Validation mode details',
+    #   help_text='Textual field for additional information on validation',
+    #   blank=True, max_length=500, )
+    #
+    # validationExtent = models.CharField(
+    #   verbose_name='Validation extent',
+    #   help_text='The resource coverage in terms of validated data',
+    #   blank=True,
+    #   max_length=20,
+    #   choices=sorted(VALIDATIONINFOTYPE_VALIDATIONEXTENT_CHOICES['choices'],
+    #                  key=lambda choice: choice[1].lower()),
+    #   )
+    #
+    # validationExtentDetails = XmlCharField(
+    #   verbose_name='Validation extent details',
+    #   help_text='Provides information on size or other details of partia' \
+    #   'lly validated data; to be used if only part of the resource has b' \
+    #   'een validated and as an alternative to SizeInfo if the validated ' \
+    #   'part cannot be counted otherwise',
+    #   blank=True, max_length=500, )
+    #
+    # sizePerValidation = models.OneToOneField("sizeInfoType_model",
+    #   verbose_name='Size per validation',
+    #   help_text='Specifies the size of the validated part of a resource',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
+    #
+    # validationReport = models.ForeignKey("documentationInfoType_model",
+    #   verbose_name='Validation report',
+    #   help_text='A short account of the validation details or a bibliogr' \
+    #   'aphic reference to a document with detailed information on the va' \
+    #   'lidation process and results',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
+    #
+    # validationTool = models.ForeignKey("targetResourceInfoType_model",
+    #   verbose_name='Validation tool',
+    #   help_text='The name, the identifier or the url of the tool used fo' \
+    #   'r the validation of the resource',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
+    #
+    # validator = models.ManyToManyField("actorInfoType_model",
+    #   verbose_name='Validator',
+    #   help_text='Groups information on the person(s) or the organization' \
+    #   '(s) that validated the resource',
+    #   blank=True, null=True, related_name="validator_%(class)s_related", )
 
     back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model",  blank=True, null=True)
 
@@ -715,13 +730,13 @@ class metadataInfoType_model(SchemaModel):
     __schema_fields__ = (
       ( u'metadataCreationDate', u'metadataCreationDate', REQUIRED ),
       ( u'metadataCreator', u'metadataCreator', OPTIONAL ),
-      ( u'source', u'source', OPTIONAL ),
-      ( u'originalMetadataSchema', u'originalMetadataSchema', OPTIONAL ),
-      ( u'originalMetadataLink', u'originalMetadataLink', OPTIONAL ),
+      # ( u'source', u'source', OPTIONAL ),
+      # ( u'originalMetadataSchema', u'originalMetadataSchema', OPTIONAL ),
+      # ( u'originalMetadataLink', u'originalMetadataLink', OPTIONAL ),
       ( u'metadataLanguageName', u'metadataLanguageName', OPTIONAL ),
-      ( u'metadataLanguageId', u'metadataLanguageId', OPTIONAL ),
+      # ( u'metadataLanguageId', u'metadataLanguageId', OPTIONAL ),
       ( u'metadataLastDateUpdated', u'metadataLastDateUpdated', OPTIONAL ),
-      ( u'revision', u'revision', OPTIONAL ),
+      # ( u'revision', u'revision', OPTIONAL ),
     )
     __schema_classes__ = {
       u'metadataCreator': "personInfoType_model",
@@ -739,23 +754,23 @@ class metadataInfoType_model(SchemaModel):
       'etadata record',
       blank=True, null=True, related_name="metadataCreator_%(class)s_related", )
 
-    source = XmlCharField(
-      verbose_name='Source', 
-      help_text='Refers to the catalogue or repository from which the me' \
-      'tadata has been originated',
-      blank=True, max_length=500, )
+    # source = XmlCharField(
+    #   verbose_name='Source',
+    #   help_text='Refers to the catalogue or repository from which the me' \
+    #   'tadata has been originated',
+    #   blank=True, max_length=500, )
 
-    originalMetadataSchema = XmlCharField(
-      verbose_name='Original metadata schema', 
-      help_text='Refers to the metadata schema originally used for the d' \
-      'escription of the resource',
-      blank=True, max_length=500, )
+    # originalMetadataSchema = XmlCharField(
+    #   verbose_name='Original metadata schema',
+    #   help_text='Refers to the metadata schema originally used for the d' \
+    #   'escription of the resource',
+    #   blank=True, max_length=500, )
 
-    originalMetadataLink = XmlCharField(
-      verbose_name='Original metadata link', validators=[HTTPURI_VALIDATOR], 
-      help_text='A link to the original metadata record, in cases of har' \
-      'vesting',
-      blank=True, max_length=1000, )
+    # originalMetadataLink = XmlCharField(
+    #   verbose_name='Original metadata link', validators=[HTTPURI_VALIDATOR],
+    #   help_text='A link to the original metadata record, in cases of har' \
+    #   'vesting',
+    #   blank=True, max_length=1000, )
 
     metadataLanguageName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=2, max_length=1000), 
       verbose_name='Metadata language name', 
@@ -766,14 +781,14 @@ class metadataInfoType_model(SchemaModel):
       '7 guidelines)',
       blank=True, validators=[validate_matches_xml_char_production], )
 
-    metadataLanguageId = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=3, max_length=1000), 
-      verbose_name='Metadata language id', 
-      help_text='The identifier of the language in which the metadata de' \
-      'scription is written; an autocompletion mechanism with values fro' \
-      'm the ISO 639 is provided in the editor, but the values can be su' \
-      'bsequently edited for further specification (according to the IET' \
-      'F BCP47 guidelines)',
-      blank=True, validators=[validate_matches_xml_char_production], )
+    # metadataLanguageId = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=3, max_length=1000),
+    #   verbose_name='Metadata language id',
+    #   help_text='The identifier of the language in which the metadata de' \
+    #   'scription is written; an autocompletion mechanism with values fro' \
+    #   'm the ISO 639 is provided in the editor, but the values can be su' \
+    #   'bsequently edited for further specification (according to the IET' \
+    #   'F BCP47 guidelines)',
+    #   blank=True, validators=[validate_matches_xml_char_production], )
 
     metadataLastDateUpdated = models.DateField(
       verbose_name='Metadata last date updated', 
@@ -781,11 +796,11 @@ class metadataInfoType_model(SchemaModel):
       'utomatically inserted by the MetaShare software)',
       blank=True, null=True, )
 
-    revision = XmlCharField(
-      verbose_name='Revision', 
-      help_text='Provides an account of the revisions in free text or a ' \
-      'link to a document with revisions',
-      blank=True, max_length=500, )
+    # revision = XmlCharField(
+    #   verbose_name='Revision',
+    #   help_text='Provides an account of the revisions in free text or a ' \
+    #   'link to a document with revisions',
+    #   blank=True, max_length=500, )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -997,9 +1012,9 @@ class documentInfoType_model(documentationInfoType_model):
         formatstring = u'{}: {}'
         return self.unicode_(formatstring, formatargs)
 
-RESOURCEDOCUMENTATIONINFOTYPE_TOOLDOCUMENTATIONTYPE_CHOICES = _make_choices_from_list([
-  u'online', u'manual', u'helpFunctions', u'none', u'other', 
-])
+# RESOURCEDOCUMENTATIONINFOTYPE_TOOLDOCUMENTATIONTYPE_CHOICES = _make_choices_from_list([
+#   u'online', u'manual', u'helpFunctions', u'none', u'other',
+# ])
 
 # pylint: disable-msg=C0103
 class resourceDocumentationInfoType_model(SchemaModel):
@@ -1016,7 +1031,7 @@ class resourceDocumentationInfoType_model(SchemaModel):
       ( 'documentation/documentUnstructured', 'documentation', RECOMMENDED ),
       ( 'documentation/documentInfo', 'documentation', RECOMMENDED ),
       ( u'samplesLocation', u'samplesLocation', RECOMMENDED ),
-      ( u'toolDocumentationType', u'toolDocumentationType', OPTIONAL ),
+      # ( u'toolDocumentationType', u'toolDocumentationType', OPTIONAL ),
     )
     __schema_classes__ = {
       u'documentInfo': "documentInfoType_model",
@@ -1035,20 +1050,71 @@ class resourceDocumentationInfoType_model(SchemaModel):
       'ools, of samples of the output',
       blank=True, )
 
-    toolDocumentationType = MultiSelectField(
-      verbose_name='Tool documentation', 
-      help_text='Specifies the type of documentation for tool or service' \
-      '',
-      blank=True, 
-      max_length=1 + len(RESOURCEDOCUMENTATIONINFOTYPE_TOOLDOCUMENTATIONTYPE_CHOICES['choices']) / 4,
-      choices=RESOURCEDOCUMENTATIONINFOTYPE_TOOLDOCUMENTATIONTYPE_CHOICES['choices'],
-      )
+    # toolDocumentationType = MultiSelectField(
+    #   verbose_name='Tool documentation',
+    #   help_text='Specifies the type of documentation for tool or service' \
+    #   '',
+    #   blank=True,
+    #   max_length=1 + len(RESOURCEDOCUMENTATIONINFOTYPE_TOOLDOCUMENTATIONTYPE_CHOICES['choices']) / 4,
+    #   choices=RESOURCEDOCUMENTATIONINFOTYPE_TOOLDOCUMENTATIONTYPE_CHOICES['choices'],
+    #   )
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
         formatargs = ['documentation', ]
         formatstring = u'{}'
         return self.unicode_(formatstring, formatargs)
+
+DOMAININFOTYPE_DOMAIN_CHOICES = (
+  (u"advertisingPublicRelationsDDC659", u"Advertising &amp; Public Relations (DDC659)"),
+  (u"agricultureDDC630", u"Agriculture (DDC630)"),
+  (u"animalsZoologyDDC590", u"Animals (Zoology) (DDC590)"),
+  (u"appliedPhysicsDDC621", u"Applied Physics (DDC621)"),
+  (u"architectureDDC720", u"Architecture (DDC720)"),
+  (u"artsRecreationDDC700", u"Arts &amp; Recreation (DDC700)"),
+  (u"astrononmyDDC520", u"Astronomy (DDC520)"),
+  (u"biochemistryDDC572", u"Biochemistry (DDC572)"),
+  (u"biologyDDC570", u"Biology (DDC570)"),
+  (u"chemicalEngineeringDDC660", "Chemical Engineering (DDC660)"),
+  (u"chemistryDDC540", u"Chemistry (DDC540)"),
+  (u"commerceTradeDDC381", u"Commerce (Trade) (DDC381)"),
+  (u"communicationsDDC384", u"Communications (DDC384)"),
+  (u"computerScienceInformationGeneralWorksDDC000", u"Computer Science, Information &amp; General Works (DDC000)"),
+  (u"constructionOfBuildingsDDC690", u"Construction of Buildings (DDC690)"),
+  (u"culture", u"Culture"), (u"earthSciencesGeologyDDC550", u"Earth Sciences &amp; Geology (DDC550)"),
+  (u"economicsDDC330", u"Economics (DDC330)"), (u"educationDDC370", u"Education (DDC370)"),
+  (u"energy", u"Energy"), (u"engineeringDDC620", u"Engineering (DDC620)"),
+  (u"environment", u"Environment"), (u"general", u"General"),
+  (u"geographyTravelDDC910", u"Geography &amp; Travel (DDC910)"),
+  (u"graphicArtsDecorativeArtsDDC740", u"Graphic Arts &amp; Decorative Arts (DDC740)"),
+  (u"hardwareHouseholdAppliancesDDC683", u"Hardware &amp; Household Appliances (DDC683)"),
+  (u"historyDDC900", u"History (DDC900)"),
+  (u"homeFamilyManagementDDC640", u"Home &amp; Family Management (DDC640)"),
+  (u"humanities", u"Humanities"), (u"industry", u"Industry"),
+  (u"languageDDC400", u"Language (DDC400)"), (u"lawDDC340", u"Law (DDC340)"),
+  (u"linguisticsDDC410", u"Linguistics (DDC410)"),
+  (u"literatureRhetoricCriticismDDC800", u"Literature, Rhetoric &amp; Criticism (DDC800)"),
+  (u"managementPublicRelationsDDC650", u"Management &amp; Public Relations (DDC650)"),
+  (u"manufacturingDDC670", u"Manufacturing (DDC670)"), (u"mathematicsDDC510", u"Mathematics (DDC510)"),
+  (u"medicineHealthDDC610", u"Medicine &amp; Health (DDC610)"), (u"musicDDC780", u"Music (DDC780)"),
+  (u"newsMediaJournalismPublishingDDC070", u"News Media, Journalism &amp; Publishing (DDC070)"),
+  (u"paintingDDC750", u"Painting (DDC750)"), (u"paleontologyDDC560", u"Paleontology (DDC560)"),
+  (u"philosophyDDC100", u"Philosophy (DDC100)"),
+  (u"photographyComputerArtFilmVideoDDC770", u"Photography, Computer Art, Film, Video (DDC770)"),
+  (u"physicsDDC530", u"Physics (DDC530)"), (u"plantsDDC580", u"Plants (DDC580)"),
+  (u"politicalScienceDDC320", u"Political Science (DDC320)"),
+  (u"psychologyDDC150", u"Psychology (DDC150)"),
+  (u"publicAdministrationDDC351", u"Public Administration (DDC351)"),
+  (u"religionDDC200", u"Religion (DDC200)"), (u"scienceDDC500", u"Science (DDC500)"),
+  (u"sculptureCeramicsMetalworkDDC730", u"Sculpture, Ceramics, &amp; Metalwork (DDC730)"),
+  (u"socialProblemsSocialServicesDDC360", u"Social Problems &amp; Social Services (DDC360)"),
+  (u"socialSciencesDDC300", u"Social Sciences (DDC300)"),
+  (u"sociologyAnthropologyDDC301", u"Sociology &amp; Anthropology (DDC301)"),
+  (u"sportsGamesEntertainmentDDC790", u"Sports, Games &amp; Entertainment (DDC790)"),
+  (u"statisticsDDC310", u"Statistics (DDC310)"),
+  (u"technologyDDC600", u"Technology (DDC600)"),
+  (u"transportationDDC388", u"Transportation (DDC388)"),
+)
 
 DOMAININFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES = _make_choices_from_list([
   u'ANC_domainClassification', u'ANC_genreClassification',
@@ -1080,11 +1146,18 @@ class domainInfoType_model(SchemaModel):
       u'sizePerDomain': "sizeInfoType_model",
     }
 
+    # TO CHANGE IN: domain = MutuallyExclusiveValueModelField
     domain = XmlCharField(
       verbose_name='Domain', 
-      help_text='Specifies the application domain of the resource or the' \
-      ' tool/service',
-      max_length=100, )
+      help_text='Specifies the application domain of the resource or ' \
+        'the tool/service; please, select one of the values supplied ' \
+        '(taken mainly from the Dewey Decimal Classification system) ' \
+        'or, in case none of these describes your domain, add a new ' \
+        'value, if possible, from the DDC recommended values ' \
+        '(https://en.wikipedia.org/wiki/List_of_Dewey_Decimal_classes)',
+      max_length=100,
+      choices=sorted(DOMAININFOTYPE_DOMAIN_CHOICES,
+                     key=lambda choice: choice[1].lower()),)
 
     sizePerDomain = models.OneToOneField("sizeInfoType_model", 
       verbose_name='Size per domain', 
