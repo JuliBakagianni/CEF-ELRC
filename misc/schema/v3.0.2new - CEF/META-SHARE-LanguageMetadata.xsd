@@ -1,0 +1,1316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by ILSP/Athena R.C. -->
+<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en">
+	<xs:include schemaLocation="./META-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-RoleTypes.xsd"/>
+	<xs:include schemaLocation="./META-SHARE-LicenseMetadata.xsd"/>
+	<!-- definition of complex types -->
+	<!-- media type info TextInfo/imageInfo/AudioInfo/VideInfo etc-->
+	<xs:complexType name="characterEncodingInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on character encoding of the resource</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ms:characterEncoding">
+				<xs:annotation>
+					<xs:documentation>The name of the character encoding used in the resource or accepted by the tool/service</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<!--
+			<xs:element name="characterSet" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			-->
+			<xs:element name="sizePerCharacterEncoding" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on the size of the resource parts with different character encoding</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="timeCoverageInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on time classification of the resource</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="timeCoverage">
+				<xs:annotation>
+					<xs:documentation>The time period that the content of a resource is about</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sizePerTimeCoverage" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on size per time period represented in the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="geographicCoverageInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on geographic classification of the resource</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="geographicCoverage">
+				<xs:annotation>
+					<xs:documentation>The geographic region that the content of a resource is about; for countries, recommended use of ISO-3166</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sizePerGeographicCoverage" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on size per geographically distinct section of the resource</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="lingualityInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the number of languages of the resource part and of the way they are combined to each other</xs:documentation>
+			<xs:appinfo>
+				<render-short>{lingualityType}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="lingualityType">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the resource includes one, two or more languages</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Linguality type</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+						<xs:enumeration value="monolingual"/>
+						<xs:enumeration value="bilingual"/>
+						<xs:enumeration value="multilingual"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="multilingualityType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the corpus is parallel, comparable or mixed</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Multilinguality type</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="30"/>
+						<xs:enumeration value="parallel"/>
+						<xs:enumeration value="comparable"/>
+						<xs:enumeration value="multilingualSingleText">
+							<xs:annotation>
+								<xs:documentation>for single texts that contain multiple language excerpts; e.g. european parliament discussions</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="multilingualityTypeDetails" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides further information on multilinguality of a resource in free text</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+						<label>Multilinguality type details</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="512"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<!--
+			<xs:element ref="ms:modalityType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>information on modality</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-many</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+            -->
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="languageVarietyInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on language varieties occurred in the resource (e.g. dialects)</xs:documentation>
+			<xs:appinfo>
+				<render-short>{languageVarietyName} ({languageVarietyType})</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="languageVarietyType">
+				<xs:annotation>
+					<xs:documentation>Specifies the type of the language variety that occurs in the resource or is supported by a tool/service</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<label>Language variety type</label>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+						<xs:enumeration value="dialect"/>
+						<xs:enumeration value="jargon"/>
+						<xs:enumeration value="other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element ref="ms:languageVarietyName">
+				<xs:annotation>
+					<xs:documentation>The name of the language variety that occurs in the resource or is supported by a tool/service</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sizePerLanguageVariety" type="ms:sizeInfoType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Provides information on the size per language variety component</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="languageName">
+		<xs:annotation>
+			<xs:documentation>A human understandable name of the language that is used in the resource or supported by the tool/service; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="100"/>
+				<xs:enumeration value="Afar"/>
+				<xs:enumeration value="Abkhazian"/>
+				<xs:enumeration value="Achinese"/>
+				<xs:enumeration value="Acoli"/>
+				<xs:enumeration value="Adangme"/>
+				<xs:enumeration value="Adyghe; Adygei"/>
+				<xs:enumeration value="Afro-Asiatic languages"/>
+				<xs:enumeration value="Afrihili"/>
+				<xs:enumeration value="Afrikaans"/>
+				<xs:enumeration value="Ainu"/>
+				<xs:enumeration value="Akan"/>
+				<xs:enumeration value="Akkadian"/>
+				<xs:enumeration value="Albanian"/>
+				<xs:enumeration value="Aleut"/>
+				<xs:enumeration value="Algonquian languages"/>
+				<xs:enumeration value="Southern Altai"/>
+				<xs:enumeration value="Amharic"/>
+				<xs:enumeration value="English, Old (ca. 450-1100)"/>
+				<xs:enumeration value="Angika"/>
+				<xs:enumeration value="Apache languages"/>
+				<xs:enumeration value="Arabic"/>
+				<xs:enumeration value="Official Aramaic (700-300 BCE); Imperial Aramaic (700-300 BCE)"/>
+				<xs:enumeration value="Aragonese"/>
+				<xs:enumeration value="Armenian"/>
+				<xs:enumeration value="Mapudungun; Mapuche"/>
+				<xs:enumeration value="Arapaho"/>
+				<xs:enumeration value="Artificial languages"/>
+				<xs:enumeration value="Arawak"/>
+				<xs:enumeration value="Assamese"/>
+				<xs:enumeration value="Asturian; Bable; Leonese; Asturleonese"/>
+				<xs:enumeration value="Athapascan languages"/>
+				<xs:enumeration value="Australian languages"/>
+				<xs:enumeration value="Avaric"/>
+				<xs:enumeration value="Avestan"/>
+				<xs:enumeration value="Awadhi"/>
+				<xs:enumeration value="Aymara"/>
+				<xs:enumeration value="Azerbaijani"/>
+				<xs:enumeration value="Banda languages"/>
+				<xs:enumeration value="Bamileke languages"/>
+				<xs:enumeration value="Bashkir"/>
+				<xs:enumeration value="Baluchi"/>
+				<xs:enumeration value="Bambara"/>
+				<xs:enumeration value="Balinese"/>
+				<xs:enumeration value="Basque"/>
+				<xs:enumeration value="Basa"/>
+				<xs:enumeration value="Baltic languages"/>
+				<xs:enumeration value="Beja; Bedawiyet"/>
+				<xs:enumeration value="Belarusian"/>
+				<xs:enumeration value="Bemba"/>
+				<xs:enumeration value="Bengali"/>
+				<xs:enumeration value="Berber languages"/>
+				<xs:enumeration value="Bhojpuri"/>
+				<xs:enumeration value="Bihari languages"/>
+				<xs:enumeration value="Bikol"/>
+				<xs:enumeration value="Bini; Edo"/>
+				<xs:enumeration value="Bislama"/>
+				<xs:enumeration value="Siksika"/>
+				<xs:enumeration value="Bantu languages"/>
+				<xs:enumeration value="Bosnian"/>
+				<xs:enumeration value="Braj"/>
+				<xs:enumeration value="Breton"/>
+				<xs:enumeration value="Batak languages"/>
+				<xs:enumeration value="Buriat"/>
+				<xs:enumeration value="Buginese"/>
+				<xs:enumeration value="Bulgarian"/>
+				<xs:enumeration value="Burmese"/>
+				<xs:enumeration value="Blin; Bilin"/>
+				<xs:enumeration value="Caddo"/>
+				<xs:enumeration value="Central American Indian languages"/>
+				<xs:enumeration value="Galibi Carib"/>
+				<xs:enumeration value="Catalan; Valencian"/>
+				<xs:enumeration value="Caucasian languages"/>
+				<xs:enumeration value="Cebuano"/>
+				<xs:enumeration value="Celtic languages"/>
+				<xs:enumeration value="Chamorro"/>
+				<xs:enumeration value="Chibcha"/>
+				<xs:enumeration value="Chechen"/>
+				<xs:enumeration value="Chagatai"/>
+				<xs:enumeration value="Chinese"/>
+				<xs:enumeration value="Chuukese"/>
+				<xs:enumeration value="Mari"/>
+				<xs:enumeration value="Chinook jargon"/>
+				<xs:enumeration value="Choctaw"/>
+				<xs:enumeration value="Chipewyan; Dene Suline"/>
+				<xs:enumeration value="Cherokee"/>
+				<xs:enumeration value="Church Slavic; Old Slavonic; Church Slavonic; Old Bulgarian; Old Church Slavonic"/>
+				<xs:enumeration value="Chuvash"/>
+				<xs:enumeration value="Cheyenne"/>
+				<xs:enumeration value="Chamic languages"/>
+				<xs:enumeration value="Coptic"/>
+				<xs:enumeration value="Cornish"/>
+				<xs:enumeration value="Corsican"/>
+				<xs:enumeration value="Creoles and pidgins, English based"/>
+				<xs:enumeration value="Creoles and pidgins, French-based"/>
+				<xs:enumeration value="Creoles and pidgins, Portuguese-based"/>
+				<xs:enumeration value="Cree"/>
+				<xs:enumeration value="Crimean Tatar; Crimean Turkish"/>
+				<xs:enumeration value="Creoles and pidgins"/>
+				<xs:enumeration value="Kashubian"/>
+				<xs:enumeration value="Cushitic languages"/>
+				<xs:enumeration value="Czech"/>
+				<xs:enumeration value="Dakota"/>
+				<xs:enumeration value="Danish"/>
+				<xs:enumeration value="Dargwa"/>
+				<xs:enumeration value="Land Dayak languages"/>
+				<xs:enumeration value="Delaware"/>
+				<xs:enumeration value="Slave (Athapascan)"/>
+				<xs:enumeration value="Dogrib"/>
+				<xs:enumeration value="Dinka"/>
+				<xs:enumeration value="Divehi; Dhivehi; Maldivian"/>
+				<xs:enumeration value="Dogri"/>
+				<xs:enumeration value="Dravidian languages"/>
+				<xs:enumeration value="Lower Sorbian"/>
+				<xs:enumeration value="Duala"/>
+				<xs:enumeration value="Dutch, Middle (ca. 1050-1350)"/>
+				<xs:enumeration value="Dutch; Flemish"/>
+				<xs:enumeration value="Dyula"/>
+				<xs:enumeration value="Dzongkha"/>
+				<xs:enumeration value="Efik"/>
+				<xs:enumeration value="Egyptian (Ancient)"/>
+				<xs:enumeration value="Ekajuk"/>
+				<xs:enumeration value="Elamite"/>
+				<xs:enumeration value="English"/>
+				<xs:enumeration value="English, Middle (1100-1500)"/>
+				<xs:enumeration value="Esperanto"/>
+				<xs:enumeration value="Estonian"/>
+				<xs:enumeration value="Ewe"/>
+				<xs:enumeration value="Ewondo"/>
+				<xs:enumeration value="Fang"/>
+				<xs:enumeration value="Faroese"/>
+				<xs:enumeration value="Fanti"/>
+				<xs:enumeration value="Fijian"/>
+				<xs:enumeration value="Filipino; Pilipino"/>
+				<xs:enumeration value="Finnish"/>
+				<xs:enumeration value="Finno-Ugrian languages"/>
+				<xs:enumeration value="Fon"/>
+				<xs:enumeration value="French"/>
+				<xs:enumeration value="French, Middle (ca. 1400-1600)"/>
+				<xs:enumeration value="French, Old (842-ca. 1400)"/>
+				<xs:enumeration value="Northern Frisian"/>
+				<xs:enumeration value="Eastern Frisian"/>
+				<xs:enumeration value="Western Frisian"/>
+				<xs:enumeration value="Fulah"/>
+				<xs:enumeration value="Friulian"/>
+				<xs:enumeration value="Ga"/>
+				<xs:enumeration value="Gayo"/>
+				<xs:enumeration value="Gbaya"/>
+				<xs:enumeration value="Germanic languages"/>
+				<xs:enumeration value="Georgian"/>
+				<xs:enumeration value="German"/>
+				<xs:enumeration value="Geez"/>
+				<xs:enumeration value="Gilbertese"/>
+				<xs:enumeration value="Gaelic; Scottish Gaelic"/>
+				<xs:enumeration value="Irish"/>
+				<xs:enumeration value="Galician"/>
+				<xs:enumeration value="Manx"/>
+				<xs:enumeration value="German, Middle High (ca. 1050-1500)"/>
+				<xs:enumeration value="German, Old High (ca. 750-1050)"/>
+				<xs:enumeration value="Gondi"/>
+				<xs:enumeration value="Gorontalo"/>
+				<xs:enumeration value="Gothic"/>
+				<xs:enumeration value="Grebo"/>
+				<xs:enumeration value="Greek, Ancient (to 1453)"/>
+				<xs:enumeration value="Greek, Modern (1453-)"/>
+				<xs:enumeration value="Guarani"/>
+				<xs:enumeration value="Swiss German; Alemannic; Alsatian"/>
+				<xs:enumeration value="Gujarati"/>
+				<xs:enumeration value="Gwich'in"/>
+				<xs:enumeration value="Haida"/>
+				<xs:enumeration value="Haitian; Haitian Creole"/>
+				<xs:enumeration value="Hausa"/>
+				<xs:enumeration value="Hawaiian"/>
+				<xs:enumeration value="Hebrew"/>
+				<xs:enumeration value="Herero"/>
+				<xs:enumeration value="Hiligaynon"/>
+				<xs:enumeration value="Himachali languages; Western Pahari languages"/>
+				<xs:enumeration value="Hindi"/>
+				<xs:enumeration value="Hittite"/>
+				<xs:enumeration value="Hmong; Mong"/>
+				<xs:enumeration value="Hiri Motu"/>
+				<xs:enumeration value="Croatian"/>
+				<xs:enumeration value="Upper Sorbian"/>
+				<xs:enumeration value="Hungarian"/>
+				<xs:enumeration value="Hupa"/>
+				<xs:enumeration value="Iban"/>
+				<xs:enumeration value="Igbo"/>
+				<xs:enumeration value="Icelandic"/>
+				<xs:enumeration value="Ido"/>
+				<xs:enumeration value="Sichuan Yi; Nuosu"/>
+				<xs:enumeration value="Ijo languages"/>
+				<xs:enumeration value="Inuktitut"/>
+				<xs:enumeration value="Interlingue; Occidental"/>
+				<xs:enumeration value="Iloko"/>
+				<xs:enumeration value="Interlingua (International Auxiliary Language Association)"/>
+				<xs:enumeration value="Indic languages"/>
+				<xs:enumeration value="Indonesian"/>
+				<xs:enumeration value="Indo-European languages"/>
+				<xs:enumeration value="Ingush"/>
+				<xs:enumeration value="Inupiaq"/>
+				<xs:enumeration value="Iranian languages"/>
+				<xs:enumeration value="Iroquoian languages"/>
+				<xs:enumeration value="Italian"/>
+				<xs:enumeration value="Javanese"/>
+				<xs:enumeration value="Lojban"/>
+				<xs:enumeration value="Japanese"/>
+				<xs:enumeration value="Judeo-Persian"/>
+				<xs:enumeration value="Judeo-Arabic"/>
+				<xs:enumeration value="Kara-Kalpak"/>
+				<xs:enumeration value="Kabyle"/>
+				<xs:enumeration value="Kachin; Jingpho"/>
+				<xs:enumeration value="Kalaallisut; Greenlandic"/>
+				<xs:enumeration value="Kamba"/>
+				<xs:enumeration value="Kannada"/>
+				<xs:enumeration value="Karen languages"/>
+				<xs:enumeration value="Kashmiri"/>
+				<xs:enumeration value="Kanuri"/>
+				<xs:enumeration value="Kawi"/>
+				<xs:enumeration value="Kazakh"/>
+				<xs:enumeration value="Kabardian"/>
+				<xs:enumeration value="Khasi"/>
+				<xs:enumeration value="Khoisan languages"/>
+				<xs:enumeration value="Central Khmer"/>
+				<xs:enumeration value="Khotanese;Sakan"/>
+				<xs:enumeration value="Kikuyu; Gikuyu"/>
+				<xs:enumeration value="Kinyarwanda"/>
+				<xs:enumeration value="Kirghiz; Kyrgyz"/>
+				<xs:enumeration value="Kimbundu"/>
+				<xs:enumeration value="Konkani"/>
+				<xs:enumeration value="Komi"/>
+				<xs:enumeration value="Kongo"/>
+				<xs:enumeration value="Korean"/>
+				<xs:enumeration value="Kosraean"/>
+				<xs:enumeration value="Kpelle"/>
+				<xs:enumeration value="Karachay-Balkar"/>
+				<xs:enumeration value="Karelian"/>
+				<xs:enumeration value="Kru languages"/>
+				<xs:enumeration value="Kurukh"/>
+				<xs:enumeration value="Kuanyama; Kwanyama"/>
+				<xs:enumeration value="Kumyk"/>
+				<xs:enumeration value="Kurdish"/>
+				<xs:enumeration value="Kutenai"/>
+				<xs:enumeration value="Ladino"/>
+				<xs:enumeration value="Lahnda"/>
+				<xs:enumeration value="Lamba"/>
+				<xs:enumeration value="Lao"/>
+				<xs:enumeration value="Latin"/>
+				<xs:enumeration value="Latvian"/>
+				<xs:enumeration value="Lezghian"/>
+				<xs:enumeration value="Limburgan; Limburger; Limburgish"/>
+				<xs:enumeration value="Lingala"/>
+				<xs:enumeration value="Lithuanian"/>
+				<xs:enumeration value="Mongo"/>
+				<xs:enumeration value="Lozi"/>
+				<xs:enumeration value="Luxembourgish; Letzeburgesch"/>
+				<xs:enumeration value="Luba-Lulua"/>
+				<xs:enumeration value="Luba-Katanga"/>
+				<xs:enumeration value="Ganda"/>
+				<xs:enumeration value="Luiseno"/>
+				<xs:enumeration value="Lunda"/>
+				<xs:enumeration value="Luo (Kenya and Tanzania)"/>
+				<xs:enumeration value="Lushai"/>
+				<xs:enumeration value="Macedonian"/>
+				<xs:enumeration value="Madurese"/>
+				<xs:enumeration value="Magahi"/>
+				<xs:enumeration value="Marshallese"/>
+				<xs:enumeration value="Maithili"/>
+				<xs:enumeration value="Makasar"/>
+				<xs:enumeration value="Malayalam"/>
+				<xs:enumeration value="Mandingo"/>
+				<xs:enumeration value="Maori"/>
+				<xs:enumeration value="Austronesian languages"/>
+				<xs:enumeration value="Marathi"/>
+				<xs:enumeration value="Masai"/>
+				<xs:enumeration value="Malay"/>
+				<xs:enumeration value="Moksha"/>
+				<xs:enumeration value="Mandar"/>
+				<xs:enumeration value="Mende"/>
+				<xs:enumeration value="Irish, Middle (900-1200)"/>
+				<xs:enumeration value="Mi'kmaq; Micmac"/>
+				<xs:enumeration value="Minangkabau"/>
+				<xs:enumeration value="Uncoded languages"/>
+				<xs:enumeration value="Mon-Khmer languages"/>
+				<xs:enumeration value="Malagasy"/>
+				<xs:enumeration value="Maltese"/>
+				<xs:enumeration value="Manchu"/>
+				<xs:enumeration value="Manipuri"/>
+				<xs:enumeration value="Manobo languages"/>
+				<xs:enumeration value="Mohawk"/>
+				<xs:enumeration value="Moldavian; Moldovan"/>
+				<xs:enumeration value="Mongolian"/>
+				<xs:enumeration value="Mossi"/>
+				<xs:enumeration value="Multiple languages"/>
+				<xs:enumeration value="Munda languages"/>
+				<xs:enumeration value="Creek"/>
+				<xs:enumeration value="Mirandese"/>
+				<xs:enumeration value="Marwari"/>
+				<xs:enumeration value="Mayan languages"/>
+				<xs:enumeration value="Erzya"/>
+				<xs:enumeration value="Nahuatl languages"/>
+				<xs:enumeration value="North American Indian languages"/>
+				<xs:enumeration value="Neapolitan"/>
+				<xs:enumeration value="Nauru"/>
+				<xs:enumeration value="Navajo; Navaho"/>
+				<xs:enumeration value="Ndebele, South; South Ndebele"/>
+				<xs:enumeration value="Ndebele, North; North Ndebele"/>
+				<xs:enumeration value="Ndonga"/>
+				<xs:enumeration value="Low German; Low Saxon; German, Low; Saxon, Low"/>
+				<xs:enumeration value="Nepali"/>
+				<xs:enumeration value="Nepal Bhasa; Newari"/>
+				<xs:enumeration value="Nias"/>
+				<xs:enumeration value="Niger-Kordofanian languages"/>
+				<xs:enumeration value="Niuean"/>
+				<xs:enumeration value="Norwegian Nynorsk; Nynorsk, Norwegian"/>
+				<xs:enumeration value="BokmC%l, Norwegian; Norwegian BokmC%l"/>
+				<xs:enumeration value="Nogai"/>
+				<xs:enumeration value="Norse, Old"/>
+				<xs:enumeration value="Norwegian"/>
+				<xs:enumeration value="N'Ko"/>
+				<xs:enumeration value="Pedi; Sepedi; Northern Sotho"/>
+				<xs:enumeration value="Nubian languages"/>
+				<xs:enumeration value="Classical Newari; Old Newari; Classical Nepal Bhasa"/>
+				<xs:enumeration value="Chichewa; Chewa; Nyanja"/>
+				<xs:enumeration value="Nyamwezi"/>
+				<xs:enumeration value="Nyankole"/>
+				<xs:enumeration value="Nyoro"/>
+				<xs:enumeration value="Nzima"/>
+				<xs:enumeration value="Occitan (post 1500)"/>
+				<xs:enumeration value="Ojibwa"/>
+				<xs:enumeration value="Oriya"/>
+				<xs:enumeration value="Oromo"/>
+				<xs:enumeration value="Osage"/>
+				<xs:enumeration value="Ossetian; Ossetic"/>
+				<xs:enumeration value="Turkish, Ottoman (1500-1928)"/>
+				<xs:enumeration value="Otomian languages"/>
+				<xs:enumeration value="Papuan languages"/>
+				<xs:enumeration value="Pangasinan"/>
+				<xs:enumeration value="Pahlavi"/>
+				<xs:enumeration value="Pampanga; Kapampangan"/>
+				<xs:enumeration value="Panjabi; Punjabi"/>
+				<xs:enumeration value="Papiamento"/>
+				<xs:enumeration value="Palauan"/>
+				<xs:enumeration value="Persian, Old (ca. 600-400 B.C.)"/>
+				<xs:enumeration value="Persian"/>
+				<xs:enumeration value="Philippine languages"/>
+				<xs:enumeration value="Phoenician"/>
+				<xs:enumeration value="Pali"/>
+				<xs:enumeration value="Polish"/>
+				<xs:enumeration value="Pohnpeian"/>
+				<xs:enumeration value="Portuguese"/>
+				<xs:enumeration value="Prakrit languages"/>
+				<xs:enumeration value="ProvenC'al, Old (to 1500); Occitan, Old (to 1500)"/>
+				<xs:enumeration value="Pushto; Pashto"/>
+				<xs:enumeration value="Quechua"/>
+				<xs:enumeration value="Rajasthani"/>
+				<xs:enumeration value="Rapanui"/>
+				<xs:enumeration value="Rarotongan; Cook Islands Maori"/>
+				<xs:enumeration value="Romance languages"/>
+				<xs:enumeration value="Romansh"/>
+				<xs:enumeration value="Romany"/>
+				<xs:enumeration value="Romanian"/>
+				<xs:enumeration value="Rundi"/>
+				<xs:enumeration value="Aromanian; Arumanian; Macedo-Romanian"/>
+				<xs:enumeration value="Russian"/>
+				<xs:enumeration value="Sandawe"/>
+				<xs:enumeration value="Sango"/>
+				<xs:enumeration value="Yakut"/>
+				<xs:enumeration value="South American Indian languages"/>
+				<xs:enumeration value="Salishan languages"/>
+				<xs:enumeration value="Samaritan Aramaic"/>
+				<xs:enumeration value="Sanskrit"/>
+				<xs:enumeration value="Sasak"/>
+				<xs:enumeration value="Santali"/>
+				<xs:enumeration value="Sicilian"/>
+				<xs:enumeration value="Scots"/>
+				<xs:enumeration value="Selkup"/>
+				<xs:enumeration value="Semitic languages"/>
+				<xs:enumeration value="Irish, Old (to 900)"/>
+				<xs:enumeration value="Sign Languages"/>
+				<xs:enumeration value="Shan"/>
+				<xs:enumeration value="Sidamo"/>
+				<xs:enumeration value="Sinhala; Sinhalese"/>
+				<xs:enumeration value="Siouan languages"/>
+				<xs:enumeration value="Sino-Tibetan languages"/>
+				<xs:enumeration value="Slavic languages"/>
+				<xs:enumeration value="Slovak"/>
+				<xs:enumeration value="Slovenian"/>
+				<xs:enumeration value="Southern Sami"/>
+				<xs:enumeration value="Northern Sami"/>
+				<xs:enumeration value="Sami languages"/>
+				<xs:enumeration value="Lule Sami"/>
+				<xs:enumeration value="Inari Sami"/>
+				<xs:enumeration value="Samoan"/>
+				<xs:enumeration value="Skolt Sami"/>
+				<xs:enumeration value="Shona"/>
+				<xs:enumeration value="Sindhi"/>
+				<xs:enumeration value="Soninke"/>
+				<xs:enumeration value="Sogdian"/>
+				<xs:enumeration value="Somali"/>
+				<xs:enumeration value="Songhai languages"/>
+				<xs:enumeration value="Sotho, Southern"/>
+				<xs:enumeration value="Spanish; Castilian"/>
+				<xs:enumeration value="Sardinian"/>
+				<xs:enumeration value="Sranan Tongo"/>
+				<xs:enumeration value="Serbian"/>
+				<xs:enumeration value="Serer"/>
+				<xs:enumeration value="Nilo-Saharan languages"/>
+				<xs:enumeration value="Swati"/>
+				<xs:enumeration value="Sukuma"/>
+				<xs:enumeration value="Sundanese"/>
+				<xs:enumeration value="Susu"/>
+				<xs:enumeration value="Sumerian"/>
+				<xs:enumeration value="Swahili"/>
+				<xs:enumeration value="Swedish"/>
+				<xs:enumeration value="Classical Syriac"/>
+				<xs:enumeration value="Syriac"/>
+				<xs:enumeration value="Tahitian"/>
+				<xs:enumeration value="Tai languages"/>
+				<xs:enumeration value="Tamil"/>
+				<xs:enumeration value="Tatar"/>
+				<xs:enumeration value="Telugu"/>
+				<xs:enumeration value="Timne"/>
+				<xs:enumeration value="Tereno"/>
+				<xs:enumeration value="Tetum"/>
+				<xs:enumeration value="Tajik"/>
+				<xs:enumeration value="Tagalog"/>
+				<xs:enumeration value="Thai"/>
+				<xs:enumeration value="Tibetan"/>
+				<xs:enumeration value="Tigre"/>
+				<xs:enumeration value="Tigrinya"/>
+				<xs:enumeration value="Tiv"/>
+				<xs:enumeration value="Tokelau"/>
+				<xs:enumeration value="Klingon; tlhIngan-Hol"/>
+				<xs:enumeration value="Tlingit"/>
+				<xs:enumeration value="Tamashek"/>
+				<xs:enumeration value="Tonga (Nyasa)"/>
+				<xs:enumeration value="Tonga (Tonga Islands)"/>
+				<xs:enumeration value="Tok Pisin"/>
+				<xs:enumeration value="Tsimshian"/>
+				<xs:enumeration value="Tswana"/>
+				<xs:enumeration value="Tsonga"/>
+				<xs:enumeration value="Turkmen"/>
+				<xs:enumeration value="Tumbuka"/>
+				<xs:enumeration value="Tupi languages"/>
+				<xs:enumeration value="Turkish"/>
+				<xs:enumeration value="Altaic languages"/>
+				<xs:enumeration value="Tuvalu"/>
+				<xs:enumeration value="Twi"/>
+				<xs:enumeration value="Tuvinian"/>
+				<xs:enumeration value="Udmurt"/>
+				<xs:enumeration value="Ugaritic"/>
+				<xs:enumeration value="Uighur; Uyghur"/>
+				<xs:enumeration value="Ukrainian"/>
+				<xs:enumeration value="Umbundu"/>
+				<xs:enumeration value="Undetermined"/>
+				<xs:enumeration value="Urdu"/>
+				<xs:enumeration value="Uzbek"/>
+				<xs:enumeration value="Vai"/>
+				<xs:enumeration value="Venda"/>
+				<xs:enumeration value="Vietnamese"/>
+				<xs:enumeration value="VolapC&lt;k"/>
+				<xs:enumeration value="Votic"/>
+				<xs:enumeration value="Wakashan languages"/>
+				<xs:enumeration value="Wolaitta; Wolaytta"/>
+				<xs:enumeration value="Waray"/>
+				<xs:enumeration value="Washo"/>
+				<xs:enumeration value="Welsh"/>
+				<xs:enumeration value="Sorbian languages"/>
+				<xs:enumeration value="Walloon"/>
+				<xs:enumeration value="Wolof"/>
+				<xs:enumeration value="Kalmyk; Oirat"/>
+				<xs:enumeration value="Xhosa"/>
+				<xs:enumeration value="Yao"/>
+				<xs:enumeration value="Yapese"/>
+				<xs:enumeration value="Yiddish"/>
+				<xs:enumeration value="Yoruba"/>
+				<xs:enumeration value="Yupik languages"/>
+				<xs:enumeration value="Zapotec"/>
+				<xs:enumeration value="Blissymbols; Blissymbolics; Bliss"/>
+				<xs:enumeration value="Zenaga"/>
+				<xs:enumeration value="Zhuang; Chuang"/>
+				<xs:enumeration value="Zande languages"/>
+				<xs:enumeration value="Zulu"/>
+				<xs:enumeration value="Zuni"/>
+				<xs:enumeration value="Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki"/>
+				<xs:enumeration value="other"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="languageId">
+		<xs:annotation>
+			<xs:documentation>The identifier of the language that is included in the resource or supported by the tool/service; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="100"/>
+				<xs:enumeration value="aa"/>
+				<xs:enumeration value="ab"/>
+				<xs:enumeration value="ace"/>
+				<xs:enumeration value="ach"/>
+				<xs:enumeration value="ada"/>
+				<xs:enumeration value="ady"/>
+				<xs:enumeration value="afa"/>
+				<xs:enumeration value="afh"/>
+				<xs:enumeration value="af"/>
+				<xs:enumeration value="ain"/>
+				<xs:enumeration value="ak"/>
+				<xs:enumeration value="akk"/>
+				<xs:enumeration value="sq"/>
+				<xs:enumeration value="ale"/>
+				<xs:enumeration value="alg"/>
+				<xs:enumeration value="alt"/>
+				<xs:enumeration value="am"/>
+				<xs:enumeration value="ang"/>
+				<xs:enumeration value="anp"/>
+				<xs:enumeration value="apa"/>
+				<xs:enumeration value="ar"/>
+				<xs:enumeration value="arc"/>
+				<xs:enumeration value="an"/>
+				<xs:enumeration value="hy"/>
+				<xs:enumeration value="arn"/>
+				<xs:enumeration value="arp"/>
+				<xs:enumeration value="art"/>
+				<xs:enumeration value="arw"/>
+				<xs:enumeration value="as"/>
+				<xs:enumeration value="ast"/>
+				<xs:enumeration value="ath"/>
+				<xs:enumeration value="aus"/>
+				<xs:enumeration value="av"/>
+				<xs:enumeration value="ae"/>
+				<xs:enumeration value="awa"/>
+				<xs:enumeration value="ay"/>
+				<xs:enumeration value="az"/>
+				<xs:enumeration value="bad"/>
+				<xs:enumeration value="bai"/>
+				<xs:enumeration value="ba"/>
+				<xs:enumeration value="bal"/>
+				<xs:enumeration value="bm"/>
+				<xs:enumeration value="ban"/>
+				<xs:enumeration value="eu"/>
+				<xs:enumeration value="bas"/>
+				<xs:enumeration value="bat"/>
+				<xs:enumeration value="bej"/>
+				<xs:enumeration value="be"/>
+				<xs:enumeration value="bem"/>
+				<xs:enumeration value="bn"/>
+				<xs:enumeration value="ber"/>
+				<xs:enumeration value="bho"/>
+				<xs:enumeration value="bh"/>
+				<xs:enumeration value="bik"/>
+				<xs:enumeration value="bin"/>
+				<xs:enumeration value="bi"/>
+				<xs:enumeration value="bla"/>
+				<xs:enumeration value="bnt"/>
+				<xs:enumeration value="bs"/>
+				<xs:enumeration value="bra"/>
+				<xs:enumeration value="br"/>
+				<xs:enumeration value="btk"/>
+				<xs:enumeration value="bua"/>
+				<xs:enumeration value="bug"/>
+				<xs:enumeration value="bg"/>
+				<xs:enumeration value="my"/>
+				<xs:enumeration value="byn"/>
+				<xs:enumeration value="cad"/>
+				<xs:enumeration value="cai"/>
+				<xs:enumeration value="car"/>
+				<xs:enumeration value="ca"/>
+				<xs:enumeration value="cau"/>
+				<xs:enumeration value="ceb"/>
+				<xs:enumeration value="cel"/>
+				<xs:enumeration value="ch"/>
+				<xs:enumeration value="chb"/>
+				<xs:enumeration value="ce"/>
+				<xs:enumeration value="chg"/>
+				<xs:enumeration value="zh"/>
+				<xs:enumeration value="chk"/>
+				<xs:enumeration value="chm"/>
+				<xs:enumeration value="chn"/>
+				<xs:enumeration value="cho"/>
+				<xs:enumeration value="chp"/>
+				<xs:enumeration value="chr"/>
+				<xs:enumeration value="cu"/>
+				<xs:enumeration value="cv"/>
+				<xs:enumeration value="chy"/>
+				<xs:enumeration value="cmc"/>
+				<xs:enumeration value="cop"/>
+				<xs:enumeration value="kw"/>
+				<xs:enumeration value="co"/>
+				<xs:enumeration value="cpe"/>
+				<xs:enumeration value="cpf"/>
+				<xs:enumeration value="cpp"/>
+				<xs:enumeration value="cr"/>
+				<xs:enumeration value="crh"/>
+				<xs:enumeration value="crp"/>
+				<xs:enumeration value="csb"/>
+				<xs:enumeration value="cus"/>
+				<xs:enumeration value="cs"/>
+				<xs:enumeration value="dak"/>
+				<xs:enumeration value="da"/>
+				<xs:enumeration value="dar"/>
+				<xs:enumeration value="day"/>
+				<xs:enumeration value="del"/>
+				<xs:enumeration value="den"/>
+				<xs:enumeration value="dgr"/>
+				<xs:enumeration value="din"/>
+				<xs:enumeration value="dv"/>
+				<xs:enumeration value="doi"/>
+				<xs:enumeration value="dra"/>
+				<xs:enumeration value="dsb"/>
+				<xs:enumeration value="dua"/>
+				<xs:enumeration value="dum"/>
+				<xs:enumeration value="nl"/>
+				<xs:enumeration value="dyu"/>
+				<xs:enumeration value="dz"/>
+				<xs:enumeration value="efi"/>
+				<xs:enumeration value="egy"/>
+				<xs:enumeration value="eka"/>
+				<xs:enumeration value="elx"/>
+				<xs:enumeration value="en"/>
+				<xs:enumeration value="enm"/>
+				<xs:enumeration value="eo"/>
+				<xs:enumeration value="et"/>
+				<xs:enumeration value="ee"/>
+				<xs:enumeration value="ewo"/>
+				<xs:enumeration value="fan"/>
+				<xs:enumeration value="fo"/>
+				<xs:enumeration value="fat"/>
+				<xs:enumeration value="fj"/>
+				<xs:enumeration value="fil"/>
+				<xs:enumeration value="fi"/>
+				<xs:enumeration value="fiu"/>
+				<xs:enumeration value="fon"/>
+				<xs:enumeration value="fr"/>
+				<xs:enumeration value="frm"/>
+				<xs:enumeration value="fro"/>
+				<xs:enumeration value="frr"/>
+				<xs:enumeration value="frs"/>
+				<xs:enumeration value="fy"/>
+				<xs:enumeration value="ff"/>
+				<xs:enumeration value="fur"/>
+				<xs:enumeration value="gaa"/>
+				<xs:enumeration value="gay"/>
+				<xs:enumeration value="gba"/>
+				<xs:enumeration value="gem"/>
+				<xs:enumeration value="ka"/>
+				<xs:enumeration value="de"/>
+				<xs:enumeration value="gez"/>
+				<xs:enumeration value="gil"/>
+				<xs:enumeration value="gd"/>
+				<xs:enumeration value="ga"/>
+				<xs:enumeration value="gl"/>
+				<xs:enumeration value="gv"/>
+				<xs:enumeration value="gmh"/>
+				<xs:enumeration value="goh"/>
+				<xs:enumeration value="gon"/>
+				<xs:enumeration value="gor"/>
+				<xs:enumeration value="got"/>
+				<xs:enumeration value="grb"/>
+				<xs:enumeration value="grc"/>
+				<xs:enumeration value="el"/>
+				<xs:enumeration value="gn"/>
+				<xs:enumeration value="gsw"/>
+				<xs:enumeration value="gu"/>
+				<xs:enumeration value="gwi"/>
+				<xs:enumeration value="hai"/>
+				<xs:enumeration value="ht"/>
+				<xs:enumeration value="ha"/>
+				<xs:enumeration value="haw"/>
+				<xs:enumeration value="he"/>
+				<xs:enumeration value="hz"/>
+				<xs:enumeration value="hil"/>
+				<xs:enumeration value="him"/>
+				<xs:enumeration value="hi"/>
+				<xs:enumeration value="hit"/>
+				<xs:enumeration value="hmn"/>
+				<xs:enumeration value="ho"/>
+				<xs:enumeration value="hr"/>
+				<xs:enumeration value="hsb"/>
+				<xs:enumeration value="hu"/>
+				<xs:enumeration value="hup"/>
+				<xs:enumeration value="iba"/>
+				<xs:enumeration value="ig"/>
+				<xs:enumeration value="is"/>
+				<xs:enumeration value="io"/>
+				<xs:enumeration value="ii"/>
+				<xs:enumeration value="ijo"/>
+				<xs:enumeration value="iu"/>
+				<xs:enumeration value="ie"/>
+				<xs:enumeration value="ilo"/>
+				<xs:enumeration value="ia"/>
+				<xs:enumeration value="inc"/>
+				<xs:enumeration value="id"/>
+				<xs:enumeration value="ine"/>
+				<xs:enumeration value="inh"/>
+				<xs:enumeration value="ik"/>
+				<xs:enumeration value="ira"/>
+				<xs:enumeration value="iro"/>
+				<xs:enumeration value="it"/>
+				<xs:enumeration value="jv"/>
+				<xs:enumeration value="jbo"/>
+				<xs:enumeration value="ja"/>
+				<xs:enumeration value="jpr"/>
+				<xs:enumeration value="jrb"/>
+				<xs:enumeration value="kaa"/>
+				<xs:enumeration value="kab"/>
+				<xs:enumeration value="kac"/>
+				<xs:enumeration value="kl"/>
+				<xs:enumeration value="kam"/>
+				<xs:enumeration value="kn"/>
+				<xs:enumeration value="kar"/>
+				<xs:enumeration value="ks"/>
+				<xs:enumeration value="kr"/>
+				<xs:enumeration value="kaw"/>
+				<xs:enumeration value="kk"/>
+				<xs:enumeration value="kbd"/>
+				<xs:enumeration value="kha"/>
+				<xs:enumeration value="khi"/>
+				<xs:enumeration value="km"/>
+				<xs:enumeration value="kho"/>
+				<xs:enumeration value="ki"/>
+				<xs:enumeration value="rw"/>
+				<xs:enumeration value="ky"/>
+				<xs:enumeration value="kmb"/>
+				<xs:enumeration value="kok"/>
+				<xs:enumeration value="kv"/>
+				<xs:enumeration value="kg"/>
+				<xs:enumeration value="ko"/>
+				<xs:enumeration value="kos"/>
+				<xs:enumeration value="kpe"/>
+				<xs:enumeration value="krc"/>
+				<xs:enumeration value="krl"/>
+				<xs:enumeration value="kro"/>
+				<xs:enumeration value="kru"/>
+				<xs:enumeration value="kj"/>
+				<xs:enumeration value="kum"/>
+				<xs:enumeration value="ku"/>
+				<xs:enumeration value="kut"/>
+				<xs:enumeration value="lad"/>
+				<xs:enumeration value="lah"/>
+				<xs:enumeration value="lam"/>
+				<xs:enumeration value="lo"/>
+				<xs:enumeration value="la"/>
+				<xs:enumeration value="lv"/>
+				<xs:enumeration value="lez"/>
+				<xs:enumeration value="li"/>
+				<xs:enumeration value="ln"/>
+				<xs:enumeration value="lt"/>
+				<xs:enumeration value="lol"/>
+				<xs:enumeration value="loz"/>
+				<xs:enumeration value="lb"/>
+				<xs:enumeration value="lua"/>
+				<xs:enumeration value="lu"/>
+				<xs:enumeration value="lg"/>
+				<xs:enumeration value="lui"/>
+				<xs:enumeration value="lun"/>
+				<xs:enumeration value="luo"/>
+				<xs:enumeration value="lus"/>
+				<xs:enumeration value="mk"/>
+				<xs:enumeration value="mad"/>
+				<xs:enumeration value="mag"/>
+				<xs:enumeration value="mh"/>
+				<xs:enumeration value="mai"/>
+				<xs:enumeration value="mak"/>
+				<xs:enumeration value="ml"/>
+				<xs:enumeration value="man"/>
+				<xs:enumeration value="mi"/>
+				<xs:enumeration value="map"/>
+				<xs:enumeration value="mr"/>
+				<xs:enumeration value="mas"/>
+				<xs:enumeration value="ms"/>
+				<xs:enumeration value="mdf"/>
+				<xs:enumeration value="mdr"/>
+				<xs:enumeration value="men"/>
+				<xs:enumeration value="mga"/>
+				<xs:enumeration value="mic"/>
+				<xs:enumeration value="min"/>
+				<xs:enumeration value="mis"/>
+				<xs:enumeration value="mkh"/>
+				<xs:enumeration value="mg"/>
+				<xs:enumeration value="mt"/>
+				<xs:enumeration value="mnc"/>
+				<xs:enumeration value="mni"/>
+				<xs:enumeration value="mno"/>
+				<xs:enumeration value="moh"/>
+				<xs:enumeration value="mo"/>
+				<xs:enumeration value="mn"/>
+				<xs:enumeration value="mos"/>
+				<xs:enumeration value="mul"/>
+				<xs:enumeration value="mun"/>
+				<xs:enumeration value="mus"/>
+				<xs:enumeration value="mwl"/>
+				<xs:enumeration value="mwr"/>
+				<xs:enumeration value="myn"/>
+				<xs:enumeration value="myv"/>
+				<xs:enumeration value="nah"/>
+				<xs:enumeration value="nai"/>
+				<xs:enumeration value="nap"/>
+				<xs:enumeration value="na"/>
+				<xs:enumeration value="nv"/>
+				<xs:enumeration value="nr"/>
+				<xs:enumeration value="nd"/>
+				<xs:enumeration value="ng"/>
+				<xs:enumeration value="nds"/>
+				<xs:enumeration value="ne"/>
+				<xs:enumeration value="new"/>
+				<xs:enumeration value="nia"/>
+				<xs:enumeration value="nic"/>
+				<xs:enumeration value="niu"/>
+				<xs:enumeration value="nn"/>
+				<xs:enumeration value="nb"/>
+				<xs:enumeration value="nog"/>
+				<xs:enumeration value="non"/>
+				<xs:enumeration value="no"/>
+				<xs:enumeration value="nqo"/>
+				<xs:enumeration value="nso"/>
+				<xs:enumeration value="nub"/>
+				<xs:enumeration value="nwc"/>
+				<xs:enumeration value="ny"/>
+				<xs:enumeration value="nym"/>
+				<xs:enumeration value="nyn"/>
+				<xs:enumeration value="nyo"/>
+				<xs:enumeration value="nzi"/>
+				<xs:enumeration value="oc"/>
+				<xs:enumeration value="oj"/>
+				<xs:enumeration value="or"/>
+				<xs:enumeration value="om"/>
+				<xs:enumeration value="osa"/>
+				<xs:enumeration value="os"/>
+				<xs:enumeration value="ota"/>
+				<xs:enumeration value="oto"/>
+				<xs:enumeration value="paa"/>
+				<xs:enumeration value="pag"/>
+				<xs:enumeration value="pal"/>
+				<xs:enumeration value="pam"/>
+				<xs:enumeration value="pa"/>
+				<xs:enumeration value="pap"/>
+				<xs:enumeration value="pau"/>
+				<xs:enumeration value="peo"/>
+				<xs:enumeration value="fa"/>
+				<xs:enumeration value="phi"/>
+				<xs:enumeration value="phn"/>
+				<xs:enumeration value="pi"/>
+				<xs:enumeration value="pl"/>
+				<xs:enumeration value="pon"/>
+				<xs:enumeration value="pt"/>
+				<xs:enumeration value="pra"/>
+				<xs:enumeration value="pro"/>
+				<xs:enumeration value="ps"/>
+				<xs:enumeration value="qu"/>
+				<xs:enumeration value="raj"/>
+				<xs:enumeration value="rap"/>
+				<xs:enumeration value="rar"/>
+				<xs:enumeration value="roa"/>
+				<xs:enumeration value="rm"/>
+				<xs:enumeration value="rom"/>
+				<xs:enumeration value="ro"/>
+				<xs:enumeration value="rn"/>
+				<xs:enumeration value="rup"/>
+				<xs:enumeration value="ru"/>
+				<xs:enumeration value="sad"/>
+				<xs:enumeration value="sg"/>
+				<xs:enumeration value="sah"/>
+				<xs:enumeration value="sai"/>
+				<xs:enumeration value="sal"/>
+				<xs:enumeration value="sam"/>
+				<xs:enumeration value="sa"/>
+				<xs:enumeration value="sas"/>
+				<xs:enumeration value="sat"/>
+				<xs:enumeration value="scn"/>
+				<xs:enumeration value="sco"/>
+				<xs:enumeration value="sel"/>
+				<xs:enumeration value="sem"/>
+				<xs:enumeration value="sga"/>
+				<xs:enumeration value="sgn"/>
+				<xs:enumeration value="shn"/>
+				<xs:enumeration value="sid"/>
+				<xs:enumeration value="si"/>
+				<xs:enumeration value="sio"/>
+				<xs:enumeration value="sit"/>
+				<xs:enumeration value="sla"/>
+				<xs:enumeration value="sk"/>
+				<xs:enumeration value="sl"/>
+				<xs:enumeration value="sma"/>
+				<xs:enumeration value="se"/>
+				<xs:enumeration value="smi"/>
+				<xs:enumeration value="smj"/>
+				<xs:enumeration value="smn"/>
+				<xs:enumeration value="sm"/>
+				<xs:enumeration value="sms"/>
+				<xs:enumeration value="sn"/>
+				<xs:enumeration value="sd"/>
+				<xs:enumeration value="snk"/>
+				<xs:enumeration value="sog"/>
+				<xs:enumeration value="so"/>
+				<xs:enumeration value="son"/>
+				<xs:enumeration value="st"/>
+				<xs:enumeration value="es"/>
+				<xs:enumeration value="sc"/>
+				<xs:enumeration value="srn"/>
+				<xs:enumeration value="sr"/>
+				<xs:enumeration value="srr"/>
+				<xs:enumeration value="ssa"/>
+				<xs:enumeration value="ss"/>
+				<xs:enumeration value="suk"/>
+				<xs:enumeration value="su"/>
+				<xs:enumeration value="sus"/>
+				<xs:enumeration value="sux"/>
+				<xs:enumeration value="sw"/>
+				<xs:enumeration value="sv"/>
+				<xs:enumeration value="syc"/>
+				<xs:enumeration value="syr"/>
+				<xs:enumeration value="ty"/>
+				<xs:enumeration value="tai"/>
+				<xs:enumeration value="ta"/>
+				<xs:enumeration value="tt"/>
+				<xs:enumeration value="te"/>
+				<xs:enumeration value="tem"/>
+				<xs:enumeration value="ter"/>
+				<xs:enumeration value="tet"/>
+				<xs:enumeration value="tg"/>
+				<xs:enumeration value="tl"/>
+				<xs:enumeration value="th"/>
+				<xs:enumeration value="bo"/>
+				<xs:enumeration value="tig"/>
+				<xs:enumeration value="ti"/>
+				<xs:enumeration value="tiv"/>
+				<xs:enumeration value="tkl"/>
+				<xs:enumeration value="tlh"/>
+				<xs:enumeration value="tli"/>
+				<xs:enumeration value="tmh"/>
+				<xs:enumeration value="tog"/>
+				<xs:enumeration value="to"/>
+				<xs:enumeration value="tpi"/>
+				<xs:enumeration value="tsi"/>
+				<xs:enumeration value="tn"/>
+				<xs:enumeration value="ts"/>
+				<xs:enumeration value="tk"/>
+				<xs:enumeration value="tum"/>
+				<xs:enumeration value="tup"/>
+				<xs:enumeration value="tr"/>
+				<xs:enumeration value="tut"/>
+				<xs:enumeration value="tvl"/>
+				<xs:enumeration value="tw"/>
+				<xs:enumeration value="tyv"/>
+				<xs:enumeration value="udm"/>
+				<xs:enumeration value="uga"/>
+				<xs:enumeration value="ug"/>
+				<xs:enumeration value="uk"/>
+				<xs:enumeration value="umb"/>
+				<xs:enumeration value="und"/>
+				<xs:enumeration value="ur"/>
+				<xs:enumeration value="uz"/>
+				<xs:enumeration value="vai"/>
+				<xs:enumeration value="ve"/>
+				<xs:enumeration value="vi"/>
+				<xs:enumeration value="vo"/>
+				<xs:enumeration value="vot"/>
+				<xs:enumeration value="wak"/>
+				<xs:enumeration value="wal"/>
+				<xs:enumeration value="war"/>
+				<xs:enumeration value="was"/>
+				<xs:enumeration value="cy"/>
+				<xs:enumeration value="wen"/>
+				<xs:enumeration value="wa"/>
+				<xs:enumeration value="wo"/>
+				<xs:enumeration value="xal"/>
+				<xs:enumeration value="xh"/>
+				<xs:enumeration value="yao"/>
+				<xs:enumeration value="yap"/>
+				<xs:enumeration value="yi"/>
+				<xs:enumeration value="yo"/>
+				<xs:enumeration value="ypk"/>
+				<xs:enumeration value="zap"/>
+				<xs:enumeration value="zbl"/>
+				<xs:enumeration value="zen"/>
+				<xs:enumeration value="za"/>
+				<xs:enumeration value="znd"/>
+				<xs:enumeration value="zu"/>
+				<xs:enumeration value="zun"/>
+				<xs:enumeration value="zza"/>
+				<xs:enumeration value="other"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:complexType name="languageInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the languages represented in the resource </xs:documentation>
+			<xs:appinfo>
+				<render-short>{languageName} {languageVarietyInfo}</render-short>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ms:languageId">
+				<xs:annotation>
+					<xs:documentation>The identifier of the language that is included in the resource or supported by the tool/service; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:languageName">
+				<xs:annotation>
+					<xs:documentation>A human understandable name of the language that is used in the resource or supported by the tool/service; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="languageScript" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Specifies the writing system used to represent the language in form of a four letter code as it is defined in ISO-15924</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="sizePerLanguage" type="ms:sizeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides information on the size per language component</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+						<inline-type>tabular</inline-type>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="ms:languageVarietyInfo" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Groups information on language varieties occurred in the resource (e.g. dialects)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- defintion of elements -->
+	<xs:element name="characterEncodingInfo" type="ms:characterEncodingInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on character encoding of the resource</xs:documentation>
+			<xs:appinfo>
+				<relation>one-to-one</relation>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="timeCoverageInfo" type="ms:timeCoverageInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups together information on time classification of the resource</xs:documentation>
+			<xs:appinfo>
+				<relation>one-to-one</relation>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="geographicCoverageInfo" type="ms:geographicCoverageInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on geographic classification of the resource</xs:documentation>
+			<xs:appinfo>
+				<relation>one-to-one</relation>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="lingualityInfo" type="ms:lingualityInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the number of languages of the resource part and of the way they are combined to each other</xs:documentation>
+			<xs:appinfo>
+				<relation>one-to-one</relation>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="languageInfo" type="ms:languageInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on the languages represented in the resource</xs:documentation>
+			<xs:appinfo>
+				<relation>one-to-one</relation>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="languageVarietyInfo" type="ms:languageVarietyInfoType">
+		<xs:annotation>
+			<xs:documentation>Groups information on language varieties occurred in the resource (e.g. dialects)</xs:documentation>
+			<xs:appinfo>
+				<relation>one-to-one</relation>
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="languageVarietyName">
+		<xs:annotation>
+			<xs:documentation>The name of the language variety that occurs in the resource or is supported by a tool/service</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="100"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+</xs:schema>
