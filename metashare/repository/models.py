@@ -4590,11 +4590,15 @@ class textFormatInfoType_model(SchemaModel):
 
     mimeType = XmlCharField(
       verbose_name='Mime type', 
-      help_text='The mime-type of the resource which is a formalized spe' \
-      'cifier for the format included or a mime-type that the tool/servi' \
-      'ce accepts; value to be taken from a subset of the official mime ' \
-      'types of the Internet Assigned Numbers Authority (http://www.iana' \
-      '.org/)',
+      help_text='The mime-type of the resource which is a formalized' \
+        'specifier for the format included or a mime-type ' \
+        'that the tool/service accepts, in conformance' \
+        'with the values of the IANA (Internet Assigned ' \
+        'Numbers Authority); you can select one of ' \
+        'the pre-defined values or add a value, ' \
+        'PREFERABLY FROM THE IANA MEDIA MIMETYPE ' \
+        'RECOMMENDED VALUES (http://www.iana.org/assignments/' \
+        'media-types/media-types.xhtml)',
       max_length=50, )
 
     sizePerTextFormat = models.OneToOneField("sizeInfoType_model", 
@@ -4614,6 +4618,22 @@ class textFormatInfoType_model(SchemaModel):
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
+
+TEXTCLASSIFICATIONINFOTYPE_TEXTGENRE_CHOICES = _make_choices_from_list([
+    u"advertising", u"discussion", u"feature", u"fiction", u"information",
+    u"instruction", u"nonFiction", u"official", u"private",
+])
+
+TEXTCLASSIFICATIONINFOTYPE_TEXTTYPE_CHOICES = _make_choices_from_list([
+    u'academicTexts', u'administrativeTexts', u'blogTexts',
+    u'chatTexts', u'emails', u'encyclopaedicTexts',
+    u'faceToFaceConversationsDiscussions', u'interviews',
+    u'journalisticTexts', u'letters', u'literaryTexts',
+    u'meetingProceedings', u'reviews', u'scripts',
+    u'subtitles', u'technicalTexts', u'telephoneConversations',
+    u'tweets',
+])
+
 
 TEXTCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES = _make_choices_from_list([
   u'ANC_domainClassification', u'ANC_genreClassification',
@@ -4647,18 +4667,31 @@ class textClassificationInfoType_model(SchemaModel):
       u'sizePerTextClassification': "sizeInfoType_model",
     }
 
+    # textGenre = MutuallyExclusiveValueModelField(
     textGenre = XmlCharField(
       verbose_name='Text genre', 
       help_text='Genre: The conventionalized discourse or text types of ' \
-      'the content of the resource, based on extra-linguistic and intern' \
-      'al linguistic criteria',
-      blank=True, max_length=50, )
+      'the content of the resource, based on extra-linguistic and internal ' \
+      'linguistic criteria; please, select one of the predefined values ' \
+      '(taken from the PAROLE text genre list) as it increases the ' \
+      'interoperability between resources and processing tools and ' \
+      'services; if none fits the contents of your resource, you can ' \
+      'add your own value',
+      blank=True, max_length=50,
+      choices=sorted(TEXTCLASSIFICATIONINFOTYPE_TEXTGENRE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),)
 
+    # textType = MutuallyExclusiveValueModelField(
     textType = XmlCharField(
       verbose_name='Text type', 
-      help_text='Specifies the type of the text according to a text type' \
-      ' classification',
-      blank=True, max_length=50, )
+      help_text='Specifies the type of the text according to a text type ' \
+        'classification; please, select one of the predefined values as ' \
+        'it increases the interoperability between resources and ' \
+        'processing tools and services; if none fits the contents ' \
+        'of your resource, you can add your own value',
+      blank=True, max_length=50,
+      choices=sorted(TEXTCLASSIFICATIONINFOTYPE_TEXTTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),)
 
     register = XmlCharField(
       verbose_name='Register', 
@@ -5246,11 +5279,15 @@ class imageFormatInfoType_model(SchemaModel):
 
     mimeType = XmlCharField(
       verbose_name='Mime type', 
-      help_text='The mime-type of the resource which is a formalized spe' \
-      'cifier for the format included or a mime-type that the tool/servi' \
-      'ce accepts; value to be taken from a subset of the official mime ' \
-      'types of the Internet Assigned Numbers Authority (http://www.iana' \
-      '.org/)',
+      help_text='The mime-type of the resource which is a formalized' \
+        'specifier for the format included or a mime-type ' \
+        'that the tool/service accepts, in conformance' \
+        'with the values of the IANA (Internet Assigned ' \
+        'Numbers Authority); you can select one of ' \
+        'the pre-defined values or add a value, ' \
+        'PREFERABLY FROM THE IANA MEDIA MIMETYPE ' \
+        'RECOMMENDED VALUES (http://www.iana.org/assignments/' \
+        'media-types/media-types.xhtml)',
       max_length=50, )
 
     colourSpace = MultiSelectField(
@@ -5521,11 +5558,15 @@ class textNumericalFormatInfoType_model(SchemaModel):
 
     mimeType = XmlCharField(
       verbose_name='Mime type', 
-      help_text='The mime-type of the resource which is a formalized spe' \
-      'cifier for the format included or a mime-type that the tool/servi' \
-      'ce accepts; value to be taken from a subset of the official mime ' \
-      'types of the Internet Assigned Numbers Authority (http://www.iana' \
-      '.org/)',
+      help_text='The mime-type of the resource which is a formalized' \
+        'specifier for the format included or a mime-type ' \
+        'that the tool/service accepts, in conformance' \
+        'with the values of the IANA (Internet Assigned ' \
+        'Numbers Authority); you can select one of ' \
+        'the pre-defined values or add a value, ' \
+        'PREFERABLY FROM THE IANA MEDIA MIMETYPE ' \
+        'RECOMMENDED VALUES (http://www.iana.org/assignments/' \
+        'media-types/media-types.xhtml)',
       max_length=1000, )
 
     sizePerTextNumericalFormat = models.OneToOneField("sizeInfoType_model", 
