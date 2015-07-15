@@ -5840,10 +5840,10 @@ LANGUAGEDESCRIPTIONENCODINGINFOTYPE_TASK_CHOICES = _make_choices_from_list([
   u'other',
 ])
 
-LANGUAGEDESCRIPTIONENCODINGINFOTYPE_GRAMMATICALPHENOMENACOVERAGE_CHOICES = _make_choices_from_list([
-  u'clauseStructure', u'ppAttachment', u'npStructure', u'coordination',
-  u'anaphora',u'other', 
-])
+# LANGUAGEDESCRIPTIONENCODINGINFOTYPE_GRAMMATICALPHENOMENACOVERAGE_CHOICES = _make_choices_from_list([
+#   u'clauseStructure', u'ppAttachment', u'npStructure', u'coordination',
+#   u'anaphora',u'other',
+# ])
 
 # pylint: disable-msg=C0103
 class languageDescriptionEncodingInfoType_model(SchemaModel):
@@ -5863,8 +5863,8 @@ class languageDescriptionEncodingInfoType_model(SchemaModel):
       ( u'theoreticModel', u'theoreticModel', RECOMMENDED ),
       ( u'formalism', u'formalism', OPTIONAL ),
       ( u'task', u'task', RECOMMENDED ),
-      ( u'grammaticalPhenomenaCoverage', u'grammaticalPhenomenaCoverage', RECOMMENDED ),
-      ( u'weightedGrammar', u'weightedGrammar', OPTIONAL ),
+      # ( u'grammaticalPhenomenaCoverage', u'grammaticalPhenomenaCoverage', RECOMMENDED ),
+      # ( u'weightedGrammar', u'weightedGrammar', OPTIONAL ),
     )
 
     encodingLevel = MultiSelectField(
@@ -5908,20 +5908,20 @@ class languageDescriptionEncodingInfoType_model(SchemaModel):
       choices=LANGUAGEDESCRIPTIONENCODINGINFOTYPE_TASK_CHOICES['choices'],
       )
 
-    grammaticalPhenomenaCoverage = MultiSelectField(
-      verbose_name='Grammatical phenomena coverage', 
-      help_text='An indication of the grammatical phenomena covered by t' \
-      'he grammar',
-      blank=True, 
-      max_length=1 + len(LANGUAGEDESCRIPTIONENCODINGINFOTYPE_GRAMMATICALPHENOMENACOVERAGE_CHOICES['choices']) / 4,
-      choices=LANGUAGEDESCRIPTIONENCODINGINFOTYPE_GRAMMATICALPHENOMENACOVERAGE_CHOICES['choices'],
-      )
+    # grammaticalPhenomenaCoverage = MultiSelectField(
+    #   verbose_name='Grammatical phenomena coverage',
+    #   help_text='An indication of the grammatical phenomena covered by t' \
+    #   'he grammar',
+    #   blank=True,
+    #   max_length=1 + len(LANGUAGEDESCRIPTIONENCODINGINFOTYPE_GRAMMATICALPHENOMENACOVERAGE_CHOICES['choices']) / 4,
+    #   choices=LANGUAGEDESCRIPTIONENCODINGINFOTYPE_GRAMMATICALPHENOMENACOVERAGE_CHOICES['choices'],
+    #   )
 
-    weightedGrammar = MetaBooleanField(
-      verbose_name='Weighted grammar', 
-      help_text='Indicates whether the grammar contains numerical weight' \
-      's (incl. probabilities)',
-      blank=True, )
+    # weightedGrammar = MetaBooleanField(
+    #   verbose_name='Weighted grammar',
+    #   help_text='Indicates whether the grammar contains numerical weight' \
+    #   's (incl. probabilities)',
+    #   blank=True, )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
