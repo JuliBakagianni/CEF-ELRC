@@ -584,7 +584,7 @@ def view(request, resource_name=None, object_id=None):
                 'linguality_infos': linguality_infos,
                 'mediaTypes': media_types,
                 'metadata_dict': metadata_dict,
-                'metaShareId': metashare_id,
+                # 'metaShareId': metashare_id,
                 'identifier': identifier,
                 'other_res_names': other_res_names,
                 'other_descriptions': other_descriptions,
