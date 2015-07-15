@@ -92,14 +92,14 @@ class resourceInfoType_model(SchemaModel):
       ( u'distributionInfo', u'distributionInfo', REQUIRED ),
       ( u'contactPerson', u'contactPerson', REQUIRED ),
       ( u'metadataInfo', u'metadataInfo', REQUIRED ),
-      ( u'versionInfo', u'versionInfo', RECOMMENDED ),
-      ( u'validationInfo', u'validationinfotype_model_set', RECOMMENDED ),
-      ( u'usageInfo', u'usageInfo', RECOMMENDED ),
+      # ( u'versionInfo', u'versionInfo', RECOMMENDED ),
+      # ( u'validationInfo', u'validationinfotype_model_set', RECOMMENDED ),
+      # ( u'usageInfo', u'usageInfo', RECOMMENDED ),
       ( u'resourceDocumentationInfo', u'resourceDocumentationInfo', RECOMMENDED ),
-      ( u'resourceCreationInfo', u'resourceCreationInfo', RECOMMENDED ),
-      ( u'relationInfo', u'relationinfotype_model_set', RECOMMENDED ),
+      # ( u'resourceCreationInfo', u'resourceCreationInfo', RECOMMENDED ),
+      # ( u'relationInfo', u'relationinfotype_model_set', RECOMMENDED ),
       ( 'resourceComponentType/corpusInfo', 'resourceComponentType', REQUIRED ),
-      ( 'resourceComponentType/toolServiceInfo', 'resourceComponentType', REQUIRED ),
+      # ( 'resourceComponentType/toolServiceInfo', 'resourceComponentType', REQUIRED ),
       ( 'resourceComponentType/languageDescriptionInfo', 'resourceComponentType', REQUIRED ),
       ( 'resourceComponentType/lexicalConceptualResourceInfo', 'resourceComponentType', REQUIRED ),
     )
@@ -111,13 +111,13 @@ class resourceInfoType_model(SchemaModel):
       u'languageDescriptionInfo': "languageDescriptionInfoType_model",
       u'lexicalConceptualResourceInfo': "lexicalConceptualResourceInfoType_model",
       u'metadataInfo': "metadataInfoType_model",
-      u'relationInfo': "relationInfoType_model",
-      u'resourceCreationInfo': "resourceCreationInfoType_model",
+      # u'relationInfo': "relationInfoType_model",
+      # u'resourceCreationInfo': "resourceCreationInfoType_model",
       u'resourceDocumentationInfo': "resourceDocumentationInfoType_model",
-      u'toolServiceInfo': "toolServiceInfoType_model",
-      u'usageInfo': "usageInfoType_model",
-      u'validationInfo': "validationInfoType_model",
-      u'versionInfo': "versionInfoType_model",
+      # u'toolServiceInfo': "toolServiceInfoType_model",
+      # u'usageInfo': "usageInfoType_model",
+      # u'validationInfo': "validationInfoType_model",
+      # u'versionInfo': "versionInfoType_model",
     }
 
     identificationInfo = models.OneToOneField("identificationInfoType_model", 
@@ -142,19 +142,19 @@ class resourceInfoType_model(SchemaModel):
       help_text='Groups information on the metadata record itself',
       )
 
-    versionInfo = models.OneToOneField("versionInfoType_model", 
-      verbose_name='Version', 
-      help_text='Groups information on a specific version or release of ' \
-      'the resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # versionInfo = models.OneToOneField("versionInfoType_model",
+    #   verbose_name='Version',
+    #   help_text='Groups information on a specific version or release of ' \
+    #   'the resource',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: validationInfo
 
-    usageInfo = models.OneToOneField("usageInfoType_model", 
-      verbose_name='Usage', 
-      help_text='Groups information on usage of the resource (both inten' \
-      'ded and actual use)',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # usageInfo = models.OneToOneField("usageInfoType_model",
+    #   verbose_name='Usage',
+    #   help_text='Groups information on usage of the resource (both inten' \
+    #   'ded and actual use)',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     resourceDocumentationInfo = models.OneToOneField("resourceDocumentationInfoType_model", 
       verbose_name='Resource documentation', 
@@ -162,11 +162,11 @@ class resourceInfoType_model(SchemaModel):
       'the resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    resourceCreationInfo = models.OneToOneField("resourceCreationInfoType_model", 
-      verbose_name='Resource creation', 
-      help_text='Groups information on the creation procedure of a resou' \
-      'rce',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # resourceCreationInfo = models.OneToOneField("resourceCreationInfoType_model",
+    #   verbose_name='Resource creation',
+    #   help_text='Groups information on the creation procedure of a resou' \
+    #   'rce',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: relationInfo
 
@@ -6969,6 +6969,21 @@ OUTPUTINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
 OUTPUTINFOTYPE_MODALITYTYPE_CHOICES = _make_choices_from_list([
   u'bodyGesture', u'facialExpression', u'voice', u'combinationOfModalities',
   u'signLanguage',u'spokenLanguage', u'writtenLanguage', u'other', 
+])
+
+OUTPUTINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
+    u'application/emma+xml', u'application/mp4', u'application/pdf',
+    u'application/pls+xml', u'application/rdf+xml', u'application/rtf',
+    u'application/tei+xml', u"application/vnd.xmi+xml",
+    u'application/voicexml+xml', u'application/x-latex',
+    u'application/x-msaccess', u'application/x-tex', u'application/x-tmx+xml',
+    u'application/x-xces+xml', u'application/xhtml+xml', u'application/xml',
+    u'audio/mp4', u'audio/mpeg', u'audio/x-wav', u'image/bmp', u'image/gif',
+    u'image/jpeg', u'image/png', u'image/svg+xml', u'image/tiff',
+    u'text/csv', u'text/html', u'text/plain', u'text/sgml',
+    u'text/tab-separated-values', u'video/jpeg', u'video/mp4',
+    u'video/mpeg', u'video/x-flv', u'video/x-ms-wmv',
+    u'video/x-msvideo', u'other',
 ])
 
 OUTPUTINFOTYPE_CHARACTERENCODING_CHOICES = _make_choices_from_list([
