@@ -1120,7 +1120,7 @@ DOMAININFOTYPE_DOMAIN_CHOICES = (
 DOMAININFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES = _make_choices_from_list([
   u'ANC_domainClassification', u'ANC_genreClassification',
   u'BNC_domainClassification',u'BNC_textTypeClassification',
-  u'DDC_classification',u'libraryOfCongress_domainClassification',
+  u'DDC_classification', u'DK-5', u'EUROVOC', u'libraryOfCongress_domainClassification',
   u'libraryofCongressSubjectHeadings_classification',u'MeSH_classification',
   u'NLK_classification',u'PAROLE_topicClassification',
   u'PAROLE_genreClassification',u'UDC_classification', u'other', 
@@ -6818,7 +6818,7 @@ class inputInfoType_model(SchemaModel):
     class Meta:
         verbose_name = "Input"
 
-
+    # mdel anchor
     __schema_name__ = 'inputInfoType'
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
@@ -6829,6 +6829,9 @@ class inputInfoType_model(SchemaModel):
       ( u'languageVarietyName', u'languageVarietyName', OPTIONAL ),
       ( u'mimeType', u'mimeType', RECOMMENDED ),
       ( u'characterEncoding', u'characterEncoding', OPTIONAL ),
+      ( u'domain', u'domain', OPTIONAL ),
+      ( u'textGenre', u'textGenre', OPTIONAL ),
+      ( u'textType', u'textType', OPTIONAL ),
       ( u'annotationType', u'annotationType', OPTIONAL ),
       ( u'annotationFormat', u'annotationFormat', OPTIONAL ),
       ( u'tagset', u'tagset', OPTIONAL ),
@@ -6889,11 +6892,15 @@ class inputInfoType_model(SchemaModel):
 
     mimeType = MultiTextField(max_length=50, widget=MultiFieldWidget(widget_id=32, max_length=50), 
       verbose_name='Mime type', 
-      help_text='The mime-type of the resource which is a formalized spe' \
-      'cifier for the format included or a mime-type that the tool/servi' \
-      'ce accepts; value to be taken from a subset of the official mime ' \
-      'types of the Internet Assigned Numbers Authority (http://www.iana' \
-      '.org/)',
+      help_text='The mime-type of the resource which is a formalized' \
+        'specifier for the format included or a mime-type ' \
+        'that the tool/service accepts, in conformance' \
+        'with the values of the IANA (Internet Assigned ' \
+        'Numbers Authority); you can select one of ' \
+        'the pre-defined values or add a value, ' \
+        'PREFERABLY FROM THE IANA MEDIA MIMETYPE ' \
+        'RECOMMENDED VALUES (http://www.iana.org/assignments/' \
+        'media-types/media-types.xhtml)',
       blank=True, validators=[validate_matches_xml_char_production], )
 
     characterEncoding = MultiSelectField(
