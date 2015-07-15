@@ -550,12 +550,12 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             if ld_media_type.languageDescriptionTextInfo:
                 result.extend([lang.languageName for lang in ld_media_type \
                             .languageDescriptionTextInfo.languageinfotype_model_set.all()])
-            if ld_media_type.languageDescriptionVideoInfo:
-                result.extend([lang.languageName for lang in ld_media_type \
-                            .languageDescriptionVideoInfo.languageinfotype_model_set.all()])
-            if ld_media_type.languageDescriptionImageInfo:
-                result.extend([lang.languageName for lang in ld_media_type \
-                            .languageDescriptionImageInfo.languageinfotype_model_set.all()])
+            # if ld_media_type.languageDescriptionVideoInfo:
+            #     result.extend([lang.languageName for lang in ld_media_type \
+            #                 .languageDescriptionVideoInfo.languageinfotype_model_set.all()])
+            # if ld_media_type.languageDescriptionImageInfo:
+            #     result.extend([lang.languageName for lang in ld_media_type \
+            #                 .languageDescriptionImageInfo.languageinfotype_model_set.all()])
 
         elif isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:
@@ -705,18 +705,18 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                   .lingualityInfo.get_multilingualityType_display()
                 if mtf != '':
                     result.append(mtf)
-            if ld_media_type.languageDescriptionVideoInfo and \
-                    ld_media_type.languageDescriptionVideoInfo.lingualityInfo:
-                mtf = ld_media_type.languageDescriptionVideoInfo \
-                  .lingualityInfo.get_multilingualityType_display()
-                if mtf != '':
-                    result.append(mtf)
-            if ld_media_type.languageDescriptionImageInfo and \
-                    ld_media_type.languageDescriptionImageInfo.lingualityInfo:
-                mtf = ld_media_type.languageDescriptionImageInfo \
-                  .lingualityInfo.get_multilingualityType_display()
-                if mtf != '':
-                    result.append(mtf)
+            # if ld_media_type.languageDescriptionVideoInfo and \
+            #         ld_media_type.languageDescriptionVideoInfo.lingualityInfo:
+            #     mtf = ld_media_type.languageDescriptionVideoInfo \
+            #       .lingualityInfo.get_multilingualityType_display()
+            #     if mtf != '':
+            #         result.append(mtf)
+            # if ld_media_type.languageDescriptionImageInfo and \
+            #         ld_media_type.languageDescriptionImageInfo.lingualityInfo:
+            #     mtf = ld_media_type.languageDescriptionImageInfo \
+            #       .lingualityInfo.get_multilingualityType_display()
+            #     if mtf != '':
+            #         result.append(mtf)
 
         return result
 
@@ -774,20 +774,20 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                         .lexicalConceptualResourceImageInfo.modalityinfotype_model_set.all()
                         for mt in modalityInfo.get_modalityType_display_list()])
 
-        elif isinstance(corpus_media, languageDescriptionInfoType_model):
-            ld_media_type = corpus_media.languageDescriptionMediaType
-            if ld_media_type.languageDescriptionTextInfo and \
-                    ld_media_type.languageDescriptionTextInfo.modalityInfo:
-                result.extend(ld_media_type.languageDescriptionTextInfo \
-                              .modalityInfo.get_modalityType_display_list())
-            if ld_media_type.languageDescriptionVideoInfo:
-                result.extend([mt for modalityInfo in ld_media_type \
-                        .languageDescriptionVideoInfo.modalityinfotype_model_set.all()
-                        for mt in modalityInfo.get_modalityType_display_list()])
-            if ld_media_type.languageDescriptionImageInfo:
-                result.extend([mt for modalityInfo in ld_media_type \
-                        .languageDescriptionImageInfo.modalityinfotype_model_set.all()
-                        for mt in modalityInfo.get_modalityType_display_list()])
+        # elif isinstance(corpus_media, languageDescriptionInfoType_model):
+        #     ld_media_type = corpus_media.languageDescriptionMediaType
+        #     if ld_media_type.languageDescriptionTextInfo and \
+        #             ld_media_type.languageDescriptionTextInfo.modalityInfo:
+        #         result.extend(ld_media_type.languageDescriptionTextInfo \
+        #                       .modalityInfo.get_modalityType_display_list())
+            # if ld_media_type.languageDescriptionVideoInfo:
+            #     result.extend([mt for modalityInfo in ld_media_type \
+            #             .languageDescriptionVideoInfo.modalityinfotype_model_set.all()
+            #             for mt in modalityInfo.get_modalityType_display_list()])
+            # if ld_media_type.languageDescriptionImageInfo:
+            #     result.extend([mt for modalityInfo in ld_media_type \
+            #             .languageDescriptionImageInfo.modalityinfotype_model_set.all()
+            #             for mt in modalityInfo.get_modalityType_display_list()])
 
         elif isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:
@@ -849,14 +849,14 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                 mimeType_list.extend([mimeType.mimeType for mimeType in
                         ld_media_type.languageDescriptionTextInfo \
                             .textformatinfotype_model_set.all()])
-            if ld_media_type.languageDescriptionVideoInfo:
-                mimeType_list.extend([mimeType.mimeType for mimeType in
-                        ld_media_type.languageDescriptionVideoInfo \
-                            .videoformatinfotype_model_set.all()])
-            if ld_media_type.languageDescriptionImageInfo:
-                mimeType_list.extend([mimeType.mimeType for mimeType in
-                        ld_media_type.languageDescriptionImageInfo \
-                            .imageformatinfotype_model_set.all()])
+            # if ld_media_type.languageDescriptionVideoInfo:
+            #     mimeType_list.extend([mimeType.mimeType for mimeType in
+            #             ld_media_type.languageDescriptionVideoInfo \
+            #                 .videoformatinfotype_model_set.all()])
+            # if ld_media_type.languageDescriptionImageInfo:
+            #     mimeType_list.extend([mimeType.mimeType for mimeType in
+            #             ld_media_type.languageDescriptionImageInfo \
+            #                 .imageformatinfotype_model_set.all()])
 
         elif isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:
@@ -964,14 +964,14 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                 result.extend([domain_info.domain for domain_info in
                                ld_media_type.languageDescriptionTextInfo \
                                     .domaininfotype_model_set.all()])
-            if ld_media_type.languageDescriptionVideoInfo:
-                result.extend([domain_info.domain for domain_info in
-                               ld_media_type.languageDescriptionVideoInfo \
-                                    .domaininfotype_model_set.all()])
-            if ld_media_type.languageDescriptionImageInfo:
-                result.extend([domain_info.domain for domain_info in
-                               ld_media_type.languageDescriptionImageInfo \
-                                    .domaininfotype_model_set.all()])
+            # if ld_media_type.languageDescriptionVideoInfo:
+            #     result.extend([domain_info.domain for domain_info in
+            #                    ld_media_type.languageDescriptionVideoInfo \
+            #                         .domaininfotype_model_set.all()])
+            # if ld_media_type.languageDescriptionImageInfo:
+            #     result.extend([domain_info.domain for domain_info in
+            #                    ld_media_type.languageDescriptionImageInfo \
+            #                         .domaininfotype_model_set.all()])
 
         return result
 
@@ -1028,14 +1028,14 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                 result.extend([gc_info.geographicCoverage for gc_info in
                                ld_media_type.languageDescriptionTextInfo \
                                     .geographiccoverageinfotype_model_set.all()])
-            if ld_media_type.languageDescriptionVideoInfo:
-                result.extend([gc_info.geographicCoverage for gc_info in
-                               ld_media_type.languageDescriptionVideoInfo \
-                                    .geographiccoverageinfotype_model_set.all()])
-            if ld_media_type.languageDescriptionImageInfo:
-                result.extend([gc_info.geographicCoverage for gc_info in
-                               ld_media_type.languageDescriptionImageInfo \
-                                    .geographiccoverageinfotype_model_set.all()])
+            # if ld_media_type.languageDescriptionVideoInfo:
+            #     result.extend([gc_info.geographicCoverage for gc_info in
+            #                    ld_media_type.languageDescriptionVideoInfo \
+            #                         .geographiccoverageinfotype_model_set.all()])
+            # if ld_media_type.languageDescriptionImageInfo:
+            #     result.extend([gc_info.geographicCoverage for gc_info in
+            #                    ld_media_type.languageDescriptionImageInfo \
+            #                         .geographiccoverageinfotype_model_set.all()])
 
         return result
 
@@ -1089,14 +1089,14 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                 result.extend([timeCoverage.timeCoverage for timeCoverage in
                         ld_media_type.languageDescriptionTextInfo \
                             .timecoverageinfotype_model_set.all()])
-            if ld_media_type.languageDescriptionVideoInfo:
-                result.extend([timeCoverage.timeCoverage for timeCoverage in
-                        ld_media_type.languageDescriptionVideoInfo \
-                            .timecoverageinfotype_model_set.all()])
-            if ld_media_type.languageDescriptionImageInfo:
-                result.extend([timeCoverage.timeCoverage for timeCoverage in
-                        ld_media_type.languageDescriptionImageInfo \
-                            .timecoverageinfotype_model_set.all()])
+            # if ld_media_type.languageDescriptionVideoInfo:
+            #     result.extend([timeCoverage.timeCoverage for timeCoverage in
+            #             ld_media_type.languageDescriptionVideoInfo \
+            #                 .timecoverageinfotype_model_set.all()])
+            # if ld_media_type.languageDescriptionImageInfo:
+            #     result.extend([timeCoverage.timeCoverage for timeCoverage in
+            #             ld_media_type.languageDescriptionImageInfo \
+            #                 .timecoverageinfotype_model_set.all()])
 
         return result
 
@@ -1631,12 +1631,12 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                               .videoContentInfo.typeOfVideoContent)
 
         # Filter for language description
-        elif isinstance(corpus_media, languageDescriptionInfoType_model):
-            ld_media_type = corpus_media.languageDescriptionMediaType
-            if ld_media_type.languageDescriptionVideoInfo \
-                    and ld_media_type.languageDescriptionVideoInfo.videoContentInfo:
-                result.extend(ld_media_type.languageDescriptionVideoInfo \
-                              .videoContentInfo.typeOfVideoContent)
+        # elif isinstance(corpus_media, languageDescriptionInfoType_model):
+        #     ld_media_type = corpus_media.languageDescriptionMediaType
+        #     if ld_media_type.languageDescriptionVideoInfo \
+        #             and ld_media_type.languageDescriptionVideoInfo.videoContentInfo:
+        #         result.extend(ld_media_type.languageDescriptionVideoInfo \
+        #                       .videoContentInfo.typeOfVideoContent)
 
         return result
     
@@ -1844,16 +1844,16 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                   languageinfotype_model_set.all():
                     result.extend([variety.languageVarietyName for variety in
                                lang.languageVarietyInfo.all()])
-            if ld_media_type.languageDescriptionVideoInfo:
-                for lang in ld_media_type.languageDescriptionVideoInfo. \
-                  languageinfotype_model_set.all():
-                    result.extend([variety.languageVarietyName for variety in
-                               lang.languageVarietyInfo.all()])
-            if ld_media_type.languageDescriptionImageInfo:
-                for lang in ld_media_type.languageDescriptionImageInfo. \
-                  languageinfotype_model_set.all():
-                    result.extend([variety.languageVarietyName for variety in
-                               lang.languageVarietyInfo.all()])
+            # if ld_media_type.languageDescriptionVideoInfo:
+            #     for lang in ld_media_type.languageDescriptionVideoInfo. \
+            #       languageinfotype_model_set.all():
+            #         result.extend([variety.languageVarietyName for variety in
+            #                    lang.languageVarietyInfo.all()])
+            # if ld_media_type.languageDescriptionImageInfo:
+            #     for lang in ld_media_type.languageDescriptionImageInfo. \
+            #       languageinfotype_model_set.all():
+            #         result.extend([variety.languageVarietyName for variety in
+            #                    lang.languageVarietyInfo.all()])
 
         elif isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:

@@ -4483,28 +4483,28 @@ class corpusTextInfoType_model(SchemaModel):
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
       ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
-      ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
+      # ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
       ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
-      ( u'textFormatInfo', u'textformatinfotype_model_set', RECOMMENDED ),
-      ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', RECOMMENDED ),
+      ( u'textFormatInfo', u'textformatinfotype_model_set', REQUIRED ),
+      ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', REQUIRED ),
       ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
       ( u'textClassificationInfo', u'textclassificationinfotype_model_set', RECOMMENDED ),
       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
-      ( u'creationInfo', u'creationInfo', RECOMMENDED ),
-      ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', OPTIONAL ),
+      # ( u'creationInfo', u'creationInfo', RECOMMENDED ),
+      # ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', OPTIONAL ),
     )
     __schema_classes__ = {
       u'annotationInfo': "annotationInfoType_model",
       u'characterEncodingInfo': "characterEncodingInfoType_model",
-      u'creationInfo': "creationInfoType_model",
+      # u'creationInfo': "creationInfoType_model",
       u'domainInfo': "domainInfoType_model",
       u'geographicCoverageInfo': "geographicCoverageInfoType_model",
       u'languageInfo': "languageInfoType_model",
       u'lingualityInfo': "lingualityInfoType_model",
-      u'linkToOtherMediaInfo': "linkToOtherMediaInfoType_model",
-      u'modalityInfo': "modalityInfoType_model",
+      # u'linkToOtherMediaInfo': "linkToOtherMediaInfoType_model",
+      # u'modalityInfo': "modalityInfoType_model",
       u'sizeInfo': "sizeInfoType_model",
       u'textClassificationInfo': "textClassificationInfoType_model",
       u'textFormatInfo': "textFormatInfoType_model",
@@ -4547,13 +4547,13 @@ class corpusTextInfoType_model(SchemaModel):
 
     # OneToMany field: geographicCoverageInfo
 
-    creationInfo = models.OneToOneField("creationInfoType_model", 
-      verbose_name='Creation', 
-      help_text='Groups together information on the resource creation (e' \
-      '.g. for corpora, selection of texts/audio files/ video files etc.' \
-      ' and structural encoding thereof; for lexica, construction of lem' \
-      'ma list etc.)',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # creationInfo = models.OneToOneField("creationInfoType_model",
+    #   verbose_name='Creation',
+    #   help_text='Groups together information on the resource creation (e' \
+    #   '.g. for corpora, selection of texts/audio files/ video files etc.' \
+    #   ' and structural encoding thereof; for lexica, construction of lem' \
+    #   'ma list etc.)',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: linkToOtherMediaInfo
 
@@ -5973,11 +5973,11 @@ class languageDescriptionTextInfoType_model(SchemaModel):
     __schema_name__ = 'languageDescriptionTextInfoType'
     __schema_fields__ = (
       ( u'mediaType', u'mediaType', REQUIRED ),
-      ( u'creationInfo', u'creationInfo', RECOMMENDED ),
-      ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', OPTIONAL ),
+      # ( u'creationInfo', u'creationInfo', RECOMMENDED ),
+      # ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', OPTIONAL ),
       ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
       ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
-      ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
+      # ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
       ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
       ( u'textFormatInfo', u'textformatinfotype_model_set', RECOMMENDED ),
       ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', RECOMMENDED ),
@@ -5987,13 +5987,13 @@ class languageDescriptionTextInfoType_model(SchemaModel):
     )
     __schema_classes__ = {
       u'characterEncodingInfo': "characterEncodingInfoType_model",
-      u'creationInfo': "creationInfoType_model",
+      # u'creationInfo': "creationInfoType_model",
       u'domainInfo': "domainInfoType_model",
       u'geographicCoverageInfo': "geographicCoverageInfoType_model",
       u'languageInfo': "languageInfoType_model",
       u'lingualityInfo': "lingualityInfoType_model",
-      u'linkToOtherMediaInfo': "linkToOtherMediaInfoType_model",
-      u'modalityInfo': "modalityInfoType_model",
+      # u'linkToOtherMediaInfo': "linkToOtherMediaInfoType_model",
+      # u'modalityInfo': "modalityInfoType_model",
       u'sizeInfo': "sizeInfoType_model",
       u'textFormatInfo': "textFormatInfoType_model",
       u'timeCoverageInfo': "timeCoverageInfoType_model",
@@ -6009,13 +6009,13 @@ class languageDescriptionTextInfoType_model(SchemaModel):
       'different media types.',
       default="text", editable=False, max_length=1000, )
 
-    creationInfo = models.OneToOneField("creationInfoType_model", 
-      verbose_name='Creation', 
-      help_text='Groups together information on the resource creation (e' \
-      '.g. for corpora, selection of texts/audio files/ video files etc.' \
-      ' and structural encoding thereof; for lexica, construction of lem' \
-      'ma list etc.)',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # creationInfo = models.OneToOneField("creationInfoType_model",
+    #   verbose_name='Creation',
+    #   help_text='Groups together information on the resource creation (e' \
+    #   '.g. for corpora, selection of texts/audio files/ video files etc.' \
+    #   ' and structural encoding thereof; for lexica, construction of lem' \
+    #   'ma list etc.)',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: linkToOtherMediaInfo
 
@@ -6027,11 +6027,11 @@ class languageDescriptionTextInfoType_model(SchemaModel):
 
     # OneToMany field: languageInfo
 
-    modalityInfo = models.OneToOneField("modalityInfoType_model", 
-      verbose_name='Modality', 
-      help_text='Groups information on the modalities represented in the' \
-      ' resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # modalityInfo = models.OneToOneField("modalityInfoType_model",
+    #   verbose_name='Modality',
+    #   help_text='Groups information on the modalities represented in the' \
+    #   ' resource',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: sizeInfo
 
@@ -7453,17 +7453,17 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
       ( u'resourceType', u'resourceType', REQUIRED ),
       ( u'languageDescriptionType', u'languageDescriptionType', REQUIRED ),
       ( u'languageDescriptionEncodingInfo', u'languageDescriptionEncodingInfo', RECOMMENDED ),
-      ( u'languageDescriptionOperationInfo', u'languageDescriptionOperationInfo', OPTIONAL ),
-      ( u'languageDescriptionPerformanceInfo', u'languageDescriptionPerformanceInfo', RECOMMENDED ),
-      ( u'creationInfo', u'creationInfo', RECOMMENDED ),
+      # ( u'languageDescriptionOperationInfo', u'languageDescriptionOperationInfo', OPTIONAL ),
+      # ( u'languageDescriptionPerformanceInfo', u'languageDescriptionPerformanceInfo', RECOMMENDED ),
+      # ( u'creationInfo', u'creationInfo', RECOMMENDED ),
       ( u'languageDescriptionMediaType', u'languageDescriptionMediaType', REQUIRED ),
     )
     __schema_classes__ = {
-      u'creationInfo': "creationInfoType_model",
+      # u'creationInfo': "creationInfoType_model",
       u'languageDescriptionEncodingInfo': "languageDescriptionEncodingInfoType_model",
       u'languageDescriptionMediaType': "languageDescriptionMediaTypeType_model",
-      u'languageDescriptionOperationInfo': "languageDescriptionOperationInfoType_model",
-      u'languageDescriptionPerformanceInfo': "languageDescriptionPerformanceInfoType_model",
+      # u'languageDescriptionOperationInfo': "languageDescriptionOperationInfoType_model",
+      # u'languageDescriptionPerformanceInfo': "languageDescriptionPerformanceInfoType_model",
     }
 
     resourceType = XmlCharField(
@@ -7486,25 +7486,25 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
       'uageDescriptions',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    languageDescriptionOperationInfo = models.OneToOneField("languageDescriptionOperationInfoType_model", 
-      verbose_name='Language description operation', 
-      help_text='Groups together information on the operation requiremen' \
-      'ts of the Language Descriptions',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # languageDescriptionOperationInfo = models.OneToOneField("languageDescriptionOperationInfoType_model",
+    #   verbose_name='Language description operation',
+    #   help_text='Groups together information on the operation requiremen' \
+    #   'ts of the Language Descriptions',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
-    languageDescriptionPerformanceInfo = models.OneToOneField("languageDescriptionPerformanceInfoType_model", 
-      verbose_name='Language description performance', 
-      help_text='Groups together information on the performance of the L' \
-      'anguage Descriptions',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # languageDescriptionPerformanceInfo = models.OneToOneField("languageDescriptionPerformanceInfoType_model",
+    #   verbose_name='Language description performance',
+    #   help_text='Groups together information on the performance of the L' \
+    #   'anguage Descriptions',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
-    creationInfo = models.OneToOneField("creationInfoType_model", 
-      verbose_name='Creation', 
-      help_text='Groups together information on the resource creation (e' \
-      '.g. for corpora, selection of texts/audio files/ video files etc.' \
-      ' and structural encoding thereof; for lexica, construction of lem' \
-      'ma list etc.)',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # creationInfo = models.OneToOneField("creationInfoType_model",
+    #   verbose_name='Creation',
+    #   help_text='Groups together information on the resource creation (e' \
+    #   '.g. for corpora, selection of texts/audio files/ video files etc.' \
+    #   ' and structural encoding thereof; for lexica, construction of lem' \
+    #   'ma list etc.)',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     languageDescriptionMediaType = models.OneToOneField("languageDescriptionMediaTypeType_model", 
       verbose_name='Language description media', 
@@ -7658,53 +7658,53 @@ class corpusMediaTypeType_model(SchemaModel):
     __schema_name__ = 'corpusMediaTypeType'
     __schema_fields__ = (
       ( u'corpusTextInfo', u'corpustextinfotype_model_set', RECOMMENDED ),
-      ( u'corpusAudioInfo', u'corpusAudioInfo', RECOMMENDED ),
-      ( u'corpusVideoInfo', u'corpusvideoinfotype_model_set', RECOMMENDED ),
-      ( u'corpusImageInfo', u'corpusImageInfo', RECOMMENDED ),
-      ( u'corpusTextNumericalInfo', u'corpusTextNumericalInfo', RECOMMENDED ),
-      ( u'corpusTextNgramInfo', u'corpusTextNgramInfo', RECOMMENDED ),
+      # ( u'corpusAudioInfo', u'corpusAudioInfo', RECOMMENDED ),
+      # ( u'corpusVideoInfo', u'corpusvideoinfotype_model_set', RECOMMENDED ),
+      # ( u'corpusImageInfo', u'corpusImageInfo', RECOMMENDED ),
+      # ( u'corpusTextNumericalInfo', u'corpusTextNumericalInfo', RECOMMENDED ),
+      # ( u'corpusTextNgramInfo', u'corpusTextNgramInfo', RECOMMENDED ),
     )
     __schema_classes__ = {
-      u'corpusAudioInfo': "corpusAudioInfoType_model",
-      u'corpusImageInfo': "corpusImageInfoType_model",
+      # u'corpusAudioInfo': "corpusAudioInfoType_model",
+      # u'corpusImageInfo': "corpusImageInfoType_model",
       u'corpusTextInfo': "corpusTextInfoType_model",
-      u'corpusTextNgramInfo': "corpusTextNgramInfoType_model",
-      u'corpusTextNumericalInfo': "corpusTextNumericalInfoType_model",
-      u'corpusVideoInfo': "corpusVideoInfoType_model",
+      # u'corpusTextNgramInfo': "corpusTextNgramInfoType_model",
+      # u'corpusTextNumericalInfo': "corpusTextNumericalInfoType_model",
+      # u'corpusVideoInfo': "corpusVideoInfoType_model",
     }
 
     # OneToMany field: corpusTextInfo
 
-    corpusAudioInfo = models.OneToOneField("corpusAudioInfoType_model", 
-      verbose_name='Corpus audio', 
-      help_text='Groups together information on the audio module of a co' \
-      'rpus',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # OneToMany field: corpusVideoInfo
-
-    corpusImageInfo = models.OneToOneField("corpusImageInfoType_model", 
-      verbose_name='Corpus image', 
-      help_text='Groups together information on the image component of a' \
-      ' resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    corpusTextNumericalInfo = models.OneToOneField("corpusTextNumericalInfoType_model", 
-      verbose_name='Corpus text numerical', 
-      help_text='Groups together information on the textNumerical compon' \
-      'ent of a corpus. It is used basically for the textual representat' \
-      'ion of measurements and observations linked to sensorimotor recor' \
-      'dings',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    corpusTextNgramInfo = models.OneToOneField("corpusTextNgramInfoType_model", 
-      verbose_name='Corpus text ngram', 
-      help_text='Groups together information required for n-gram resourc' \
-      'es; information can be provided both as regards features drawn fr' \
-      'om the source corpus (e.g. language coverage, size, format, domai' \
-      'ns etc.) and features pertaining to the n-gram output itself (e.g' \
-      '. range of n-grams, type of item included, etc.)',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # corpusAudioInfo = models.OneToOneField("corpusAudioInfoType_model",
+    #   verbose_name='Corpus audio',
+    #   help_text='Groups together information on the audio module of a co' \
+    #   'rpus',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
+    #
+    # # OneToMany field: corpusVideoInfo
+    #
+    # corpusImageInfo = models.OneToOneField("corpusImageInfoType_model",
+    #   verbose_name='Corpus image',
+    #   help_text='Groups together information on the image component of a' \
+    #   ' resource',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
+    #
+    # corpusTextNumericalInfo = models.OneToOneField("corpusTextNumericalInfoType_model",
+    #   verbose_name='Corpus text numerical',
+    #   help_text='Groups together information on the textNumerical compon' \
+    #   'ent of a corpus. It is used basically for the textual representat' \
+    #   'ion of measurements and observations linked to sensorimotor recor' \
+    #   'dings',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
+    #
+    # corpusTextNgramInfo = models.OneToOneField("corpusTextNgramInfoType_model",
+    #   verbose_name='Corpus text ngram',
+    #   help_text='Groups together information required for n-gram resourc' \
+    #   'es; information can be provided both as regards features drawn fr' \
+    #   'om the source corpus (e.g. language coverage, size, format, domai' \
+    #   'ns etc.) and features pertaining to the n-gram output itself (e.g' \
+    #   '. range of n-grams, type of item included, etc.)',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -7923,13 +7923,13 @@ class languageDescriptionMediaTypeType_model(SchemaModel):
     __schema_name__ = 'languageDescriptionMediaTypeType'
     __schema_fields__ = (
       ( u'languageDescriptionTextInfo', u'languageDescriptionTextInfo', RECOMMENDED ),
-      ( u'languageDescriptionVideoInfo', u'languageDescriptionVideoInfo', OPTIONAL ),
-      ( u'languageDescriptionImageInfo', u'languageDescriptionImageInfo', OPTIONAL ),
+      # ( u'languageDescriptionVideoInfo', u'languageDescriptionVideoInfo', OPTIONAL ),
+      # ( u'languageDescriptionImageInfo', u'languageDescriptionImageInfo', OPTIONAL ),
     )
     __schema_classes__ = {
-      u'languageDescriptionImageInfo': "languageDescriptionImageInfoType_model",
+      # u'languageDescriptionImageInfo': "languageDescriptionImageInfoType_model",
       u'languageDescriptionTextInfo': "languageDescriptionTextInfoType_model",
-      u'languageDescriptionVideoInfo': "languageDescriptionVideoInfoType_model",
+      # u'languageDescriptionVideoInfo': "languageDescriptionVideoInfoType_model",
     }
 
     languageDescriptionTextInfo = models.OneToOneField("languageDescriptionTextInfoType_model", 
@@ -7939,19 +7939,19 @@ class languageDescriptionMediaTypeType_model(SchemaModel):
       '); it is obligatory for all language descriptions',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    languageDescriptionVideoInfo = models.OneToOneField("languageDescriptionVideoInfoType_model", 
-      verbose_name='Language description video', 
-      help_text='Groups together all information relevant to the video p' \
-      'arts of a language description (e.g. format, languages, size etc.' \
-      '), if there are any (e.g. for sign language grammars)',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # languageDescriptionVideoInfo = models.OneToOneField("languageDescriptionVideoInfoType_model",
+    #   verbose_name='Language description video',
+    #   help_text='Groups together all information relevant to the video p' \
+    #   'arts of a language description (e.g. format, languages, size etc.' \
+    #   '), if there are any (e.g. for sign language grammars)',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
-    languageDescriptionImageInfo = models.OneToOneField("languageDescriptionImageInfoType_model", 
-      verbose_name='Language description image', 
-      help_text='Groups together all information relevant to the image m' \
-      'odule of a language description (e.g. format, languages, size etc' \
-      '.), if there are any (e.g. for sign language grammars)',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # languageDescriptionImageInfo = models.OneToOneField("languageDescriptionImageInfoType_model",
+    #   verbose_name='Language description image',
+    #   help_text='Groups together all information relevant to the image m' \
+    #   'odule of a language description (e.g. format, languages, size etc' \
+    #   '.), if there are any (e.g. for sign language grammars)',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
