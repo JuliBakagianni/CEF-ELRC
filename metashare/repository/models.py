@@ -4945,11 +4945,15 @@ class videoFormatInfoType_model(SchemaModel):
 
     mimeType = XmlCharField(
       verbose_name='Mime type', 
-      help_text='The mime-type of the resource which is a formalized spe' \
-      'cifier for the format included or a mime-type that the tool/servi' \
-      'ce accepts; value to be taken from a subset of the official mime ' \
-      'types of the Internet Assigned Numbers Authority (http://www.iana' \
-      '.org/)',
+      help_text='The mime-type of the resource which is a formalized' \
+        'specifier for the format included or a mime-type ' \
+        'that the tool/service accepts, in conformance' \
+        'with the values of the IANA (Internet Assigned ' \
+        'Numbers Authority); you can select one of ' \
+        'the pre-defined values or add a value, ' \
+        'PREFERABLY FROM THE IANA MEDIA MIMETYPE ' \
+        'RECOMMENDED VALUES (http://www.iana.org/assignments/' \
+        'media-types/media-types.xhtml)',
       max_length=50, )
 
     colourSpace = MultiSelectField(
