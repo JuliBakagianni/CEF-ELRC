@@ -45,18 +45,18 @@ class ResourceLanguages(template.Node):
 
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
-            if lcr_media_type.lexicalConceptualResourceAudioInfo:
-                result.extend([lang.languageName for lang in lcr_media_type \
-                        .lexicalConceptualResourceAudioInfo.languageinfotype_model_set.all()])
+            # if lcr_media_type.lexicalConceptualResourceAudioInfo:
+            #     result.extend([lang.languageName for lang in lcr_media_type \
+            #             .lexicalConceptualResourceAudioInfo.languageinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceTextInfo:
                 result.extend([lang.languageName for lang in lcr_media_type \
                         .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all()])
-            if lcr_media_type.lexicalConceptualResourceVideoInfo:
-                result.extend([lang.languageName for lang in lcr_media_type \
-                        .lexicalConceptualResourceVideoInfo.languageinfotype_model_set.all()])
-            if lcr_media_type.lexicalConceptualResourceImageInfo:
-                result.extend([lang.languageName for lang in lcr_media_type \
-                        .lexicalConceptualResourceImageInfo.languageinfotype_model_set.all()])
+            # if lcr_media_type.lexicalConceptualResourceVideoInfo:
+            #     result.extend([lang.languageName for lang in lcr_media_type \
+            #             .lexicalConceptualResourceVideoInfo.languageinfotype_model_set.all()])
+            # if lcr_media_type.lexicalConceptualResourceImageInfo:
+            #     result.extend([lang.languageName for lang in lcr_media_type \
+            #             .lexicalConceptualResourceImageInfo.languageinfotype_model_set.all()])
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType

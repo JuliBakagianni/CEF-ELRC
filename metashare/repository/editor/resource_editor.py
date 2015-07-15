@@ -1107,12 +1107,12 @@ class ResourceModelAdmin(SchemaModelAdmin):
         elif isinstance(content_info, lexicalConceptualResourceInfoType_model):
             structures['lexiconTextInfoId'] = get_mediatype_id('lexicalConceptualResourceTextInfo', \
                 content_info.lexicalConceptualResourceMediaType.lexicalConceptualResourceTextInfo)
-            structures['lexiconAudioInfoId'] = get_mediatype_id('lexicalConceptualResourceAudioInfo', \
-                content_info.lexicalConceptualResourceMediaType.lexicalConceptualResourceAudioInfo)
-            structures['lexiconVideoInfoId'] = get_mediatype_id('lexicalConceptualResourceVideoInfo', \
-                content_info.lexicalConceptualResourceMediaType.lexicalConceptualResourceVideoInfo)
-            structures['lexiconImageInfoId'] = get_mediatype_id('lexicalConceptualResourceImageInfo', \
-                content_info.lexicalConceptualResourceMediaType.lexicalConceptualResourceImageInfo)
+            # structures['lexiconAudioInfoId'] = get_mediatype_id('lexicalConceptualResourceAudioInfo', \
+            #     content_info.lexicalConceptualResourceMediaType.lexicalConceptualResourceAudioInfo)
+            # structures['lexiconVideoInfoId'] = get_mediatype_id('lexicalConceptualResourceVideoInfo', \
+            #     content_info.lexicalConceptualResourceMediaType.lexicalConceptualResourceVideoInfo)
+            # structures['lexiconImageInfoId'] = get_mediatype_id('lexicalConceptualResourceImageInfo', \
+            #     content_info.lexicalConceptualResourceMediaType.lexicalConceptualResourceImageInfo)
         elif isinstance(content_info, toolServiceInfoType_model):
             structures['toolServiceInfoId'] = content_info.pk
             

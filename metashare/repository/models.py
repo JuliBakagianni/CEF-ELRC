@@ -7435,11 +7435,11 @@ class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
       ( u'resourceType', u'resourceType', REQUIRED ),
       ( u'lexicalConceptualResourceType', u'lexicalConceptualResourceType', REQUIRED ),
       ( u'lexicalConceptualResourceEncodingInfo', u'lexicalConceptualResourceEncodingInfo', RECOMMENDED ),
-      ( u'creationInfo', u'creationInfo', OPTIONAL ),
+      # ( u'creationInfo', u'creationInfo', OPTIONAL ),
       ( u'lexicalConceptualResourceMediaType', u'lexicalConceptualResourceMediaType', REQUIRED ),
     )
     __schema_classes__ = {
-      u'creationInfo': "creationInfoType_model",
+      # u'creationInfo': "creationInfoType_model",
       u'lexicalConceptualResourceEncodingInfo': "lexicalConceptualResourceEncodingInfoType_model",
       u'lexicalConceptualResourceMediaType': "lexicalConceptualResourceMediaTypeType_model",
     }
@@ -7463,13 +7463,13 @@ class lexicalConceptualResourceInfoType_model(resourceComponentTypeType_model):
       'l/conceptual resources',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    creationInfo = models.OneToOneField("creationInfoType_model", 
-      verbose_name='Creation', 
-      help_text='Groups together information on the resource creation (e' \
-      '.g. for corpora, selection of texts/audio files/ video files etc.' \
-      ' and structural encoding thereof; for lexica, construction of lem' \
-      'ma list etc.)',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # creationInfo = models.OneToOneField("creationInfoType_model",
+    #   verbose_name='Creation',
+    #   help_text='Groups together information on the resource creation (e' \
+    #   '.g. for corpora, selection of texts/audio files/ video files etc.' \
+    #   ' and structural encoding thereof; for lexica, construction of lem' \
+    #   'ma list etc.)',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     lexicalConceptualResourceMediaType = models.OneToOneField("lexicalConceptualResourceMediaTypeType_model", 
       verbose_name='Lexical conceptual resource media', 
@@ -8016,15 +8016,15 @@ class lexicalConceptualResourceMediaTypeType_model(SchemaModel):
     __schema_name__ = 'lexicalConceptualResourceMediaTypeType'
     __schema_fields__ = (
       ( u'lexicalConceptualResourceTextInfo', u'lexicalConceptualResourceTextInfo', RECOMMENDED ),
-      ( u'lexicalConceptualResourceAudioInfo', u'lexicalConceptualResourceAudioInfo', OPTIONAL ),
-      ( u'lexicalConceptualResourceVideoInfo', u'lexicalConceptualResourceVideoInfo', OPTIONAL ),
-      ( u'lexicalConceptualResourceImageInfo', u'lexicalConceptualResourceImageInfo', OPTIONAL ),
+      # ( u'lexicalConceptualResourceAudioInfo', u'lexicalConceptualResourceAudioInfo', OPTIONAL ),
+      # ( u'lexicalConceptualResourceVideoInfo', u'lexicalConceptualResourceVideoInfo', OPTIONAL ),
+      # ( u'lexicalConceptualResourceImageInfo', u'lexicalConceptualResourceImageInfo', OPTIONAL ),
     )
     __schema_classes__ = {
-      u'lexicalConceptualResourceAudioInfo': "lexicalConceptualResourceAudioInfoType_model",
-      u'lexicalConceptualResourceImageInfo': "lexicalConceptualResourceImageInfoType_model",
+      # u'lexicalConceptualResourceAudioInfo': "lexicalConceptualResourceAudioInfoType_model",
+      # u'lexicalConceptualResourceImageInfo': "lexicalConceptualResourceImageInfoType_model",
       u'lexicalConceptualResourceTextInfo': "lexicalConceptualResourceTextInfoType_model",
-      u'lexicalConceptualResourceVideoInfo': "lexicalConceptualResourceVideoInfoType_model",
+      # u'lexicalConceptualResourceVideoInfo': "lexicalConceptualResourceVideoInfoType_model",
     }
 
     lexicalConceptualResourceTextInfo = models.OneToOneField("lexicalConceptualResourceTextInfoType_model", 
@@ -8033,23 +8033,23 @@ class lexicalConceptualResourceMediaTypeType_model(SchemaModel):
       'onceptual resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    lexicalConceptualResourceAudioInfo = models.OneToOneField("lexicalConceptualResourceAudioInfoType_model", 
-      verbose_name='Lexical conceptual resource audio', 
-      help_text='Groups information on the audio part of the lexical/con' \
-      'ceptual resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # lexicalConceptualResourceAudioInfo = models.OneToOneField("lexicalConceptualResourceAudioInfoType_model",
+    #   verbose_name='Lexical conceptual resource audio',
+    #   help_text='Groups information on the audio part of the lexical/con' \
+    #   'ceptual resource',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
-    lexicalConceptualResourceVideoInfo = models.OneToOneField("lexicalConceptualResourceVideoInfoType_model", 
-      verbose_name='Lexical conceptual resource video', 
-      help_text='Groups information on the video part of the lexical con' \
-      'ceptual resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # lexicalConceptualResourceVideoInfo = models.OneToOneField("lexicalConceptualResourceVideoInfoType_model",
+    #   verbose_name='Lexical conceptual resource video',
+    #   help_text='Groups information on the video part of the lexical con' \
+    #   'ceptual resource',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
-    lexicalConceptualResourceImageInfo = models.OneToOneField("lexicalConceptualResourceImageInfoType_model", 
-      verbose_name='Lexical conceptual resource image', 
-      help_text='Groups information on the image part of the lexical/con' \
-      'ceptual resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # lexicalConceptualResourceImageInfo = models.OneToOneField("lexicalConceptualResourceImageInfoType_model",
+    #   verbose_name='Lexical conceptual resource image',
+    #   help_text='Groups information on the image part of the lexical/con' \
+    #   'ceptual resource',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)

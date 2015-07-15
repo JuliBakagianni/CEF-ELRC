@@ -45,15 +45,15 @@ class ResourceMediaTypes(template.Node):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
             if lcr_media_type.lexicalConceptualResourceTextInfo:
                 result.append(lcr_media_type.lexicalConceptualResourceTextInfo.mediaType)
-            if lcr_media_type.lexicalConceptualResourceAudioInfo:
-                result.append(lcr_media_type \
-                    .lexicalConceptualResourceAudioInfo.mediaType)
-            if lcr_media_type.lexicalConceptualResourceVideoInfo:
-                result.append(lcr_media_type \
-                    .lexicalConceptualResourceVideoInfo.mediaType)
-            if lcr_media_type.lexicalConceptualResourceImageInfo:
-                result.append(lcr_media_type \
-                    .lexicalConceptualResourceImageInfo.mediaType)
+            # if lcr_media_type.lexicalConceptualResourceAudioInfo:
+            #     result.append(lcr_media_type \
+            #         .lexicalConceptualResourceAudioInfo.mediaType)
+            # if lcr_media_type.lexicalConceptualResourceVideoInfo:
+            #     result.append(lcr_media_type \
+            #         .lexicalConceptualResourceVideoInfo.mediaType)
+            # if lcr_media_type.lexicalConceptualResourceImageInfo:
+            #     result.append(lcr_media_type \
+            #         .lexicalConceptualResourceImageInfo.mediaType)
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType

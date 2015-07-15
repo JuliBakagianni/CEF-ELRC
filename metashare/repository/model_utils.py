@@ -153,24 +153,24 @@ def get_resource_linguality_infos(res_obj):
         if lcr_media_type.lexicalConceptualResourceTextInfo:
             result.append(lcr_media_type.lexicalConceptualResourceTextInfo \
                           .lingualityInfo.get_lingualityType_display())
-        if lcr_media_type.lexicalConceptualResourceAudioInfo and \
-                lcr_media_type.lexicalConceptualResourceAudioInfo \
-                    .lingualityInfo:
-            result.append(lcr_media_type \
-                    .lexicalConceptualResourceAudioInfo.lingualityInfo \
-                    .get_lingualityType_display())
-        if lcr_media_type.lexicalConceptualResourceVideoInfo and \
-                lcr_media_type.lexicalConceptualResourceVideoInfo \
-                    .lingualityInfo:
-            result.append(lcr_media_type \
-                    .lexicalConceptualResourceVideoInfo.lingualityInfo \
-                    .get_lingualityType_display())
-        if lcr_media_type.lexicalConceptualResourceImageInfo and \
-                lcr_media_type.lexicalConceptualResourceImageInfo \
-                    .lingualityInfo:
-            result.append(lcr_media_type \
-                    .lexicalConceptualResourceImageInfo.lingualityInfo \
-                    .get_lingualityType_display())
+        # if lcr_media_type.lexicalConceptualResourceAudioInfo and \
+        #         lcr_media_type.lexicalConceptualResourceAudioInfo \
+        #             .lingualityInfo:
+        #     result.append(lcr_media_type \
+        #             .lexicalConceptualResourceAudioInfo.lingualityInfo \
+        #             .get_lingualityType_display())
+        # if lcr_media_type.lexicalConceptualResourceVideoInfo and \
+        #         lcr_media_type.lexicalConceptualResourceVideoInfo \
+        #             .lingualityInfo:
+        #     result.append(lcr_media_type \
+        #             .lexicalConceptualResourceVideoInfo.lingualityInfo \
+        #             .get_lingualityType_display())
+        # if lcr_media_type.lexicalConceptualResourceImageInfo and \
+        #         lcr_media_type.lexicalConceptualResourceImageInfo \
+        #             .lingualityInfo:
+        #     result.append(lcr_media_type \
+        #             .lexicalConceptualResourceImageInfo.lingualityInfo \
+        #             .get_lingualityType_display())
 
     elif isinstance(corpus_media, languageDescriptionInfoType_model):
         ld_media_type = corpus_media.languageDescriptionMediaType
@@ -226,15 +226,15 @@ def get_resource_media_types(res_obj):
         if lcr_media_type.lexicalConceptualResourceTextInfo:
             result.append(
                 lcr_media_type.lexicalConceptualResourceTextInfo.mediaType)
-        if lcr_media_type.lexicalConceptualResourceAudioInfo:
-            result.append(
-                lcr_media_type.lexicalConceptualResourceAudioInfo.mediaType)
-        if lcr_media_type.lexicalConceptualResourceVideoInfo:
-            result.append(
-                lcr_media_type.lexicalConceptualResourceVideoInfo.mediaType)
-        if lcr_media_type.lexicalConceptualResourceImageInfo:
-            result.append(
-                lcr_media_type.lexicalConceptualResourceImageInfo.mediaType)
+        # if lcr_media_type.lexicalConceptualResourceAudioInfo:
+        #     result.append(
+        #         lcr_media_type.lexicalConceptualResourceAudioInfo.mediaType)
+        # if lcr_media_type.lexicalConceptualResourceVideoInfo:
+        #     result.append(
+        #         lcr_media_type.lexicalConceptualResourceVideoInfo.mediaType)
+        # if lcr_media_type.lexicalConceptualResourceImageInfo:
+        #     result.append(
+        #         lcr_media_type.lexicalConceptualResourceImageInfo.mediaType)
 
     elif isinstance(corpus_media, languageDescriptionInfoType_model):
         ld_media_type = corpus_media.languageDescriptionMediaType
