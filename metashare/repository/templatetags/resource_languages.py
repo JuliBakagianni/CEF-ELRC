@@ -30,18 +30,18 @@ class ResourceLanguages(template.Node):
             for corpus_info in media_type.corpustextinfotype_model_set.all():
                 result.extend([lang.languageName for lang in
                                corpus_info.languageinfotype_model_set.all()])
-            if media_type.corpusAudioInfo:
-                result.extend([lang.languageName for lang in
-                               media_type.corpusAudioInfo.languageinfotype_model_set.all()])
+            # if media_type.corpusAudioInfo:
+            #     result.extend([lang.languageName for lang in
+            #                    media_type.corpusAudioInfo.languageinfotype_model_set.all()])
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
                 result.extend([lang.languageName for lang in
                                corpus_info.languageinfotype_model_set.all()])
-            if media_type.corpusTextNgramInfo:
-                result.extend([lang.languageName for lang in
-                            media_type.corpusTextNgramInfo.languageinfotype_model_set.all()])
-            if media_type.corpusImageInfo:
-                result.extend([lang.languageName for lang in
-                               media_type.corpusImageInfo.languageinfotype_model_set.all()])
+            # if media_type.corpusTextNgramInfo:
+            #     result.extend([lang.languageName for lang in
+            #                 media_type.corpusTextNgramInfo.languageinfotype_model_set.all()])
+            # if media_type.corpusImageInfo:
+            #     result.extend([lang.languageName for lang in
+            #                    media_type.corpusImageInfo.languageinfotype_model_set.all()])
 
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
@@ -63,12 +63,12 @@ class ResourceLanguages(template.Node):
             if ld_media_type.languageDescriptionTextInfo:
                 result.extend([lang.languageName for lang in ld_media_type \
                             .languageDescriptionTextInfo.languageinfotype_model_set.all()])
-            if ld_media_type.languageDescriptionVideoInfo:
-                result.extend([lang.languageName for lang in ld_media_type \
-                            .languageDescriptionVideoInfo.languageinfotype_model_set.all()])
-            if ld_media_type.languageDescriptionImageInfo:
-                result.extend([lang.languageName for lang in ld_media_type \
-                            .languageDescriptionImageInfo.languageinfotype_model_set.all()])
+            # if ld_media_type.languageDescriptionVideoInfo:
+            #     result.extend([lang.languageName for lang in ld_media_type \
+            #                 .languageDescriptionVideoInfo.languageinfotype_model_set.all()])
+            # if ld_media_type.languageDescriptionImageInfo:
+            #     result.extend([lang.languageName for lang in ld_media_type \
+            #                 .languageDescriptionImageInfo.languageinfotype_model_set.all()])
 
         elif isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:

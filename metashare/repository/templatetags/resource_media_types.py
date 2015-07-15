@@ -30,16 +30,16 @@ class ResourceMediaTypes(template.Node):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
                 result.append(corpus_info.mediaType)
-            if media_type.corpusAudioInfo:
-                result.append(media_type.corpusAudioInfo.mediaType)
+            # if media_type.corpusAudioInfo:
+            #     result.append(media_type.corpusAudioInfo.mediaType)
             for corpus_info in media_type.corpusvideoinfotype_model_set.all():
                 result.append(corpus_info.mediaType)
-            if media_type.corpusTextNgramInfo:
-                result.append(media_type.corpusTextNgramInfo.mediaType)
-            if media_type.corpusImageInfo:
-                result.append(media_type.corpusImageInfo.mediaType)
-            if media_type.corpusTextNumericalInfo:
-                result.append(media_type.corpusTextNumericalInfo.mediaType)
+            # if media_type.corpusTextNgramInfo:
+            #     result.append(media_type.corpusTextNgramInfo.mediaType)
+            # if media_type.corpusImageInfo:
+            #     result.append(media_type.corpusImageInfo.mediaType)
+            # if media_type.corpusTextNumericalInfo:
+            #     result.append(media_type.corpusTextNumericalInfo.mediaType)
 
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
@@ -59,10 +59,10 @@ class ResourceMediaTypes(template.Node):
             ld_media_type = corpus_media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
                 result.append(ld_media_type.languageDescriptionTextInfo.mediaType)
-            if ld_media_type.languageDescriptionVideoInfo:
-                result.append(ld_media_type.languageDescriptionVideoInfo.mediaType)
-            if ld_media_type.languageDescriptionImageInfo:
-                result.append(ld_media_type.languageDescriptionImageInfo.mediaType)
+            # if ld_media_type.languageDescriptionVideoInfo:
+            #     result.append(ld_media_type.languageDescriptionVideoInfo.mediaType)
+            # if ld_media_type.languageDescriptionImageInfo:
+            #     result.append(ld_media_type.languageDescriptionImageInfo.mediaType)
 
         elif isinstance(corpus_media, toolServiceInfoType_model):
             if corpus_media.inputInfo:

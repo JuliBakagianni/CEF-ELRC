@@ -1089,21 +1089,21 @@ class ResourceModelAdmin(SchemaModelAdmin):
         structures['resourceComponentType'] = content_info
         if isinstance(content_info, corpusInfoType_model):
             structures['corpusMediaType'] = content_info.corpusMediaType
-            structures['corpusAudioInfoId'] = get_mediatype_id('corpusAudioInfo', \
-                content_info.corpusMediaType.corpusAudioInfo)
-            structures['corpusImageInfoId'] = get_mediatype_id('corpusImageInfo', \
-                content_info.corpusMediaType.corpusImageInfo)
-            structures['corpusTextNumericalInfoId'] = get_mediatype_id('corpusTextNumericalInfo', \
-                content_info.corpusMediaType.corpusTextNumericalInfo)
-            structures['corpusTextNgramInfoId'] = get_mediatype_id('corpusTextNgramInfo', \
-                content_info.corpusMediaType.corpusTextNgramInfo)
+            # structures['corpusAudioInfoId'] = get_mediatype_id('corpusAudioInfo', \
+            #     content_info.corpusMediaType.corpusAudioInfo)
+            # structures['corpusImageInfoId'] = get_mediatype_id('corpusImageInfo', \
+            #     content_info.corpusMediaType.corpusImageInfo)
+            # structures['corpusTextNumericalInfoId'] = get_mediatype_id('corpusTextNumericalInfo', \
+            #     content_info.corpusMediaType.corpusTextNumericalInfo)
+            # structures['corpusTextNgramInfoId'] = get_mediatype_id('corpusTextNgramInfo', \
+            #     content_info.corpusMediaType.corpusTextNgramInfo)
         elif isinstance(content_info, languageDescriptionInfoType_model):
             structures['langdescTextInfoId'] = get_mediatype_id('languageDescriptionTextInfo', \
                 content_info.languageDescriptionMediaType.languageDescriptionTextInfo)
-            structures['langdescVideoInfoId'] = get_mediatype_id('languageDescriptionVideoInfo', \
-                content_info.languageDescriptionMediaType.languageDescriptionVideoInfo)
-            structures['langdescImageInfoId'] = get_mediatype_id('languageDescriptionImageInfo', \
-                content_info.languageDescriptionMediaType.languageDescriptionImageInfo)
+            # structures['langdescVideoInfoId'] = get_mediatype_id('languageDescriptionVideoInfo', \
+            #     content_info.languageDescriptionMediaType.languageDescriptionVideoInfo)
+            # structures['langdescImageInfoId'] = get_mediatype_id('languageDescriptionImageInfo', \
+            #     content_info.languageDescriptionMediaType.languageDescriptionImageInfo)
         elif isinstance(content_info, lexicalConceptualResourceInfoType_model):
             structures['lexiconTextInfoId'] = get_mediatype_id('lexicalConceptualResourceTextInfo', \
                 content_info.lexicalConceptualResourceMediaType.lexicalConceptualResourceTextInfo)
