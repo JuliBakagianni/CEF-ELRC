@@ -2978,23 +2978,24 @@ class licenceInfoType_model(SchemaModel):
       ( u'licence', u'licence', REQUIRED ),
       ( u'restrictionsOfUse', u'restrictionsOfUse', OPTIONAL ),
       ( u'termsOfServiceText', u'termsOfServiceText', OPTIONAL ),
+      ( u'termsOfServiceURL', u'termsOfServiceURL', OPTIONAL ),
       ( u'distributionAccessMedium', u'distributionAccessMedium', RECOMMENDED ),
       ( u'downloadLocation', u'downloadLocation', OPTIONAL ),
       ( u'executionLocation', u'executionLocation', OPTIONAL ),
       ( u'fee', u'fee', OPTIONAL ),
       ( u'attributionText', u'attributionText', OPTIONAL ),
-      ( 'licensor/personInfo', 'licensor', RECOMMENDED ),
-      ( 'licensor/organizationInfo', 'licensor', RECOMMENDED ),
-      ( 'distributionRightsHolder/personInfo', 'distributionRightsHolder', RECOMMENDED ),
-      ( 'distributionRightsHolder/organizationInfo', 'distributionRightsHolder', RECOMMENDED ),
-      ( u'userNature', u'userNature', OPTIONAL ),
-      ( u'membershipInfo', u'membershipInfo', OPTIONAL ),
+      # ( 'licensor/personInfo', 'licensor', RECOMMENDED ),
+      # ( 'licensor/organizationInfo', 'licensor', RECOMMENDED ),
+      # ( 'distributionRightsHolder/personInfo', 'distributionRightsHolder', RECOMMENDED ),
+      # ( 'distributionRightsHolder/organizationInfo', 'distributionRightsHolder', RECOMMENDED ),
+      # ( u'userNature', u'userNature', OPTIONAL ),
+      # ( u'membershipInfo', u'membershipInfo', OPTIONAL ),
     )
-    __schema_classes__ = {
-      u'membershipInfo': "membershipInfoType_model",
-      u'organizationInfo': "organizationInfoType_model",
-      u'personInfo': "personInfoType_model",
-    }
+    # __schema_classes__ = {
+    #   u'membershipInfo': "membershipInfoType_model",
+    #   u'organizationInfo': "organizationInfoType_model",
+    #   u'personInfo': "personInfoType_model",
+    # }
 
     licence = MultiSelectField(
       verbose_name='Licence', 
@@ -3065,52 +3066,52 @@ class licenceInfoType_model(SchemaModel):
       'h a restriction on attribution',
       blank=True)
 
-    licensor = models.ManyToManyField("actorInfoType_model", 
-      verbose_name='Licensor', 
-      help_text='Groups information on the person who is legally eligibl' \
-      'e to licence and actually licenses the resource. The licensor cou' \
-      'ld be different from the creator, the distributor or the IP right' \
-      'sholder. The licensor has the necessary rights or licences to lic' \
-      'ense the work and is the party that actually licenses the resourc' \
-      'e that enters the META-SHARE network. She will have obtained the ' \
-      'necessary rights or licences from the IPR holder and she may have' \
-      ' a distribution agreement with a distributor that disseminates th' \
-      'e work under a set of conditions defined in the specific licence ' \
-      'and collects revenue on the licensor\'s behalf. The attribution o' \
-      'f the creator, separately from the attribution of the licensor, m' \
-      'ay be part of the licence under which the resource is distributed' \
-      ' (as e.g. is the case with Creative Commons Licences)',
-      blank=True, null=True, related_name="licensor_%(class)s_related", )
+    # licensor = models.ManyToManyField("actorInfoType_model",
+    #   verbose_name='Licensor',
+    #   help_text='Groups information on the person who is legally eligibl' \
+    #   'e to licence and actually licenses the resource. The licensor cou' \
+    #   'ld be different from the creator, the distributor or the IP right' \
+    #   'sholder. The licensor has the necessary rights or licences to lic' \
+    #   'ense the work and is the party that actually licenses the resourc' \
+    #   'e that enters the META-SHARE network. She will have obtained the ' \
+    #   'necessary rights or licences from the IPR holder and she may have' \
+    #   ' a distribution agreement with a distributor that disseminates th' \
+    #   'e work under a set of conditions defined in the specific licence ' \
+    #   'and collects revenue on the licensor\'s behalf. The attribution o' \
+    #   'f the creator, separately from the attribution of the licensor, m' \
+    #   'ay be part of the licence under which the resource is distributed' \
+    #   ' (as e.g. is the case with Creative Commons Licences)',
+    #   blank=True, null=True, related_name="licensor_%(class)s_related", )
 
-    distributionRightsHolder = models.ManyToManyField("actorInfoType_model", 
-      verbose_name='Distribution rights holder', 
-      help_text='Groups information on a person or an organization that ' \
-      'holds the distribution rights. The range and scope of distributio' \
-      'n rights is defined in the distribution agreement. The distributo' \
-      'r in most cases only has a limited licence to distribute the work' \
-      ' and collect royalties on behalf of the licensor or the IPR holde' \
-      'r and cannot give to any recipient of the work permissions that e' \
-      'xceed the scope of the distribution agreement (e.g. to allow uses' \
-      ' of the work that are not defined in the distribution agreement)',
-      blank=True, null=True, related_name="distributionRightsHolder_%(class)s_related", )
+    # distributionRightsHolder = models.ManyToManyField("actorInfoType_model",
+    #   verbose_name='Distribution rights holder',
+    #   help_text='Groups information on a person or an organization that ' \
+    #   'holds the distribution rights. The range and scope of distributio' \
+    #   'n rights is defined in the distribution agreement. The distributo' \
+    #   'r in most cases only has a limited licence to distribute the work' \
+    #   ' and collect royalties on behalf of the licensor or the IPR holde' \
+    #   'r and cannot give to any recipient of the work permissions that e' \
+    #   'xceed the scope of the distribution agreement (e.g. to allow uses' \
+    #   ' of the work that are not defined in the distribution agreement)',
+    #   blank=True, null=True, related_name="distributionRightsHolder_%(class)s_related", )
 
-    userNature = MultiSelectField(
-      verbose_name='User nature', 
-      help_text='The conditions imposed by the nature of the user (for i' \
-      'nstance, a research use may have different implications depending' \
-      ' on this)',
-      blank=True, 
-      max_length=1 + len(LICENCEINFOTYPE_USERNATURE_CHOICES['choices']) / 4,
-      choices=LICENCEINFOTYPE_USERNATURE_CHOICES['choices'],
-      )
+    # userNature = MultiSelectField(
+    #   verbose_name='User nature',
+    #   help_text='The conditions imposed by the nature of the user (for i' \
+    #   'nstance, a research use may have different implications depending' \
+    #   ' on this)',
+    #   blank=True,
+    #   max_length=1 + len(LICENCEINFOTYPE_USERNATURE_CHOICES['choices']) / 4,
+    #   choices=LICENCEINFOTYPE_USERNATURE_CHOICES['choices'],
+    #   )
 
-    membershipInfo = models.ManyToManyField("membershipInfoType_model", 
-      verbose_name='Membership', 
-      help_text='The conditions imposed by the user being member of some' \
-      ' association/institution (e.g., ELRA, LDC) distributing the resou' \
-      'rce. This indicates the availability conditions (and prices) for ' \
-      'users who are members or not',
-      blank=True, null=True, related_name="membershipInfo_%(class)s_related", )
+    # membershipInfo = models.ManyToManyField("membershipInfoType_model",
+    #   verbose_name='Membership',
+    #   help_text='The conditions imposed by the user being member of some' \
+    #   ' association/institution (e.g., ELRA, LDC) distributing the resou' \
+    #   'rce. This indicates the availability conditions (and prices) for ' \
+    #   'users who are members or not',
+    #   blank=True, null=True, related_name="membershipInfo_%(class)s_related", )
 
     back_to_distributioninfotype_model = models.ForeignKey("distributionInfoType_model",  blank=True, null=True)
 
