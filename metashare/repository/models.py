@@ -2400,100 +2400,100 @@ class resolutionInfoType_model(SchemaModel):
 #         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
 #         return _unicode
 
-LINKTOOTHERMEDIAINFOTYPE_OTHERMEDIA_CHOICES = _make_choices_from_list([
-  u'text', u'textNumerical', u'video', u'audio', u'image', 
-])
+# LINKTOOTHERMEDIAINFOTYPE_OTHERMEDIA_CHOICES = _make_choices_from_list([
+#   u'text', u'textNumerical', u'video', u'audio', u'image',
+# ])
 
 # pylint: disable-msg=C0103
-class linkToOtherMediaInfoType_model(SchemaModel):
-    """
-    Groups information on the way different media of the resource
-    interact with or link to each other. To be used for multimodal
-    resources or for resources representing sensorimotor data
-    """
-
-    class Meta:
-        verbose_name = "Link to other media"
-
-
-    __schema_name__ = 'linkToOtherMediaInfoType'
-    __schema_fields__ = (
-      ( u'otherMedia', u'otherMedia', REQUIRED ),
-      ( u'mediaTypeDetails', u'mediaTypeDetails', OPTIONAL ),
-      ( u'synchronizedWithText', u'synchronizedWithText', OPTIONAL ),
-      ( u'synchronizedWithAudio', u'synchronizedWithAudio', OPTIONAL ),
-      ( u'synchronizedWithVideo', u'synchronizedWithVideo', OPTIONAL ),
-      ( u'sycnhronizedWithImage', u'sycnhronizedWithImage', OPTIONAL ),
-      ( u'synchronizedWithTextNumerical', u'synchronizedWithTextNumerical', OPTIONAL ),
-    )
-
-    otherMedia = models.CharField(
-      verbose_name='Other media', 
-      help_text='Specifies the media types that are linked to the media ' \
-      'type described within the same resource',
-      
-      max_length=30,
-      choices=sorted(LINKTOOTHERMEDIAINFOTYPE_OTHERMEDIA_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    mediaTypeDetails = XmlCharField(
-      verbose_name='Media details', 
-      help_text='Provides further information on the way the media types' \
-      ' are linked and/or synchronized with each other within the same r' \
-      'esource',
-      blank=True, max_length=500, )
-
-    synchronizedWithText = MetaBooleanField(
-      verbose_name='Synchronized with text', 
-      help_text='Whether video, text and textNumerical media type is syn' \
-      'chronized with text within the same resource',
-      blank=True, )
-
-    synchronizedWithAudio = MetaBooleanField(
-      verbose_name='Synchronized with audio', 
-      help_text='Whether text, video or textNumerical media type is sync' \
-      'hronized with audio within the same resource',
-      blank=True, )
-
-    synchronizedWithVideo = MetaBooleanField(
-      verbose_name='Synchronized with video', 
-      help_text='Whether text or textNumerical media type is synchronize' \
-      'd with video within the same resource',
-      blank=True, )
-
-    sycnhronizedWithImage = MetaBooleanField(
-      verbose_name='Sycnhronized with image', 
-      help_text='Whether text or textNumerical media type is synchronize' \
-      'd with image within the same resource',
-      blank=True, )
-
-    synchronizedWithTextNumerical = MetaBooleanField(
-      verbose_name='Synchronized with text numerical', 
-      help_text='Whether video or audio media type is synchronized with ' \
-      'the textNumerical (representation of sensorimotor measurements) w' \
-      'ithin the same resource',
-      blank=True, )
-
-    # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
-
-    back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
-
-    # back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
-
-    # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
-
-    # back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
-
-    back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
-
-    # back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
-
-    # back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class linkToOtherMediaInfoType_model(SchemaModel):
+#     """
+#     Groups information on the way different media of the resource
+#     interact with or link to each other. To be used for multimodal
+#     resources or for resources representing sensorimotor data
+#     """
+#
+#     class Meta:
+#         verbose_name = "Link to other media"
+#
+#
+#     __schema_name__ = 'linkToOtherMediaInfoType'
+#     __schema_fields__ = (
+#       ( u'otherMedia', u'otherMedia', REQUIRED ),
+#       ( u'mediaTypeDetails', u'mediaTypeDetails', OPTIONAL ),
+#       ( u'synchronizedWithText', u'synchronizedWithText', OPTIONAL ),
+#       ( u'synchronizedWithAudio', u'synchronizedWithAudio', OPTIONAL ),
+#       ( u'synchronizedWithVideo', u'synchronizedWithVideo', OPTIONAL ),
+#       ( u'sycnhronizedWithImage', u'sycnhronizedWithImage', OPTIONAL ),
+#       ( u'synchronizedWithTextNumerical', u'synchronizedWithTextNumerical', OPTIONAL ),
+#     )
+#
+#     otherMedia = models.CharField(
+#       verbose_name='Other media',
+#       help_text='Specifies the media types that are linked to the media ' \
+#       'type described within the same resource',
+#
+#       max_length=30,
+#       choices=sorted(LINKTOOTHERMEDIAINFOTYPE_OTHERMEDIA_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     mediaTypeDetails = XmlCharField(
+#       verbose_name='Media details',
+#       help_text='Provides further information on the way the media types' \
+#       ' are linked and/or synchronized with each other within the same r' \
+#       'esource',
+#       blank=True, max_length=500, )
+#
+#     synchronizedWithText = MetaBooleanField(
+#       verbose_name='Synchronized with text',
+#       help_text='Whether video, text and textNumerical media type is syn' \
+#       'chronized with text within the same resource',
+#       blank=True, )
+#
+#     synchronizedWithAudio = MetaBooleanField(
+#       verbose_name='Synchronized with audio',
+#       help_text='Whether text, video or textNumerical media type is sync' \
+#       'hronized with audio within the same resource',
+#       blank=True, )
+#
+#     synchronizedWithVideo = MetaBooleanField(
+#       verbose_name='Synchronized with video',
+#       help_text='Whether text or textNumerical media type is synchronize' \
+#       'd with video within the same resource',
+#       blank=True, )
+#
+#     sycnhronizedWithImage = MetaBooleanField(
+#       verbose_name='Sycnhronized with image',
+#       help_text='Whether text or textNumerical media type is synchronize' \
+#       'd with image within the same resource',
+#       blank=True, )
+#
+#     synchronizedWithTextNumerical = MetaBooleanField(
+#       verbose_name='Synchronized with text numerical',
+#       help_text='Whether video or audio media type is synchronized with ' \
+#       'the textNumerical (representation of sensorimotor measurements) w' \
+#       'ithin the same resource',
+#       blank=True, )
+#
+#     # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+#
+#     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
+#
+#     # back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
+#
+#     # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+#
+#     # back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
+#
+#     back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
+#
+#     # back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
+#
+#     # back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # pylint: disable-msg=C0103
 class documentListType_model(SchemaModel):

@@ -33,7 +33,6 @@ from metashare.repository.models import \
     lexicalConceptualResourceTextInfoType_model, \
     licenceInfoType_model, \
     lingualityInfoType_model, \
-    linkToOtherMediaInfoType_model, \
     membershipInfoType_model, \
     metadataInfoType_model, \
     modalityInfoType_model, \
@@ -81,6 +80,7 @@ from metashare.repository.models import \
     # lexicalConceptualResourceAudioInfoType_model, \
     # languageDescriptionOperationInfoType_model, \
     # actualUseInfoType_model, \
+    # linkToOtherMediaInfoType_model, \
     # audioClassificationInfoType_model, \
     # languageDescriptionPerformanceInfoType_model, \
     # corpusAudioInfoType_model, \
@@ -531,57 +531,57 @@ class licenceInfo_model_inline(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
-class linkToOtherMediaInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
-    model = linkToOtherMediaInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpusaudioinfotype_model'
+# class linkToOtherMediaInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
+#     model = linkToOtherMediaInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_corpusaudioinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class linkToOtherMediaInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
-    model = linkToOtherMediaInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpusimageinfotype_model'
+# class linkToOtherMediaInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
+#     model = linkToOtherMediaInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_corpusimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class linkToOtherMediaInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
-    model = linkToOtherMediaInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpustextinfotype_model'
+# class linkToOtherMediaInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
+#     model = linkToOtherMediaInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_corpustextinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class linkToOtherMediaInfo_model_inline_corpusTextNumericalInfoType_model(SchemaModelInline):
-    model = linkToOtherMediaInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpustextnumericalinfotype_model'
+# class linkToOtherMediaInfo_model_inline_corpusTextNumericalInfoType_model(SchemaModelInline):
+#     model = linkToOtherMediaInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_corpustextnumericalinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class linkToOtherMediaInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
-    model = linkToOtherMediaInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpusvideoinfotype_model'
+# class linkToOtherMediaInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
+#     model = linkToOtherMediaInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_corpusvideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class linkToOtherMediaInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
-    model = linkToOtherMediaInfoType_model
-    fk_name = 'back_to_languagedescriptionimageinfotype_model'
+# class linkToOtherMediaInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
+#     model = linkToOtherMediaInfoType_model
+#     fk_name = 'back_to_languagedescriptionimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class linkToOtherMediaInfo_model_inline_languageDescriptionTextInfoType_model(SchemaModelInline):
-    model = linkToOtherMediaInfoType_model
-    collapse = True
-    fk_name = 'back_to_languagedescriptiontextinfotype_model'
+# class linkToOtherMediaInfo_model_inline_languageDescriptionTextInfoType_model(SchemaModelInline):
+#     model = linkToOtherMediaInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_languagedescriptiontextinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class linkToOtherMediaInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
-    model = linkToOtherMediaInfoType_model
-    fk_name = 'back_to_languagedescriptionvideoinfotype_model'
+# class linkToOtherMediaInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
+#     model = linkToOtherMediaInfoType_model
+#     fk_name = 'back_to_languagedescriptionvideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -991,7 +991,7 @@ admin.site.register(lexicalConceptualResourceTextInfoType_model, SchemaModelAdmi
 # admin.site.register(lexicalConceptualResourceVideoInfoType_model, SchemaModelAdmin)
 admin.site.register(licenceInfoType_model, SchemaModelAdmin)
 admin.site.register(lingualityInfoType_model, SchemaModelAdmin)
-admin.site.register(linkToOtherMediaInfoType_model, SchemaModelAdmin)
+# admin.site.register(linkToOtherMediaInfoType_model, SchemaModelAdmin)
 admin.site.register(membershipInfoType_model, SchemaModelAdmin)
 admin.site.register(metadataInfoType_model, SchemaModelAdmin)
 admin.site.register(modalityInfoType_model, SchemaModelAdmin)
