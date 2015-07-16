@@ -6958,258 +6958,258 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
 #         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
 #         return _unicode
 
-OUTPUTINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
-  u'text', u'audio', u'video', u'image', u'textNumerical', 
-])
+# OUTPUTINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
+#   u'text', u'audio', u'video', u'image', u'textNumerical',
+# ])
 
-OUTPUTINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
-  u'corpus', u'lexicalConceptualResource', u'languageDescription', 
-])
+# OUTPUTINFOTYPE_RESOURCETYPE_CHOICES = _make_choices_from_list([
+#   u'corpus', u'lexicalConceptualResource', u'languageDescription',
+# ])
 
-OUTPUTINFOTYPE_MODALITYTYPE_CHOICES = _make_choices_from_list([
-  u'bodyGesture', u'facialExpression', u'voice', u'combinationOfModalities',
-  u'signLanguage',u'spokenLanguage', u'writtenLanguage', u'other', 
-])
+# OUTPUTINFOTYPE_MODALITYTYPE_CHOICES = _make_choices_from_list([
+#   u'bodyGesture', u'facialExpression', u'voice', u'combinationOfModalities',
+#   u'signLanguage',u'spokenLanguage', u'writtenLanguage', u'other',
+# ])
 
-OUTPUTINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
-    u'application/emma+xml', u'application/mp4', u'application/pdf',
-    u'application/pls+xml', u'application/rdf+xml', u'application/rtf',
-    u'application/tei+xml', u"application/vnd.xmi+xml",
-    u'application/voicexml+xml', u'application/x-latex',
-    u'application/x-msaccess', u'application/x-tex', u'application/x-tmx+xml',
-    u'application/x-xces+xml', u'application/xhtml+xml', u'application/xml',
-    u'audio/mp4', u'audio/mpeg', u'audio/x-wav', u'image/bmp', u'image/gif',
-    u'image/jpeg', u'image/png', u'image/svg+xml', u'image/tiff',
-    u'text/csv', u'text/html', u'text/plain', u'text/sgml',
-    u'text/tab-separated-values', u'video/jpeg', u'video/mp4',
-    u'video/mpeg', u'video/x-flv', u'video/x-ms-wmv',
-    u'video/x-msvideo', u'other',
-])
+# OUTPUTINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
+#     u'application/emma+xml', u'application/mp4', u'application/pdf',
+#     u'application/pls+xml', u'application/rdf+xml', u'application/rtf',
+#     u'application/tei+xml', u"application/vnd.xmi+xml",
+#     u'application/voicexml+xml', u'application/x-latex',
+#     u'application/x-msaccess', u'application/x-tex', u'application/x-tmx+xml',
+#     u'application/x-xces+xml', u'application/xhtml+xml', u'application/xml',
+#     u'audio/mp4', u'audio/mpeg', u'audio/x-wav', u'image/bmp', u'image/gif',
+#     u'image/jpeg', u'image/png', u'image/svg+xml', u'image/tiff',
+#     u'text/csv', u'text/html', u'text/plain', u'text/sgml',
+#     u'text/tab-separated-values', u'video/jpeg', u'video/mp4',
+#     u'video/mpeg', u'video/x-flv', u'video/x-ms-wmv',
+#     u'video/x-msvideo', u'other',
+# ])
 
-OUTPUTINFOTYPE_CHARACTERENCODING_CHOICES = _make_choices_from_list([
-  u'US-ASCII', u'windows-1250', u'windows-1251', u'windows-1252',
-  u'windows-1253',u'windows-1254', u'windows-1257', u'ISO-8859-1',
-  u'ISO-8859-2',u'ISO-8859-4', u'ISO-8859-5', u'ISO-8859-7', u'ISO-8859-9',
-  u'ISO-8859-13',u'ISO-8859-15', u'KOI8-R', u'UTF-8', u'UTF-16',
-  u'UTF-16BE',u'UTF-16LE', u'windows-1255', u'windows-1256',
-  u'windows-1258',u'ISO-8859-3', u'ISO-8859-6', u'ISO-8859-8',
-  u'windows-31j',u'EUC-JP', u'x-EUC-JP-LINUX', u'Shift_JIS', u'ISO-2022-JP',
-  u'x-mswin-936',u'GB18030', u'x-EUC-CN', u'GBK', u'ISCII91',
-  u'x-windows-949',u'EUC-KR', u'ISO-2022-KR', u'x-windows-950',
-  u'x-MS950-HKSCS',u'x-EUC-TW', u'Big5', u'Big5-HKSCS', u'TIS-620',
-  u'Big5_Solaris',u'Cp037', u'Cp273', u'Cp277', u'Cp278', u'Cp280',
-  u'Cp284',u'Cp285', u'Cp297', u'Cp420', u'Cp424', u'Cp437', u'Cp500',
-  u'Cp737',u'Cp775', u'Cp838', u'Cp850', u'Cp852', u'Cp855', u'Cp856',
-  u'Cp857',u'Cp858', u'Cp860', u'Cp861', u'Cp862', u'Cp863', u'Cp864',
-  u'Cp865',u'Cp866', u'Cp868', u'Cp869', u'Cp870', u'Cp871', u'Cp874',
-  u'Cp875',u'Cp918', u'Cp921', u'Cp922', u'Cp930', u'Cp933', u'Cp935',
-  u'Cp937',u'Cp939', u'Cp942', u'Cp942C', u'Cp943', u'Cp943C', u'Cp948',
-  u'Cp949',u'Cp949C', u'Cp950', u'Cp964', u'Cp970', u'Cp1006', u'Cp1025',
-  u'Cp1026',u'Cp1046', u'Cp1047', u'Cp1097', u'Cp1098', u'Cp1112',
-  u'Cp1122',u'Cp1123', u'Cp1124', u'Cp1140', u'Cp1141', u'Cp1142',
-  u'Cp1143',u'Cp1144', u'Cp1145', u'Cp1146', u'Cp1147', u'Cp1148',
-  u'Cp1149',u'Cp1381', u'Cp1383', u'Cp33722', u'ISO2022_CN_CNS',
-  u'ISO2022_CN_GB',u'JISAutoDetect', u'MS874', u'MacArabic',
-  u'MacCentralEurope',u'MacCroatian', u'MacCyrillic', u'MacDingbat',
-  u'MacGreek',u'MacHebrew', u'MacIceland', u'MacRoman', u'MacRomania',
-  u'MacSymbol',u'MacThai', u'MacTurkish', u'MacUkraine', 
-])
+# OUTPUTINFOTYPE_CHARACTERENCODING_CHOICES = _make_choices_from_list([
+#   u'US-ASCII', u'windows-1250', u'windows-1251', u'windows-1252',
+#   u'windows-1253',u'windows-1254', u'windows-1257', u'ISO-8859-1',
+#   u'ISO-8859-2',u'ISO-8859-4', u'ISO-8859-5', u'ISO-8859-7', u'ISO-8859-9',
+#   u'ISO-8859-13',u'ISO-8859-15', u'KOI8-R', u'UTF-8', u'UTF-16',
+#   u'UTF-16BE',u'UTF-16LE', u'windows-1255', u'windows-1256',
+#   u'windows-1258',u'ISO-8859-3', u'ISO-8859-6', u'ISO-8859-8',
+#   u'windows-31j',u'EUC-JP', u'x-EUC-JP-LINUX', u'Shift_JIS', u'ISO-2022-JP',
+#   u'x-mswin-936',u'GB18030', u'x-EUC-CN', u'GBK', u'ISCII91',
+#   u'x-windows-949',u'EUC-KR', u'ISO-2022-KR', u'x-windows-950',
+#   u'x-MS950-HKSCS',u'x-EUC-TW', u'Big5', u'Big5-HKSCS', u'TIS-620',
+#   u'Big5_Solaris',u'Cp037', u'Cp273', u'Cp277', u'Cp278', u'Cp280',
+#   u'Cp284',u'Cp285', u'Cp297', u'Cp420', u'Cp424', u'Cp437', u'Cp500',
+#   u'Cp737',u'Cp775', u'Cp838', u'Cp850', u'Cp852', u'Cp855', u'Cp856',
+#   u'Cp857',u'Cp858', u'Cp860', u'Cp861', u'Cp862', u'Cp863', u'Cp864',
+#   u'Cp865',u'Cp866', u'Cp868', u'Cp869', u'Cp870', u'Cp871', u'Cp874',
+#   u'Cp875',u'Cp918', u'Cp921', u'Cp922', u'Cp930', u'Cp933', u'Cp935',
+#   u'Cp937',u'Cp939', u'Cp942', u'Cp942C', u'Cp943', u'Cp943C', u'Cp948',
+#   u'Cp949',u'Cp949C', u'Cp950', u'Cp964', u'Cp970', u'Cp1006', u'Cp1025',
+#   u'Cp1026',u'Cp1046', u'Cp1047', u'Cp1097', u'Cp1098', u'Cp1112',
+#   u'Cp1122',u'Cp1123', u'Cp1124', u'Cp1140', u'Cp1141', u'Cp1142',
+#   u'Cp1143',u'Cp1144', u'Cp1145', u'Cp1146', u'Cp1147', u'Cp1148',
+#   u'Cp1149',u'Cp1381', u'Cp1383', u'Cp33722', u'ISO2022_CN_CNS',
+#   u'ISO2022_CN_GB',u'JISAutoDetect', u'MS874', u'MacArabic',
+#   u'MacCentralEurope',u'MacCroatian', u'MacCyrillic', u'MacDingbat',
+#   u'MacGreek',u'MacHebrew', u'MacIceland', u'MacRoman', u'MacRomania',
+#   u'MacSymbol',u'MacThai', u'MacTurkish', u'MacUkraine',
+# ])
 
-OUTPUTINFOTYPE_ANNOTATIONTYPE_CHOICES = _make_choices_from_list([
-  u'alignment', u'discourseAnnotation',
-  u'discourseAnnotation-audienceReactions',
-  u'discourseAnnotation-coreference',u'discourseAnnotation-dialogueActs',
-  u'discourseAnnotation-discourseRelations',u'lemmatization',
-  u'morphosyntacticAnnotation-bPosTagging',
-  u'morphosyntacticAnnotation-posTagging',u'segmentation',
-  u'semanticAnnotation',u'semanticAnnotation-certaintyLevel',
-  u'semanticAnnotation-emotions',u'semanticAnnotation-entityMentions',
-  u'semanticAnnotation-events',u'semanticAnnotation-namedEntities',
-  u'semanticAnnotation-polarity',
-  u'semanticAnnotation-questionTopicalTarget',
-  u'semanticAnnotation-semanticClasses',
-  u'semanticAnnotation-semanticRelations',
-  u'semanticAnnotation-semanticRoles',u'semanticAnnotation-speechActs',
-  u'semanticAnnotation-temporalExpressions',
-  u'semanticAnnotation-textualEntailment',u'semanticAnnotation-wordSenses',
-  u'speechAnnotation',u'speechAnnotation-orthographicTranscription',
-  u'speechAnnotation-paralanguageAnnotation',
-  u'speechAnnotation-phoneticTranscription',
-  u'speechAnnotation-prosodicAnnotation',u'speechAnnotation-soundEvents',
-  u'speechAnnotation-soundToTextAlignment',
-  u'speechAnnotation-speakerIdentification',
-  u'speechAnnotation-speakerTurns',u'speechAnnotation', u'stemming',
-  u'structuralAnnotation',u'syntacticAnnotation-shallowParsing',
-  u'syntacticAnnotation-subcategorizationFrames',
-  u'syntacticAnnotation-treebanks',u'syntacticosemanticAnnotation-links',
-  u'translation',u'transliteration', u'discourseAnnotation-dialogueActs',
-  u'modalityAnnotation-bodyMovements',
-  u'modalityAnnotation-facialExpressions',
-  u'modalityAnnotation-gazeEyeMovements',
-  u'modalityAnnotation-handArmGestures',
-  u'modalityAnnotation-handManipulationOfObjects',
-  u'modalityAnnotation-headMovements',u'modalityAnnotation-lipMovements',
-  u'semanticAnnotation-emotions',u'other', 
-])
+# OUTPUTINFOTYPE_ANNOTATIONTYPE_CHOICES = _make_choices_from_list([
+#   u'alignment', u'discourseAnnotation',
+#   u'discourseAnnotation-audienceReactions',
+#   u'discourseAnnotation-coreference',u'discourseAnnotation-dialogueActs',
+#   u'discourseAnnotation-discourseRelations',u'lemmatization',
+#   u'morphosyntacticAnnotation-bPosTagging',
+#   u'morphosyntacticAnnotation-posTagging',u'segmentation',
+#   u'semanticAnnotation',u'semanticAnnotation-certaintyLevel',
+#   u'semanticAnnotation-emotions',u'semanticAnnotation-entityMentions',
+#   u'semanticAnnotation-events',u'semanticAnnotation-namedEntities',
+#   u'semanticAnnotation-polarity',
+#   u'semanticAnnotation-questionTopicalTarget',
+#   u'semanticAnnotation-semanticClasses',
+#   u'semanticAnnotation-semanticRelations',
+#   u'semanticAnnotation-semanticRoles',u'semanticAnnotation-speechActs',
+#   u'semanticAnnotation-temporalExpressions',
+#   u'semanticAnnotation-textualEntailment',u'semanticAnnotation-wordSenses',
+#   u'speechAnnotation',u'speechAnnotation-orthographicTranscription',
+#   u'speechAnnotation-paralanguageAnnotation',
+#   u'speechAnnotation-phoneticTranscription',
+#   u'speechAnnotation-prosodicAnnotation',u'speechAnnotation-soundEvents',
+#   u'speechAnnotation-soundToTextAlignment',
+#   u'speechAnnotation-speakerIdentification',
+#   u'speechAnnotation-speakerTurns',u'speechAnnotation', u'stemming',
+#   u'structuralAnnotation',u'syntacticAnnotation-shallowParsing',
+#   u'syntacticAnnotation-subcategorizationFrames',
+#   u'syntacticAnnotation-treebanks',u'syntacticosemanticAnnotation-links',
+#   u'translation',u'transliteration', u'discourseAnnotation-dialogueActs',
+#   u'modalityAnnotation-bodyMovements',
+#   u'modalityAnnotation-facialExpressions',
+#   u'modalityAnnotation-gazeEyeMovements',
+#   u'modalityAnnotation-handArmGestures',
+#   u'modalityAnnotation-handManipulationOfObjects',
+#   u'modalityAnnotation-headMovements',u'modalityAnnotation-lipMovements',
+#   u'semanticAnnotation-emotions',u'other',
+# ])
 
-OUTPUTINFOTYPE_SEGMENTATIONLEVEL_CHOICES = _make_choices_from_list([
-  u'paragraph', u'sentence', u'clause', u'word', u'wordGroup', u'utterance',
-  u'topic',u'signal', u'phoneme', u'syllable', u'phrase', u'diphone',
-  u'prosodicBoundaries',u'frame', u'scene', u'shot', u'other', 
-])
+# OUTPUTINFOTYPE_SEGMENTATIONLEVEL_CHOICES = _make_choices_from_list([
+#   u'paragraph', u'sentence', u'clause', u'word', u'wordGroup', u'utterance',
+#   u'topic',u'signal', u'phoneme', u'syllable', u'phrase', u'diphone',
+#   u'prosodicBoundaries',u'frame', u'scene', u'shot', u'other',
+# ])
 
-OUTPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_list([
-  u'BLM', u'CES', u'EAGLES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys',
-  u'InkML',u'ISO12620', u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042',
-  u'ISO704',u'LMF', u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
-  u'multimodalInteractionFramework',u'OAXAL', u'OWL', u'pennTreeBank',
-  u'pragueTreebank',u'RDF', u'SemAF', u'SemAF_DA', u'SemAF_NE',
-  u'SemAF_SRL',u'SemAF_DS', u'SKOS', u'SRX', u'SynAF', u'TBX', u'TMX',
-  u'TEI',u'TEI_P3', u'TEI_P4', u'TEI_P5', u'TimeML', u'XCES', u'XLIFF',
-  u'WordNet',u'other', 
-])
+# OUTPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_list([
+#   u'BLM', u'CES', u'EAGLES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys',
+#   u'InkML',u'ISO12620', u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042',
+#   u'ISO704',u'LMF', u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
+#   u'multimodalInteractionFramework',u'OAXAL', u'OWL', u'pennTreeBank',
+#   u'pragueTreebank',u'RDF', u'SemAF', u'SemAF_DA', u'SemAF_NE',
+#   u'SemAF_SRL',u'SemAF_DS', u'SKOS', u'SRX', u'SynAF', u'TBX', u'TMX',
+#   u'TEI',u'TEI_P3', u'TEI_P4', u'TEI_P5', u'TimeML', u'XCES', u'XLIFF',
+#   u'WordNet',u'other',
+# ])
 
 # pylint: disable-msg=C0103
-class outputInfoType_model(SchemaModel):
-    """
-    Groups together information on the requirements set on the output of
-    a tool or service
-    """
-
-    class Meta:
-        verbose_name = "Output"
-
-
-    __schema_name__ = 'outputInfoType'
-    __schema_fields__ = (
-      ( u'mediaType', u'mediaType', REQUIRED ),
-      ( u'resourceType', u'resourceType', RECOMMENDED ),
-      ( u'modalityType', u'modalityType', RECOMMENDED ),
-      ( u'languageName', u'languageName', OPTIONAL ),
-      ( u'languageId', u'languageId', OPTIONAL ),
-      ( u'languageVarietyName', u'languageVarietyName', OPTIONAL ),
-      ( u'mimeType', u'mimeType', RECOMMENDED ),
-      ( u'characterEncoding', u'characterEncoding', OPTIONAL ),
-      ( u'annotationType', u'annotationType', OPTIONAL ),
-      ( u'annotationFormat', u'annotationFormat', OPTIONAL ),
-      ( u'tagset', u'tagset', OPTIONAL ),
-      ( u'segmentationLevel', u'segmentationLevel', OPTIONAL ),
-      ( u'conformanceToStandardsBestPractices', u'conformanceToStandardsBestPractices', OPTIONAL ),
-    )
-
-    mediaType = MultiSelectField(
-      verbose_name='Media type', 
-      help_text='Specifies the media type of the resource and basically ' \
-      'corresponds to the physical medium of the content representation.' \
-      ' Each media type is described through a distinctive set of featur' \
-      'es. A resource may consist of parts attributed to different types' \
-      ' of media. A tool/service may take as input/output more than one ' \
-      'different media types.',
-      
-      max_length=1 + len(OUTPUTINFOTYPE_MEDIATYPE_CHOICES['choices']) / 4,
-      choices=OUTPUTINFOTYPE_MEDIATYPE_CHOICES['choices'],
-      )
-
-    resourceType = MultiSelectField(
-      verbose_name='Resource type', 
-      help_text='The type of the resource that a tool or service takes a' \
-      's input or produces as output',
-      blank=True, 
-      max_length=1 + len(OUTPUTINFOTYPE_RESOURCETYPE_CHOICES['choices']) / 4,
-      choices=OUTPUTINFOTYPE_RESOURCETYPE_CHOICES['choices'],
-      )
-
-    modalityType = MultiSelectField(
-      verbose_name='Modality type', 
-      help_text='Specifies the type of the modality represented in the r' \
-      'esource or processed by a tool/service',
-      blank=True, 
-      max_length=1 + len(OUTPUTINFOTYPE_MODALITYTYPE_CHOICES['choices']) / 4,
-      choices=OUTPUTINFOTYPE_MODALITYTYPE_CHOICES['choices'],
-      )
-
-    languageName = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=35, max_length=100), 
-      verbose_name='Language name', 
-      help_text='A human understandable name of the language that is use' \
-      'd in the resource or supported by the tool/service according to t' \
-      'he IETF BCP47 standard',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    languageId = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=36, max_length=100), 
-      verbose_name='Language id', 
-      help_text='The identifier of the language that is included in the ' \
-      'resource or supported by the tool/service according to the IETF B' \
-      'CP47 standard',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    languageVarietyName = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=37, max_length=100), 
-      verbose_name='Language variety name', 
-      help_text='Specifies the type of the language variety that occurs ' \
-      'in the resource or is supported by a tool/service',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    mimeType = MultiTextField(max_length=50, widget=MultiFieldWidget(widget_id=38, max_length=50), 
-      verbose_name='Mime type', 
-      help_text='The mime-type of the resource which is a formalized spe' \
-      'cifier for the format included or a mime-type that the tool/servi' \
-      'ce accepts; value to be taken from a subset of the official mime ' \
-      'types of the Internet Assigned Numbers Authority (http://www.iana' \
-      '.org/)',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    characterEncoding = MultiSelectField(
-      verbose_name='Character encoding', 
-      help_text='The name of the character encoding used in the resource' \
-      ' or accepted by the tool/service',
-      blank=True, 
-      max_length=1 + len(OUTPUTINFOTYPE_CHARACTERENCODING_CHOICES['choices']) / 4,
-      choices=OUTPUTINFOTYPE_CHARACTERENCODING_CHOICES['choices'],
-      )
-
-    annotationType = MultiSelectField(
-      verbose_name='Annotation type', 
-      help_text='Specifies the annotation level of the resource or the a' \
-      'nnotation type a tool/ service requires or produces as an output',
-      blank=True, 
-      max_length=1 + len(OUTPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['choices']) / 4,
-      choices=OUTPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['choices'],
-      )
-
-    annotationFormat = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=39, max_length=100), 
-      verbose_name='Annotation format', 
-      help_text='Specifies the format that is used in the annotation pro' \
-      'cess since often the mime type will not be sufficient for machine' \
-      ' processing',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    tagset = MultiTextField(max_length=500, widget=MultiFieldWidget(widget_id=40, max_length=500), 
-      verbose_name='Tagset', 
-      help_text='A name or a url reference to the tagset used in the ann' \
-      'otation of the resource or used by the tool/service',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    segmentationLevel = MultiSelectField(
-      verbose_name='Segmentation level', 
-      help_text='Specifies the segmentation unit in terms of which the r' \
-      'esource has been segmented or the level of segmentation a tool/se' \
-      'rvice requires/outputs',
-      blank=True, 
-      max_length=1 + len(OUTPUTINFOTYPE_SEGMENTATIONLEVEL_CHOICES['choices']) / 4,
-      choices=OUTPUTINFOTYPE_SEGMENTATIONLEVEL_CHOICES['choices'],
-      )
-
-    conformanceToStandardsBestPractices = MultiSelectField(
-      verbose_name='Conformance to standards best practices', 
-      help_text='Specifies the standards or the best practices to which ' \
-      'the tagset used for the annotation conforms',
-      blank=True, 
-      max_length=1 + len(OUTPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices']) / 4,
-      choices=OUTPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices'],
-      )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class outputInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the requirements set on the output of
+#     a tool or service
+#     """
+#
+#     class Meta:
+#         verbose_name = "Output"
+#
+#
+#     __schema_name__ = 'outputInfoType'
+#     __schema_fields__ = (
+#       ( u'mediaType', u'mediaType', REQUIRED ),
+#       ( u'resourceType', u'resourceType', RECOMMENDED ),
+#       ( u'modalityType', u'modalityType', RECOMMENDED ),
+#       ( u'languageName', u'languageName', OPTIONAL ),
+#       ( u'languageId', u'languageId', OPTIONAL ),
+#       ( u'languageVarietyName', u'languageVarietyName', OPTIONAL ),
+#       ( u'mimeType', u'mimeType', RECOMMENDED ),
+#       ( u'characterEncoding', u'characterEncoding', OPTIONAL ),
+#       ( u'annotationType', u'annotationType', OPTIONAL ),
+#       ( u'annotationFormat', u'annotationFormat', OPTIONAL ),
+#       ( u'tagset', u'tagset', OPTIONAL ),
+#       ( u'segmentationLevel', u'segmentationLevel', OPTIONAL ),
+#       ( u'conformanceToStandardsBestPractices', u'conformanceToStandardsBestPractices', OPTIONAL ),
+#     )
+#
+#     mediaType = MultiSelectField(
+#       verbose_name='Media type',
+#       help_text='Specifies the media type of the resource and basically ' \
+#       'corresponds to the physical medium of the content representation.' \
+#       ' Each media type is described through a distinctive set of featur' \
+#       'es. A resource may consist of parts attributed to different types' \
+#       ' of media. A tool/service may take as input/output more than one ' \
+#       'different media types.',
+#
+#       max_length=1 + len(OUTPUTINFOTYPE_MEDIATYPE_CHOICES['choices']) / 4,
+#       choices=OUTPUTINFOTYPE_MEDIATYPE_CHOICES['choices'],
+#       )
+#
+#     resourceType = MultiSelectField(
+#       verbose_name='Resource type',
+#       help_text='The type of the resource that a tool or service takes a' \
+#       's input or produces as output',
+#       blank=True,
+#       max_length=1 + len(OUTPUTINFOTYPE_RESOURCETYPE_CHOICES['choices']) / 4,
+#       choices=OUTPUTINFOTYPE_RESOURCETYPE_CHOICES['choices'],
+#       )
+#
+#     modalityType = MultiSelectField(
+#       verbose_name='Modality type',
+#       help_text='Specifies the type of the modality represented in the r' \
+#       'esource or processed by a tool/service',
+#       blank=True,
+#       max_length=1 + len(OUTPUTINFOTYPE_MODALITYTYPE_CHOICES['choices']) / 4,
+#       choices=OUTPUTINFOTYPE_MODALITYTYPE_CHOICES['choices'],
+#       )
+#
+#     languageName = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=35, max_length=100),
+#       verbose_name='Language name',
+#       help_text='A human understandable name of the language that is use' \
+#       'd in the resource or supported by the tool/service according to t' \
+#       'he IETF BCP47 standard',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     languageId = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=36, max_length=100),
+#       verbose_name='Language id',
+#       help_text='The identifier of the language that is included in the ' \
+#       'resource or supported by the tool/service according to the IETF B' \
+#       'CP47 standard',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     languageVarietyName = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=37, max_length=100),
+#       verbose_name='Language variety name',
+#       help_text='Specifies the type of the language variety that occurs ' \
+#       'in the resource or is supported by a tool/service',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     mimeType = MultiTextField(max_length=50, widget=MultiFieldWidget(widget_id=38, max_length=50),
+#       verbose_name='Mime type',
+#       help_text='The mime-type of the resource which is a formalized spe' \
+#       'cifier for the format included or a mime-type that the tool/servi' \
+#       'ce accepts; value to be taken from a subset of the official mime ' \
+#       'types of the Internet Assigned Numbers Authority (http://www.iana' \
+#       '.org/)',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     characterEncoding = MultiSelectField(
+#       verbose_name='Character encoding',
+#       help_text='The name of the character encoding used in the resource' \
+#       ' or accepted by the tool/service',
+#       blank=True,
+#       max_length=1 + len(OUTPUTINFOTYPE_CHARACTERENCODING_CHOICES['choices']) / 4,
+#       choices=OUTPUTINFOTYPE_CHARACTERENCODING_CHOICES['choices'],
+#       )
+#
+#     annotationType = MultiSelectField(
+#       verbose_name='Annotation type',
+#       help_text='Specifies the annotation level of the resource or the a' \
+#       'nnotation type a tool/ service requires or produces as an output',
+#       blank=True,
+#       max_length=1 + len(OUTPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['choices']) / 4,
+#       choices=OUTPUTINFOTYPE_ANNOTATIONTYPE_CHOICES['choices'],
+#       )
+#
+#     annotationFormat = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=39, max_length=100),
+#       verbose_name='Annotation format',
+#       help_text='Specifies the format that is used in the annotation pro' \
+#       'cess since often the mime type will not be sufficient for machine' \
+#       ' processing',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     tagset = MultiTextField(max_length=500, widget=MultiFieldWidget(widget_id=40, max_length=500),
+#       verbose_name='Tagset',
+#       help_text='A name or a url reference to the tagset used in the ann' \
+#       'otation of the resource or used by the tool/service',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     segmentationLevel = MultiSelectField(
+#       verbose_name='Segmentation level',
+#       help_text='Specifies the segmentation unit in terms of which the r' \
+#       'esource has been segmented or the level of segmentation a tool/se' \
+#       'rvice requires/outputs',
+#       blank=True,
+#       max_length=1 + len(OUTPUTINFOTYPE_SEGMENTATIONLEVEL_CHOICES['choices']) / 4,
+#       choices=OUTPUTINFOTYPE_SEGMENTATIONLEVEL_CHOICES['choices'],
+#       )
+#
+#     conformanceToStandardsBestPractices = MultiSelectField(
+#       verbose_name='Conformance to standards best practices',
+#       help_text='Specifies the standards or the best practices to which ' \
+#       'the tagset used for the annotation conforms',
+#       blank=True,
+#       max_length=1 + len(OUTPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices']) / 4,
+#       choices=OUTPUTINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES['choices'],
+#       )
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONLEVEL_CHOICES = _make_choices_from_list([
   u'technological', u'usage', u'impact', u'diagnostic', 
@@ -7654,11 +7654,11 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
     #   'the input resource of a tool or service',
     #   blank=True, null=True, on_delete=models.SET_NULL, )
 
-    outputInfo = models.OneToOneField("outputInfoType_model", 
-      verbose_name='Output', 
-      help_text='Groups together information on the requirements set on ' \
-      'the output of a tool or service',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # outputInfo = models.OneToOneField("outputInfoType_model",
+    #   verbose_name='Output',
+    #   help_text='Groups together information on the requirements set on ' \
+    #   'the output of a tool or service',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     toolServiceOperationInfo = models.OneToOneField("toolServiceOperationInfoType_model", 
       verbose_name='Tool service operation', 

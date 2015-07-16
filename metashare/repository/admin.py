@@ -36,7 +36,6 @@ from metashare.repository.models import \
     metadataInfoType_model, \
     organizationInfoType_model, \
     organizationListType_model, \
-    outputInfoType_model, \
     participantInfoType_model, \
     personInfoType_model, \
     personListType_model, \
@@ -79,6 +78,7 @@ from metashare.repository.models import \
     # membershipInfoType_model, \
     # actualUseInfoType_model, \
     # ngramInfoType_model, \
+    # outputInfoType_model, \
     # modalityInfoType_model, \
     # linkToOtherMediaInfoType_model, \
     # audioClassificationInfoType_model, \
@@ -998,7 +998,7 @@ admin.site.register(metadataInfoType_model, SchemaModelAdmin)
 # admin.site.register(ngramInfoType_model, SchemaModelAdmin)
 admin.site.register(organizationInfoType_model, SchemaModelAdmin)
 admin.site.register(organizationListType_model, SchemaModelAdmin)
-admin.site.register(outputInfoType_model, SchemaModelAdmin)
+# admin.site.register(outputInfoType_model, SchemaModelAdmin)
 admin.site.register(participantInfoType_model, SchemaModelAdmin)
 admin.site.register(personInfoType_model, SchemaModelAdmin)
 admin.site.register(personListType_model, SchemaModelAdmin)
