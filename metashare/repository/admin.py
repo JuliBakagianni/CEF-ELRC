@@ -9,7 +9,6 @@ admin.site.register(documentUnstructuredString_model)
 from metashare.repository.models import \
     actorInfoType_model, \
     annotationInfoType_model, \
-    audioContentInfoType_model, \
     audioFormatInfoType_model, \
     audioSizeInfoType_model, \
     captureInfoType_model, \
@@ -103,6 +102,7 @@ from metashare.repository.models import \
     # actualUseInfoType_model, \
     # audioClassificationInfoType_model, \
     # corpusAudioInfoType_model, \
+    # audioContentInfoType_model, \
 
 # pylint: disable-msg=C0103
 # class actualUseInfo_model_inline(SchemaModelInline):
@@ -941,7 +941,7 @@ admin.site.register(actorInfoType_model, SchemaModelAdmin)
 # admin.site.register(actualUseInfoType_model, SchemaModelAdmin)
 admin.site.register(annotationInfoType_model, SchemaModelAdmin)
 # admin.site.register(audioClassificationInfoType_model, SchemaModelAdmin)
-admin.site.register(audioContentInfoType_model, SchemaModelAdmin)
+# admin.site.register(audioContentInfoType_model, SchemaModelAdmin)
 admin.site.register(audioFormatInfoType_model, SchemaModelAdmin)
 admin.site.register(audioSizeInfoType_model, SchemaModelAdmin)
 admin.site.register(captureInfoType_model, SchemaModelAdmin)

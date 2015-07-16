@@ -4043,59 +4043,59 @@ AUDIOCONTENTINFOTYPE_NOISELEVEL_CHOICES = _make_choices_from_list([
 ])
 
 # pylint: disable-msg=C0103
-class audioContentInfoType_model(SchemaModel):
-    """
-    Groups together information on the contents of the audio part of a
-    resource
-    """
-
-    class Meta:
-        verbose_name = "Audio content"
-
-
-    __schema_name__ = 'audioContentInfoType'
-    __schema_fields__ = (
-      ( u'speechItems', u'speechItems', OPTIONAL ),
-      ( u'nonSpeechItems', u'nonSpeechItems', OPTIONAL ),
-      ( u'textualDescription', u'textualDescription', OPTIONAL ),
-      ( u'noiseLevel', u'noiseLevel', OPTIONAL ),
-    )
-
-    speechItems = MultiSelectField(
-      verbose_name='Speech items', 
-      help_text='Specifies the distinct elements that are pronounced and' \
-      ' annotated as such',
-      blank=True, 
-      max_length=1 + len(AUDIOCONTENTINFOTYPE_SPEECHITEMS_CHOICES['choices']) / 4,
-      choices=AUDIOCONTENTINFOTYPE_SPEECHITEMS_CHOICES['choices'],
-      )
-
-    nonSpeechItems = MultiSelectField(
-      verbose_name='Non speech items', 
-      help_text='Specifies the distinct elements that maybe included in ' \
-      'the audio corpus',
-      blank=True, 
-      max_length=1 + len(AUDIOCONTENTINFOTYPE_NONSPEECHITEMS_CHOICES['choices']) / 4,
-      choices=AUDIOCONTENTINFOTYPE_NONSPEECHITEMS_CHOICES['choices'],
-      )
-
-    textualDescription = XmlCharField(
-      verbose_name='Textual description', 
-      help_text='The legend of the soundtrack',
-      blank=True, max_length=500, )
-
-    noiseLevel = models.CharField(
-      verbose_name='Noise level', 
-      help_text='Specifies the level of background noise',
-      blank=True, 
-      max_length=30,
-      choices=sorted(AUDIOCONTENTINFOTYPE_NOISELEVEL_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class audioContentInfoType_model(SchemaModel):
+    # """
+    # Groups together information on the contents of the audio part of a
+    # resource
+    # """
+    #
+    # class Meta:
+    #     verbose_name = "Audio content"
+    #
+    #
+    # __schema_name__ = 'audioContentInfoType'
+    # __schema_fields__ = (
+    #   ( u'speechItems', u'speechItems', OPTIONAL ),
+    #   ( u'nonSpeechItems', u'nonSpeechItems', OPTIONAL ),
+    #   ( u'textualDescription', u'textualDescription', OPTIONAL ),
+    #   ( u'noiseLevel', u'noiseLevel', OPTIONAL ),
+    # )
+    #
+    # speechItems = MultiSelectField(
+    #   verbose_name='Speech items',
+    #   help_text='Specifies the distinct elements that are pronounced and' \
+    #   ' annotated as such',
+    #   blank=True,
+    #   max_length=1 + len(AUDIOCONTENTINFOTYPE_SPEECHITEMS_CHOICES['choices']) / 4,
+    #   choices=AUDIOCONTENTINFOTYPE_SPEECHITEMS_CHOICES['choices'],
+    #   )
+    #
+    # nonSpeechItems = MultiSelectField(
+    #   verbose_name='Non speech items',
+    #   help_text='Specifies the distinct elements that maybe included in ' \
+    #   'the audio corpus',
+    #   blank=True,
+    #   max_length=1 + len(AUDIOCONTENTINFOTYPE_NONSPEECHITEMS_CHOICES['choices']) / 4,
+    #   choices=AUDIOCONTENTINFOTYPE_NONSPEECHITEMS_CHOICES['choices'],
+    #   )
+    #
+    # textualDescription = XmlCharField(
+    #   verbose_name='Textual description',
+    #   help_text='The legend of the soundtrack',
+    #   blank=True, max_length=500, )
+    #
+    # noiseLevel = models.CharField(
+    #   verbose_name='Noise level',
+    #   help_text='Specifies the level of background noise',
+    #   blank=True,
+    #   max_length=30,
+    #   choices=sorted(AUDIOCONTENTINFOTYPE_NOISELEVEL_CHOICES['choices'],
+    #                  key=lambda choice: choice[1].lower()),
+    #   )
+    #
+    # def __unicode__(self):
+    #     _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+    #     return _unicode
 
 # pylint: disable-msg=C0103
 class audioSizeInfoType_model(SchemaModel):
@@ -6471,11 +6471,11 @@ class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
 
     # OneToMany field: sizeInfo
 
-    audioContentInfo = models.OneToOneField("audioContentInfoType_model", 
-      verbose_name='Audio content', 
-      help_text='Groups together information on the contents of the audi' \
-      'o part of a resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # audioContentInfo = models.OneToOneField("audioContentInfoType_model",
+    #   verbose_name='Audio content',
+    #   help_text='Groups together information on the contents of the audi' \
+    #   'o part of a resource',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: audioFormatInfo
 
