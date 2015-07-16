@@ -2361,44 +2361,44 @@ COMPRESSIONINFOTYPE_COMPRESSIONNAME_CHOICES = _make_choices_from_list([
 ])
 
 # pylint: disable-msg=C0103
-class compressionInfoType_model(SchemaModel):
-    """
-    Groups together information on the compression status and method of
-    a resource
-    """
-
-    class Meta:
-        verbose_name = "Compression"
-
-
-    __schema_name__ = 'compressionInfoType'
-    __schema_fields__ = (
-      ( u'compression', u'compression', REQUIRED ),
-      ( u'compressionName', u'compressionName', OPTIONAL ),
-      ( u'compressionLoss', u'compressionLoss', OPTIONAL ),
-    )
-
-    compression = MetaBooleanField(
-      verbose_name='Compression', 
-      help_text='Whether the audio, video or image is compressed or not',
-      )
-
-    compressionName = MultiSelectField(
-      verbose_name='Compression name', 
-      help_text='The name of the compression applied',
-      blank=True, 
-      max_length=1 + len(COMPRESSIONINFOTYPE_COMPRESSIONNAME_CHOICES['choices']) / 4,
-      choices=COMPRESSIONINFOTYPE_COMPRESSIONNAME_CHOICES['choices'],
-      )
-
-    compressionLoss = MetaBooleanField(
-      verbose_name='Compression loss', 
-      help_text='Whether there is loss due to compression',
-      blank=True, )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class compressionInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the compression status and method of
+#     a resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Compression"
+#
+#
+#     __schema_name__ = 'compressionInfoType'
+#     __schema_fields__ = (
+#       ( u'compression', u'compression', REQUIRED ),
+#       ( u'compressionName', u'compressionName', OPTIONAL ),
+#       ( u'compressionLoss', u'compressionLoss', OPTIONAL ),
+#     )
+#
+#     compression = MetaBooleanField(
+#       verbose_name='Compression',
+#       help_text='Whether the audio, video or image is compressed or not',
+#       )
+#
+#     compressionName = MultiSelectField(
+#       verbose_name='Compression name',
+#       help_text='The name of the compression applied',
+#       blank=True,
+#       max_length=1 + len(COMPRESSIONINFOTYPE_COMPRESSIONNAME_CHOICES['choices']) / 4,
+#       choices=COMPRESSIONINFOTYPE_COMPRESSIONNAME_CHOICES['choices'],
+#       )
+#
+#     compressionLoss = MetaBooleanField(
+#       verbose_name='Compression loss',
+#       help_text='Whether there is loss due to compression',
+#       blank=True, )
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 LINKTOOTHERMEDIAINFOTYPE_OTHERMEDIA_CHOICES = _make_choices_from_list([
   u'text', u'textNumerical', u'video', u'audio', u'image', 
@@ -4996,11 +4996,11 @@ class videoFormatInfoType_model(SchemaModel):
       '',
       blank=True, )
 
-    compressionInfo = models.OneToOneField("compressionInfoType_model", 
-      verbose_name='Compression', 
-      help_text='Groups together information on the compression status a' \
-      'nd method of a resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # compressionInfo = models.OneToOneField("compressionInfoType_model",
+    #   verbose_name='Compression',
+    #   help_text='Groups together information on the compression status a' \
+    #   'nd method of a resource',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     sizePerVideoFormat = models.OneToOneField("sizeInfoType_model", 
       verbose_name='Size per video format', 
@@ -5309,11 +5309,11 @@ class imageFormatInfoType_model(SchemaModel):
       'ngle pixel',
       blank=True, null=True, )
 
-    compressionInfo = models.OneToOneField("compressionInfoType_model", 
-      verbose_name='Compression', 
-      help_text='Groups together information on the compression status a' \
-      'nd method of a resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # compressionInfo = models.OneToOneField("compressionInfoType_model",
+    #   verbose_name='Compression',
+    #   help_text='Groups together information on the compression status a' \
+    #   'nd method of a resource',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     resolutionInfo = models.ManyToManyField("resolutionInfoType_model", 
       verbose_name='Resolution', 
