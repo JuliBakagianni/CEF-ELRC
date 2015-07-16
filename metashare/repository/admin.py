@@ -27,7 +27,6 @@ from metashare.repository.models import \
     languageDescriptionTextInfoType_model, \
     languageInfoType_model, \
     languageVarietyInfoType_model, \
-    lexicalConceptualResourceAudioInfoType_model, \
     lexicalConceptualResourceEncodingInfoType_model, \
     lexicalConceptualResourceImageInfoType_model, \
     lexicalConceptualResourceInfoType_model, \
@@ -79,6 +78,7 @@ from metashare.repository.models import \
     videoContentInfoType_model, \
     videoFormatInfoType_model
     # languageDescriptionImageInfoType_model, \
+    # lexicalConceptualResourceAudioInfoType_model, \
     # languageDescriptionOperationInfoType_model, \
     # actualUseInfoType_model, \
     # audioClassificationInfoType_model, \
@@ -982,7 +982,7 @@ admin.site.register(languageDescriptionTextInfoType_model, SchemaModelAdmin)
 # admin.site.register(languageDescriptionVideoInfoType_model, SchemaModelAdmin)
 admin.site.register(languageInfoType_model, SchemaModelAdmin)
 admin.site.register(languageVarietyInfoType_model, SchemaModelAdmin)
-admin.site.register(lexicalConceptualResourceAudioInfoType_model, SchemaModelAdmin)
+# admin.site.register(lexicalConceptualResourceAudioInfoType_model, SchemaModelAdmin)
 admin.site.register(lexicalConceptualResourceEncodingInfoType_model, SchemaModelAdmin)
 admin.site.register(lexicalConceptualResourceImageInfoType_model, SchemaModelAdmin)
 admin.site.register(lexicalConceptualResourceInfoType_model, SchemaModelAdmin)

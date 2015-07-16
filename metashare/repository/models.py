@@ -330,7 +330,7 @@ class sizeInfoType_model(SchemaModel):
 
     # back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
 
     back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
 
@@ -1190,7 +1190,7 @@ class domainInfoType_model(SchemaModel):
 
     # back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
 
     back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
 
@@ -1592,7 +1592,7 @@ class modalityInfoType_model(SchemaModel):
 
     # back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
 
     back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
 
@@ -3244,7 +3244,7 @@ class timeCoverageInfoType_model(SchemaModel):
 
     # back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
 
     back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
 
@@ -3303,7 +3303,7 @@ class geographicCoverageInfoType_model(SchemaModel):
 
     # back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
 
     back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
 
@@ -3505,7 +3505,7 @@ class languageInfoType_model(SchemaModel):
 
     # back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
 
     back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
 
@@ -6414,80 +6414,80 @@ class lexicalConceptualResourceEncodingInfoType_model(SchemaModel):
         return _unicode
 
 # pylint: disable-msg=C0103
-class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
-    """
-    Groups information on the audio part of the lexical/conceptual
-    resource
-    """
-
-    class Meta:
-        verbose_name = "Lexical conceptual resource audio"
-
-
-    __schema_name__ = 'lexicalConceptualResourceAudioInfoType'
-    __schema_fields__ = (
-      ( u'mediaType', u'mediaType', REQUIRED ),
-      ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
-      ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
-      ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
-      ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
-      ( u'audioContentInfo', u'audioContentInfo', RECOMMENDED ),
-      ( u'audioFormatInfo', u'audioformatinfotype_model_set', RECOMMENDED ),
-      ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
-      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
-      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'audioContentInfo': "audioContentInfoType_model",
-      u'audioFormatInfo': "audioFormatInfoType_model",
-      u'domainInfo': "domainInfoType_model",
-      u'geographicCoverageInfo': "geographicCoverageInfoType_model",
-      u'languageInfo': "languageInfoType_model",
-      u'lingualityInfo': "lingualityInfoType_model",
-      u'modalityInfo': "modalityInfoType_model",
-      u'sizeInfo': "sizeInfoType_model",
-      u'timeCoverageInfo': "timeCoverageInfoType_model",
-    }
-
-    mediaType = XmlCharField(
-      verbose_name='Media', 
-      help_text='Specifies the media type of the resource and basically ' \
-      'corresponds to the physical medium of the content representation.' \
-      ' Each media type is described through a distinctive set of featur' \
-      'es. A resource may consist of parts attributed to different types' \
-      ' of media. A tool/service may take as input/output more than one ' \
-      'different media types.',
-      default="audio", editable=False, max_length=1000, )
-
-    lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
-      verbose_name='Linguality', 
-      help_text='Groups information on the number of languages of the re' \
-      'source part and of the way they are combined to each other',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # OneToMany field: languageInfo
-
-    # OneToMany field: modalityInfo
-
-    # OneToMany field: sizeInfo
-
-    # audioContentInfo = models.OneToOneField("audioContentInfoType_model",
-    #   verbose_name='Audio content',
-    #   help_text='Groups together information on the contents of the audi' \
-    #   'o part of a resource',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # OneToMany field: audioFormatInfo
-
-    # OneToMany field: domainInfo
-
-    # OneToMany field: geographicCoverageInfo
-
-    # OneToMany field: timeCoverageInfo
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class lexicalConceptualResourceAudioInfoType_model(SchemaModel):
+#     """
+#     Groups information on the audio part of the lexical/conceptual
+#     resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Lexical conceptual resource audio"
+#
+#
+#     __schema_name__ = 'lexicalConceptualResourceAudioInfoType'
+#     __schema_fields__ = (
+#       ( u'mediaType', u'mediaType', REQUIRED ),
+#       ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
+#       ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
+#       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
+#       ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
+#       ( u'audioContentInfo', u'audioContentInfo', RECOMMENDED ),
+#       ( u'audioFormatInfo', u'audioformatinfotype_model_set', RECOMMENDED ),
+#       ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
+#       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
+#       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'audioContentInfo': "audioContentInfoType_model",
+#       u'audioFormatInfo': "audioFormatInfoType_model",
+#       u'domainInfo': "domainInfoType_model",
+#       u'geographicCoverageInfo': "geographicCoverageInfoType_model",
+#       u'languageInfo': "languageInfoType_model",
+#       u'lingualityInfo': "lingualityInfoType_model",
+#       u'modalityInfo': "modalityInfoType_model",
+#       u'sizeInfo': "sizeInfoType_model",
+#       u'timeCoverageInfo': "timeCoverageInfoType_model",
+#     }
+#
+#     mediaType = XmlCharField(
+#       verbose_name='Media',
+#       help_text='Specifies the media type of the resource and basically ' \
+#       'corresponds to the physical medium of the content representation.' \
+#       ' Each media type is described through a distinctive set of featur' \
+#       'es. A resource may consist of parts attributed to different types' \
+#       ' of media. A tool/service may take as input/output more than one ' \
+#       'different media types.',
+#       default="audio", editable=False, max_length=1000, )
+#
+#     lingualityInfo = models.OneToOneField("lingualityInfoType_model",
+#       verbose_name='Linguality',
+#       help_text='Groups information on the number of languages of the re' \
+#       'source part and of the way they are combined to each other',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # OneToMany field: languageInfo
+#
+#     # OneToMany field: modalityInfo
+#
+#     # OneToMany field: sizeInfo
+#
+#     # audioContentInfo = models.OneToOneField("audioContentInfoType_model",
+#     #   verbose_name='Audio content',
+#     #   help_text='Groups together information on the contents of the audi' \
+#     #   'o part of a resource',
+#     #   blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # OneToMany field: audioFormatInfo
+#
+#     # OneToMany field: domainInfo
+#
+#     # OneToMany field: geographicCoverageInfo
+#
+#     # OneToMany field: timeCoverageInfo
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # pylint: disable-msg=C0103
 class lexicalConceptualResourceTextInfoType_model(SchemaModel):
