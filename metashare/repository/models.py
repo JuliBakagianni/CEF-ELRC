@@ -360,7 +360,7 @@ class identificationInfoType_model(SchemaModel):
       ( u'description', u'description', REQUIRED ),
       ( u'resourceShortName', u'resourceShortName', OPTIONAL ),
       ( u'url', u'url', RECOMMENDED ),
-      # ( u'metaShareId', u'metaShareId', REQUIRED ),
+      ( u'metaShareId', u'metaShareId', REQUIRED ),
       ( u'identifier', u'identifier', OPTIONAL ),
       ( u'PID', u'PID', RECOMMENDED),
       ( u'ISLRN', u'ISLRN', RECOMMENDED ),
@@ -401,12 +401,12 @@ class identificationInfoType_model(SchemaModel):
       'ment etc.) is located',
       blank=True, )
 
-    # metaShareId = XmlCharField(
-    #   verbose_name='Meta share id',
-    #   help_text='An unambiguous referent to the resource within META-SHA' \
-    #   'RE; it reflects to the unique system id provided automatically by' \
-    #   ' the MetaShare software',
-    #   max_length=100, default="NOT_DEFINED_FOR_V2", )
+    metaShareId = XmlCharField(
+      verbose_name='Meta share id',
+      help_text='An unambiguous referent to the resource within META-SHA' \
+      'RE; it reflects to the unique system id provided automatically by' \
+      ' the MetaShare software',
+      max_length=100, default="NOT_DEFINED_FOR_V2", )
 
     identifier = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=1, max_length=100),
       verbose_name='Identifier',
