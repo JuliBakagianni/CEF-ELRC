@@ -5187,55 +5187,55 @@ class videoClassificationInfoType_model(SchemaModel):
 #         formatstring = u'image ({})'
 #         return self.unicode_(formatstring, formatargs)
 
-IMAGECONTENTINFOTYPE_TEXTINCLUDEDINIMAGE_CHOICES = _make_choices_from_list([
-  u'captions', u'subtitles', u'captureTime', u'none', 
-])
+# IMAGECONTENTINFOTYPE_TEXTINCLUDEDINIMAGE_CHOICES = _make_choices_from_list([
+#   u'captions', u'subtitles', u'captureTime', u'none',
+# ])
 
 # pylint: disable-msg=C0103
-class imageContentInfoType_model(SchemaModel):
-    """
-    Groups together information on the contents of the image part of a
-    resource
-    """
-
-    class Meta:
-        verbose_name = "Image content"
-
-
-    __schema_name__ = 'imageContentInfoType'
-    __schema_fields__ = (
-      ( u'typeOfImageContent', u'typeOfImageContent', REQUIRED ),
-      ( u'textIncludedInImage', u'textIncludedInImage', OPTIONAL ),
-      ( u'staticElementInfo', u'staticElementInfo', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'staticElementInfo': "staticElementInfoType_model",
-    }
-
-    typeOfImageContent = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=23, max_length=1000), 
-      verbose_name='Type of image content', 
-      help_text='The main types of object or people represented in the i' \
-      'mage corpus',
-      validators=[validate_matches_xml_char_production], )
-
-    textIncludedInImage = MultiSelectField(
-      verbose_name='Text included in image', 
-      help_text='Provides information on the type of text that may be on' \
-      ' the image',
-      blank=True, 
-      max_length=1 + len(IMAGECONTENTINFOTYPE_TEXTINCLUDEDINIMAGE_CHOICES['choices']) / 4,
-      choices=IMAGECONTENTINFOTYPE_TEXTINCLUDEDINIMAGE_CHOICES['choices'],
-      )
-
-    staticElementInfo = models.OneToOneField("staticElementInfoType_model", 
-      verbose_name='Static element', 
-      help_text='Groups information on the static element visible on the' \
-      ' images',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class imageContentInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the contents of the image part of a
+#     resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Image content"
+#
+#
+#     __schema_name__ = 'imageContentInfoType'
+#     __schema_fields__ = (
+#       ( u'typeOfImageContent', u'typeOfImageContent', REQUIRED ),
+#       ( u'textIncludedInImage', u'textIncludedInImage', OPTIONAL ),
+#       ( u'staticElementInfo', u'staticElementInfo', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'staticElementInfo': "staticElementInfoType_model",
+#     }
+#
+#     typeOfImageContent = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=23, max_length=1000),
+#       verbose_name='Type of image content',
+#       help_text='The main types of object or people represented in the i' \
+#       'mage corpus',
+#       validators=[validate_matches_xml_char_production], )
+#
+#     textIncludedInImage = MultiSelectField(
+#       verbose_name='Text included in image',
+#       help_text='Provides information on the type of text that may be on' \
+#       ' the image',
+#       blank=True,
+#       max_length=1 + len(IMAGECONTENTINFOTYPE_TEXTINCLUDEDINIMAGE_CHOICES['choices']) / 4,
+#       choices=IMAGECONTENTINFOTYPE_TEXTINCLUDEDINIMAGE_CHOICES['choices'],
+#       )
+#
+#     staticElementInfo = models.OneToOneField("staticElementInfoType_model",
+#       verbose_name='Static element',
+#       help_text='Groups information on the static element visible on the' \
+#       ' images',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 IMAGEFORMATINFOTYPE_COLOURSPACE_CHOICES = _make_choices_from_list([
   u'RGB', u'CMYK', u'4:2:2', u'YUV', 
@@ -6263,11 +6263,11 @@ class languageDescriptionImageInfoType_model(SchemaModel):
 
     # OneToMany field: sizeInfo
 
-    imageContentInfo = models.OneToOneField("imageContentInfoType_model", 
-      verbose_name='Image content', 
-      help_text='Groups together information on the contents of the imag' \
-      'e part of a resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # imageContentInfo = models.OneToOneField("imageContentInfoType_model",
+    #   verbose_name='Image content',
+    #   help_text='Groups together information on the contents of the imag' \
+    #   'e part of a resource',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: imageFormatInfo
 
@@ -6695,11 +6695,11 @@ class lexicalConceptualResourceImageInfoType_model(SchemaModel):
 
     # OneToMany field: sizeInfo
 
-    imageContentInfo = models.OneToOneField("imageContentInfoType_model", 
-      verbose_name='Image content', 
-      help_text='Groups together information on the contents of the imag' \
-      'e part of a resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # imageContentInfo = models.OneToOneField("imageContentInfoType_model",
+    #   verbose_name='Image content',
+    #   help_text='Groups together information on the contents of the imag' \
+    #   'e part of a resource',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: imageFormatInfo
 
