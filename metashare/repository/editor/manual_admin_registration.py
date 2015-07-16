@@ -13,7 +13,6 @@ from metashare.repository.models import resourceInfoType_model, \
     metadataInfoType_model, \
     communicationInfoType_model, \
     corpusMediaTypeType_model, corpusTextInfoType_model, \
-    videoClassificationInfoType_model, \
     languageDescriptionInfoType_model, \
     languageDescriptionTextInfoType_model, \
     lexicalConceptualResourceInfoType_model, \
@@ -24,6 +23,7 @@ from metashare.repository.models import resourceInfoType_model, \
     documentUnstructuredString_model
 
     # actualUseInfoType_model, \
+    # videoClassificationInfoType_model, \
     # validationInfoType_model, \
     # textNumericalFormatInfoType_model, \
     # toolServiceInfoType_model, \
@@ -228,7 +228,7 @@ purely_inline_models = (
     # foreseenUseInfoType_model,
     corpusMediaTypeType_model,
     # textNumericalFormatInfoType_model,
-    videoClassificationInfoType_model,
+    # videoClassificationInfoType_model,
     # imageClassificationInfoType_model,
     # participantInfoType_model,
 )

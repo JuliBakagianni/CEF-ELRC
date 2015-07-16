@@ -5024,67 +5024,67 @@ class videoFormatInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-VIDEOCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES = _make_choices_from_list([
-  u'ANC_domainClassification', u'ANC_genreClassification',
-  u'BNC_domainClassification',u'BNC_textTypeClassification',
-  u'DDC_classification',u'libraryOfCongress_domainClassification',
-  u'libraryofCongressSubjectHeadings_classification',u'MeSH_classification',
-  u'NLK_classification',u'PAROLE_topicClassification',
-  u'PAROLE_genreClassification',u'UDC_classification', u'other', 
-])
+# VIDEOCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES = _make_choices_from_list([
+#   u'ANC_domainClassification', u'ANC_genreClassification',
+#   u'BNC_domainClassification',u'BNC_textTypeClassification',
+#   u'DDC_classification',u'libraryOfCongress_domainClassification',
+#   u'libraryofCongressSubjectHeadings_classification',u'MeSH_classification',
+#   u'NLK_classification',u'PAROLE_topicClassification',
+#   u'PAROLE_genreClassification',u'UDC_classification', u'other',
+# ])
 
 # pylint: disable-msg=C0103
-class videoClassificationInfoType_model(SchemaModel):
-    """
-    Groups together information on video genre of the resource
-    """
-
-    class Meta:
-        verbose_name = "Video classification"
-
-
-    __schema_name__ = 'videoClassificationInfoType'
-    __schema_fields__ = (
-      ( u'videoGenre', u'videoGenre', RECOMMENDED ),
-      ( u'subject_topic', u'subject_topic', OPTIONAL ),
-      ( u'conformanceToClassificationScheme', u'conformanceToClassificationScheme', OPTIONAL ),
-      ( u'sizePerVideoClassification', u'sizePerVideoClassification', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'sizePerVideoClassification': "sizeInfoType_model",
-    }
-
-    videoGenre = XmlCharField(
-      verbose_name='Video genre', 
-      help_text='A first indication of type of video recorded',
-      blank=True, max_length=1000, )
-
-    subject_topic = XmlCharField(
-      verbose_name='Subject topic', 
-      help_text='For corpora that have already been using subject classi' \
-      'fication',
-      blank=True, max_length=1000, )
-
-    conformanceToClassificationScheme = models.CharField(
-      verbose_name='Conformance to classification scheme', 
-      help_text='Specifies the external classification schemes',
-      blank=True, 
-      max_length=100,
-      choices=sorted(VIDEOCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    sizePerVideoClassification = models.OneToOneField("sizeInfoType_model", 
-      verbose_name='Size per video classification', 
-      help_text='Used to give info on size of parts with different video' \
-      ' classification',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class videoClassificationInfoType_model(SchemaModel):
+#     """
+#     Groups together information on video genre of the resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Video classification"
+#
+#
+#     __schema_name__ = 'videoClassificationInfoType'
+#     __schema_fields__ = (
+#       ( u'videoGenre', u'videoGenre', RECOMMENDED ),
+#       ( u'subject_topic', u'subject_topic', OPTIONAL ),
+#       ( u'conformanceToClassificationScheme', u'conformanceToClassificationScheme', OPTIONAL ),
+#       ( u'sizePerVideoClassification', u'sizePerVideoClassification', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'sizePerVideoClassification': "sizeInfoType_model",
+#     }
+#
+#     videoGenre = XmlCharField(
+#       verbose_name='Video genre',
+#       help_text='A first indication of type of video recorded',
+#       blank=True, max_length=1000, )
+#
+#     subject_topic = XmlCharField(
+#       verbose_name='Subject topic',
+#       help_text='For corpora that have already been using subject classi' \
+#       'fication',
+#       blank=True, max_length=1000, )
+#
+#     conformanceToClassificationScheme = models.CharField(
+#       verbose_name='Conformance to classification scheme',
+#       help_text='Specifies the external classification schemes',
+#       blank=True,
+#       max_length=100,
+#       choices=sorted(VIDEOCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     sizePerVideoClassification = models.OneToOneField("sizeInfoType_model",
+#       verbose_name='Size per video classification',
+#       help_text='Used to give info on size of parts with different video' \
+#       ' classification',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # pylint: disable-msg=C0103
 # class corpusImageInfoType_model(SchemaModel):
