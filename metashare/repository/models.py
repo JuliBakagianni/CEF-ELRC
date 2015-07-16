@@ -3802,80 +3802,80 @@ ACTUALUSEINFOTYPE_USENLPSPECIFIC_CHOICES = _make_choices_from_list([
 ])
 
 # pylint: disable-msg=C0103
-class actualUseInfoType_model(SchemaModel):
-    """
-    Groups information on how the resource has already been used
-    """
-
-    class Meta:
-        verbose_name = "Actual use"
-
-
-    __schema_name__ = 'actualUseInfoType'
-    __schema_fields__ = (
-      ( u'actualUse', u'actualUse', REQUIRED ),
-      ( u'useNLPSpecific', u'useNLPSpecific', RECOMMENDED ),
-      ( 'usageReport/documentUnstructured', 'usageReport', OPTIONAL ),
-      ( 'usageReport/documentInfo', 'usageReport', OPTIONAL ),
-      ( u'derivedResource', u'derivedResource', OPTIONAL ),
-      ( u'usageProject', u'usageProject', OPTIONAL ),
-      ( u'actualUseDetails', u'actualUseDetails', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'derivedResource': "targetResourceInfoType_model",
-      u'documentInfo': "documentInfoType_model",
-      u'documentUnstructured': "documentUnstructuredString_model",
-      u'usageProject': "projectInfoType_model",
-    }
-
-    actualUse = models.CharField(
-      verbose_name='Actual use', 
-      help_text='Classification of the actual use of the resource',
-      
-      max_length=30,
-      choices=sorted(ACTUALUSEINFOTYPE_ACTUALUSE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    useNLPSpecific = MultiSelectField(
-      verbose_name='Use nlpspecific', 
-      help_text='Specifies the NLP application for which the resource is' \
-      'created or the application in which it has actually been used.',
-      blank=True, 
-      max_length=1 + len(ACTUALUSEINFOTYPE_USENLPSPECIFIC_CHOICES['choices']) / 4,
-      choices=ACTUALUSEINFOTYPE_USENLPSPECIFIC_CHOICES['choices'],
-      )
-
-    usageReport = models.ManyToManyField("documentationInfoType_model", 
-      verbose_name='Usage report', 
-      help_text='Reports on the research papers documenting the usage of' \
-      ' a resource, either in a structured form or in free text',
-      blank=True, null=True, related_name="usageReport_%(class)s_related", )
-
-    derivedResource = models.ManyToManyField("targetResourceInfoType_model", 
-      verbose_name='Derived resource', 
-      help_text='The name, the identifier or the url of the outcome or p' \
-      'roduct of the resource.',
-      blank=True, null=True, related_name="derivedResource_%(class)s_related", )
-
-    usageProject = models.ManyToManyField("projectInfoType_model", 
-      verbose_name='Usage project', 
-      help_text='Groups information on the project in which the resource' \
-      ' has been used',
-      blank=True, null=True, related_name="usageProject_%(class)s_related", )
-
-    actualUseDetails = XmlCharField(
-      verbose_name='Actual use details', 
-      help_text='Reports on the usage of the resource in free text',
-      blank=True, max_length=250, )
-
-    back_to_usageinfotype_model = models.ForeignKey("usageInfoType_model",  blank=True, null=True)
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['actualUse', 'useNLPSpecific', ]
-        formatstring = u'{}, NLP specific: {}'
-        return self.unicode_(formatstring, formatargs)
+# class actualUseInfoType_model(SchemaModel):
+#     """
+#     Groups information on how the resource has already been used
+#     """
+#
+#     class Meta:
+#         verbose_name = "Actual use"
+#
+#
+#     __schema_name__ = 'actualUseInfoType'
+#     __schema_fields__ = (
+#       ( u'actualUse', u'actualUse', REQUIRED ),
+#       ( u'useNLPSpecific', u'useNLPSpecific', RECOMMENDED ),
+#       ( 'usageReport/documentUnstructured', 'usageReport', OPTIONAL ),
+#       ( 'usageReport/documentInfo', 'usageReport', OPTIONAL ),
+#       ( u'derivedResource', u'derivedResource', OPTIONAL ),
+#       ( u'usageProject', u'usageProject', OPTIONAL ),
+#       ( u'actualUseDetails', u'actualUseDetails', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'derivedResource': "targetResourceInfoType_model",
+#       u'documentInfo': "documentInfoType_model",
+#       u'documentUnstructured': "documentUnstructuredString_model",
+#       u'usageProject': "projectInfoType_model",
+#     }
+#
+#     actualUse = models.CharField(
+#       verbose_name='Actual use',
+#       help_text='Classification of the actual use of the resource',
+#
+#       max_length=30,
+#       choices=sorted(ACTUALUSEINFOTYPE_ACTUALUSE_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     useNLPSpecific = MultiSelectField(
+#       verbose_name='Use nlpspecific',
+#       help_text='Specifies the NLP application for which the resource is' \
+#       'created or the application in which it has actually been used.',
+#       blank=True,
+#       max_length=1 + len(ACTUALUSEINFOTYPE_USENLPSPECIFIC_CHOICES['choices']) / 4,
+#       choices=ACTUALUSEINFOTYPE_USENLPSPECIFIC_CHOICES['choices'],
+#       )
+#
+#     usageReport = models.ManyToManyField("documentationInfoType_model",
+#       verbose_name='Usage report',
+#       help_text='Reports on the research papers documenting the usage of' \
+#       ' a resource, either in a structured form or in free text',
+#       blank=True, null=True, related_name="usageReport_%(class)s_related", )
+#
+#     derivedResource = models.ManyToManyField("targetResourceInfoType_model",
+#       verbose_name='Derived resource',
+#       help_text='The name, the identifier or the url of the outcome or p' \
+#       'roduct of the resource.',
+#       blank=True, null=True, related_name="derivedResource_%(class)s_related", )
+#
+#     usageProject = models.ManyToManyField("projectInfoType_model",
+#       verbose_name='Usage project',
+#       help_text='Groups information on the project in which the resource' \
+#       ' has been used',
+#       blank=True, null=True, related_name="usageProject_%(class)s_related", )
+#
+#     actualUseDetails = XmlCharField(
+#       verbose_name='Actual use details',
+#       help_text='Reports on the usage of the resource in free text',
+#       blank=True, max_length=250, )
+#
+#     back_to_usageinfotype_model = models.ForeignKey("usageInfoType_model",  blank=True, null=True)
+#
+#     def real_unicode_(self):
+#         # pylint: disable-msg=C0301
+#         formatargs = ['actualUse', 'useNLPSpecific', ]
+#         formatstring = u'{}, NLP specific: {}'
+#         return self.unicode_(formatstring, formatargs)
 
 # pylint: disable-msg=C0103
 class projectListType_model(SchemaModel):
