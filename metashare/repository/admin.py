@@ -46,7 +46,6 @@ from metashare.repository.models import \
     targetResourceInfoType_model, \
     textClassificationInfoType_model, \
     textFormatInfoType_model, \
-    textNumericalContentInfoType_model, \
     textNumericalFormatInfoType_model, \
     timeCoverageInfoType_model, \
     toolServiceCreationInfoType_model, \
@@ -66,6 +65,7 @@ from metashare.repository.models import \
     # settingInfoType_model, \
     # staticElementInfoType_model, \
     # runningEnvironmentInfoType_model, \
+    # textNumericalContentInfoType_model, \
     # relationInfoType_model, \
     # resolutionInfoType_model, \
     # resourceCreationInfoType_model, \
@@ -1020,7 +1020,7 @@ admin.site.register(sizeInfoType_model, SchemaModelAdmin)
 admin.site.register(targetResourceInfoType_model, SchemaModelAdmin)
 admin.site.register(textClassificationInfoType_model, SchemaModelAdmin)
 admin.site.register(textFormatInfoType_model, SchemaModelAdmin)
-admin.site.register(textNumericalContentInfoType_model, SchemaModelAdmin)
+# admin.site.register(textNumericalContentInfoType_model, SchemaModelAdmin)
 admin.site.register(textNumericalFormatInfoType_model, SchemaModelAdmin)
 admin.site.register(timeCoverageInfoType_model, SchemaModelAdmin)
 admin.site.register(toolServiceCreationInfoType_model, SchemaModelAdmin)

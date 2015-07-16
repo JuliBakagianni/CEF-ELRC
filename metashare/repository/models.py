@@ -5522,30 +5522,30 @@ class videoClassificationInfoType_model(SchemaModel):
 #         return self.unicode_(formatstring, formatargs)
 
 # pylint: disable-msg=C0103
-class textNumericalContentInfoType_model(SchemaModel):
-    """
-    Groups information on the content of the textNumerical part of the
-    resource
-    """
-
-    class Meta:
-        verbose_name = "Text numerical content"
-
-
-    __schema_name__ = 'textNumericalContentInfoType'
-    __schema_fields__ = (
-      ( u'typeOfTextNumericalContent', u'typeOfTextNumericalContent', REQUIRED ),
-    )
-
-    typeOfTextNumericalContent = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=24, max_length=1000), 
-      verbose_name='Type of text numerical content', 
-      help_text='Specifies the content that is represented in the textNu' \
-      'merical part of the resource',
-      validators=[validate_matches_xml_char_production], )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class textNumericalContentInfoType_model(SchemaModel):
+#     """
+#     Groups information on the content of the textNumerical part of the
+#     resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Text numerical content"
+#
+#
+#     __schema_name__ = 'textNumericalContentInfoType'
+#     __schema_fields__ = (
+#       ( u'typeOfTextNumericalContent', u'typeOfTextNumericalContent', REQUIRED ),
+#     )
+#
+#     typeOfTextNumericalContent = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=24, max_length=1000),
+#       verbose_name='Type of text numerical content',
+#       help_text='Specifies the content that is represented in the textNu' \
+#       'merical part of the resource',
+#       validators=[validate_matches_xml_char_production], )
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # pylint: disable-msg=C0103
 class textNumericalFormatInfoType_model(SchemaModel):
