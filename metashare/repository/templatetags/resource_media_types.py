@@ -1,8 +1,9 @@
 from django import template
 
 from metashare.repository.models import corpusInfoType_model, \
-    toolServiceInfoType_model, lexicalConceptualResourceInfoType_model, \
+    lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model
+    # toolServiceInfoType_model,
 from metashare.settings import MEDIA_URL
 
 register = template.Library()
@@ -64,13 +65,13 @@ class ResourceMediaTypes(template.Node):
             # if ld_media_type.languageDescriptionImageInfo:
             #     result.append(ld_media_type.languageDescriptionImageInfo.mediaType)
 
-        elif isinstance(corpus_media, toolServiceInfoType_model):
-            if corpus_media.inputInfo:
-                result.extend(corpus_media.inputInfo \
-                              .get_mediaType_display_list())
-            if corpus_media.outputInfo:
-                result.extend(corpus_media.outputInfo \
-                              .get_mediaType_display_list())
+        # elif isinstance(corpus_media, toolServiceInfoType_model):
+        #     if corpus_media.inputInfo:
+        #         result.extend(corpus_media.inputInfo \
+        #                       .get_mediaType_display_list())
+        #     if corpus_media.outputInfo:
+        #         result.extend(corpus_media.outputInfo \
+        #                       .get_mediaType_display_list())
 
         result = list(set(result))
         result.sort()

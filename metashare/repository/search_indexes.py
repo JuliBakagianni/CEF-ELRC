@@ -13,8 +13,9 @@ from unidecode import unidecode
 from metashare.repository import model_utils
 from metashare.repository.models import resourceInfoType_model, \
     corpusInfoType_model, \
-    toolServiceInfoType_model, lexicalConceptualResourceInfoType_model, \
+    lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model
+    # toolServiceInfoType_model,
 from metashare.repository.search_fields import LabeledCharField, \
     LabeledMultiValueField
 from metashare.storage.models import StorageObject, INGESTED, PUBLISHED
@@ -557,11 +558,11 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             #     result.extend([lang.languageName for lang in ld_media_type \
             #                 .languageDescriptionImageInfo.languageinfotype_model_set.all()])
 
-        elif isinstance(corpus_media, toolServiceInfoType_model):
-            if corpus_media.inputInfo:
-                result.extend(corpus_media.inputInfo.languageName)
-            if corpus_media.outputInfo:
-                result.extend(corpus_media.outputInfo.languageName)
+        # elif isinstance(corpus_media, toolServiceInfoType_model):
+        #     if corpus_media.inputInfo:
+        #         result.extend(corpus_media.inputInfo.languageName)
+        #     if corpus_media.outputInfo:
+        #         result.extend(corpus_media.outputInfo.languageName)
 
         return result
 
@@ -789,13 +790,13 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             #             .languageDescriptionImageInfo.modalityinfotype_model_set.all()
             #             for mt in modalityInfo.get_modalityType_display_list()])
 
-        elif isinstance(corpus_media, toolServiceInfoType_model):
-            if corpus_media.inputInfo:
-                result.extend(corpus_media.inputInfo \
-                              .get_modalityType_display_list())
-            if corpus_media.outputInfo:
-                result.extend(corpus_media.outputInfo \
-                              .get_modalityType_display_list())
+        # elif isinstance(corpus_media, toolServiceInfoType_model):
+        #     if corpus_media.inputInfo:
+        #         result.extend(corpus_media.inputInfo \
+        #                       .get_modalityType_display_list())
+        #     if corpus_media.outputInfo:
+        #         result.extend(corpus_media.outputInfo \
+        #                       .get_modalityType_display_list())
 
         return result
 
@@ -858,11 +859,11 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             #             ld_media_type.languageDescriptionImageInfo \
             #                 .imageformatinfotype_model_set.all()])
 
-        elif isinstance(corpus_media, toolServiceInfoType_model):
-            if corpus_media.inputInfo:
-                mimeType_list.extend(corpus_media.inputInfo.mimeType)
-            if corpus_media.outputInfo:
-                mimeType_list.extend(corpus_media.outputInfo.mimeType)
+        # elif isinstance(corpus_media, toolServiceInfoType_model):
+        #     if corpus_media.inputInfo:
+        #         mimeType_list.extend(corpus_media.inputInfo.mimeType)
+        #     if corpus_media.outputInfo:
+        #         mimeType_list.extend(corpus_media.outputInfo.mimeType)
 
         return mimeType_list
 
@@ -904,13 +905,13 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                 result.extend(corpus_media.languageDescriptionEncodingInfo \
                   .get_conformanceToStandardsBestPractices_display_list())
 
-        elif isinstance(corpus_media, toolServiceInfoType_model):
-            if corpus_media.inputInfo:
-                result.extend(corpus_media.inputInfo \
-                  .get_conformanceToStandardsBestPractices_display_list())
-            if corpus_media.outputInfo:
-                result.extend(corpus_media.outputInfo \
-                  .get_conformanceToStandardsBestPractices_display_list())
+        # elif isinstance(corpus_media, toolServiceInfoType_model):
+        #     if corpus_media.inputInfo:
+        #         result.extend(corpus_media.inputInfo \
+        #           .get_conformanceToStandardsBestPractices_display_list())
+        #     if corpus_media.outputInfo:
+        #         result.extend(corpus_media.outputInfo \
+        #           .get_conformanceToStandardsBestPractices_display_list())
 
         return result
 
@@ -1290,8 +1291,8 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         corpus_media = obj.resourceComponentType.as_subclass()
 
         # Filter for toolService
-        if isinstance(corpus_media, toolServiceInfoType_model):
-            result.append(corpus_media.get_toolServiceType_display())
+        # if isinstance(corpus_media, toolServiceInfoType_model):
+        #     result.append(corpus_media.get_toolServiceType_display())
 
         return result
     
@@ -1304,8 +1305,8 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         corpus_media = obj.resourceComponentType.as_subclass()
 
         # Filter for toolService
-        if isinstance(corpus_media, toolServiceInfoType_model):
-            result.extend(corpus_media.toolServiceSubtype)
+        # if isinstance(corpus_media, toolServiceInfoType_model):
+        #     result.extend(corpus_media.toolServiceSubtype)
 
         return result
 
@@ -1318,8 +1319,8 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         corpus_media = obj.resourceComponentType.as_subclass()
 
         # Filter for toolService
-        if isinstance(corpus_media, toolServiceInfoType_model):
-            result.append(corpus_media.get_languageDependent_display())
+        # if isinstance(corpus_media, toolServiceInfoType_model):
+        #     result.append(corpus_media.get_languageDependent_display())
 
         return result
     
@@ -1332,13 +1333,13 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         corpus_media = obj.resourceComponentType.as_subclass()
 
         # Filter for toolService
-        if isinstance(corpus_media, toolServiceInfoType_model):
-            if corpus_media.inputInfo:
-                result.extend(
-                    corpus_media.inputInfo.get_resourceType_display_list())
-            if corpus_media.outputInfo:
-                result.extend(
-                    corpus_media.outputInfo.get_resourceType_display_list())
+        # if isinstance(corpus_media, toolServiceInfoType_model):
+        #     if corpus_media.inputInfo:
+        #         result.extend(
+        #             corpus_media.inputInfo.get_resourceType_display_list())
+        #     if corpus_media.outputInfo:
+        #         result.extend(
+        #             corpus_media.outputInfo.get_resourceType_display_list())
 
         return result
     
@@ -1351,11 +1352,11 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         corpus_media = obj.resourceComponentType.as_subclass()
 
         # Filter for toolService
-        if isinstance(corpus_media, toolServiceInfoType_model):
-            if corpus_media.inputInfo:
-                result.append(corpus_media.inputInfo.get_mediaType_display())
-            if corpus_media.outputInfo:
-                result.append(corpus_media.outputInfo.get_mediaType_display())
+        # if isinstance(corpus_media, toolServiceInfoType_model):
+        #     if corpus_media.inputInfo:
+        #         result.append(corpus_media.inputInfo.get_mediaType_display())
+        #     if corpus_media.outputInfo:
+        #         result.append(corpus_media.outputInfo.get_mediaType_display())
 
         return result
     
@@ -1367,11 +1368,11 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         corpus_media = obj.resourceComponentType.as_subclass()
 
-        if isinstance(corpus_media, toolServiceInfoType_model):
-            if corpus_media.inputInfo:
-                result.extend(corpus_media.inputInfo.get_annotationType_display_list())
-            if corpus_media.outputInfo:
-                result.extend(corpus_media.outputInfo.get_annotationType_display_list())
+        # if isinstance(corpus_media, toolServiceInfoType_model):
+        #     if corpus_media.inputInfo:
+        #         result.extend(corpus_media.inputInfo.get_annotationType_display_list())
+        #     if corpus_media.outputInfo:
+        #         result.extend(corpus_media.outputInfo.get_annotationType_display_list())
 
         return result
     
@@ -1384,13 +1385,13 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         corpus_media = obj.resourceComponentType.as_subclass()
 
         # Filter for toolService
-        if isinstance(corpus_media, toolServiceInfoType_model):
-            if corpus_media.inputInfo:
-                if corpus_media.inputInfo.annotationFormat:
-                    result.extend(corpus_media.inputInfo.annotationFormat)
-            if corpus_media.outputInfo:
-                if corpus_media.outputInfo.annotationFormat:
-                    result.extend(corpus_media.outputInfo.annotationFormat)
+        # if isinstance(corpus_media, toolServiceInfoType_model):
+        #     if corpus_media.inputInfo:
+        #         if corpus_media.inputInfo.annotationFormat:
+        #             result.extend(corpus_media.inputInfo.annotationFormat)
+        #     if corpus_media.outputInfo:
+        #         if corpus_media.outputInfo.annotationFormat:
+        #             result.extend(corpus_media.outputInfo.annotationFormat)
 
         return result
     
@@ -1403,9 +1404,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         corpus_media = obj.resourceComponentType.as_subclass()
 
         # Filter for toolService
-        if isinstance(corpus_media, toolServiceInfoType_model):
-            if corpus_media.toolServiceEvaluationInfo:
-                result.append(corpus_media.toolServiceEvaluationInfo.get_evaluated_display())
+        # if isinstance(corpus_media, toolServiceInfoType_model):
+        #     if corpus_media.toolServiceEvaluationInfo:
+        #         result.append(corpus_media.toolServiceEvaluationInfo.get_evaluated_display())
 
         return result
 
@@ -1855,11 +1856,11 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             #         result.extend([variety.languageVarietyName for variety in
             #                    lang.languageVarietyInfo.all()])
 
-        elif isinstance(corpus_media, toolServiceInfoType_model):
-            if corpus_media.inputInfo:
-                result.extend(corpus_media.inputInfo.languageVarietyName)
-            if corpus_media.outputInfo:
-                result.extend(corpus_media.outputInfo.languageVarietyName)
+        # elif isinstance(corpus_media, toolServiceInfoType_model):
+        #     if corpus_media.inputInfo:
+        #         result.extend(corpus_media.inputInfo.languageVarietyName)
+        #     if corpus_media.outputInfo:
+        #         result.extend(corpus_media.outputInfo.languageVarietyName)
 
         return result
 

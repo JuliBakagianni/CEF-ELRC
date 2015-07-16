@@ -18,7 +18,6 @@ from metashare.repository.models import resourceInfoType_model, \
     languageDescriptionTextInfoType_model, \
     lexicalConceptualResourceInfoType_model, \
     lexicalConceptualResourceTextInfoType_model, \
-    toolServiceInfoType_model, \
     licenceInfoType_model, personInfoType_model, \
     documentInfoType_model, organizationInfoType_model, \
     identificationInfoType_model, \
@@ -26,6 +25,7 @@ from metashare.repository.models import resourceInfoType_model, \
 
     # actualUseInfoType_model, \
     # textNumericalFormatInfoType_model, \
+    # toolServiceInfoType_model, \
     # relationInfoType_model, \
     # projectInfoType_model, \
     # languageDescriptionImageInfoType_model, \
@@ -249,7 +249,7 @@ custom_admin_classes = {
     # lexicalConceptualResourceAudioInfoType_model: GenericTabbedAdmin,
     # lexicalConceptualResourceVideoInfoType_model: GenericTabbedAdmin,
     # lexicalConceptualResourceImageInfoType_model: GenericTabbedAdmin,
-    toolServiceInfoType_model: GenericTabbedAdmin,
+    # toolServiceInfoType_model: GenericTabbedAdmin,
     licenceInfoType_model: LicenceModelAdmin,
     personInfoType_model: PersonModelAdmin, 
     organizationInfoType_model: OrganizationModelAdmin, 

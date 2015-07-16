@@ -7596,99 +7596,99 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
         formatstring = u'languageDescription ({})'
         return self.unicode_(formatstring, formatargs)
 
-TOOLSERVICEINFOTYPE_TOOLSERVICETYPE_CHOICES = _make_choices_from_list([
-  u'tool', u'service', u'platform', u'suiteOfTools', u'infrastructure',
-  u'architecture',u'nlpDevelopmentEnvironment', u'other', 
-])
+# TOOLSERVICEINFOTYPE_TOOLSERVICETYPE_CHOICES = _make_choices_from_list([
+#   u'tool', u'service', u'platform', u'suiteOfTools', u'infrastructure',
+#   u'architecture',u'nlpDevelopmentEnvironment', u'other',
+# ])
 
 # pylint: disable-msg=C0103
-class toolServiceInfoType_model(resourceComponentTypeType_model):
-
-    class Meta:
-        verbose_name = "Tool service"
-
-
-    __schema_name__ = 'toolServiceInfoType'
-    __schema_fields__ = (
-      ( u'resourceType', u'resourceType', REQUIRED ),
-      ( u'toolServiceType', u'toolServiceType', REQUIRED ),
-      ( u'toolServiceSubtype', u'toolServiceSubtype', OPTIONAL ),
-      ( u'languageDependent', u'languageDependent', REQUIRED ),
-      ( u'inputInfo', u'inputInfo', RECOMMENDED ),
-      ( u'outputInfo', u'outputInfo', RECOMMENDED ),
-      ( u'toolServiceOperationInfo', u'toolServiceOperationInfo', RECOMMENDED ),
-      ( u'toolServiceEvaluationInfo', u'toolServiceEvaluationInfo', RECOMMENDED ),
-      ( u'toolServiceCreationInfo', u'toolServiceCreationInfo', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'inputInfo': "inputInfoType_model",
-      u'outputInfo': "outputInfoType_model",
-      u'toolServiceCreationInfo': "toolServiceCreationInfoType_model",
-      u'toolServiceEvaluationInfo': "toolServiceEvaluationInfoType_model",
-      u'toolServiceOperationInfo': "toolServiceOperationInfoType_model",
-    }
-
-    resourceType = XmlCharField(
-      verbose_name='Resource', 
-      help_text='The type of the resource that a tool or service takes a' \
-      's input or produces as output',
-      default="toolService", editable=False, max_length=1000, )
-
-    toolServiceType = models.CharField(
-      verbose_name='Tool service type', 
-      help_text='Specifies the type of the tool or service',
-      
-      max_length=100,
-      choices=sorted(TOOLSERVICEINFOTYPE_TOOLSERVICETYPE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    toolServiceSubtype = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=43, max_length=100), 
-      verbose_name='Tool service subtype', 
-      help_text='Specifies the subtype of tool or service',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    languageDependent = MetaBooleanField(
-      verbose_name='Language dependent', 
-      help_text='Indicates whether the operation of the tool or service ' \
-      'is language dependent or not',
-      )
-
-    # inputInfo = models.OneToOneField("inputInfoType_model",
-    #   verbose_name='Input',
-    #   help_text='Groups together information on the requirements set on ' \
-    #   'the input resource of a tool or service',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # outputInfo = models.OneToOneField("outputInfoType_model",
-    #   verbose_name='Output',
-    #   help_text='Groups together information on the requirements set on ' \
-    #   'the output of a tool or service',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
-
-    toolServiceOperationInfo = models.OneToOneField("toolServiceOperationInfoType_model", 
-      verbose_name='Tool service operation', 
-      help_text='Groups together information on the operation of a tool ' \
-      'or service',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    toolServiceEvaluationInfo = models.OneToOneField("toolServiceEvaluationInfoType_model", 
-      verbose_name='Tool service evaluation', 
-      help_text='Groups together information on the evaluation status of' \
-      ' a tool or service',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # toolServiceCreationInfo = models.OneToOneField("toolServiceCreationInfoType_model",
-    #   verbose_name='Tool service creation',
-    #   help_text='Groups together information on the creation of a tool o' \
-    #   'r service',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['toolServiceType', ]
-        formatstring = u'toolService ({})'
-        return self.unicode_(formatstring, formatargs)
+# class toolServiceInfoType_model(resourceComponentTypeType_model):
+#
+#     class Meta:
+#         verbose_name = "Tool service"
+#
+#
+#     __schema_name__ = 'toolServiceInfoType'
+#     __schema_fields__ = (
+#       ( u'resourceType', u'resourceType', REQUIRED ),
+#       ( u'toolServiceType', u'toolServiceType', REQUIRED ),
+#       ( u'toolServiceSubtype', u'toolServiceSubtype', OPTIONAL ),
+#       ( u'languageDependent', u'languageDependent', REQUIRED ),
+#       ( u'inputInfo', u'inputInfo', RECOMMENDED ),
+#       ( u'outputInfo', u'outputInfo', RECOMMENDED ),
+#       ( u'toolServiceOperationInfo', u'toolServiceOperationInfo', RECOMMENDED ),
+#       ( u'toolServiceEvaluationInfo', u'toolServiceEvaluationInfo', RECOMMENDED ),
+#       ( u'toolServiceCreationInfo', u'toolServiceCreationInfo', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'inputInfo': "inputInfoType_model",
+#       u'outputInfo': "outputInfoType_model",
+#       u'toolServiceCreationInfo': "toolServiceCreationInfoType_model",
+#       u'toolServiceEvaluationInfo': "toolServiceEvaluationInfoType_model",
+#       u'toolServiceOperationInfo': "toolServiceOperationInfoType_model",
+#     }
+#
+#     resourceType = XmlCharField(
+#       verbose_name='Resource',
+#       help_text='The type of the resource that a tool or service takes a' \
+#       's input or produces as output',
+#       default="toolService", editable=False, max_length=1000, )
+#
+#     toolServiceType = models.CharField(
+#       verbose_name='Tool service type',
+#       help_text='Specifies the type of the tool or service',
+#
+#       max_length=100,
+#       choices=sorted(TOOLSERVICEINFOTYPE_TOOLSERVICETYPE_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     toolServiceSubtype = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=43, max_length=100),
+#       verbose_name='Tool service subtype',
+#       help_text='Specifies the subtype of tool or service',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     languageDependent = MetaBooleanField(
+#       verbose_name='Language dependent',
+#       help_text='Indicates whether the operation of the tool or service ' \
+#       'is language dependent or not',
+#       )
+#
+#     # inputInfo = models.OneToOneField("inputInfoType_model",
+#     #   verbose_name='Input',
+#     #   help_text='Groups together information on the requirements set on ' \
+#     #   'the input resource of a tool or service',
+#     #   blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # outputInfo = models.OneToOneField("outputInfoType_model",
+#     #   verbose_name='Output',
+#     #   help_text='Groups together information on the requirements set on ' \
+#     #   'the output of a tool or service',
+#     #   blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     toolServiceOperationInfo = models.OneToOneField("toolServiceOperationInfoType_model",
+#       verbose_name='Tool service operation',
+#       help_text='Groups together information on the operation of a tool ' \
+#       'or service',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     toolServiceEvaluationInfo = models.OneToOneField("toolServiceEvaluationInfoType_model",
+#       verbose_name='Tool service evaluation',
+#       help_text='Groups together information on the evaluation status of' \
+#       ' a tool or service',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # toolServiceCreationInfo = models.OneToOneField("toolServiceCreationInfoType_model",
+#     #   verbose_name='Tool service creation',
+#     #   help_text='Groups together information on the creation of a tool o' \
+#     #   'r service',
+#     #   blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     def real_unicode_(self):
+#         # pylint: disable-msg=C0301
+#         formatargs = ['toolServiceType', ]
+#         formatstring = u'toolService ({})'
+#         return self.unicode_(formatstring, formatargs)
 
 # pylint: disable-msg=C0103
 class corpusInfoType_model(resourceComponentTypeType_model):

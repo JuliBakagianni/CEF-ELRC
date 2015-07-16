@@ -30,10 +30,11 @@ from metashare.repository.editor.superadmin import SchemaModelAdmin
 from metashare.repository.editor.widgets import OneToManyWidget
 from metashare.repository.models import resourceComponentTypeType_model, \
     corpusInfoType_model, languageDescriptionInfoType_model, \
-    lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
+    lexicalConceptualResourceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
     licenceInfoType_model, User
+    # toolServiceInfoType_model,
 from metashare.repository.supermodel import SchemaModel
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, DELETE_STAT
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
@@ -58,8 +59,8 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
             error_list = error_list + self.clean_langdesc(actual_instance)
         elif isinstance(actual_instance, lexicalConceptualResourceInfoType_model):
             error_list = error_list + self.clean_lexicon(actual_instance)
-        elif isinstance(actual_instance, toolServiceInfoType_model):
-            error_list = error_list + self.clean_toolservice(actual_instance)
+        # elif isinstance(actual_instance, toolServiceInfoType_model):
+        #     error_list = error_list + self.clean_toolservice(actual_instance)
         else:
             raise Exception, "unexpected resource component class type: {}".format(actual_instance.__class__.__name__)
         try:
@@ -172,8 +173,8 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
             self.save_langdesc(actual_instance, commit)
         elif isinstance(actual_instance, lexicalConceptualResourceInfoType_model):
             self.save_lexicon(actual_instance, commit)
-        elif isinstance(actual_instance, toolServiceInfoType_model):
-            self.save_toolservice(actual_instance, commit)
+        # elif isinstance(actual_instance, toolServiceInfoType_model):
+        #     self.save_toolservice(actual_instance, commit)
         else:
             raise Exception, "unexpected resource component class type: {}".format(actual_instance.__class__.__name__)
         super(ResourceComponentInlineFormSet, self).save(commit)
@@ -1063,10 +1064,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
             lexicon_info = lexicalConceptualResourceInfoType_model.objects.create(lexicalConceptualResourceMediaType=lexicon_media_type)
             structures['resourceComponentType'] = lexicon_info
             structures['lexicalConceptualResourceMediaType'] = lexicon_media_type
-        elif resource_type == 'toolservice':
-            tool_info = toolServiceInfoType_model.objects.create()
-            structures['resourceComponentType'] = tool_info
-            structures['toolServiceInfoId'] = tool_info.pk
+        # elif resource_type == 'toolservice':
+        #     tool_info = toolServiceInfoType_model.objects.create()
+        #     structures['resourceComponentType'] = tool_info
+        #     structures['toolServiceInfoId'] = tool_info.pk
         else:
             raise NotImplementedError, "Cannot deal with '{}' resource types just yet".format(resource_type)
         return structures
@@ -1113,8 +1114,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
             #     content_info.lexicalConceptualResourceMediaType.lexicalConceptualResourceVideoInfo)
             # structures['lexiconImageInfoId'] = get_mediatype_id('lexicalConceptualResourceImageInfo', \
             #     content_info.lexicalConceptualResourceMediaType.lexicalConceptualResourceImageInfo)
-        elif isinstance(content_info, toolServiceInfoType_model):
-            structures['toolServiceInfoId'] = content_info.pk
+        # elif isinstance(content_info, toolServiceInfoType_model):
+        #     structures['toolServiceInfoId'] = content_info.pk
             
         else:
             raise NotImplementedError, "Cannot deal with '{}' resource types just yet".format(content_info.__class__.__name__)

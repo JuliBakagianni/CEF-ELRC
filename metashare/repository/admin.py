@@ -48,7 +48,6 @@ from metashare.repository.models import \
     textFormatInfoType_model, \
     timeCoverageInfoType_model, \
     toolServiceEvaluationInfoType_model, \
-    toolServiceInfoType_model, \
     toolServiceOperationInfoType_model, \
     usageInfoType_model, \
     validationInfoType_model, \
@@ -58,6 +57,7 @@ from metashare.repository.models import \
     identificationInfoType_model, \
     videoFormatInfoType_model
     # languageDescriptionImageInfoType_model, \
+    # toolServiceInfoType_model, \
     # toolServiceCreationInfoType_model, \
     # personSourceSetInfoType_model, \
     # textNumericalFormatInfoType_model, \
@@ -900,8 +900,8 @@ class timeCoverageInfo_model_inline_lexicalConceptualResourceVideoInfoType_model
 
 
 # pylint: disable-msg=C0103
-class toolServiceInfo_model_inline(SchemaModelInline):
-    model = toolServiceInfoType_model
+# class toolServiceInfo_model_inline(SchemaModelInline):
+#     model = toolServiceInfoType_model
 
 
 # pylint: disable-msg=C0103
@@ -1025,7 +1025,7 @@ admin.site.register(textFormatInfoType_model, SchemaModelAdmin)
 admin.site.register(timeCoverageInfoType_model, SchemaModelAdmin)
 # admin.site.register(toolServiceCreationInfoType_model, SchemaModelAdmin)
 admin.site.register(toolServiceEvaluationInfoType_model, SchemaModelAdmin)
-admin.site.register(toolServiceInfoType_model, SchemaModelAdmin)
+# admin.site.register(toolServiceInfoType_model, SchemaModelAdmin)
 admin.site.register(toolServiceOperationInfoType_model, SchemaModelAdmin)
 admin.site.register(usageInfoType_model, SchemaModelAdmin)
 admin.site.register(validationInfoType_model, SchemaModelAdmin)

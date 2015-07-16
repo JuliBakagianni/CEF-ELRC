@@ -8,7 +8,8 @@ from django.db.models import OneToOneField, Sum
 
 from metashare.repository.models import resourceInfoType_model, \
     corpusInfoType_model, lexicalConceptualResourceInfoType_model, \
-    languageDescriptionInfoType_model, toolServiceInfoType_model
+    languageDescriptionInfoType_model
+    # toolServiceInfoType_model
 from metashare.settings import LOG_HANDLER
 from metashare.stats.models import LRStats
 
@@ -245,13 +246,13 @@ def get_resource_media_types(res_obj):
         # if ld_media_type.languageDescriptionImageInfo:
         #     result.append(ld_media_type.languageDescriptionImageInfo.mediaType)
 
-    elif isinstance(corpus_media, toolServiceInfoType_model):
-        if corpus_media.inputInfo:
-            result.extend(corpus_media.inputInfo \
-                          .get_mediaType_display_list())
-        if corpus_media.outputInfo:
-            result.extend(corpus_media.outputInfo \
-                          .get_mediaType_display_list())
+    # elif isinstance(corpus_media, toolServiceInfoType_model):
+    #     if corpus_media.inputInfo:
+    #         result.extend(corpus_media.inputInfo \
+    #                       .get_mediaType_display_list())
+    #     if corpus_media.outputInfo:
+    #         result.extend(corpus_media.outputInfo \
+    #                       .get_mediaType_display_list())
 
     result_lower = []
     for res in result:

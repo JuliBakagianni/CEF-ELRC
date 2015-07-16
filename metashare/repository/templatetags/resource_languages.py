@@ -1,8 +1,9 @@
 from django import template
 
 from metashare.repository.models import corpusInfoType_model, \
-    toolServiceInfoType_model, lexicalConceptualResourceInfoType_model, \
+    lexicalConceptualResourceInfoType_model, \
     languageDescriptionInfoType_model
+    # toolServiceInfoType_model,
 
 register = template.Library()
 
@@ -70,11 +71,11 @@ class ResourceLanguages(template.Node):
             #     result.extend([lang.languageName for lang in ld_media_type \
             #                 .languageDescriptionImageInfo.languageinfotype_model_set.all()])
 
-        elif isinstance(corpus_media, toolServiceInfoType_model):
-            if corpus_media.inputInfo:
-                result.extend(corpus_media.inputInfo.languageName)
-            if corpus_media.outputInfo:
-                result.extend(corpus_media.outputInfo.languageName)
+        # elif isinstance(corpus_media, toolServiceInfoType_model):
+        #     if corpus_media.inputInfo:
+        #         result.extend(corpus_media.inputInfo.languageName)
+        #     if corpus_media.outputInfo:
+        #         result.extend(corpus_media.outputInfo.languageName)
 
         result = list(set(result))
         result.sort()
