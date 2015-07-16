@@ -334,7 +334,7 @@ class sizeInfoType_model(SchemaModel):
 
     back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
 
     # back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
@@ -1194,7 +1194,7 @@ class domainInfoType_model(SchemaModel):
 
     back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
 
     # back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
@@ -1596,7 +1596,7 @@ class modalityInfoType_model(SchemaModel):
 
     back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
 
     # back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
@@ -3248,7 +3248,7 @@ class timeCoverageInfoType_model(SchemaModel):
 
     back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
 
     # back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
@@ -3307,7 +3307,7 @@ class geographicCoverageInfoType_model(SchemaModel):
 
     back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
 
     # back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
@@ -3509,7 +3509,7 @@ class languageInfoType_model(SchemaModel):
 
     back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
 
     # back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
@@ -5012,7 +5012,7 @@ class videoFormatInfoType_model(SchemaModel):
 
     # back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -6562,80 +6562,80 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
         return _unicode
 
 # pylint: disable-msg=C0103
-class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
-    """
-    Groups information on the video part of the lexical conceptual
-    resource
-    """
-
-    class Meta:
-        verbose_name = "Lexical conceptual resource video"
-
-
-    __schema_name__ = 'lexicalConceptualResourceVideoInfoType'
-    __schema_fields__ = (
-      ( u'mediaType', u'mediaType', REQUIRED ),
-      ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
-      ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
-      ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
-      ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
-      ( u'videoContentInfo', u'videoContentInfo', REQUIRED ),
-      ( u'videoFormatInfo', u'videoformatinfotype_model_set', RECOMMENDED ),
-      ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
-      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
-      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'domainInfo': "domainInfoType_model",
-      u'geographicCoverageInfo': "geographicCoverageInfoType_model",
-      u'languageInfo': "languageInfoType_model",
-      u'lingualityInfo': "lingualityInfoType_model",
-      u'modalityInfo': "modalityInfoType_model",
-      u'sizeInfo': "sizeInfoType_model",
-      u'timeCoverageInfo': "timeCoverageInfoType_model",
-      u'videoContentInfo': "videoContentInfoType_model",
-      u'videoFormatInfo': "videoFormatInfoType_model",
-    }
-
-    mediaType = XmlCharField(
-      verbose_name='Media', 
-      help_text='Specifies the media type of the resource and basically ' \
-      'corresponds to the physical medium of the content representation.' \
-      ' Each media type is described through a distinctive set of featur' \
-      'es. A resource may consist of parts attributed to different types' \
-      ' of media. A tool/service may take as input/output more than one ' \
-      'different media types.',
-      default="video", editable=False, max_length=1000, )
-
-    lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
-      verbose_name='Linguality', 
-      help_text='Groups information on the number of languages of the re' \
-      'source part and of the way they are combined to each other',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # OneToMany field: languageInfo
-
-    # OneToMany field: modalityInfo
-
-    # OneToMany field: sizeInfo
-
-    videoContentInfo = models.OneToOneField("videoContentInfoType_model", 
-      verbose_name='Video content', 
-      help_text='Groups together information on the contents of the vide' \
-      'o part of a resource',
-      )
-
-    # OneToMany field: videoFormatInfo
-
-    # OneToMany field: domainInfo
-
-    # OneToMany field: geographicCoverageInfo
-
-    # OneToMany field: timeCoverageInfo
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
+#     """
+#     Groups information on the video part of the lexical conceptual
+#     resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Lexical conceptual resource video"
+#
+#
+#     __schema_name__ = 'lexicalConceptualResourceVideoInfoType'
+#     __schema_fields__ = (
+#       ( u'mediaType', u'mediaType', REQUIRED ),
+#       ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
+#       ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
+#       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
+#       ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
+#       ( u'videoContentInfo', u'videoContentInfo', REQUIRED ),
+#       ( u'videoFormatInfo', u'videoformatinfotype_model_set', RECOMMENDED ),
+#       ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
+#       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
+#       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'domainInfo': "domainInfoType_model",
+#       u'geographicCoverageInfo': "geographicCoverageInfoType_model",
+#       u'languageInfo': "languageInfoType_model",
+#       u'lingualityInfo': "lingualityInfoType_model",
+#       u'modalityInfo': "modalityInfoType_model",
+#       u'sizeInfo': "sizeInfoType_model",
+#       u'timeCoverageInfo': "timeCoverageInfoType_model",
+#       u'videoContentInfo': "videoContentInfoType_model",
+#       u'videoFormatInfo': "videoFormatInfoType_model",
+#     }
+#
+#     mediaType = XmlCharField(
+#       verbose_name='Media',
+#       help_text='Specifies the media type of the resource and basically ' \
+#       'corresponds to the physical medium of the content representation.' \
+#       ' Each media type is described through a distinctive set of featur' \
+#       'es. A resource may consist of parts attributed to different types' \
+#       ' of media. A tool/service may take as input/output more than one ' \
+#       'different media types.',
+#       default="video", editable=False, max_length=1000, )
+#
+#     lingualityInfo = models.OneToOneField("lingualityInfoType_model",
+#       verbose_name='Linguality',
+#       help_text='Groups information on the number of languages of the re' \
+#       'source part and of the way they are combined to each other',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # OneToMany field: languageInfo
+#
+#     # OneToMany field: modalityInfo
+#
+#     # OneToMany field: sizeInfo
+#
+#     videoContentInfo = models.OneToOneField("videoContentInfoType_model",
+#       verbose_name='Video content',
+#       help_text='Groups together information on the contents of the vide' \
+#       'o part of a resource',
+#       )
+#
+#     # OneToMany field: videoFormatInfo
+#
+#     # OneToMany field: domainInfo
+#
+#     # OneToMany field: geographicCoverageInfo
+#
+#     # OneToMany field: timeCoverageInfo
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # pylint: disable-msg=C0103
 # class lexicalConceptualResourceImageInfoType_model(SchemaModel):
