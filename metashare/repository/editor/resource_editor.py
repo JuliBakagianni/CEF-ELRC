@@ -24,7 +24,7 @@ from metashare.repository.editor.editorutils import FilteredChangeList
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
     ReverseInlineModelAdmin
-from metashare.repository.editor.lookups import MembershipDummyLookup
+# from metashare.repository.editor.lookups import MembershipDummyLookup
 from metashare.repository.editor.schemamodel_mixin import encode_as_inline
 from metashare.repository.editor.superadmin import SchemaModelAdmin
 from metashare.repository.editor.widgets import OneToManyWidget
@@ -1211,7 +1211,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
 class LicenceForm(forms.ModelForm):
     class Meta:
         model = licenceInfoType_model
-        widgets = {'membershipInfo': OneToManyWidget(lookup_class=MembershipDummyLookup)}
+        # widgets = {'membershipInfo': OneToManyWidget(lookup_class=MembershipDummyLookup)}
 
 class LicenceModelAdmin(SchemaModelAdmin):
     form = LicenceForm

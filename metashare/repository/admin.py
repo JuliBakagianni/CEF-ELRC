@@ -33,7 +33,6 @@ from metashare.repository.models import \
     lexicalConceptualResourceTextInfoType_model, \
     licenceInfoType_model, \
     lingualityInfoType_model, \
-    membershipInfoType_model, \
     metadataInfoType_model, \
     modalityInfoType_model, \
     ngramInfoType_model, \
@@ -79,6 +78,7 @@ from metashare.repository.models import \
     # lexicalConceptualResourceImageInfoType_model, \
     # lexicalConceptualResourceAudioInfoType_model, \
     # languageDescriptionOperationInfoType_model, \
+    # membershipInfoType_model, \
     # actualUseInfoType_model, \
     # linkToOtherMediaInfoType_model, \
     # audioClassificationInfoType_model, \
@@ -992,7 +992,7 @@ admin.site.register(lexicalConceptualResourceTextInfoType_model, SchemaModelAdmi
 admin.site.register(licenceInfoType_model, SchemaModelAdmin)
 admin.site.register(lingualityInfoType_model, SchemaModelAdmin)
 # admin.site.register(linkToOtherMediaInfoType_model, SchemaModelAdmin)
-admin.site.register(membershipInfoType_model, SchemaModelAdmin)
+# admin.site.register(membershipInfoType_model, SchemaModelAdmin)
 admin.site.register(metadataInfoType_model, SchemaModelAdmin)
 admin.site.register(modalityInfoType_model, SchemaModelAdmin)
 admin.site.register(ngramInfoType_model, SchemaModelAdmin)

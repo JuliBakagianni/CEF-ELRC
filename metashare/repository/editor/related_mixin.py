@@ -15,19 +15,22 @@ from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
 from django.db import models
 from metashare.repository.models import actorInfoType_model, \
     documentationInfoType_model, \
-    organizationInfoType_model, projectInfoType_model,\
-    membershipInfoType_model, \
+    organizationInfoType_model, projectInfoType_model, \
     personInfoType_model, \
     targetResourceInfoType_model, documentInfoType_model, \
     languageVarietyInfoType_model, \
     sizeInfoType_model, resolutionInfoType_model
+
     # audioSizeInfoType_model
+    # membershipInfoType_model, \
+
 from metashare.repository.editor.lookups import ActorLookup, \
-    OrganizationLookup, ProjectLookup, MembershipDummyLookup, \
+    OrganizationLookup, ProjectLookup, \
     PersonLookup, TargetResourceLookup, DocumentLookup, \
     DocumentationLookup, LanguageVarietyDummyLookup, SizeDummyLookup, \
     ResolutionDummyLookup
-    # AudioSizeDummyLookup
+    # AudioSizeDummyLookup, \
+    #  MembershipDummyLookup, \
 from metashare.repository.editor.widgets import AutoCompleteSelectMultipleSubClsWidget
 from metashare.repository.editor.widgets import AutoCompleteSelectMultipleEditWidget
 from metashare.repository.editor.widgets import AutoCompleteSelectSingleWidget
@@ -49,7 +52,7 @@ class RelatedAdminMixin(object):
         projectInfoType_model: AutoCompleteSelectMultipleEditWidget(lookup_class=ProjectLookup, **kwargs),
         targetResourceInfoType_model: AutoCompleteSelectMultipleEditWidget(lookup_class=TargetResourceLookup, **kwargs),
         # Custom one-to-many widgets needed to avoid nested inlines:
-        membershipInfoType_model: OneToManyWidget(lookup_class=MembershipDummyLookup),
+        # membershipInfoType_model: OneToManyWidget(lookup_class=MembershipDummyLookup),
         languageVarietyInfoType_model: OneToManyWidget(lookup_class=LanguageVarietyDummyLookup),
         sizeInfoType_model: OneToManyWidget(lookup_class=SizeDummyLookup),
         resolutionInfoType_model: OneToManyWidget(lookup_class=ResolutionDummyLookup),

@@ -2890,48 +2890,48 @@ class distributionInfoType_model(SchemaModel):
         formatstring = u'{}, licenses: {}'
         return self.unicode_(formatstring, formatargs)
 
-MEMBERSHIPINFOTYPE_MEMBERSHIPINSTITUTION_CHOICES = _make_choices_from_list([
-  u'ELRA', u'LDC', u'TST-CENTRALE', u'other', 
-])
+# MEMBERSHIPINFOTYPE_MEMBERSHIPINSTITUTION_CHOICES = _make_choices_from_list([
+#   u'ELRA', u'LDC', u'TST-CENTRALE', u'other',
+# ])
 
 # pylint: disable-msg=C0103
-class membershipInfoType_model(SchemaModel):
-    """
-    The conditions imposed by the user being member of some
-    association/institution (e.g., ELRA, LDC) distributing the
-    resource. This indicates the availability conditions (and
-    prices) for users who are members or not.
-    """
-
-    class Meta:
-        verbose_name = "Membership"
-
-
-    __schema_name__ = 'membershipInfoType'
-    __schema_fields__ = (
-      ( u'member', u'member', REQUIRED ),
-      ( u'membershipInstitution', u'membershipInstitution', REQUIRED ),
-    )
-
-    member = MetaBooleanField(
-      verbose_name='Member', 
-      help_text='Whether the user is a member or not',
-      )
-
-    membershipInstitution = MultiSelectField(
-      verbose_name='Membership institution', 
-      help_text='This lists the different institutions releasing the res' \
-      'ources and establishing membership conditions',
-      
-      max_length=1 + len(MEMBERSHIPINFOTYPE_MEMBERSHIPINSTITUTION_CHOICES['choices']) / 4,
-      choices=MEMBERSHIPINFOTYPE_MEMBERSHIPINSTITUTION_CHOICES['choices'],
-      )
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['member', 'membershipInstitution', ]
-        formatstring = u'member:{} {}'
-        return self.unicode_(formatstring, formatargs)
+# class membershipInfoType_model(SchemaModel):
+#     """
+#     The conditions imposed by the user being member of some
+#     association/institution (e.g., ELRA, LDC) distributing the
+#     resource. This indicates the availability conditions (and
+#     prices) for users who are members or not.
+#     """
+#
+#     class Meta:
+#         verbose_name = "Membership"
+#
+#
+#     __schema_name__ = 'membershipInfoType'
+#     __schema_fields__ = (
+#       ( u'member', u'member', REQUIRED ),
+#       ( u'membershipInstitution', u'membershipInstitution', REQUIRED ),
+#     )
+#
+#     member = MetaBooleanField(
+#       verbose_name='Member',
+#       help_text='Whether the user is a member or not',
+#       )
+#
+#     membershipInstitution = MultiSelectField(
+#       verbose_name='Membership institution',
+#       help_text='This lists the different institutions releasing the res' \
+#       'ources and establishing membership conditions',
+#
+#       max_length=1 + len(MEMBERSHIPINFOTYPE_MEMBERSHIPINSTITUTION_CHOICES['choices']) / 4,
+#       choices=MEMBERSHIPINFOTYPE_MEMBERSHIPINSTITUTION_CHOICES['choices'],
+#       )
+#
+#     def real_unicode_(self):
+#         # pylint: disable-msg=C0301
+#         formatargs = ['member', 'membershipInstitution', ]
+#         formatstring = u'member:{} {}'
+#         return self.unicode_(formatstring, formatargs)
 
 LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
   u'CC-BY', u'CC-BY-NC', u'CC-BY-NC-ND', u'CC-BY-NC-SA', u'CC-BY-ND',

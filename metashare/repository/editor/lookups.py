@@ -8,11 +8,11 @@ from selectable.registry import registry
 from metashare.repository.models import personInfoType_model, \
     actorInfoType_model, documentInfoType_model, documentationInfoType_model,\
     projectInfoType_model, organizationInfoType_model,\
-    membershipInfoType_model, \
     targetResourceInfoType_model, languageVarietyInfoType_model, \
     sizeInfoType_model, annotationInfoType_model, videoFormatInfoType_model, \
     resolutionInfoType_model
     # audioSizeInfoType_model \
+    # membershipInfoType_model, \
     # imageFormatInfoType_model
 from metashare.storage.models import MASTER
 import logging
@@ -124,13 +124,13 @@ class DocumentationLookup(GenericUnicodeLookup):
         filtered_results = [p for p in results if p.as_subclass().__class__ == documentInfoType_model]
         return filtered_results
 
-class MembershipDummyLookup(ModelLookup):
-    '''
-        Dummy class for use with OneToOneWidget.
-        Should be removed when unnecessary dependencies are
-        removed from OneToOneWidget
-    '''
-    model = membershipInfoType_model
+# class MembershipDummyLookup(ModelLookup):
+#     '''
+#         Dummy class for use with OneToOneWidget.
+#         Should be removed when unnecessary dependencies are
+#         removed from OneToOneWidget
+#     '''
+#     model = membershipInfoType_model
 
 class AnnotationLookup(ModelLookup):
     '''
