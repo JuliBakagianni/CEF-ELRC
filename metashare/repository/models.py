@@ -1534,77 +1534,77 @@ class relationInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-MODALITYINFOTYPE_MODALITYTYPE_CHOICES = _make_choices_from_list([
-  u'bodyGesture', u'facialExpression', u'voice', u'combinationOfModalities',
-  u'signLanguage',u'spokenLanguage', u'writtenLanguage', u'other', 
-])
+# MODALITYINFOTYPE_MODALITYTYPE_CHOICES = _make_choices_from_list([
+#   u'bodyGesture', u'facialExpression', u'voice', u'combinationOfModalities',
+#   u'signLanguage',u'spokenLanguage', u'writtenLanguage', u'other',
+# ])
 
 # pylint: disable-msg=C0103
-class modalityInfoType_model(SchemaModel):
-    """
-    Groups information on the modalities represented in the resource
-    """
-
-    class Meta:
-        verbose_name = "Modality"
-        verbose_name_plural = "Modalities"
-
-
-    __schema_name__ = 'modalityInfoType'
-    __schema_fields__ = (
-      ( u'modalityType', u'modalityType', REQUIRED ),
-      ( u'modalityTypeDetails', u'modalityTypeDetails', OPTIONAL ),
-      ( u'sizePerModality', u'sizePerModality', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'sizePerModality': "sizeInfoType_model",
-    }
-
-    modalityType = MultiSelectField(
-      verbose_name='Modality type', 
-      help_text='Specifies the type of the modality represented in the r' \
-      'esource or processed by a tool/service',
-      
-      max_length=1 + len(MODALITYINFOTYPE_MODALITYTYPE_CHOICES['choices']) / 4,
-      choices=MODALITYINFOTYPE_MODALITYTYPE_CHOICES['choices'],
-      )
-
-    modalityTypeDetails = XmlCharField(
-      verbose_name='Modality type details', 
-      help_text='Provides further information on modalities',
-      blank=True, max_length=500, )
-
-    sizePerModality = models.OneToOneField("sizeInfoType_model", 
-      verbose_name='Size per modality', 
-      help_text='Provides information on the size per modality component' \
-      '',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
-
-    back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
-
-    # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
-
-    # back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
-
-    # back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
-
-    # back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
-
-    # back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
-
-    back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
-
-    # back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
-
-    # back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['modalityType', 'modalityTypeDetails', ]
-        formatstring = u'{} {}'
-        return self.unicode_(formatstring, formatargs)
+# class modalityInfoType_model(SchemaModel):
+#     """
+#     Groups information on the modalities represented in the resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Modality"
+#         verbose_name_plural = "Modalities"
+#
+#
+#     __schema_name__ = 'modalityInfoType'
+#     __schema_fields__ = (
+#       ( u'modalityType', u'modalityType', REQUIRED ),
+#       ( u'modalityTypeDetails', u'modalityTypeDetails', OPTIONAL ),
+#       ( u'sizePerModality', u'sizePerModality', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'sizePerModality': "sizeInfoType_model",
+#     }
+#
+#     modalityType = MultiSelectField(
+#       verbose_name='Modality type',
+#       help_text='Specifies the type of the modality represented in the r' \
+#       'esource or processed by a tool/service',
+#
+#       max_length=1 + len(MODALITYINFOTYPE_MODALITYTYPE_CHOICES['choices']) / 4,
+#       choices=MODALITYINFOTYPE_MODALITYTYPE_CHOICES['choices'],
+#       )
+#
+#     modalityTypeDetails = XmlCharField(
+#       verbose_name='Modality type details',
+#       help_text='Provides further information on modalities',
+#       blank=True, max_length=500, )
+#
+#     sizePerModality = models.OneToOneField("sizeInfoType_model",
+#       verbose_name='Size per modality',
+#       help_text='Provides information on the size per modality component' \
+#       '',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+#
+#     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
+#
+#     # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+#
+#     # back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
+#
+#     # back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
+#
+#     # back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
+#
+#     # back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
+#
+#     back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
+#
+#     # back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
+#
+#     # back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
+#
+#     def real_unicode_(self):
+#         # pylint: disable-msg=C0301
+#         formatargs = ['modalityType', 'modalityTypeDetails', ]
+#         formatstring = u'{} {}'
+#         return self.unicode_(formatstring, formatargs)
 
 PARTICIPANTINFOTYPE_AGEGROUP_CHOICES = _make_choices_from_list([
   u'child', u'teenager', u'adult', u'elderly', 
