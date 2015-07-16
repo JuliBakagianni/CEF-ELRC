@@ -1786,22 +1786,22 @@ class participantInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-CAPTUREINFOTYPE_CAPTURINGDEVICETYPE_CHOICES = _make_choices_from_list([
-  u'studioEquipment', u'microphone', u'closeTalkMicrophone',
-  u'farfieldMicrophone',u'lavalierMicrophone', u'microphoneArray',
-  u'embeddedMicrophone',u'largeMembraneMicrophone', u'laryngograph',
-  u'telephoneFixed',u'telephoneMobile', u'telephoneIP', u'camera',
-  u'webcam',u'other', 
-])
+# CAPTUREINFOTYPE_CAPTURINGDEVICETYPE_CHOICES = _make_choices_from_list([
+#   u'studioEquipment', u'microphone', u'closeTalkMicrophone',
+#   u'farfieldMicrophone',u'lavalierMicrophone', u'microphoneArray',
+#   u'embeddedMicrophone',u'largeMembraneMicrophone', u'laryngograph',
+#   u'telephoneFixed',u'telephoneMobile', u'telephoneIP', u'camera',
+#   u'webcam',u'other',
+# ])
 
-CAPTUREINFOTYPE_CAPTURINGENVIRONMENT_CHOICES = _make_choices_from_list([
-  u'complex', u'plain', 
-])
+# CAPTUREINFOTYPE_CAPTURINGENVIRONMENT_CHOICES = _make_choices_from_list([
+#   u'complex', u'plain',
+# ])
 
-CAPTUREINFOTYPE_SCENEILLUMINATION_CHOICES = _make_choices_from_list([
-  u'daylight', u'fix', u'multipleSources', u'singleSource', u'variable',
-  u'other',
-])
+# CAPTUREINFOTYPE_SCENEILLUMINATION_CHOICES = _make_choices_from_list([
+#   u'daylight', u'fix', u'multipleSources', u'singleSource', u'variable',
+#   u'other',
+# ])
 
 # pylint: disable-msg=C0103
 # class captureInfoType_model(SchemaModel):
@@ -2355,10 +2355,10 @@ class resolutionInfoType_model(SchemaModel):
         formatstring = u'{} {} {}'
         return self.unicode_(formatstring, formatargs)
 
-COMPRESSIONINFOTYPE_COMPRESSIONNAME_CHOICES = _make_choices_from_list([
-  u'mpg', u'avi', u'mov', u'flac', u'shorten', u'mp3', u'oggVorbis',
-  u'atrac',u'aac', u'mpeg', u'realAudio', u'other', 
-])
+# COMPRESSIONINFOTYPE_COMPRESSIONNAME_CHOICES = _make_choices_from_list([
+#   u'mpg', u'avi', u'mov', u'flac', u'shorten', u'mp3', u'oggVorbis',
+#   u'atrac',u'aac', u'mpeg', u'realAudio', u'other',
+# ])
 
 # pylint: disable-msg=C0103
 # class compressionInfoType_model(SchemaModel):
@@ -4033,14 +4033,14 @@ AUDIOCONTENTINFOTYPE_SPEECHITEMS_CHOICES = _make_choices_from_list([
   u'yesNoQuestions',u'vcvSequences', u'freeSpeech', u'other', 
 ])
 
-AUDIOCONTENTINFOTYPE_NONSPEECHITEMS_CHOICES = _make_choices_from_list([
-  u'notes', u'tempo', u'sounds', u'noise', u'music', u'commercial ',
-  u'other',
-])
+# AUDIOCONTENTINFOTYPE_NONSPEECHITEMS_CHOICES = _make_choices_from_list([
+#   u'notes', u'tempo', u'sounds', u'noise', u'music', u'commercial ',
+#   u'other',
+# ])
 
-AUDIOCONTENTINFOTYPE_NOISELEVEL_CHOICES = _make_choices_from_list([
-  u'low', u'medium', u'high', 
-])
+# AUDIOCONTENTINFOTYPE_NOISELEVEL_CHOICES = _make_choices_from_list([
+#   u'low', u'medium', u'high',
+# ])
 
 # pylint: disable-msg=C0103
 # class audioContentInfoType_model(SchemaModel):
@@ -4238,13 +4238,13 @@ AUDIOFORMATINFOTYPE_AUDIOQUALITYMEASURESINCLUDED_CHOICES = _make_choices_from_li
   u'SNR', u'crossTalk', u'clippingRate', u'backgroundNoise', u'other', 
 ])
 
-AUDIOFORMATINFOTYPE_NUMBEROFTRACKS_CHOICES = _make_choices_from_int_list([
-1, 2, 4, 8, 
-])
+# AUDIOFORMATINFOTYPE_NUMBEROFTRACKS_CHOICES = _make_choices_from_int_list([
+# 1, 2, 4, 8,
+# ])
 
-AUDIOFORMATINFOTYPE_RECORDINGQUALITY_CHOICES = _make_choices_from_list([
-  u'veryLow', u'low', u'medium', u'high', u'veryHigh', 
-])
+# AUDIOFORMATINFOTYPE_RECORDINGQUALITY_CHOICES = _make_choices_from_list([
+#   u'veryLow', u'low', u'medium', u'high', u'veryHigh',
+# ])
 
 # pylint: disable-msg=C0103
 # class audioFormatInfoType_model(SchemaModel):
@@ -4377,25 +4377,25 @@ AUDIOFORMATINFOTYPE_RECORDINGQUALITY_CHOICES = _make_choices_from_list([
 #         formatstring = u'{} {}'
 #         return self.unicode_(formatstring, formatargs)
 
-AUDIOCLASSIFICATIONINFOTYPE_AUDIOGENRE_CHOICES = _make_choices_from_list([
-  u'speech', u'humanNonSpeech', u'noise', u'animalVocalizations', u'song',
-  u'instrumentalMusic',u'other', 
-])
+# AUDIOCLASSIFICATIONINFOTYPE_AUDIOGENRE_CHOICES = _make_choices_from_list([
+#   u'speech', u'humanNonSpeech', u'noise', u'animalVocalizations', u'song',
+#   u'instrumentalMusic',u'other',
+# ])
 
-AUDIOCLASSIFICATIONINFOTYPE_SPEECHGENRE_CHOICES = _make_choices_from_list([
-  u'broadcastNews', u'meeting', u'lecture', u'emotionalExpressive',
-  u'airTrafficControl',u'conversation', u'roundtable', u'interview',
-  u'debate',u'call-in', u'questionAnswer', u'presentation', u'narrative', 
-])
+# AUDIOCLASSIFICATIONINFOTYPE_SPEECHGENRE_CHOICES = _make_choices_from_list([
+#   u'broadcastNews', u'meeting', u'lecture', u'emotionalExpressive',
+#   u'airTrafficControl',u'conversation', u'roundtable', u'interview',
+#   u'debate',u'call-in', u'questionAnswer', u'presentation', u'narrative',
+# ])
 
-AUDIOCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES = _make_choices_from_list([
-  u'ANC_domainClassification', u'ANC_genreClassification',
-  u'BNC_domainClassification',u'BNC_textTypeClassification',
-  u'DDC_classification',u'libraryOfCongress_domainClassification',
-  u'libraryofCongressSubjectHeadings_classification',u'MeSH_classification',
-  u'NLK_classification',u'PAROLE_topicClassification',
-  u'PAROLE_genreClassification',u'UDC_classification', u'other', 
-])
+# AUDIOCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES = _make_choices_from_list([
+#   u'ANC_domainClassification', u'ANC_genreClassification',
+#   u'BNC_domainClassification',u'BNC_textTypeClassification',
+#   u'DDC_classification',u'libraryOfCongress_domainClassification',
+#   u'libraryofCongressSubjectHeadings_classification',u'MeSH_classification',
+#   u'NLK_classification',u'PAROLE_topicClassification',
+#   u'PAROLE_genreClassification',u'UDC_classification', u'other',
+# ])
 
 # pylint: disable-msg=C0103
 # class audioClassificationInfoType_model(SchemaModel):
