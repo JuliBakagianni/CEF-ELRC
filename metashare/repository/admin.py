@@ -36,7 +36,6 @@ from metashare.repository.models import \
     metadataInfoType_model, \
     organizationInfoType_model, \
     organizationListType_model, \
-    participantInfoType_model, \
     personInfoType_model, \
     personListType_model, \
     personSourceSetInfoType_model, \
@@ -92,6 +91,7 @@ from metashare.repository.models import \
     # corpusImageInfoType_model, \
     # corpusTextNgramInfoType_model, \
     # corpusTextNumericalInfoType_model, \
+    # participantInfoType_model, \
     # corpusVideoInfoType_model, \
     # creationInfoType_model, \
     # durationOfAudioInfoType_model, \
@@ -660,9 +660,9 @@ class organizationInfo_model_inline(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
-class participantInfo_model_inline(SchemaModelInline):
-    model = participantInfoType_model
-    collapse = True
+# class participantInfo_model_inline(SchemaModelInline):
+#     model = participantInfoType_model
+#     collapse = True
 
 
 # pylint: disable-msg=C0103
@@ -999,7 +999,7 @@ admin.site.register(metadataInfoType_model, SchemaModelAdmin)
 admin.site.register(organizationInfoType_model, SchemaModelAdmin)
 admin.site.register(organizationListType_model, SchemaModelAdmin)
 # admin.site.register(outputInfoType_model, SchemaModelAdmin)
-admin.site.register(participantInfoType_model, SchemaModelAdmin)
+# admin.site.register(participantInfoType_model, SchemaModelAdmin)
 admin.site.register(personInfoType_model, SchemaModelAdmin)
 admin.site.register(personListType_model, SchemaModelAdmin)
 admin.site.register(personSourceSetInfoType_model, SchemaModelAdmin)

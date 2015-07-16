@@ -16,7 +16,6 @@ from metashare.repository.models import resourceInfoType_model, \
     corpusMediaTypeType_model, corpusTextInfoType_model, \
     textNumericalFormatInfoType_model, \
     videoClassificationInfoType_model, \
-    participantInfoType_model, \
     languageDescriptionInfoType_model, \
     languageDescriptionTextInfoType_model, \
     lexicalConceptualResourceInfoType_model, \
@@ -28,6 +27,7 @@ from metashare.repository.models import resourceInfoType_model, \
 
     # actualUseInfoType_model, \
     # languageDescriptionImageInfoType_model, \
+    # participantInfoType_model, \
     # lexicalConceptualResourceVideoInfoType_model, \
     # languageDescriptionVideoInfoType_model, \
     # corpusAudioInfoType_model, \
@@ -228,7 +228,7 @@ purely_inline_models = (
     textNumericalFormatInfoType_model,
     videoClassificationInfoType_model,
     # imageClassificationInfoType_model,
-    participantInfoType_model,
+    # participantInfoType_model,
 )
 
 custom_admin_classes = {

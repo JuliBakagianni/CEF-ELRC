@@ -1606,185 +1606,185 @@ class relationInfoType_model(SchemaModel):
 #         formatstring = u'{} {}'
 #         return self.unicode_(formatstring, formatargs)
 
-PARTICIPANTINFOTYPE_AGEGROUP_CHOICES = _make_choices_from_list([
-  u'child', u'teenager', u'adult', u'elderly', 
-])
+# PARTICIPANTINFOTYPE_AGEGROUP_CHOICES = _make_choices_from_list([
+#   u'child', u'teenager', u'adult', u'elderly',
+# ])
 
-PARTICIPANTINFOTYPE_SEX_CHOICES = _make_choices_from_list([
-  u'male', u'female', u'unknown', 
-])
+# PARTICIPANTINFOTYPE_SEX_CHOICES = _make_choices_from_list([
+#   u'male', u'female', u'unknown',
+# ])
 
-PARTICIPANTINFOTYPE_ORIGIN_CHOICES = _make_choices_from_list([
-  u'native', u'nonNative', u'unknown', 
-])
+# PARTICIPANTINFOTYPE_ORIGIN_CHOICES = _make_choices_from_list([
+#   u'native', u'nonNative', u'unknown',
+# ])
 
-PARTICIPANTINFOTYPE_VOCALTRACTCONDITIONS_CHOICES = _make_choices_from_list([
-  u'dentalProsthesis', u'other', 
-])
+# PARTICIPANTINFOTYPE_VOCALTRACTCONDITIONS_CHOICES = _make_choices_from_list([
+#   u'dentalProsthesis', u'other',
+# ])
 
 # pylint: disable-msg=C0103
-class participantInfoType_model(SchemaModel):
-    """
-    Groups information on the person(s) participating in the audio,
-    video, sensorimotor (textNumerical) part of the resource
-    """
-
-    class Meta:
-        verbose_name = "Participant"
-
-
-    __schema_name__ = 'participantInfoType'
-    __schema_fields__ = (
-      ( u'alias', u'alias', OPTIONAL ),
-      ( u'ageGroup', u'ageGroup', OPTIONAL ),
-      ( u'age', u'age', OPTIONAL ),
-      ( u'sex', u'sex', OPTIONAL ),
-      ( u'origin', u'origin', OPTIONAL ),
-      ( u'placeOfLiving', u'placeOfLiving', OPTIONAL ),
-      ( u'placeOfBirth', u'placeOfBirth', OPTIONAL ),
-      ( u'placeOfChildhood', u'placeOfChildhood', OPTIONAL ),
-      ( u'dialectAccent', u'dialectAccent', OPTIONAL ),
-      ( u'speakingImpairment', u'speakingImpairment', OPTIONAL ),
-      ( u'hearingImpairment', u'hearingImpairment', OPTIONAL ),
-      ( u'smokingHabits', u'smokingHabits', OPTIONAL ),
-      ( u'vocalTractConditions', u'vocalTractConditions', OPTIONAL ),
-      ( u'profession', u'profession', OPTIONAL ),
-      ( u'height', u'height', OPTIONAL ),
-      ( u'weight', u'weight', OPTIONAL ),
-      ( u'trainedSpeaker', u'trainedSpeaker', OPTIONAL ),
-      ( u'placeOfSecondEducation', u'placeOfSecondEducation', OPTIONAL ),
-      ( u'educationLevel', u'educationLevel', OPTIONAL ),
-    )
-
-    alias = DictField(validators=[validate_lang_code_keys, validate_dict_values],
-      default_retriever=best_lang_value_retriever, 
-      verbose_name='Alias', 
-      max_val_length=500, 
-      help_text='The name of the person used instead of the real one',
-      blank=True)
-
-    ageGroup = models.CharField(
-      verbose_name='Age group', 
-      help_text='The age group to which the participant belongs',
-      blank=True, 
-      max_length=30,
-      choices=sorted(PARTICIPANTINFOTYPE_AGEGROUP_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    age = XmlCharField(
-      verbose_name='Age', 
-      help_text='The age of the participant',
-      blank=True, max_length=50, )
-
-    sex = models.CharField(
-      verbose_name='Sex', 
-      help_text='The gender of a person related to or participating in t' \
-      'he resource',
-      blank=True, 
-      max_length=30,
-      choices=sorted(PARTICIPANTINFOTYPE_SEX_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    origin = models.CharField(
-      verbose_name='Origin', 
-      help_text='The language origin of the participant',
-      blank=True, 
-      max_length=30,
-      choices=sorted(PARTICIPANTINFOTYPE_ORIGIN_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    placeOfLiving = XmlCharField(
-      verbose_name='Place of living', 
-      help_text='The participant\'s place of living',
-      blank=True, max_length=100, )
-
-    placeOfBirth = XmlCharField(
-      verbose_name='Place of birth', 
-      help_text='The place in which the participant has been born',
-      blank=True, max_length=100, )
-
-    placeOfChildhood = XmlCharField(
-      verbose_name='Place of childhood', 
-      help_text='The place in which the participant lived as a child',
-      blank=True, max_length=100, )
-
-    dialectAccent = DictField(validators=[validate_lang_code_keys, validate_dict_values],
-      default_retriever=best_lang_value_retriever, 
-      verbose_name='Dialect accent', 
-      max_val_length=500, 
-      help_text='Provides information on the dialect of the participant',
-      blank=True)
-
-    speakingImpairment = XmlCharField(
-      verbose_name='Speaking impairment', 
-      help_text='Provides information on any speaking impairment the par' \
-      'ticipant may have',
-      blank=True, max_length=200, )
-
-    hearingImpairment = XmlCharField(
-      verbose_name='Hearing impairment', 
-      help_text='Provides information on any hearing impairment the part' \
-      'icipant may have',
-      blank=True, max_length=200, )
-
-    smokingHabits = XmlCharField(
-      verbose_name='Smoking habits', 
-      help_text='Provides information on whether the participants smokes' \
-      ' and on his/her smoking habits in general',
-      blank=True, max_length=100, )
-
-    vocalTractConditions = models.CharField(
-      verbose_name='Vocal tract conditions', 
-      help_text='Provides information on the vocal tract conditions that' \
-      ' may influence the speech of the participant',
-      blank=True, 
-      max_length=30,
-      choices=sorted(PARTICIPANTINFOTYPE_VOCALTRACTCONDITIONS_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    profession = XmlCharField(
-      verbose_name='Profession', 
-      help_text='Provides information on the participant\'s profession',
-      blank=True, max_length=100, )
-
-    height = models.BigIntegerField(
-      verbose_name='Height', 
-      help_text='Provides information on the height of the participant i' \
-      'n cm',
-      blank=True, null=True, )
-
-    weight = models.BigIntegerField(
-      verbose_name='Weight', 
-      help_text='Provides information on the weight of the participant',
-      blank=True, null=True, )
-
-    trainedSpeaker = MetaBooleanField(
-      verbose_name='Trained speaker', 
-      help_text='Provides information on whether the participant is trai' \
-      'ned in a specific task',
-      blank=True, )
-
-    placeOfSecondEducation = XmlCharField(
-      verbose_name='Place of second education', 
-      help_text='Specifies the place of the secondary education of the p' \
-      'articipant',
-      blank=True, max_length=100, )
-
-    educationLevel = XmlCharField(
-      verbose_name='Education level', 
-      help_text='Provides information on the education level of the part' \
-      'icipant',
-      blank=True, max_length=100, )
-
-    back_to_personsourcesetinfotype_model = models.ForeignKey("personSourceSetInfoType_model",  blank=True, null=True)
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class participantInfoType_model(SchemaModel):
+#     """
+#     Groups information on the person(s) participating in the audio,
+#     video, sensorimotor (textNumerical) part of the resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Participant"
+#
+#
+#     __schema_name__ = 'participantInfoType'
+#     __schema_fields__ = (
+#       ( u'alias', u'alias', OPTIONAL ),
+#       ( u'ageGroup', u'ageGroup', OPTIONAL ),
+#       ( u'age', u'age', OPTIONAL ),
+#       ( u'sex', u'sex', OPTIONAL ),
+#       ( u'origin', u'origin', OPTIONAL ),
+#       ( u'placeOfLiving', u'placeOfLiving', OPTIONAL ),
+#       ( u'placeOfBirth', u'placeOfBirth', OPTIONAL ),
+#       ( u'placeOfChildhood', u'placeOfChildhood', OPTIONAL ),
+#       ( u'dialectAccent', u'dialectAccent', OPTIONAL ),
+#       ( u'speakingImpairment', u'speakingImpairment', OPTIONAL ),
+#       ( u'hearingImpairment', u'hearingImpairment', OPTIONAL ),
+#       ( u'smokingHabits', u'smokingHabits', OPTIONAL ),
+#       ( u'vocalTractConditions', u'vocalTractConditions', OPTIONAL ),
+#       ( u'profession', u'profession', OPTIONAL ),
+#       ( u'height', u'height', OPTIONAL ),
+#       ( u'weight', u'weight', OPTIONAL ),
+#       ( u'trainedSpeaker', u'trainedSpeaker', OPTIONAL ),
+#       ( u'placeOfSecondEducation', u'placeOfSecondEducation', OPTIONAL ),
+#       ( u'educationLevel', u'educationLevel', OPTIONAL ),
+#     )
+#
+#     alias = DictField(validators=[validate_lang_code_keys, validate_dict_values],
+#       default_retriever=best_lang_value_retriever,
+#       verbose_name='Alias',
+#       max_val_length=500,
+#       help_text='The name of the person used instead of the real one',
+#       blank=True)
+#
+#     ageGroup = models.CharField(
+#       verbose_name='Age group',
+#       help_text='The age group to which the participant belongs',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(PARTICIPANTINFOTYPE_AGEGROUP_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     age = XmlCharField(
+#       verbose_name='Age',
+#       help_text='The age of the participant',
+#       blank=True, max_length=50, )
+#
+#     sex = models.CharField(
+#       verbose_name='Sex',
+#       help_text='The gender of a person related to or participating in t' \
+#       'he resource',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(PARTICIPANTINFOTYPE_SEX_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     origin = models.CharField(
+#       verbose_name='Origin',
+#       help_text='The language origin of the participant',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(PARTICIPANTINFOTYPE_ORIGIN_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     placeOfLiving = XmlCharField(
+#       verbose_name='Place of living',
+#       help_text='The participant\'s place of living',
+#       blank=True, max_length=100, )
+#
+#     placeOfBirth = XmlCharField(
+#       verbose_name='Place of birth',
+#       help_text='The place in which the participant has been born',
+#       blank=True, max_length=100, )
+#
+#     placeOfChildhood = XmlCharField(
+#       verbose_name='Place of childhood',
+#       help_text='The place in which the participant lived as a child',
+#       blank=True, max_length=100, )
+#
+#     dialectAccent = DictField(validators=[validate_lang_code_keys, validate_dict_values],
+#       default_retriever=best_lang_value_retriever,
+#       verbose_name='Dialect accent',
+#       max_val_length=500,
+#       help_text='Provides information on the dialect of the participant',
+#       blank=True)
+#
+#     speakingImpairment = XmlCharField(
+#       verbose_name='Speaking impairment',
+#       help_text='Provides information on any speaking impairment the par' \
+#       'ticipant may have',
+#       blank=True, max_length=200, )
+#
+#     hearingImpairment = XmlCharField(
+#       verbose_name='Hearing impairment',
+#       help_text='Provides information on any hearing impairment the part' \
+#       'icipant may have',
+#       blank=True, max_length=200, )
+#
+#     smokingHabits = XmlCharField(
+#       verbose_name='Smoking habits',
+#       help_text='Provides information on whether the participants smokes' \
+#       ' and on his/her smoking habits in general',
+#       blank=True, max_length=100, )
+#
+#     vocalTractConditions = models.CharField(
+#       verbose_name='Vocal tract conditions',
+#       help_text='Provides information on the vocal tract conditions that' \
+#       ' may influence the speech of the participant',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(PARTICIPANTINFOTYPE_VOCALTRACTCONDITIONS_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     profession = XmlCharField(
+#       verbose_name='Profession',
+#       help_text='Provides information on the participant\'s profession',
+#       blank=True, max_length=100, )
+#
+#     height = models.BigIntegerField(
+#       verbose_name='Height',
+#       help_text='Provides information on the height of the participant i' \
+#       'n cm',
+#       blank=True, null=True, )
+#
+#     weight = models.BigIntegerField(
+#       verbose_name='Weight',
+#       help_text='Provides information on the weight of the participant',
+#       blank=True, null=True, )
+#
+#     trainedSpeaker = MetaBooleanField(
+#       verbose_name='Trained speaker',
+#       help_text='Provides information on whether the participant is trai' \
+#       'ned in a specific task',
+#       blank=True, )
+#
+#     placeOfSecondEducation = XmlCharField(
+#       verbose_name='Place of second education',
+#       help_text='Specifies the place of the secondary education of the p' \
+#       'articipant',
+#       blank=True, max_length=100, )
+#
+#     educationLevel = XmlCharField(
+#       verbose_name='Education level',
+#       help_text='Provides information on the education level of the part' \
+#       'icipant',
+#       blank=True, max_length=100, )
+#
+#     back_to_personsourcesetinfotype_model = models.ForeignKey("personSourceSetInfoType_model",  blank=True, null=True)
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # CAPTUREINFOTYPE_CAPTURINGDEVICETYPE_CHOICES = _make_choices_from_list([
 #   u'studioEquipment', u'microphone', u'closeTalkMicrophone',
