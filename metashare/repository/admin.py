@@ -42,7 +42,6 @@ from metashare.repository.models import \
     resourceComponentTypeType_model, \
     resourceDocumentationInfoType_model, \
     resourceInfoType_model, \
-    settingInfoType_model, \
     sizeInfoType_model, \
     staticElementInfoType_model, \
     targetResourceInfoType_model, \
@@ -65,6 +64,7 @@ from metashare.repository.models import \
     # languageDescriptionImageInfoType_model, \
     # personSourceSetInfoType_model, \
     # recordingInfoType_model, \
+    # settingInfoType_model, \
     # runningEnvironmentInfoType_model, \
     # relationInfoType_model, \
     # resolutionInfoType_model, \
@@ -1014,7 +1014,7 @@ admin.site.register(resourceComponentTypeType_model, SchemaModelAdmin)
 admin.site.register(resourceDocumentationInfoType_model, SchemaModelAdmin)
 admin.site.register(resourceInfoType_model, SchemaModelAdmin)
 # admin.site.register(runningEnvironmentInfoType_model, SchemaModelAdmin)
-admin.site.register(settingInfoType_model, SchemaModelAdmin)
+# admin.site.register(settingInfoType_model, SchemaModelAdmin)
 admin.site.register(sizeInfoType_model, SchemaModelAdmin)
 admin.site.register(staticElementInfoType_model, SchemaModelAdmin)
 admin.site.register(targetResourceInfoType_model, SchemaModelAdmin)

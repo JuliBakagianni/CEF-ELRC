@@ -2031,110 +2031,110 @@ class targetResourceInfoType_model(SchemaModel):
 #         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
 #         return _unicode
 
-SETTINGINFOTYPE_NATURALITY_CHOICES = _make_choices_from_list([
-  u'natural', u'planned', u'semiPlanned', u'readSpeech', u'spontaneous',
-  u'elicited',u'assisted', u'prompted', u'other', 
-])
+# SETTINGINFOTYPE_NATURALITY_CHOICES = _make_choices_from_list([
+#   u'natural', u'planned', u'semiPlanned', u'readSpeech', u'spontaneous',
+#   u'elicited',u'assisted', u'prompted', u'other',
+# ])
 
-SETTINGINFOTYPE_CONVERSATIONALTYPE_CHOICES = _make_choices_from_list([
-  u'monologue', u'dialogue', u'multilogue', 
-])
+# SETTINGINFOTYPE_CONVERSATIONALTYPE_CHOICES = _make_choices_from_list([
+#   u'monologue', u'dialogue', u'multilogue',
+# ])
 
-SETTINGINFOTYPE_SCENARIOTYPE_CHOICES = _make_choices_from_list([
-  u'frogStory', u'pearStory', u'mapTask', u'onlineEducationalGame',
-  u'pearStory',u'rolePlay', u'wordGame', u'wizardOfOz', u'other', 
-])
+# SETTINGINFOTYPE_SCENARIOTYPE_CHOICES = _make_choices_from_list([
+#   u'frogStory', u'pearStory', u'mapTask', u'onlineEducationalGame',
+#   u'pearStory',u'rolePlay', u'wordGame', u'wizardOfOz', u'other',
+# ])
 
-SETTINGINFOTYPE_AUDIENCE_CHOICES = _make_choices_from_list([
-  u'no', u'few', u'some', u'largePublic', 
-])
+# SETTINGINFOTYPE_AUDIENCE_CHOICES = _make_choices_from_list([
+#   u'no', u'few', u'some', u'largePublic',
+# ])
 
-SETTINGINFOTYPE_INTERACTIVITY_CHOICES = _make_choices_from_list([
-  u'interactive', u'nonInteractive', u'semiInteractive', u'overlapping',
-  u'other',
-])
+# SETTINGINFOTYPE_INTERACTIVITY_CHOICES = _make_choices_from_list([
+#   u'interactive', u'nonInteractive', u'semiInteractive', u'overlapping',
+#   u'other',
+# ])
 
 # pylint: disable-msg=C0103
-class settingInfoType_model(SchemaModel):
-    """
-    Groups together information on the setting of the audio and/or video
-    part of a resource
-    """
-
-    class Meta:
-        verbose_name = "Setting"
-
-
-    __schema_name__ = 'settingInfoType'
-    __schema_fields__ = (
-      ( u'naturality', u'naturality', OPTIONAL ),
-      ( u'conversationalType', u'conversationalType', OPTIONAL ),
-      ( u'scenarioType', u'scenarioType', OPTIONAL ),
-      ( u'audience', u'audience', OPTIONAL ),
-      ( u'interactivity', u'interactivity', OPTIONAL ),
-      ( u'interaction', u'interaction', OPTIONAL ),
-    )
-
-    naturality = models.CharField(
-      verbose_name='Naturality', 
-      help_text='Specifies the level of naturality for multimodal/multim' \
-      'edia resources',
-      blank=True, 
-      max_length=30,
-      choices=sorted(SETTINGINFOTYPE_NATURALITY_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    conversationalType = models.CharField(
-      verbose_name='Conversational type', 
-      help_text='Specifies the conversational type of the resource',
-      blank=True, 
-      max_length=30,
-      choices=sorted(SETTINGINFOTYPE_CONVERSATIONALTYPE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    scenarioType = models.CharField(
-      verbose_name='Scenario type', 
-      help_text='Indicates the task defined for the conversation or the ' \
-      'interaction of participants',
-      blank=True, 
-      max_length=30,
-      choices=sorted(SETTINGINFOTYPE_SCENARIOTYPE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    audience = models.CharField(
-      verbose_name='Audience', 
-      help_text='Indication of the intended audience size',
-      blank=True, 
-      max_length=30,
-      choices=sorted(SETTINGINFOTYPE_AUDIENCE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    interactivity = models.CharField(
-      verbose_name='Interactivity', 
-      help_text='Indicates the level of conversational interaction betwe' \
-      'en speakers (for audio component) or participants (for video comp' \
-      'onent)',
-      blank=True, 
-      max_length=30,
-      choices=sorted(SETTINGINFOTYPE_INTERACTIVITY_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    interaction = XmlCharField(
-      verbose_name='Interaction', 
-      help_text='Specifies the parts that interact in an audio or video ' \
-      'component',
-      blank=True, max_length=1000, )
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['naturality', 'conversationalType', 'scenarioType', 'audience', 'interactivity', ]
-        formatstring = u'{} {} {} {} {}'
-        return self.unicode_(formatstring, formatargs)
+# class settingInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the setting of the audio and/or video
+#     part of a resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Setting"
+#
+#
+#     __schema_name__ = 'settingInfoType'
+#     __schema_fields__ = (
+#       ( u'naturality', u'naturality', OPTIONAL ),
+#       ( u'conversationalType', u'conversationalType', OPTIONAL ),
+#       ( u'scenarioType', u'scenarioType', OPTIONAL ),
+#       ( u'audience', u'audience', OPTIONAL ),
+#       ( u'interactivity', u'interactivity', OPTIONAL ),
+#       ( u'interaction', u'interaction', OPTIONAL ),
+#     )
+#
+#     naturality = models.CharField(
+#       verbose_name='Naturality',
+#       help_text='Specifies the level of naturality for multimodal/multim' \
+#       'edia resources',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(SETTINGINFOTYPE_NATURALITY_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     conversationalType = models.CharField(
+#       verbose_name='Conversational type',
+#       help_text='Specifies the conversational type of the resource',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(SETTINGINFOTYPE_CONVERSATIONALTYPE_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     scenarioType = models.CharField(
+#       verbose_name='Scenario type',
+#       help_text='Indicates the task defined for the conversation or the ' \
+#       'interaction of participants',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(SETTINGINFOTYPE_SCENARIOTYPE_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     audience = models.CharField(
+#       verbose_name='Audience',
+#       help_text='Indication of the intended audience size',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(SETTINGINFOTYPE_AUDIENCE_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     interactivity = models.CharField(
+#       verbose_name='Interactivity',
+#       help_text='Indicates the level of conversational interaction betwe' \
+#       'en speakers (for audio component) or participants (for video comp' \
+#       'onent)',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(SETTINGINFOTYPE_INTERACTIVITY_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     interaction = XmlCharField(
+#       verbose_name='Interaction',
+#       help_text='Specifies the parts that interact in an audio or video ' \
+#       'component',
+#       blank=True, max_length=1000, )
+#
+#     def real_unicode_(self):
+#         # pylint: disable-msg=C0301
+#         formatargs = ['naturality', 'conversationalType', 'scenarioType', 'audience', 'interactivity', ]
+#         formatstring = u'{} {} {} {} {}'
+#         return self.unicode_(formatstring, formatargs)
 
 # RUNNINGENVIRONMENTINFOTYPE_REQUIREDHARDWARE_CHOICES = _make_choices_from_list([
 #   u'graphicCard', u'microphone', u'ocrSystem', u'specialHardwareEquipment',
