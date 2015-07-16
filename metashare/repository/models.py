@@ -4897,11 +4897,11 @@ class videoContentInfoType_model(SchemaModel):
       choices=VIDEOCONTENTINFOTYPE_TEXTINCLUDEDINVIDEO_CHOICES['choices'],
       )
 
-    # dynamicElementInfo = models.OneToOneField("dynamicElementInfoType_model",
-    #   verbose_name='Dynamic element',
-    #   help_text='Groups information on the dynamic elements that are rep' \
-    #   'resented in the video part of the resource',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
+    dynamicElementInfo = models.OneToOneField("dynamicElementInfoType_model",
+      verbose_name='Dynamic element',
+      help_text='Groups information on the dynamic elements that are rep' \
+      'resented in the video part of the resource',
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -7782,116 +7782,116 @@ class corpusMediaTypeType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-# DYNAMICELEMENTINFOTYPE_BODYPARTS_CHOICES = _make_choices_from_list([
-#   u'arms', u'face', u'feet', u'hands', u'head', u'legs', u'mouth',
-#   u'wholeBody',u'none',
-# ])
+DYNAMICELEMENTINFOTYPE_BODYPARTS_CHOICES = _make_choices_from_list([
+  u'arms', u'face', u'feet', u'hands', u'head', u'legs', u'mouth',
+  u'wholeBody',u'none',
+])
 
 # pylint: disable-msg=C0103
-# class dynamicElementInfoType_model(SchemaModel):
-#
-#     class Meta:
-#         verbose_name = "Dynamic element"
-#
-#
-#     __schema_name__ = 'dynamicElementInfoType'
-#     __schema_fields__ = (
-#       ( u'typeOfElement', u'typeOfElement', OPTIONAL ),
-#       ( u'bodyParts', u'bodyParts', OPTIONAL ),
-#       ( u'distractors', u'distractors', OPTIONAL ),
-#       ( u'interactiveMedia', u'interactiveMedia', OPTIONAL ),
-#       ( u'faceViews', u'faceViews', OPTIONAL ),
-#       ( u'faceExpressions', u'faceExpressions', OPTIONAL ),
-#       ( u'bodyMovement', u'bodyMovement', OPTIONAL ),
-#       ( u'gestures', u'gestures', OPTIONAL ),
-#       ( u'handArmMovement', u'handArmMovement', OPTIONAL ),
-#       ( u'handManipulation', u'handManipulation', OPTIONAL ),
-#       ( u'headMovement', u'headMovement', OPTIONAL ),
-#       ( u'eyeMovement', u'eyeMovement', OPTIONAL ),
-#       ( u'posesPerSubject', u'posesPerSubject', OPTIONAL ),
-#     )
-#
-#     typeOfElement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=44, max_length=1000),
-#       verbose_name='Type of element',
-#       help_text='The type of objects or people that represented in the v' \
-#       'ideo or image part of the resource',
-#       blank=True, validators=[validate_matches_xml_char_production], )
-#
-#     bodyParts = MultiSelectField(
-#       verbose_name='Body parts',
-#       help_text='The body parts visible in the video or image part of th' \
-#       'e resource',
-#       blank=True,
-#       max_length=1 + len(DYNAMICELEMENTINFOTYPE_BODYPARTS_CHOICES['choices']) / 4,
-#       choices=DYNAMICELEMENTINFOTYPE_BODYPARTS_CHOICES['choices'],
-#       )
-#
-#     distractors = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=45, max_length=1000),
-#       verbose_name='Distractors',
-#       help_text='Any distractors visible in the resource',
-#       blank=True, validators=[validate_matches_xml_char_production], )
-#
-#     interactiveMedia = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=46, max_length=1000),
-#       verbose_name='Interactive media',
-#       help_text='Any interactive media visible in the resource',
-#       blank=True, validators=[validate_matches_xml_char_production], )
-#
-#     faceViews = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=47, max_length=1000),
-#       verbose_name='Face views',
-#       help_text='Indicates the view of the face(s) that appear in the vi' \
-#       'deo or on the image part of the resource',
-#       blank=True, validators=[validate_matches_xml_char_production], )
-#
-#     faceExpressions = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=48, max_length=1000),
-#       verbose_name='Face expressions',
-#       help_text='Indicates the facial expressions visible in the resourc' \
-#       'e',
-#       blank=True, validators=[validate_matches_xml_char_production], )
-#
-#     bodyMovement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=49, max_length=1000),
-#       verbose_name='Body movement',
-#       help_text='Indicates the body parts that move in the video part of' \
-#       ' the resource',
-#       blank=True, validators=[validate_matches_xml_char_production], )
-#
-#     gestures = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=50, max_length=1000),
-#       verbose_name='Gestures',
-#       help_text='Indicates the type of gestures visible in the resource',
-#       blank=True, validators=[validate_matches_xml_char_production], )
-#
-#     handArmMovement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=51, max_length=1000),
-#       verbose_name='Hand arm movement',
-#       help_text='Indicates the movement of hands and/or arms visible in ' \
-#       'the resource',
-#       blank=True, validators=[validate_matches_xml_char_production], )
-#
-#     handManipulation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=52, max_length=1000),
-#       verbose_name='Hand manipulation',
-#       help_text='Gives information on the manipulation of objects by han' \
-#       'd',
-#       blank=True, validators=[validate_matches_xml_char_production], )
-#
-#     headMovement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=53, max_length=1000),
-#       verbose_name='Head movement',
-#       help_text='Indicates the movements of the head visible in the reso' \
-#       'urce',
-#       blank=True, validators=[validate_matches_xml_char_production], )
-#
-#     eyeMovement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=54, max_length=1000),
-#       verbose_name='Eye movement',
-#       help_text='Indicates the movement of the eyes visible in the resou' \
-#       'rce',
-#       blank=True, validators=[validate_matches_xml_char_production], )
-#
-#     posesPerSubject = models.IntegerField(
-#       verbose_name='Poses per subject',
-#       help_text='The number of poses per subject that participates in th' \
-#       'e video part of the resource',
-#       blank=True, null=True, )
-#
-#     def __unicode__(self):
-#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-#         return _unicode
+class dynamicElementInfoType_model(SchemaModel):
+
+    class Meta:
+        verbose_name = "Dynamic element"
+
+
+    __schema_name__ = 'dynamicElementInfoType'
+    __schema_fields__ = (
+      ( u'typeOfElement', u'typeOfElement', OPTIONAL ),
+      ( u'bodyParts', u'bodyParts', OPTIONAL ),
+      ( u'distractors', u'distractors', OPTIONAL ),
+      ( u'interactiveMedia', u'interactiveMedia', OPTIONAL ),
+      ( u'faceViews', u'faceViews', OPTIONAL ),
+      ( u'faceExpressions', u'faceExpressions', OPTIONAL ),
+      ( u'bodyMovement', u'bodyMovement', OPTIONAL ),
+      ( u'gestures', u'gestures', OPTIONAL ),
+      ( u'handArmMovement', u'handArmMovement', OPTIONAL ),
+      ( u'handManipulation', u'handManipulation', OPTIONAL ),
+      ( u'headMovement', u'headMovement', OPTIONAL ),
+      ( u'eyeMovement', u'eyeMovement', OPTIONAL ),
+      ( u'posesPerSubject', u'posesPerSubject', OPTIONAL ),
+    )
+
+    typeOfElement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=44, max_length=1000),
+      verbose_name='Type of element',
+      help_text='The type of objects or people that represented in the v' \
+      'ideo or image part of the resource',
+      blank=True, validators=[validate_matches_xml_char_production], )
+
+    bodyParts = MultiSelectField(
+      verbose_name='Body parts',
+      help_text='The body parts visible in the video or image part of th' \
+      'e resource',
+      blank=True,
+      max_length=1 + len(DYNAMICELEMENTINFOTYPE_BODYPARTS_CHOICES['choices']) / 4,
+      choices=DYNAMICELEMENTINFOTYPE_BODYPARTS_CHOICES['choices'],
+      )
+
+    distractors = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=45, max_length=1000),
+      verbose_name='Distractors',
+      help_text='Any distractors visible in the resource',
+      blank=True, validators=[validate_matches_xml_char_production], )
+
+    interactiveMedia = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=46, max_length=1000),
+      verbose_name='Interactive media',
+      help_text='Any interactive media visible in the resource',
+      blank=True, validators=[validate_matches_xml_char_production], )
+
+    faceViews = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=47, max_length=1000),
+      verbose_name='Face views',
+      help_text='Indicates the view of the face(s) that appear in the vi' \
+      'deo or on the image part of the resource',
+      blank=True, validators=[validate_matches_xml_char_production], )
+
+    faceExpressions = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=48, max_length=1000),
+      verbose_name='Face expressions',
+      help_text='Indicates the facial expressions visible in the resourc' \
+      'e',
+      blank=True, validators=[validate_matches_xml_char_production], )
+
+    bodyMovement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=49, max_length=1000),
+      verbose_name='Body movement',
+      help_text='Indicates the body parts that move in the video part of' \
+      ' the resource',
+      blank=True, validators=[validate_matches_xml_char_production], )
+
+    gestures = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=50, max_length=1000),
+      verbose_name='Gestures',
+      help_text='Indicates the type of gestures visible in the resource',
+      blank=True, validators=[validate_matches_xml_char_production], )
+
+    handArmMovement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=51, max_length=1000),
+      verbose_name='Hand arm movement',
+      help_text='Indicates the movement of hands and/or arms visible in ' \
+      'the resource',
+      blank=True, validators=[validate_matches_xml_char_production], )
+
+    handManipulation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=52, max_length=1000),
+      verbose_name='Hand manipulation',
+      help_text='Gives information on the manipulation of objects by han' \
+      'd',
+      blank=True, validators=[validate_matches_xml_char_production], )
+
+    headMovement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=53, max_length=1000),
+      verbose_name='Head movement',
+      help_text='Indicates the movements of the head visible in the reso' \
+      'urce',
+      blank=True, validators=[validate_matches_xml_char_production], )
+
+    eyeMovement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=54, max_length=1000),
+      verbose_name='Eye movement',
+      help_text='Indicates the movement of the eyes visible in the resou' \
+      'rce',
+      blank=True, validators=[validate_matches_xml_char_production], )
+
+    posesPerSubject = models.IntegerField(
+      verbose_name='Poses per subject',
+      help_text='The number of poses per subject that participates in th' \
+      'e video part of the resource',
+      blank=True, null=True, )
+
+    def __unicode__(self):
+        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+        return _unicode
 
 STATICELEMENTINFOTYPE_BODYPARTS_CHOICES = _make_choices_from_list([
   u'arms', u'face', u'feet', u'hands', u'head', u'legs', u'mouth',

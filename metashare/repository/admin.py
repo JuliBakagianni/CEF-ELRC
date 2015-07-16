@@ -19,6 +19,7 @@ from metashare.repository.models import \
     documentListType_model, \
     documentationInfoType_model, \
     domainInfoType_model, \
+    dynamicElementInfoType_model, \
     foreseenUseInfoType_model, \
     geographicCoverageInfoType_model, \
     identificationInfoType_model, \
@@ -102,7 +103,6 @@ from metashare.repository.models import \
     # creationInfoType_model, \
     # durationOfAudioInfoType_model, \
     # durationOfEffectiveSpeechInfoType_model, \
-    # dynamicElementInfoType_model, \
 
 # pylint: disable-msg=C0103
 # class actualUseInfo_model_inline(SchemaModelInline):
@@ -964,7 +964,7 @@ admin.site.register(documentationInfoType_model, SchemaModelAdmin)
 admin.site.register(domainInfoType_model, SchemaModelAdmin)
 # admin.site.register(durationOfAudioInfoType_model, SchemaModelAdmin)
 # admin.site.register(durationOfEffectiveSpeechInfoType_model, SchemaModelAdmin)
-# admin.site.register(dynamicElementInfoType_model, SchemaModelAdmin)
+admin.site.register(dynamicElementInfoType_model, SchemaModelAdmin)
 admin.site.register(foreseenUseInfoType_model, SchemaModelAdmin)
 admin.site.register(geographicCoverageInfoType_model, SchemaModelAdmin)
 admin.site.register(identificationInfoType_model, SchemaModelAdmin)
