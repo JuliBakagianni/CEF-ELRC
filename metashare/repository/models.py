@@ -660,62 +660,62 @@ CREATIONINFOTYPE_CREATIONMODE_CHOICES = _make_choices_from_list([
 ])
 
 # pylint: disable-msg=C0103
-class creationInfoType_model(SchemaModel):
-    """
-    Groups together information on the resource creation (e.g. for
-    corpora, selection of texts/audio files/ video files etc. and
-    structural encoding thereof; for lexica, construction of lemma
-    list etc.)
-    """
-
-    class Meta:
-        verbose_name = "Creation"
-
-
-    __schema_name__ = 'creationInfoType'
-    __schema_fields__ = (
-      ( u'originalSource', u'originalSource', RECOMMENDED ),
-      ( u'creationMode', u'creationMode', RECOMMENDED ),
-      ( u'creationModeDetails', u'creationModeDetails', OPTIONAL ),
-      ( u'creationTool', u'creationTool', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'creationTool': "targetResourceInfoType_model",
-      u'originalSource': "targetResourceInfoType_model",
-    }
-
-    originalSource = models.ManyToManyField("targetResourceInfoType_model", 
-      verbose_name='Original source', 
-      help_text='The name, the identifier or the url of thethe original ' \
-      'resources that were at the base of the creation process of the re' \
-      'source',
-      blank=True, null=True, related_name="originalSource_%(class)s_related", )
-
-    creationMode = models.CharField(
-      verbose_name='Creation mode', 
-      help_text='Specifies whether the resource is created automatically' \
-      ' or in a manual or interactive mode',
-      blank=True, 
-      max_length=30,
-      choices=sorted(CREATIONINFOTYPE_CREATIONMODE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    creationModeDetails = XmlCharField(
-      verbose_name='Creation mode details', 
-      help_text='Provides further information on the creation methods an' \
-      'd processes',
-      blank=True, max_length=200, )
-
-    creationTool = models.ManyToManyField("targetResourceInfoType_model", 
-      verbose_name='Creation tool', 
-      help_text='The name, the identifier or the url of the tool used in' \
-      ' the creation process',
-      blank=True, null=True, related_name="creationTool_%(class)s_related", )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class creationInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the resource creation (e.g. for
+#     corpora, selection of texts/audio files/ video files etc. and
+#     structural encoding thereof; for lexica, construction of lemma
+#     list etc.)
+#     """
+#
+#     class Meta:
+#         verbose_name = "Creation"
+#
+#
+#     __schema_name__ = 'creationInfoType'
+#     __schema_fields__ = (
+#       ( u'originalSource', u'originalSource', RECOMMENDED ),
+#       ( u'creationMode', u'creationMode', RECOMMENDED ),
+#       ( u'creationModeDetails', u'creationModeDetails', OPTIONAL ),
+#       ( u'creationTool', u'creationTool', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'creationTool': "targetResourceInfoType_model",
+#       u'originalSource': "targetResourceInfoType_model",
+#     }
+#
+#     originalSource = models.ManyToManyField("targetResourceInfoType_model",
+#       verbose_name='Original source',
+#       help_text='The name, the identifier or the url of thethe original ' \
+#       'resources that were at the base of the creation process of the re' \
+#       'source',
+#       blank=True, null=True, related_name="originalSource_%(class)s_related", )
+#
+#     creationMode = models.CharField(
+#       verbose_name='Creation mode',
+#       help_text='Specifies whether the resource is created automatically' \
+#       ' or in a manual or interactive mode',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(CREATIONINFOTYPE_CREATIONMODE_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     creationModeDetails = XmlCharField(
+#       verbose_name='Creation mode details',
+#       help_text='Provides further information on the creation methods an' \
+#       'd processes',
+#       blank=True, max_length=200, )
+#
+#     creationTool = models.ManyToManyField("targetResourceInfoType_model",
+#       verbose_name='Creation tool',
+#       help_text='The name, the identifier or the url of the tool used in' \
+#       ' the creation process',
+#       blank=True, null=True, related_name="creationTool_%(class)s_related", )
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # pylint: disable-msg=C0103
 class metadataInfoType_model(SchemaModel):
@@ -6150,13 +6150,13 @@ class languageDescriptionVideoInfoType_model(SchemaModel):
       'different media types.',
       default="video", editable=False, max_length=1000, )
 
-    creationInfo = models.OneToOneField("creationInfoType_model", 
-      verbose_name='Creation', 
-      help_text='Groups together information on the resource creation (e' \
-      '.g. for corpora, selection of texts/audio files/ video files etc.' \
-      ' and structural encoding thereof; for lexica, construction of lem' \
-      'ma list etc.)',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # creationInfo = models.OneToOneField("creationInfoType_model",
+    #   verbose_name='Creation',
+    #   help_text='Groups together information on the resource creation (e' \
+    #   '.g. for corpora, selection of texts/audio files/ video files etc.' \
+    #   ' and structural encoding thereof; for lexica, construction of lem' \
+    #   'ma list etc.)',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: linkToOtherMediaInfo
 
@@ -6249,13 +6249,13 @@ class languageDescriptionImageInfoType_model(SchemaModel):
 
     # OneToMany field: languageInfo
 
-    creationInfo = models.OneToOneField("creationInfoType_model", 
-      verbose_name='Creation', 
-      help_text='Groups together information on the resource creation (e' \
-      '.g. for corpora, selection of texts/audio files/ video files etc.' \
-      ' and structural encoding thereof; for lexica, construction of lem' \
-      'ma list etc.)',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # creationInfo = models.OneToOneField("creationInfoType_model",
+    #   verbose_name='Creation',
+    #   help_text='Groups together information on the resource creation (e' \
+    #   '.g. for corpora, selection of texts/audio files/ video files etc.' \
+    #   ' and structural encoding thereof; for lexica, construction of lem' \
+    #   'ma list etc.)',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: linkToOtherMediaInfo
 
