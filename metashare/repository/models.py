@@ -318,7 +318,7 @@ class sizeInfoType_model(SchemaModel):
 
     back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
 
-    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+    # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
     back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
 
@@ -1180,7 +1180,7 @@ class domainInfoType_model(SchemaModel):
 
     back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
 
-    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+    # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
     back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
 
@@ -1457,7 +1457,7 @@ class annotationInfoType_model(SchemaModel):
 
     back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
 
-    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+    # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
     back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
 
@@ -1584,7 +1584,7 @@ class modalityInfoType_model(SchemaModel):
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
 
-    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+    # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
     back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
 
@@ -2481,7 +2481,7 @@ class linkToOtherMediaInfoType_model(SchemaModel):
 
     back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
 
-    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+    # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
     back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
 
@@ -3234,7 +3234,7 @@ class timeCoverageInfoType_model(SchemaModel):
 
     back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
 
-    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+    # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
     back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
 
@@ -3293,7 +3293,7 @@ class geographicCoverageInfoType_model(SchemaModel):
 
     back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
 
-    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+    # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
     back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
 
@@ -3495,7 +3495,7 @@ class languageInfoType_model(SchemaModel):
 
     back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
 
-    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+    # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
     back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
 
@@ -5081,111 +5081,111 @@ class videoClassificationInfoType_model(SchemaModel):
         return _unicode
 
 # pylint: disable-msg=C0103
-class corpusImageInfoType_model(SchemaModel):
-    """
-    Groups together information on the image component of a resource
-    """
-
-    class Meta:
-        verbose_name = "Corpus image"
-
-
-    __schema_name__ = 'corpusImageInfoType'
-    __schema_fields__ = (
-      ( u'mediaType', u'mediaType', REQUIRED ),
-      ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
-      ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
-      ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
-      ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
-      ( u'imageContentInfo', u'imageContentInfo', RECOMMENDED ),
-      ( u'imageFormatInfo', u'imageformatinfotype_model_set', RECOMMENDED ),
-      ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
-      ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
-      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
-      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
-      ( u'imageClassificationInfo', u'imageclassificationinfotype_model_set', OPTIONAL ),
-      ( u'captureInfo', u'captureInfo', RECOMMENDED ),
-      ( u'creationInfo', u'creationInfo', OPTIONAL ),
-      ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'annotationInfo': "annotationInfoType_model",
-      u'captureInfo': "captureInfoType_model",
-      u'creationInfo': "creationInfoType_model",
-      u'domainInfo': "domainInfoType_model",
-      u'geographicCoverageInfo': "geographicCoverageInfoType_model",
-      u'imageClassificationInfo': "imageClassificationInfoType_model",
-      u'imageContentInfo': "imageContentInfoType_model",
-      u'imageFormatInfo': "imageFormatInfoType_model",
-      u'languageInfo': "languageInfoType_model",
-      u'lingualityInfo': "lingualityInfoType_model",
-      u'linkToOtherMediaInfo': "linkToOtherMediaInfoType_model",
-      u'modalityInfo': "modalityInfoType_model",
-      u'sizeInfo': "sizeInfoType_model",
-      u'timeCoverageInfo': "timeCoverageInfoType_model",
-    }
-
-    mediaType = XmlCharField(
-      verbose_name='Media', 
-      help_text='Specifies the media type of the resource and basically ' \
-      'corresponds to the physical medium of the content representation.' \
-      ' Each media type is described through a distinctive set of featur' \
-      'es. A resource may consist of parts attributed to different types' \
-      ' of media. A tool/service may take as input/output more than one ' \
-      'different media types.',
-      default="image", editable=False, max_length=1000, )
-
-    # OneToMany field: modalityInfo
-
-    lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
-      verbose_name='Linguality', 
-      help_text='Groups information on the number of languages of the re' \
-      'source part and of the way they are combined to each other',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # OneToMany field: languageInfo
-
-    # OneToMany field: sizeInfo
-
-    imageContentInfo = models.OneToOneField("imageContentInfoType_model", 
-      verbose_name='Image content', 
-      help_text='Groups together information on the contents of the imag' \
-      'e part of a resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # OneToMany field: imageFormatInfo
-
-    # OneToMany field: annotationInfo
-
-    # OneToMany field: domainInfo
-
-    # OneToMany field: timeCoverageInfo
-
-    # OneToMany field: geographicCoverageInfo
-
-    # OneToMany field: imageClassificationInfo
-
-    # captureInfo = models.OneToOneField("captureInfoType_model",
-    #   verbose_name='Capture',
-    #   help_text='Groups together information on the capture of the audio' \
-    #   ' or video part of a corpus',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
-
-    creationInfo = models.OneToOneField("creationInfoType_model", 
-      verbose_name='Creation', 
-      help_text='Groups together information on the resource creation (e' \
-      '.g. for corpora, selection of texts/audio files/ video files etc.' \
-      ' and structural encoding thereof; for lexica, construction of lem' \
-      'ma list etc.)',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # OneToMany field: linkToOtherMediaInfo
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['sizeInfo', ]
-        formatstring = u'image ({})'
-        return self.unicode_(formatstring, formatargs)
+# class corpusImageInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the image component of a resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Corpus image"
+#
+#
+#     __schema_name__ = 'corpusImageInfoType'
+#     __schema_fields__ = (
+#       ( u'mediaType', u'mediaType', REQUIRED ),
+#       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
+#       ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
+#       ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
+#       ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
+#       ( u'imageContentInfo', u'imageContentInfo', RECOMMENDED ),
+#       ( u'imageFormatInfo', u'imageformatinfotype_model_set', RECOMMENDED ),
+#       ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
+#       ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
+#       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
+#       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
+#       ( u'imageClassificationInfo', u'imageclassificationinfotype_model_set', OPTIONAL ),
+#       ( u'captureInfo', u'captureInfo', RECOMMENDED ),
+#       ( u'creationInfo', u'creationInfo', OPTIONAL ),
+#       ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'annotationInfo': "annotationInfoType_model",
+#       u'captureInfo': "captureInfoType_model",
+#       u'creationInfo': "creationInfoType_model",
+#       u'domainInfo': "domainInfoType_model",
+#       u'geographicCoverageInfo': "geographicCoverageInfoType_model",
+#       u'imageClassificationInfo': "imageClassificationInfoType_model",
+#       u'imageContentInfo': "imageContentInfoType_model",
+#       u'imageFormatInfo': "imageFormatInfoType_model",
+#       u'languageInfo': "languageInfoType_model",
+#       u'lingualityInfo': "lingualityInfoType_model",
+#       u'linkToOtherMediaInfo': "linkToOtherMediaInfoType_model",
+#       u'modalityInfo': "modalityInfoType_model",
+#       u'sizeInfo': "sizeInfoType_model",
+#       u'timeCoverageInfo': "timeCoverageInfoType_model",
+#     }
+#
+#     mediaType = XmlCharField(
+#       verbose_name='Media',
+#       help_text='Specifies the media type of the resource and basically ' \
+#       'corresponds to the physical medium of the content representation.' \
+#       ' Each media type is described through a distinctive set of featur' \
+#       'es. A resource may consist of parts attributed to different types' \
+#       ' of media. A tool/service may take as input/output more than one ' \
+#       'different media types.',
+#       default="image", editable=False, max_length=1000, )
+#
+#     # OneToMany field: modalityInfo
+#
+#     lingualityInfo = models.OneToOneField("lingualityInfoType_model",
+#       verbose_name='Linguality',
+#       help_text='Groups information on the number of languages of the re' \
+#       'source part and of the way they are combined to each other',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # OneToMany field: languageInfo
+#
+#     # OneToMany field: sizeInfo
+#
+#     imageContentInfo = models.OneToOneField("imageContentInfoType_model",
+#       verbose_name='Image content',
+#       help_text='Groups together information on the contents of the imag' \
+#       'e part of a resource',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # OneToMany field: imageFormatInfo
+#
+#     # OneToMany field: annotationInfo
+#
+#     # OneToMany field: domainInfo
+#
+#     # OneToMany field: timeCoverageInfo
+#
+#     # OneToMany field: geographicCoverageInfo
+#
+#     # OneToMany field: imageClassificationInfo
+#
+#     # captureInfo = models.OneToOneField("captureInfoType_model",
+#     #   verbose_name='Capture',
+#     #   help_text='Groups together information on the capture of the audio' \
+#     #   ' or video part of a corpus',
+#     #   blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     creationInfo = models.OneToOneField("creationInfoType_model",
+#       verbose_name='Creation',
+#       help_text='Groups together information on the resource creation (e' \
+#       '.g. for corpora, selection of texts/audio files/ video files etc.' \
+#       ' and structural encoding thereof; for lexica, construction of lem' \
+#       'ma list etc.)',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # OneToMany field: linkToOtherMediaInfo
+#
+#     def real_unicode_(self):
+#         # pylint: disable-msg=C0301
+#         formatargs = ['sizeInfo', ]
+#         formatstring = u'image ({})'
+#         return self.unicode_(formatstring, formatargs)
 
 IMAGECONTENTINFOTYPE_TEXTINCLUDEDINIMAGE_CHOICES = _make_choices_from_list([
   u'captions', u'subtitles', u'captureTime', u'none', 
@@ -5354,7 +5354,7 @@ class imageFormatInfoType_model(SchemaModel):
       'iffer as to the format',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+    # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
     back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
 
@@ -5420,7 +5420,7 @@ class imageClassificationInfoType_model(SchemaModel):
       'age classification',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+    # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)

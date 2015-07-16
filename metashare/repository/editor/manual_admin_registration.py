@@ -17,7 +17,7 @@ from metashare.repository.models import resourceInfoType_model, \
     corpusVideoInfoType_model, textNumericalFormatInfoType_model, \
     videoClassificationInfoType_model, imageClassificationInfoType_model, \
     participantInfoType_model, \
-    corpusImageInfoType_model, corpusTextNumericalInfoType_model, \
+    corpusTextNumericalInfoType_model, \
     corpusTextNgramInfoType_model, languageDescriptionInfoType_model, \
     languageDescriptionTextInfoType_model, \
     languageDescriptionVideoInfoType_model, \
@@ -33,6 +33,7 @@ from metashare.repository.models import resourceInfoType_model, \
 
     # actualUseInfoType_model, \
     # corpusAudioInfoType_model, \
+    # corpusImageInfoType_model, \
 
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from django.views.decorators.csrf import csrf_protect
@@ -229,7 +230,7 @@ custom_admin_classes = {
     # corpusAudioInfoType_model: CorpusAudioModelAdmin,
     corpusTextInfoType_model: CorpusTextInfoAdmin,
     corpusVideoInfoType_model: CorpusVideoInfoAdmin,
-    corpusImageInfoType_model: GenericTabbedAdmin,
+    # corpusImageInfoType_model: GenericTabbedAdmin,
     corpusTextNumericalInfoType_model: GenericTabbedAdmin,
     corpusTextNgramInfoType_model: GenericTabbedAdmin,
     languageDescriptionInfoType_model: LanguageDescriptionInfoAdmin,

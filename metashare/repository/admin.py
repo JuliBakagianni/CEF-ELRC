@@ -11,7 +11,6 @@ from metashare.repository.models import \
     annotationInfoType_model, \
     characterEncodingInfoType_model, \
     communicationInfoType_model, \
-    corpusImageInfoType_model, \
     corpusInfoType_model, \
     corpusMediaTypeType_model, \
     corpusTextInfoType_model, \
@@ -103,6 +102,7 @@ from metashare.repository.models import \
     # audioSizeInfoType_model, \
     # captureInfoType_model, \
     # compressionInfoType_model, \
+    # corpusImageInfoType_model, \
 
 # pylint: disable-msg=C0103
 # class actualUseInfo_model_inline(SchemaModelInline):
@@ -949,7 +949,7 @@ admin.site.register(characterEncodingInfoType_model, SchemaModelAdmin)
 admin.site.register(communicationInfoType_model, SchemaModelAdmin)
 # admin.site.register(compressionInfoType_model, SchemaModelAdmin)
 # admin.site.register(corpusAudioInfoType_model, SchemaModelAdmin)
-admin.site.register(corpusImageInfoType_model, SchemaModelAdmin)
+# admin.site.register(corpusImageInfoType_model, SchemaModelAdmin)
 admin.site.register(corpusInfoType_model, SchemaModelAdmin)
 admin.site.register(corpusMediaTypeType_model, SchemaModelAdmin)
 admin.site.register(corpusTextInfoType_model, SchemaModelAdmin)
