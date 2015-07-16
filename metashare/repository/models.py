@@ -655,9 +655,9 @@ class resourceCreationInfoType_model(SchemaModel):
         formatstring = u'{} {} {}-{}'
         return self.unicode_(formatstring, formatargs)
 
-CREATIONINFOTYPE_CREATIONMODE_CHOICES = _make_choices_from_list([
-  u'automatic', u'manual', u'mixed', u'interactive', 
-])
+# CREATIONINFOTYPE_CREATIONMODE_CHOICES = _make_choices_from_list([
+#   u'automatic', u'manual', u'mixed', u'interactive',
+# ])
 
 # pylint: disable-msg=C0103
 # class creationInfoType_model(SchemaModel):
@@ -3761,45 +3761,45 @@ class foreseenUseInfoType_model(SchemaModel):
         formatstring = u'{}, NLP specific: {}'
         return self.unicode_(formatstring, formatargs)
 
-ACTUALUSEINFOTYPE_ACTUALUSE_CHOICES = _make_choices_from_list([
-  u'humanUse', u'nlpApplications', 
-])
+# ACTUALUSEINFOTYPE_ACTUALUSE_CHOICES = _make_choices_from_list([
+#   u'humanUse', u'nlpApplications',
+# ])
 
-ACTUALUSEINFOTYPE_USENLPSPECIFIC_CHOICES = _make_choices_from_list([
-  u'parsing', u'contradictionDetection', u'opinionMining',
-  u'wordSenseDisambiguation',u'voiceControl', u'topicDetection_Tracking',
-  u'textualEntailment',u'textMining', u'textCategorisation',
-  u'terminologyExtraction',u'summarisation', u'spellChecking',
-  u'speechUnderstanding',u'speechToSpeechTranslation', u'speechSynthesis',
-  u'speechRecognition',u'signLanguageRecognition',
-  u'signLanguageGeneration',u'semanticWeb', u'questionAnswering',
-  u'informationExtraction',u'posTagging', u'personIdentification',
-  u'naturalLanguageUnderstanding',u'naturalLanguageGeneration',
-  u'namedEntityRecognition',u'multimediaDocumentProcessing',
-  u'morphosyntacticTagging',u'morphologicalAnalysis', u'linguisticResearch',
-  u'lexiconEnhancement',u'lemmatization', u'languageModelsTraining',
-  u'languageModelling',u'languageIdentification',
-  u'knowledgeRepresentation',u'knowledgeDiscovery', u'emotionRecognition',
-  u'emotionGeneration',u'documentClassification',
-  u'derivationalMorphologicalAnalysis',u'coreferenceResolution',
-  u'bilingualLexiconInduction',u'annotation', u'webServices',
-  u'eventExtraction',u'semanticRoleLabelling',
-  u'readingAndWritingAidApplications',u'temporalExpressionRecognition',
-  u'intra-documentCoreferenceResolution',u'visualSceneUnderstanding',
-  u'entityMentionRecognition',u'sentimentAnalysis', u'machineTranslation',
-  u'persuasiveExpressionMining',u'qualitativeAnalysis',
-  u'texToSpeechSynthesis',u'personRecognition', u'textGeneration',
-  u'avatarSynthesis',u'discourseAnalysis', u'expressionRecognition',
-  u'faceRecognition',u'faceVerification', u'humanoidAgentSynthesis',
-  u'informationRetrieval',u'lexiconAccess',
-  u'lexiconAcquisitionFromCorpora',u'lexiconExtractionFromLexica',
-  u'lexiconFormatConversion',u'lexiconMerging', u'lexiconVisualization',
-  u'lipTrackingAnalysis',u'multimediaDevelopment', u'speakerIdentification',
-  u'speakerVerification',u'speechLipsCorrelationAnalysis',
-  u'speechAnalysis',u'speechAssistedVideoControl', u'speechVerification',
-  u'spokenDialogueSystems',u'talkingHeadSynthesis', u'userAuthentication',
-  u'other',
-])
+# ACTUALUSEINFOTYPE_USENLPSPECIFIC_CHOICES = _make_choices_from_list([
+#   u'parsing', u'contradictionDetection', u'opinionMining',
+#   u'wordSenseDisambiguation',u'voiceControl', u'topicDetection_Tracking',
+#   u'textualEntailment',u'textMining', u'textCategorisation',
+#   u'terminologyExtraction',u'summarisation', u'spellChecking',
+#   u'speechUnderstanding',u'speechToSpeechTranslation', u'speechSynthesis',
+#   u'speechRecognition',u'signLanguageRecognition',
+#   u'signLanguageGeneration',u'semanticWeb', u'questionAnswering',
+#   u'informationExtraction',u'posTagging', u'personIdentification',
+#   u'naturalLanguageUnderstanding',u'naturalLanguageGeneration',
+#   u'namedEntityRecognition',u'multimediaDocumentProcessing',
+#   u'morphosyntacticTagging',u'morphologicalAnalysis', u'linguisticResearch',
+#   u'lexiconEnhancement',u'lemmatization', u'languageModelsTraining',
+#   u'languageModelling',u'languageIdentification',
+#   u'knowledgeRepresentation',u'knowledgeDiscovery', u'emotionRecognition',
+#   u'emotionGeneration',u'documentClassification',
+#   u'derivationalMorphologicalAnalysis',u'coreferenceResolution',
+#   u'bilingualLexiconInduction',u'annotation', u'webServices',
+#   u'eventExtraction',u'semanticRoleLabelling',
+#   u'readingAndWritingAidApplications',u'temporalExpressionRecognition',
+#   u'intra-documentCoreferenceResolution',u'visualSceneUnderstanding',
+#   u'entityMentionRecognition',u'sentimentAnalysis', u'machineTranslation',
+#   u'persuasiveExpressionMining',u'qualitativeAnalysis',
+#   u'texToSpeechSynthesis',u'personRecognition', u'textGeneration',
+#   u'avatarSynthesis',u'discourseAnalysis', u'expressionRecognition',
+#   u'faceRecognition',u'faceVerification', u'humanoidAgentSynthesis',
+#   u'informationRetrieval',u'lexiconAccess',
+#   u'lexiconAcquisitionFromCorpora',u'lexiconExtractionFromLexica',
+#   u'lexiconFormatConversion',u'lexiconMerging', u'lexiconVisualization',
+#   u'lipTrackingAnalysis',u'multimediaDevelopment', u'speakerIdentification',
+#   u'speakerVerification',u'speechLipsCorrelationAnalysis',
+#   u'speechAnalysis',u'speechAssistedVideoControl', u'speechVerification',
+#   u'spokenDialogueSystems',u'talkingHeadSynthesis', u'userAuthentication',
+#   u'other',
+# ])
 
 # pylint: disable-msg=C0103
 # class actualUseInfoType_model(SchemaModel):
