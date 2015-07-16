@@ -3639,51 +3639,51 @@ class languageInfoType_model(SchemaModel):
 #         return self.unicode_(formatstring, formatargs)
 
 # pylint: disable-msg=C0103
-class usageInfoType_model(SchemaModel):
-    """
-    Groups information on usage of the resource (both intended and
-    actual use)
-    """
-
-    class Meta:
-        verbose_name = "Usage"
-
-
-    __schema_name__ = 'usageInfoType'
-    __schema_fields__ = (
-      ( u'accessTool', u'accessTool', OPTIONAL ),
-      ( u'resourceAssociatedWith', u'resourceAssociatedWith', OPTIONAL ),
-      ( u'foreseenUseInfo', u'foreseenuseinfotype_model_set', RECOMMENDED ),
-      ( u'actualUseInfo', u'actualuseinfotype_model_set', RECOMMENDED ),
-    )
-    __schema_classes__ = {
-      u'accessTool': "targetResourceInfoType_model",
-      u'actualUseInfo': "actualUseInfoType_model",
-      u'foreseenUseInfo': "foreseenUseInfoType_model",
-      u'resourceAssociatedWith': "targetResourceInfoType_model",
-    }
-
-    accessTool = models.ManyToManyField("targetResourceInfoType_model", 
-      verbose_name='Access tool', 
-      help_text='The name or the identifier or the url of the tool used ' \
-      'to access a resource (e.g. a corpus workbench)',
-      blank=True, null=True, related_name="accessTool_%(class)s_related", )
-
-    resourceAssociatedWith = models.ManyToManyField("targetResourceInfoType_model", 
-      verbose_name='Resource associated with', 
-      help_text='Refers to another resource that the resource described ' \
-      'uses for its operation',
-      blank=True, null=True, related_name="resourceAssociatedWith_%(class)s_related", )
-
-    # OneToMany field: foreseenUseInfo
-
-    # OneToMany field: actualUseInfo
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['foreseenUseInfo', 'actualUseInfo', ]
-        formatstring = u'foreseen uses: {} / actual uses: {}'
-        return self.unicode_(formatstring, formatargs)
+# class usageInfoType_model(SchemaModel):
+#     """
+#     Groups information on usage of the resource (both intended and
+#     actual use)
+#     """
+#
+#     class Meta:
+#         verbose_name = "Usage"
+#
+#
+#     __schema_name__ = 'usageInfoType'
+#     __schema_fields__ = (
+#       ( u'accessTool', u'accessTool', OPTIONAL ),
+#       ( u'resourceAssociatedWith', u'resourceAssociatedWith', OPTIONAL ),
+#       ( u'foreseenUseInfo', u'foreseenuseinfotype_model_set', RECOMMENDED ),
+#       ( u'actualUseInfo', u'actualuseinfotype_model_set', RECOMMENDED ),
+#     )
+#     __schema_classes__ = {
+#       u'accessTool': "targetResourceInfoType_model",
+#       u'actualUseInfo': "actualUseInfoType_model",
+#       u'foreseenUseInfo': "foreseenUseInfoType_model",
+#       u'resourceAssociatedWith': "targetResourceInfoType_model",
+#     }
+#
+#     accessTool = models.ManyToManyField("targetResourceInfoType_model",
+#       verbose_name='Access tool',
+#       help_text='The name or the identifier or the url of the tool used ' \
+#       'to access a resource (e.g. a corpus workbench)',
+#       blank=True, null=True, related_name="accessTool_%(class)s_related", )
+#
+#     resourceAssociatedWith = models.ManyToManyField("targetResourceInfoType_model",
+#       verbose_name='Resource associated with',
+#       help_text='Refers to another resource that the resource described ' \
+#       'uses for its operation',
+#       blank=True, null=True, related_name="resourceAssociatedWith_%(class)s_related", )
+#
+#     # OneToMany field: foreseenUseInfo
+#
+#     # OneToMany field: actualUseInfo
+#
+#     def real_unicode_(self):
+#         # pylint: disable-msg=C0301
+#         formatargs = ['foreseenUseInfo', 'actualUseInfo', ]
+#         formatstring = u'foreseen uses: {} / actual uses: {}'
+#         return self.unicode_(formatstring, formatargs)
 
 # FORESEENUSEINFOTYPE_FORESEENUSE_CHOICES = _make_choices_from_list([
 #   u'humanUse', u'nlpApplications',
