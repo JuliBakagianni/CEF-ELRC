@@ -432,51 +432,51 @@ class identificationInfoType_model(SchemaModel):
         return _unicode
 
 # pylint: disable-msg=C0103
-class versionInfoType_model(SchemaModel):
-    """
-    Groups information on a specific version or release of the resource
-    """
-
-    class Meta:
-        verbose_name = "Version"
-
-
-    __schema_name__ = 'versionInfoType'
-    __schema_fields__ = (
-      ( u'version', u'version', REQUIRED ),
-      ( u'revision', u'revision', OPTIONAL ),
-      ( u'lastDateUpdated', u'lastDateUpdated', OPTIONAL ),
-      ( u'updateFrequency', u'updateFrequency', OPTIONAL ),
-    )
-
-    version = XmlCharField(
-      verbose_name='Version', 
-      help_text='Any string, usually a number, that identifies the versi' \
-      'on of a resource',
-      max_length=100, )
-
-    revision = XmlCharField(
-      verbose_name='Revision', 
-      help_text='Provides an account of the revisions in free text or a ' \
-      'link to a document with revisions',
-      blank=True, max_length=500, )
-
-    lastDateUpdated = models.DateField(
-      verbose_name='Last date updated', 
-      help_text='Date of the last update of the version of the resource',
-      blank=True, null=True, )
-
-    updateFrequency = XmlCharField(
-      verbose_name='Update frequency', 
-      help_text='Specifies the frequency with which the resource is upda' \
-      'ted',
-      blank=True, max_length=100, )
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['version', 'revision', 'lastDateUpdated', ]
-        formatstring = u'{} {} {}'
-        return self.unicode_(formatstring, formatargs)
+# class versionInfoType_model(SchemaModel):
+#     """
+#     Groups information on a specific version or release of the resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Version"
+#
+#
+#     __schema_name__ = 'versionInfoType'
+#     __schema_fields__ = (
+#       ( u'version', u'version', REQUIRED ),
+#       ( u'revision', u'revision', OPTIONAL ),
+#       ( u'lastDateUpdated', u'lastDateUpdated', OPTIONAL ),
+#       ( u'updateFrequency', u'updateFrequency', OPTIONAL ),
+#     )
+#
+#     version = XmlCharField(
+#       verbose_name='Version',
+#       help_text='Any string, usually a number, that identifies the versi' \
+#       'on of a resource',
+#       max_length=100, )
+#
+#     revision = XmlCharField(
+#       verbose_name='Revision',
+#       help_text='Provides an account of the revisions in free text or a ' \
+#       'link to a document with revisions',
+#       blank=True, max_length=500, )
+#
+#     lastDateUpdated = models.DateField(
+#       verbose_name='Last date updated',
+#       help_text='Date of the last update of the version of the resource',
+#       blank=True, null=True, )
+#
+#     updateFrequency = XmlCharField(
+#       verbose_name='Update frequency',
+#       help_text='Specifies the frequency with which the resource is upda' \
+#       'ted',
+#       blank=True, max_length=100, )
+#
+#     def real_unicode_(self):
+#         # pylint: disable-msg=C0301
+#         formatargs = ['version', 'revision', 'lastDateUpdated', ]
+#         formatstring = u'{} {} {}'
+#         return self.unicode_(formatstring, formatargs)
 
 # VALIDATIONINFOTYPE_VALIDATIONTYPE_CHOICES = _make_choices_from_list([
 #   u'formal', u'content',
