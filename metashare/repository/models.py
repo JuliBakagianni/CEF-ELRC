@@ -1174,7 +1174,7 @@ class domainInfoType_model(SchemaModel):
                      key=lambda choice: choice[1].lower()),
       )
 
-    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+    # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
 
@@ -1451,7 +1451,7 @@ class annotationInfoType_model(SchemaModel):
       'notation type',
       blank=True, null=True, related_name="annotator_%(class)s_related", )
 
-    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+    # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
 
@@ -1580,7 +1580,7 @@ class modalityInfoType_model(SchemaModel):
       '',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+    # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
 
@@ -2475,7 +2475,7 @@ class linkToOtherMediaInfoType_model(SchemaModel):
       'ithin the same resource',
       blank=True, )
 
-    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+    # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
 
@@ -3228,7 +3228,7 @@ class timeCoverageInfoType_model(SchemaModel):
       'd in the resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+    # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
 
@@ -3287,7 +3287,7 @@ class geographicCoverageInfoType_model(SchemaModel):
       't section of the resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+    # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
 
@@ -3489,7 +3489,7 @@ class languageInfoType_model(SchemaModel):
       'e resource (e.g. dialects)',
       blank=True, null=True, related_name="languageVarietyInfo_%(class)s_related", )
 
-    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+    # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
 
@@ -3900,130 +3900,130 @@ class projectListType_model(SchemaModel):
         return _unicode
 
 # pylint: disable-msg=C0103
-class corpusAudioInfoType_model(SchemaModel):
-    """
-    Groups together information on the audio module of a corpus
-    """
-
-    class Meta:
-        verbose_name = "Corpus audio"
-
-
-    __schema_name__ = 'corpusAudioInfoType'
-    __schema_fields__ = (
-      ( u'mediaType', u'mediaType', REQUIRED ),
-      ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
-      ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
-      ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
-      ( u'audioSizeInfo', u'audioSizeInfo', REQUIRED ),
-      ( u'audioContentInfo', u'audioContentInfo', RECOMMENDED ),
-      ( u'settingInfo', u'settingInfo', RECOMMENDED ),
-      ( u'audioFormatInfo', u'audioformatinfotype_model_set', RECOMMENDED ),
-      ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
-      ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
-      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
-      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
-      ( u'audioClassificationInfo', u'audioclassificationinfotype_model_set', RECOMMENDED ),
-      ( u'recordingInfo', u'recordingInfo', RECOMMENDED ),
-      ( u'captureInfo', u'captureInfo', RECOMMENDED ),
-      ( u'creationInfo', u'creationInfo', OPTIONAL ),
-      ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'annotationInfo': "annotationInfoType_model",
-      u'audioClassificationInfo': "audioClassificationInfoType_model",
-      u'audioContentInfo': "audioContentInfoType_model",
-      u'audioFormatInfo': "audioFormatInfoType_model",
-      u'audioSizeInfo': "audioSizeInfoType_model",
-      u'captureInfo': "captureInfoType_model",
-      u'creationInfo': "creationInfoType_model",
-      u'domainInfo': "domainInfoType_model",
-      u'geographicCoverageInfo': "geographicCoverageInfoType_model",
-      u'languageInfo': "languageInfoType_model",
-      u'lingualityInfo': "lingualityInfoType_model",
-      u'linkToOtherMediaInfo': "linkToOtherMediaInfoType_model",
-      u'modalityInfo': "modalityInfoType_model",
-      u'recordingInfo': "recordingInfoType_model",
-      u'settingInfo': "settingInfoType_model",
-      u'timeCoverageInfo': "timeCoverageInfoType_model",
-    }
-
-    mediaType = XmlCharField(
-      verbose_name='Media', 
-      help_text='Specifies the media type of the resource and basically ' \
-      'corresponds to the physical medium of the content representation.' \
-      ' Each media type is described through a distinctive set of featur' \
-      'es. A resource may consist of parts attributed to different types' \
-      ' of media. A tool/service may take as input/output more than one ' \
-      'different media types.',
-      default="audio", editable=False, max_length=1000, )
-
-    lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
-      verbose_name='Linguality', 
-      help_text='Groups information on the number of languages of the re' \
-      'source part and of the way they are combined to each other',
-      )
-
-    # OneToMany field: languageInfo
-
-    # OneToMany field: modalityInfo
-
-    audioSizeInfo = models.ManyToManyField("audioSizeInfoType_model", 
-      verbose_name='Audio size', 
-      help_text='SizeInfo Element for Audio parts of a resource',
-      related_name="audioSizeInfo_%(class)s_related", )
-
-    audioContentInfo = models.OneToOneField("audioContentInfoType_model", 
-      verbose_name='Audio content', 
-      help_text='Groups together information on the contents of the audi' \
-      'o part of a resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    settingInfo = models.OneToOneField("settingInfoType_model", 
-      verbose_name='Setting', 
-      help_text='Groups together information on the setting of the audio' \
-      ' and/or video part of a resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # OneToMany field: audioFormatInfo
-
-    # OneToMany field: annotationInfo
-
-    # OneToMany field: domainInfo
-
-    # OneToMany field: timeCoverageInfo
-
-    # OneToMany field: geographicCoverageInfo
-
-    # OneToMany field: audioClassificationInfo
-
-    recordingInfo = models.OneToOneField("recordingInfoType_model", 
-      verbose_name='Recording', 
-      help_text='Groups together information on the recording of the aud' \
-      'io or video part of a resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    captureInfo = models.OneToOneField("captureInfoType_model", 
-      verbose_name='Capture', 
-      help_text='Groups together information on the capture of the audio' \
-      ' or video part of a corpus',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    creationInfo = models.OneToOneField("creationInfoType_model", 
-      verbose_name='Creation', 
-      help_text='Groups together information on the resource creation (e' \
-      '.g. for corpora, selection of texts/audio files/ video files etc.' \
-      ' and structural encoding thereof; for lexica, construction of lem' \
-      'ma list etc.)',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # OneToMany field: linkToOtherMediaInfo
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['lingualityInfo', 'languageInfo', ]
-        formatstring = u'audio ({} {})'
-        return self.unicode_(formatstring, formatargs)
+# class corpusAudioInfoType_model(SchemaModel):
+    # """
+    # Groups together information on the audio module of a corpus
+    # """
+    #
+    # class Meta:
+    #     verbose_name = "Corpus audio"
+    #
+    #
+    # __schema_name__ = 'corpusAudioInfoType'
+    # __schema_fields__ = (
+    #   ( u'mediaType', u'mediaType', REQUIRED ),
+    #   ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
+    #   ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
+    #   ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
+    #   ( u'audioSizeInfo', u'audioSizeInfo', REQUIRED ),
+    #   ( u'audioContentInfo', u'audioContentInfo', RECOMMENDED ),
+    #   ( u'settingInfo', u'settingInfo', RECOMMENDED ),
+    #   ( u'audioFormatInfo', u'audioformatinfotype_model_set', RECOMMENDED ),
+    #   ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
+    #   ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
+    #   ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
+    #   ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
+    #   ( u'audioClassificationInfo', u'audioclassificationinfotype_model_set', RECOMMENDED ),
+    #   ( u'recordingInfo', u'recordingInfo', RECOMMENDED ),
+    #   ( u'captureInfo', u'captureInfo', RECOMMENDED ),
+    #   ( u'creationInfo', u'creationInfo', OPTIONAL ),
+    #   ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', OPTIONAL ),
+    # )
+    # __schema_classes__ = {
+    #   u'annotationInfo': "annotationInfoType_model",
+    #   u'audioClassificationInfo': "audioClassificationInfoType_model",
+    #   u'audioContentInfo': "audioContentInfoType_model",
+    #   u'audioFormatInfo': "audioFormatInfoType_model",
+    #   u'audioSizeInfo': "audioSizeInfoType_model",
+    #   u'captureInfo': "captureInfoType_model",
+    #   u'creationInfo': "creationInfoType_model",
+    #   u'domainInfo': "domainInfoType_model",
+    #   u'geographicCoverageInfo': "geographicCoverageInfoType_model",
+    #   u'languageInfo': "languageInfoType_model",
+    #   u'lingualityInfo': "lingualityInfoType_model",
+    #   u'linkToOtherMediaInfo': "linkToOtherMediaInfoType_model",
+    #   u'modalityInfo': "modalityInfoType_model",
+    #   u'recordingInfo': "recordingInfoType_model",
+    #   u'settingInfo': "settingInfoType_model",
+    #   u'timeCoverageInfo': "timeCoverageInfoType_model",
+    # }
+    #
+    # mediaType = XmlCharField(
+    #   verbose_name='Media',
+    #   help_text='Specifies the media type of the resource and basically ' \
+    #   'corresponds to the physical medium of the content representation.' \
+    #   ' Each media type is described through a distinctive set of featur' \
+    #   'es. A resource may consist of parts attributed to different types' \
+    #   ' of media. A tool/service may take as input/output more than one ' \
+    #   'different media types.',
+    #   default="audio", editable=False, max_length=1000, )
+    #
+    # lingualityInfo = models.OneToOneField("lingualityInfoType_model",
+    #   verbose_name='Linguality',
+    #   help_text='Groups information on the number of languages of the re' \
+    #   'source part and of the way they are combined to each other',
+    #   )
+    #
+    # # OneToMany field: languageInfo
+    #
+    # # OneToMany field: modalityInfo
+    #
+    # audioSizeInfo = models.ManyToManyField("audioSizeInfoType_model",
+    #   verbose_name='Audio size',
+    #   help_text='SizeInfo Element for Audio parts of a resource',
+    #   related_name="audioSizeInfo_%(class)s_related", )
+    #
+    # audioContentInfo = models.OneToOneField("audioContentInfoType_model",
+    #   verbose_name='Audio content',
+    #   help_text='Groups together information on the contents of the audi' \
+    #   'o part of a resource',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
+    #
+    # settingInfo = models.OneToOneField("settingInfoType_model",
+    #   verbose_name='Setting',
+    #   help_text='Groups together information on the setting of the audio' \
+    #   ' and/or video part of a resource',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
+    #
+    # # OneToMany field: audioFormatInfo
+    #
+    # # OneToMany field: annotationInfo
+    #
+    # # OneToMany field: domainInfo
+    #
+    # # OneToMany field: timeCoverageInfo
+    #
+    # # OneToMany field: geographicCoverageInfo
+    #
+    # # OneToMany field: audioClassificationInfo
+    #
+    # recordingInfo = models.OneToOneField("recordingInfoType_model",
+    #   verbose_name='Recording',
+    #   help_text='Groups together information on the recording of the aud' \
+    #   'io or video part of a resource',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
+    #
+    # captureInfo = models.OneToOneField("captureInfoType_model",
+    #   verbose_name='Capture',
+    #   help_text='Groups together information on the capture of the audio' \
+    #   ' or video part of a corpus',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
+    #
+    # creationInfo = models.OneToOneField("creationInfoType_model",
+    #   verbose_name='Creation',
+    #   help_text='Groups together information on the resource creation (e' \
+    #   '.g. for corpora, selection of texts/audio files/ video files etc.' \
+    #   ' and structural encoding thereof; for lexica, construction of lem' \
+    #   'ma list etc.)',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
+    #
+    # # OneToMany field: linkToOtherMediaInfo
+    #
+    # def real_unicode_(self):
+    #     # pylint: disable-msg=C0301
+    #     formatargs = ['lingualityInfo', 'languageInfo', ]
+    #     formatstring = u'audio ({} {})'
+    #     return self.unicode_(formatstring, formatargs)
 
 AUDIOCONTENTINFOTYPE_SPEECHITEMS_CHOICES = _make_choices_from_list([
   u'isolatedWords', u'isolatedDigits', u'naturalNumbers', u'properNouns',
@@ -4367,7 +4367,7 @@ class audioFormatInfoType_model(SchemaModel):
       'iffer as to the format',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+    # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
     back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
 
