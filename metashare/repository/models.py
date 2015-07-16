@@ -1497,42 +1497,42 @@ class targetResourceInfoType_model(SchemaModel):
         return self.unicode_(formatstring, formatargs)
 
 # pylint: disable-msg=C0103
-class relationInfoType_model(SchemaModel):
-    """
-    Groups information on the relations of the resource being described
-    with other resources
-    """
-
-    class Meta:
-        verbose_name = "Relation"
-
-
-    __schema_name__ = 'relationInfoType'
-    __schema_fields__ = (
-      ( u'relationType', u'relationType', REQUIRED ),
-      ( u'relatedResource', u'relatedResource', REQUIRED ),
-    )
-    __schema_classes__ = {
-      u'relatedResource': "targetResourceInfoType_model",
-    }
-
-    relationType = XmlCharField(
-      verbose_name='Relation type', 
-      help_text='Specifies the type of relation not covered by the ones ' \
-      'proposed by META-SHARE',
-      max_length=100, )
-
-    relatedResource = models.ForeignKey("targetResourceInfoType_model", 
-      verbose_name='Related resource', 
-      help_text='The full name, the identifier or the url of the related' \
-      ' resource',
-      )
-
-    back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model",  blank=True, null=True)
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class relationInfoType_model(SchemaModel):
+#     """
+#     Groups information on the relations of the resource being described
+#     with other resources
+#     """
+#
+#     class Meta:
+#         verbose_name = "Relation"
+#
+#
+#     __schema_name__ = 'relationInfoType'
+#     __schema_fields__ = (
+#       ( u'relationType', u'relationType', REQUIRED ),
+#       ( u'relatedResource', u'relatedResource', REQUIRED ),
+#     )
+#     __schema_classes__ = {
+#       u'relatedResource': "targetResourceInfoType_model",
+#     }
+#
+#     relationType = XmlCharField(
+#       verbose_name='Relation type',
+#       help_text='Specifies the type of relation not covered by the ones ' \
+#       'proposed by META-SHARE',
+#       max_length=100, )
+#
+#     relatedResource = models.ForeignKey("targetResourceInfoType_model",
+#       verbose_name='Related resource',
+#       help_text='The full name, the identifier or the url of the related' \
+#       ' resource',
+#       )
+#
+#     back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model",  blank=True, null=True)
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # MODALITYINFOTYPE_MODALITYTYPE_CHOICES = _make_choices_from_list([
 #   u'bodyGesture', u'facialExpression', u'voice', u'combinationOfModalities',
