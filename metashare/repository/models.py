@@ -2195,119 +2195,119 @@ class runningEnvironmentInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-RECORDINGINFOTYPE_RECORDINGDEVICETYPE_CHOICES = _make_choices_from_list([
-  u'hardDisk', u'dv', u'tapeVHS', u'flash', u'DAT', u'soundBlasterCard',
-  u'other',
-])
+# RECORDINGINFOTYPE_RECORDINGDEVICETYPE_CHOICES = _make_choices_from_list([
+#   u'hardDisk', u'dv', u'tapeVHS', u'flash', u'DAT', u'soundBlasterCard',
+#   u'other',
+# ])
 
-RECORDINGINFOTYPE_RECORDINGENVIRONMENT_CHOICES = _make_choices_from_list([
-  u'office', u'inCar', u'studio', u'conferenceRoom', u'lectureRoom',
-  u'industrial',u'transport', u'openPublicPlace', u'closedPublicPlace',
-  u'anechoicChamber',u'other', 
-])
+# RECORDINGINFOTYPE_RECORDINGENVIRONMENT_CHOICES = _make_choices_from_list([
+#   u'office', u'inCar', u'studio', u'conferenceRoom', u'lectureRoom',
+#   u'industrial',u'transport', u'openPublicPlace', u'closedPublicPlace',
+#   u'anechoicChamber',u'other',
+# ])
 
-RECORDINGINFOTYPE_SOURCECHANNEL_CHOICES = _make_choices_from_list([
-  u'internet', u'radio', u'tv', u'telephone', u'laryngograph', u'airflow',
-  u'EMA',u'webCam', u'camcorder', u'other', 
-])
+# RECORDINGINFOTYPE_SOURCECHANNEL_CHOICES = _make_choices_from_list([
+#   u'internet', u'radio', u'tv', u'telephone', u'laryngograph', u'airflow',
+#   u'EMA',u'webCam', u'camcorder', u'other',
+# ])
 
-RECORDINGINFOTYPE_SOURCECHANNELTYPE_CHOICES = _make_choices_from_list([
-  u'ISDN', u'GSM', u'3G', u'CDMA', u'DVB-T', u'DVB-S', u'DVB-C', u'VOIP',
-  u'other',
-])
+# RECORDINGINFOTYPE_SOURCECHANNELTYPE_CHOICES = _make_choices_from_list([
+#   u'ISDN', u'GSM', u'3G', u'CDMA', u'DVB-T', u'DVB-S', u'DVB-C', u'VOIP',
+#   u'other',
+# ])
 
 # pylint: disable-msg=C0103
-class recordingInfoType_model(SchemaModel):
-    """
-    Groups together information on the recording of the audio or video
-    part of a resource
-    """
-
-    class Meta:
-        verbose_name = "Recording"
-
-
-    __schema_name__ = 'recordingInfoType'
-    __schema_fields__ = (
-      ( u'recordingDeviceType', u'recordingDeviceType', OPTIONAL ),
-      ( u'recordingDeviceTypeDetails', u'recordingDeviceTypeDetails', OPTIONAL ),
-      ( u'recordingPlatformSoftware', u'recordingPlatformSoftware', OPTIONAL ),
-      ( u'recordingEnvironment', u'recordingEnvironment', OPTIONAL ),
-      ( u'sourceChannel', u'sourceChannel', OPTIONAL ),
-      ( u'sourceChannelType', u'sourceChannelType', OPTIONAL ),
-      ( u'sourceChannelName', u'sourceChannelName', OPTIONAL ),
-      ( u'sourceChannelDetails', u'sourceChannelDetails', OPTIONAL ),
-      ( 'recorder/personInfo', 'recorder', OPTIONAL ),
-      ( 'recorder/organizationInfo', 'recorder', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'organizationInfo': "organizationInfoType_model",
-      u'personInfo': "personInfoType_model",
-    }
-
-    recordingDeviceType = MultiSelectField(
-      verbose_name='Recording device type', 
-      help_text='The nature of the recording platform hardware and the s' \
-      'torage medium',
-      blank=True, 
-      max_length=1 + len(RECORDINGINFOTYPE_RECORDINGDEVICETYPE_CHOICES['choices']) / 4,
-      choices=RECORDINGINFOTYPE_RECORDINGDEVICETYPE_CHOICES['choices'],
-      )
-
-    recordingDeviceTypeDetails = XmlCharField(
-      verbose_name='Recording device type details', 
-      help_text='Free text description of the recoding device',
-      blank=True, max_length=500, )
-
-    recordingPlatformSoftware = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=11, max_length=100), 
-      verbose_name='Recording platform software', 
-      help_text='The software used for the recording platform',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    recordingEnvironment = MultiSelectField(
-      verbose_name='Recording environment', 
-      help_text='Where the recording took place',
-      blank=True, 
-      max_length=1 + len(RECORDINGINFOTYPE_RECORDINGENVIRONMENT_CHOICES['choices']) / 4,
-      choices=RECORDINGINFOTYPE_RECORDINGENVIRONMENT_CHOICES['choices'],
-      )
-
-    sourceChannel = MultiSelectField(
-      verbose_name='Source channel', 
-      help_text='Information on the source channel',
-      blank=True, 
-      max_length=1 + len(RECORDINGINFOTYPE_SOURCECHANNEL_CHOICES['choices']) / 4,
-      choices=RECORDINGINFOTYPE_SOURCECHANNEL_CHOICES['choices'],
-      )
-
-    sourceChannelType = MultiSelectField(
-      verbose_name='Source channel type', 
-      help_text='Type of the source channel',
-      blank=True, 
-      max_length=1 + len(RECORDINGINFOTYPE_SOURCECHANNELTYPE_CHOICES['choices']) / 4,
-      choices=RECORDINGINFOTYPE_SOURCECHANNELTYPE_CHOICES['choices'],
-      )
-
-    sourceChannelName = MultiTextField(max_length=30, widget=MultiFieldWidget(widget_id=12, max_length=30), 
-      verbose_name='Source channel name', 
-      help_text='The name of the specific source recorded',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    sourceChannelDetails = XmlCharField(
-      verbose_name='Source channel details', 
-      help_text='The details of the channel equipment used (brand, type ' \
-      'etc.)',
-      blank=True, max_length=200, )
-
-    recorder = models.ManyToManyField("actorInfoType_model", 
-      verbose_name='Recorder', 
-      help_text='Information on the recorder(s) of the audio or video pa' \
-      'rt of the resource',
-      blank=True, null=True, related_name="recorder_%(class)s_related", )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class recordingInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the recording of the audio or video
+#     part of a resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Recording"
+#
+#
+#     __schema_name__ = 'recordingInfoType'
+#     __schema_fields__ = (
+#       ( u'recordingDeviceType', u'recordingDeviceType', OPTIONAL ),
+#       ( u'recordingDeviceTypeDetails', u'recordingDeviceTypeDetails', OPTIONAL ),
+#       ( u'recordingPlatformSoftware', u'recordingPlatformSoftware', OPTIONAL ),
+#       ( u'recordingEnvironment', u'recordingEnvironment', OPTIONAL ),
+#       ( u'sourceChannel', u'sourceChannel', OPTIONAL ),
+#       ( u'sourceChannelType', u'sourceChannelType', OPTIONAL ),
+#       ( u'sourceChannelName', u'sourceChannelName', OPTIONAL ),
+#       ( u'sourceChannelDetails', u'sourceChannelDetails', OPTIONAL ),
+#       ( 'recorder/personInfo', 'recorder', OPTIONAL ),
+#       ( 'recorder/organizationInfo', 'recorder', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'organizationInfo': "organizationInfoType_model",
+#       u'personInfo': "personInfoType_model",
+#     }
+#
+#     recordingDeviceType = MultiSelectField(
+#       verbose_name='Recording device type',
+#       help_text='The nature of the recording platform hardware and the s' \
+#       'torage medium',
+#       blank=True,
+#       max_length=1 + len(RECORDINGINFOTYPE_RECORDINGDEVICETYPE_CHOICES['choices']) / 4,
+#       choices=RECORDINGINFOTYPE_RECORDINGDEVICETYPE_CHOICES['choices'],
+#       )
+#
+#     recordingDeviceTypeDetails = XmlCharField(
+#       verbose_name='Recording device type details',
+#       help_text='Free text description of the recoding device',
+#       blank=True, max_length=500, )
+#
+#     recordingPlatformSoftware = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=11, max_length=100),
+#       verbose_name='Recording platform software',
+#       help_text='The software used for the recording platform',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     recordingEnvironment = MultiSelectField(
+#       verbose_name='Recording environment',
+#       help_text='Where the recording took place',
+#       blank=True,
+#       max_length=1 + len(RECORDINGINFOTYPE_RECORDINGENVIRONMENT_CHOICES['choices']) / 4,
+#       choices=RECORDINGINFOTYPE_RECORDINGENVIRONMENT_CHOICES['choices'],
+#       )
+#
+#     sourceChannel = MultiSelectField(
+#       verbose_name='Source channel',
+#       help_text='Information on the source channel',
+#       blank=True,
+#       max_length=1 + len(RECORDINGINFOTYPE_SOURCECHANNEL_CHOICES['choices']) / 4,
+#       choices=RECORDINGINFOTYPE_SOURCECHANNEL_CHOICES['choices'],
+#       )
+#
+#     sourceChannelType = MultiSelectField(
+#       verbose_name='Source channel type',
+#       help_text='Type of the source channel',
+#       blank=True,
+#       max_length=1 + len(RECORDINGINFOTYPE_SOURCECHANNELTYPE_CHOICES['choices']) / 4,
+#       choices=RECORDINGINFOTYPE_SOURCECHANNELTYPE_CHOICES['choices'],
+#       )
+#
+#     sourceChannelName = MultiTextField(max_length=30, widget=MultiFieldWidget(widget_id=12, max_length=30),
+#       verbose_name='Source channel name',
+#       help_text='The name of the specific source recorded',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     sourceChannelDetails = XmlCharField(
+#       verbose_name='Source channel details',
+#       help_text='The details of the channel equipment used (brand, type ' \
+#       'etc.)',
+#       blank=True, max_length=200, )
+#
+#     recorder = models.ManyToManyField("actorInfoType_model",
+#       verbose_name='Recorder',
+#       help_text='Information on the recorder(s) of the audio or video pa' \
+#       'rt of the resource',
+#       blank=True, null=True, related_name="recorder_%(class)s_related", )
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 RESOLUTIONINFOTYPE_RESOLUTIONSTANDARD_CHOICES = _make_choices_from_list([
   u'VGA', u'HD.720', u'HD.1080', 
