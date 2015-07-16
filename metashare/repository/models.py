@@ -320,7 +320,7 @@ class sizeInfoType_model(SchemaModel):
 
     # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
-    back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
+    # back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
 
     # back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
 
@@ -1459,7 +1459,7 @@ class annotationInfoType_model(SchemaModel):
 
     # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
-    back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
+    # back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
 
     # back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
 
@@ -1586,7 +1586,7 @@ class modalityInfoType_model(SchemaModel):
 
     # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
-    back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
+    # back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
 
     back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
 
@@ -2483,7 +2483,7 @@ class linkToOtherMediaInfoType_model(SchemaModel):
 
     # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
-    back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
+    # back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
 
     back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
 
@@ -5427,93 +5427,93 @@ class imageClassificationInfoType_model(SchemaModel):
         return _unicode
 
 # pylint: disable-msg=C0103
-class corpusTextNumericalInfoType_model(SchemaModel):
-    """
-    Groups together information on the textNumerical component of a
-    corpus. It is used basically for the textual representation of
-    measurements and observations linked to sensorimotor recordings
-    """
-
-    class Meta:
-        verbose_name = "Corpus text numerical"
-
-
-    __schema_name__ = 'corpusTextNumericalInfoType'
-    __schema_fields__ = (
-      ( u'mediaType', u'mediaType', REQUIRED ),
-      ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
-      ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
-      ( u'textNumericalContentInfo', u'textNumericalContentInfo', RECOMMENDED ),
-      ( u'textNumericalFormatInfo', u'textnumericalformatinfotype_model_set', RECOMMENDED ),
-      ( u'recordingInfo', u'recordingInfo', RECOMMENDED ),
-      ( u'captureInfo', u'captureInfo', RECOMMENDED ),
-      ( u'creationInfo', u'creationInfo', RECOMMENDED ),
-      ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
-      ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', RECOMMENDED ),
-    )
-    __schema_classes__ = {
-      u'annotationInfo': "annotationInfoType_model",
-      u'captureInfo': "captureInfoType_model",
-      u'creationInfo': "creationInfoType_model",
-      u'linkToOtherMediaInfo': "linkToOtherMediaInfoType_model",
-      u'modalityInfo': "modalityInfoType_model",
-      u'recordingInfo': "recordingInfoType_model",
-      u'sizeInfo': "sizeInfoType_model",
-      u'textNumericalContentInfo': "textNumericalContentInfoType_model",
-      u'textNumericalFormatInfo': "textNumericalFormatInfoType_model",
-    }
-
-    mediaType = XmlCharField(
-      verbose_name='Media', 
-      help_text='Specifies the media type of the resource and basically ' \
-      'corresponds to the physical medium of the content representation.' \
-      ' Each media type is described through a distinctive set of featur' \
-      'es. A resource may consist of parts attributed to different types' \
-      ' of media. A tool/service may take as input/output more than one ' \
-      'different media types.',
-      default="textNumerical", editable=False, max_length=1000, )
-
-    # OneToMany field: modalityInfo
-
-    # OneToMany field: sizeInfo
-
-    textNumericalContentInfo = models.OneToOneField("textNumericalContentInfoType_model", 
-      verbose_name='Text numerical content', 
-      help_text='Groups information on the content of the textNumerical ' \
-      'part of the resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # OneToMany field: textNumericalFormatInfo
-
-    recordingInfo = models.OneToOneField("recordingInfoType_model", 
-      verbose_name='Recording', 
-      help_text='Groups together information on the recording of the aud' \
-      'io or video part of a resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # captureInfo = models.OneToOneField("captureInfoType_model",
-    #   verbose_name='Capture',
-    #   help_text='Groups together information on the capture of the audio' \
-    #   ' or video part of a corpus',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
-
-    creationInfo = models.OneToOneField("creationInfoType_model", 
-      verbose_name='Creation', 
-      help_text='Groups together information on the resource creation (e' \
-      '.g. for corpora, selection of texts/audio files/ video files etc.' \
-      ' and structural encoding thereof; for lexica, construction of lem' \
-      'ma list etc.)',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # OneToMany field: annotationInfo
-
-    # OneToMany field: linkToOtherMediaInfo
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['modalityInfo', 'sizeInfo', ]
-        formatstring = u'textNumerical ({} {})'
-        return self.unicode_(formatstring, formatargs)
+# class corpusTextNumericalInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the textNumerical component of a
+#     corpus. It is used basically for the textual representation of
+#     measurements and observations linked to sensorimotor recordings
+#     """
+#
+#     class Meta:
+#         verbose_name = "Corpus text numerical"
+#
+#
+#     __schema_name__ = 'corpusTextNumericalInfoType'
+#     __schema_fields__ = (
+#       ( u'mediaType', u'mediaType', REQUIRED ),
+#       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
+#       ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
+#       ( u'textNumericalContentInfo', u'textNumericalContentInfo', RECOMMENDED ),
+#       ( u'textNumericalFormatInfo', u'textnumericalformatinfotype_model_set', RECOMMENDED ),
+#       ( u'recordingInfo', u'recordingInfo', RECOMMENDED ),
+#       ( u'captureInfo', u'captureInfo', RECOMMENDED ),
+#       ( u'creationInfo', u'creationInfo', RECOMMENDED ),
+#       ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
+#       ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', RECOMMENDED ),
+#     )
+#     __schema_classes__ = {
+#       u'annotationInfo': "annotationInfoType_model",
+#       u'captureInfo': "captureInfoType_model",
+#       u'creationInfo': "creationInfoType_model",
+#       u'linkToOtherMediaInfo': "linkToOtherMediaInfoType_model",
+#       u'modalityInfo': "modalityInfoType_model",
+#       u'recordingInfo': "recordingInfoType_model",
+#       u'sizeInfo': "sizeInfoType_model",
+#       u'textNumericalContentInfo': "textNumericalContentInfoType_model",
+#       u'textNumericalFormatInfo': "textNumericalFormatInfoType_model",
+#     }
+#
+#     mediaType = XmlCharField(
+#       verbose_name='Media',
+#       help_text='Specifies the media type of the resource and basically ' \
+#       'corresponds to the physical medium of the content representation.' \
+#       ' Each media type is described through a distinctive set of featur' \
+#       'es. A resource may consist of parts attributed to different types' \
+#       ' of media. A tool/service may take as input/output more than one ' \
+#       'different media types.',
+#       default="textNumerical", editable=False, max_length=1000, )
+#
+#     # OneToMany field: modalityInfo
+#
+#     # OneToMany field: sizeInfo
+#
+#     textNumericalContentInfo = models.OneToOneField("textNumericalContentInfoType_model",
+#       verbose_name='Text numerical content',
+#       help_text='Groups information on the content of the textNumerical ' \
+#       'part of the resource',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # OneToMany field: textNumericalFormatInfo
+#
+#     recordingInfo = models.OneToOneField("recordingInfoType_model",
+#       verbose_name='Recording',
+#       help_text='Groups together information on the recording of the aud' \
+#       'io or video part of a resource',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # captureInfo = models.OneToOneField("captureInfoType_model",
+#     #   verbose_name='Capture',
+#     #   help_text='Groups together information on the capture of the audio' \
+#     #   ' or video part of a corpus',
+#     #   blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     creationInfo = models.OneToOneField("creationInfoType_model",
+#       verbose_name='Creation',
+#       help_text='Groups together information on the resource creation (e' \
+#       '.g. for corpora, selection of texts/audio files/ video files etc.' \
+#       ' and structural encoding thereof; for lexica, construction of lem' \
+#       'ma list etc.)',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # OneToMany field: annotationInfo
+#
+#     # OneToMany field: linkToOtherMediaInfo
+#
+#     def real_unicode_(self):
+#         # pylint: disable-msg=C0301
+#         formatargs = ['modalityInfo', 'sizeInfo', ]
+#         formatstring = u'textNumerical ({} {})'
+#         return self.unicode_(formatstring, formatargs)
 
 # pylint: disable-msg=C0103
 class textNumericalContentInfoType_model(SchemaModel):
@@ -5580,7 +5580,7 @@ class textNumericalFormatInfoType_model(SchemaModel):
       ' parts with different format',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
+    # back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)

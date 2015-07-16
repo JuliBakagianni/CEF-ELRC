@@ -14,7 +14,6 @@ from metashare.repository.models import \
     corpusInfoType_model, \
     corpusMediaTypeType_model, \
     corpusTextInfoType_model, \
-    corpusTextNumericalInfoType_model, \
     corpusVideoInfoType_model, \
     creationInfoType_model, \
     distributionInfoType_model, \
@@ -103,6 +102,7 @@ from metashare.repository.models import \
     # compressionInfoType_model, \
     # corpusImageInfoType_model, \
     # corpusTextNgramInfoType_model, \
+    # corpusTextNumericalInfoType_model, \
 
 # pylint: disable-msg=C0103
 # class actualUseInfo_model_inline(SchemaModelInline):
@@ -954,7 +954,7 @@ admin.site.register(corpusInfoType_model, SchemaModelAdmin)
 admin.site.register(corpusMediaTypeType_model, SchemaModelAdmin)
 admin.site.register(corpusTextInfoType_model, SchemaModelAdmin)
 # admin.site.register(corpusTextNgramInfoType_model, SchemaModelAdmin)
-admin.site.register(corpusTextNumericalInfoType_model, SchemaModelAdmin)
+# admin.site.register(corpusTextNumericalInfoType_model, SchemaModelAdmin)
 admin.site.register(corpusVideoInfoType_model, SchemaModelAdmin)
 admin.site.register(creationInfoType_model, SchemaModelAdmin)
 admin.site.register(distributionInfoType_model, SchemaModelAdmin)
