@@ -39,7 +39,6 @@ from metashare.repository.models import \
     personInfoType_model, \
     personListType_model, \
     projectListType_model, \
-    relatedLexiconInfoType_model, \
     relationInfoType_model, \
     resolutionInfoType_model, \
     resourceComponentTypeType_model, \
@@ -69,6 +68,7 @@ from metashare.repository.models import \
     # languageDescriptionImageInfoType_model, \
     # personSourceSetInfoType_model, \
     # recordingInfoType_model, \
+    # relatedLexiconInfoType_model, \
     # lexicalConceptualResourceVideoInfoType_model, \
     # lexicalConceptualResourceImageInfoType_model, \
     # lexicalConceptualResourceAudioInfoType_model, \
@@ -1006,7 +1006,7 @@ admin.site.register(personListType_model, SchemaModelAdmin)
 # admin.site.register(projectInfoType_model, SchemaModelAdmin)
 admin.site.register(projectListType_model, SchemaModelAdmin)
 # admin.site.register(recordingInfoType_model, SchemaModelAdmin)
-admin.site.register(relatedLexiconInfoType_model, SchemaModelAdmin)
+# admin.site.register(relatedLexiconInfoType_model, SchemaModelAdmin)
 admin.site.register(relationInfoType_model, SchemaModelAdmin)
 admin.site.register(resolutionInfoType_model, SchemaModelAdmin)
 admin.site.register(resourceComponentTypeType_model, SchemaModelAdmin)

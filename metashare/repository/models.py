@@ -5764,60 +5764,60 @@ class textNumericalFormatInfoType_model(SchemaModel):
 #         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
 #         return _unicode
 
-RELATEDLEXICONINFOTYPE_RELATEDLEXICONTYPE_CHOICES = _make_choices_from_list([
-  u'included', u'attached', u'compatible', u'none', 
-])
+# RELATEDLEXICONINFOTYPE_RELATEDLEXICONTYPE_CHOICES = _make_choices_from_list([
+#   u'included', u'attached', u'compatible', u'none',
+# ])
 
-RELATEDLEXICONINFOTYPE_COMPATIBLELEXICONTYPE_CHOICES = _make_choices_from_list([
-  u'wordnet', u'wordlist', u'morphologicalLexicon', u'other', 
-])
+# RELATEDLEXICONINFOTYPE_COMPATIBLELEXICONTYPE_CHOICES = _make_choices_from_list([
+#   u'wordnet', u'wordlist', u'morphologicalLexicon', u'other',
+# ])
 
 # pylint: disable-msg=C0103
-class relatedLexiconInfoType_model(SchemaModel):
-    """
-    Groups together information on requirements for lexica set by the
-    LanguageDescriptions
-    """
-
-    class Meta:
-        verbose_name = "Related lexicon"
-
-
-    __schema_name__ = 'relatedLexiconInfoType'
-    __schema_fields__ = (
-      ( u'relatedLexiconType', u'relatedLexiconType', REQUIRED ),
-      ( u'attachedLexiconPosition', u'attachedLexiconPosition', OPTIONAL ),
-      ( u'compatibleLexiconType', u'compatibleLexiconType', OPTIONAL ),
-    )
-
-    relatedLexiconType = models.CharField(
-      verbose_name='Related lexicon type', 
-      help_text='Indicates the position of the lexica that must or can b' \
-      'e used with the grammar',
-      
-      max_length=30,
-      choices=sorted(RELATEDLEXICONINFOTYPE_RELATEDLEXICONTYPE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    attachedLexiconPosition = XmlCharField(
-      verbose_name='Attached lexicon position', 
-      help_text='Indicates the position of the lexicon, if attached to t' \
-      'he grammar',
-      blank=True, max_length=500, )
-
-    compatibleLexiconType = MultiSelectField(
-      verbose_name='Compatible lexicon type', 
-      help_text='Type of (external) lexicon that can be used with the gr' \
-      'ammar',
-      blank=True, 
-      max_length=1 + len(RELATEDLEXICONINFOTYPE_COMPATIBLELEXICONTYPE_CHOICES['choices']) / 4,
-      choices=RELATEDLEXICONINFOTYPE_COMPATIBLELEXICONTYPE_CHOICES['choices'],
-      )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class relatedLexiconInfoType_model(SchemaModel):
+#     """
+#     Groups together information on requirements for lexica set by the
+#     LanguageDescriptions
+#     """
+#
+#     class Meta:
+#         verbose_name = "Related lexicon"
+#
+#
+#     __schema_name__ = 'relatedLexiconInfoType'
+#     __schema_fields__ = (
+#       ( u'relatedLexiconType', u'relatedLexiconType', REQUIRED ),
+#       ( u'attachedLexiconPosition', u'attachedLexiconPosition', OPTIONAL ),
+#       ( u'compatibleLexiconType', u'compatibleLexiconType', OPTIONAL ),
+#     )
+#
+#     relatedLexiconType = models.CharField(
+#       verbose_name='Related lexicon type',
+#       help_text='Indicates the position of the lexica that must or can b' \
+#       'e used with the grammar',
+#
+#       max_length=30,
+#       choices=sorted(RELATEDLEXICONINFOTYPE_RELATEDLEXICONTYPE_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     attachedLexiconPosition = XmlCharField(
+#       verbose_name='Attached lexicon position',
+#       help_text='Indicates the position of the lexicon, if attached to t' \
+#       'he grammar',
+#       blank=True, max_length=500, )
+#
+#     compatibleLexiconType = MultiSelectField(
+#       verbose_name='Compatible lexicon type',
+#       help_text='Type of (external) lexicon that can be used with the gr' \
+#       'ammar',
+#       blank=True,
+#       max_length=1 + len(RELATEDLEXICONINFOTYPE_COMPATIBLELEXICONTYPE_CHOICES['choices']) / 4,
+#       choices=RELATEDLEXICONINFOTYPE_COMPATIBLELEXICONTYPE_CHOICES['choices'],
+#       )
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 LANGUAGEDESCRIPTIONENCODINGINFOTYPE_ENCODINGLEVEL_CHOICES = _make_choices_from_list([
   u'phonetics', u'phonology', u'semantics', u'morphology', u'syntax',
