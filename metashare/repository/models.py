@@ -7383,56 +7383,56 @@ class toolServiceOperationInfoType_model(SchemaModel):
         return _unicode
 
 # pylint: disable-msg=C0103
-class toolServiceCreationInfoType_model(SchemaModel):
-    """
-    Groups together information on the creation of a tool or service
-    """
-
-    class Meta:
-        verbose_name = "Tool service creation"
-
-
-    __schema_name__ = 'toolServiceCreationInfoType'
-    __schema_fields__ = (
-      ( u'implementationLanguage', u'implementationLanguage', RECOMMENDED ),
-      ( u'formalism', u'formalism', OPTIONAL ),
-      ( u'originalSource', u'originalSource', OPTIONAL ),
-      ( u'creationDetails', u'creationDetails', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'originalSource': "targetResourceInfoType_model",
-    }
-
-    implementationLanguage = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=41, max_length=100), 
-      verbose_name='Implementation language', 
-      help_text='The programming languages needed for allowing user cont' \
-      'ributions, or for running the tools, in case no executables are a' \
-      'vailable',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    formalism = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=42, max_length=100), 
-      verbose_name='Formalism', 
-      help_text='Reference (name, bibliographic reference or link to url' \
-      ') for the formalism used for the creation/enrichment of the resou' \
-      'rce (grammar or tool/service)',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    originalSource = models.ManyToManyField("targetResourceInfoType_model", 
-      verbose_name='Original source', 
-      help_text='The name, the identifier or the url of thethe original ' \
-      'resources that were at the base of the creation process of the re' \
-      'source',
-      blank=True, null=True, related_name="originalSource_%(class)s_related", )
-
-    creationDetails = XmlCharField(
-      verbose_name='Creation details', 
-      help_text='Provides additional information on the creation of a to' \
-      'ol or service',
-      blank=True, max_length=500, )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class toolServiceCreationInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the creation of a tool or service
+#     """
+#
+#     class Meta:
+#         verbose_name = "Tool service creation"
+#
+#
+#     __schema_name__ = 'toolServiceCreationInfoType'
+#     __schema_fields__ = (
+#       ( u'implementationLanguage', u'implementationLanguage', RECOMMENDED ),
+#       ( u'formalism', u'formalism', OPTIONAL ),
+#       ( u'originalSource', u'originalSource', OPTIONAL ),
+#       ( u'creationDetails', u'creationDetails', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'originalSource': "targetResourceInfoType_model",
+#     }
+#
+#     implementationLanguage = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=41, max_length=100),
+#       verbose_name='Implementation language',
+#       help_text='The programming languages needed for allowing user cont' \
+#       'ributions, or for running the tools, in case no executables are a' \
+#       'vailable',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     formalism = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=42, max_length=100),
+#       verbose_name='Formalism',
+#       help_text='Reference (name, bibliographic reference or link to url' \
+#       ') for the formalism used for the creation/enrichment of the resou' \
+#       'rce (grammar or tool/service)',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     originalSource = models.ManyToManyField("targetResourceInfoType_model",
+#       verbose_name='Original source',
+#       help_text='The name, the identifier or the url of thethe original ' \
+#       'resources that were at the base of the creation process of the re' \
+#       'source',
+#       blank=True, null=True, related_name="originalSource_%(class)s_related", )
+#
+#     creationDetails = XmlCharField(
+#       verbose_name='Creation details',
+#       help_text='Provides additional information on the creation of a to' \
+#       'ol or service',
+#       blank=True, max_length=500, )
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # pylint: disable-msg=C0103
 class resourceComponentTypeType_model(SubclassableModel):
@@ -7678,11 +7678,11 @@ class toolServiceInfoType_model(resourceComponentTypeType_model):
       ' a tool or service',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    toolServiceCreationInfo = models.OneToOneField("toolServiceCreationInfoType_model", 
-      verbose_name='Tool service creation', 
-      help_text='Groups together information on the creation of a tool o' \
-      'r service',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # toolServiceCreationInfo = models.OneToOneField("toolServiceCreationInfoType_model",
+    #   verbose_name='Tool service creation',
+    #   help_text='Groups together information on the creation of a tool o' \
+    #   'r service',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301

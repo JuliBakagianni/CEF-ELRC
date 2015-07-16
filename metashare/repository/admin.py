@@ -47,7 +47,6 @@ from metashare.repository.models import \
     textClassificationInfoType_model, \
     textFormatInfoType_model, \
     timeCoverageInfoType_model, \
-    toolServiceCreationInfoType_model, \
     toolServiceEvaluationInfoType_model, \
     toolServiceInfoType_model, \
     toolServiceOperationInfoType_model, \
@@ -59,6 +58,7 @@ from metashare.repository.models import \
     identificationInfoType_model, \
     videoFormatInfoType_model
     # languageDescriptionImageInfoType_model, \
+    # toolServiceCreationInfoType_model, \
     # personSourceSetInfoType_model, \
     # textNumericalFormatInfoType_model, \
     # recordingInfoType_model, \
@@ -1023,7 +1023,7 @@ admin.site.register(textFormatInfoType_model, SchemaModelAdmin)
 # admin.site.register(textNumericalContentInfoType_model, SchemaModelAdmin)
 # admin.site.register(textNumericalFormatInfoType_model, SchemaModelAdmin)
 admin.site.register(timeCoverageInfoType_model, SchemaModelAdmin)
-admin.site.register(toolServiceCreationInfoType_model, SchemaModelAdmin)
+# admin.site.register(toolServiceCreationInfoType_model, SchemaModelAdmin)
 admin.site.register(toolServiceEvaluationInfoType_model, SchemaModelAdmin)
 admin.site.register(toolServiceInfoType_model, SchemaModelAdmin)
 admin.site.register(toolServiceOperationInfoType_model, SchemaModelAdmin)
