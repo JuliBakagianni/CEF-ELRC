@@ -5690,79 +5690,79 @@ class textNumericalFormatInfoType_model(SchemaModel):
 #         formatstring = u'textNgram ({} {})'
 #         return self.unicode_(formatstring, formatargs)
 
-NGRAMINFOTYPE_BASEITEM_CHOICES = _make_choices_from_list([
-  u'word', u'syllable', u'letter', u'phoneme', u'other', 
-])
+# NGRAMINFOTYPE_BASEITEM_CHOICES = _make_choices_from_list([
+#   u'word', u'syllable', u'letter', u'phoneme', u'other',
+# ])
 
 # pylint: disable-msg=C0103
-class ngramInfoType_model(SchemaModel):
-    """
-    Groups information specific to n-gram resources (e.g. range of
-    n-grams, base item etc.)
-    """
-
-    class Meta:
-        verbose_name = "Ngram"
-
-
-    __schema_name__ = 'ngramInfoType'
-    __schema_fields__ = (
-      ( u'baseItem', u'baseItem', REQUIRED ),
-      ( u'order', u'order', REQUIRED ),
-      ( u'perplexity', u'perplexity', RECOMMENDED ),
-      ( u'isFactored', u'isFactored', RECOMMENDED ),
-      ( u'factors', u'factors', RECOMMENDED ),
-      ( u'smoothing', u'smoothing', RECOMMENDED ),
-      ( u'interpolated', u'interpolated', OPTIONAL ),
-    )
-
-    baseItem = MultiSelectField(
-      verbose_name='Base item', 
-      help_text='Type of item that is represented in the n-gram resource' \
-      '',
-      
-      max_length=1 + len(NGRAMINFOTYPE_BASEITEM_CHOICES['choices']) / 4,
-      choices=NGRAMINFOTYPE_BASEITEM_CHOICES['choices'],
-      )
-
-    order = models.IntegerField(
-      verbose_name='Order', 
-      help_text='The maximum number of items in the sequence',
-      )
-
-    perplexity = models.FloatField(
-      verbose_name='Perplexity', 
-      help_text='Derived from running on test set taken from the same co' \
-      'rpus',
-      blank=True, null=True, )
-
-    isFactored = MetaBooleanField(
-      verbose_name='Is factored', 
-      help_text='Specifies whether the model is factored or not',
-      blank=True, )
-
-    factors = MultiTextField(max_length=150, widget=MultiFieldWidget(widget_id=25, max_length=150), 
-      verbose_name='Factors', 
-      help_text='The list of factors that have been used for the n-gram ' \
-      'model',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    smoothing = XmlCharField(
-      verbose_name='Smoothing', 
-      help_text='The technique used for giving unseen items some probabi' \
-      'lity',
-      blank=True, max_length=1000, )
-
-    interpolated = MetaBooleanField(
-      verbose_name='Interpolated', 
-      help_text='Interpolated language models are constructed by 2 or mo' \
-      're corpora. Each corpus is represented in the model according to ' \
-      'a predefined weight.',
-      blank=True, )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class ngramInfoType_model(SchemaModel):
+#     """
+#     Groups information specific to n-gram resources (e.g. range of
+#     n-grams, base item etc.)
+#     """
+#
+#     class Meta:
+#         verbose_name = "Ngram"
+#
+#
+#     __schema_name__ = 'ngramInfoType'
+#     __schema_fields__ = (
+#       ( u'baseItem', u'baseItem', REQUIRED ),
+#       ( u'order', u'order', REQUIRED ),
+#       ( u'perplexity', u'perplexity', RECOMMENDED ),
+#       ( u'isFactored', u'isFactored', RECOMMENDED ),
+#       ( u'factors', u'factors', RECOMMENDED ),
+#       ( u'smoothing', u'smoothing', RECOMMENDED ),
+#       ( u'interpolated', u'interpolated', OPTIONAL ),
+#     )
+#
+#     baseItem = MultiSelectField(
+#       verbose_name='Base item',
+#       help_text='Type of item that is represented in the n-gram resource' \
+#       '',
+#
+#       max_length=1 + len(NGRAMINFOTYPE_BASEITEM_CHOICES['choices']) / 4,
+#       choices=NGRAMINFOTYPE_BASEITEM_CHOICES['choices'],
+#       )
+#
+#     order = models.IntegerField(
+#       verbose_name='Order',
+#       help_text='The maximum number of items in the sequence',
+#       )
+#
+#     perplexity = models.FloatField(
+#       verbose_name='Perplexity',
+#       help_text='Derived from running on test set taken from the same co' \
+#       'rpus',
+#       blank=True, null=True, )
+#
+#     isFactored = MetaBooleanField(
+#       verbose_name='Is factored',
+#       help_text='Specifies whether the model is factored or not',
+#       blank=True, )
+#
+#     factors = MultiTextField(max_length=150, widget=MultiFieldWidget(widget_id=25, max_length=150),
+#       verbose_name='Factors',
+#       help_text='The list of factors that have been used for the n-gram ' \
+#       'model',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     smoothing = XmlCharField(
+#       verbose_name='Smoothing',
+#       help_text='The technique used for giving unseen items some probabi' \
+#       'lity',
+#       blank=True, max_length=1000, )
+#
+#     interpolated = MetaBooleanField(
+#       verbose_name='Interpolated',
+#       help_text='Interpolated language models are constructed by 2 or mo' \
+#       're corpora. Each corpus is represented in the model according to ' \
+#       'a predefined weight.',
+#       blank=True, )
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 RELATEDLEXICONINFOTYPE_RELATEDLEXICONTYPE_CHOICES = _make_choices_from_list([
   u'included', u'attached', u'compatible', u'none', 

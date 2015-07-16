@@ -34,7 +34,6 @@ from metashare.repository.models import \
     licenceInfoType_model, \
     lingualityInfoType_model, \
     metadataInfoType_model, \
-    ngramInfoType_model, \
     organizationInfoType_model, \
     organizationListType_model, \
     outputInfoType_model, \
@@ -79,6 +78,7 @@ from metashare.repository.models import \
     # languageDescriptionOperationInfoType_model, \
     # membershipInfoType_model, \
     # actualUseInfoType_model, \
+    # ngramInfoType_model, \
     # modalityInfoType_model, \
     # linkToOtherMediaInfoType_model, \
     # audioClassificationInfoType_model, \
@@ -995,7 +995,7 @@ admin.site.register(lingualityInfoType_model, SchemaModelAdmin)
 # admin.site.register(membershipInfoType_model, SchemaModelAdmin)
 admin.site.register(metadataInfoType_model, SchemaModelAdmin)
 # admin.site.register(modalityInfoType_model, SchemaModelAdmin)
-admin.site.register(ngramInfoType_model, SchemaModelAdmin)
+# admin.site.register(ngramInfoType_model, SchemaModelAdmin)
 admin.site.register(organizationInfoType_model, SchemaModelAdmin)
 admin.site.register(organizationListType_model, SchemaModelAdmin)
 admin.site.register(outputInfoType_model, SchemaModelAdmin)
