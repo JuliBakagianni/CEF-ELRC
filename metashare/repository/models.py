@@ -4129,49 +4129,49 @@ AUDIOCONTENTINFOTYPE_SPEECHITEMS_CHOICES = _make_choices_from_list([
 #         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
 #         return _unicode
 
-DURATIONOFEFFECTIVESPEECHINFOTYPE_DURATIONUNIT_CHOICES = _make_choices_from_list([
-  u'hours', u'minutes', u'seconds', 
-])
+# DURATIONOFEFFECTIVESPEECHINFOTYPE_DURATIONUNIT_CHOICES = _make_choices_from_list([
+#   u'hours', u'minutes', u'seconds',
+# ])
 
 # pylint: disable-msg=C0103
-class durationOfEffectiveSpeechInfoType_model(SchemaModel):
-    """
-    Groups together information on the duration of effective speech
-    """
-
-    class Meta:
-        verbose_name = "Duration of effective speech"
-
-
-    __schema_name__ = 'durationOfEffectiveSpeechInfoType'
-    __schema_fields__ = (
-      ( u'size', u'size', REQUIRED ),
-      ( u'durationUnit', u'durationUnit', REQUIRED ),
-    )
-
-    size = models.BigIntegerField(
-      verbose_name='Size', 
-      help_text='Specifies the size of the resource with regard to the S' \
-      'izeUnit measurement in form of a number',
-      )
-
-    durationUnit = models.CharField(
-      verbose_name='Duration unit', 
-      help_text='Specification of the unit of size that is used when pro' \
-      'viding information on the size of a resource',
-      
-      max_length=30,
-      choices=sorted(DURATIONOFEFFECTIVESPEECHINFOTYPE_DURATIONUNIT_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    # back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model",  blank=True, null=True)
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['size', 'durationUnit', ]
-        formatstring = u'{} {}'
-        return self.unicode_(formatstring, formatargs)
+# class durationOfEffectiveSpeechInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the duration of effective speech
+#     """
+#
+#     class Meta:
+#         verbose_name = "Duration of effective speech"
+#
+#
+#     __schema_name__ = 'durationOfEffectiveSpeechInfoType'
+#     __schema_fields__ = (
+#       ( u'size', u'size', REQUIRED ),
+#       ( u'durationUnit', u'durationUnit', REQUIRED ),
+#     )
+#
+#     size = models.BigIntegerField(
+#       verbose_name='Size',
+#       help_text='Specifies the size of the resource with regard to the S' \
+#       'izeUnit measurement in form of a number',
+#       )
+#
+#     durationUnit = models.CharField(
+#       verbose_name='Duration unit',
+#       help_text='Specification of the unit of size that is used when pro' \
+#       'viding information on the size of a resource',
+#
+#       max_length=30,
+#       choices=sorted(DURATIONOFEFFECTIVESPEECHINFOTYPE_DURATIONUNIT_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     # back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model",  blank=True, null=True)
+#
+#     def real_unicode_(self):
+#         # pylint: disable-msg=C0301
+#         formatargs = ['size', 'durationUnit', ]
+#         formatstring = u'{} {}'
+#         return self.unicode_(formatstring, formatargs)
 
 # DURATIONOFAUDIOINFOTYPE_DURATIONUNIT_CHOICES = _make_choices_from_list([
 #   u'hours', u'minutes', u'seconds',

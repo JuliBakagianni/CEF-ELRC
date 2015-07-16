@@ -19,7 +19,6 @@ from metashare.repository.models import \
     documentListType_model, \
     documentationInfoType_model, \
     domainInfoType_model, \
-    durationOfEffectiveSpeechInfoType_model, \
     dynamicElementInfoType_model, \
     foreseenUseInfoType_model, \
     geographicCoverageInfoType_model, \
@@ -103,6 +102,7 @@ from metashare.repository.models import \
     # corpusVideoInfoType_model, \
     # creationInfoType_model, \
     # durationOfAudioInfoType_model, \
+    # durationOfEffectiveSpeechInfoType_model, \
 
 # pylint: disable-msg=C0103
 # class actualUseInfo_model_inline(SchemaModelInline):
@@ -313,9 +313,9 @@ class domainInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(Schem
 
 
 # pylint: disable-msg=C0103
-class durationOfEffectiveSpeechInfo_model_inline(SchemaModelInline):
-    model = durationOfEffectiveSpeechInfoType_model
-    template = 'admin/edit_inline/tabular.html'
+# class durationOfEffectiveSpeechInfo_model_inline(SchemaModelInline):
+#     model = durationOfEffectiveSpeechInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
 
 
 # pylint: disable-msg=C0103
@@ -963,7 +963,7 @@ admin.site.register(documentListType_model, SchemaModelAdmin)
 admin.site.register(documentationInfoType_model, SchemaModelAdmin)
 admin.site.register(domainInfoType_model, SchemaModelAdmin)
 # admin.site.register(durationOfAudioInfoType_model, SchemaModelAdmin)
-admin.site.register(durationOfEffectiveSpeechInfoType_model, SchemaModelAdmin)
+# admin.site.register(durationOfEffectiveSpeechInfoType_model, SchemaModelAdmin)
 admin.site.register(dynamicElementInfoType_model, SchemaModelAdmin)
 admin.site.register(foreseenUseInfoType_model, SchemaModelAdmin)
 admin.site.register(geographicCoverageInfoType_model, SchemaModelAdmin)
