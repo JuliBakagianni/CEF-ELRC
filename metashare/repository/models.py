@@ -633,11 +633,11 @@ class resourceCreationInfoType_model(SchemaModel):
       'at has created the resource',
       blank=True, null=True, related_name="resourceCreator_%(class)s_related", )
 
-    fundingProject = models.ManyToManyField("projectInfoType_model", 
-      verbose_name='Funding project', 
-      help_text='Groups information on the project that has funded the r' \
-      'esource',
-      blank=True, null=True, related_name="fundingProject_%(class)s_related", )
+    # fundingProject = models.ManyToManyField("projectInfoType_model",
+    #   verbose_name='Funding project',
+    #   help_text='Groups information on the project that has funded the r' \
+    #   'esource',
+    #   blank=True, null=True, related_name="fundingProject_%(class)s_related", )
 
     creationStartDate = models.DateField(
       verbose_name='Creation start date', 
@@ -3531,106 +3531,106 @@ class languageInfoType_model(SchemaModel):
         formatstring = u'{} {}'
         return self.unicode_(formatstring, formatargs)
 
-PROJECTINFOTYPE_FUNDINGTYPE_CHOICES = _make_choices_from_list([
-  u'other', u'ownFunds', u'nationalFunds', u'euFunds', 
-])
+# PROJECTINFOTYPE_FUNDINGTYPE_CHOICES = _make_choices_from_list([
+#   u'other', u'ownFunds', u'nationalFunds', u'euFunds',
+# ])
 
 # pylint: disable-msg=C0103
-class projectInfoType_model(SchemaModel):
-    """
-    Groups information on a project related to the resource(e.g. a
-    project the resource has been used in; a funded project that led
-    to the resource creation etc.)
-    """
-
-    class Meta:
-        verbose_name = "Project"
-
-
-    __schema_name__ = 'projectInfoType'
-    __schema_fields__ = (
-      ( u'projectName', u'projectName', REQUIRED ),
-      ( u'projectShortName', u'projectShortName', OPTIONAL ),
-      ( u'projectID', u'projectID', OPTIONAL ),
-      ( u'url', u'url', OPTIONAL ),
-      ( u'fundingType', u'fundingType', REQUIRED ),
-      ( u'funder', u'funder', RECOMMENDED ),
-      ( u'fundingCountry', u'fundingCountry', RECOMMENDED ),
-      ( u'projectStartDate', u'projectStartDate', OPTIONAL ),
-      ( u'projectEndDate', u'projectEndDate', OPTIONAL ),
-    )
-
-    projectName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
-      default_retriever=best_lang_value_retriever, 
-      verbose_name='Project name', 
-      max_val_length=500, 
-      help_text='The full name of a project related to the resource',
-      )
-
-    projectShortName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
-      default_retriever=best_lang_value_retriever, 
-      verbose_name='Project short name', 
-      max_val_length=500, 
-      help_text='A short name or abbreviation of a project related to th' \
-      'e resource',
-      blank=True)
-
-    projectID = XmlCharField(
-      verbose_name='Project id', 
-      help_text='An unambiguous referent to a project related to the res' \
-      'ource',
-      blank=True, max_length=100, )
-
-    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=19, max_length=1000), 
-      verbose_name='Url', validators=[HTTPURI_VALIDATOR], 
-      help_text='A URL used as homepage of an entity (e.g. of a person, ' \
-      'organization, resource etc.) and/or where an entity (e.g.LR, docu' \
-      'ment etc.) is located',
-      blank=True, )
-
-    fundingType = MultiSelectField(
-      verbose_name='Funding type', 
-      help_text='Specifies the type of funding of the project',
-      
-      max_length=1 + len(PROJECTINFOTYPE_FUNDINGTYPE_CHOICES['choices']) / 4,
-      choices=PROJECTINFOTYPE_FUNDINGTYPE_CHOICES['choices'],
-      )
-
-    funder = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=20, max_length=100), 
-      verbose_name='Funder', 
-      help_text='The full name of the funder of the project',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    fundingCountry = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=21, max_length=100), 
-      verbose_name='Funding country', 
-      help_text='The name of the funding country, in case of national fu' \
-      'nding as mentioned in ISO3166',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    projectStartDate = models.DateField(
-      verbose_name='Project start date', 
-      help_text='The starting date of a project related to the resource',
-      blank=True, null=True, )
-
-    projectEndDate = models.DateField(
-      verbose_name='Project end date', 
-      help_text='The end date of a project related to the resources',
-      blank=True, null=True, )
-
-
-    source_url = models.URLField(verify_exists=False, 
-      default=DJANGO_URL,
-      help_text="(Read-only) base URL for the server where the master copy of " \
-      "the associated entity instance is located.")
-    
-    copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
-        help_text="Generalized copy status flag for this entity instance.")
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['projectName', 'projectShortName', ]
-        formatstring = u'{} ({})'
-        return self.unicode_(formatstring, formatargs)
+# class projectInfoType_model(SchemaModel):
+#     """
+#     Groups information on a project related to the resource(e.g. a
+#     project the resource has been used in; a funded project that led
+#     to the resource creation etc.)
+#     """
+#
+#     class Meta:
+#         verbose_name = "Project"
+#
+#
+#     __schema_name__ = 'projectInfoType'
+#     __schema_fields__ = (
+#       ( u'projectName', u'projectName', REQUIRED ),
+#       ( u'projectShortName', u'projectShortName', OPTIONAL ),
+#       ( u'projectID', u'projectID', OPTIONAL ),
+#       ( u'url', u'url', OPTIONAL ),
+#       ( u'fundingType', u'fundingType', REQUIRED ),
+#       ( u'funder', u'funder', RECOMMENDED ),
+#       ( u'fundingCountry', u'fundingCountry', RECOMMENDED ),
+#       ( u'projectStartDate', u'projectStartDate', OPTIONAL ),
+#       ( u'projectEndDate', u'projectEndDate', OPTIONAL ),
+#     )
+#
+#     projectName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
+#       default_retriever=best_lang_value_retriever,
+#       verbose_name='Project name',
+#       max_val_length=500,
+#       help_text='The full name of a project related to the resource',
+#       )
+#
+#     projectShortName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
+#       default_retriever=best_lang_value_retriever,
+#       verbose_name='Project short name',
+#       max_val_length=500,
+#       help_text='A short name or abbreviation of a project related to th' \
+#       'e resource',
+#       blank=True)
+#
+#     projectID = XmlCharField(
+#       verbose_name='Project id',
+#       help_text='An unambiguous referent to a project related to the res' \
+#       'ource',
+#       blank=True, max_length=100, )
+#
+#     url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=19, max_length=1000),
+#       verbose_name='Url', validators=[HTTPURI_VALIDATOR],
+#       help_text='A URL used as homepage of an entity (e.g. of a person, ' \
+#       'organization, resource etc.) and/or where an entity (e.g.LR, docu' \
+#       'ment etc.) is located',
+#       blank=True, )
+#
+#     fundingType = MultiSelectField(
+#       verbose_name='Funding type',
+#       help_text='Specifies the type of funding of the project',
+#
+#       max_length=1 + len(PROJECTINFOTYPE_FUNDINGTYPE_CHOICES['choices']) / 4,
+#       choices=PROJECTINFOTYPE_FUNDINGTYPE_CHOICES['choices'],
+#       )
+#
+#     funder = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=20, max_length=100),
+#       verbose_name='Funder',
+#       help_text='The full name of the funder of the project',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     fundingCountry = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=21, max_length=100),
+#       verbose_name='Funding country',
+#       help_text='The name of the funding country, in case of national fu' \
+#       'nding as mentioned in ISO3166',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     projectStartDate = models.DateField(
+#       verbose_name='Project start date',
+#       help_text='The starting date of a project related to the resource',
+#       blank=True, null=True, )
+#
+#     projectEndDate = models.DateField(
+#       verbose_name='Project end date',
+#       help_text='The end date of a project related to the resources',
+#       blank=True, null=True, )
+#
+#
+#     source_url = models.URLField(verify_exists=False,
+#       default=DJANGO_URL,
+#       help_text="(Read-only) base URL for the server where the master copy of " \
+#       "the associated entity instance is located.")
+#
+#     copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
+#         help_text="Generalized copy status flag for this entity instance.")
+#
+#     def real_unicode_(self):
+#         # pylint: disable-msg=C0301
+#         formatargs = ['projectName', 'projectShortName', ]
+#         formatstring = u'{} ({})'
+#         return self.unicode_(formatstring, formatargs)
 
 # pylint: disable-msg=C0103
 class usageInfoType_model(SchemaModel):
@@ -3892,8 +3892,8 @@ class projectListType_model(SchemaModel):
       u'projectInfo': "projectInfoType_model",
     }
 
-    projectInfo = models.ManyToManyField("projectInfoType_model", 
-      verbose_name='Project', related_name="projectInfo_%(class)s_related", )
+    # projectInfo = models.ManyToManyField("projectInfoType_model",
+    #   verbose_name='Project', related_name="projectInfo_%(class)s_related", )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)

@@ -38,7 +38,6 @@ from metashare.repository.models import \
     organizationListType_model, \
     personInfoType_model, \
     personListType_model, \
-    projectInfoType_model, \
     projectListType_model, \
     recordingInfoType_model, \
     relatedLexiconInfoType_model, \
@@ -76,6 +75,7 @@ from metashare.repository.models import \
     # languageDescriptionOperationInfoType_model, \
     # membershipInfoType_model, \
     # actualUseInfoType_model, \
+    # projectInfoType_model, \
     # ngramInfoType_model, \
     # outputInfoType_model, \
     # modalityInfoType_model, \
@@ -1003,7 +1003,7 @@ admin.site.register(organizationListType_model, SchemaModelAdmin)
 admin.site.register(personInfoType_model, SchemaModelAdmin)
 admin.site.register(personListType_model, SchemaModelAdmin)
 # admin.site.register(personSourceSetInfoType_model, SchemaModelAdmin)
-admin.site.register(projectInfoType_model, SchemaModelAdmin)
+# admin.site.register(projectInfoType_model, SchemaModelAdmin)
 admin.site.register(projectListType_model, SchemaModelAdmin)
 admin.site.register(recordingInfoType_model, SchemaModelAdmin)
 admin.site.register(relatedLexiconInfoType_model, SchemaModelAdmin)

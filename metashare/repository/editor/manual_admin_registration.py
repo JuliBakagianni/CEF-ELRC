@@ -21,11 +21,12 @@ from metashare.repository.models import resourceInfoType_model, \
     lexicalConceptualResourceInfoType_model, \
     lexicalConceptualResourceTextInfoType_model, \
     toolServiceInfoType_model, \
-    licenceInfoType_model, personInfoType_model, projectInfoType_model, \
+    licenceInfoType_model, personInfoType_model, \
     documentInfoType_model, organizationInfoType_model, \
     documentUnstructuredString_model
 
     # actualUseInfoType_model, \
+    # projectInfoType_model, \
     # languageDescriptionImageInfoType_model, \
     # participantInfoType_model, \
     # lexicalConceptualResourceVideoInfoType_model, \
@@ -252,7 +253,7 @@ custom_admin_classes = {
     licenceInfoType_model: LicenceModelAdmin,
     personInfoType_model: PersonModelAdmin, 
     organizationInfoType_model: OrganizationModelAdmin, 
-    projectInfoType_model: ProjectModelAdmin, 
+    # projectInfoType_model: ProjectModelAdmin,
     documentInfoType_model: DocumentModelAdmin,
     documentUnstructuredString_model: DocumentUnstructuredStringModelAdmin, 
 }

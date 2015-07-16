@@ -7,13 +7,15 @@ from selectable.base import ModelLookup
 from selectable.registry import registry
 from metashare.repository.models import personInfoType_model, \
     actorInfoType_model, documentInfoType_model, documentationInfoType_model,\
-    projectInfoType_model, organizationInfoType_model,\
+    organizationInfoType_model,\
     targetResourceInfoType_model, languageVarietyInfoType_model, \
     sizeInfoType_model, annotationInfoType_model, videoFormatInfoType_model, \
     resolutionInfoType_model
     # audioSizeInfoType_model \
     # membershipInfoType_model, \
     # imageFormatInfoType_model
+    # projectInfoType_model,
+
 from metashare.storage.models import MASTER
 import logging
 from metashare.settings import LOG_HANDLER
@@ -185,7 +187,7 @@ class SizeDummyLookup(ModelLookup):
 
 
 class ProjectLookup(ModelLookup):
-    model = projectInfoType_model
+    # model = projectInfoType_model
     search_fields = ('projectName__contains', )
     filters = {}
     
@@ -265,7 +267,7 @@ registry.register(PersonLookup)
 registry.register(ActorLookup)
 registry.register(DocumentationLookup)
 registry.register(DocumentLookup)
-registry.register(ProjectLookup)
+# registry.register(ProjectLookup)
 registry.register(OrganizationLookup)
 registry.register(TargetResourceLookup)
 
