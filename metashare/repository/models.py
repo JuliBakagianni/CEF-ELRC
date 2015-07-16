@@ -7217,122 +7217,122 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
 #         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
 #         return _unicode
 
-TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONLEVEL_CHOICES = _make_choices_from_list([
-  u'technological', u'usage', u'impact', u'diagnostic', 
-])
+# TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONLEVEL_CHOICES = _make_choices_from_list([
+#   u'technological', u'usage', u'impact', u'diagnostic',
+# ])
 
-TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONTYPE_CHOICES = _make_choices_from_list([
-  u'glassBox', u'blackBox', 
-])
+# TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONTYPE_CHOICES = _make_choices_from_list([
+#   u'glassBox', u'blackBox',
+# ])
 
-TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONCRITERIA_CHOICES = _make_choices_from_list([
-  u'extrinsic', u'intrinsic', 
-])
+# TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONCRITERIA_CHOICES = _make_choices_from_list([
+#   u'extrinsic', u'intrinsic',
+# ])
 
-TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONMEASURE_CHOICES = _make_choices_from_list([
-  u'human', u'automatic', 
-])
+# TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONMEASURE_CHOICES = _make_choices_from_list([
+#   u'human', u'automatic',
+# ])
 
 # pylint: disable-msg=C0103
-class toolServiceEvaluationInfoType_model(SchemaModel):
-    """
-    Groups together information on the evaluation status of a tool or
-    service
-    """
-
-    class Meta:
-        verbose_name = "Tool service evaluation"
-
-
-    __schema_name__ = 'toolServiceEvaluationInfoType'
-    __schema_fields__ = (
-      ( u'evaluated', u'evaluated', REQUIRED ),
-      ( u'evaluationLevel', u'evaluationLevel', OPTIONAL ),
-      ( u'evaluationType', u'evaluationType', OPTIONAL ),
-      ( u'evaluationCriteria', u'evaluationCriteria', OPTIONAL ),
-      ( u'evaluationMeasure', u'evaluationMeasure', OPTIONAL ),
-      ( 'evaluationReport/documentUnstructured', 'evaluationReport', RECOMMENDED ),
-      ( 'evaluationReport/documentInfo', 'evaluationReport', RECOMMENDED ),
-      ( u'evaluationTool', u'evaluationTool', RECOMMENDED ),
-      ( u'evaluationDetails', u'evaluationDetails', RECOMMENDED ),
-      ( 'evaluator/personInfo', 'evaluator', OPTIONAL ),
-      ( 'evaluator/organizationInfo', 'evaluator', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'documentInfo': "documentInfoType_model",
-      u'documentUnstructured': "documentUnstructuredString_model",
-      u'evaluationTool': "targetResourceInfoType_model",
-      u'organizationInfo': "organizationInfoType_model",
-      u'personInfo': "personInfoType_model",
-    }
-
-    evaluated = MetaBooleanField(
-      verbose_name='Evaluated', 
-      help_text='Indicates whether the tool or service has been evaluate' \
-      'd',
-      )
-
-    evaluationLevel = MultiSelectField(
-      verbose_name='Evaluation level', 
-      help_text='Indicates the evaluation level',
-      blank=True, 
-      max_length=1 + len(TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONLEVEL_CHOICES['choices']) / 4,
-      choices=TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONLEVEL_CHOICES['choices'],
-      )
-
-    evaluationType = MultiSelectField(
-      verbose_name='Evaluation type', 
-      help_text='Indicates the evaluation type',
-      blank=True, 
-      max_length=1 + len(TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONTYPE_CHOICES['choices']) / 4,
-      choices=TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONTYPE_CHOICES['choices'],
-      )
-
-    evaluationCriteria = MultiSelectField(
-      verbose_name='Evaluation criteria', 
-      help_text='Defines the criteria of the evaluation of a tool',
-      blank=True, 
-      max_length=1 + len(TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONCRITERIA_CHOICES['choices']) / 4,
-      choices=TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONCRITERIA_CHOICES['choices'],
-      )
-
-    evaluationMeasure = MultiSelectField(
-      verbose_name='Evaluation measure', 
-      help_text='Defines whether the evaluation measure is human or auto' \
-      'matic',
-      blank=True, 
-      max_length=1 + len(TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONMEASURE_CHOICES['choices']) / 4,
-      choices=TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONMEASURE_CHOICES['choices'],
-      )
-
-    evaluationReport = models.ManyToManyField("documentationInfoType_model", 
-      verbose_name='Evaluation report', 
-      help_text='A bibliographical record of or link to a report describ' \
-      'ing the evaluation process, tool, method etc. of the tool or serv' \
-      'ice',
-      blank=True, null=True, related_name="evaluationReport_%(class)s_related", )
-
-    evaluationTool = models.ManyToManyField("targetResourceInfoType_model", 
-      verbose_name='Evaluation tool', 
-      help_text='The name or id or url of the tool used for the evaluati' \
-      'on of the tool or service',
-      blank=True, null=True, related_name="evaluationTool_%(class)s_related", )
-
-    evaluationDetails = XmlCharField(
-      verbose_name='Evaluation details', 
-      help_text='Provides further information on the evaluation process ' \
-      'of a tool or service',
-      blank=True, max_length=500, )
-
-    evaluator = models.ManyToManyField("actorInfoType_model", 
-      verbose_name='Evaluator', 
-      help_text='Groups information on person or organization that evalu' \
-      'ated the tool or service',
-      blank=True, null=True, related_name="evaluator_%(class)s_related", )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class toolServiceEvaluationInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the evaluation status of a tool or
+#     service
+#     """
+#
+#     class Meta:
+#         verbose_name = "Tool service evaluation"
+#
+#
+#     __schema_name__ = 'toolServiceEvaluationInfoType'
+#     __schema_fields__ = (
+#       ( u'evaluated', u'evaluated', REQUIRED ),
+#       ( u'evaluationLevel', u'evaluationLevel', OPTIONAL ),
+#       ( u'evaluationType', u'evaluationType', OPTIONAL ),
+#       ( u'evaluationCriteria', u'evaluationCriteria', OPTIONAL ),
+#       ( u'evaluationMeasure', u'evaluationMeasure', OPTIONAL ),
+#       ( 'evaluationReport/documentUnstructured', 'evaluationReport', RECOMMENDED ),
+#       ( 'evaluationReport/documentInfo', 'evaluationReport', RECOMMENDED ),
+#       ( u'evaluationTool', u'evaluationTool', RECOMMENDED ),
+#       ( u'evaluationDetails', u'evaluationDetails', RECOMMENDED ),
+#       ( 'evaluator/personInfo', 'evaluator', OPTIONAL ),
+#       ( 'evaluator/organizationInfo', 'evaluator', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'documentInfo': "documentInfoType_model",
+#       u'documentUnstructured': "documentUnstructuredString_model",
+#       u'evaluationTool': "targetResourceInfoType_model",
+#       u'organizationInfo': "organizationInfoType_model",
+#       u'personInfo': "personInfoType_model",
+#     }
+#
+#     evaluated = MetaBooleanField(
+#       verbose_name='Evaluated',
+#       help_text='Indicates whether the tool or service has been evaluate' \
+#       'd',
+#       )
+#
+#     evaluationLevel = MultiSelectField(
+#       verbose_name='Evaluation level',
+#       help_text='Indicates the evaluation level',
+#       blank=True,
+#       max_length=1 + len(TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONLEVEL_CHOICES['choices']) / 4,
+#       choices=TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONLEVEL_CHOICES['choices'],
+#       )
+#
+#     evaluationType = MultiSelectField(
+#       verbose_name='Evaluation type',
+#       help_text='Indicates the evaluation type',
+#       blank=True,
+#       max_length=1 + len(TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONTYPE_CHOICES['choices']) / 4,
+#       choices=TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONTYPE_CHOICES['choices'],
+#       )
+#
+#     evaluationCriteria = MultiSelectField(
+#       verbose_name='Evaluation criteria',
+#       help_text='Defines the criteria of the evaluation of a tool',
+#       blank=True,
+#       max_length=1 + len(TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONCRITERIA_CHOICES['choices']) / 4,
+#       choices=TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONCRITERIA_CHOICES['choices'],
+#       )
+#
+#     evaluationMeasure = MultiSelectField(
+#       verbose_name='Evaluation measure',
+#       help_text='Defines whether the evaluation measure is human or auto' \
+#       'matic',
+#       blank=True,
+#       max_length=1 + len(TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONMEASURE_CHOICES['choices']) / 4,
+#       choices=TOOLSERVICEEVALUATIONINFOTYPE_EVALUATIONMEASURE_CHOICES['choices'],
+#       )
+#
+#     evaluationReport = models.ManyToManyField("documentationInfoType_model",
+#       verbose_name='Evaluation report',
+#       help_text='A bibliographical record of or link to a report describ' \
+#       'ing the evaluation process, tool, method etc. of the tool or serv' \
+#       'ice',
+#       blank=True, null=True, related_name="evaluationReport_%(class)s_related", )
+#
+#     evaluationTool = models.ManyToManyField("targetResourceInfoType_model",
+#       verbose_name='Evaluation tool',
+#       help_text='The name or id or url of the tool used for the evaluati' \
+#       'on of the tool or service',
+#       blank=True, null=True, related_name="evaluationTool_%(class)s_related", )
+#
+#     evaluationDetails = XmlCharField(
+#       verbose_name='Evaluation details',
+#       help_text='Provides further information on the evaluation process ' \
+#       'of a tool or service',
+#       blank=True, max_length=500, )
+#
+#     evaluator = models.ManyToManyField("actorInfoType_model",
+#       verbose_name='Evaluator',
+#       help_text='Groups information on person or organization that evalu' \
+#       'ated the tool or service',
+#       blank=True, null=True, related_name="evaluator_%(class)s_related", )
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 TOOLSERVICEOPERATIONINFOTYPE_OPERATINGSYSTEM_CHOICES = _make_choices_from_list([
   u'os-independent', u'windows', u'linux', u'unix', u'mac-OS', u'other', 
