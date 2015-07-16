@@ -5929,41 +5929,41 @@ class languageDescriptionEncodingInfoType_model(SchemaModel):
         return _unicode
 
 # pylint: disable-msg=C0103
-class languageDescriptionOperationInfoType_model(SchemaModel):
-    """
-    Groups together information on the operation requirements of the
-    Language Descriptions
-    """
-
-    class Meta:
-        verbose_name = "Language description operation"
-
-
-    __schema_name__ = 'languageDescriptionOperationInfoType'
-    __schema_fields__ = (
-      ( u'runningEnvironmentInfo', u'runningEnvironmentInfo', RECOMMENDED ),
-      ( u'relatedLexiconInfo', u'relatedLexiconInfo', RECOMMENDED ),
-    )
-    __schema_classes__ = {
-      u'relatedLexiconInfo': "relatedLexiconInfoType_model",
-      u'runningEnvironmentInfo': "runningEnvironmentInfoType_model",
-    }
-
-    runningEnvironmentInfo = models.OneToOneField("runningEnvironmentInfoType_model", 
-      verbose_name='Running environment', 
-      help_text='Groups together information on the running environment ' \
-      'of a tool or a language description',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    relatedLexiconInfo = models.OneToOneField("relatedLexiconInfoType_model", 
-      verbose_name='Related lexicon', 
-      help_text='Groups together information on requirements for lexica ' \
-      'set by the LanguageDescriptions',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class languageDescriptionOperationInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the operation requirements of the
+#     Language Descriptions
+#     """
+#
+#     class Meta:
+#         verbose_name = "Language description operation"
+#
+#
+#     __schema_name__ = 'languageDescriptionOperationInfoType'
+#     __schema_fields__ = (
+#       ( u'runningEnvironmentInfo', u'runningEnvironmentInfo', RECOMMENDED ),
+#       ( u'relatedLexiconInfo', u'relatedLexiconInfo', RECOMMENDED ),
+#     )
+#     __schema_classes__ = {
+#       u'relatedLexiconInfo': "relatedLexiconInfoType_model",
+#       u'runningEnvironmentInfo': "runningEnvironmentInfoType_model",
+#     }
+#
+#     runningEnvironmentInfo = models.OneToOneField("runningEnvironmentInfoType_model",
+#       verbose_name='Running environment',
+#       help_text='Groups together information on the running environment ' \
+#       'of a tool or a language description',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     relatedLexiconInfo = models.OneToOneField("relatedLexiconInfoType_model",
+#       verbose_name='Related lexicon',
+#       help_text='Groups together information on requirements for lexica ' \
+#       'set by the LanguageDescriptions',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # pylint: disable-msg=C0103
 class languageDescriptionPerformanceInfoType_model(SchemaModel):
