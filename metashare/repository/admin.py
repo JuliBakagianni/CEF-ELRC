@@ -9,7 +9,6 @@ admin.site.register(documentUnstructuredString_model)
 from metashare.repository.models import \
     actorInfoType_model, \
     annotationInfoType_model, \
-    audioFormatInfoType_model, \
     audioSizeInfoType_model, \
     captureInfoType_model, \
     characterEncodingInfoType_model, \
@@ -103,6 +102,7 @@ from metashare.repository.models import \
     # audioClassificationInfoType_model, \
     # corpusAudioInfoType_model, \
     # audioContentInfoType_model, \
+    # audioFormatInfoType_model, \
 
 # pylint: disable-msg=C0103
 # class actualUseInfo_model_inline(SchemaModelInline):
@@ -159,17 +159,17 @@ class annotationInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
-class audioFormatInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
-    model = audioFormatInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpusaudioinfotype_model'
+# class audioFormatInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
+#     model = audioFormatInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_corpusaudioinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class audioFormatInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(SchemaModelInline):
-    model = audioFormatInfoType_model
-    collapse = True
-    fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
+# class audioFormatInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(SchemaModelInline):
+#     model = audioFormatInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -942,7 +942,7 @@ admin.site.register(actorInfoType_model, SchemaModelAdmin)
 admin.site.register(annotationInfoType_model, SchemaModelAdmin)
 # admin.site.register(audioClassificationInfoType_model, SchemaModelAdmin)
 # admin.site.register(audioContentInfoType_model, SchemaModelAdmin)
-admin.site.register(audioFormatInfoType_model, SchemaModelAdmin)
+# admin.site.register(audioFormatInfoType_model, SchemaModelAdmin)
 admin.site.register(audioSizeInfoType_model, SchemaModelAdmin)
 admin.site.register(captureInfoType_model, SchemaModelAdmin)
 admin.site.register(characterEncodingInfoType_model, SchemaModelAdmin)

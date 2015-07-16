@@ -4247,135 +4247,135 @@ AUDIOFORMATINFOTYPE_RECORDINGQUALITY_CHOICES = _make_choices_from_list([
 ])
 
 # pylint: disable-msg=C0103
-class audioFormatInfoType_model(SchemaModel):
-    """
-    Groups together information on the format of the audio part of a
-    resource
-    """
-
-    class Meta:
-        verbose_name = "Audio format"
-
-
-    __schema_name__ = 'audioFormatInfoType'
-    __schema_fields__ = (
-      ( u'mimeType', u'mimeType', REQUIRED ),
-      ( u'signalEncoding', u'signalEncoding', RECOMMENDED ),
-      ( u'samplingRate', u'samplingRate', RECOMMENDED ),
-      ( u'quantization', u'quantization', OPTIONAL ),
-      ( u'byteOrder', u'byteOrder', OPTIONAL ),
-      ( u'signConvention', u'signConvention', OPTIONAL ),
-      ( u'compressionInfo', u'compressionInfo', OPTIONAL ),
-      ( u'audioQualityMeasuresIncluded', u'audioQualityMeasuresIncluded', OPTIONAL ),
-      ( u'numberOfTracks', u'numberOfTracks', OPTIONAL ),
-      ( u'recordingQuality', u'recordingQuality', OPTIONAL ),
-      ( u'sizePerAudioFormat', u'sizePerAudioFormat', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'compressionInfo': "compressionInfoType_model",
-      u'sizePerAudioFormat': "sizeInfoType_model",
-    }
-
-    mimeType = XmlCharField(
-      verbose_name='Mime type', 
-      help_text='The mime-type of the resource which is a formalized' \
-        'specifier for the format included or a mime-type ' \
-        'that the tool/service accepts, in conformance' \
-        'with the values of the IANA (Internet Assigned ' \
-        'Numbers Authority); you can select one of ' \
-        'the pre-defined values or add a value, ' \
-        'PREFERABLY FROM THE IANA MEDIA MIMETYPE ' \
-        'RECOMMENDED VALUES (http://www.iana.org/assignments/' \
-        'media-types/media-types.xhtml)',
-      max_length=50, )
-
-    signalEncoding = MultiSelectField(
-      verbose_name='Signal encoding', 
-      help_text='Specifies the encoding the audio type uses',
-      blank=True, 
-      max_length=1 + len(AUDIOFORMATINFOTYPE_SIGNALENCODING_CHOICES['choices']) / 4,
-      choices=AUDIOFORMATINFOTYPE_SIGNALENCODING_CHOICES['choices'],
-      )
-
-    samplingRate = models.BigIntegerField(
-      verbose_name='Sampling rate', 
-      help_text='Specifies the format of files contained in the resource' \
-      ' in Hertz',
-      blank=True, null=True, )
-
-    quantization = models.IntegerField(
-      verbose_name='Quantization', 
-      help_text='The number of bits for each audio sample',
-      
-      max_length=AUDIOFORMATINFOTYPE_QUANTIZATION_CHOICES['max_length'],
-      choices=AUDIOFORMATINFOTYPE_QUANTIZATION_CHOICES['choices'],
-      blank=True, null=True, )
-
-    byteOrder = models.CharField(
-      verbose_name='Byte order', 
-      help_text='The byte order of 2 or more bytes sample',
-      blank=True, 
-      max_length=30,
-      choices=sorted(AUDIOFORMATINFOTYPE_BYTEORDER_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    signConvention = models.CharField(
-      verbose_name='Sign convention', 
-      help_text='Binary representation of numbers',
-      blank=True, 
-      max_length=30,
-      choices=sorted(AUDIOFORMATINFOTYPE_SIGNCONVENTION_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    compressionInfo = models.OneToOneField("compressionInfoType_model", 
-      verbose_name='Compression', 
-      help_text='Groups together information on the compression status a' \
-      'nd method of a resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    audioQualityMeasuresIncluded = models.CharField(
-      verbose_name='Audio quality measures included', 
-      help_text='Specifies the audio quality measures',
-      blank=True, 
-      max_length=30,
-      choices=sorted(AUDIOFORMATINFOTYPE_AUDIOQUALITYMEASURESINCLUDED_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    numberOfTracks = models.IntegerField(
-      verbose_name='Number of tracks', 
-      help_text='Specifies the number of audio channels',
-      
-      max_length=AUDIOFORMATINFOTYPE_NUMBEROFTRACKS_CHOICES['max_length'],
-      choices=AUDIOFORMATINFOTYPE_NUMBEROFTRACKS_CHOICES['choices'],
-      blank=True, null=True, )
-
-    recordingQuality = models.CharField(
-      verbose_name='Recording quality', 
-      help_text='Indication of the audio or video recording quality',
-      blank=True, 
-      max_length=30,
-      choices=sorted(AUDIOFORMATINFOTYPE_RECORDINGQUALITY_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    sizePerAudioFormat = models.OneToOneField("sizeInfoType_model", 
-      verbose_name='Size per audio format', 
-      help_text='Used to give info on size of parts of a resource that d' \
-      'iffer as to the format',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
-
-    back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['mimeType', 'signalEncoding', ]
-        formatstring = u'{} {}'
-        return self.unicode_(formatstring, formatargs)
+# class audioFormatInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the format of the audio part of a
+#     resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Audio format"
+#
+#
+#     __schema_name__ = 'audioFormatInfoType'
+#     __schema_fields__ = (
+#       ( u'mimeType', u'mimeType', REQUIRED ),
+#       ( u'signalEncoding', u'signalEncoding', RECOMMENDED ),
+#       ( u'samplingRate', u'samplingRate', RECOMMENDED ),
+#       ( u'quantization', u'quantization', OPTIONAL ),
+#       ( u'byteOrder', u'byteOrder', OPTIONAL ),
+#       ( u'signConvention', u'signConvention', OPTIONAL ),
+#       ( u'compressionInfo', u'compressionInfo', OPTIONAL ),
+#       ( u'audioQualityMeasuresIncluded', u'audioQualityMeasuresIncluded', OPTIONAL ),
+#       ( u'numberOfTracks', u'numberOfTracks', OPTIONAL ),
+#       ( u'recordingQuality', u'recordingQuality', OPTIONAL ),
+#       ( u'sizePerAudioFormat', u'sizePerAudioFormat', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'compressionInfo': "compressionInfoType_model",
+#       u'sizePerAudioFormat': "sizeInfoType_model",
+#     }
+#
+#     mimeType = XmlCharField(
+#       verbose_name='Mime type',
+#       help_text='The mime-type of the resource which is a formalized' \
+#         'specifier for the format included or a mime-type ' \
+#         'that the tool/service accepts, in conformance' \
+#         'with the values of the IANA (Internet Assigned ' \
+#         'Numbers Authority); you can select one of ' \
+#         'the pre-defined values or add a value, ' \
+#         'PREFERABLY FROM THE IANA MEDIA MIMETYPE ' \
+#         'RECOMMENDED VALUES (http://www.iana.org/assignments/' \
+#         'media-types/media-types.xhtml)',
+#       max_length=50, )
+#
+#     signalEncoding = MultiSelectField(
+#       verbose_name='Signal encoding',
+#       help_text='Specifies the encoding the audio type uses',
+#       blank=True,
+#       max_length=1 + len(AUDIOFORMATINFOTYPE_SIGNALENCODING_CHOICES['choices']) / 4,
+#       choices=AUDIOFORMATINFOTYPE_SIGNALENCODING_CHOICES['choices'],
+#       )
+#
+#     samplingRate = models.BigIntegerField(
+#       verbose_name='Sampling rate',
+#       help_text='Specifies the format of files contained in the resource' \
+#       ' in Hertz',
+#       blank=True, null=True, )
+#
+#     quantization = models.IntegerField(
+#       verbose_name='Quantization',
+#       help_text='The number of bits for each audio sample',
+#
+#       max_length=AUDIOFORMATINFOTYPE_QUANTIZATION_CHOICES['max_length'],
+#       choices=AUDIOFORMATINFOTYPE_QUANTIZATION_CHOICES['choices'],
+#       blank=True, null=True, )
+#
+#     byteOrder = models.CharField(
+#       verbose_name='Byte order',
+#       help_text='The byte order of 2 or more bytes sample',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(AUDIOFORMATINFOTYPE_BYTEORDER_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     signConvention = models.CharField(
+#       verbose_name='Sign convention',
+#       help_text='Binary representation of numbers',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(AUDIOFORMATINFOTYPE_SIGNCONVENTION_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     compressionInfo = models.OneToOneField("compressionInfoType_model",
+#       verbose_name='Compression',
+#       help_text='Groups together information on the compression status a' \
+#       'nd method of a resource',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     audioQualityMeasuresIncluded = models.CharField(
+#       verbose_name='Audio quality measures included',
+#       help_text='Specifies the audio quality measures',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(AUDIOFORMATINFOTYPE_AUDIOQUALITYMEASURESINCLUDED_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     numberOfTracks = models.IntegerField(
+#       verbose_name='Number of tracks',
+#       help_text='Specifies the number of audio channels',
+#
+#       max_length=AUDIOFORMATINFOTYPE_NUMBEROFTRACKS_CHOICES['max_length'],
+#       choices=AUDIOFORMATINFOTYPE_NUMBEROFTRACKS_CHOICES['choices'],
+#       blank=True, null=True, )
+#
+#     recordingQuality = models.CharField(
+#       verbose_name='Recording quality',
+#       help_text='Indication of the audio or video recording quality',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(AUDIOFORMATINFOTYPE_RECORDINGQUALITY_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     sizePerAudioFormat = models.OneToOneField("sizeInfoType_model",
+#       verbose_name='Size per audio format',
+#       help_text='Used to give info on size of parts of a resource that d' \
+#       'iffer as to the format',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+#
+#     back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
+#
+#     def real_unicode_(self):
+#         # pylint: disable-msg=C0301
+#         formatargs = ['mimeType', 'signalEncoding', ]
+#         formatstring = u'{} {}'
+#         return self.unicode_(formatstring, formatargs)
 
 AUDIOCLASSIFICATIONINFOTYPE_AUDIOGENRE_CHOICES = _make_choices_from_list([
   u'speech', u'humanNonSpeech', u'noise', u'animalVocalizations', u'song',
