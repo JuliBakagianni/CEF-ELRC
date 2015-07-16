@@ -5548,49 +5548,49 @@ class videoClassificationInfoType_model(SchemaModel):
 #         return _unicode
 
 # pylint: disable-msg=C0103
-class textNumericalFormatInfoType_model(SchemaModel):
-    """
-    Groups information on the format(s) of the textNumerical part of the
-    resource
-    """
-
-    class Meta:
-        verbose_name = "Text numerical format"
-
-
-    __schema_name__ = 'textNumericalFormatInfoType'
-    __schema_fields__ = (
-      ( u'mimeType', u'mimeType', REQUIRED ),
-      ( u'sizePerTextNumericalFormat', u'sizePerTextNumericalFormat', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'sizePerTextNumericalFormat': "sizeInfoType_model",
-    }
-
-    mimeType = XmlCharField(
-      verbose_name='Mime type', 
-      help_text='The mime-type of the resource which is a formalized' \
-        'specifier for the format included or a mime-type ' \
-        'that the tool/service accepts, in conformance' \
-        'with the values of the IANA (Internet Assigned ' \
-        'Numbers Authority); you can select one of ' \
-        'the pre-defined values or add a value, ' \
-        'PREFERABLY FROM THE IANA MEDIA MIMETYPE ' \
-        'RECOMMENDED VALUES (http://www.iana.org/assignments/' \
-        'media-types/media-types.xhtml)',
-      max_length=1000, )
-
-    sizePerTextNumericalFormat = models.OneToOneField("sizeInfoType_model", 
-      verbose_name='Size per text numerical format', 
-      help_text='Gives information on the size of textNumerical resource' \
-      ' parts with different format',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class textNumericalFormatInfoType_model(SchemaModel):
+#     """
+#     Groups information on the format(s) of the textNumerical part of the
+#     resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Text numerical format"
+#
+#
+#     __schema_name__ = 'textNumericalFormatInfoType'
+#     __schema_fields__ = (
+#       ( u'mimeType', u'mimeType', REQUIRED ),
+#       ( u'sizePerTextNumericalFormat', u'sizePerTextNumericalFormat', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'sizePerTextNumericalFormat': "sizeInfoType_model",
+#     }
+#
+#     mimeType = XmlCharField(
+#       verbose_name='Mime type',
+#       help_text='The mime-type of the resource which is a formalized' \
+#         'specifier for the format included or a mime-type ' \
+#         'that the tool/service accepts, in conformance' \
+#         'with the values of the IANA (Internet Assigned ' \
+#         'Numbers Authority); you can select one of ' \
+#         'the pre-defined values or add a value, ' \
+#         'PREFERABLY FROM THE IANA MEDIA MIMETYPE ' \
+#         'RECOMMENDED VALUES (http://www.iana.org/assignments/' \
+#         'media-types/media-types.xhtml)',
+#       max_length=1000, )
+#
+#     sizePerTextNumericalFormat = models.OneToOneField("sizeInfoType_model",
+#       verbose_name='Size per text numerical format',
+#       help_text='Gives information on the size of textNumerical resource' \
+#       ' parts with different format',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # pylint: disable-msg=C0103
 # class corpusTextNgramInfoType_model(SchemaModel):

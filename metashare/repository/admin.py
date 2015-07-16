@@ -46,7 +46,6 @@ from metashare.repository.models import \
     targetResourceInfoType_model, \
     textClassificationInfoType_model, \
     textFormatInfoType_model, \
-    textNumericalFormatInfoType_model, \
     timeCoverageInfoType_model, \
     toolServiceCreationInfoType_model, \
     toolServiceEvaluationInfoType_model, \
@@ -61,6 +60,7 @@ from metashare.repository.models import \
     videoFormatInfoType_model
     # languageDescriptionImageInfoType_model, \
     # personSourceSetInfoType_model, \
+    # textNumericalFormatInfoType_model, \
     # recordingInfoType_model, \
     # settingInfoType_model, \
     # staticElementInfoType_model, \
@@ -810,9 +810,9 @@ class textFormatInfo_model_inline_lexicalConceptualResourceTextInfoType_model(Sc
 
 
 # pylint: disable-msg=C0103
-class textNumericalFormatInfo_model_inline(SchemaModelInline):
-    model = textNumericalFormatInfoType_model
-    collapse = True
+# class textNumericalFormatInfo_model_inline(SchemaModelInline):
+#     model = textNumericalFormatInfoType_model
+#     collapse = True
 
 
 # pylint: disable-msg=C0103
@@ -1021,7 +1021,7 @@ admin.site.register(targetResourceInfoType_model, SchemaModelAdmin)
 admin.site.register(textClassificationInfoType_model, SchemaModelAdmin)
 admin.site.register(textFormatInfoType_model, SchemaModelAdmin)
 # admin.site.register(textNumericalContentInfoType_model, SchemaModelAdmin)
-admin.site.register(textNumericalFormatInfoType_model, SchemaModelAdmin)
+# admin.site.register(textNumericalFormatInfoType_model, SchemaModelAdmin)
 admin.site.register(timeCoverageInfoType_model, SchemaModelAdmin)
 admin.site.register(toolServiceCreationInfoType_model, SchemaModelAdmin)
 admin.site.register(toolServiceEvaluationInfoType_model, SchemaModelAdmin)
