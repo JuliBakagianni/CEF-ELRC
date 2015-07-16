@@ -38,7 +38,6 @@ from metashare.repository.models import \
     organizationListType_model, \
     personInfoType_model, \
     personListType_model, \
-    personSourceSetInfoType_model, \
     projectInfoType_model, \
     projectListType_model, \
     recordingInfoType_model, \
@@ -70,6 +69,7 @@ from metashare.repository.models import \
     videoContentInfoType_model, \
     videoFormatInfoType_model
     # languageDescriptionImageInfoType_model, \
+    # personSourceSetInfoType_model, \
     # lexicalConceptualResourceVideoInfoType_model, \
     # lexicalConceptualResourceImageInfoType_model, \
     # lexicalConceptualResourceAudioInfoType_model, \
@@ -1002,7 +1002,7 @@ admin.site.register(organizationListType_model, SchemaModelAdmin)
 # admin.site.register(participantInfoType_model, SchemaModelAdmin)
 admin.site.register(personInfoType_model, SchemaModelAdmin)
 admin.site.register(personListType_model, SchemaModelAdmin)
-admin.site.register(personSourceSetInfoType_model, SchemaModelAdmin)
+# admin.site.register(personSourceSetInfoType_model, SchemaModelAdmin)
 admin.site.register(projectInfoType_model, SchemaModelAdmin)
 admin.site.register(projectListType_model, SchemaModelAdmin)
 admin.site.register(recordingInfoType_model, SchemaModelAdmin)

@@ -1881,155 +1881,155 @@ class relationInfoType_model(SchemaModel):
 #         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
 #         return _unicode
 
-PERSONSOURCESETINFOTYPE_AGEOFPERSONS_CHOICES = _make_choices_from_list([
-  u'child', u'teenager', u'adult', u'elderly', 
-])
+# PERSONSOURCESETINFOTYPE_AGEOFPERSONS_CHOICES = _make_choices_from_list([
+#   u'child', u'teenager', u'adult', u'elderly',
+# ])
 
-PERSONSOURCESETINFOTYPE_SEXOFPERSONS_CHOICES = _make_choices_from_list([
-  u'male', u'female', u'mixed', u'unknown', 
-])
+# PERSONSOURCESETINFOTYPE_SEXOFPERSONS_CHOICES = _make_choices_from_list([
+#   u'male', u'female', u'mixed', u'unknown',
+# ])
 
-PERSONSOURCESETINFOTYPE_ORIGINOFPERSONS_CHOICES = _make_choices_from_list([
-  u'native', u'nonNative', u'mixed', u'unknown', 
-])
+# PERSONSOURCESETINFOTYPE_ORIGINOFPERSONS_CHOICES = _make_choices_from_list([
+#   u'native', u'nonNative', u'mixed', u'unknown',
+# ])
 
-PERSONSOURCESETINFOTYPE_HEARINGIMPAIRMENTOFPERSONS_CHOICES = _make_choices_from_list([
-  u'yes', u'no', u'mixed', 
-])
+# PERSONSOURCESETINFOTYPE_HEARINGIMPAIRMENTOFPERSONS_CHOICES = _make_choices_from_list([
+#   u'yes', u'no', u'mixed',
+# ])
 
-PERSONSOURCESETINFOTYPE_SPEAKINGIMPAIRMENTOFPERSONS_CHOICES = _make_choices_from_list([
-  u'yes', u'no', u'mixed', 
-])
+# PERSONSOURCESETINFOTYPE_SPEAKINGIMPAIRMENTOFPERSONS_CHOICES = _make_choices_from_list([
+#   u'yes', u'no', u'mixed',
+# ])
 
-PERSONSOURCESETINFOTYPE_SPEECHINFLUENCES_CHOICES = _make_choices_from_list([
-  u'alcohol', u'sleepDeprivation', u'hyperbaric', u'medication', u'other', 
-])
+# PERSONSOURCESETINFOTYPE_SPEECHINFLUENCES_CHOICES = _make_choices_from_list([
+#   u'alcohol', u'sleepDeprivation', u'hyperbaric', u'medication', u'other',
+# ])
 
 # pylint: disable-msg=C0103
-class personSourceSetInfoType_model(SchemaModel):
-    """
-    Groups information on the persons (speakers, video participants,
-    etc.) in the audio andvideoparts of the resource
-    """
-
-    class Meta:
-        verbose_name = "Person source set"
-
-
-    __schema_name__ = 'personSourceSetInfoType'
-    __schema_fields__ = (
-      ( u'numberOfPersons', u'numberOfPersons', OPTIONAL ),
-      ( u'ageOfPersons', u'ageOfPersons', OPTIONAL ),
-      ( u'ageRangeStart', u'ageRangeStart', OPTIONAL ),
-      ( u'ageRangeEnd', u'ageRangeEnd', OPTIONAL ),
-      ( u'sexOfPersons', u'sexOfPersons', OPTIONAL ),
-      ( u'originOfPersons', u'originOfPersons', OPTIONAL ),
-      ( u'dialectAccentOfPersons', u'dialectAccentOfPersons', OPTIONAL ),
-      ( u'geographicDistributionOfPersons', u'geographicDistributionOfPersons', OPTIONAL ),
-      ( u'hearingImpairmentOfPersons', u'hearingImpairmentOfPersons', OPTIONAL ),
-      ( u'speakingImpairmentOfPersons', u'speakingImpairmentOfPersons', OPTIONAL ),
-      ( u'numberOfTrainedSpeakers', u'numberOfTrainedSpeakers', OPTIONAL ),
-      ( u'speechInfluences', u'speechInfluences', OPTIONAL ),
-      ( u'participantInfo', u'participantinfotype_model_set', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'participantInfo': "participantInfoType_model",
-    }
-
-    numberOfPersons = models.BigIntegerField(
-      verbose_name='Number of persons', 
-      help_text='The number of the persons participating in the audio or' \
-      ' video part of the resource',
-      blank=True, null=True, )
-
-    ageOfPersons = MultiSelectField(
-      verbose_name='Age of persons', 
-      help_text='The age range of the group of participants; repeat the ' \
-      'element if needed',
-      blank=True, 
-      max_length=1 + len(PERSONSOURCESETINFOTYPE_AGEOFPERSONS_CHOICES['choices']) / 4,
-      choices=PERSONSOURCESETINFOTYPE_AGEOFPERSONS_CHOICES['choices'],
-      )
-
-    ageRangeStart = models.BigIntegerField(
-      verbose_name='Age range start', 
-      help_text='Start of age range of the group of participants',
-      blank=True, null=True, )
-
-    ageRangeEnd = models.BigIntegerField(
-      verbose_name='Age range end', 
-      help_text='End of age range of the group of participants',
-      blank=True, null=True, )
-
-    sexOfPersons = models.CharField(
-      verbose_name='Sex of persons', 
-      help_text='The gender of the group of participants',
-      blank=True, 
-      max_length=30,
-      choices=sorted(PERSONSOURCESETINFOTYPE_SEXOFPERSONS_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    originOfPersons = models.CharField(
-      verbose_name='Origin of persons', 
-      help_text='The language origin of the group of participants',
-      blank=True, 
-      max_length=30,
-      choices=sorted(PERSONSOURCESETINFOTYPE_ORIGINOFPERSONS_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    dialectAccentOfPersons = MultiTextField(max_length=500, widget=MultiFieldWidget(widget_id=10, max_length=500), 
-      verbose_name='Dialect accent of persons', 
-      help_text='Provides information on the dialect of the group of par' \
-      'ticipants',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    geographicDistributionOfPersons = XmlCharField(
-      verbose_name='Geographic distribution of persons', 
-      help_text='Gives information on the geographic distribution of the' \
-      ' participants',
-      blank=True, max_length=200, )
-
-    hearingImpairmentOfPersons = models.CharField(
-      verbose_name='Hearing impairment of persons', 
-      help_text='Whether the group of participants contains persons with' \
-      ' hearing impairments',
-      blank=True, 
-      max_length=30,
-      choices=sorted(PERSONSOURCESETINFOTYPE_HEARINGIMPAIRMENTOFPERSONS_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    speakingImpairmentOfPersons = models.CharField(
-      verbose_name='Speaking impairment of persons', 
-      help_text='Whether the group of participants contains persons with' \
-      'with speakingimpairments',
-      blank=True, 
-      max_length=30,
-      choices=sorted(PERSONSOURCESETINFOTYPE_SPEAKINGIMPAIRMENTOFPERSONS_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    numberOfTrainedSpeakers = models.BigIntegerField(
-      verbose_name='Number of trained speakers', 
-      help_text='The number of participants that have been trained for t' \
-      'he specific task',
-      blank=True, null=True, )
-
-    speechInfluences = MultiSelectField(
-      verbose_name='Speech influences', 
-      help_text='Specifies the factors influencing speech',
-      blank=True, 
-      max_length=1 + len(PERSONSOURCESETINFOTYPE_SPEECHINFLUENCES_CHOICES['choices']) / 4,
-      choices=PERSONSOURCESETINFOTYPE_SPEECHINFLUENCES_CHOICES['choices'],
-      )
-
-    # OneToMany field: participantInfo
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class personSourceSetInfoType_model(SchemaModel):
+#     """
+#     Groups information on the persons (speakers, video participants,
+#     etc.) in the audio andvideoparts of the resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Person source set"
+#
+#
+#     __schema_name__ = 'personSourceSetInfoType'
+#     __schema_fields__ = (
+#       ( u'numberOfPersons', u'numberOfPersons', OPTIONAL ),
+#       ( u'ageOfPersons', u'ageOfPersons', OPTIONAL ),
+#       ( u'ageRangeStart', u'ageRangeStart', OPTIONAL ),
+#       ( u'ageRangeEnd', u'ageRangeEnd', OPTIONAL ),
+#       ( u'sexOfPersons', u'sexOfPersons', OPTIONAL ),
+#       ( u'originOfPersons', u'originOfPersons', OPTIONAL ),
+#       ( u'dialectAccentOfPersons', u'dialectAccentOfPersons', OPTIONAL ),
+#       ( u'geographicDistributionOfPersons', u'geographicDistributionOfPersons', OPTIONAL ),
+#       ( u'hearingImpairmentOfPersons', u'hearingImpairmentOfPersons', OPTIONAL ),
+#       ( u'speakingImpairmentOfPersons', u'speakingImpairmentOfPersons', OPTIONAL ),
+#       ( u'numberOfTrainedSpeakers', u'numberOfTrainedSpeakers', OPTIONAL ),
+#       ( u'speechInfluences', u'speechInfluences', OPTIONAL ),
+#       ( u'participantInfo', u'participantinfotype_model_set', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'participantInfo': "participantInfoType_model",
+#     }
+#
+#     numberOfPersons = models.BigIntegerField(
+#       verbose_name='Number of persons',
+#       help_text='The number of the persons participating in the audio or' \
+#       ' video part of the resource',
+#       blank=True, null=True, )
+#
+#     ageOfPersons = MultiSelectField(
+#       verbose_name='Age of persons',
+#       help_text='The age range of the group of participants; repeat the ' \
+#       'element if needed',
+#       blank=True,
+#       max_length=1 + len(PERSONSOURCESETINFOTYPE_AGEOFPERSONS_CHOICES['choices']) / 4,
+#       choices=PERSONSOURCESETINFOTYPE_AGEOFPERSONS_CHOICES['choices'],
+#       )
+#
+#     ageRangeStart = models.BigIntegerField(
+#       verbose_name='Age range start',
+#       help_text='Start of age range of the group of participants',
+#       blank=True, null=True, )
+#
+#     ageRangeEnd = models.BigIntegerField(
+#       verbose_name='Age range end',
+#       help_text='End of age range of the group of participants',
+#       blank=True, null=True, )
+#
+#     sexOfPersons = models.CharField(
+#       verbose_name='Sex of persons',
+#       help_text='The gender of the group of participants',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(PERSONSOURCESETINFOTYPE_SEXOFPERSONS_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     originOfPersons = models.CharField(
+#       verbose_name='Origin of persons',
+#       help_text='The language origin of the group of participants',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(PERSONSOURCESETINFOTYPE_ORIGINOFPERSONS_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     dialectAccentOfPersons = MultiTextField(max_length=500, widget=MultiFieldWidget(widget_id=10, max_length=500),
+#       verbose_name='Dialect accent of persons',
+#       help_text='Provides information on the dialect of the group of par' \
+#       'ticipants',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     geographicDistributionOfPersons = XmlCharField(
+#       verbose_name='Geographic distribution of persons',
+#       help_text='Gives information on the geographic distribution of the' \
+#       ' participants',
+#       blank=True, max_length=200, )
+#
+#     hearingImpairmentOfPersons = models.CharField(
+#       verbose_name='Hearing impairment of persons',
+#       help_text='Whether the group of participants contains persons with' \
+#       ' hearing impairments',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(PERSONSOURCESETINFOTYPE_HEARINGIMPAIRMENTOFPERSONS_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     speakingImpairmentOfPersons = models.CharField(
+#       verbose_name='Speaking impairment of persons',
+#       help_text='Whether the group of participants contains persons with' \
+#       'with speakingimpairments',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(PERSONSOURCESETINFOTYPE_SPEAKINGIMPAIRMENTOFPERSONS_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     numberOfTrainedSpeakers = models.BigIntegerField(
+#       verbose_name='Number of trained speakers',
+#       help_text='The number of participants that have been trained for t' \
+#       'he specific task',
+#       blank=True, null=True, )
+#
+#     speechInfluences = MultiSelectField(
+#       verbose_name='Speech influences',
+#       help_text='Specifies the factors influencing speech',
+#       blank=True,
+#       max_length=1 + len(PERSONSOURCESETINFOTYPE_SPEECHINFLUENCES_CHOICES['choices']) / 4,
+#       choices=PERSONSOURCESETINFOTYPE_SPEECHINFLUENCES_CHOICES['choices'],
+#       )
+#
+#     # OneToMany field: participantInfo
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 SETTINGINFOTYPE_NATURALITY_CHOICES = _make_choices_from_list([
   u'natural', u'planned', u'semiPlanned', u'readSpeech', u'spontaneous',
