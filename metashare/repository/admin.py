@@ -21,7 +21,6 @@ from metashare.repository.models import \
     domainInfoType_model, \
     dynamicElementInfoType_model, \
     geographicCoverageInfoType_model, \
-    imageFormatInfoType_model, \
     inputInfoType_model, \
     languageDescriptionEncodingInfoType_model, \
     languageDescriptionImageInfoType_model, \
@@ -103,6 +102,7 @@ from metashare.repository.models import \
     # identificationInfoType_model, \
     # imageClassificationInfoType_model, \
     # imageContentInfoType_model, \
+    # imageFormatInfoType_model, \
 
 # pylint: disable-msg=C0103
 # class actualUseInfo_model_inline(SchemaModelInline):
@@ -415,24 +415,24 @@ class geographicCoverageInfo_model_inline_lexicalConceptualResourceVideoInfoType
 
 
 # pylint: disable-msg=C0103
-class imageFormatInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
-    model = imageFormatInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpusimageinfotype_model'
+# class imageFormatInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
+#     model = imageFormatInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_corpusimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class imageFormatInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
-    model = imageFormatInfoType_model
-    collapse = True
-    fk_name = 'back_to_languagedescriptionimageinfotype_model'
+# class imageFormatInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
+#     model = imageFormatInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_languagedescriptionimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class imageFormatInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
-    model = imageFormatInfoType_model
-    collapse = True
-    fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
+# class imageFormatInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
+#     model = imageFormatInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -970,7 +970,7 @@ admin.site.register(geographicCoverageInfoType_model, SchemaModelAdmin)
 # admin.site.register(identificationInfoType_model, SchemaModelAdmin)
 # admin.site.register(imageClassificationInfoType_model, SchemaModelAdmin)
 # admin.site.register(imageContentInfoType_model, SchemaModelAdmin)
-admin.site.register(imageFormatInfoType_model, SchemaModelAdmin)
+# admin.site.register(imageFormatInfoType_model, SchemaModelAdmin)
 admin.site.register(inputInfoType_model, SchemaModelAdmin)
 admin.site.register(languageDescriptionEncodingInfoType_model, SchemaModelAdmin)
 admin.site.register(languageDescriptionImageInfoType_model, SchemaModelAdmin)
