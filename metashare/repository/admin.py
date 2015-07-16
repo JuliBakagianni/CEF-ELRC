@@ -47,7 +47,6 @@ from metashare.repository.models import \
     textClassificationInfoType_model, \
     textFormatInfoType_model, \
     timeCoverageInfoType_model, \
-    validationInfoType_model, \
     versionInfoType_model, \
     videoClassificationInfoType_model, \
     videoContentInfoType_model, \
@@ -55,6 +54,7 @@ from metashare.repository.models import \
     videoFormatInfoType_model
     # languageDescriptionImageInfoType_model, \
     # usageInfoType_model, \
+    # validationInfoType_model, \
     # toolServiceOperationInfoType_model, \
     # toolServiceInfoType_model, \
     # toolServiceCreationInfoType_model, \
@@ -1028,7 +1028,7 @@ admin.site.register(timeCoverageInfoType_model, SchemaModelAdmin)
 # admin.site.register(toolServiceInfoType_model, SchemaModelAdmin)
 # admin.site.register(toolServiceOperationInfoType_model, SchemaModelAdmin)
 # admin.site.register(usageInfoType_model, SchemaModelAdmin)
-admin.site.register(validationInfoType_model, SchemaModelAdmin)
+# admin.site.register(validationInfoType_model, SchemaModelAdmin)
 admin.site.register(versionInfoType_model, SchemaModelAdmin)
 admin.site.register(videoClassificationInfoType_model, SchemaModelAdmin)
 admin.site.register(videoContentInfoType_model, SchemaModelAdmin)

@@ -11,7 +11,7 @@ from metashare.repository.editor.resource_editor import ResourceModelAdmin, \
 from metashare.repository.editor.superadmin import SchemaModelAdmin
 from metashare.repository.models import resourceInfoType_model, \
     metadataInfoType_model, \
-    communicationInfoType_model, validationInfoType_model, \
+    communicationInfoType_model, \
     corpusMediaTypeType_model, corpusTextInfoType_model, \
     videoClassificationInfoType_model, \
     languageDescriptionInfoType_model, \
@@ -24,6 +24,7 @@ from metashare.repository.models import resourceInfoType_model, \
     documentUnstructuredString_model
 
     # actualUseInfoType_model, \
+    # validationInfoType_model, \
     # textNumericalFormatInfoType_model, \
     # toolServiceInfoType_model, \
     # relationInfoType_model, \
@@ -222,7 +223,7 @@ purely_inline_models = (
     identificationInfoType_model,
     metadataInfoType_model,
     communicationInfoType_model,
-    validationInfoType_model,
+    # validationInfoType_model,
     # relationInfoType_model,
     # foreseenUseInfoType_model,
     corpusMediaTypeType_model,

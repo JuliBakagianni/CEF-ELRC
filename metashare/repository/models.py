@@ -491,117 +491,117 @@ class versionInfoType_model(SchemaModel):
 # ])
 
 # pylint: disable-msg=C0103
-class validationInfoType_model(SchemaModel):
-    """
-    Groups information on validation of a resource; it can be repeated
-    to allow for different validations (e.g. formal validation of
-    the whole resource; content validation of one part of the
-    resource etc.).
-    """
-
-    class Meta:
-        verbose_name = "Validation"
-
-
-    __schema_name__ = 'validationInfoType'
-    __schema_fields__ = (
-      ( u'validated', u'validated', REQUIRED ),
-      # ( u'validationType', u'validationType', OPTIONAL ),
-      # ( u'validationMode', u'validationMode', OPTIONAL ),
-      # ( u'validationModeDetails', u'validationModeDetails', OPTIONAL ),
-      # ( u'validationExtent', u'validationExtent', OPTIONAL ),
-      # ( u'validationExtentDetails', u'validationExtentDetails', OPTIONAL ),
-      # ( u'sizePerValidation', u'sizePerValidation', OPTIONAL ),
-      # ( 'validationReport/documentUnstructured', 'validationReport', OPTIONAL ),
-      # ( 'validationReport/documentInfo', 'validationReport', OPTIONAL ),
-      # ( u'validationTool', u'validationTool', OPTIONAL ),
-      # ( 'validator/personInfo', 'validator', OPTIONAL ),
-      # ( 'validator/organizationInfo', 'validator', OPTIONAL ),
-    )
-    # __schema_classes__ = {
-    #   u'documentInfo': "documentInfoType_model",
-    #   u'documentUnstructured': "documentUnstructuredString_model",
-    #   u'organizationInfo': "organizationInfoType_model",
-    #   u'personInfo': "personInfoType_model",
-    #   u'sizePerValidation': "sizeInfoType_model",
-    #   u'validationTool': "targetResourceInfoType_model",
-    # }
-
-    validated = MetaBooleanField(
-      verbose_name='Validated', 
-      help_text='Specifies the validation status of the resource',
-      )
-
-    # validationType = models.CharField(
-    #   verbose_name='Validation type',
-    #   help_text='Specifies the type of the validation that have been per' \
-    #   'formed',
-    #   blank=True,
-    #   max_length=20,
-    #   choices=sorted(VALIDATIONINFOTYPE_VALIDATIONTYPE_CHOICES['choices'],
-    #                  key=lambda choice: choice[1].lower()),
-    #   )
-    #
-    # validationMode = models.CharField(
-    #   verbose_name='Validation mode',
-    #   help_text='Specifies the validation methodology applied',
-    #   blank=True,
-    #   max_length=20,
-    #   choices=sorted(VALIDATIONINFOTYPE_VALIDATIONMODE_CHOICES['choices'],
-    #                  key=lambda choice: choice[1].lower()),
-    #   )
-    #
-    # validationModeDetails = XmlCharField(
-    #   verbose_name='Validation mode details',
-    #   help_text='Textual field for additional information on validation',
-    #   blank=True, max_length=500, )
-    #
-    # validationExtent = models.CharField(
-    #   verbose_name='Validation extent',
-    #   help_text='The resource coverage in terms of validated data',
-    #   blank=True,
-    #   max_length=20,
-    #   choices=sorted(VALIDATIONINFOTYPE_VALIDATIONEXTENT_CHOICES['choices'],
-    #                  key=lambda choice: choice[1].lower()),
-    #   )
-    #
-    # validationExtentDetails = XmlCharField(
-    #   verbose_name='Validation extent details',
-    #   help_text='Provides information on size or other details of partia' \
-    #   'lly validated data; to be used if only part of the resource has b' \
-    #   'een validated and as an alternative to SizeInfo if the validated ' \
-    #   'part cannot be counted otherwise',
-    #   blank=True, max_length=500, )
-    #
-    # sizePerValidation = models.OneToOneField("sizeInfoType_model",
-    #   verbose_name='Size per validation',
-    #   help_text='Specifies the size of the validated part of a resource',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
-    #
-    # validationReport = models.ForeignKey("documentationInfoType_model",
-    #   verbose_name='Validation report',
-    #   help_text='A short account of the validation details or a bibliogr' \
-    #   'aphic reference to a document with detailed information on the va' \
-    #   'lidation process and results',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
-    #
-    # validationTool = models.ForeignKey("targetResourceInfoType_model",
-    #   verbose_name='Validation tool',
-    #   help_text='The name, the identifier or the url of the tool used fo' \
-    #   'r the validation of the resource',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
-    #
-    # validator = models.ManyToManyField("actorInfoType_model",
-    #   verbose_name='Validator',
-    #   help_text='Groups information on the person(s) or the organization' \
-    #   '(s) that validated the resource',
-    #   blank=True, null=True, related_name="validator_%(class)s_related", )
-
-    back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model",  blank=True, null=True)
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class validationInfoType_model(SchemaModel):
+#     """
+#     Groups information on validation of a resource; it can be repeated
+#     to allow for different validations (e.g. formal validation of
+#     the whole resource; content validation of one part of the
+#     resource etc.).
+#     """
+#
+#     class Meta:
+#         verbose_name = "Validation"
+#
+#
+#     __schema_name__ = 'validationInfoType'
+#     __schema_fields__ = (
+#       ( u'validated', u'validated', REQUIRED ),
+#       # ( u'validationType', u'validationType', OPTIONAL ),
+#       # ( u'validationMode', u'validationMode', OPTIONAL ),
+#       # ( u'validationModeDetails', u'validationModeDetails', OPTIONAL ),
+#       # ( u'validationExtent', u'validationExtent', OPTIONAL ),
+#       # ( u'validationExtentDetails', u'validationExtentDetails', OPTIONAL ),
+#       # ( u'sizePerValidation', u'sizePerValidation', OPTIONAL ),
+#       # ( 'validationReport/documentUnstructured', 'validationReport', OPTIONAL ),
+#       # ( 'validationReport/documentInfo', 'validationReport', OPTIONAL ),
+#       # ( u'validationTool', u'validationTool', OPTIONAL ),
+#       # ( 'validator/personInfo', 'validator', OPTIONAL ),
+#       # ( 'validator/organizationInfo', 'validator', OPTIONAL ),
+#     )
+#     # __schema_classes__ = {
+#     #   u'documentInfo': "documentInfoType_model",
+#     #   u'documentUnstructured': "documentUnstructuredString_model",
+#     #   u'organizationInfo': "organizationInfoType_model",
+#     #   u'personInfo': "personInfoType_model",
+#     #   u'sizePerValidation': "sizeInfoType_model",
+#     #   u'validationTool': "targetResourceInfoType_model",
+#     # }
+#
+#     validated = MetaBooleanField(
+#       verbose_name='Validated',
+#       help_text='Specifies the validation status of the resource',
+#       )
+#
+#     # validationType = models.CharField(
+#     #   verbose_name='Validation type',
+#     #   help_text='Specifies the type of the validation that have been per' \
+#     #   'formed',
+#     #   blank=True,
+#     #   max_length=20,
+#     #   choices=sorted(VALIDATIONINFOTYPE_VALIDATIONTYPE_CHOICES['choices'],
+#     #                  key=lambda choice: choice[1].lower()),
+#     #   )
+#     #
+#     # validationMode = models.CharField(
+#     #   verbose_name='Validation mode',
+#     #   help_text='Specifies the validation methodology applied',
+#     #   blank=True,
+#     #   max_length=20,
+#     #   choices=sorted(VALIDATIONINFOTYPE_VALIDATIONMODE_CHOICES['choices'],
+#     #                  key=lambda choice: choice[1].lower()),
+#     #   )
+#     #
+#     # validationModeDetails = XmlCharField(
+#     #   verbose_name='Validation mode details',
+#     #   help_text='Textual field for additional information on validation',
+#     #   blank=True, max_length=500, )
+#     #
+#     # validationExtent = models.CharField(
+#     #   verbose_name='Validation extent',
+#     #   help_text='The resource coverage in terms of validated data',
+#     #   blank=True,
+#     #   max_length=20,
+#     #   choices=sorted(VALIDATIONINFOTYPE_VALIDATIONEXTENT_CHOICES['choices'],
+#     #                  key=lambda choice: choice[1].lower()),
+#     #   )
+#     #
+#     # validationExtentDetails = XmlCharField(
+#     #   verbose_name='Validation extent details',
+#     #   help_text='Provides information on size or other details of partia' \
+#     #   'lly validated data; to be used if only part of the resource has b' \
+#     #   'een validated and as an alternative to SizeInfo if the validated ' \
+#     #   'part cannot be counted otherwise',
+#     #   blank=True, max_length=500, )
+#     #
+#     # sizePerValidation = models.OneToOneField("sizeInfoType_model",
+#     #   verbose_name='Size per validation',
+#     #   help_text='Specifies the size of the validated part of a resource',
+#     #   blank=True, null=True, on_delete=models.SET_NULL, )
+#     #
+#     # validationReport = models.ForeignKey("documentationInfoType_model",
+#     #   verbose_name='Validation report',
+#     #   help_text='A short account of the validation details or a bibliogr' \
+#     #   'aphic reference to a document with detailed information on the va' \
+#     #   'lidation process and results',
+#     #   blank=True, null=True, on_delete=models.SET_NULL, )
+#     #
+#     # validationTool = models.ForeignKey("targetResourceInfoType_model",
+#     #   verbose_name='Validation tool',
+#     #   help_text='The name, the identifier or the url of the tool used fo' \
+#     #   'r the validation of the resource',
+#     #   blank=True, null=True, on_delete=models.SET_NULL, )
+#     #
+#     # validator = models.ManyToManyField("actorInfoType_model",
+#     #   verbose_name='Validator',
+#     #   help_text='Groups information on the person(s) or the organization' \
+#     #   '(s) that validated the resource',
+#     #   blank=True, null=True, related_name="validator_%(class)s_related", )
+#
+#     back_to_resourceinfotype_model = models.ForeignKey("resourceInfoType_model",  blank=True, null=True)
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # pylint: disable-msg=C0103
 # class resourceCreationInfoType_model(SchemaModel):
