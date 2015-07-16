@@ -7899,97 +7899,97 @@ class dynamicElementInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-STATICELEMENTINFOTYPE_BODYPARTS_CHOICES = _make_choices_from_list([
-  u'arms', u'face', u'feet', u'hands', u'head', u'legs', u'mouth',
-  u'wholeBody',u'none', 
-])
+# STATICELEMENTINFOTYPE_BODYPARTS_CHOICES = _make_choices_from_list([
+#   u'arms', u'face', u'feet', u'hands', u'head', u'legs', u'mouth',
+#   u'wholeBody',u'none',
+# ])
 
 # pylint: disable-msg=C0103
-class staticElementInfoType_model(SchemaModel):
-
-    class Meta:
-        verbose_name = "Static element"
-
-
-    __schema_name__ = 'staticElementInfoType'
-    __schema_fields__ = (
-      ( u'typeOfElement', u'typeOfElement', OPTIONAL ),
-      ( u'bodyParts', u'bodyParts', OPTIONAL ),
-      ( u'faceViews', u'faceViews', RECOMMENDED ),
-      ( u'faceExpressions', u'faceExpressions', RECOMMENDED ),
-      ( u'artifactParts', u'artifactParts', OPTIONAL ),
-      ( u'landscapeParts', u'landscapeParts', OPTIONAL ),
-      ( u'personDescription', u'personDescription', OPTIONAL ),
-      ( u'thingDescription', u'thingDescription', OPTIONAL ),
-      ( u'organizationDescription', u'organizationDescription', OPTIONAL ),
-      ( u'eventDescription', u'eventDescription', OPTIONAL ),
-    )
-
-    typeOfElement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=55, max_length=1000), 
-      verbose_name='Type of element', 
-      help_text='The type of objects or people that represented in the v' \
-      'ideo or image part of the resource',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    bodyParts = MultiSelectField(
-      verbose_name='Body parts', 
-      help_text='The body parts visible in the video or image part of th' \
-      'e resource',
-      blank=True, 
-      max_length=1 + len(STATICELEMENTINFOTYPE_BODYPARTS_CHOICES['choices']) / 4,
-      choices=STATICELEMENTINFOTYPE_BODYPARTS_CHOICES['choices'],
-      )
-
-    faceViews = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=56, max_length=1000), 
-      verbose_name='Face views', 
-      help_text='Indicates the view of the face(s) that appear in the vi' \
-      'deo or on the image part of the resource',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    faceExpressions = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=57, max_length=1000), 
-      verbose_name='Face expressions', 
-      help_text='Indicates the facial expressions visible in the resourc' \
-      'e',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    artifactParts = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=58, max_length=1000), 
-      verbose_name='Artifact parts', 
-      help_text='Indicates the parts of the artifacts represented in the' \
-      ' image corpus',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    landscapeParts = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=59, max_length=1000), 
-      verbose_name='Landscape parts', 
-      help_text='landscape parts represented in the image corpus',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    personDescription = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=60, max_length=1000), 
-      verbose_name='Person description', 
-      help_text='Provides descriptive features for the persons represent' \
-      'ed in the image corpus',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    thingDescription = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=61, max_length=1000), 
-      verbose_name='Thing description', 
-      help_text='Provides description of the things represented in the i' \
-      'mage corpus',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    organizationDescription = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=62, max_length=1000), 
-      verbose_name='Organization description', 
-      help_text='Provides description of the organizations that may appe' \
-      'ar in the image corpus',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    eventDescription = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=63, max_length=1000), 
-      verbose_name='Event description', 
-      help_text='Provides description of any events represented in the i' \
-      'mage corpus',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class staticElementInfoType_model(SchemaModel):
+#
+#     class Meta:
+#         verbose_name = "Static element"
+#
+#
+#     __schema_name__ = 'staticElementInfoType'
+#     __schema_fields__ = (
+#       ( u'typeOfElement', u'typeOfElement', OPTIONAL ),
+#       ( u'bodyParts', u'bodyParts', OPTIONAL ),
+#       ( u'faceViews', u'faceViews', RECOMMENDED ),
+#       ( u'faceExpressions', u'faceExpressions', RECOMMENDED ),
+#       ( u'artifactParts', u'artifactParts', OPTIONAL ),
+#       ( u'landscapeParts', u'landscapeParts', OPTIONAL ),
+#       ( u'personDescription', u'personDescription', OPTIONAL ),
+#       ( u'thingDescription', u'thingDescription', OPTIONAL ),
+#       ( u'organizationDescription', u'organizationDescription', OPTIONAL ),
+#       ( u'eventDescription', u'eventDescription', OPTIONAL ),
+#     )
+#
+#     typeOfElement = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=55, max_length=1000),
+#       verbose_name='Type of element',
+#       help_text='The type of objects or people that represented in the v' \
+#       'ideo or image part of the resource',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     bodyParts = MultiSelectField(
+#       verbose_name='Body parts',
+#       help_text='The body parts visible in the video or image part of th' \
+#       'e resource',
+#       blank=True,
+#       max_length=1 + len(STATICELEMENTINFOTYPE_BODYPARTS_CHOICES['choices']) / 4,
+#       choices=STATICELEMENTINFOTYPE_BODYPARTS_CHOICES['choices'],
+#       )
+#
+#     faceViews = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=56, max_length=1000),
+#       verbose_name='Face views',
+#       help_text='Indicates the view of the face(s) that appear in the vi' \
+#       'deo or on the image part of the resource',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     faceExpressions = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=57, max_length=1000),
+#       verbose_name='Face expressions',
+#       help_text='Indicates the facial expressions visible in the resourc' \
+#       'e',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     artifactParts = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=58, max_length=1000),
+#       verbose_name='Artifact parts',
+#       help_text='Indicates the parts of the artifacts represented in the' \
+#       ' image corpus',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     landscapeParts = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=59, max_length=1000),
+#       verbose_name='Landscape parts',
+#       help_text='landscape parts represented in the image corpus',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     personDescription = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=60, max_length=1000),
+#       verbose_name='Person description',
+#       help_text='Provides descriptive features for the persons represent' \
+#       'ed in the image corpus',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     thingDescription = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=61, max_length=1000),
+#       verbose_name='Thing description',
+#       help_text='Provides description of the things represented in the i' \
+#       'mage corpus',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     organizationDescription = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=62, max_length=1000),
+#       verbose_name='Organization description',
+#       help_text='Provides description of the organizations that may appe' \
+#       'ar in the image corpus',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     eventDescription = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=63, max_length=1000),
+#       verbose_name='Event description',
+#       help_text='Provides description of any events represented in the i' \
+#       'mage corpus',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # pylint: disable-msg=C0103
 class languageDescriptionMediaTypeType_model(SchemaModel):
