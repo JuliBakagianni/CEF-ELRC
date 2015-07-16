@@ -2136,64 +2136,64 @@ class settingInfoType_model(SchemaModel):
         formatstring = u'{} {} {} {} {}'
         return self.unicode_(formatstring, formatargs)
 
-RUNNINGENVIRONMENTINFOTYPE_REQUIREDHARDWARE_CHOICES = _make_choices_from_list([
-  u'graphicCard', u'microphone', u'ocrSystem', u'specialHardwareEquipment',
-  u'none',u'other', 
-])
+# RUNNINGENVIRONMENTINFOTYPE_REQUIREDHARDWARE_CHOICES = _make_choices_from_list([
+#   u'graphicCard', u'microphone', u'ocrSystem', u'specialHardwareEquipment',
+#   u'none',u'other',
+# ])
 
 # pylint: disable-msg=C0103
-class runningEnvironmentInfoType_model(SchemaModel):
-    """
-    Groups together information on the running environment of a tool or
-    a language description
-    """
-
-    class Meta:
-        verbose_name = "Running environment"
-
-
-    __schema_name__ = 'runningEnvironmentInfoType'
-    __schema_fields__ = (
-      ( u'requiredSoftware', u'requiredSoftware', OPTIONAL ),
-      ( u'requiredHardware', u'requiredHardware', RECOMMENDED ),
-      ( u'requiredLRs', u'requiredLRs', OPTIONAL ),
-      ( u'runningEnvironmentDetails', u'runningEnvironmentDetails', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'requiredLRs': "targetResourceInfoType_model",
-      u'requiredSoftware': "targetResourceInfoType_model",
-    }
-
-    requiredSoftware = models.ManyToManyField("targetResourceInfoType_model", 
-      verbose_name='Required software', 
-      help_text='Additional software required for running a tool and/or ' \
-      'computational grammar',
-      blank=True, null=True, related_name="requiredSoftware_%(class)s_related", )
-
-    requiredHardware = MultiSelectField(
-      verbose_name='Required hardware', 
-      help_text='Hardware required for running a tool and/or computation' \
-      'al grammar',
-      blank=True, 
-      max_length=1 + len(RUNNINGENVIRONMENTINFOTYPE_REQUIREDHARDWARE_CHOICES['choices']) / 4,
-      choices=RUNNINGENVIRONMENTINFOTYPE_REQUIREDHARDWARE_CHOICES['choices'],
-      )
-
-    requiredLRs = models.ManyToManyField("targetResourceInfoType_model", 
-      verbose_name='Required lrs', 
-      help_text='If for running a tool and/or computational grammar, spe' \
-      'cific LRs (e.g. a grammar, a list of words etc.) are required',
-      blank=True, null=True, related_name="requiredLRs_%(class)s_related", )
-
-    runningEnvironmentDetails = XmlCharField(
-      verbose_name='Running environment details', 
-      help_text='Provides further information on the running environment' \
-      '',
-      blank=True, max_length=200, )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class runningEnvironmentInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the running environment of a tool or
+#     a language description
+#     """
+#
+#     class Meta:
+#         verbose_name = "Running environment"
+#
+#
+#     __schema_name__ = 'runningEnvironmentInfoType'
+#     __schema_fields__ = (
+#       ( u'requiredSoftware', u'requiredSoftware', OPTIONAL ),
+#       ( u'requiredHardware', u'requiredHardware', RECOMMENDED ),
+#       ( u'requiredLRs', u'requiredLRs', OPTIONAL ),
+#       ( u'runningEnvironmentDetails', u'runningEnvironmentDetails', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'requiredLRs': "targetResourceInfoType_model",
+#       u'requiredSoftware': "targetResourceInfoType_model",
+#     }
+#
+#     requiredSoftware = models.ManyToManyField("targetResourceInfoType_model",
+#       verbose_name='Required software',
+#       help_text='Additional software required for running a tool and/or ' \
+#       'computational grammar',
+#       blank=True, null=True, related_name="requiredSoftware_%(class)s_related", )
+#
+#     requiredHardware = MultiSelectField(
+#       verbose_name='Required hardware',
+#       help_text='Hardware required for running a tool and/or computation' \
+#       'al grammar',
+#       blank=True,
+#       max_length=1 + len(RUNNINGENVIRONMENTINFOTYPE_REQUIREDHARDWARE_CHOICES['choices']) / 4,
+#       choices=RUNNINGENVIRONMENTINFOTYPE_REQUIREDHARDWARE_CHOICES['choices'],
+#       )
+#
+#     requiredLRs = models.ManyToManyField("targetResourceInfoType_model",
+#       verbose_name='Required lrs',
+#       help_text='If for running a tool and/or computational grammar, spe' \
+#       'cific LRs (e.g. a grammar, a list of words etc.) are required',
+#       blank=True, null=True, related_name="requiredLRs_%(class)s_related", )
+#
+#     runningEnvironmentDetails = XmlCharField(
+#       verbose_name='Running environment details',
+#       help_text='Provides further information on the running environment' \
+#       '',
+#       blank=True, max_length=200, )
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # RECORDINGINFOTYPE_RECORDINGDEVICETYPE_CHOICES = _make_choices_from_list([
 #   u'hardDisk', u'dv', u'tapeVHS', u'flash', u'DAT', u'soundBlasterCard',
@@ -7366,11 +7366,11 @@ class toolServiceOperationInfoType_model(SchemaModel):
       choices=TOOLSERVICEOPERATIONINFOTYPE_OPERATINGSYSTEM_CHOICES['choices'],
       )
 
-    runningEnvironmentInfo = models.OneToOneField("runningEnvironmentInfoType_model", 
-      verbose_name='Running environment', 
-      help_text='Groups together information on the running environment ' \
-      'of a tool or a language description',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # runningEnvironmentInfo = models.OneToOneField("runningEnvironmentInfoType_model",
+    #   verbose_name='Running environment',
+    #   help_text='Groups together information on the running environment ' \
+    #   'of a tool or a language description',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     runningTime = XmlCharField(
       verbose_name='Running time', 
