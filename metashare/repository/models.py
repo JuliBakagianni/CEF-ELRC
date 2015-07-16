@@ -120,11 +120,11 @@ class resourceInfoType_model(SchemaModel):
       # u'versionInfo': "versionInfoType_model",
     }
 
-    identificationInfo = models.OneToOneField("identificationInfoType_model", 
-      verbose_name='Identification', 
-      help_text='Groups together information needed to identify the reso' \
-      'urce',
-      )
+    # identificationInfo = models.OneToOneField("identificationInfoType_model",
+    #   verbose_name='Identification',
+    #   help_text='Groups together information needed to identify the reso' \
+    #   'urce',
+    #   )
 
     distributionInfo = models.OneToOneField("distributionInfoType_model", 
       verbose_name='Distribution', 
@@ -345,91 +345,91 @@ class sizeInfoType_model(SchemaModel):
         return self.unicode_(formatstring, formatargs)
 
 # pylint: disable-msg=C0103
-class identificationInfoType_model(SchemaModel):
-    """
-    Groups together information needed to identify the resource
-    """
-
-    class Meta:
-        verbose_name = "Identification"
-
-
-    __schema_name__ = 'identificationInfoType'
-    __schema_fields__ = (
-      ( u'resourceName', u'resourceName', REQUIRED ),
-      ( u'description', u'description', REQUIRED ),
-      ( u'resourceShortName', u'resourceShortName', OPTIONAL ),
-      ( u'url', u'url', RECOMMENDED ),
-      # ( u'metaShareId', u'metaShareId', REQUIRED ),
-      ( u'identifier', u'identifier', OPTIONAL ),
-      ( u'PID', u'PID', RECOMMENDED),
-      ( u'ISLRN', u'ISLRN', RECOMMENDED ),
-    )
-
-    resourceName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
-      default_retriever=best_lang_value_retriever, 
-      verbose_name='Resource name', 
-      max_val_length=500, 
-      help_text='The full name by which the resource is known; the eleme' \
-      'nt can be repeated for the different language versions using the ' \
-      '"lang" attribute to specify the language.',
-      )
-
-    description = DictField(validators=[validate_lang_code_keys, validate_dict_values],
-      default_retriever=best_lang_value_retriever, 
-      verbose_name='Description', 
-      max_val_length=10000, 
-      help_text='Provides the description of the resource in prose; the ' \
-      'element can be repeated for the different language versions using' \
-      ' the "lang" attribute to specify the language.',
-      )
-
-    resourceShortName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
-      default_retriever=best_lang_value_retriever, 
-      verbose_name='Resource short name', 
-      max_val_length=500, 
-      help_text='The short form (abbreviation, acronym etc.) used to ide' \
-      'ntify the resource; the element can be repeated for the different' \
-      ' language versions using the "lang" attribute to specify the lang' \
-      'uage.',
-      blank=True)
-
-    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=0, max_length=1000), 
-      verbose_name='Url', validators=[HTTPURI_VALIDATOR], 
-      help_text='A URL used as homepage of an entity (e.g. of a person, ' \
-      'organization, resource etc.) and/or where an entity (e.g.LR, docu' \
-      'ment etc.) is located',
-      blank=True, )
-
-    # metaShareId = XmlCharField(
-    #   verbose_name='Meta share id',
-    #   help_text='An unambiguous referent to the resource within META-SHA' \
-    #   'RE; it reflects to the unique system id provided automatically by' \
-    #   ' the MetaShare software',
-    #   max_length=100, default="NOT_DEFINED_FOR_V2", )
-
-    identifier = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=1, max_length=100), 
-      verbose_name='Identifier', 
-      help_text='A reference to the resource like a pid or an internal i' \
-      'dentifier used by the resource provider',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    PID = models.URLField(editable=False,
-        help_text='To be used for CLARIN-EL '
-        'purposes; automatically assigned by the '
-        'system and thus not viewable on the editor; '
-        'at a later stage, we might consider having it '
-        'also editable for PIDs assigned by other entities')
-
-    ISLRN = XmlCharField(
-      verbose_name='Islrn',
-      help_text='Reference to the unique ISLRN number',
-      blank=True, max_length=17,
-      validators=[validate_matches_xml_char_production], )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class identificationInfoType_model(SchemaModel):
+#     """
+#     Groups together information needed to identify the resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Identification"
+#
+#
+#     __schema_name__ = 'identificationInfoType'
+#     __schema_fields__ = (
+#       ( u'resourceName', u'resourceName', REQUIRED ),
+#       ( u'description', u'description', REQUIRED ),
+#       ( u'resourceShortName', u'resourceShortName', OPTIONAL ),
+#       ( u'url', u'url', RECOMMENDED ),
+#       # ( u'metaShareId', u'metaShareId', REQUIRED ),
+#       ( u'identifier', u'identifier', OPTIONAL ),
+#       ( u'PID', u'PID', RECOMMENDED),
+#       ( u'ISLRN', u'ISLRN', RECOMMENDED ),
+#     )
+#
+#     resourceName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
+#       default_retriever=best_lang_value_retriever,
+#       verbose_name='Resource name',
+#       max_val_length=500,
+#       help_text='The full name by which the resource is known; the eleme' \
+#       'nt can be repeated for the different language versions using the ' \
+#       '"lang" attribute to specify the language.',
+#       )
+#
+#     description = DictField(validators=[validate_lang_code_keys, validate_dict_values],
+#       default_retriever=best_lang_value_retriever,
+#       verbose_name='Description',
+#       max_val_length=10000,
+#       help_text='Provides the description of the resource in prose; the ' \
+#       'element can be repeated for the different language versions using' \
+#       ' the "lang" attribute to specify the language.',
+#       )
+#
+#     resourceShortName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
+#       default_retriever=best_lang_value_retriever,
+#       verbose_name='Resource short name',
+#       max_val_length=500,
+#       help_text='The short form (abbreviation, acronym etc.) used to ide' \
+#       'ntify the resource; the element can be repeated for the different' \
+#       ' language versions using the "lang" attribute to specify the lang' \
+#       'uage.',
+#       blank=True)
+#
+#     url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=0, max_length=1000),
+#       verbose_name='Url', validators=[HTTPURI_VALIDATOR],
+#       help_text='A URL used as homepage of an entity (e.g. of a person, ' \
+#       'organization, resource etc.) and/or where an entity (e.g.LR, docu' \
+#       'ment etc.) is located',
+#       blank=True, )
+#
+#     # metaShareId = XmlCharField(
+#     #   verbose_name='Meta share id',
+#     #   help_text='An unambiguous referent to the resource within META-SHA' \
+#     #   'RE; it reflects to the unique system id provided automatically by' \
+#     #   ' the MetaShare software',
+#     #   max_length=100, default="NOT_DEFINED_FOR_V2", )
+#
+#     identifier = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=1, max_length=100),
+#       verbose_name='Identifier',
+#       help_text='A reference to the resource like a pid or an internal i' \
+#       'dentifier used by the resource provider',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     PID = models.URLField(editable=False,
+#         help_text='To be used for CLARIN-EL '
+#         'purposes; automatically assigned by the '
+#         'system and thus not viewable on the editor; '
+#         'at a later stage, we might consider having it '
+#         'also editable for PIDs assigned by other entities')
+#
+#     ISLRN = XmlCharField(
+#       verbose_name='Islrn',
+#       help_text='Reference to the unique ISLRN number',
+#       blank=True, max_length=17,
+#       validators=[validate_matches_xml_char_production], )
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # pylint: disable-msg=C0103
 class versionInfoType_model(SchemaModel):

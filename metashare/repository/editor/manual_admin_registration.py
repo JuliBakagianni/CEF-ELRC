@@ -10,7 +10,7 @@ from metashare.repository.editor.resource_editor import ResourceModelAdmin, \
     LicenceModelAdmin
 from metashare.repository.editor.superadmin import SchemaModelAdmin
 from metashare.repository.models import resourceInfoType_model, \
-    identificationInfoType_model, metadataInfoType_model, \
+    metadataInfoType_model, \
     communicationInfoType_model, validationInfoType_model, \
     relationInfoType_model, \
     corpusMediaTypeType_model, corpusTextInfoType_model, \
@@ -37,6 +37,7 @@ from metashare.repository.models import resourceInfoType_model, \
     # corpusTextNumericalInfoType_model, \
     # corpusVideoInfoType_model, \
     # foreseenUseInfoType_model, \
+    # identificationInfoType_model, \
 
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from django.views.decorators.csrf import csrf_protect
@@ -215,7 +216,7 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
 # Models which are always rendered inline so they don't need their own admin form:
 purely_inline_models = (
     # actualUseInfoType_model,
-    identificationInfoType_model,
+    # identificationInfoType_model,
     metadataInfoType_model,
     communicationInfoType_model,
     validationInfoType_model,
