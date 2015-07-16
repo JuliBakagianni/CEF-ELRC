@@ -25,7 +25,6 @@ from metashare.repository.models import \
     languageDescriptionInfoType_model, \
     languageDescriptionMediaTypeType_model, \
     languageDescriptionTextInfoType_model, \
-    languageDescriptionVideoInfoType_model, \
     languageInfoType_model, \
     languageVarietyInfoType_model, \
     lexicalConceptualResourceAudioInfoType_model, \
@@ -102,6 +101,7 @@ from metashare.repository.models import \
     # imageClassificationInfoType_model, \
     # imageContentInfoType_model, \
     # imageFormatInfoType_model, \
+    # languageDescriptionVideoInfoType_model, \
     # inputInfoType_model, \
 
 # pylint: disable-msg=C0103
@@ -979,7 +979,7 @@ admin.site.register(languageDescriptionMediaTypeType_model, SchemaModelAdmin)
 # admin.site.register(languageDescriptionOperationInfoType_model, SchemaModelAdmin)
 # admin.site.register(languageDescriptionPerformanceInfoType_model, SchemaModelAdmin)
 admin.site.register(languageDescriptionTextInfoType_model, SchemaModelAdmin)
-admin.site.register(languageDescriptionVideoInfoType_model, SchemaModelAdmin)
+# admin.site.register(languageDescriptionVideoInfoType_model, SchemaModelAdmin)
 admin.site.register(languageInfoType_model, SchemaModelAdmin)
 admin.site.register(languageVarietyInfoType_model, SchemaModelAdmin)
 admin.site.register(lexicalConceptualResourceAudioInfoType_model, SchemaModelAdmin)
