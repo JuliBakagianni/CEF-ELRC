@@ -149,9 +149,9 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="restrictionsOfUse" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="conditionsOfUse" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Specifies the restrictions imposed by the licence</xs:documentation>
+					<xs:documentation>Specifies terms and conditions of use (e.g. attribution, payment etc.) imposed by the licence</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-many</relation>
 					</xs:appinfo>
@@ -161,13 +161,22 @@
 						<xs:maxLength value="100"/>
 						<xs:enumeration value="informLicensor"/>
 						<xs:enumeration value="redeposit"/>
-						<xs:enumeration value="academic-nonCommercialUse"/>
+						<xs:enumeration value="nonCommercialUse"/>
 						<xs:enumeration value="evaluationUse"/>
 						<xs:enumeration value="commercialUse"/>
 						<xs:enumeration value="attribution"/>
 						<xs:enumeration value="shareAlike"/>
 						<xs:enumeration value="noDerivatives"/>
 						<xs:enumeration value="noRedistribution"/>
+						<xs:enumeration value="personalDataIncluded"/>
+						<xs:enumeration value="sensitiveDataIncluded"/>
+						<xs:enumeration value="languageEngineeringResearch"/>
+						<xs:enumeration value="requestPlan"/>
+						<xs:enumeration value="spatialConstraint"/>
+						<xs:enumeration value="userIdentified"/>
+						<xs:enumeration value="research"/>
+						<xs:enumeration value="education"/>
+						<xs:enumeration value="compensate"/>
 						<xs:enumeration value="other"/>
 					</xs:restriction>
 				</xs:simpleType>
