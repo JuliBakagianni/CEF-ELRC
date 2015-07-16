@@ -604,56 +604,56 @@ class validationInfoType_model(SchemaModel):
         return _unicode
 
 # pylint: disable-msg=C0103
-class resourceCreationInfoType_model(SchemaModel):
-    """
-    Groups information on the creation procedure of a resource
-    """
-
-    class Meta:
-        verbose_name = "Resource creation"
-
-
-    __schema_name__ = 'resourceCreationInfoType'
-    __schema_fields__ = (
-      ( 'resourceCreator/personInfo', 'resourceCreator', RECOMMENDED ),
-      ( 'resourceCreator/organizationInfo', 'resourceCreator', RECOMMENDED ),
-      ( u'fundingProject', u'fundingProject', OPTIONAL ),
-      ( u'creationStartDate', u'creationStartDate', RECOMMENDED ),
-      ( u'creationEndDate', u'creationEndDate', RECOMMENDED ),
-    )
-    __schema_classes__ = {
-      u'fundingProject': "projectInfoType_model",
-      u'organizationInfo': "organizationInfoType_model",
-      u'personInfo': "personInfoType_model",
-    }
-
-    resourceCreator = models.ManyToManyField("actorInfoType_model", 
-      verbose_name='Resource creator', 
-      help_text='Groups information on the person or the organization th' \
-      'at has created the resource',
-      blank=True, null=True, related_name="resourceCreator_%(class)s_related", )
-
-    # fundingProject = models.ManyToManyField("projectInfoType_model",
-    #   verbose_name='Funding project',
-    #   help_text='Groups information on the project that has funded the r' \
-    #   'esource',
-    #   blank=True, null=True, related_name="fundingProject_%(class)s_related", )
-
-    creationStartDate = models.DateField(
-      verbose_name='Creation start date', 
-      help_text='The date in which the creation process was started',
-      blank=True, null=True, )
-
-    creationEndDate = models.DateField(
-      verbose_name='Creation end date', 
-      help_text='The date in which the creation process was completed',
-      blank=True, null=True, )
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['resourceCreator', 'fundingProject', 'creationStartDate', 'creationEndDate', ]
-        formatstring = u'{} {} {}-{}'
-        return self.unicode_(formatstring, formatargs)
+# class resourceCreationInfoType_model(SchemaModel):
+#     """
+#     Groups information on the creation procedure of a resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Resource creation"
+#
+#
+#     __schema_name__ = 'resourceCreationInfoType'
+#     __schema_fields__ = (
+#       ( 'resourceCreator/personInfo', 'resourceCreator', RECOMMENDED ),
+#       ( 'resourceCreator/organizationInfo', 'resourceCreator', RECOMMENDED ),
+#       ( u'fundingProject', u'fundingProject', OPTIONAL ),
+#       ( u'creationStartDate', u'creationStartDate', RECOMMENDED ),
+#       ( u'creationEndDate', u'creationEndDate', RECOMMENDED ),
+#     )
+#     __schema_classes__ = {
+#       u'fundingProject': "projectInfoType_model",
+#       u'organizationInfo': "organizationInfoType_model",
+#       u'personInfo': "personInfoType_model",
+#     }
+#
+#     resourceCreator = models.ManyToManyField("actorInfoType_model",
+#       verbose_name='Resource creator',
+#       help_text='Groups information on the person or the organization th' \
+#       'at has created the resource',
+#       blank=True, null=True, related_name="resourceCreator_%(class)s_related", )
+#
+#     # fundingProject = models.ManyToManyField("projectInfoType_model",
+#     #   verbose_name='Funding project',
+#     #   help_text='Groups information on the project that has funded the r' \
+#     #   'esource',
+#     #   blank=True, null=True, related_name="fundingProject_%(class)s_related", )
+#
+#     creationStartDate = models.DateField(
+#       verbose_name='Creation start date',
+#       help_text='The date in which the creation process was started',
+#       blank=True, null=True, )
+#
+#     creationEndDate = models.DateField(
+#       verbose_name='Creation end date',
+#       help_text='The date in which the creation process was completed',
+#       blank=True, null=True, )
+#
+#     def real_unicode_(self):
+#         # pylint: disable-msg=C0301
+#         formatargs = ['resourceCreator', 'fundingProject', 'creationStartDate', 'creationEndDate', ]
+#         formatstring = u'{} {} {}-{}'
+#         return self.unicode_(formatstring, formatargs)
 
 # CREATIONINFOTYPE_CREATIONMODE_CHOICES = _make_choices_from_list([
 #   u'automatic', u'manual', u'mixed', u'interactive',
