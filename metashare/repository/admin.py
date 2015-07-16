@@ -47,8 +47,8 @@ from metashare.repository.models import \
     textClassificationInfoType_model, \
     textFormatInfoType_model, \
     timeCoverageInfoType_model, \
-    identificationInfoType_model, \
-    videoFormatInfoType_model
+    identificationInfoType_model
+    # videoFormatInfoType_model
     # languageDescriptionImageInfoType_model, \
     # versionInfoType_model, \
     # videoClassificationInfoType_model, \
@@ -917,24 +917,24 @@ class timeCoverageInfo_model_inline_lexicalConceptualResourceVideoInfoType_model
 
 
 # pylint: disable-msg=C0103
-class videoFormatInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
-    model = videoFormatInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpusvideoinfotype_model'
+# class videoFormatInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
+#     model = videoFormatInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_corpusvideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class videoFormatInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
-    model = videoFormatInfoType_model
-    collapse = True
-    fk_name = 'back_to_languagedescriptionvideoinfotype_model'
+# class videoFormatInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
+#     model = videoFormatInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_languagedescriptionvideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class videoFormatInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
-    model = videoFormatInfoType_model
-    collapse = True
-    fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
+# class videoFormatInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
+#     model = videoFormatInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
 
 
 admin.site.register(actorInfoType_model, SchemaModelAdmin)
@@ -1032,7 +1032,7 @@ admin.site.register(timeCoverageInfoType_model, SchemaModelAdmin)
 # admin.site.register(versionInfoType_model, SchemaModelAdmin)
 # admin.site.register(videoClassificationInfoType_model, SchemaModelAdmin)
 # admin.site.register(videoContentInfoType_model, SchemaModelAdmin)
-admin.site.register(videoFormatInfoType_model, SchemaModelAdmin)
+# admin.site.register(videoFormatInfoType_model, SchemaModelAdmin)
 
 
 from metashare.repository.editor import manual_admin_registration

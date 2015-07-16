@@ -4913,116 +4913,116 @@ class textClassificationInfoType_model(SchemaModel):
 #         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
 #         return _unicode
 
-VIDEOFORMATINFOTYPE_COLOURSPACE_CHOICES = _make_choices_from_list([
-  u'RGB', u'CMYK', u'4:2:2', u'YUV', 
-])
+# VIDEOFORMATINFOTYPE_COLOURSPACE_CHOICES = _make_choices_from_list([
+#   u'RGB', u'CMYK', u'4:2:2', u'YUV',
+# ])
 
-VIDEOFORMATINFOTYPE_VISUALMODELLING_CHOICES = _make_choices_from_list([
-  u'2D', u'3D', 
-])
+# VIDEOFORMATINFOTYPE_VISUALMODELLING_CHOICES = _make_choices_from_list([
+#   u'2D', u'3D',
+# ])
 
 # pylint: disable-msg=C0103
-class videoFormatInfoType_model(SchemaModel):
-    """
-    Groups information on the format(s) of a resource; repeated if parts
-    of the resource are in different formats
-    """
-
-    class Meta:
-        verbose_name = "Video format"
-
-
-    __schema_name__ = 'videoFormatInfoType'
-    __schema_fields__ = (
-      ( u'mimeType', u'mimeType', REQUIRED ),
-      ( u'colourSpace', u'colourSpace', RECOMMENDED ),
-      ( u'colourDepth', u'colourDepth', OPTIONAL ),
-      ( u'frameRate', u'frameRate', OPTIONAL ),
-      ( u'resolutionInfo', u'resolutionInfo', RECOMMENDED ),
-      ( u'visualModelling', u'visualModelling', OPTIONAL ),
-      ( u'fidelity', u'fidelity', OPTIONAL ),
-      ( u'compressionInfo', u'compressionInfo', OPTIONAL ),
-      ( u'sizePerVideoFormat', u'sizePerVideoFormat', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'compressionInfo': "compressionInfoType_model",
-      u'resolutionInfo': "resolutionInfoType_model",
-      u'sizePerVideoFormat': "sizeInfoType_model",
-    }
-
-    mimeType = XmlCharField(
-      verbose_name='Mime type', 
-      help_text='The mime-type of the resource which is a formalized' \
-        'specifier for the format included or a mime-type ' \
-        'that the tool/service accepts, in conformance' \
-        'with the values of the IANA (Internet Assigned ' \
-        'Numbers Authority); you can select one of ' \
-        'the pre-defined values or add a value, ' \
-        'PREFERABLY FROM THE IANA MEDIA MIMETYPE ' \
-        'RECOMMENDED VALUES (http://www.iana.org/assignments/' \
-        'media-types/media-types.xhtml)',
-      max_length=50, )
-
-    colourSpace = MultiSelectField(
-      verbose_name='Colour space', 
-      help_text='Defines the colour space for the video',
-      blank=True, 
-      max_length=1 + len(VIDEOFORMATINFOTYPE_COLOURSPACE_CHOICES['choices']) / 4,
-      choices=VIDEOFORMATINFOTYPE_COLOURSPACE_CHOICES['choices'],
-      )
-
-    colourDepth = models.IntegerField(
-      verbose_name='Colour depth', 
-      help_text='The number of bits used to represent the colour of a si' \
-      'ngle pixel',
-      blank=True, null=True, )
-
-    frameRate = models.IntegerField(
-      verbose_name='Frame rate', 
-      help_text='The number of frames per second',
-      blank=True, null=True, )
-
-    # resolutionInfo = models.ManyToManyField("resolutionInfoType_model",
-    #   verbose_name='Resolution',
-    #   help_text='Groups together information on the image resolution',
-    #   blank=True, null=True, related_name="resolutionInfo_%(class)s_related", )
-
-    visualModelling = models.CharField(
-      verbose_name='Visual modelling', 
-      help_text='The dimensional form applied on video or image corpus',
-      blank=True, 
-      max_length=30,
-      choices=sorted(VIDEOFORMATINFOTYPE_VISUALMODELLING_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    fidelity = MetaBooleanField(
-      verbose_name='Fidelity', 
-      help_text='Defines whether blur is present in the moving sequences' \
-      '',
-      blank=True, )
-
-    # compressionInfo = models.OneToOneField("compressionInfoType_model",
-    #   verbose_name='Compression',
-    #   help_text='Groups together information on the compression status a' \
-    #   'nd method of a resource',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
-
-    sizePerVideoFormat = models.OneToOneField("sizeInfoType_model", 
-      verbose_name='Size per video format', 
-      help_text='Used to give info on size of parts of a resource that d' \
-      'iffer as to the format',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
-
-    # back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
-
-    # back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class videoFormatInfoType_model(SchemaModel):
+#     """
+#     Groups information on the format(s) of a resource; repeated if parts
+#     of the resource are in different formats
+#     """
+#
+#     class Meta:
+#         verbose_name = "Video format"
+#
+#
+#     __schema_name__ = 'videoFormatInfoType'
+#     __schema_fields__ = (
+#       ( u'mimeType', u'mimeType', REQUIRED ),
+#       ( u'colourSpace', u'colourSpace', RECOMMENDED ),
+#       ( u'colourDepth', u'colourDepth', OPTIONAL ),
+#       ( u'frameRate', u'frameRate', OPTIONAL ),
+#       ( u'resolutionInfo', u'resolutionInfo', RECOMMENDED ),
+#       ( u'visualModelling', u'visualModelling', OPTIONAL ),
+#       ( u'fidelity', u'fidelity', OPTIONAL ),
+#       ( u'compressionInfo', u'compressionInfo', OPTIONAL ),
+#       ( u'sizePerVideoFormat', u'sizePerVideoFormat', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'compressionInfo': "compressionInfoType_model",
+#       u'resolutionInfo': "resolutionInfoType_model",
+#       u'sizePerVideoFormat': "sizeInfoType_model",
+#     }
+#
+#     mimeType = XmlCharField(
+#       verbose_name='Mime type',
+#       help_text='The mime-type of the resource which is a formalized' \
+#         'specifier for the format included or a mime-type ' \
+#         'that the tool/service accepts, in conformance' \
+#         'with the values of the IANA (Internet Assigned ' \
+#         'Numbers Authority); you can select one of ' \
+#         'the pre-defined values or add a value, ' \
+#         'PREFERABLY FROM THE IANA MEDIA MIMETYPE ' \
+#         'RECOMMENDED VALUES (http://www.iana.org/assignments/' \
+#         'media-types/media-types.xhtml)',
+#       max_length=50, )
+#
+#     colourSpace = MultiSelectField(
+#       verbose_name='Colour space',
+#       help_text='Defines the colour space for the video',
+#       blank=True,
+#       max_length=1 + len(VIDEOFORMATINFOTYPE_COLOURSPACE_CHOICES['choices']) / 4,
+#       choices=VIDEOFORMATINFOTYPE_COLOURSPACE_CHOICES['choices'],
+#       )
+#
+#     colourDepth = models.IntegerField(
+#       verbose_name='Colour depth',
+#       help_text='The number of bits used to represent the colour of a si' \
+#       'ngle pixel',
+#       blank=True, null=True, )
+#
+#     frameRate = models.IntegerField(
+#       verbose_name='Frame rate',
+#       help_text='The number of frames per second',
+#       blank=True, null=True, )
+#
+#     # resolutionInfo = models.ManyToManyField("resolutionInfoType_model",
+#     #   verbose_name='Resolution',
+#     #   help_text='Groups together information on the image resolution',
+#     #   blank=True, null=True, related_name="resolutionInfo_%(class)s_related", )
+#
+#     visualModelling = models.CharField(
+#       verbose_name='Visual modelling',
+#       help_text='The dimensional form applied on video or image corpus',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(VIDEOFORMATINFOTYPE_VISUALMODELLING_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     fidelity = MetaBooleanField(
+#       verbose_name='Fidelity',
+#       help_text='Defines whether blur is present in the moving sequences' \
+#       '',
+#       blank=True, )
+#
+#     # compressionInfo = models.OneToOneField("compressionInfoType_model",
+#     #   verbose_name='Compression',
+#     #   help_text='Groups together information on the compression status a' \
+#     #   'nd method of a resource',
+#     #   blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     sizePerVideoFormat = models.OneToOneField("sizeInfoType_model",
+#       verbose_name='Size per video format',
+#       help_text='Used to give info on size of parts of a resource that d' \
+#       'iffer as to the format',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
+#
+#     # back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
+#
+#     # back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # VIDEOCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES = _make_choices_from_list([
 #   u'ANC_domainClassification', u'ANC_genreClassification',
