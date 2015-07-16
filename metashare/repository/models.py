@@ -4864,54 +4864,54 @@ class textClassificationInfoType_model(SchemaModel):
 #         formatstring = u'video ({} {})'
 #         return self.unicode_(formatstring, formatargs)
 
-VIDEOCONTENTINFOTYPE_TEXTINCLUDEDINVIDEO_CHOICES = _make_choices_from_list([
-  u'captions', u'subtitles', u'none', 
-])
+# VIDEOCONTENTINFOTYPE_TEXTINCLUDEDINVIDEO_CHOICES = _make_choices_from_list([
+#   u'captions', u'subtitles', u'none',
+# ])
 
 # pylint: disable-msg=C0103
-class videoContentInfoType_model(SchemaModel):
-    """
-    Groups together information on the contents of the video part of a
-    resource
-    """
-
-    class Meta:
-        verbose_name = "Video content"
-
-
-    __schema_name__ = 'videoContentInfoType'
-    __schema_fields__ = (
-      ( u'typeOfVideoContent', u'typeOfVideoContent', REQUIRED ),
-      ( u'textIncludedInVideo', u'textIncludedInVideo', OPTIONAL ),
-      ( u'dynamicElementInfo', u'dynamicElementInfo', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'dynamicElementInfo': "dynamicElementInfoType_model",
-    }
-
-    typeOfVideoContent = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=22, max_length=1000), 
-      verbose_name='Type of video content', 
-      help_text='Main type of object or people represented in the video',
-      validators=[validate_matches_xml_char_production], )
-
-    textIncludedInVideo = MultiSelectField(
-      verbose_name='Text included in video', 
-      help_text='Indicates if text is present in or in conjunction with ' \
-      'the video',
-      blank=True, 
-      max_length=1 + len(VIDEOCONTENTINFOTYPE_TEXTINCLUDEDINVIDEO_CHOICES['choices']) / 4,
-      choices=VIDEOCONTENTINFOTYPE_TEXTINCLUDEDINVIDEO_CHOICES['choices'],
-      )
-
-    dynamicElementInfo = models.OneToOneField("dynamicElementInfoType_model",
-      verbose_name='Dynamic element',
-      help_text='Groups information on the dynamic elements that are rep' \
-      'resented in the video part of the resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class videoContentInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the contents of the video part of a
+#     resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Video content"
+#
+#
+#     __schema_name__ = 'videoContentInfoType'
+#     __schema_fields__ = (
+#       ( u'typeOfVideoContent', u'typeOfVideoContent', REQUIRED ),
+#       ( u'textIncludedInVideo', u'textIncludedInVideo', OPTIONAL ),
+#       ( u'dynamicElementInfo', u'dynamicElementInfo', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'dynamicElementInfo': "dynamicElementInfoType_model",
+#     }
+#
+#     typeOfVideoContent = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=22, max_length=1000),
+#       verbose_name='Type of video content',
+#       help_text='Main type of object or people represented in the video',
+#       validators=[validate_matches_xml_char_production], )
+#
+#     textIncludedInVideo = MultiSelectField(
+#       verbose_name='Text included in video',
+#       help_text='Indicates if text is present in or in conjunction with ' \
+#       'the video',
+#       blank=True,
+#       max_length=1 + len(VIDEOCONTENTINFOTYPE_TEXTINCLUDEDINVIDEO_CHOICES['choices']) / 4,
+#       choices=VIDEOCONTENTINFOTYPE_TEXTINCLUDEDINVIDEO_CHOICES['choices'],
+#       )
+#
+#     dynamicElementInfo = models.OneToOneField("dynamicElementInfoType_model",
+#       verbose_name='Dynamic element',
+#       help_text='Groups information on the dynamic elements that are rep' \
+#       'resented in the video part of the resource',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 VIDEOFORMATINFOTYPE_COLOURSPACE_CHOICES = _make_choices_from_list([
   u'RGB', u'CMYK', u'4:2:2', u'YUV', 
