@@ -2944,10 +2944,14 @@ LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
   u'openForReuseWithRestrictions', u'termsOfService',
 ])
 
-LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES = _make_choices_from_list([
-  u'informLicensor', u'redeposit', u'academic-nonCommercialUse',
+LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES = _make_choices_from_list([
+  u'informLicensor', u'redeposit', u'nonCommercialUse',
   u'evaluationUse', u'commercialUse', u'attribution',
   u'shareAlike', u'noDerivatives', u'noRedistribution',
+  u'personalDataIncluded',u'sensitiveDataIncluded',
+  u'languageEngineeringResearch', u'requestPlan',
+  u'spatialConstraint',u'userIdentified',
+  u'research', u'education', u'compensate',
   u'other',
 ])
 
@@ -2976,7 +2980,7 @@ class licenceInfoType_model(SchemaModel):
     __schema_name__ = 'licenceInfoType'
     __schema_fields__ = (
       ( u'licence', u'licence', REQUIRED ),
-      ( u'restrictionsOfUse', u'restrictionsOfUse', OPTIONAL ),
+      ( u'conditionsOfUse', u'conditionsOfUse', OPTIONAL ),
       ( u'termsOfServiceText', u'termsOfServiceText', OPTIONAL ),
       ( u'termsOfServiceURL', u'termsOfServiceURL', OPTIONAL ),
       ( u'distributionAccessMedium', u'distributionAccessMedium', RECOMMENDED ),
@@ -3007,12 +3011,14 @@ class licenceInfoType_model(SchemaModel):
       choices=LICENCEINFOTYPE_LICENCE_CHOICES['choices'],
       )
 
-    restrictionsOfUse = MultiSelectField(
+    conditionsOfUse = MultiSelectField(
       verbose_name='Restrictions of use', 
-      help_text='Specifies the restrictions imposed by the licence',
+      help_text='Specifies terms and conditions of use ' \
+                '(e.g. attribution, payment etc.) imposed by ' \
+                'the licence',
       blank=True, 
-      max_length=1 + len(LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES['choices']) / 4,
-      choices=LICENCEINFOTYPE_RESTRICTIONSOFUSE_CHOICES['choices'],
+      max_length=1 + len(LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES['choices']) / 4,
+      choices=LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES['choices'],
       )
 
     termsOfServiceText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
