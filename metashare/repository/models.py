@@ -322,7 +322,7 @@ class sizeInfoType_model(SchemaModel):
 
     back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
 
-    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+    # back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
 
     back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
 
@@ -1182,7 +1182,7 @@ class domainInfoType_model(SchemaModel):
 
     # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
-    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+    # back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
 
     back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
 
@@ -1461,7 +1461,7 @@ class annotationInfoType_model(SchemaModel):
 
     back_to_corpustextnumericalinfotype_model = models.ForeignKey("corpusTextNumericalInfoType_model",  blank=True, null=True)
 
-    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+    # back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -3187,7 +3187,7 @@ class characterEncodingInfoType_model(SchemaModel):
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
 
-    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+    # back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
 
     back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
 
@@ -3236,7 +3236,7 @@ class timeCoverageInfoType_model(SchemaModel):
 
     # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
-    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+    # back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
 
     back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
 
@@ -3295,7 +3295,7 @@ class geographicCoverageInfoType_model(SchemaModel):
 
     # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
-    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+    # back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
 
     back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
 
@@ -3497,7 +3497,7 @@ class languageInfoType_model(SchemaModel):
 
     # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
 
-    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+    # back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
 
     back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
 
@@ -4610,7 +4610,7 @@ class textFormatInfoType_model(SchemaModel):
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
 
-    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+    # back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
 
     back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
 
@@ -4723,7 +4723,7 @@ class textClassificationInfoType_model(SchemaModel):
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
 
-    back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+    # back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -5587,108 +5587,108 @@ class textNumericalFormatInfoType_model(SchemaModel):
         return _unicode
 
 # pylint: disable-msg=C0103
-class corpusTextNgramInfoType_model(SchemaModel):
-    """
-    Groups together information required for n-gram resources;
-    information can be provided both as regards features drawn from
-    the source corpus (e.g. language coverage, size, format, domains
-    etc.) and features pertaining to the n-gram output itself (e.g.
-    range of n-grams, type of item included, etc.)
-    """
-
-    class Meta:
-        verbose_name = "Corpus text ngram"
-
-
-    __schema_name__ = 'corpusTextNgramInfoType'
-    __schema_fields__ = (
-      ( u'mediaType', u'mediaType', REQUIRED ),
-      ( u'ngramInfo', u'ngramInfo', REQUIRED ),
-      ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
-      ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
-      ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
-      ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
-      ( u'textFormatInfo', u'textformatinfotype_model_set', RECOMMENDED ),
-      ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', RECOMMENDED ),
-      ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
-      ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
-      ( u'textClassificationInfo', u'textclassificationinfotype_model_set', RECOMMENDED ),
-      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
-      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
-      ( u'creationInfo', u'creationInfo', RECOMMENDED ),
-    )
-    __schema_classes__ = {
-      u'annotationInfo': "annotationInfoType_model",
-      u'characterEncodingInfo': "characterEncodingInfoType_model",
-      u'creationInfo': "creationInfoType_model",
-      u'domainInfo': "domainInfoType_model",
-      u'geographicCoverageInfo': "geographicCoverageInfoType_model",
-      u'languageInfo': "languageInfoType_model",
-      u'lingualityInfo': "lingualityInfoType_model",
-      u'modalityInfo': "modalityInfoType_model",
-      u'ngramInfo': "ngramInfoType_model",
-      u'sizeInfo': "sizeInfoType_model",
-      u'textClassificationInfo': "textClassificationInfoType_model",
-      u'textFormatInfo': "textFormatInfoType_model",
-      u'timeCoverageInfo': "timeCoverageInfoType_model",
-    }
-
-    mediaType = XmlCharField(
-      verbose_name='Media', 
-      help_text='Specifies the media type of the resource and basically ' \
-      'corresponds to the physical medium of the content representation.' \
-      ' Each media type is described through a distinctive set of featur' \
-      'es. A resource may consist of parts attributed to different types' \
-      ' of media. A tool/service may take as input/output more than one ' \
-      'different media types.',
-      default="textNgram", editable=False, max_length=1000, )
-
-    ngramInfo = models.OneToOneField("ngramInfoType_model", 
-      verbose_name='Ngram', )
-
-    lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
-      verbose_name='Linguality', 
-      help_text='Groups information on the number of languages of the re' \
-      'source part and of the way they are combined to each other',
-      )
-
-    # OneToMany field: languageInfo
-
-    modalityInfo = models.OneToOneField("modalityInfoType_model", 
-      verbose_name='Modality', 
-      help_text='Groups information on the modalities represented in the' \
-      ' resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # OneToMany field: sizeInfo
-
-    # OneToMany field: textFormatInfo
-
-    # OneToMany field: characterEncodingInfo
-
-    # OneToMany field: annotationInfo
-
-    # OneToMany field: domainInfo
-
-    # OneToMany field: textClassificationInfo
-
-    # OneToMany field: timeCoverageInfo
-
-    # OneToMany field: geographicCoverageInfo
-
-    creationInfo = models.OneToOneField("creationInfoType_model", 
-      verbose_name='Creation', 
-      help_text='Groups together information on the resource creation (e' \
-      '.g. for corpora, selection of texts/audio files/ video files etc.' \
-      ' and structural encoding thereof; for lexica, construction of lem' \
-      'ma list etc.)',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['lingualityInfo', 'languageInfo', ]
-        formatstring = u'textNgram ({} {})'
-        return self.unicode_(formatstring, formatargs)
+# class corpusTextNgramInfoType_model(SchemaModel):
+#     """
+#     Groups together information required for n-gram resources;
+#     information can be provided both as regards features drawn from
+#     the source corpus (e.g. language coverage, size, format, domains
+#     etc.) and features pertaining to the n-gram output itself (e.g.
+#     range of n-grams, type of item included, etc.)
+#     """
+#
+#     class Meta:
+#         verbose_name = "Corpus text ngram"
+#
+#
+#     __schema_name__ = 'corpusTextNgramInfoType'
+#     __schema_fields__ = (
+#       ( u'mediaType', u'mediaType', REQUIRED ),
+#       ( u'ngramInfo', u'ngramInfo', REQUIRED ),
+#       ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
+#       ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
+#       ( u'modalityInfo', u'modalityInfo', RECOMMENDED ),
+#       ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
+#       ( u'textFormatInfo', u'textformatinfotype_model_set', RECOMMENDED ),
+#       ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', RECOMMENDED ),
+#       ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
+#       ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
+#       ( u'textClassificationInfo', u'textclassificationinfotype_model_set', RECOMMENDED ),
+#       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
+#       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
+#       ( u'creationInfo', u'creationInfo', RECOMMENDED ),
+#     )
+#     __schema_classes__ = {
+#       u'annotationInfo': "annotationInfoType_model",
+#       u'characterEncodingInfo': "characterEncodingInfoType_model",
+#       u'creationInfo': "creationInfoType_model",
+#       u'domainInfo': "domainInfoType_model",
+#       u'geographicCoverageInfo': "geographicCoverageInfoType_model",
+#       u'languageInfo': "languageInfoType_model",
+#       u'lingualityInfo': "lingualityInfoType_model",
+#       u'modalityInfo': "modalityInfoType_model",
+#       u'ngramInfo': "ngramInfoType_model",
+#       u'sizeInfo': "sizeInfoType_model",
+#       u'textClassificationInfo': "textClassificationInfoType_model",
+#       u'textFormatInfo': "textFormatInfoType_model",
+#       u'timeCoverageInfo': "timeCoverageInfoType_model",
+#     }
+#
+#     mediaType = XmlCharField(
+#       verbose_name='Media',
+#       help_text='Specifies the media type of the resource and basically ' \
+#       'corresponds to the physical medium of the content representation.' \
+#       ' Each media type is described through a distinctive set of featur' \
+#       'es. A resource may consist of parts attributed to different types' \
+#       ' of media. A tool/service may take as input/output more than one ' \
+#       'different media types.',
+#       default="textNgram", editable=False, max_length=1000, )
+#
+#     ngramInfo = models.OneToOneField("ngramInfoType_model",
+#       verbose_name='Ngram', )
+#
+#     lingualityInfo = models.OneToOneField("lingualityInfoType_model",
+#       verbose_name='Linguality',
+#       help_text='Groups information on the number of languages of the re' \
+#       'source part and of the way they are combined to each other',
+#       )
+#
+#     # OneToMany field: languageInfo
+#
+#     modalityInfo = models.OneToOneField("modalityInfoType_model",
+#       verbose_name='Modality',
+#       help_text='Groups information on the modalities represented in the' \
+#       ' resource',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # OneToMany field: sizeInfo
+#
+#     # OneToMany field: textFormatInfo
+#
+#     # OneToMany field: characterEncodingInfo
+#
+#     # OneToMany field: annotationInfo
+#
+#     # OneToMany field: domainInfo
+#
+#     # OneToMany field: textClassificationInfo
+#
+#     # OneToMany field: timeCoverageInfo
+#
+#     # OneToMany field: geographicCoverageInfo
+#
+#     creationInfo = models.OneToOneField("creationInfoType_model",
+#       verbose_name='Creation',
+#       help_text='Groups together information on the resource creation (e' \
+#       '.g. for corpora, selection of texts/audio files/ video files etc.' \
+#       ' and structural encoding thereof; for lexica, construction of lem' \
+#       'ma list etc.)',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     def real_unicode_(self):
+#         # pylint: disable-msg=C0301
+#         formatargs = ['lingualityInfo', 'languageInfo', ]
+#         formatstring = u'textNgram ({} {})'
+#         return self.unicode_(formatstring, formatargs)
 
 NGRAMINFOTYPE_BASEITEM_CHOICES = _make_choices_from_list([
   u'word', u'syllable', u'letter', u'phoneme', u'other', 
