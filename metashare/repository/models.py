@@ -336,7 +336,7 @@ class sizeInfoType_model(SchemaModel):
 
     back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -1196,7 +1196,7 @@ class domainInfoType_model(SchemaModel):
 
     back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -1598,7 +1598,7 @@ class modalityInfoType_model(SchemaModel):
 
     back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -3250,7 +3250,7 @@ class timeCoverageInfoType_model(SchemaModel):
 
     back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -3309,7 +3309,7 @@ class geographicCoverageInfoType_model(SchemaModel):
 
     back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -3511,7 +3511,7 @@ class languageInfoType_model(SchemaModel):
 
     back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
 
-    back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
+    # back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
     def save(self, *args, **kwargs):
         """
@@ -6638,80 +6638,80 @@ class lexicalConceptualResourceVideoInfoType_model(SchemaModel):
         return _unicode
 
 # pylint: disable-msg=C0103
-class lexicalConceptualResourceImageInfoType_model(SchemaModel):
-    """
-    Groups information on the image part of the lexical/conceptual
-    resource
-    """
-
-    class Meta:
-        verbose_name = "Lexical conceptual resource image"
-
-
-    __schema_name__ = 'lexicalConceptualResourceImageInfoType'
-    __schema_fields__ = (
-      ( u'mediaType', u'mediaType', REQUIRED ),
-      ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
-      ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
-      ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
-      ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
-      ( u'imageContentInfo', u'imageContentInfo', RECOMMENDED ),
-      ( u'imageFormatInfo', u'imageformatinfotype_model_set', RECOMMENDED ),
-      ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
-      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
-      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'domainInfo': "domainInfoType_model",
-      u'geographicCoverageInfo': "geographicCoverageInfoType_model",
-      u'imageContentInfo': "imageContentInfoType_model",
-      u'imageFormatInfo': "imageFormatInfoType_model",
-      u'languageInfo': "languageInfoType_model",
-      u'lingualityInfo': "lingualityInfoType_model",
-      u'modalityInfo': "modalityInfoType_model",
-      u'sizeInfo': "sizeInfoType_model",
-      u'timeCoverageInfo': "timeCoverageInfoType_model",
-    }
-
-    mediaType = XmlCharField(
-      verbose_name='Media', 
-      help_text='Specifies the media type of the resource and basically ' \
-      'corresponds to the physical medium of the content representation.' \
-      ' Each media type is described through a distinctive set of featur' \
-      'es. A resource may consist of parts attributed to different types' \
-      ' of media. A tool/service may take as input/output more than one ' \
-      'different media types.',
-      default="image", editable=False, max_length=1000, )
-
-    # OneToMany field: modalityInfo
-
-    lingualityInfo = models.OneToOneField("lingualityInfoType_model", 
-      verbose_name='Linguality', 
-      help_text='Groups information on the number of languages of the re' \
-      'source part and of the way they are combined to each other',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # OneToMany field: languageInfo
-
-    # OneToMany field: sizeInfo
-
-    # imageContentInfo = models.OneToOneField("imageContentInfoType_model",
-    #   verbose_name='Image content',
-    #   help_text='Groups together information on the contents of the imag' \
-    #   'e part of a resource',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # OneToMany field: imageFormatInfo
-
-    # OneToMany field: domainInfo
-
-    # OneToMany field: geographicCoverageInfo
-
-    # OneToMany field: timeCoverageInfo
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class lexicalConceptualResourceImageInfoType_model(SchemaModel):
+#     """
+#     Groups information on the image part of the lexical/conceptual
+#     resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Lexical conceptual resource image"
+#
+#
+#     __schema_name__ = 'lexicalConceptualResourceImageInfoType'
+#     __schema_fields__ = (
+#       ( u'mediaType', u'mediaType', REQUIRED ),
+#       ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
+#       ( u'lingualityInfo', u'lingualityInfo', OPTIONAL ),
+#       ( u'languageInfo', u'languageinfotype_model_set', OPTIONAL ),
+#       ( u'sizeInfo', u'sizeinfotype_model_set', RECOMMENDED ),
+#       ( u'imageContentInfo', u'imageContentInfo', RECOMMENDED ),
+#       ( u'imageFormatInfo', u'imageformatinfotype_model_set', RECOMMENDED ),
+#       ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
+#       ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
+#       ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'domainInfo': "domainInfoType_model",
+#       u'geographicCoverageInfo': "geographicCoverageInfoType_model",
+#       u'imageContentInfo': "imageContentInfoType_model",
+#       u'imageFormatInfo': "imageFormatInfoType_model",
+#       u'languageInfo': "languageInfoType_model",
+#       u'lingualityInfo': "lingualityInfoType_model",
+#       u'modalityInfo': "modalityInfoType_model",
+#       u'sizeInfo': "sizeInfoType_model",
+#       u'timeCoverageInfo': "timeCoverageInfoType_model",
+#     }
+#
+#     mediaType = XmlCharField(
+#       verbose_name='Media',
+#       help_text='Specifies the media type of the resource and basically ' \
+#       'corresponds to the physical medium of the content representation.' \
+#       ' Each media type is described through a distinctive set of featur' \
+#       'es. A resource may consist of parts attributed to different types' \
+#       ' of media. A tool/service may take as input/output more than one ' \
+#       'different media types.',
+#       default="image", editable=False, max_length=1000, )
+#
+#     # OneToMany field: modalityInfo
+#
+#     lingualityInfo = models.OneToOneField("lingualityInfoType_model",
+#       verbose_name='Linguality',
+#       help_text='Groups information on the number of languages of the re' \
+#       'source part and of the way they are combined to each other',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # OneToMany field: languageInfo
+#
+#     # OneToMany field: sizeInfo
+#
+#     # imageContentInfo = models.OneToOneField("imageContentInfoType_model",
+#     #   verbose_name='Image content',
+#     #   help_text='Groups together information on the contents of the imag' \
+#     #   'e part of a resource',
+#     #   blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # OneToMany field: imageFormatInfo
+#
+#     # OneToMany field: domainInfo
+#
+#     # OneToMany field: geographicCoverageInfo
+#
+#     # OneToMany field: timeCoverageInfo
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # INPUTINFOTYPE_MEDIATYPE_CHOICES = _make_choices_from_list([
 #   u'text', u'audio', u'video', u'image', u'textNumerical',
