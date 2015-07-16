@@ -7334,53 +7334,53 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
 #         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
 #         return _unicode
 
-TOOLSERVICEOPERATIONINFOTYPE_OPERATINGSYSTEM_CHOICES = _make_choices_from_list([
-  u'os-independent', u'windows', u'linux', u'unix', u'mac-OS', u'other', 
-])
+# TOOLSERVICEOPERATIONINFOTYPE_OPERATINGSYSTEM_CHOICES = _make_choices_from_list([
+#   u'os-independent', u'windows', u'linux', u'unix', u'mac-OS', u'other',
+# ])
 
 # pylint: disable-msg=C0103
-class toolServiceOperationInfoType_model(SchemaModel):
-    """
-    Groups together information on the operation of a tool or service
-    """
-
-    class Meta:
-        verbose_name = "Tool service operation"
-
-
-    __schema_name__ = 'toolServiceOperationInfoType'
-    __schema_fields__ = (
-      ( u'operatingSystem', u'operatingSystem', REQUIRED ),
-      ( u'runningEnvironmentInfo', u'runningEnvironmentInfo', RECOMMENDED ),
-      ( u'runningTime', u'runningTime', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'runningEnvironmentInfo': "runningEnvironmentInfoType_model",
-    }
-
-    operatingSystem = MultiSelectField(
-      verbose_name='Operating system', 
-      help_text='The operating system on which the tool will be running',
-      
-      max_length=1 + len(TOOLSERVICEOPERATIONINFOTYPE_OPERATINGSYSTEM_CHOICES['choices']) / 4,
-      choices=TOOLSERVICEOPERATIONINFOTYPE_OPERATINGSYSTEM_CHOICES['choices'],
-      )
-
-    # runningEnvironmentInfo = models.OneToOneField("runningEnvironmentInfoType_model",
-    #   verbose_name='Running environment',
-    #   help_text='Groups together information on the running environment ' \
-    #   'of a tool or a language description',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
-
-    runningTime = XmlCharField(
-      verbose_name='Running time', 
-      help_text='Gives information on the running time of a tool or serv' \
-      'ice',
-      blank=True, max_length=100, )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class toolServiceOperationInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the operation of a tool or service
+#     """
+#
+#     class Meta:
+#         verbose_name = "Tool service operation"
+#
+#
+#     __schema_name__ = 'toolServiceOperationInfoType'
+#     __schema_fields__ = (
+#       ( u'operatingSystem', u'operatingSystem', REQUIRED ),
+#       ( u'runningEnvironmentInfo', u'runningEnvironmentInfo', RECOMMENDED ),
+#       ( u'runningTime', u'runningTime', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'runningEnvironmentInfo': "runningEnvironmentInfoType_model",
+#     }
+#
+#     operatingSystem = MultiSelectField(
+#       verbose_name='Operating system',
+#       help_text='The operating system on which the tool will be running',
+#
+#       max_length=1 + len(TOOLSERVICEOPERATIONINFOTYPE_OPERATINGSYSTEM_CHOICES['choices']) / 4,
+#       choices=TOOLSERVICEOPERATIONINFOTYPE_OPERATINGSYSTEM_CHOICES['choices'],
+#       )
+#
+#     # runningEnvironmentInfo = models.OneToOneField("runningEnvironmentInfoType_model",
+#     #   verbose_name='Running environment',
+#     #   help_text='Groups together information on the running environment ' \
+#     #   'of a tool or a language description',
+#     #   blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     runningTime = XmlCharField(
+#       verbose_name='Running time',
+#       help_text='Gives information on the running time of a tool or serv' \
+#       'ice',
+#       blank=True, max_length=100, )
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # pylint: disable-msg=C0103
 # class toolServiceCreationInfoType_model(SchemaModel):
