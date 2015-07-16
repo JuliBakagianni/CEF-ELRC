@@ -21,7 +21,6 @@ from metashare.repository.models import \
     domainInfoType_model, \
     dynamicElementInfoType_model, \
     geographicCoverageInfoType_model, \
-    inputInfoType_model, \
     languageDescriptionEncodingInfoType_model, \
     languageDescriptionImageInfoType_model, \
     languageDescriptionInfoType_model, \
@@ -103,6 +102,7 @@ from metashare.repository.models import \
     # imageClassificationInfoType_model, \
     # imageContentInfoType_model, \
     # imageFormatInfoType_model, \
+    # inputInfoType_model, \
 
 # pylint: disable-msg=C0103
 # class actualUseInfo_model_inline(SchemaModelInline):
@@ -971,7 +971,7 @@ admin.site.register(geographicCoverageInfoType_model, SchemaModelAdmin)
 # admin.site.register(imageClassificationInfoType_model, SchemaModelAdmin)
 # admin.site.register(imageContentInfoType_model, SchemaModelAdmin)
 # admin.site.register(imageFormatInfoType_model, SchemaModelAdmin)
-admin.site.register(inputInfoType_model, SchemaModelAdmin)
+# admin.site.register(inputInfoType_model, SchemaModelAdmin)
 admin.site.register(languageDescriptionEncodingInfoType_model, SchemaModelAdmin)
 admin.site.register(languageDescriptionImageInfoType_model, SchemaModelAdmin)
 admin.site.register(languageDescriptionInfoType_model, SchemaModelAdmin)

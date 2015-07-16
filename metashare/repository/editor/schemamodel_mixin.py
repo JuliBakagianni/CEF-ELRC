@@ -6,15 +6,16 @@ from metashare.repository.supermodel import SchemaModel
 from metashare.repository.editor.editorutils import encode_as_inline
 from django.db.models.fields import FieldDoesNotExist
 from metashare.repository.editor.widgets import ComboWidget, MultiComboWidget
-from metashare.repository.models import inputInfoType_model, \
-    outputInfoType_model, languageInfoType_model, metadataInfoType_model, \
+from metashare.repository.models import outputInfoType_model,languageInfoType_model, metadataInfoType_model, \
     documentInfoType_model, annotationInfoType_model
+
+# inputInfoType_model, \
 
 # Fields that need the ComboWidget/MultiComboWidget with autocomplete functionality
 # to use with languageId,languageName pairs.
 LANGUAGE_ID_NAME_FIELDS = {
-   inputInfoType_model:
-       {'type': 'multiple', 'id': "languageId", 'name': "languageName"},
+   # inputInfoType_model:
+   #     {'type': 'multiple', 'id': "languageId", 'name': "languageName"},
    outputInfoType_model:
        {'type': 'multiple', 'id': "languageId", 'name': "languageName"},
    languageInfoType_model:
