@@ -9,7 +9,6 @@ admin.site.register(documentUnstructuredString_model)
 from metashare.repository.models import \
     actorInfoType_model, \
     annotationInfoType_model, \
-    audioClassificationInfoType_model, \
     audioContentInfoType_model, \
     audioFormatInfoType_model, \
     audioSizeInfoType_model, \
@@ -103,6 +102,7 @@ from metashare.repository.models import \
     videoContentInfoType_model, \
     videoFormatInfoType_model
     # actualUseInfoType_model, \
+    # audioClassificationInfoType_model, \
 
 # pylint: disable-msg=C0103
 # class actualUseInfo_model_inline(SchemaModelInline):
@@ -153,9 +153,9 @@ class annotationInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
-class audioClassificationInfo_model_inline(SchemaModelInline):
-    model = audioClassificationInfoType_model
-    collapse = True
+# class audioClassificationInfo_model_inline(SchemaModelInline):
+#     model = audioClassificationInfoType_model
+#     collapse = True
 
 
 # pylint: disable-msg=C0103
@@ -940,7 +940,7 @@ class videoFormatInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(
 admin.site.register(actorInfoType_model, SchemaModelAdmin)
 # admin.site.register(actualUseInfoType_model, SchemaModelAdmin)
 admin.site.register(annotationInfoType_model, SchemaModelAdmin)
-admin.site.register(audioClassificationInfoType_model, SchemaModelAdmin)
+# admin.site.register(audioClassificationInfoType_model, SchemaModelAdmin)
 admin.site.register(audioContentInfoType_model, SchemaModelAdmin)
 admin.site.register(audioFormatInfoType_model, SchemaModelAdmin)
 admin.site.register(audioSizeInfoType_model, SchemaModelAdmin)

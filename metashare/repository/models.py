@@ -4398,80 +4398,80 @@ AUDIOCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES = _make_ch
 ])
 
 # pylint: disable-msg=C0103
-class audioClassificationInfoType_model(SchemaModel):
-    """
-    Groups together information on audio type/genre of the resource
-    """
-
-    class Meta:
-        verbose_name = "Audio classification"
-
-
-    __schema_name__ = 'audioClassificationInfoType'
-    __schema_fields__ = (
-      ( u'audioGenre', u'audioGenre', REQUIRED ),
-      ( u'speechGenre', u'speechGenre', RECOMMENDED ),
-      ( u'subject_topic', u'subject_topic', OPTIONAL ),
-      ( u'register', u'register', OPTIONAL ),
-      ( u'conformanceToClassificationScheme', u'conformanceToClassificationScheme', OPTIONAL ),
-      ( u'sizePerAudioClassification', u'sizePerAudioClassification', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'sizePerAudioClassification': "sizeInfoType_model",
-    }
-
-    audioGenre = models.CharField(
-      verbose_name='Audio genre', 
-      help_text='A first indication of type of sounds recorded',
-      
-      max_length=30,
-      choices=sorted(AUDIOCLASSIFICATIONINFOTYPE_AUDIOGENRE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    speechGenre = models.CharField(
-      verbose_name='Speech genre', 
-      help_text='The conventionalized discourse of the content of the re' \
-      'source, based on extra-linguistic and internal linguistic criteri' \
-      'a; the values here are intended only for speech',
-      blank=True, 
-      max_length=30,
-      choices=sorted(AUDIOCLASSIFICATIONINFOTYPE_SPEECHGENRE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    subject_topic = XmlCharField(
-      verbose_name='Subject topic', 
-      help_text='For corpora that have already been using subject classi' \
-      'fication',
-      blank=True, max_length=500, )
-
-    register = XmlCharField(
-      verbose_name='Register', 
-      help_text='For corpora that have already been using register class' \
-      'ification',
-      blank=True, max_length=500, )
-
-    conformanceToClassificationScheme = models.CharField(
-      verbose_name='Conformance to classification scheme', 
-      help_text='Specifies the external classification schemes',
-      blank=True, 
-      max_length=100,
-      choices=sorted(AUDIOCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    sizePerAudioClassification = models.OneToOneField("sizeInfoType_model", 
-      verbose_name='Size per audio classification', 
-      help_text='The size of the audio subparts of the resource in terms' \
-      ' of classification criteria',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class audioClassificationInfoType_model(SchemaModel):
+    # """
+    # Groups together information on audio type/genre of the resource
+    # """
+    #
+    # class Meta:
+    #     verbose_name = "Audio classification"
+    #
+    #
+    # __schema_name__ = 'audioClassificationInfoType'
+    # __schema_fields__ = (
+    #   ( u'audioGenre', u'audioGenre', REQUIRED ),
+    #   ( u'speechGenre', u'speechGenre', RECOMMENDED ),
+    #   ( u'subject_topic', u'subject_topic', OPTIONAL ),
+    #   ( u'register', u'register', OPTIONAL ),
+    #   ( u'conformanceToClassificationScheme', u'conformanceToClassificationScheme', OPTIONAL ),
+    #   ( u'sizePerAudioClassification', u'sizePerAudioClassification', OPTIONAL ),
+    # )
+    # __schema_classes__ = {
+    #   u'sizePerAudioClassification': "sizeInfoType_model",
+    # }
+    #
+    # audioGenre = models.CharField(
+    #   verbose_name='Audio genre',
+    #   help_text='A first indication of type of sounds recorded',
+    #
+    #   max_length=30,
+    #   choices=sorted(AUDIOCLASSIFICATIONINFOTYPE_AUDIOGENRE_CHOICES['choices'],
+    #                  key=lambda choice: choice[1].lower()),
+    #   )
+    #
+    # speechGenre = models.CharField(
+    #   verbose_name='Speech genre',
+    #   help_text='The conventionalized discourse of the content of the re' \
+    #   'source, based on extra-linguistic and internal linguistic criteri' \
+    #   'a; the values here are intended only for speech',
+    #   blank=True,
+    #   max_length=30,
+    #   choices=sorted(AUDIOCLASSIFICATIONINFOTYPE_SPEECHGENRE_CHOICES['choices'],
+    #                  key=lambda choice: choice[1].lower()),
+    #   )
+    #
+    # subject_topic = XmlCharField(
+    #   verbose_name='Subject topic',
+    #   help_text='For corpora that have already been using subject classi' \
+    #   'fication',
+    #   blank=True, max_length=500, )
+    #
+    # register = XmlCharField(
+    #   verbose_name='Register',
+    #   help_text='For corpora that have already been using register class' \
+    #   'ification',
+    #   blank=True, max_length=500, )
+    #
+    # conformanceToClassificationScheme = models.CharField(
+    #   verbose_name='Conformance to classification scheme',
+    #   help_text='Specifies the external classification schemes',
+    #   blank=True,
+    #   max_length=100,
+    #   choices=sorted(AUDIOCLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
+    #                  key=lambda choice: choice[1].lower()),
+    #   )
+    #
+    # sizePerAudioClassification = models.OneToOneField("sizeInfoType_model",
+    #   verbose_name='Size per audio classification',
+    #   help_text='The size of the audio subparts of the resource in terms' \
+    #   ' of classification criteria',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
+    #
+    # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+    #
+    # def __unicode__(self):
+    #     _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+    #     return _unicode
 
 # pylint: disable-msg=C0103
 class corpusTextInfoType_model(SchemaModel):
