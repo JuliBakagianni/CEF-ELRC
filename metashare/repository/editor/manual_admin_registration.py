@@ -12,7 +12,7 @@ from metashare.repository.editor.superadmin import SchemaModelAdmin
 from metashare.repository.models import resourceInfoType_model, \
     identificationInfoType_model, metadataInfoType_model, \
     communicationInfoType_model, validationInfoType_model, \
-    relationInfoType_model, foreseenUseInfoType_model, \
+    relationInfoType_model, \
     corpusMediaTypeType_model, corpusTextInfoType_model, \
     textNumericalFormatInfoType_model, \
     videoClassificationInfoType_model, imageClassificationInfoType_model, \
@@ -36,6 +36,7 @@ from metashare.repository.models import resourceInfoType_model, \
     # corpusTextNgramInfoType_model, \
     # corpusTextNumericalInfoType_model, \
     # corpusVideoInfoType_model, \
+    # foreseenUseInfoType_model, \
 
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from django.views.decorators.csrf import csrf_protect
@@ -219,7 +220,7 @@ purely_inline_models = (
     communicationInfoType_model,
     validationInfoType_model,
     relationInfoType_model,
-    foreseenUseInfoType_model,
+    # foreseenUseInfoType_model,
     corpusMediaTypeType_model,
     textNumericalFormatInfoType_model,
     videoClassificationInfoType_model,

@@ -3679,87 +3679,87 @@ class usageInfoType_model(SchemaModel):
         formatstring = u'foreseen uses: {} / actual uses: {}'
         return self.unicode_(formatstring, formatargs)
 
-FORESEENUSEINFOTYPE_FORESEENUSE_CHOICES = _make_choices_from_list([
-  u'humanUse', u'nlpApplications', 
-])
+# FORESEENUSEINFOTYPE_FORESEENUSE_CHOICES = _make_choices_from_list([
+#   u'humanUse', u'nlpApplications',
+# ])
 
-FORESEENUSEINFOTYPE_USENLPSPECIFIC_CHOICES = _make_choices_from_list([
-  u'parsing', u'contradictionDetection', u'opinionMining',
-  u'wordSenseDisambiguation',u'voiceControl', u'topicDetection_Tracking',
-  u'textualEntailment',u'textMining', u'textCategorisation',
-  u'terminologyExtraction',u'summarisation', u'spellChecking',
-  u'speechUnderstanding',u'speechToSpeechTranslation', u'speechSynthesis',
-  u'speechRecognition',u'signLanguageRecognition',
-  u'signLanguageGeneration',u'semanticWeb', u'questionAnswering',
-  u'informationExtraction',u'posTagging', u'personIdentification',
-  u'naturalLanguageUnderstanding',u'naturalLanguageGeneration',
-  u'namedEntityRecognition',u'multimediaDocumentProcessing',
-  u'morphosyntacticTagging',u'morphologicalAnalysis', u'linguisticResearch',
-  u'lexiconEnhancement',u'lemmatization', u'languageModelsTraining',
-  u'languageModelling',u'languageIdentification',
-  u'knowledgeRepresentation',u'knowledgeDiscovery', u'emotionRecognition',
-  u'emotionGeneration',u'documentClassification',
-  u'derivationalMorphologicalAnalysis',u'coreferenceResolution',
-  u'bilingualLexiconInduction',u'annotation', u'webServices',
-  u'eventExtraction',u'semanticRoleLabelling',
-  u'readingAndWritingAidApplications',u'temporalExpressionRecognition',
-  u'intra-documentCoreferenceResolution',u'visualSceneUnderstanding',
-  u'entityMentionRecognition',u'sentimentAnalysis', u'machineTranslation',
-  u'persuasiveExpressionMining',u'qualitativeAnalysis',
-  u'texToSpeechSynthesis',u'personRecognition', u'textGeneration',
-  u'avatarSynthesis',u'discourseAnalysis', u'expressionRecognition',
-  u'faceRecognition',u'faceVerification', u'humanoidAgentSynthesis',
-  u'informationRetrieval',u'lexiconAccess',
-  u'lexiconAcquisitionFromCorpora',u'lexiconExtractionFromLexica',
-  u'lexiconFormatConversion',u'lexiconMerging', u'lexiconVisualization',
-  u'lipTrackingAnalysis',u'multimediaDevelopment', u'speakerIdentification',
-  u'speakerVerification',u'speechLipsCorrelationAnalysis',
-  u'speechAnalysis',u'speechAssistedVideoControl', u'speechVerification',
-  u'spokenDialogueSystems',u'talkingHeadSynthesis', u'userAuthentication',
-  u'other',
-])
+# FORESEENUSEINFOTYPE_USENLPSPECIFIC_CHOICES = _make_choices_from_list([
+#   u'parsing', u'contradictionDetection', u'opinionMining',
+#   u'wordSenseDisambiguation',u'voiceControl', u'topicDetection_Tracking',
+#   u'textualEntailment',u'textMining', u'textCategorisation',
+#   u'terminologyExtraction',u'summarisation', u'spellChecking',
+#   u'speechUnderstanding',u'speechToSpeechTranslation', u'speechSynthesis',
+#   u'speechRecognition',u'signLanguageRecognition',
+#   u'signLanguageGeneration',u'semanticWeb', u'questionAnswering',
+#   u'informationExtraction',u'posTagging', u'personIdentification',
+#   u'naturalLanguageUnderstanding',u'naturalLanguageGeneration',
+#   u'namedEntityRecognition',u'multimediaDocumentProcessing',
+#   u'morphosyntacticTagging',u'morphologicalAnalysis', u'linguisticResearch',
+#   u'lexiconEnhancement',u'lemmatization', u'languageModelsTraining',
+#   u'languageModelling',u'languageIdentification',
+#   u'knowledgeRepresentation',u'knowledgeDiscovery', u'emotionRecognition',
+#   u'emotionGeneration',u'documentClassification',
+#   u'derivationalMorphologicalAnalysis',u'coreferenceResolution',
+#   u'bilingualLexiconInduction',u'annotation', u'webServices',
+#   u'eventExtraction',u'semanticRoleLabelling',
+#   u'readingAndWritingAidApplications',u'temporalExpressionRecognition',
+#   u'intra-documentCoreferenceResolution',u'visualSceneUnderstanding',
+#   u'entityMentionRecognition',u'sentimentAnalysis', u'machineTranslation',
+#   u'persuasiveExpressionMining',u'qualitativeAnalysis',
+#   u'texToSpeechSynthesis',u'personRecognition', u'textGeneration',
+#   u'avatarSynthesis',u'discourseAnalysis', u'expressionRecognition',
+#   u'faceRecognition',u'faceVerification', u'humanoidAgentSynthesis',
+#   u'informationRetrieval',u'lexiconAccess',
+#   u'lexiconAcquisitionFromCorpora',u'lexiconExtractionFromLexica',
+#   u'lexiconFormatConversion',u'lexiconMerging', u'lexiconVisualization',
+#   u'lipTrackingAnalysis',u'multimediaDevelopment', u'speakerIdentification',
+#   u'speakerVerification',u'speechLipsCorrelationAnalysis',
+#   u'speechAnalysis',u'speechAssistedVideoControl', u'speechVerification',
+#   u'spokenDialogueSystems',u'talkingHeadSynthesis', u'userAuthentication',
+#   u'other',
+# ])
 
 # pylint: disable-msg=C0103
-class foreseenUseInfoType_model(SchemaModel):
-    """
-    Groups information on the use for which the resource is created
-    """
-
-    class Meta:
-        verbose_name = "Foreseen use"
-
-
-    __schema_name__ = 'foreseenUseInfoType'
-    __schema_fields__ = (
-      ( u'foreseenUse', u'foreseenUse', REQUIRED ),
-      ( u'useNLPSpecific', u'useNLPSpecific', RECOMMENDED ),
-    )
-
-    foreseenUse = models.CharField(
-      verbose_name='Foreseen use', 
-      help_text='Classification of the intended use of the resource',
-      
-      max_length=30,
-      choices=sorted(FORESEENUSEINFOTYPE_FORESEENUSE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    useNLPSpecific = MultiSelectField(
-      verbose_name='Use nlpspecific', 
-      help_text='Specifies the NLP application for which the resource is' \
-      'created or the application in which it has actually been used.',
-      blank=True, 
-      max_length=1 + len(FORESEENUSEINFOTYPE_USENLPSPECIFIC_CHOICES['choices']) / 4,
-      choices=FORESEENUSEINFOTYPE_USENLPSPECIFIC_CHOICES['choices'],
-      )
-
-    back_to_usageinfotype_model = models.ForeignKey("usageInfoType_model",  blank=True, null=True)
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['foreseenUse', 'useNLPSpecific', ]
-        formatstring = u'{}, NLP specific: {}'
-        return self.unicode_(formatstring, formatargs)
+# class foreseenUseInfoType_model(SchemaModel):
+#     """
+#     Groups information on the use for which the resource is created
+#     """
+#
+#     class Meta:
+#         verbose_name = "Foreseen use"
+#
+#
+#     __schema_name__ = 'foreseenUseInfoType'
+#     __schema_fields__ = (
+#       ( u'foreseenUse', u'foreseenUse', REQUIRED ),
+#       ( u'useNLPSpecific', u'useNLPSpecific', RECOMMENDED ),
+#     )
+#
+#     foreseenUse = models.CharField(
+#       verbose_name='Foreseen use',
+#       help_text='Classification of the intended use of the resource',
+#
+#       max_length=30,
+#       choices=sorted(FORESEENUSEINFOTYPE_FORESEENUSE_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     useNLPSpecific = MultiSelectField(
+#       verbose_name='Use nlpspecific',
+#       help_text='Specifies the NLP application for which the resource is' \
+#       'created or the application in which it has actually been used.',
+#       blank=True,
+#       max_length=1 + len(FORESEENUSEINFOTYPE_USENLPSPECIFIC_CHOICES['choices']) / 4,
+#       choices=FORESEENUSEINFOTYPE_USENLPSPECIFIC_CHOICES['choices'],
+#       )
+#
+#     back_to_usageinfotype_model = models.ForeignKey("usageInfoType_model",  blank=True, null=True)
+#
+#     def real_unicode_(self):
+#         # pylint: disable-msg=C0301
+#         formatargs = ['foreseenUse', 'useNLPSpecific', ]
+#         formatstring = u'{}, NLP specific: {}'
+#         return self.unicode_(formatstring, formatargs)
 
 # ACTUALUSEINFOTYPE_ACTUALUSE_CHOICES = _make_choices_from_list([
 #   u'humanUse', u'nlpApplications',
