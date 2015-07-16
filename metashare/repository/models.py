@@ -312,7 +312,7 @@ class sizeInfoType_model(SchemaModel):
                      key=lambda choice: choice[1].lower()),
       )
 
-    back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model",  blank=True, null=True)
+    # back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model",  blank=True, null=True)
 
     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
 
@@ -4098,36 +4098,36 @@ AUDIOCONTENTINFOTYPE_NOISELEVEL_CHOICES = _make_choices_from_list([
     #     return _unicode
 
 # pylint: disable-msg=C0103
-class audioSizeInfoType_model(SchemaModel):
-    """
-    SizeInfo Element for Audio parts of a resource
-    """
-
-    class Meta:
-        verbose_name = "Audio size"
-
-
-    __schema_name__ = 'audioSizeInfoType'
-    __schema_fields__ = (
-      ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
-      ( u'durationOfEffectiveSpeechInfo', u'durationofeffectivespeechinfotype_model_set', OPTIONAL ),
-      ( u'durationOfAudioInfo', u'durationofaudioinfotype_model_set', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'durationOfAudioInfo': "durationOfAudioInfoType_model",
-      u'durationOfEffectiveSpeechInfo': "durationOfEffectiveSpeechInfoType_model",
-      u'sizeInfo': "sizeInfoType_model",
-    }
-
-    # OneToMany field: sizeInfo
-
-    # OneToMany field: durationOfEffectiveSpeechInfo
-
-    # OneToMany field: durationOfAudioInfo
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class audioSizeInfoType_model(SchemaModel):
+#     """
+#     SizeInfo Element for Audio parts of a resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Audio size"
+#
+#
+#     __schema_name__ = 'audioSizeInfoType'
+#     __schema_fields__ = (
+#       ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
+#       ( u'durationOfEffectiveSpeechInfo', u'durationofeffectivespeechinfotype_model_set', OPTIONAL ),
+#       ( u'durationOfAudioInfo', u'durationofaudioinfotype_model_set', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'durationOfAudioInfo': "durationOfAudioInfoType_model",
+#       u'durationOfEffectiveSpeechInfo': "durationOfEffectiveSpeechInfoType_model",
+#       u'sizeInfo': "sizeInfoType_model",
+#     }
+#
+#     # OneToMany field: sizeInfo
+#
+#     # OneToMany field: durationOfEffectiveSpeechInfo
+#
+#     # OneToMany field: durationOfAudioInfo
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 DURATIONOFEFFECTIVESPEECHINFOTYPE_DURATIONUNIT_CHOICES = _make_choices_from_list([
   u'hours', u'minutes', u'seconds', 
@@ -4165,7 +4165,7 @@ class durationOfEffectiveSpeechInfoType_model(SchemaModel):
                      key=lambda choice: choice[1].lower()),
       )
 
-    back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model",  blank=True, null=True)
+    # back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model",  blank=True, null=True)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -4210,7 +4210,7 @@ class durationOfAudioInfoType_model(SchemaModel):
                      key=lambda choice: choice[1].lower()),
       )
 
-    back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model",  blank=True, null=True)
+    # back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model",  blank=True, null=True)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
