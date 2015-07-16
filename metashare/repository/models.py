@@ -5966,47 +5966,47 @@ class languageDescriptionEncodingInfoType_model(SchemaModel):
 #         return _unicode
 
 # pylint: disable-msg=C0103
-class languageDescriptionPerformanceInfoType_model(SchemaModel):
-    """
-    Groups together information on the performance of the Language
-    Descriptions
-    """
-
-    class Meta:
-        verbose_name = "Language description performance"
-
-
-    __schema_name__ = 'languageDescriptionPerformanceInfoType'
-    __schema_fields__ = (
-      ( u'robustness', u'robustness', RECOMMENDED ),
-      ( u'shallowness', u'shallowness', RECOMMENDED ),
-      ( u'output', u'output', RECOMMENDED ),
-    )
-
-    robustness = XmlCharField(
-      verbose_name='Robustness', 
-      help_text='Free text statement on the robustness of the grammar (h' \
-      'ow well the grammar can cope with misspelt/unknown etc. input, i.' \
-      'e. whether it can produce even partial interpretations of the inp' \
-      'ut)',
-      blank=True, max_length=500, )
-
-    shallowness = XmlCharField(
-      verbose_name='Shallowness', 
-      help_text='Free text statement on the shallowness of the grammar (' \
-      'how deep the syntactic analysis performed by the grammar can be)',
-      blank=True, max_length=200, )
-
-    output = XmlCharField(
-      verbose_name='Output', 
-      help_text='Indicates whether the output of the operation of the gr' \
-      'ammar is a statement of grammaticality (grammatical/ungrammatical' \
-      ') or structures (interpretation of the input)',
-      blank=True, max_length=500, )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class languageDescriptionPerformanceInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the performance of the Language
+#     Descriptions
+#     """
+#
+#     class Meta:
+#         verbose_name = "Language description performance"
+#
+#
+#     __schema_name__ = 'languageDescriptionPerformanceInfoType'
+#     __schema_fields__ = (
+#       ( u'robustness', u'robustness', RECOMMENDED ),
+#       ( u'shallowness', u'shallowness', RECOMMENDED ),
+#       ( u'output', u'output', RECOMMENDED ),
+#     )
+#
+#     robustness = XmlCharField(
+#       verbose_name='Robustness',
+#       help_text='Free text statement on the robustness of the grammar (h' \
+#       'ow well the grammar can cope with misspelt/unknown etc. input, i.' \
+#       'e. whether it can produce even partial interpretations of the inp' \
+#       'ut)',
+#       blank=True, max_length=500, )
+#
+#     shallowness = XmlCharField(
+#       verbose_name='Shallowness',
+#       help_text='Free text statement on the shallowness of the grammar (' \
+#       'how deep the syntactic analysis performed by the grammar can be)',
+#       blank=True, max_length=200, )
+#
+#     output = XmlCharField(
+#       verbose_name='Output',
+#       help_text='Indicates whether the output of the operation of the gr' \
+#       'ammar is a statement of grammaticality (grammatical/ungrammatical' \
+#       ') or structures (interpretation of the input)',
+#       blank=True, max_length=500, )
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # pylint: disable-msg=C0103
 class languageDescriptionTextInfoType_model(SchemaModel):

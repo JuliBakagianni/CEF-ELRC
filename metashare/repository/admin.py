@@ -24,7 +24,6 @@ from metashare.repository.models import \
     languageDescriptionEncodingInfoType_model, \
     languageDescriptionInfoType_model, \
     languageDescriptionMediaTypeType_model, \
-    languageDescriptionPerformanceInfoType_model, \
     languageDescriptionTextInfoType_model, \
     languageDescriptionVideoInfoType_model, \
     languageInfoType_model, \
@@ -84,6 +83,7 @@ from metashare.repository.models import \
     # languageDescriptionOperationInfoType_model, \
     # actualUseInfoType_model, \
     # audioClassificationInfoType_model, \
+    # languageDescriptionPerformanceInfoType_model, \
     # corpusAudioInfoType_model, \
     # audioContentInfoType_model, \
     # audioFormatInfoType_model, \
@@ -977,7 +977,7 @@ admin.site.register(languageDescriptionEncodingInfoType_model, SchemaModelAdmin)
 admin.site.register(languageDescriptionInfoType_model, SchemaModelAdmin)
 admin.site.register(languageDescriptionMediaTypeType_model, SchemaModelAdmin)
 # admin.site.register(languageDescriptionOperationInfoType_model, SchemaModelAdmin)
-admin.site.register(languageDescriptionPerformanceInfoType_model, SchemaModelAdmin)
+# admin.site.register(languageDescriptionPerformanceInfoType_model, SchemaModelAdmin)
 admin.site.register(languageDescriptionTextInfoType_model, SchemaModelAdmin)
 admin.site.register(languageDescriptionVideoInfoType_model, SchemaModelAdmin)
 admin.site.register(languageInfoType_model, SchemaModelAdmin)
