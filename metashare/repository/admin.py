@@ -8,7 +8,6 @@ admin.site.register(documentUnstructuredString_model)
 
 from metashare.repository.models import \
     actorInfoType_model, \
-    actualUseInfoType_model, \
     annotationInfoType_model, \
     audioClassificationInfoType_model, \
     audioContentInfoType_model, \
@@ -103,12 +102,12 @@ from metashare.repository.models import \
     videoClassificationInfoType_model, \
     videoContentInfoType_model, \
     videoFormatInfoType_model
-
+    # actualUseInfoType_model, \
 
 # pylint: disable-msg=C0103
-class actualUseInfo_model_inline(SchemaModelInline):
-    model = actualUseInfoType_model
-    collapse = True
+# class actualUseInfo_model_inline(SchemaModelInline):
+#     model = actualUseInfoType_model
+#     collapse = True
 
 
 # pylint: disable-msg=C0103
@@ -939,7 +938,7 @@ class videoFormatInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(
 
 
 admin.site.register(actorInfoType_model, SchemaModelAdmin)
-admin.site.register(actualUseInfoType_model, SchemaModelAdmin)
+# admin.site.register(actualUseInfoType_model, SchemaModelAdmin)
 admin.site.register(annotationInfoType_model, SchemaModelAdmin)
 admin.site.register(audioClassificationInfoType_model, SchemaModelAdmin)
 admin.site.register(audioContentInfoType_model, SchemaModelAdmin)

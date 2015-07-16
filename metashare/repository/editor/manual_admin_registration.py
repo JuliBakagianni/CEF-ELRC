@@ -19,7 +19,7 @@ from metashare.repository.models import resourceInfoType_model, \
     participantInfoType_model, corpusAudioInfoType_model, \
     corpusImageInfoType_model, corpusTextNumericalInfoType_model, \
     corpusTextNgramInfoType_model, languageDescriptionInfoType_model, \
-    languageDescriptionTextInfoType_model, actualUseInfoType_model, \
+    languageDescriptionTextInfoType_model, \
     languageDescriptionVideoInfoType_model, \
     languageDescriptionImageInfoType_model, \
     lexicalConceptualResourceInfoType_model, \
@@ -30,6 +30,9 @@ from metashare.repository.models import resourceInfoType_model, \
     licenceInfoType_model, personInfoType_model, projectInfoType_model, \
     documentInfoType_model, organizationInfoType_model, \
     documentUnstructuredString_model
+
+    # actualUseInfoType_model, \
+
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from django.views.decorators.csrf import csrf_protect
 from django.db import transaction
@@ -206,7 +209,7 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
 
 # Models which are always rendered inline so they don't need their own admin form:
 purely_inline_models = (
-    actualUseInfoType_model,
+    # actualUseInfoType_model,
     identificationInfoType_model,
     metadataInfoType_model,
     communicationInfoType_model,
