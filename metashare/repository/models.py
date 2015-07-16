@@ -1804,82 +1804,82 @@ CAPTUREINFOTYPE_SCENEILLUMINATION_CHOICES = _make_choices_from_list([
 ])
 
 # pylint: disable-msg=C0103
-class captureInfoType_model(SchemaModel):
-    """
-    Groups together information on the capture of the audio or video
-    part of a corpus
-    """
-
-    class Meta:
-        verbose_name = "Capture"
-
-
-    __schema_name__ = 'captureInfoType'
-    __schema_fields__ = (
-      ( u'capturingDeviceType', u'capturingDeviceType', OPTIONAL ),
-      ( u'capturingDeviceTypeDetails', u'capturingDeviceTypeDetails', OPTIONAL ),
-      ( u'capturingDetails', u'capturingDetails', OPTIONAL ),
-      ( u'capturingEnvironment', u'capturingEnvironment', OPTIONAL ),
-      ( u'sensorTechnology', u'sensorTechnology', OPTIONAL ),
-      ( u'sceneIllumination', u'sceneIllumination', OPTIONAL ),
-      ( u'personSourceSetInfo', u'personSourceSetInfo', RECOMMENDED ),
-    )
-    __schema_classes__ = {
-      u'personSourceSetInfo': "personSourceSetInfoType_model",
-    }
-
-    capturingDeviceType = MultiSelectField(
-      verbose_name='Capturing device type', 
-      help_text='The transducers through which the data is captured',
-      blank=True, 
-      max_length=1 + len(CAPTUREINFOTYPE_CAPTURINGDEVICETYPE_CHOICES['choices']) / 4,
-      choices=CAPTUREINFOTYPE_CAPTURINGDEVICETYPE_CHOICES['choices'],
-      )
-
-    capturingDeviceTypeDetails = XmlCharField(
-      verbose_name='Capturing device type details', 
-      help_text='Provides further information on the capturing device',
-      blank=True, max_length=400, )
-
-    capturingDetails = XmlCharField(
-      verbose_name='Capturing details', 
-      help_text='Provides further information on the capturing method an' \
-      'd procedure',
-      blank=True, max_length=400, )
-
-    capturingEnvironment = models.CharField(
-      verbose_name='Capturing environment', 
-      help_text='Type of capturing environment',
-      blank=True, 
-      max_length=30,
-      choices=sorted(CAPTUREINFOTYPE_CAPTURINGENVIRONMENT_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    sensorTechnology = MultiTextField(max_length=200, widget=MultiFieldWidget(widget_id=9, max_length=200), 
-      verbose_name='Sensor technology', 
-      help_text='Specifies either the type of image sensor or the sensin' \
-      'g method used in the camera or the image-capture device',
-      blank=True, validators=[validate_matches_xml_char_production], )
-
-    sceneIllumination = models.CharField(
-      verbose_name='Scene illumination', 
-      help_text='Information on the illumination of the scene',
-      blank=True, 
-      max_length=30,
-      choices=sorted(CAPTUREINFOTYPE_SCENEILLUMINATION_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    personSourceSetInfo = models.OneToOneField("personSourceSetInfoType_model", 
-      verbose_name='Person source set', 
-      help_text='Groups information on the persons (speakers, video part' \
-      'icipants, etc.) in the audio andvideoparts of the resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class captureInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the capture of the audio or video
+#     part of a corpus
+#     """
+#
+#     class Meta:
+#         verbose_name = "Capture"
+#
+#
+#     __schema_name__ = 'captureInfoType'
+#     __schema_fields__ = (
+#       ( u'capturingDeviceType', u'capturingDeviceType', OPTIONAL ),
+#       ( u'capturingDeviceTypeDetails', u'capturingDeviceTypeDetails', OPTIONAL ),
+#       ( u'capturingDetails', u'capturingDetails', OPTIONAL ),
+#       ( u'capturingEnvironment', u'capturingEnvironment', OPTIONAL ),
+#       ( u'sensorTechnology', u'sensorTechnology', OPTIONAL ),
+#       ( u'sceneIllumination', u'sceneIllumination', OPTIONAL ),
+#       ( u'personSourceSetInfo', u'personSourceSetInfo', RECOMMENDED ),
+#     )
+#     __schema_classes__ = {
+#       u'personSourceSetInfo': "personSourceSetInfoType_model",
+#     }
+#
+#     capturingDeviceType = MultiSelectField(
+#       verbose_name='Capturing device type',
+#       help_text='The transducers through which the data is captured',
+#       blank=True,
+#       max_length=1 + len(CAPTUREINFOTYPE_CAPTURINGDEVICETYPE_CHOICES['choices']) / 4,
+#       choices=CAPTUREINFOTYPE_CAPTURINGDEVICETYPE_CHOICES['choices'],
+#       )
+#
+#     capturingDeviceTypeDetails = XmlCharField(
+#       verbose_name='Capturing device type details',
+#       help_text='Provides further information on the capturing device',
+#       blank=True, max_length=400, )
+#
+#     capturingDetails = XmlCharField(
+#       verbose_name='Capturing details',
+#       help_text='Provides further information on the capturing method an' \
+#       'd procedure',
+#       blank=True, max_length=400, )
+#
+#     capturingEnvironment = models.CharField(
+#       verbose_name='Capturing environment',
+#       help_text='Type of capturing environment',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(CAPTUREINFOTYPE_CAPTURINGENVIRONMENT_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     sensorTechnology = MultiTextField(max_length=200, widget=MultiFieldWidget(widget_id=9, max_length=200),
+#       verbose_name='Sensor technology',
+#       help_text='Specifies either the type of image sensor or the sensin' \
+#       'g method used in the camera or the image-capture device',
+#       blank=True, validators=[validate_matches_xml_char_production], )
+#
+#     sceneIllumination = models.CharField(
+#       verbose_name='Scene illumination',
+#       help_text='Information on the illumination of the scene',
+#       blank=True,
+#       max_length=30,
+#       choices=sorted(CAPTUREINFOTYPE_SCENEILLUMINATION_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     personSourceSetInfo = models.OneToOneField("personSourceSetInfoType_model",
+#       verbose_name='Person source set',
+#       help_text='Groups information on the persons (speakers, video part' \
+#       'icipants, etc.) in the audio andvideoparts of the resource',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 PERSONSOURCESETINFOTYPE_AGEOFPERSONS_CHOICES = _make_choices_from_list([
   u'child', u'teenager', u'adult', u'elderly', 
@@ -4834,11 +4834,11 @@ class corpusVideoInfoType_model(SchemaModel):
       'io or video part of a resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    captureInfo = models.OneToOneField("captureInfoType_model", 
-      verbose_name='Capture', 
-      help_text='Groups together information on the capture of the audio' \
-      ' or video part of a corpus',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # captureInfo = models.OneToOneField("captureInfoType_model",
+    #   verbose_name='Capture',
+    #   help_text='Groups together information on the capture of the audio' \
+    #   ' or video part of a corpus',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -5165,11 +5165,11 @@ class corpusImageInfoType_model(SchemaModel):
 
     # OneToMany field: imageClassificationInfo
 
-    captureInfo = models.OneToOneField("captureInfoType_model", 
-      verbose_name='Capture', 
-      help_text='Groups together information on the capture of the audio' \
-      ' or video part of a corpus',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # captureInfo = models.OneToOneField("captureInfoType_model",
+    #   verbose_name='Capture',
+    #   help_text='Groups together information on the capture of the audio' \
+    #   ' or video part of a corpus',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
@@ -5491,11 +5491,11 @@ class corpusTextNumericalInfoType_model(SchemaModel):
       'io or video part of a resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    captureInfo = models.OneToOneField("captureInfoType_model", 
-      verbose_name='Capture', 
-      help_text='Groups together information on the capture of the audio' \
-      ' or video part of a corpus',
-      blank=True, null=True, on_delete=models.SET_NULL, )
+    # captureInfo = models.OneToOneField("captureInfoType_model",
+    #   verbose_name='Capture',
+    #   help_text='Groups together information on the capture of the audio' \
+    #   ' or video part of a corpus',
+    #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     creationInfo = models.OneToOneField("creationInfoType_model", 
       verbose_name='Creation', 
