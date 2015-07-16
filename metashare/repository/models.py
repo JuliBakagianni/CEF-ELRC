@@ -2309,51 +2309,51 @@ class runningEnvironmentInfoType_model(SchemaModel):
 #         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
 #         return _unicode
 
-RESOLUTIONINFOTYPE_RESOLUTIONSTANDARD_CHOICES = _make_choices_from_list([
-  u'VGA', u'HD.720', u'HD.1080', 
-])
+# RESOLUTIONINFOTYPE_RESOLUTIONSTANDARD_CHOICES = _make_choices_from_list([
+#   u'VGA', u'HD.720', u'HD.1080',
+# ])
 
 # pylint: disable-msg=C0103
-class resolutionInfoType_model(SchemaModel):
-    """
-    Groups together information on the image resolution
-    """
-
-    class Meta:
-        verbose_name = "Resolution"
-
-
-    __schema_name__ = 'resolutionInfoType'
-    __schema_fields__ = (
-      ( u'sizeWidth', u'sizeWidth', OPTIONAL ),
-      ( u'sizeHeight', u'sizeHeight', OPTIONAL ),
-      ( u'resolutionStandard', u'resolutionStandard', OPTIONAL ),
-    )
-
-    sizeWidth = models.IntegerField(
-      verbose_name='Size width', 
-      help_text='The frame width in pixels',
-      blank=True, null=True, )
-
-    sizeHeight = models.IntegerField(
-      verbose_name='Size height', 
-      help_text='The frame height in pixels',
-      blank=True, null=True, )
-
-    resolutionStandard = models.CharField(
-      verbose_name='Resolution standard', 
-      help_text='The standard to which the resolution conforms',
-      blank=True, 
-      max_length=50,
-      choices=sorted(RESOLUTIONINFOTYPE_RESOLUTIONSTANDARD_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['sizeWidth', 'sizeHeight', 'resolutionStandard', ]
-        formatstring = u'{} {} {}'
-        return self.unicode_(formatstring, formatargs)
+# class resolutionInfoType_model(SchemaModel):
+#     """
+#     Groups together information on the image resolution
+#     """
+#
+#     class Meta:
+#         verbose_name = "Resolution"
+#
+#
+#     __schema_name__ = 'resolutionInfoType'
+#     __schema_fields__ = (
+#       ( u'sizeWidth', u'sizeWidth', OPTIONAL ),
+#       ( u'sizeHeight', u'sizeHeight', OPTIONAL ),
+#       ( u'resolutionStandard', u'resolutionStandard', OPTIONAL ),
+#     )
+#
+#     sizeWidth = models.IntegerField(
+#       verbose_name='Size width',
+#       help_text='The frame width in pixels',
+#       blank=True, null=True, )
+#
+#     sizeHeight = models.IntegerField(
+#       verbose_name='Size height',
+#       help_text='The frame height in pixels',
+#       blank=True, null=True, )
+#
+#     resolutionStandard = models.CharField(
+#       verbose_name='Resolution standard',
+#       help_text='The standard to which the resolution conforms',
+#       blank=True,
+#       max_length=50,
+#       choices=sorted(RESOLUTIONINFOTYPE_RESOLUTIONSTANDARD_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     def real_unicode_(self):
+#         # pylint: disable-msg=C0301
+#         formatargs = ['sizeWidth', 'sizeHeight', 'resolutionStandard', ]
+#         formatstring = u'{} {} {}'
+#         return self.unicode_(formatstring, formatargs)
 
 # COMPRESSIONINFOTYPE_COMPRESSIONNAME_CHOICES = _make_choices_from_list([
 #   u'mpg', u'avi', u'mov', u'flac', u'shorten', u'mp3', u'oggVorbis',
@@ -4976,10 +4976,10 @@ class videoFormatInfoType_model(SchemaModel):
       help_text='The number of frames per second',
       blank=True, null=True, )
 
-    resolutionInfo = models.ManyToManyField("resolutionInfoType_model", 
-      verbose_name='Resolution', 
-      help_text='Groups together information on the image resolution',
-      blank=True, null=True, related_name="resolutionInfo_%(class)s_related", )
+    # resolutionInfo = models.ManyToManyField("resolutionInfoType_model",
+    #   verbose_name='Resolution',
+    #   help_text='Groups together information on the image resolution',
+    #   blank=True, null=True, related_name="resolutionInfo_%(class)s_related", )
 
     visualModelling = models.CharField(
       verbose_name='Visual modelling', 

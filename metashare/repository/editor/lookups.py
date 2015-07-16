@@ -9,12 +9,13 @@ from metashare.repository.models import personInfoType_model, \
     actorInfoType_model, documentInfoType_model, documentationInfoType_model,\
     organizationInfoType_model,\
     targetResourceInfoType_model, languageVarietyInfoType_model, \
-    sizeInfoType_model, annotationInfoType_model, videoFormatInfoType_model, \
-    resolutionInfoType_model
+    sizeInfoType_model, annotationInfoType_model, videoFormatInfoType_model
+
     # audioSizeInfoType_model \
     # membershipInfoType_model, \
-    # imageFormatInfoType_model
-    # projectInfoType_model,
+    # imageFormatInfoType_model, \
+    # projectInfoType_model, \
+    # resolutionInfoType_model
 
 from metashare.storage.models import MASTER
 import logging
@@ -158,13 +159,13 @@ class VideoFormatLookup(ModelLookup):
 #     '''
 #     model = imageFormatInfoType_model
 
-class ResolutionDummyLookup(ModelLookup):
-    '''
-        Dummy class for use with OneToOneWidget.
-        Should be removed when unnecessary dependencies are
-        removed from OneToOneWidget
-    '''
-    model = resolutionInfoType_model
+# class ResolutionDummyLookup(ModelLookup):
+#     '''
+#         Dummy class for use with OneToOneWidget.
+#         Should be removed when unnecessary dependencies are
+#         removed from OneToOneWidget
+#     '''
+#     model = resolutionInfoType_model
 
 class LanguageVarietyDummyLookup(ModelLookup):
     '''
