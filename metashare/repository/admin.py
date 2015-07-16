@@ -62,6 +62,7 @@ from metashare.repository.models import \
     versionInfoType_model, \
     videoClassificationInfoType_model, \
     videoContentInfoType_model, \
+    identificationInfoType_model, \
     videoFormatInfoType_model
     # languageDescriptionImageInfoType_model, \
     # personSourceSetInfoType_model, \
@@ -97,7 +98,6 @@ from metashare.repository.models import \
     # durationOfAudioInfoType_model, \
     # durationOfEffectiveSpeechInfoType_model, \
     # foreseenUseInfoType_model, \
-    # identificationInfoType_model, \
     # imageClassificationInfoType_model, \
     # imageContentInfoType_model, \
     # imageFormatInfoType_model, \
@@ -967,7 +967,7 @@ admin.site.register(domainInfoType_model, SchemaModelAdmin)
 admin.site.register(dynamicElementInfoType_model, SchemaModelAdmin)
 # admin.site.register(foreseenUseInfoType_model, SchemaModelAdmin)
 admin.site.register(geographicCoverageInfoType_model, SchemaModelAdmin)
-# admin.site.register(identificationInfoType_model, SchemaModelAdmin)
+admin.site.register(identificationInfoType_model, SchemaModelAdmin)
 # admin.site.register(imageClassificationInfoType_model, SchemaModelAdmin)
 # admin.site.register(imageContentInfoType_model, SchemaModelAdmin)
 # admin.site.register(imageFormatInfoType_model, SchemaModelAdmin)

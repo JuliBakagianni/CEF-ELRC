@@ -22,6 +22,7 @@ from metashare.repository.models import resourceInfoType_model, \
     toolServiceInfoType_model, \
     licenceInfoType_model, personInfoType_model, \
     documentInfoType_model, organizationInfoType_model, \
+    identificationInfoType_model, \
     documentUnstructuredString_model
 
     # actualUseInfoType_model, \
@@ -39,7 +40,6 @@ from metashare.repository.models import resourceInfoType_model, \
     # corpusTextNumericalInfoType_model, \
     # corpusVideoInfoType_model, \
     # foreseenUseInfoType_model, \
-    # identificationInfoType_model, \
     # imageClassificationInfoType_model, \
 
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
@@ -219,7 +219,7 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
 # Models which are always rendered inline so they don't need their own admin form:
 purely_inline_models = (
     # actualUseInfoType_model,
-    # identificationInfoType_model,
+    identificationInfoType_model,
     metadataInfoType_model,
     communicationInfoType_model,
     validationInfoType_model,
