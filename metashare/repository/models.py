@@ -5364,67 +5364,67 @@ class imageFormatInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-IMAGECLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES = _make_choices_from_list([
-  u'ANC_domainClassification', u'ANC_genreClassification',
-  u'BNC_domainClassification',u'BNC_textTypeClassification',
-  u'DDC_classification',u'libraryOfCongress_domainClassification',
-  u'libraryofCongressSubjectHeadings_classification',u'MeSH_classification',
-  u'NLK_classification',u'PAROLE_topicClassification',
-  u'PAROLE_genreClassification',u'UDC_classification', u'other', 
-])
+# IMAGECLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES = _make_choices_from_list([
+#   u'ANC_domainClassification', u'ANC_genreClassification',
+#   u'BNC_domainClassification',u'BNC_textTypeClassification',
+#   u'DDC_classification',u'libraryOfCongress_domainClassification',
+#   u'libraryofCongressSubjectHeadings_classification',u'MeSH_classification',
+#   u'NLK_classification',u'PAROLE_topicClassification',
+#   u'PAROLE_genreClassification',u'UDC_classification', u'other',
+# ])
 
 # pylint: disable-msg=C0103
-class imageClassificationInfoType_model(SchemaModel):
-    """
-    Groups information on the classification of the image corpus
-    """
-
-    class Meta:
-        verbose_name = "Image classification"
-
-
-    __schema_name__ = 'imageClassificationInfoType'
-    __schema_fields__ = (
-      ( u'imageGenre', u'imageGenre', OPTIONAL ),
-      ( u'subject_topic', u'subject_topic', OPTIONAL ),
-      ( u'conformanceToClassificationScheme', u'conformanceToClassificationScheme', OPTIONAL ),
-      ( u'sizePerImageClassification', u'sizePerImageClassification', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'sizePerImageClassification': "sizeInfoType_model",
-    }
-
-    imageGenre = XmlCharField(
-      verbose_name='Image genre', 
-      help_text='A first indication of the genre of images',
-      blank=True, max_length=1000, )
-
-    subject_topic = XmlCharField(
-      verbose_name='Subject topic', 
-      help_text='For corpora that have already been using subject classi' \
-      'fication',
-      blank=True, max_length=1000, )
-
-    conformanceToClassificationScheme = models.CharField(
-      verbose_name='Conformance to classification scheme', 
-      help_text='Specifies the external classification schemes',
-      blank=True, 
-      max_length=100,
-      choices=sorted(IMAGECLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    sizePerImageClassification = models.OneToOneField("sizeInfoType_model", 
-      verbose_name='Size per image classification', 
-      help_text='Provides information on size of parts with different im' \
-      'age classification',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class imageClassificationInfoType_model(SchemaModel):
+#     """
+#     Groups information on the classification of the image corpus
+#     """
+#
+#     class Meta:
+#         verbose_name = "Image classification"
+#
+#
+#     __schema_name__ = 'imageClassificationInfoType'
+#     __schema_fields__ = (
+#       ( u'imageGenre', u'imageGenre', OPTIONAL ),
+#       ( u'subject_topic', u'subject_topic', OPTIONAL ),
+#       ( u'conformanceToClassificationScheme', u'conformanceToClassificationScheme', OPTIONAL ),
+#       ( u'sizePerImageClassification', u'sizePerImageClassification', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'sizePerImageClassification': "sizeInfoType_model",
+#     }
+#
+#     imageGenre = XmlCharField(
+#       verbose_name='Image genre',
+#       help_text='A first indication of the genre of images',
+#       blank=True, max_length=1000, )
+#
+#     subject_topic = XmlCharField(
+#       verbose_name='Subject topic',
+#       help_text='For corpora that have already been using subject classi' \
+#       'fication',
+#       blank=True, max_length=1000, )
+#
+#     conformanceToClassificationScheme = models.CharField(
+#       verbose_name='Conformance to classification scheme',
+#       help_text='Specifies the external classification schemes',
+#       blank=True,
+#       max_length=100,
+#       choices=sorted(IMAGECLASSIFICATIONINFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     sizePerImageClassification = models.OneToOneField("sizeInfoType_model",
+#       verbose_name='Size per image classification',
+#       help_text='Provides information on size of parts with different im' \
+#       'age classification',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # pylint: disable-msg=C0103
 # class corpusTextNumericalInfoType_model(SchemaModel):
