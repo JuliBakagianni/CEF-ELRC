@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End User (free.org) -->
+<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End user (free.org) -->
 <!-- edited by ILSP/Athena R.C. -->
 <xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en">
 	<xs:include schemaLocation="./META-SHARE-SimpleTypes.xsd"/>
@@ -618,22 +618,6 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="annotatedElements" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Specifies the elements annotated in each annotation level</xs:documentation>
-				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="30"/>
-						<xs:enumeration value="speakerNoise"/>
-						<xs:enumeration value="backgroundNoise"/>
-						<xs:enumeration value="mispronunciations"/>
-						<xs:enumeration value="truncation"/>
-						<xs:enumeration value="discourseMarkers"/>
-						<xs:enumeration value="other"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
 			<xs:element name="annotationStandoff" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Indicates whether the annotation is created inline or in a stand-off fashion</xs:documentation>
@@ -665,32 +649,6 @@
 						<relation>one-to-one</relation>
 					</xs:appinfo>
 				</xs:annotation>
-			</xs:element>
-			<xs:element name="tagsetLanguageId" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>The identifier of the tagset language; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="20"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
-			<xs:element name="tagsetLanguageName" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>The name of the tagset language; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="100"/>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
 			<xs:element ref="ms:conformanceToStandardsBestPractices" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
@@ -749,50 +707,12 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="annotationStartDate" type="xs:date" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>The date in which the annotation process has started</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="annotationEndDate" type="xs:date" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>The date in which the annotation process has ended</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="sizePerAnnotation" type="ms:sizeInfoType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Provides information on size for the annotated parts of the resource</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
 						<inline-type>tabular</inline-type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="interannotatorAgreement" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Provides information on the interannotator agreement and the methods/metrics applied </xs:documentation>
-				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="1000"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
-			<xs:element name="intraannotatorAgreement" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Provides information on the intra-annotator agreement and the methods/metrics applied  </xs:documentation>
-				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="1000"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
-			<xs:element name="annotator" type="ms:actorInfoType" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Groups information on the annotators of the specific annotation type</xs:documentation>
-					<xs:appinfo>
-						<relation>many-to-many</relation>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
