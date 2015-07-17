@@ -1278,13 +1278,13 @@ class annotationInfoType_model(SchemaModel):
     __schema_name__ = 'annotationInfoType'
     __schema_fields__ = (
       ( u'annotationType', u'annotationType', REQUIRED ),
-      ( u'annotatedElements', u'annotatedElements', OPTIONAL ),
+      # ( u'annotatedElements', u'annotatedElements', OPTIONAL ),
       ( u'annotationStandoff', u'annotationStandoff', OPTIONAL ),
       ( u'segmentationLevel', u'segmentationLevel', OPTIONAL ),
       ( u'annotationFormat', u'annotationFormat', RECOMMENDED ),
       ( u'tagset', u'tagset', RECOMMENDED ),
-      ( u'tagsetLanguageId', u'tagsetLanguageId', OPTIONAL ),
-      ( u'tagsetLanguageName', u'tagsetLanguageName', OPTIONAL ),
+      # ( u'tagsetLanguageId', u'tagsetLanguageId', OPTIONAL ),
+      # ( u'tagsetLanguageName', u'tagsetLanguageName', OPTIONAL ),
       ( u'conformanceToStandardsBestPractices', u'conformanceToStandardsBestPractices', OPTIONAL ),
       ( u'theoreticModel', u'theoreticModel', OPTIONAL ),
       ( 'annotationManual/documentUnstructured', 'annotationManual', OPTIONAL ),
@@ -1292,20 +1292,20 @@ class annotationInfoType_model(SchemaModel):
       ( u'annotationMode', u'annotationMode', RECOMMENDED ),
       ( u'annotationModeDetails', u'annotationModeDetails', OPTIONAL ),
       ( u'annotationTool', u'annotationTool', RECOMMENDED ),
-      ( u'annotationStartDate', u'annotationStartDate', OPTIONAL ),
-      ( u'annotationEndDate', u'annotationEndDate', OPTIONAL ),
+      # ( u'annotationStartDate', u'annotationStartDate', OPTIONAL ),
+      # ( u'annotationEndDate', u'annotationEndDate', OPTIONAL ),
       ( u'sizePerAnnotation', u'sizePerAnnotation', OPTIONAL ),
-      ( u'interannotatorAgreement', u'interannotatorAgreement', OPTIONAL ),
-      ( u'intraannotatorAgreement', u'intraannotatorAgreement', OPTIONAL ),
-      ( 'annotator/personInfo', 'annotator', OPTIONAL ),
-      ( 'annotator/organizationInfo', 'annotator', OPTIONAL ),
+      # ( u'interannotatorAgreement', u'interannotatorAgreement', OPTIONAL ),
+      # ( u'intraannotatorAgreement', u'intraannotatorAgreement', OPTIONAL ),
+      # ( 'annotator/personInfo', 'annotator', OPTIONAL ),
+      # ( 'annotator/organizationInfo', 'annotator', OPTIONAL ),
     )
     __schema_classes__ = {
       u'annotationTool': "targetResourceInfoType_model",
       u'documentInfo': "documentInfoType_model",
       u'documentUnstructured': "documentUnstructuredString_model",
-      u'organizationInfo': "organizationInfoType_model",
-      u'personInfo': "personInfoType_model",
+      # u'organizationInfo': "organizationInfoType_model",
+      # u'personInfo': "personInfoType_model",
       u'sizePerAnnotation': "sizeInfoType_model",
     }
 
@@ -1319,14 +1319,14 @@ class annotationInfoType_model(SchemaModel):
                      key=lambda choice: choice[1].lower()),
       )
 
-    annotatedElements = MultiSelectField(
-      verbose_name='Annotated elements', 
-      help_text='Specifies the elements annotated in each annotation lev' \
-      'el',
-      blank=True, 
-      max_length=1 + len(ANNOTATIONINFOTYPE_ANNOTATEDELEMENTS_CHOICES['choices']) / 4,
-      choices=ANNOTATIONINFOTYPE_ANNOTATEDELEMENTS_CHOICES['choices'],
-      )
+    # annotatedElements = MultiSelectField(
+    #   verbose_name='Annotated elements',
+    #   help_text='Specifies the elements annotated in each annotation lev' \
+    #   'el',
+    #   blank=True,
+    #   max_length=1 + len(ANNOTATIONINFOTYPE_ANNOTATEDELEMENTS_CHOICES['choices']) / 4,
+    #   choices=ANNOTATIONINFOTYPE_ANNOTATEDELEMENTS_CHOICES['choices'],
+    #   )
 
     annotationStandoff = MetaBooleanField(
       verbose_name='Annotation standoff', 
@@ -1357,21 +1357,21 @@ class annotationInfoType_model(SchemaModel):
       'otation of the resource or used by the tool/service',
       blank=True, max_length=500, )
 
-    tagsetLanguageId = XmlCharField(
-      verbose_name='Tagset language id', 
-      help_text='The identifier of the tagset language; an autocompletio' \
-      'n mechanism with values from the ISO 639 is provided in the edito' \
-      'r, but the values can be subsequently edited for further specific' \
-      'ation (according to the IETF BCP47 guidelines)',
-      blank=True, max_length=20, )
-
-    tagsetLanguageName = XmlCharField(
-      verbose_name='Tagset language name', 
-      help_text='The name of the tagset language; an autocompletion mech' \
-      'anism with values from the ISO 639 is provided in the editor, but' \
-      ' the values can be subsequently edited for further specification ' \
-      '(according to the IETF BCP47 guidelines)',
-      blank=True, max_length=100, )
+    # tagsetLanguageId = XmlCharField(
+    #   verbose_name='Tagset language id',
+    #   help_text='The identifier of the tagset language; an autocompletio' \
+    #   'n mechanism with values from the ISO 639 is provided in the edito' \
+    #   'r, but the values can be subsequently edited for further specific' \
+    #   'ation (according to the IETF BCP47 guidelines)',
+    #   blank=True, max_length=20, )
+    #
+    # tagsetLanguageName = XmlCharField(
+    #   verbose_name='Tagset language name',
+    #   help_text='The name of the tagset language; an autocompletion mech' \
+    #   'anism with values from the ISO 639 is provided in the editor, but' \
+    #   ' the values can be subsequently edited for further specification ' \
+    #   '(according to the IETF BCP47 guidelines)',
+    #   blank=True, max_length=100, )
 
     conformanceToStandardsBestPractices = MultiSelectField(
       verbose_name='Conformance to standards best practices', 
@@ -1417,15 +1417,15 @@ class annotationInfoType_model(SchemaModel):
       'r the annotation of the resource',
       blank=True, null=True, related_name="annotationTool_%(class)s_related", )
 
-    annotationStartDate = models.DateField(
-      verbose_name='Annotation start date', 
-      help_text='The date in which the annotation process has started',
-      blank=True, null=True, )
-
-    annotationEndDate = models.DateField(
-      verbose_name='Annotation end date', 
-      help_text='The date in which the annotation process has ended',
-      blank=True, null=True, )
+    # annotationStartDate = models.DateField(
+    #   verbose_name='Annotation start date',
+    #   help_text='The date in which the annotation process has started',
+    #   blank=True, null=True, )
+    #
+    # annotationEndDate = models.DateField(
+    #   verbose_name='Annotation end date',
+    #   help_text='The date in which the annotation process has ended',
+    #   blank=True, null=True, )
 
     sizePerAnnotation = models.OneToOneField("sizeInfoType_model", 
       verbose_name='Size per annotation', 
@@ -1433,23 +1433,23 @@ class annotationInfoType_model(SchemaModel):
       ' the resource',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    interannotatorAgreement = XmlCharField(
-      verbose_name='Interannotator agreement', 
-      help_text='Provides information on the interannotator agreement an' \
-      'd the methods/metrics applied',
-      blank=True, max_length=1000, )
-
-    intraannotatorAgreement = XmlCharField(
-      verbose_name='Intraannotator agreement', 
-      help_text='Provides information on the intra-annotator agreement a' \
-      'nd the methods/metrics applied',
-      blank=True, max_length=1000, )
-
-    annotator = models.ManyToManyField("actorInfoType_model", 
-      verbose_name='Annotator', 
-      help_text='Groups information on the annotators of the specific an' \
-      'notation type',
-      blank=True, null=True, related_name="annotator_%(class)s_related", )
+    # interannotatorAgreement = XmlCharField(
+    #   verbose_name='Interannotator agreement',
+    #   help_text='Provides information on the interannotator agreement an' \
+    #   'd the methods/metrics applied',
+    #   blank=True, max_length=1000, )
+    #
+    # intraannotatorAgreement = XmlCharField(
+    #   verbose_name='Intraannotator agreement',
+    #   help_text='Provides information on the intra-annotator agreement a' \
+    #   'nd the methods/metrics applied',
+    #   blank=True, max_length=1000, )
+    #
+    # annotator = models.ManyToManyField("actorInfoType_model",
+    #   verbose_name='Annotator',
+    #   help_text='Groups information on the annotators of the specific an' \
+    #   'notation type',
+    #   blank=True, null=True, related_name="annotator_%(class)s_related", )
 
     # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
@@ -6511,7 +6511,7 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
       ( u'mediaType', u'mediaType', REQUIRED ),
       ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
       ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
-      ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
+      # ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
       ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
       ( u'textFormatInfo', u'textformatinfotype_model_set', RECOMMENDED ),
       ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', OPTIONAL ),
@@ -6525,7 +6525,7 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
       u'geographicCoverageInfo': "geographicCoverageInfoType_model",
       u'languageInfo': "languageInfoType_model",
       u'lingualityInfo': "lingualityInfoType_model",
-      u'modalityInfo': "modalityInfoType_model",
+      # u'modalityInfo': "modalityInfoType_model",
       u'sizeInfo': "sizeInfoType_model",
       u'textFormatInfo': "textFormatInfoType_model",
       u'timeCoverageInfo': "timeCoverageInfoType_model",
