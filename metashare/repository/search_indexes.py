@@ -165,15 +165,15 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     domainFilter = LabeledMultiValueField(
                                 label=_('Domain'), facet_id=15, parent_id=0,
                                 faceted=True)
-    geographicCoverageFilter = LabeledMultiValueField(
-                                label=_('Geographic Coverage'), facet_id=16, parent_id=0,
-                                faceted=True)
-    timeCoverageFilter = LabeledMultiValueField(
-                                label=_('Time Coverage'), facet_id=17, parent_id=0,
-                                faceted=True)
-    subjectFilter = LabeledMultiValueField(
-                                label=_('Subject'), facet_id=18, parent_id=0,
-                                faceted=True)
+    # geographicCoverageFilter = LabeledMultiValueField(
+    #                             label=_('Geographic Coverage'), facet_id=16, parent_id=0,
+    #                             faceted=True)
+    # timeCoverageFilter = LabeledMultiValueField(
+    #                             label=_('Time Coverage'), facet_id=17, parent_id=0,
+    #                             faceted=True)
+    # subjectFilter = LabeledMultiValueField(
+    #                             label=_('Subject'), facet_id=18, parent_id=0,
+    #                             faceted=True)
 
     corpusAnnotationTypeFilter = LabeledMultiValueField(
                                 label=_('Annotation Type'), facet_id=19, parent_id=2,
@@ -231,9 +231,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     textTextTypeFilter = LabeledMultiValueField(
                                 label=_('Text Type'), facet_id=36, parent_id=3,
                                 faceted=True)
-    textRegisterFilter = LabeledMultiValueField(
-                                label=_('Register'), facet_id=37, parent_id=3,
-                                faceted=True)
+    # textRegisterFilter = LabeledMultiValueField(
+    #                             label=_('Register'), facet_id=37, parent_id=3,
+    #                             faceted=True)
     # audioAudioGenreFilter = LabeledMultiValueField(
     #                             label=_('Audio Genre'), facet_id=38, parent_id=3,
     #                             faceted=True)
@@ -285,9 +285,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     # textngramOrderFilter = LabeledMultiValueField(
     #                             label=_('Order'), facet_id=54, parent_id=3,
     #                             faceted=True)
-    languageVarietyFilter = LabeledMultiValueField(
-                                label=_('Language Variety'), facet_id=55, parent_id=0,
-                                faceted=True)
+    # languageVarietyFilter = LabeledMultiValueField(
+    #                             label=_('Language Variety'), facet_id=55, parent_id=0,
+    #                             faceted=True)
 
     # we create all items that may appear in the search results list already at
     # index time
@@ -976,69 +976,69 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return result
 
-    def prepare_geographicCoverageFilter(self, obj):
-        """
-        Collect the data to filter the resources on Geographic Coverage
-        """
-        result = []
-        corpus_media = obj.resourceComponentType.as_subclass()
-
-        if isinstance(corpus_media, corpusInfoType_model):
-            media_type = corpus_media.corpusMediaType
-            for corpus_info in media_type.corpustextinfotype_model_set.all():
-                result.extend([gc_info.geographicCoverage for gc_info in
-                               corpus_info.geographiccoverageinfotype_model_set.all()])
-            # if media_type.corpusAudioInfo:
-            #     result.extend([gc_info.geographicCoverage for gc_info in
-            #                    media_type.corpusAudioInfo \
-            #                         .geographiccoverageinfotype_model_set.all()])
-            # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-            #     result.extend([gc_info.geographicCoverage for gc_info in
-            #                    corpus_info.geographiccoverageinfotype_model_set.all()])
-            # if media_type.corpusTextNgramInfo:
-            #     result.extend([gc_info.geographicCoverage for gc_info in
-            #                    media_type.corpusTextNgramInfo \
-            #                         .geographiccoverageinfotype_model_set.all()])
-            # if media_type.corpusImageInfo:
-            #     result.extend([gc_info.geographicCoverage for gc_info in
-            #                    media_type.corpusImageInfo \
-            #                         .geographiccoverageinfotype_model_set.all()])
-
-        elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
-            lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
-            if lcr_media_type.lexicalConceptualResourceTextInfo:
-                result.extend([gc_info.geographicCoverage for gc_info in
-                        lcr_media_type.lexicalConceptualResourceTextInfo \
-                            .geographiccoverageinfotype_model_set.all()])
-            # if lcr_media_type.lexicalConceptualResourceAudioInfo:
-            #     result.extend([gc_info.geographicCoverage for gc_info in
-            #             lcr_media_type.lexicalConceptualResourceAudioInfo \
-            #                 .geographiccoverageinfotype_model_set.all()])
-            # if lcr_media_type.lexicalConceptualResourceVideoInfo:
-            #     result.extend([gc_info.geographicCoverage for gc_info in
-            #             lcr_media_type.lexicalConceptualResourceVideoInfo \
-            #                 .geographiccoverageinfotype_model_set.all()])
-            # if lcr_media_type.lexicalConceptualResourceImageInfo:
-            #     result.extend([gc_info.geographicCoverage for gc_info in
-            #             lcr_media_type.lexicalConceptualResourceImageInfo \
-            #                 .geographiccoverageinfotype_model_set.all()])
-
-        elif isinstance(corpus_media, languageDescriptionInfoType_model):
-            ld_media_type = corpus_media.languageDescriptionMediaType
-            if ld_media_type.languageDescriptionTextInfo:
-                result.extend([gc_info.geographicCoverage for gc_info in
-                               ld_media_type.languageDescriptionTextInfo \
-                                    .geographiccoverageinfotype_model_set.all()])
-            # if ld_media_type.languageDescriptionVideoInfo:
-            #     result.extend([gc_info.geographicCoverage for gc_info in
-            #                    ld_media_type.languageDescriptionVideoInfo \
-            #                         .geographiccoverageinfotype_model_set.all()])
-            # if ld_media_type.languageDescriptionImageInfo:
-            #     result.extend([gc_info.geographicCoverage for gc_info in
-            #                    ld_media_type.languageDescriptionImageInfo \
-            #                         .geographiccoverageinfotype_model_set.all()])
-
-        return result
+    # def prepare_geographicCoverageFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Geographic Coverage
+    #     """
+    #     result = []
+    #     corpus_media = obj.resourceComponentType.as_subclass()
+    #
+    #     if isinstance(corpus_media, corpusInfoType_model):
+    #         media_type = corpus_media.corpusMediaType
+    #         for corpus_info in media_type.corpustextinfotype_model_set.all():
+    #             result.extend([gc_info.geographicCoverage for gc_info in
+    #                            corpus_info.geographiccoverageinfotype_model_set.all()])
+    #         # if media_type.corpusAudioInfo:
+    #         #     result.extend([gc_info.geographicCoverage for gc_info in
+    #         #                    media_type.corpusAudioInfo \
+    #         #                         .geographiccoverageinfotype_model_set.all()])
+    #         # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+    #         #     result.extend([gc_info.geographicCoverage for gc_info in
+    #         #                    corpus_info.geographiccoverageinfotype_model_set.all()])
+    #         # if media_type.corpusTextNgramInfo:
+    #         #     result.extend([gc_info.geographicCoverage for gc_info in
+    #         #                    media_type.corpusTextNgramInfo \
+    #         #                         .geographiccoverageinfotype_model_set.all()])
+    #         # if media_type.corpusImageInfo:
+    #         #     result.extend([gc_info.geographicCoverage for gc_info in
+    #         #                    media_type.corpusImageInfo \
+    #         #                         .geographiccoverageinfotype_model_set.all()])
+    #
+    #     elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+    #         lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
+    #         if lcr_media_type.lexicalConceptualResourceTextInfo:
+    #             result.extend([gc_info.geographicCoverage for gc_info in
+    #                     lcr_media_type.lexicalConceptualResourceTextInfo \
+    #                         .geographiccoverageinfotype_model_set.all()])
+    #         # if lcr_media_type.lexicalConceptualResourceAudioInfo:
+    #         #     result.extend([gc_info.geographicCoverage for gc_info in
+    #         #             lcr_media_type.lexicalConceptualResourceAudioInfo \
+    #         #                 .geographiccoverageinfotype_model_set.all()])
+    #         # if lcr_media_type.lexicalConceptualResourceVideoInfo:
+    #         #     result.extend([gc_info.geographicCoverage for gc_info in
+    #         #             lcr_media_type.lexicalConceptualResourceVideoInfo \
+    #         #                 .geographiccoverageinfotype_model_set.all()])
+    #         # if lcr_media_type.lexicalConceptualResourceImageInfo:
+    #         #     result.extend([gc_info.geographicCoverage for gc_info in
+    #         #             lcr_media_type.lexicalConceptualResourceImageInfo \
+    #         #                 .geographiccoverageinfotype_model_set.all()])
+    #
+    #     elif isinstance(corpus_media, languageDescriptionInfoType_model):
+    #         ld_media_type = corpus_media.languageDescriptionMediaType
+    #         if ld_media_type.languageDescriptionTextInfo:
+    #             result.extend([gc_info.geographicCoverage for gc_info in
+    #                            ld_media_type.languageDescriptionTextInfo \
+    #                                 .geographiccoverageinfotype_model_set.all()])
+    #         # if ld_media_type.languageDescriptionVideoInfo:
+    #         #     result.extend([gc_info.geographicCoverage for gc_info in
+    #         #                    ld_media_type.languageDescriptionVideoInfo \
+    #         #                         .geographiccoverageinfotype_model_set.all()])
+    #         # if ld_media_type.languageDescriptionImageInfo:
+    #         #     result.extend([gc_info.geographicCoverage for gc_info in
+    #         #                    ld_media_type.languageDescriptionImageInfo \
+    #         #                         .geographiccoverageinfotype_model_set.all()])
+    #
+    #     return result
 
     def prepare_languageNameFilter(self, obj):
         """
@@ -1101,44 +1101,44 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return result
 
-    def prepare_subjectFilter(self, obj):
-        """
-        Collect the data to filter the resources on Subject
-        """
-        result = []
-        corpus_media = obj.resourceComponentType.as_subclass()
-
-        if isinstance(corpus_media, corpusInfoType_model):
-            media_type = corpus_media.corpusMediaType
-            for corpus_info in media_type.corpustextinfotype_model_set.all():
-                sf = [class_info.subject_topic for class_info in
-                    corpus_info.textclassificationinfotype_model_set.all()]
-                if sf != ['']:
-                    result.extend(sf)
-            # if media_type.corpusAudioInfo:
-            #     sf = [class_info.subject_topic for class_info in
-            #         media_type.corpusAudioInfo.audioclassificationinfotype_model_set.all()]
-            #     if sf != ['']:
-            #         result.extend(sf)
-            # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-            #     sf = [class_info.subject_topic for class_info in
-            #             corpus_info.videoclassificationinfotype_model_set.all()]
-            #     if sf != ['']:
-            #         result.extend(sf)
-            # if media_type.corpusTextNgramInfo:
-            #     sf = [class_info.subject_topic for class_info in
-            #             media_type.corpusTextNgramInfo \
-            #                 .textclassificationinfotype_model_set.all()]
-            #     if sf != ['']:
-            #         result.extend(sf)
-            # if media_type.corpusImageInfo:
-            #     sf = [class_info.subject_topic for class_info in
-            #             media_type.corpusImageInfo \
-            #                 .imageclassificationinfotype_model_set.all()]
-            #     if sf != ['']:
-            #         result.extend(sf)
-
-        return result
+    # def prepare_subjectFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Subject
+    #     """
+    #     result = []
+    #     corpus_media = obj.resourceComponentType.as_subclass()
+    #
+    #     if isinstance(corpus_media, corpusInfoType_model):
+    #         media_type = corpus_media.corpusMediaType
+    #         for corpus_info in media_type.corpustextinfotype_model_set.all():
+    #             sf = [class_info.subject_topic for class_info in
+    #                 corpus_info.textclassificationinfotype_model_set.all()]
+    #             if sf != ['']:
+    #                 result.extend(sf)
+    #         # if media_type.corpusAudioInfo:
+    #         #     sf = [class_info.subject_topic for class_info in
+    #         #         media_type.corpusAudioInfo.audioclassificationinfotype_model_set.all()]
+    #         #     if sf != ['']:
+    #         #         result.extend(sf)
+    #         # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+    #         #     sf = [class_info.subject_topic for class_info in
+    #         #             corpus_info.videoclassificationinfotype_model_set.all()]
+    #         #     if sf != ['']:
+    #         #         result.extend(sf)
+    #         # if media_type.corpusTextNgramInfo:
+    #         #     sf = [class_info.subject_topic for class_info in
+    #         #             media_type.corpusTextNgramInfo \
+    #         #                 .textclassificationinfotype_model_set.all()]
+    #         #     if sf != ['']:
+    #         #         result.extend(sf)
+    #         # if media_type.corpusImageInfo:
+    #         #     sf = [class_info.subject_topic for class_info in
+    #         #             media_type.corpusImageInfo \
+    #         #                 .imageclassificationinfotype_model_set.all()]
+    #         #     if sf != ['']:
+    #         #         result.extend(sf)
+    #
+    #     return result
 
     def prepare_corpusAnnotationTypeFilter(self, obj):
         """
@@ -1444,22 +1444,22 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return result
     
-    def prepare_textRegisterFilter(self, obj):
-        """
-        Collect the data to filter the resources on Media Type children
-        """
-        result = []
-
-        corpus_media = obj.resourceComponentType.as_subclass()
-
-        # Filter for corpus
-        if isinstance(corpus_media, corpusInfoType_model):
-            media_type = corpus_media.corpusMediaType
-            for corpus_info in media_type.corpustextinfotype_model_set.all():
-                result.extend([text_classification_info.register \
-                  for text_classification_info in corpus_info.textclassificationinfotype_model_set.all()])
-
-        return result
+    # def prepare_textRegisterFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Media Type children
+    #     """
+    #     result = []
+    #
+    #     corpus_media = obj.resourceComponentType.as_subclass()
+    #
+    #     # Filter for corpus
+    #     if isinstance(corpus_media, corpusInfoType_model):
+    #         media_type = corpus_media.corpusMediaType
+    #         for corpus_info in media_type.corpustextinfotype_model_set.all():
+    #             result.extend([text_classification_info.register \
+    #               for text_classification_info in corpus_info.textclassificationinfotype_model_set.all()])
+    #
+    #     return result
     
     # def prepare_audioAudioGenreFilter(self, obj):
     #     """
@@ -1862,5 +1862,5 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         #     if corpus_media.outputInfo:
         #         result.extend(corpus_media.outputInfo.languageVarietyName)
 
-        return result
+        # return result
 
