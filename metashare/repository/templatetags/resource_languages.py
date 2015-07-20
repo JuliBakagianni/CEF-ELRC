@@ -34,9 +34,9 @@ class ResourceLanguages(template.Node):
             # if media_type.corpusAudioInfo:
             #     result.extend([lang.languageName for lang in
             #                    media_type.corpusAudioInfo.languageinfotype_model_set.all()])
-            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                result.extend([lang.languageName for lang in
-                               corpus_info.languageinfotype_model_set.all()])
+            # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+            #     result.extend([lang.languageName for lang in
+            #                    corpus_info.languageinfotype_model_set.all()])
             # if media_type.corpusTextNgramInfo:
             #     result.extend([lang.languageName for lang in
             #                 media_type.corpusTextNgramInfo.languageinfotype_model_set.all()])
