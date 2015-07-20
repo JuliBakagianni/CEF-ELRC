@@ -6058,21 +6058,21 @@ class languageDescriptionTextInfoType_model(SchemaModel):
       ( u'textFormatInfo', u'textformatinfotype_model_set', RECOMMENDED ),
       ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
-      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
-      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
+      # ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
+      # ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
     )
     __schema_classes__ = {
       u'characterEncodingInfo': "characterEncodingInfoType_model",
       # u'creationInfo': "creationInfoType_model",
       u'domainInfo': "domainInfoType_model",
-      u'geographicCoverageInfo': "geographicCoverageInfoType_model",
+      # u'geographicCoverageInfo': "geographicCoverageInfoType_model",
       u'languageInfo': "languageInfoType_model",
       u'lingualityInfo': "lingualityInfoType_model",
       # u'linkToOtherMediaInfo': "linkToOtherMediaInfoType_model",
       # u'modalityInfo': "modalityInfoType_model",
       u'sizeInfo': "sizeInfoType_model",
       u'textFormatInfo': "textFormatInfoType_model",
-      u'timeCoverageInfo': "timeCoverageInfoType_model",
+      # u'timeCoverageInfo': "timeCoverageInfoType_model",
     }
 
     mediaType = XmlCharField(
