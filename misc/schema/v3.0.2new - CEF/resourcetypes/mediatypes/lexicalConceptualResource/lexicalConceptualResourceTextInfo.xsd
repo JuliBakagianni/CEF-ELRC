@@ -68,24 +68,6 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element ref="ms:timeCoverageInfo" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Groups together information on time classification of the resource</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-many</relation>
-						<inline-type>tabular</inline-type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element ref="ms:geographicCoverageInfo" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Groups information on geographic classification of the resource</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-many</relation>
-						<inline-type>tabular</inline-type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<!-- elements -->
