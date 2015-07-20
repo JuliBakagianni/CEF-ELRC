@@ -3212,63 +3212,63 @@ class characterEncodingInfoType_model(SchemaModel):
         return _unicode
 
 # pylint: disable-msg=C0103
-class timeCoverageInfoType_model(SchemaModel):
-    """
-    Groups together information on time classification of the resource
-    """
-
-    class Meta:
-        verbose_name = "Time coverage"
-
-
-    __schema_name__ = 'timeCoverageInfoType'
-    __schema_fields__ = (
-      ( u'timeCoverage', u'timeCoverage', REQUIRED ),
-      ( u'sizePerTimeCoverage', u'sizePerTimeCoverage', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'sizePerTimeCoverage': "sizeInfoType_model",
-    }
-
-    timeCoverage = XmlCharField(
-      verbose_name='Time coverage', 
-      help_text='The time period that the content of a resource is about' \
-      '',
-      max_length=100, )
-
-    sizePerTimeCoverage = models.OneToOneField("sizeInfoType_model", 
-      verbose_name='Size per time coverage', 
-      help_text='Provides information on size per time period represente' \
-      'd in the resource',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
-
-    back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
-
-    # back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
-
-    # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
-
-    # back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
-
-    back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
-
-    # back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
-
-    # back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
-
-    # back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
-
-    back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
-
-    # back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
-
-    # back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
-
-    def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-        return _unicode
+# class timeCoverageInfoType_model(SchemaModel):
+#     """
+#     Groups together information on time classification of the resource
+#     """
+#
+#     class Meta:
+#         verbose_name = "Time coverage"
+#
+#
+#     __schema_name__ = 'timeCoverageInfoType'
+#     __schema_fields__ = (
+#       ( u'timeCoverage', u'timeCoverage', REQUIRED ),
+#       ( u'sizePerTimeCoverage', u'sizePerTimeCoverage', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'sizePerTimeCoverage': "sizeInfoType_model",
+#     }
+#
+#     timeCoverage = XmlCharField(
+#       verbose_name='Time coverage',
+#       help_text='The time period that the content of a resource is about' \
+#       '',
+#       max_length=100, )
+#
+#     sizePerTimeCoverage = models.OneToOneField("sizeInfoType_model",
+#       verbose_name='Size per time coverage',
+#       help_text='Provides information on size per time period represente' \
+#       'd in the resource',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
+#
+#     back_to_corpustextinfotype_model = models.ForeignKey("corpusTextInfoType_model",  blank=True, null=True)
+#
+#     # back_to_corpusvideoinfotype_model = models.ForeignKey("corpusVideoInfoType_model",  blank=True, null=True)
+#
+#     # back_to_corpusimageinfotype_model = models.ForeignKey("corpusImageInfoType_model",  blank=True, null=True)
+#
+#     # back_to_corpustextngraminfotype_model = models.ForeignKey("corpusTextNgramInfoType_model",  blank=True, null=True)
+#
+#     back_to_languagedescriptiontextinfotype_model = models.ForeignKey("languageDescriptionTextInfoType_model",  blank=True, null=True)
+#
+#     # back_to_languagedescriptionvideoinfotype_model = models.ForeignKey("languageDescriptionVideoInfoType_model",  blank=True, null=True)
+#
+#     # back_to_languagedescriptionimageinfotype_model = models.ForeignKey("languageDescriptionImageInfoType_model",  blank=True, null=True)
+#
+#     # back_to_lexicalconceptualresourceaudioinfotype_model = models.ForeignKey("lexicalConceptualResourceAudioInfoType_model",  blank=True, null=True)
+#
+#     back_to_lexicalconceptualresourcetextinfotype_model = models.ForeignKey("lexicalConceptualResourceTextInfoType_model",  blank=True, null=True)
+#
+#     # back_to_lexicalconceptualresourcevideoinfotype_model = models.ForeignKey("lexicalConceptualResourceVideoInfoType_model",  blank=True, null=True)
+#
+#     # back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
+#
+#     def __unicode__(self):
+#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+#         return _unicode
 
 # pylint: disable-msg=C0103
 class geographicCoverageInfoType_model(SchemaModel):

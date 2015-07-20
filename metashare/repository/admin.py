@@ -20,7 +20,6 @@ from metashare.repository.models import \
     documentationInfoType_model, \
     domainInfoType_model, \
     dynamicElementInfoType_model, \
-    geographicCoverageInfoType_model, \
     languageDescriptionEncodingInfoType_model, \
     languageDescriptionInfoType_model, \
     languageDescriptionMediaTypeType_model, \
@@ -46,11 +45,11 @@ from metashare.repository.models import \
     targetResourceInfoType_model, \
     textClassificationInfoType_model, \
     textFormatInfoType_model, \
-    timeCoverageInfoType_model, \
     identificationInfoType_model
     # videoFormatInfoType_model
     # languageDescriptionImageInfoType_model, \
     # versionInfoType_model, \
+    # geographicCoverageInfoType_model, \
     # videoClassificationInfoType_model, \
     # usageInfoType_model, \
     # validationInfoType_model, \
@@ -63,6 +62,7 @@ from metashare.repository.models import \
     # textNumericalFormatInfoType_model, \
     # recordingInfoType_model, \
     # settingInfoType_model, \
+    # timeCoverageInfoType_model, \
     # staticElementInfoType_model, \
     # runningEnvironmentInfoType_model, \
     # textNumericalContentInfoType_model, \
@@ -325,87 +325,87 @@ class domainInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(Schem
 
 
 # pylint: disable-msg=C0103
-class geographicCoverageInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
-    model = geographicCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpusaudioinfotype_model'
+# class geographicCoverageInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
+#     model = geographicCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpusaudioinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class geographicCoverageInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
-    model = geographicCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpusimageinfotype_model'
+# class geographicCoverageInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
+#     model = geographicCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpusimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class geographicCoverageInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
-    model = geographicCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpustextinfotype_model'
+# class geographicCoverageInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
+#     model = geographicCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpustextinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class geographicCoverageInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
-    model = geographicCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpustextngraminfotype_model'
+# class geographicCoverageInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
+#     model = geographicCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpustextngraminfotype_model'
 
 
 # pylint: disable-msg=C0103
-class geographicCoverageInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
-    model = geographicCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpusvideoinfotype_model'
+# class geographicCoverageInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
+#     model = geographicCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpusvideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class geographicCoverageInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
-    model = geographicCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_languagedescriptionimageinfotype_model'
+# class geographicCoverageInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
+#     model = geographicCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_languagedescriptionimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class geographicCoverageInfo_model_inline_languageDescriptionTextInfoType_model(SchemaModelInline):
-    model = geographicCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_languagedescriptiontextinfotype_model'
+# class geographicCoverageInfo_model_inline_languageDescriptionTextInfoType_model(SchemaModelInline):
+#     model = geographicCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_languagedescriptiontextinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class geographicCoverageInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
-    model = geographicCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_languagedescriptionvideoinfotype_model'
+# class geographicCoverageInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
+#     model = geographicCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_languagedescriptionvideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class geographicCoverageInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(SchemaModelInline):
-    model = geographicCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
+# class geographicCoverageInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(SchemaModelInline):
+#     model = geographicCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class geographicCoverageInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
-    model = geographicCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
+# class geographicCoverageInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
+#     model = geographicCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class geographicCoverageInfo_model_inline_lexicalConceptualResourceTextInfoType_model(SchemaModelInline):
-    model = geographicCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_lexicalconceptualresourcetextinfotype_model'
+# class geographicCoverageInfo_model_inline_lexicalConceptualResourceTextInfoType_model(SchemaModelInline):
+#     model = geographicCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_lexicalconceptualresourcetextinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class geographicCoverageInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
-    model = geographicCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
+# class geographicCoverageInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
+#     model = geographicCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -816,87 +816,87 @@ class textFormatInfo_model_inline_lexicalConceptualResourceTextInfoType_model(Sc
 
 
 # pylint: disable-msg=C0103
-class timeCoverageInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
-    model = timeCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpusaudioinfotype_model'
+# class timeCoverageInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
+#     model = timeCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpusaudioinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class timeCoverageInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
-    model = timeCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpusimageinfotype_model'
+# class timeCoverageInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
+#     model = timeCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpusimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class timeCoverageInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
-    model = timeCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpustextinfotype_model'
+# class timeCoverageInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
+#     model = timeCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpustextinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class timeCoverageInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
-    model = timeCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpustextngraminfotype_model'
+# class timeCoverageInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
+#     model = timeCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpustextngraminfotype_model'
 
 
 # pylint: disable-msg=C0103
-class timeCoverageInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
-    model = timeCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpusvideoinfotype_model'
+# class timeCoverageInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
+#     model = timeCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpusvideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class timeCoverageInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
-    model = timeCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_languagedescriptionimageinfotype_model'
+# class timeCoverageInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
+#     model = timeCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_languagedescriptionimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class timeCoverageInfo_model_inline_languageDescriptionTextInfoType_model(SchemaModelInline):
-    model = timeCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_languagedescriptiontextinfotype_model'
+# class timeCoverageInfo_model_inline_languageDescriptionTextInfoType_model(SchemaModelInline):
+#     model = timeCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_languagedescriptiontextinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class timeCoverageInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
-    model = timeCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_languagedescriptionvideoinfotype_model'
+# class timeCoverageInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
+#     model = timeCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_languagedescriptionvideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class timeCoverageInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(SchemaModelInline):
-    model = timeCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
+# class timeCoverageInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(SchemaModelInline):
+#     model = timeCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class timeCoverageInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
-    model = timeCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
+# class timeCoverageInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
+#     model = timeCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class timeCoverageInfo_model_inline_lexicalConceptualResourceTextInfoType_model(SchemaModelInline):
-    model = timeCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_lexicalconceptualresourcetextinfotype_model'
+# class timeCoverageInfo_model_inline_lexicalConceptualResourceTextInfoType_model(SchemaModelInline):
+#     model = timeCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_lexicalconceptualresourcetextinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class timeCoverageInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
-    model = timeCoverageInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
+# class timeCoverageInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
+#     model = timeCoverageInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -966,7 +966,7 @@ admin.site.register(domainInfoType_model, SchemaModelAdmin)
 # admin.site.register(durationOfEffectiveSpeechInfoType_model, SchemaModelAdmin)
 admin.site.register(dynamicElementInfoType_model, SchemaModelAdmin)
 # admin.site.register(foreseenUseInfoType_model, SchemaModelAdmin)
-admin.site.register(geographicCoverageInfoType_model, SchemaModelAdmin)
+# admin.site.register(geographicCoverageInfoType_model, SchemaModelAdmin)
 admin.site.register(identificationInfoType_model, SchemaModelAdmin)
 # admin.site.register(imageClassificationInfoType_model, SchemaModelAdmin)
 # admin.site.register(imageContentInfoType_model, SchemaModelAdmin)
@@ -1022,7 +1022,7 @@ admin.site.register(textClassificationInfoType_model, SchemaModelAdmin)
 admin.site.register(textFormatInfoType_model, SchemaModelAdmin)
 # admin.site.register(textNumericalContentInfoType_model, SchemaModelAdmin)
 # admin.site.register(textNumericalFormatInfoType_model, SchemaModelAdmin)
-admin.site.register(timeCoverageInfoType_model, SchemaModelAdmin)
+# admin.site.register(timeCoverageInfoType_model, SchemaModelAdmin)
 # admin.site.register(toolServiceCreationInfoType_model, SchemaModelAdmin)
 # admin.site.register(toolServiceEvaluationInfoType_model, SchemaModelAdmin)
 # admin.site.register(toolServiceInfoType_model, SchemaModelAdmin)
