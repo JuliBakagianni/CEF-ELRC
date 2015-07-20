@@ -3385,9 +3385,9 @@ class lingualityInfoType_model(SchemaModel):
         formatstring = u'{}'
         return self.unicode_(formatstring, formatargs)
 
-LANGUAGEVARIETYINFOTYPE_LANGUAGEVARIETYTYPE_CHOICES = _make_choices_from_list([
-  u'dialect', u'jargon', u'other', 
-])
+# LANGUAGEVARIETYINFOTYPE_LANGUAGEVARIETYTYPE_CHOICES = _make_choices_from_list([
+#   u'dialect', u'jargon', u'other',
+# ])
 
 # pylint: disable-msg=C0103
 # class languageVarietyInfoType_model(SchemaModel):
