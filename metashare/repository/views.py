@@ -95,26 +95,26 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
   'CC-BY-ND': (MEDIA_URL + 'licences/CC-BYNDv3.0.htm', MEMBER_TYPES.NON),
   'CC-BY-SA': (MEDIA_URL + 'licences/CC-BYSAv3.0.htm', MEMBER_TYPES.NON),
   'CC-BY': (MEDIA_URL + 'licences/CC-BYv3.0.htm', MEMBER_TYPES.NON),
-  'MSCommons-BY': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BY_v1.0.htm',
-                   MEMBER_TYPES.FULL),
-  'MSCommons-BY-NC': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNC_v1.0.htm',
-                      MEMBER_TYPES.FULL),
-  'MSCommons-BY-NC-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCND_' \
-                         'v1.0.htm', MEMBER_TYPES.FULL),
-  'MSCommons-BY-NC-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCSA' \
-                         '_v1.0.htm', MEMBER_TYPES.FULL),
-  'MSCommons-BY-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYND_v1.0.htm',
-                      MEMBER_TYPES.FULL),
-  'MSCommons-BY-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYSA_v1.0.htm',
-                      MEMBER_TYPES.FULL),
-  'MS-C-NoReD-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
-        'NoRedistribution_For-a-Fee_v1.0.htm', MEMBER_TYPES.GOD),
-  'MS-C-NoReD': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
-        'NoRedistribution_v1.0.htm', MEMBER_TYPES.GOD),
-  'MS-C-NoReD-ND-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
-        'NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.GOD),
-  'MS-C-NoReD-ND': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
-        'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.GOD),
+  # 'MSCommons-BY': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BY_v1.0.htm',
+  #                  MEMBER_TYPES.FULL),
+  # 'MSCommons-BY-NC': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNC_v1.0.htm',
+  #                     MEMBER_TYPES.FULL),
+  # 'MSCommons-BY-NC-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCND_' \
+  #                        'v1.0.htm', MEMBER_TYPES.FULL),
+  # 'MSCommons-BY-NC-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCSA' \
+  #                        '_v1.0.htm', MEMBER_TYPES.FULL),
+  # 'MSCommons-BY-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYND_v1.0.htm',
+  #                     MEMBER_TYPES.FULL),
+  # 'MSCommons-BY-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYSA_v1.0.htm',
+  #                     MEMBER_TYPES.FULL),
+  # 'MS-C-NoReD-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
+  #       'NoRedistribution_For-a-Fee_v1.0.htm', MEMBER_TYPES.GOD),
+  # 'MS-C-NoReD': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
+  #       'NoRedistribution_v1.0.htm', MEMBER_TYPES.GOD),
+  # 'MS-C-NoReD-ND-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
+  #       'NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.GOD),
+  # 'MS-C-NoReD-ND': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
+  #       'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.GOD),
   'MS-NC-NoReD-ND-FF': (MEDIA_URL + 'licences/META-SHARE_NonCommercial' \
         '_NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.GOD),
   'MS-NC-NoReD-ND': (MEDIA_URL + 'licences/META-SHARE_NonCommercial_' \
@@ -123,15 +123,25 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
         '_NoRedistribution_For-a-Fee-v1.0.htm', MEMBER_TYPES.GOD),
   'MS-NC-NoReD': (MEDIA_URL + 'licences/META-SHARE_NonCommercial_' \
         'NoRedistribution-v1.0.htm', MEMBER_TYPES.GOD),
-  'ELRA_EVALUATION': (MEDIA_URL + 'licences/EVALUATION.htm', MEMBER_TYPES.GOD),
-  'ELRA_VAR': (MEDIA_URL + 'licences/VAR-v3_2007.htm', MEMBER_TYPES.GOD),
-  'ELRA_END_USER': (MEDIA_URL + 'licences/ENDUSER-v3_2007.htm',
-                    MEMBER_TYPES.GOD),
+
+  # TODO: mdel
+  # 'MS-NoReD-ND-FF': (MEDIA_URL + 'licences/META-SHARE_NonCommercial' \
+  #       '_NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.GOD),
+  # 'MS-NoReD-ND': (MEDIA_URL + 'licences/META-SHARE_NonCommercial_' \
+  #       'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.GOD),
+  # 'MS-NoReD-FF': (MEDIA_URL + 'licences/META-SHARE_NonCommercial' \
+  #       '_NoRedistribution_For-a-Fee-v1.0.htm', MEMBER_TYPES.GOD),
+  # 'MS-NoReD': (MEDIA_URL + 'licences/META-SHARE_NonCommercial_' \
+  #       'NoRedistribution-v1.0.htm', MEMBER_TYPES.GOD),
+
+  # 'ELRA_EVALUATION': (MEDIA_URL + 'licences/EVALUATION.htm', MEMBER_TYPES.GOD),
+  # 'ELRA_VAR': (MEDIA_URL + 'licences/VAR-v3_2007.htm', MEMBER_TYPES.GOD),
+  # 'ELRA_END_USER': (MEDIA_URL + 'licences/ENDUSER-v3_2007.htm', MEMBER_TYPES.GOD),
   'proprietary': ('', MEMBER_TYPES.GOD),
-  'CLARIN_PUB': (MEDIA_URL + 'licences/CLARIN_PUB.html', MEMBER_TYPES.GOD),
-  'CLARIN_ACA-NC': (MEDIA_URL + 'licences/CLARIN_ACA.html', MEMBER_TYPES.GOD),
-  'CLARIN_ACA': (MEDIA_URL + 'licences/CLARIN_ACA.html', MEMBER_TYPES.GOD),
-  'CLARIN_RES': (MEDIA_URL + 'licences/CLARIN_RES.html', MEMBER_TYPES.GOD),
+  # 'CLARIN_PUB': (MEDIA_URL + 'licences/CLARIN_PUB.html', MEMBER_TYPES.GOD),
+  # 'CLARIN_ACA-NC': (MEDIA_URL + 'licences/CLARIN_ACA.html', MEMBER_TYPES.GOD),
+  # 'CLARIN_ACA': (MEDIA_URL + 'licences/CLARIN_ACA.html', MEMBER_TYPES.GOD),
+  # 'CLARIN_RES': (MEDIA_URL + 'licences/CLARIN_RES.html', MEMBER_TYPES.GOD),
   'Princeton_Wordnet': (MEDIA_URL + 'licences/WordNet-3.0.txt',
                         MEMBER_TYPES.NON),
   'GPL': (MEDIA_URL + 'licences/GNU_gpl-3.0.htm', MEMBER_TYPES.NON),
@@ -141,6 +151,7 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
   'BSD': (MEDIA_URL + 'licences/BSD_licence.htm', MEMBER_TYPES.NON),
   'BSD-style': ('', MEMBER_TYPES.NON),
   'underNegotiation': ('', MEMBER_TYPES.GOD),
+  'openForReuseWithRestrictions': ('', MEMBER_TYPES.NON),
   'other': ('', MEMBER_TYPES.GOD)
 }
 
@@ -432,6 +443,8 @@ def view(request, resource_name=None, object_id=None):
     # Create fields lists
     url = resource.identificationInfo.url
     # metashare_id = resource.identificationInfo.metaShareId
+    # pid = resource.identificationInfo.PID
+    # islrn = resource.identificationInfo.ISLRN
     identifier = resource.identificationInfo.identifier
     resource_type = resource.resourceComponentType.as_subclass().resourceType
     media_types = set(model_utils.get_resource_media_types(resource))
