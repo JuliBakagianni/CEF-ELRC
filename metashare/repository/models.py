@@ -6536,19 +6536,19 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
       ( u'textFormatInfo', u'textformatinfotype_model_set', RECOMMENDED ),
       ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', OPTIONAL ),
       ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
-      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
-      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
+      # ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
+      # ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
     )
     __schema_classes__ = {
       u'characterEncodingInfo': "characterEncodingInfoType_model",
       u'domainInfo': "domainInfoType_model",
-      u'geographicCoverageInfo': "geographicCoverageInfoType_model",
+      # u'geographicCoverageInfo': "geographicCoverageInfoType_model",
       u'languageInfo': "languageInfoType_model",
       u'lingualityInfo': "lingualityInfoType_model",
       # u'modalityInfo': "modalityInfoType_model",
       u'sizeInfo': "sizeInfoType_model",
       u'textFormatInfo': "textFormatInfoType_model",
-      u'timeCoverageInfo': "timeCoverageInfoType_model",
+      # u'timeCoverageInfo': "timeCoverageInfoType_model",
     }
 
     mediaType = XmlCharField(
