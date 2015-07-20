@@ -3439,6 +3439,16 @@ class languageVarietyInfoType_model(SchemaModel):
         formatstring = u'{} ({})'
         return self.unicode_(formatstring, formatargs)
 
+def languageinfotype_characterencoding_optgroup_choices():
+    """
+    Group the choices in groups. The first group is the most used choices
+    and the second group is the rest.
+    """
+    most_used_choices = ('', LANGUAGENAME_CHOICES['choices'][:23])
+    more_choices = ('More', LANGUAGENAME_CHOICES['choices'][23:])
+    optgroup = [most_used_choices, more_choices]
+    return optgroup
+
 # pylint: disable-msg=C0103
 class languageInfoType_model(SchemaModel):
     """
@@ -3482,7 +3492,8 @@ class languageInfoType_model(SchemaModel):
       'itor, but the values can be subsequently edited for further speci' \
       'fication (according to the IETF BCP47 guidelines)',
       max_length=100,
-      choices=LANGUAGENAME_CHOICES['choices'])
+      choices=languageinfotype_characterencoding_optgroup_choices(),
+      )
 
     # languageScript = XmlCharField(
     #   verbose_name='Language script',
