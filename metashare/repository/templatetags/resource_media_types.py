@@ -33,8 +33,8 @@ class ResourceMediaTypes(template.Node):
                 result.append(corpus_info.mediaType)
             # if media_type.corpusAudioInfo:
             #     result.append(media_type.corpusAudioInfo.mediaType)
-            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                result.append(corpus_info.mediaType)
+            # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+            #     result.append(corpus_info.mediaType)
             # if media_type.corpusTextNgramInfo:
             #     result.append(media_type.corpusTextNgramInfo.mediaType)
             # if media_type.corpusImageInfo:
@@ -82,26 +82,26 @@ class ResourceMediaTypes(template.Node):
             image_tag = ' <img title="text" src="{}css/sexybuttons/images/icons/silk/page' \
               '_white_text_media_type.png" /> &nbsp;' \
               .format(MEDIA_URL)
-        if "audio" in result:
-            image_tag = image_tag + ' <img title="audio" src="{}css/sexybuttons/images/' \
-              'icons/silk/sound_none.png" /> &nbsp; ' \
-              .format(MEDIA_URL)
-        if "image" in result:
-            image_tag = image_tag + ' <img title="image" src="{}css/sexybuttons/images/' \
-              'icons/silk/picture.png" /> &nbsp; ' \
-              .format(MEDIA_URL)
-        if "video" in result:
-            image_tag = image_tag + ' <img title="video" src="{}css/sexybuttons/images/' \
-              'icons/silk/film.png" />' \
-              .format(MEDIA_URL)
-        if "textNumerical" in result:
-            image_tag = image_tag + ' <img title="textNumerical" src="{}css/sexybuttons/images/' \
-              'icons/silk/eye.png" />' \
-              .format(MEDIA_URL)
-        if "textNgram" in result:
-            image_tag = image_tag + ' <img title="textNgram" src="{}css/sexybuttons/images/' \
-              'icons/silk/text_align_left.png" />' \
-              .format(MEDIA_URL)
+        # if "audio" in result:
+        #     image_tag = image_tag + ' <img title="audio" src="{}css/sexybuttons/images/' \
+        #       'icons/silk/sound_none.png" /> &nbsp; ' \
+        #       .format(MEDIA_URL)
+        # if "image" in result:
+        #     image_tag = image_tag + ' <img title="image" src="{}css/sexybuttons/images/' \
+        #       'icons/silk/picture.png" /> &nbsp; ' \
+        #       .format(MEDIA_URL)
+        # if "video" in result:
+        #     image_tag = image_tag + ' <img title="video" src="{}css/sexybuttons/images/' \
+        #       'icons/silk/film.png" />' \
+        #       .format(MEDIA_URL)
+        # if "textNumerical" in result:
+        #     image_tag = image_tag + ' <img title="textNumerical" src="{}css/sexybuttons/images/' \
+        #       'icons/silk/eye.png" />' \
+        #       .format(MEDIA_URL)
+        # if "textNgram" in result:
+        #     image_tag = image_tag + ' <img title="textNgram" src="{}css/sexybuttons/images/' \
+        #       'icons/silk/text_align_left.png" />' \
+        #       .format(MEDIA_URL)
 
         return image_tag
 
