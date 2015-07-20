@@ -584,13 +584,16 @@ class MutuallyExclusiveValueModelField(models.Field):
     A model field that uses the AdminMutuallyExclusiveValueField form field,
     to either select a value from the choices list or type a string
     """
+
     def formfield(self, form_class=None, choices_form_class=None, **kwargs):
+
         """
         Returns a AdminMutuallyExclusiveValueField instance for this
         database Field.
         This follows closely the base implementation from Django 1.6.6's
         django.db.models.fields.Field, with the explicitly marked modifications.
         """
+
         #### begin modification ####
         form_class = form_fields.AdminMutuallyExclusiveValueField
         #### end modification ####
@@ -653,7 +656,7 @@ class MutuallyExclusiveValueModelField(models.Field):
         if value is None and not self.null:
             raise exceptions.ValidationError(self.error_messages['null'], code='null')
 
-        if not self.blank and value in self.empty_values:
+        if not self.blank and value in validators.EMPTY_VALUES:
             raise exceptions.ValidationError(self.error_messages['blank'], code='blank')
 
 
