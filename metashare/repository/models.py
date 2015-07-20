@@ -4510,8 +4510,8 @@ class corpusTextInfoType_model(SchemaModel):
       ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
       ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
       ( u'textClassificationInfo', u'textclassificationinfotype_model_set', RECOMMENDED ),
-      ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
-      ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
+      # ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
+      # ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
       # ( u'creationInfo', u'creationInfo', RECOMMENDED ),
       # ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', OPTIONAL ),
     )
@@ -4520,7 +4520,7 @@ class corpusTextInfoType_model(SchemaModel):
       u'characterEncodingInfo': "characterEncodingInfoType_model",
       # u'creationInfo': "creationInfoType_model",
       u'domainInfo': "domainInfoType_model",
-      u'geographicCoverageInfo': "geographicCoverageInfoType_model",
+      # u'geographicCoverageInfo': "geographicCoverageInfoType_model",
       u'languageInfo': "languageInfoType_model",
       u'lingualityInfo': "lingualityInfoType_model",
       # u'linkToOtherMediaInfo': "linkToOtherMediaInfoType_model",
@@ -4528,7 +4528,7 @@ class corpusTextInfoType_model(SchemaModel):
       u'sizeInfo': "sizeInfoType_model",
       u'textClassificationInfo': "textClassificationInfoType_model",
       u'textFormatInfo': "textFormatInfoType_model",
-      u'timeCoverageInfo': "timeCoverageInfoType_model",
+      # u'timeCoverageInfo': "timeCoverageInfoType_model",
     }
 
     mediaType = XmlCharField(
