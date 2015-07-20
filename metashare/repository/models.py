@@ -14,7 +14,8 @@ from metashare.repository.supermodel import SchemaModel, SubclassableModel, \
   _make_choices_from_int_list
 from metashare.repository.editor.widgets import MultiFieldWidget
 from metashare.repository.fields import MultiTextField, MetaBooleanField, \
-  MultiSelectField, DictField, XmlCharField, best_lang_value_retriever
+  MultiSelectField, DictField, XmlCharField, best_lang_value_retriever, \
+  MutuallyExclusiveValueModelField
 from metashare.repository.validators import validate_lang_code_keys, \
   validate_dict_values, validate_xml_schema_year, \
   validate_matches_xml_char_production
@@ -1147,8 +1148,7 @@ class domainInfoType_model(SchemaModel):
       u'sizePerDomain': "sizeInfoType_model",
     }
 
-    # TO CHANGE IN: domain = MutuallyExclusiveValueModelField
-    domain = XmlCharField(
+    domain = MutuallyExclusiveValueModelField(
       verbose_name='Domain', 
       help_text='Specifies the application domain of the resource or ' \
         'the tool/service; please, select one of the values supplied ' \
@@ -4613,7 +4613,7 @@ class textFormatInfoType_model(SchemaModel):
       u'sizePerTextFormat': "sizeInfoType_model",
     }
 
-    mimeType = XmlCharField(
+    mimeType = MutuallyExclusiveValueModelField(
       verbose_name='Mime type', 
       help_text='The mime-type of the resource which is a formalized ' \
         'specifier for the format included or a mime-type that the ' \
@@ -4693,8 +4693,7 @@ class textClassificationInfoType_model(SchemaModel):
       u'sizePerTextClassification': "sizeInfoType_model",
     }
 
-    # textGenre = MutuallyExclusiveValueModelField(
-    textGenre = XmlCharField(
+    textGenre = MutuallyExclusiveValueModelField(
       verbose_name='Text genre', 
       help_text='Genre: The conventionalized discourse or text types of ' \
       'the content of the resource, based on extra-linguistic and internal ' \
@@ -4707,8 +4706,7 @@ class textClassificationInfoType_model(SchemaModel):
       choices=sorted(TEXTCLASSIFICATIONINFOTYPE_TEXTGENRE_CHOICES['choices'],
                      key=lambda choice: choice[1].lower()),)
 
-    # textType = MutuallyExclusiveValueModelField(
-    textType = XmlCharField(
+    textType = MutuallyExclusiveValueModelField(
       verbose_name='Text type', 
       help_text='Specifies the type of the text according to a text type ' \
         'classification; please, select one of the predefined values as ' \

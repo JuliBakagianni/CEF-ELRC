@@ -8,6 +8,7 @@ django-jenkins==0.12.0
 django-kronos==0.3
 django-selectable==0.4.1
 django-selenium==0.8
+django-xor-formfields==0.1.0
 flup==1.0.2
 httplib2==0.7.1
 logilab-common==0.62.1

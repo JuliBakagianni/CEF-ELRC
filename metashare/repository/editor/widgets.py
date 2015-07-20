@@ -18,6 +18,7 @@ from selectable.forms.widgets import AutoCompleteWidget, AutoCompleteSelectWidge
 from django.forms.util import flatatt
 from django.utils.encoding import force_unicode
 from django import forms
+from xorformfields.forms import MutuallyExclusiveRadioWidget
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -716,4 +717,19 @@ class AutoCompleteSelectSingleWidget(AutoCompleteSelectWidget):
         # and replaces it.
         # pylint: disable-msg=E1003
         super(AutoCompleteSelectWidget, self).__init__(widget_list, *args, **kwargs)
-    
+
+class AdminMutuallyExclusiveRadioWidget(MutuallyExclusiveRadioWidget):
+    """
+    A MutuallyExclusiveRadioWidget widget that renders the saved value
+    and the first widget is a Select widget and the second is a TextInput
+    """
+    def decompress(self, value):
+        """
+        Return the list to be rendered.
+        If value is in choices of the first widget, that is a Select widget,
+        then render the value, else render the value in the TextInput
+        """
+        select_widget_choices = [choice[0] for choice in self.widgets[0].choices]
+        if value in select_widget_choices:
+            return [value, '']
+        return ['', value]
