@@ -137,10 +137,10 @@ def get_resource_linguality_infos(res_obj):
         # if media_type.corpusAudioInfo:
         #     result.append(media_type.corpusAudioInfo.lingualityInfo \
         #                   .get_lingualityType_display())
-        for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-            if corpus_info.lingualityInfo:
-                result.append(corpus_info.lingualityInfo \
-                              .get_lingualityType_display())
+        # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+        #     if corpus_info.lingualityInfo:
+        #         result.append(corpus_info.lingualityInfo \
+        #                       .get_lingualityType_display())
         # if media_type.corpusTextNgramInfo:
         #     result.append(media_type.corpusTextNgramInfo.lingualityInfo \
         #                   .get_lingualityType_display())
@@ -213,8 +213,8 @@ def get_resource_media_types(res_obj):
             result.append(corpus_info.mediaType)
         # if media_type.corpusAudioInfo:
         #     result.append(media_type.corpusAudioInfo.mediaType)
-        for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-            result.append(corpus_info.mediaType)
+        # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+        #     result.append(corpus_info.mediaType)
         # if media_type.corpusTextNgramInfo:
         #     result.append(media_type.corpusTextNgramInfo.mediaType)
         # if media_type.corpusImageInfo:
