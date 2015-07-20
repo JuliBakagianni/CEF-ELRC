@@ -218,6 +218,32 @@
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
 				<xs:maxLength value="100"/>
+				<xs:enumeration value="Bulgarian"/>
+				<xs:enumeration value="Czech"/>
+				<xs:enumeration value="Danish"/>
+				<xs:enumeration value="Dutch; Flemish"/>
+				<xs:enumeration value="English"/>
+				<xs:enumeration value="Estonian"/>
+				<xs:enumeration value="Finnish"/>
+				<xs:enumeration value="French"/>
+				<xs:enumeration value="German"/>
+				<xs:enumeration value="Irish"/>
+				<xs:enumeration value="Greek, Modern (1453-)"/>
+				<xs:enumeration value="Croatian"/>
+				<xs:enumeration value="Hungarian"/>
+				<xs:enumeration value="Italian"/>
+				<xs:enumeration value="Latvian"/>
+				<xs:enumeration value="Lithuanian"/>
+				<xs:enumeration value="Maltese"/>
+				<xs:enumeration value="Polish"/>
+				<xs:enumeration value="Portuguese"/>
+				<xs:enumeration value="Romanian"/>
+				<xs:enumeration value="Slovak"/>
+				<xs:enumeration value="Slovenian"/>
+				<xs:enumeration value="Spanish; Castilian"/>
+				<xs:enumeration value="Swedish"/>
+				<xs:enumeration value="other"/>
+				<!-- non-EU official languages
 				<xs:enumeration value="Afar"/>
 				<xs:enumeration value="Abkhazian"/>
 				<xs:enumeration value="Achinese"/>
@@ -282,7 +308,8 @@
 				<xs:enumeration value="Batak languages"/>
 				<xs:enumeration value="Buriat"/>
 				<xs:enumeration value="Buginese"/>
-				<xs:enumeration value="Bulgarian"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Burmese"/>
 				<xs:enumeration value="Blin; Bilin"/>
 				<xs:enumeration value="Caddo"/>
@@ -318,9 +345,11 @@
 				<xs:enumeration value="Creoles and pidgins"/>
 				<xs:enumeration value="Kashubian"/>
 				<xs:enumeration value="Cushitic languages"/>
-				<xs:enumeration value="Czech"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Dakota"/>
-				<xs:enumeration value="Danish"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Dargwa"/>
 				<xs:enumeration value="Land Dayak languages"/>
 				<xs:enumeration value="Delaware"/>
@@ -333,17 +362,20 @@
 				<xs:enumeration value="Lower Sorbian"/>
 				<xs:enumeration value="Duala"/>
 				<xs:enumeration value="Dutch, Middle (ca. 1050-1350)"/>
-				<xs:enumeration value="Dutch; Flemish"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Dyula"/>
 				<xs:enumeration value="Dzongkha"/>
 				<xs:enumeration value="Efik"/>
 				<xs:enumeration value="Egyptian (Ancient)"/>
 				<xs:enumeration value="Ekajuk"/>
 				<xs:enumeration value="Elamite"/>
-				<xs:enumeration value="English"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="English, Middle (1100-1500)"/>
 				<xs:enumeration value="Esperanto"/>
-				<xs:enumeration value="Estonian"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Ewe"/>
 				<xs:enumeration value="Ewondo"/>
 				<xs:enumeration value="Fang"/>
@@ -351,10 +383,12 @@
 				<xs:enumeration value="Fanti"/>
 				<xs:enumeration value="Fijian"/>
 				<xs:enumeration value="Filipino; Pilipino"/>
-				<xs:enumeration value="Finnish"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Finno-Ugrian languages"/>
 				<xs:enumeration value="Fon"/>
-				<xs:enumeration value="French"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="French, Middle (ca. 1400-1600)"/>
 				<xs:enumeration value="French, Old (842-ca. 1400)"/>
 				<xs:enumeration value="Northern Frisian"/>
@@ -367,11 +401,13 @@
 				<xs:enumeration value="Gbaya"/>
 				<xs:enumeration value="Germanic languages"/>
 				<xs:enumeration value="Georgian"/>
-				<xs:enumeration value="German"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Geez"/>
 				<xs:enumeration value="Gilbertese"/>
 				<xs:enumeration value="Gaelic; Scottish Gaelic"/>
-				<xs:enumeration value="Irish"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Galician"/>
 				<xs:enumeration value="Manx"/>
 				<xs:enumeration value="German, Middle High (ca. 1050-1500)"/>
@@ -381,7 +417,8 @@
 				<xs:enumeration value="Gothic"/>
 				<xs:enumeration value="Grebo"/>
 				<xs:enumeration value="Greek, Ancient (to 1453)"/>
-				<xs:enumeration value="Greek, Modern (1453-)"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Guarani"/>
 				<xs:enumeration value="Swiss German; Alemannic; Alsatian"/>
 				<xs:enumeration value="Gujarati"/>
@@ -398,9 +435,11 @@
 				<xs:enumeration value="Hittite"/>
 				<xs:enumeration value="Hmong; Mong"/>
 				<xs:enumeration value="Hiri Motu"/>
-				<xs:enumeration value="Croatian"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Upper Sorbian"/>
-				<xs:enumeration value="Hungarian"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Hupa"/>
 				<xs:enumeration value="Iban"/>
 				<xs:enumeration value="Igbo"/>
@@ -419,7 +458,8 @@
 				<xs:enumeration value="Inupiaq"/>
 				<xs:enumeration value="Iranian languages"/>
 				<xs:enumeration value="Iroquoian languages"/>
-				<xs:enumeration value="Italian"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Javanese"/>
 				<xs:enumeration value="Lojban"/>
 				<xs:enumeration value="Japanese"/>
@@ -464,11 +504,13 @@
 				<xs:enumeration value="Lamba"/>
 				<xs:enumeration value="Lao"/>
 				<xs:enumeration value="Latin"/>
-				<xs:enumeration value="Latvian"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Lezghian"/>
 				<xs:enumeration value="Limburgan; Limburger; Limburgish"/>
 				<xs:enumeration value="Lingala"/>
-				<xs:enumeration value="Lithuanian"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Mongo"/>
 				<xs:enumeration value="Lozi"/>
 				<xs:enumeration value="Luxembourgish; Letzeburgesch"/>
@@ -501,7 +543,8 @@
 				<xs:enumeration value="Uncoded languages"/>
 				<xs:enumeration value="Mon-Khmer languages"/>
 				<xs:enumeration value="Malagasy"/>
-				<xs:enumeration value="Maltese"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Manchu"/>
 				<xs:enumeration value="Manipuri"/>
 				<xs:enumeration value="Manobo languages"/>
@@ -564,9 +607,11 @@
 				<xs:enumeration value="Philippine languages"/>
 				<xs:enumeration value="Phoenician"/>
 				<xs:enumeration value="Pali"/>
-				<xs:enumeration value="Polish"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Pohnpeian"/>
-				<xs:enumeration value="Portuguese"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Prakrit languages"/>
 				<xs:enumeration value="ProvenC'al, Old (to 1500); Occitan, Old (to 1500)"/>
 				<xs:enumeration value="Pushto; Pashto"/>
@@ -577,7 +622,8 @@
 				<xs:enumeration value="Romance languages"/>
 				<xs:enumeration value="Romansh"/>
 				<xs:enumeration value="Romany"/>
-				<xs:enumeration value="Romanian"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Rundi"/>
 				<xs:enumeration value="Aromanian; Arumanian; Macedo-Romanian"/>
 				<xs:enumeration value="Russian"/>
@@ -602,8 +648,8 @@
 				<xs:enumeration value="Siouan languages"/>
 				<xs:enumeration value="Sino-Tibetan languages"/>
 				<xs:enumeration value="Slavic languages"/>
-				<xs:enumeration value="Slovak"/>
-				<xs:enumeration value="Slovenian"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Southern Sami"/>
 				<xs:enumeration value="Northern Sami"/>
 				<xs:enumeration value="Sami languages"/>
@@ -618,7 +664,8 @@
 				<xs:enumeration value="Somali"/>
 				<xs:enumeration value="Songhai languages"/>
 				<xs:enumeration value="Sotho, Southern"/>
-				<xs:enumeration value="Spanish; Castilian"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Sardinian"/>
 				<xs:enumeration value="Sranan Tongo"/>
 				<xs:enumeration value="Serbian"/>
@@ -630,7 +677,8 @@
 				<xs:enumeration value="Susu"/>
 				<xs:enumeration value="Sumerian"/>
 				<xs:enumeration value="Swahili"/>
-				<xs:enumeration value="Swedish"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="Classical Syriac"/>
 				<xs:enumeration value="Syriac"/>
 				<xs:enumeration value="Tahitian"/>
@@ -702,7 +750,7 @@
 				<xs:enumeration value="Zulu"/>
 				<xs:enumeration value="Zuni"/>
 				<xs:enumeration value="Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki"/>
-				<xs:enumeration value="other"/>
+-->
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:element>
@@ -713,6 +761,32 @@
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
 				<xs:maxLength value="100"/>
+				<xs:enumeration value="bg"/>
+				<xs:enumeration value="cs"/>
+				<xs:enumeration value="da"/>
+				<xs:enumeration value="nl"/>
+				<xs:enumeration value="en"/>
+				<xs:enumeration value="et"/>
+				<xs:enumeration value="fi"/>
+				<xs:enumeration value="fr"/>
+				<xs:enumeration value="de"/>
+				<xs:enumeration value="ga"/>
+				<xs:enumeration value="el"/>
+				<xs:enumeration value="hr"/>
+				<xs:enumeration value="hu"/>
+				<xs:enumeration value="it"/>
+				<xs:enumeration value="lv"/>
+				<xs:enumeration value="lt"/>
+				<xs:enumeration value="mt"/>
+				<xs:enumeration value="pl"/>
+				<xs:enumeration value="pt"/>
+				<xs:enumeration value="ro"/>
+				<xs:enumeration value="sk"/>
+				<xs:enumeration value="sl"/>
+				<xs:enumeration value="es"/>
+				<xs:enumeration value="sv"/>
+				<xs:enumeration value="other"/>
+				<!-- non-EU official languages
 				<xs:enumeration value="aa"/>
 				<xs:enumeration value="ab"/>
 				<xs:enumeration value="ace"/>
@@ -777,7 +851,8 @@
 				<xs:enumeration value="btk"/>
 				<xs:enumeration value="bua"/>
 				<xs:enumeration value="bug"/>
-				<xs:enumeration value="bg"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="my"/>
 				<xs:enumeration value="byn"/>
 				<xs:enumeration value="cad"/>
@@ -813,9 +888,11 @@
 				<xs:enumeration value="crp"/>
 				<xs:enumeration value="csb"/>
 				<xs:enumeration value="cus"/>
-				<xs:enumeration value="cs"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="dak"/>
-				<xs:enumeration value="da"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="dar"/>
 				<xs:enumeration value="day"/>
 				<xs:enumeration value="del"/>
@@ -828,17 +905,20 @@
 				<xs:enumeration value="dsb"/>
 				<xs:enumeration value="dua"/>
 				<xs:enumeration value="dum"/>
-				<xs:enumeration value="nl"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="dyu"/>
 				<xs:enumeration value="dz"/>
 				<xs:enumeration value="efi"/>
 				<xs:enumeration value="egy"/>
 				<xs:enumeration value="eka"/>
 				<xs:enumeration value="elx"/>
-				<xs:enumeration value="en"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="enm"/>
 				<xs:enumeration value="eo"/>
-				<xs:enumeration value="et"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="ee"/>
 				<xs:enumeration value="ewo"/>
 				<xs:enumeration value="fan"/>
@@ -846,10 +926,12 @@
 				<xs:enumeration value="fat"/>
 				<xs:enumeration value="fj"/>
 				<xs:enumeration value="fil"/>
-				<xs:enumeration value="fi"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="fiu"/>
 				<xs:enumeration value="fon"/>
-				<xs:enumeration value="fr"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="frm"/>
 				<xs:enumeration value="fro"/>
 				<xs:enumeration value="frr"/>
@@ -862,11 +944,13 @@
 				<xs:enumeration value="gba"/>
 				<xs:enumeration value="gem"/>
 				<xs:enumeration value="ka"/>
-				<xs:enumeration value="de"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="gez"/>
 				<xs:enumeration value="gil"/>
 				<xs:enumeration value="gd"/>
-				<xs:enumeration value="ga"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="gl"/>
 				<xs:enumeration value="gv"/>
 				<xs:enumeration value="gmh"/>
@@ -876,7 +960,8 @@
 				<xs:enumeration value="got"/>
 				<xs:enumeration value="grb"/>
 				<xs:enumeration value="grc"/>
-				<xs:enumeration value="el"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="gn"/>
 				<xs:enumeration value="gsw"/>
 				<xs:enumeration value="gu"/>
