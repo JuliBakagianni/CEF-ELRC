@@ -3187,7 +3187,6 @@ class characterEncodingInfoType_model(SchemaModel):
       verbose_name='Character encoding', 
       help_text='The name of the character encoding used in the resource' \
       ' or accepted by the tool/service',
-      
       max_length=100,
       choices=characterencodinginfotype_characterencoding_optgroup_choices(),
       )
@@ -3391,58 +3390,58 @@ LANGUAGEVARIETYINFOTYPE_LANGUAGEVARIETYTYPE_CHOICES = _make_choices_from_list([
 ])
 
 # pylint: disable-msg=C0103
-class languageVarietyInfoType_model(SchemaModel):
-    """
-    Groups information on language varieties occurred in the resource
-    (e.g. dialects)
-    """
-
-    class Meta:
-        verbose_name = "Language variety"
-
-
-    __schema_name__ = 'languageVarietyInfoType'
-    __schema_fields__ = (
-      ( u'languageVarietyType', u'languageVarietyType', REQUIRED ),
-      ( u'languageVarietyName', u'languageVarietyName', REQUIRED ),
-      ( u'sizePerLanguageVariety', u'sizePerLanguageVariety', OPTIONAL ),
-    )
-    __schema_classes__ = {
-      u'sizePerLanguageVariety': "sizeInfoType_model",
-    }
-
-    languageVarietyType = models.CharField(
-      verbose_name='Language variety type', 
-      help_text='Specifies the type of the language variety that occurs ' \
-      'in the resource or is supported by a tool/service',
-      
-      max_length=20,
-      choices=sorted(LANGUAGEVARIETYINFOTYPE_LANGUAGEVARIETYTYPE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
-
-    languageVarietyName = XmlCharField(
-      verbose_name='Language variety name', 
-      help_text='The name of the language variety that occurs in the res' \
-      'ource or is supported by a tool/service',
-      max_length=100, )
-
-    sizePerLanguageVariety = models.OneToOneField("sizeInfoType_model", 
-      verbose_name='Size per language variety', 
-      help_text='Provides information on the size per language variety c' \
-      'omponent',
-      blank=True, null=True, on_delete=models.SET_NULL, )
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['languageVarietyName', 'languageVarietyType', ]
-        formatstring = u'{} ({})'
-        return self.unicode_(formatstring, formatargs)
+# class languageVarietyInfoType_model(SchemaModel):
+#     """
+#     Groups information on language varieties occurred in the resource
+#     (e.g. dialects)
+#     """
+#
+#     class Meta:
+#         verbose_name = "Language variety"
+#
+#
+#     __schema_name__ = 'languageVarietyInfoType'
+#     __schema_fields__ = (
+#       ( u'languageVarietyType', u'languageVarietyType', REQUIRED ),
+#       ( u'languageVarietyName', u'languageVarietyName', REQUIRED ),
+#       ( u'sizePerLanguageVariety', u'sizePerLanguageVariety', OPTIONAL ),
+#     )
+#     __schema_classes__ = {
+#       u'sizePerLanguageVariety': "sizeInfoType_model",
+#     }
+#
+#     languageVarietyType = models.CharField(
+#       verbose_name='Language variety type',
+#       help_text='Specifies the type of the language variety that occurs ' \
+#       'in the resource or is supported by a tool/service',
+#
+#       max_length=20,
+#       choices=sorted(LANGUAGEVARIETYINFOTYPE_LANGUAGEVARIETYTYPE_CHOICES['choices'],
+#                      key=lambda choice: choice[1].lower()),
+#       )
+#
+#     languageVarietyName = XmlCharField(
+#       verbose_name='Language variety name',
+#       help_text='The name of the language variety that occurs in the res' \
+#       'ource or is supported by a tool/service',
+#       max_length=100, )
+#
+#     sizePerLanguageVariety = models.OneToOneField("sizeInfoType_model",
+#       verbose_name='Size per language variety',
+#       help_text='Provides information on the size per language variety c' \
+#       'omponent',
+#       blank=True, null=True, on_delete=models.SET_NULL, )
+#
+#     def real_unicode_(self):
+#         # pylint: disable-msg=C0301
+#         formatargs = ['languageVarietyName', 'languageVarietyType', ]
+#         formatstring = u'{} ({})'
+#         return self.unicode_(formatstring, formatargs)
 
 def languageinfotype_characterencoding_optgroup_choices():
     """
-    Group the choices in groups. The first group is the most used choices
-    and the second group is the rest.
+    Group the choices in groups. The first group the EU languages
+    and the second group contains the rest.
     """
     most_used_choices = ('', LANGUAGENAME_CHOICES['choices'][:23])
     more_choices = ('More', LANGUAGENAME_CHOICES['choices'][23:])
@@ -3484,7 +3483,7 @@ class languageInfoType_model(SchemaModel):
       choices=LANGUAGEID_CHOICES['choices'])
 
 
-    languageName = XmlCharField(
+    languageName = models.CharField(
       verbose_name='Language name', 
       help_text='A human understandable name of the language that is use' \
       'd in the resource or supported by the tool/service; an autocomple' \
@@ -4602,7 +4601,7 @@ TEXTFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
   u'text/tab-separated-values', u'application/x-tex', u'text/plain',
   u'application/xhtml+xml', u'application/xml', u'application/tei+xml',
   u'application/x-msaccess', u'application/x-tmx+xml', u'application/x-xces+xml',
-  u"application/vnd.xmi+xml"
+  u'application/vnd.xmi+xml'
 ])
 
 # pylint: disable-msg=C0103
@@ -4625,7 +4624,7 @@ class textFormatInfoType_model(SchemaModel):
     }
 
     mimeType = MutuallyExclusiveValueModelField(
-      verbose_name='Mime type', 
+      verbose_name='Mime type',
       help_text='The mime-type of the resource which is a formalized ' \
         'specifier for the format included or a mime-type that the ' \
         'tool/service accepts, in conformance with the values of the ' \
