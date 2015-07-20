@@ -978,9 +978,11 @@
 				<xs:enumeration value="hit"/>
 				<xs:enumeration value="hmn"/>
 				<xs:enumeration value="ho"/>
-				<xs:enumeration value="hr"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="hsb"/>
-				<xs:enumeration value="hu"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="hup"/>
 				<xs:enumeration value="iba"/>
 				<xs:enumeration value="ig"/>
@@ -999,7 +1001,8 @@
 				<xs:enumeration value="ik"/>
 				<xs:enumeration value="ira"/>
 				<xs:enumeration value="iro"/>
-				<xs:enumeration value="it"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="jv"/>
 				<xs:enumeration value="jbo"/>
 				<xs:enumeration value="ja"/>
@@ -1044,11 +1047,13 @@
 				<xs:enumeration value="lam"/>
 				<xs:enumeration value="lo"/>
 				<xs:enumeration value="la"/>
-				<xs:enumeration value="lv"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="lez"/>
 				<xs:enumeration value="li"/>
 				<xs:enumeration value="ln"/>
-				<xs:enumeration value="lt"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="lol"/>
 				<xs:enumeration value="loz"/>
 				<xs:enumeration value="lb"/>
@@ -1081,7 +1086,8 @@
 				<xs:enumeration value="mis"/>
 				<xs:enumeration value="mkh"/>
 				<xs:enumeration value="mg"/>
-				<xs:enumeration value="mt"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="mnc"/>
 				<xs:enumeration value="mni"/>
 				<xs:enumeration value="mno"/>
@@ -1144,9 +1150,11 @@
 				<xs:enumeration value="phi"/>
 				<xs:enumeration value="phn"/>
 				<xs:enumeration value="pi"/>
-				<xs:enumeration value="pl"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="pon"/>
-				<xs:enumeration value="pt"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="pra"/>
 				<xs:enumeration value="pro"/>
 				<xs:enumeration value="ps"/>
@@ -1157,7 +1165,8 @@
 				<xs:enumeration value="roa"/>
 				<xs:enumeration value="rm"/>
 				<xs:enumeration value="rom"/>
-				<xs:enumeration value="ro"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="rn"/>
 				<xs:enumeration value="rup"/>
 				<xs:enumeration value="ru"/>
@@ -1182,8 +1191,8 @@
 				<xs:enumeration value="sio"/>
 				<xs:enumeration value="sit"/>
 				<xs:enumeration value="sla"/>
-				<xs:enumeration value="sk"/>
-				<xs:enumeration value="sl"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="sma"/>
 				<xs:enumeration value="se"/>
 				<xs:enumeration value="smi"/>
@@ -1198,7 +1207,8 @@
 				<xs:enumeration value="so"/>
 				<xs:enumeration value="son"/>
 				<xs:enumeration value="st"/>
-				<xs:enumeration value="es"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="sc"/>
 				<xs:enumeration value="srn"/>
 				<xs:enumeration value="sr"/>
@@ -1210,7 +1220,8 @@
 				<xs:enumeration value="sus"/>
 				<xs:enumeration value="sux"/>
 				<xs:enumeration value="sw"/>
-				<xs:enumeration value="sv"/>
+-->
+				<!-- non-EU official languages
 				<xs:enumeration value="syc"/>
 				<xs:enumeration value="syr"/>
 				<xs:enumeration value="ty"/>
@@ -1282,7 +1293,7 @@
 				<xs:enumeration value="zu"/>
 				<xs:enumeration value="zun"/>
 				<xs:enumeration value="zza"/>
-				<xs:enumeration value="other"/>
+-->
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:element>
@@ -1310,19 +1321,6 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="languageScript" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Specifies the writing system used to represent the language in form of a four letter code as it is defined in ISO-15924</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="100"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
 			<xs:element name="sizePerLanguage" type="ms:sizeInfoType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Provides information on the size per language component</xs:documentation>
@@ -1330,11 +1328,6 @@
 						<relation>one-to-one</relation>
 						<inline-type>tabular</inline-type>
 					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element ref="ms:languageVarietyInfo" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Groups information on language varieties occurred in the resource (e.g. dialects)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
