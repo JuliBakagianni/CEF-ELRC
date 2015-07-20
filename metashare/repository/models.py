@@ -4685,8 +4685,8 @@ class textClassificationInfoType_model(SchemaModel):
     __schema_fields__ = (
       ( u'textGenre', u'textGenre', OPTIONAL ),
       ( u'textType', u'textType', OPTIONAL ),
-      ( u'register', u'register', OPTIONAL ),
-      ( u'subject_topic', u'subject_topic', OPTIONAL ),
+      # ( u'register', u'register', OPTIONAL ),
+      # ( u'subject_topic', u'subject_topic', OPTIONAL ),
       ( u'conformanceToClassificationScheme', u'conformanceToClassificationScheme', OPTIONAL ),
       ( u'sizePerTextClassification', u'sizePerTextClassification', OPTIONAL ),
     )
@@ -4720,17 +4720,17 @@ class textClassificationInfoType_model(SchemaModel):
       choices=sorted(TEXTCLASSIFICATIONINFOTYPE_TEXTTYPE_CHOICES['choices'],
                      key=lambda choice: choice[1].lower()),)
 
-    register = XmlCharField(
-      verbose_name='Register', 
-      help_text='For corpora that have already been using register class' \
-      'ification',
-      blank=True, max_length=500, )
+    # register = XmlCharField(
+    #   verbose_name='Register',
+    #   help_text='For corpora that have already been using register class' \
+    #   'ification',
+    #   blank=True, max_length=500, )
 
-    subject_topic = XmlCharField(
-      verbose_name='Subject topic', 
-      help_text='For corpora that have already been using subject classi' \
-      'fication',
-      blank=True, max_length=500, )
+    # subject_topic = XmlCharField(
+    #   verbose_name='Subject topic',
+    #   help_text='For corpora that have already been using subject classi' \
+    #   'fication',
+    #   blank=True, max_length=500, )
 
     conformanceToClassificationScheme = models.CharField(
       verbose_name='Conformance to classification scheme', 
