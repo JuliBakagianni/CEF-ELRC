@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End user (free.org) -->
 <!-- edited by ILSP/Athena R.C. -->
 <xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en">
 	<xs:include schemaLocation="../../META-SHARE-SimpleTypes.xsd"/>
@@ -27,26 +28,6 @@
 		<xs:sequence>
 			<xs:element ref="ms:textGenre" minOccurs="0"/>
 			<xs:element ref="ms:textType" minOccurs="0"/>
-			<xs:element name="register" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>For corpora that have already been using register classification</xs:documentation>
-				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="500"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
-			<xs:element name="subject_topic" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>For corpora that have already been using subject classification</xs:documentation>
-				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="500"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
 			<xs:element ref="ms:conformanceToClassificationScheme" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Specifies the external classification schemes</xs:documentation>
