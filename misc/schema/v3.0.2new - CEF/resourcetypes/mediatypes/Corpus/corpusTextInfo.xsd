@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End User (free.org) -->
+<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End user (free.org) -->
 <!-- edited by ILSP/Athena R.C. -->
 <xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en">
 	<xs:include schemaLocation="../../../META-SHARE-SimpleTypes.xsd"/>
@@ -88,26 +88,6 @@
 					<xs:appinfo>
 						<recommended>true</recommended>
 						<relation>one-to-many</relation>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element ref="ms:timeCoverageInfo" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Groups together information on time classification of the resource</xs:documentation>
-					<xs:appinfo>
-						<recommended>true</recommended>
-						<relation>one-to-many</relation>
-						<inline-type>tabular</inline-type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			<xs:element ref="ms:geographicCoverageInfo" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Groups information on geographic classification of the resource</xs:documentation>
-					<xs:appinfo>
-						<recommended>true</recommended>
-						<relation>one-to-many</relation>
-						<inline-type>tabular</inline-type>
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
