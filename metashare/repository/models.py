@@ -1239,10 +1239,10 @@ ANNOTATIONINFOTYPE_ANNOTATIONTYPE_CHOICES = _make_choices_from_list([
   u'semanticAnnotation-emotions',u'other', 
 ])
 
-ANNOTATIONINFOTYPE_ANNOTATEDELEMENTS_CHOICES = _make_choices_from_list([
-  u'speakerNoise', u'backgroundNoise', u'mispronunciations', u'truncation',
-  u'discourseMarkers',u'other', 
-])
+# ANNOTATIONINFOTYPE_ANNOTATEDELEMENTS_CHOICES = _make_choices_from_list([
+#   u'speakerNoise', u'backgroundNoise', u'mispronunciations', u'truncation',
+#   u'discourseMarkers',u'other',
+# ])
 
 ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES = _make_choices_from_list([
   u'paragraph', u'sentence', u'clause', u'word', u'wordGroup', u'utterance',
@@ -3128,33 +3128,42 @@ class licenceInfoType_model(SchemaModel):
         return self.unicode_(formatstring, formatargs)
 
 CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES = _make_choices_from_list([
-  u'US-ASCII', u'windows-1250', u'windows-1251', u'windows-1252',
-  u'windows-1253',u'windows-1254', u'windows-1257', u'ISO-8859-1',
-  u'ISO-8859-2',u'ISO-8859-4', u'ISO-8859-5', u'ISO-8859-7', u'ISO-8859-9',
-  u'ISO-8859-13',u'ISO-8859-15', u'KOI8-R', u'UTF-8', u'UTF-16',
-  u'UTF-16BE',u'UTF-16LE', u'windows-1255', u'windows-1256',
-  u'windows-1258',u'ISO-8859-3', u'ISO-8859-6', u'ISO-8859-8',
-  u'windows-31j',u'EUC-JP', u'x-EUC-JP-LINUX', u'Shift_JIS', u'ISO-2022-JP',
-  u'x-mswin-936',u'GB18030', u'x-EUC-CN', u'GBK', u'ISCII91',
-  u'x-windows-949',u'EUC-KR', u'ISO-2022-KR', u'x-windows-950',
-  u'x-MS950-HKSCS',u'x-EUC-TW', u'Big5', u'Big5-HKSCS', u'TIS-620',
-  u'Big5_Solaris',u'Cp037', u'Cp273', u'Cp277', u'Cp278', u'Cp280',
-  u'Cp284',u'Cp285', u'Cp297', u'Cp420', u'Cp424', u'Cp437', u'Cp500',
-  u'Cp737',u'Cp775', u'Cp838', u'Cp850', u'Cp852', u'Cp855', u'Cp856',
-  u'Cp857',u'Cp858', u'Cp860', u'Cp861', u'Cp862', u'Cp863', u'Cp864',
-  u'Cp865',u'Cp866', u'Cp868', u'Cp869', u'Cp870', u'Cp871', u'Cp874',
-  u'Cp875',u'Cp918', u'Cp921', u'Cp922', u'Cp930', u'Cp933', u'Cp935',
-  u'Cp937',u'Cp939', u'Cp942', u'Cp942C', u'Cp943', u'Cp943C', u'Cp948',
-  u'Cp949',u'Cp949C', u'Cp950', u'Cp964', u'Cp970', u'Cp1006', u'Cp1025',
-  u'Cp1026',u'Cp1046', u'Cp1047', u'Cp1097', u'Cp1098', u'Cp1112',
-  u'Cp1122',u'Cp1123', u'Cp1124', u'Cp1140', u'Cp1141', u'Cp1142',
-  u'Cp1143',u'Cp1144', u'Cp1145', u'Cp1146', u'Cp1147', u'Cp1148',
-  u'Cp1149',u'Cp1381', u'Cp1383', u'Cp33722', u'ISO2022_CN_CNS',
-  u'ISO2022_CN_GB',u'JISAutoDetect', u'MS874', u'MacArabic',
-  u'MacCentralEurope',u'MacCroatian', u'MacCyrillic', u'MacDingbat',
-  u'MacGreek',u'MacHebrew', u'MacIceland', u'MacRoman', u'MacRomania',
-  u'MacSymbol',u'MacThai', u'MacTurkish', u'MacUkraine', 
+    u'UTF-8', u'ISO-8859-7', u'windows-1253', u'MacGreek', u'ISO-8859-1',
+    u'ISO-8859-2', u'US-ASCII', u'Big5', u'Big5-HKSCS', u'Big5_Solaris',
+    u'Cp037', u'Cp1006', u'Cp1025', u'Cp1026',u'Cp1046', u'Cp1047',
+    u'Cp1097', u'Cp1098', u'Cp1112', u'Cp1122', u'Cp1123', u'Cp1124',
+    u'Cp1140', u'Cp1141', u'Cp1142', u'Cp1143', u'Cp1144', u'Cp1145', u'Cp1146',
+    u'Cp1147', u'Cp1148', u'Cp1149', u'Cp1381', u'Cp1383', u'Cp273', u'Cp277',
+    u'Cp278', u'Cp280', u'Cp284', u'Cp285', u'Cp297', u'Cp33722', u'Cp420', u'Cp424',
+    u'Cp437', u'Cp500', u'Cp737', u'Cp775', u'Cp838', u'Cp850', u'Cp852', u'Cp855',
+    u'Cp856', u'Cp857', u'Cp858', u'Cp860', u'Cp861', u'Cp862', u'Cp863', u'Cp864',
+    u'Cp865', u'Cp866', u'Cp868', u'Cp869', u'Cp870', u'Cp871', u'Cp874', u'Cp875',
+    u'Cp918', u'Cp921', u'Cp922', u'Cp930', u'Cp933', u'Cp935', u'Cp937', u'Cp939',
+    u'Cp942', u'Cp942C', u'Cp943', u'Cp943C', u'Cp948', u'Cp949', u'Cp949C',
+    u'Cp950', u'Cp964', u'Cp970', u'EUC-JP', u'EUC-KR', u'GB18030', u'GBK',
+    u'ISCII91', u'ISO-2022-JP', u'ISO-2022-KR', u'ISO-8859-13', u'ISO-8859-15',
+    u'ISO-8859-3', u'ISO-8859-4', u'ISO-8859-5', u'ISO-8859-6', u'ISO-8859-8',
+    u'ISO-8859-9', u'ISO2022_CN_CNS', u'ISO2022_CN_GB', u'JISAutoDetect',
+    u'KOI8-R', u'MS874', u'MacArabic', u'MacCentralEurope', u'MacCroatian',
+    u'MacCyrillic', u'MacDingbat', u'MacHebrew', u'MacIceland',
+    u'MacRoman', u'MacRomania', u'MacSymbol', u'MacThai', u'MacTurkish',
+    u'MacUkraine', u'Shift_JIS', u'TIS-620', u'UTF-16',
+    u'UTF-16BE', u'UTF-16LE', u'windows-1250', u'windows-1251',
+    u'windows-1252', u'windows-1254', u'windows-1255',
+    u'windows-1256', u'windows-1257', u'windows-1258', u'windows-31j',
+    u'x-EUC-CN', u'x-EUC-JP-LINUX', u'x-EUC-TW', u'x-MS950-HKSCS',
+    u'x-mswin-936', u'x-windows-949', u'x-windows-950'
 ])
+
+def characterencodinginfotype_characterencoding_optgroup_choices():
+    """
+    Group the choices in groups. The first group is the most used choices
+    and the second group is the rest.
+    """
+    most_used_choices = ('', CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES['choices'][:7])
+    more_choices = ('More', CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES['choices'][7:])
+    optgroup = [most_used_choices, more_choices]
+    return optgroup
 
 # pylint: disable-msg=C0103
 class characterEncodingInfoType_model(SchemaModel):
@@ -3181,8 +3190,7 @@ class characterEncodingInfoType_model(SchemaModel):
       ' or accepted by the tool/service',
       
       max_length=100,
-      choices=sorted(CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
+      choices=characterencodinginfotype_characterencoding_optgroup_choices(),
       )
 
     sizePerCharacterEncoding = models.OneToOneField("sizeInfoType_model", 
@@ -3446,12 +3454,12 @@ class languageInfoType_model(SchemaModel):
     __schema_fields__ = (
       ( u'languageId', u'languageId', REQUIRED ),
       ( u'languageName', u'languageName', REQUIRED ),
-      ( u'languageScript', u'languageScript', OPTIONAL ),
+      # ( u'languageScript', u'languageScript', OPTIONAL ),
       ( u'sizePerLanguage', u'sizePerLanguage', OPTIONAL ),
-      ( u'languageVarietyInfo', u'languageVarietyInfo', OPTIONAL ),
+      # ( u'languageVarietyInfo', u'languageVarietyInfo', OPTIONAL ),
     )
     __schema_classes__ = {
-      u'languageVarietyInfo': "languageVarietyInfoType_model",
+      # u'languageVarietyInfo': "languageVarietyInfoType_model",
       u'sizePerLanguage': "sizeInfoType_model",
     }
 
@@ -3477,11 +3485,11 @@ class languageInfoType_model(SchemaModel):
       max_length=100,
       choices=LANGUAGENAME_CHOICES['choices'])
 
-    languageScript = XmlCharField(
-      verbose_name='Language script', 
-      help_text='Specifies the writing system used to represent the lang' \
-      'uage in form of a four letter code as it is defined in ISO-15924',
-      blank=True, max_length=100, )
+    # languageScript = XmlCharField(
+    #   verbose_name='Language script',
+    #   help_text='Specifies the writing system used to represent the lang' \
+    #   'uage in form of a four letter code as it is defined in ISO-15924',
+    #   blank=True, max_length=100, )
 
     sizePerLanguage = models.OneToOneField("sizeInfoType_model", 
       verbose_name='Size per language', 
@@ -3489,11 +3497,11 @@ class languageInfoType_model(SchemaModel):
       '',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    languageVarietyInfo = models.ManyToManyField("languageVarietyInfoType_model", 
-      verbose_name='Language variety', 
-      help_text='Groups information on language varieties occurred in th' \
-      'e resource (e.g. dialects)',
-      blank=True, null=True, related_name="languageVarietyInfo_%(class)s_related", )
+    # languageVarietyInfo = models.ManyToManyField("languageVarietyInfoType_model",
+    #   verbose_name='Language variety',
+    #   help_text='Groups information on language varieties occurred in th' \
+    #   'e resource (e.g. dialects)',
+    #   blank=True, null=True, related_name="languageVarietyInfo_%(class)s_related", )
 
     # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
@@ -3891,12 +3899,13 @@ class projectListType_model(SchemaModel):
 
 
     __schema_name__ = 'projectListType'
-    __schema_fields__ = (
-      ( u'projectInfo', u'projectInfo', REQUIRED ),
-    )
-    __schema_classes__ = {
-      u'projectInfo': "projectInfoType_model",
-    }
+    # mdel ??
+    # __schema_fields__ = (
+    #   ( u'projectInfo', u'projectInfo', REQUIRED ),
+    # )
+    # __schema_classes__ = {
+    #   u'projectInfo': "projectInfoType_model",
+    # }
 
     # projectInfo = models.ManyToManyField("projectInfoType_model",
     #   verbose_name='Project', related_name="projectInfo_%(class)s_related", )
@@ -4576,6 +4585,16 @@ class corpusTextInfoType_model(SchemaModel):
         formatstring = u'text ({} {})'
         return self.unicode_(formatstring, formatargs)
 
+TEXTFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
+  u'application/pdf', u'text/csv', u'application/emma+xml',
+  u'text/html', u'application/x-latex', u'application/pls+xml',
+  u'application/rdf+xml', u'application/rtf', u'text/sgml',
+  u'text/tab-separated-values', u'application/x-tex', u'text/plain',
+  u'application/xhtml+xml', u'application/xml', u'application/tei+xml',
+  u'application/x-msaccess', u'application/x-tmx+xml', u'application/x-xces+xml',
+  u"application/vnd.xmi+xml"
+])
+
 # pylint: disable-msg=C0103
 class textFormatInfoType_model(SchemaModel):
     """
@@ -4597,16 +4616,17 @@ class textFormatInfoType_model(SchemaModel):
 
     mimeType = XmlCharField(
       verbose_name='Mime type', 
-      help_text='The mime-type of the resource which is a formalized' \
-        'specifier for the format included or a mime-type ' \
-        'that the tool/service accepts, in conformance' \
-        'with the values of the IANA (Internet Assigned ' \
-        'Numbers Authority); you can select one of ' \
-        'the pre-defined values or add a value, ' \
-        'PREFERABLY FROM THE IANA MEDIA MIMETYPE ' \
-        'RECOMMENDED VALUES (http://www.iana.org/assignments/' \
-        'media-types/media-types.xhtml)',
-      max_length=50, )
+      help_text='The mime-type of the resource which is a formalized ' \
+        'specifier for the format included or a mime-type that the ' \
+        'tool/service accepts, in conformance with the values of the ' \
+        'IANA (Internet Assigned Numbers Authority); you can select ' \
+        'one of the pre-defined values or add a value, PREFERABLY FROM ' \
+        'THE IANA MEDIA MIMETYPE RECOMMENDED VALUES ' \
+        '(http://www.iana.org/assignments/media-types/media-types.xhtml)',
+      max_length=50,
+      choices=sorted(TEXTFORMATINFOTYPE_MIMETYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
+    )
 
     sizePerTextFormat = models.OneToOneField("sizeInfoType_model", 
       verbose_name='Size per text format', 

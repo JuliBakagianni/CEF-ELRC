@@ -138,24 +138,24 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     restrictionsOfUseFilter = LabeledMultiValueField(
                                 label=_('Restrictions of Use'), facet_id=6, parent_id=0,
                                 faceted=True)
-    validatedFilter = LabeledMultiValueField(
-                                label=_('Validated'), facet_id=7, parent_id=0,
-                                faceted=True)
-    foreseenUseFilter = LabeledMultiValueField(
-                                label=_('Foreseen Use'), facet_id=8, parent_id=0,
-                                faceted=True)
-    useNlpSpecificFilter = LabeledMultiValueField(
-                                label=_('Use Is NLP Specific'), facet_id=9, parent_id=0,
-                                faceted=True)
+    # validatedFilter = LabeledMultiValueField(
+    #                             label=_('Validated'), facet_id=7, parent_id=0,
+    #                             faceted=True)
+    # foreseenUseFilter = LabeledMultiValueField(
+    #                             label=_('Foreseen Use'), facet_id=8, parent_id=0,
+    #                             faceted=True)
+    # useNlpSpecificFilter = LabeledMultiValueField(
+    #                             label=_('Use Is NLP Specific'), facet_id=9, parent_id=0,
+    #                             faceted=True)
     lingualityTypeFilter = LabeledMultiValueField(
                                 label=_('Linguality Type'), facet_id=10, parent_id=0,
                                 faceted=True)
     multilingualityTypeFilter = LabeledMultiValueField(
                                 label=_('Multilinguality Type'), facet_id=11, parent_id=0,
                                 faceted=True)
-    modalityTypeFilter = LabeledMultiValueField(
-                                label=_('Modality Type'), facet_id=12, parent_id=0,
-                                faceted=True)
+    # modalityTypeFilter = LabeledMultiValueField(
+    #                             label=_('Modality Type'), facet_id=12, parent_id=0,
+    #                             faceted=True)
     mimeTypeFilter = LabeledMultiValueField(
                                 label=_('MIME Type'), facet_id=13, parent_id=0,
                                 faceted=True)
@@ -200,30 +200,30 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                                 label=_('Linguistic Information'), facet_id=26, parent_id=2,
                                 faceted=True)
 
-    toolServiceToolServiceTypeFilter = LabeledMultiValueField(
-                                label=_('Tool/Service Type'), facet_id=27, parent_id=2,
-                                faceted=True)
-    toolServiceToolServiceSubTypeFilter = LabeledMultiValueField(
-                                label=_('Tool/Service Subtype'), facet_id=28, parent_id=2,
-                                faceted=True)
-    toolServiceLanguageDependentTypeFilter = LabeledMultiValueField(
-                                label=_('Language Dependent'), facet_id=29, parent_id=2,
-                                faceted=True)
-    toolServiceInputOutputResourceTypeFilter = LabeledMultiValueField(
-                                label=_('InputInfo/OutputInfo Resource Type'), facet_id=30, parent_id=2,
-                                faceted=True)
-    toolServiceInputOutputMediaTypeFilter = LabeledMultiValueField(
-                                label=_('InputInfo/OutputInfo Media Type'), facet_id=31, parent_id=2,
-                                faceted=True)
-    toolServiceAnnotationTypeFilter = LabeledMultiValueField(
-                                label=_('Annotation Type'), facet_id=32, parent_id=2,
-                                faceted=True)
-    toolServiceAnnotationFormatFilter = LabeledMultiValueField(
-                                label=_('Annotation Format'), facet_id=33, parent_id=2,
-                                faceted=True)
-    toolServiceEvaluatedFilter = LabeledMultiValueField(
-                                label=_('Evaluated'), facet_id=34, parent_id=2,
-                                faceted=True)
+    # toolServiceToolServiceTypeFilter = LabeledMultiValueField(
+    #                             label=_('Tool/Service Type'), facet_id=27, parent_id=2,
+    #                             faceted=True)
+    # toolServiceToolServiceSubTypeFilter = LabeledMultiValueField(
+    #                             label=_('Tool/Service Subtype'), facet_id=28, parent_id=2,
+    #                             faceted=True)
+    # toolServiceLanguageDependentTypeFilter = LabeledMultiValueField(
+    #                             label=_('Language Dependent'), facet_id=29, parent_id=2,
+    #                             faceted=True)
+    # toolServiceInputOutputResourceTypeFilter = LabeledMultiValueField(
+    #                             label=_('InputInfo/OutputInfo Resource Type'), facet_id=30, parent_id=2,
+    #                             faceted=True)
+    # toolServiceInputOutputMediaTypeFilter = LabeledMultiValueField(
+    #                             label=_('InputInfo/OutputInfo Media Type'), facet_id=31, parent_id=2,
+    #                             faceted=True)
+    # toolServiceAnnotationTypeFilter = LabeledMultiValueField(
+    #                             label=_('Annotation Type'), facet_id=32, parent_id=2,
+    #                             faceted=True)
+    # toolServiceAnnotationFormatFilter = LabeledMultiValueField(
+    #                             label=_('Annotation Format'), facet_id=33, parent_id=2,
+    #                             faceted=True)
+    # toolServiceEvaluatedFilter = LabeledMultiValueField(
+    #                             label=_('Evaluated'), facet_id=34, parent_id=2,
+    #                             faceted=True)
     #Start sub filters
     textTextGenreFilter = LabeledMultiValueField(
                                 label=_('Text Genre'), facet_id=35, parent_id=3,
@@ -234,57 +234,57 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     textRegisterFilter = LabeledMultiValueField(
                                 label=_('Register'), facet_id=37, parent_id=3,
                                 faceted=True)
-    audioAudioGenreFilter = LabeledMultiValueField(
-                                label=_('Audio Genre'), facet_id=38, parent_id=3,
-                                faceted=True)
-    audioSpeechGenreFilter = LabeledMultiValueField(
-                                label=_('Speech Genre'), facet_id=39, parent_id=3,
-                                faceted=True)
-    audioRegisterFilter = LabeledMultiValueField(
-                                label=_('Register'), facet_id=40, parent_id=3,
-                                faceted=True)
-    audioSpeechItemsFilter = LabeledMultiValueField(
-                                label=_('Speech Items'), facet_id=41, parent_id=3,
-                                faceted=True)
-    audioNaturalityFilter = LabeledMultiValueField(
-                                label=_('Naturality'), facet_id=42, parent_id=3,
-                                faceted=True)
-    audioConversationalTypeFilter = LabeledMultiValueField(
-                                label=_('Conversational Type'), facet_id=43, parent_id=3,
-                                faceted=True)
-    audioScenarioTypeFilter = LabeledMultiValueField(
-                                label=_('Scenario Type'), facet_id=44, parent_id=3,
-                                faceted=True)
-    videoVideoGenreFilter = LabeledMultiValueField(
-                                label=_('Video Genre'), facet_id=45, parent_id=3,
-                                faceted=True)
-    videoTypeOfVideoContentFilter = LabeledMultiValueField(
-                                label=_('Type of Video Content'), facet_id=46, parent_id=3,
-                                faceted=True)
-    videoNaturalityFilter = LabeledMultiValueField(
-                                label=_('Naturality'), facet_id=47, parent_id=3,
-                                faceted=True)
-    videoConversationalTypeFilter = LabeledMultiValueField(
-                                label=_('Conversational Type'), facet_id=48, parent_id=3,
-                                faceted=True)
-    videoScenarioTypeFilter = LabeledMultiValueField(
-                                label=_('Scenario Type'), facet_id=49, parent_id=3,
-                                faceted=True)
-    imageImageGenreFilter = LabeledMultiValueField(
-                                label=_('Image Genre'), facet_id=50, parent_id=3,
-                                faceted=True)
-    imageTypeOfImageContentFilter = LabeledMultiValueField(
-                                label=_('Type of Image Content'), facet_id=51, parent_id=3,
-                                faceted=True)
-    textnumericalTypeOfTnContentFilter = LabeledMultiValueField(
-                                label=_('Type of Text Numerical Content'), facet_id=52, parent_id=3,
-                                faceted=True)
-    textngramBaseItemFilter = LabeledMultiValueField(
-                                label=_('Base Item'), facet_id=53, parent_id=3,
-                                faceted=True)
-    textngramOrderFilter = LabeledMultiValueField(
-                                label=_('Order'), facet_id=54, parent_id=3,
-                                faceted=True)
+    # audioAudioGenreFilter = LabeledMultiValueField(
+    #                             label=_('Audio Genre'), facet_id=38, parent_id=3,
+    #                             faceted=True)
+    # audioSpeechGenreFilter = LabeledMultiValueField(
+    #                             label=_('Speech Genre'), facet_id=39, parent_id=3,
+    #                             faceted=True)
+    # audioRegisterFilter = LabeledMultiValueField(
+    #                             label=_('Register'), facet_id=40, parent_id=3,
+    #                             faceted=True)
+    # audioSpeechItemsFilter = LabeledMultiValueField(
+    #                             label=_('Speech Items'), facet_id=41, parent_id=3,
+    #                             faceted=True)
+    # audioNaturalityFilter = LabeledMultiValueField(
+    #                             label=_('Naturality'), facet_id=42, parent_id=3,
+    #                             faceted=True)
+    # audioConversationalTypeFilter = LabeledMultiValueField(
+    #                             label=_('Conversational Type'), facet_id=43, parent_id=3,
+    #                             faceted=True)
+    # audioScenarioTypeFilter = LabeledMultiValueField(
+    #                             label=_('Scenario Type'), facet_id=44, parent_id=3,
+    #                             faceted=True)
+    # videoVideoGenreFilter = LabeledMultiValueField(
+    #                             label=_('Video Genre'), facet_id=45, parent_id=3,
+    #                             faceted=True)
+    # videoTypeOfVideoContentFilter = LabeledMultiValueField(
+    #                             label=_('Type of Video Content'), facet_id=46, parent_id=3,
+    #                             faceted=True)
+    # videoNaturalityFilter = LabeledMultiValueField(
+    #                             label=_('Naturality'), facet_id=47, parent_id=3,
+    #                             faceted=True)
+    # videoConversationalTypeFilter = LabeledMultiValueField(
+    #                             label=_('Conversational Type'), facet_id=48, parent_id=3,
+    #                             faceted=True)
+    # videoScenarioTypeFilter = LabeledMultiValueField(
+    #                             label=_('Scenario Type'), facet_id=49, parent_id=3,
+    #                             faceted=True)
+    # imageImageGenreFilter = LabeledMultiValueField(
+    #                             label=_('Image Genre'), facet_id=50, parent_id=3,
+    #                             faceted=True)
+    # imageTypeOfImageContentFilter = LabeledMultiValueField(
+    #                             label=_('Type of Image Content'), facet_id=51, parent_id=3,
+    #                             faceted=True)
+    # textnumericalTypeOfTnContentFilter = LabeledMultiValueField(
+    #                             label=_('Type of Text Numerical Content'), facet_id=52, parent_id=3,
+    #                             faceted=True)
+    # textngramBaseItemFilter = LabeledMultiValueField(
+    #                             label=_('Base Item'), facet_id=53, parent_id=3,
+    #                             faceted=True)
+    # textngramOrderFilter = LabeledMultiValueField(
+    #                             label=_('Order'), facet_id=54, parent_id=3,
+    #                             faceted=True)
     languageVarietyFilter = LabeledMultiValueField(
                                 label=_('Language Variety'), facet_id=55, parent_id=0,
                                 faceted=True)
@@ -521,9 +521,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             # if media_type.corpusAudioInfo:
             #     result.extend([lang.languageName for lang in
             #                    media_type.corpusAudioInfo.languageinfotype_model_set.all()])
-            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                result.extend([lang.languageName for lang in
-                               corpus_info.languageinfotype_model_set.all()])
+            # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+            #     result.extend([lang.languageName for lang in
+            #                    corpus_info.languageinfotype_model_set.all()])
             # if media_type.corpusTextNgramInfo:
             #     result.extend([lang.languageName for lang in
             #                 media_type.corpusTextNgramInfo.languageinfotype_model_set.all()])
@@ -600,32 +600,32 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         return [restr for licence_info in
                 obj.distributionInfo.licenceinfotype_model_set.all()
                 for restr in licence_info.get_restrictionsOfUse_display_list()]
+    # mdel
+    # def prepare_validatedFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Validated
+    #     """
+    #     return [validation_info.validated for validation_info in
+    #             obj.validationinfotype_model_set.all()]
 
-    def prepare_validatedFilter(self, obj):
-        """
-        Collect the data to filter the resources on Validated
-        """
-        return [validation_info.validated for validation_info in
-                obj.validationinfotype_model_set.all()]
+    # def prepare_foreseenUseFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Foreseen Use
+    #     """
+    #     if obj.usageInfo:
+    #         return [use_info.get_foreseenUse_display() for use_info in
+    #                 obj.usageInfo.foreseenuseinfotype_model_set.all()]
+    #     return []
 
-    def prepare_foreseenUseFilter(self, obj):
-        """
-        Collect the data to filter the resources on Foreseen Use
-        """
-        if obj.usageInfo:
-            return [use_info.get_foreseenUse_display() for use_info in
-                    obj.usageInfo.foreseenuseinfotype_model_set.all()]
-        return []
-
-    def prepare_useNlpSpecificFilter(self, obj):
-        """
-        Collect the data to filter the resources on NLP Specific
-        """
-        if obj.usageInfo:
-            return [use for use_info in
-                    obj.usageInfo.foreseenuseinfotype_model_set.all()
-                    for use in use_info.get_useNLPSpecific_display_list()]
-        return []
+    # def prepare_useNlpSpecificFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on NLP Specific
+    #     """
+    #     if obj.usageInfo:
+    #         return [use for use_info in
+    #                 obj.usageInfo.foreseenuseinfotype_model_set.all()
+    #                 for use in use_info.get_useNLPSpecific_display_list()]
+    #     return []
 
     def prepare_lingualityTypeFilter(self, obj):
         """
@@ -652,12 +652,12 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             #       .get_multilingualityType_display()
             #     if mtf != '':
             #         result.append(mtf)
-            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                if corpus_info.lingualityInfo:
-                    mtf = corpus_info.lingualityInfo \
-                  .get_multilingualityType_display()
-                    if mtf != '':
-                        result.append(mtf)
+            # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+            #     if corpus_info.lingualityInfo:
+            #         mtf = corpus_info.lingualityInfo \
+            #       .get_multilingualityType_display()
+            #         if mtf != '':
+            #             result.append(mtf)
             # if media_type.corpusTextNgramInfo:
             #     mtf = media_type.corpusTextNgramInfo.lingualityInfo \
             #       .get_multilingualityType_display()
@@ -721,84 +721,84 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return result
 
-    def prepare_modalityTypeFilter(self, obj):
-        """
-        Collect the data to filter the resources on Modality Type
-        """
-        result = []
-        corpus_media = obj.resourceComponentType.as_subclass()
-
-        if isinstance(corpus_media, corpusInfoType_model):
-            media_type = corpus_media.corpusMediaType
-            for corpus_info in media_type.corpustextinfotype_model_set.all():
-                result.extend([mt for modalityInfo in
-                        corpus_info.modalityinfotype_model_set.all() for mt in
-                        modalityInfo.get_modalityType_display_list()])
-            # if media_type.corpusAudioInfo:
-            #     result.extend([mt for modalityInfo in
-            #             media_type.corpusAudioInfo.modalityinfotype_model_set.all()
-            #             for mt in modalityInfo.get_modalityType_display_list()])
-            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                if corpus_info.modalityInfo:
-                    result.extend(corpus_info.modalityInfo \
-                                  .get_modalityType_display_list())
-            # if media_type.corpusTextNgramInfo and \
-            #         media_type.corpusTextNgramInfo.modalityInfo:
-            #     result.extend(media_type.corpusTextNgramInfo.modalityInfo \
-            #                   .get_modalityType_display_list())
-            # if media_type.corpusImageInfo:
-            #     result.extend([mt for modalityInfo in
-            #                    media_type.corpusImageInfo.modalityinfotype_model_set.all()
-            #                    for mt in
-            #                    modalityInfo.get_modalityType_display_list()])
-            # if media_type.corpusTextNumericalInfo:
-            #     result.extend([mt for modalityInfo in
-            #             media_type.corpusTextNumericalInfo.modalityinfotype_model_set.all()
-            #             for mt in modalityInfo.get_modalityType_display_list()])
-
-        elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
-            lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
-            if lcr_media_type.lexicalConceptualResourceTextInfo:
-                result.extend([mt for modalityInfo in lcr_media_type \
-                        .lexicalConceptualResourceTextInfo.modalityinfotype_model_set.all()
-                        for mt in modalityInfo.get_modalityType_display_list()])
-            # if lcr_media_type.lexicalConceptualResourceAudioInfo:
-            #     result.extend([mt for modalityInfo in lcr_media_type \
-            #             .lexicalConceptualResourceAudioInfo.modalityinfotype_model_set.all()
-            #             for mt in modalityInfo.get_modalityType_display_list()])
-            # if lcr_media_type.lexicalConceptualResourceVideoInfo:
-            #     result.extend([mt for modalityInfo in lcr_media_type \
-            #             .lexicalConceptualResourceVideoInfo.modalityinfotype_model_set.all()
-            #             for mt in modalityInfo.get_modalityType_display_list()])
-            # if lcr_media_type.lexicalConceptualResourceImageInfo:
-            #     result.extend([mt for modalityInfo in lcr_media_type \
-            #             .lexicalConceptualResourceImageInfo.modalityinfotype_model_set.all()
-            #             for mt in modalityInfo.get_modalityType_display_list()])
-
-        # elif isinstance(corpus_media, languageDescriptionInfoType_model):
-        #     ld_media_type = corpus_media.languageDescriptionMediaType
-        #     if ld_media_type.languageDescriptionTextInfo and \
-        #             ld_media_type.languageDescriptionTextInfo.modalityInfo:
-        #         result.extend(ld_media_type.languageDescriptionTextInfo \
-        #                       .modalityInfo.get_modalityType_display_list())
-            # if ld_media_type.languageDescriptionVideoInfo:
-            #     result.extend([mt for modalityInfo in ld_media_type \
-            #             .languageDescriptionVideoInfo.modalityinfotype_model_set.all()
-            #             for mt in modalityInfo.get_modalityType_display_list()])
-            # if ld_media_type.languageDescriptionImageInfo:
-            #     result.extend([mt for modalityInfo in ld_media_type \
-            #             .languageDescriptionImageInfo.modalityinfotype_model_set.all()
-            #             for mt in modalityInfo.get_modalityType_display_list()])
-
-        # elif isinstance(corpus_media, toolServiceInfoType_model):
-        #     if corpus_media.inputInfo:
-        #         result.extend(corpus_media.inputInfo \
-        #                       .get_modalityType_display_list())
-        #     if corpus_media.outputInfo:
-        #         result.extend(corpus_media.outputInfo \
-        #                       .get_modalityType_display_list())
-
-        return result
+    # def prepare_modalityTypeFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Modality Type
+    #     """
+    #     result = []
+    #     corpus_media = obj.resourceComponentType.as_subclass()
+    #
+    #     if isinstance(corpus_media, corpusInfoType_model):
+    #         media_type = corpus_media.corpusMediaType
+    #         for corpus_info in media_type.corpustextinfotype_model_set.all():
+    #             result.extend([mt for modalityInfo in
+    #                     corpus_info.modalityinfotype_model_set.all() for mt in
+    #                     modalityInfo.get_modalityType_display_list()])
+    #         # if media_type.corpusAudioInfo:
+    #         #     result.extend([mt for modalityInfo in
+    #         #             media_type.corpusAudioInfo.modalityinfotype_model_set.all()
+    #         #             for mt in modalityInfo.get_modalityType_display_list()])
+    #         # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+    #         #     if corpus_info.modalityInfo:
+    #         #         result.extend(corpus_info.modalityInfo \
+    #         #                       .get_modalityType_display_list())
+    #         # if media_type.corpusTextNgramInfo and \
+    #         #         media_type.corpusTextNgramInfo.modalityInfo:
+    #         #     result.extend(media_type.corpusTextNgramInfo.modalityInfo \
+    #         #                   .get_modalityType_display_list())
+    #         # if media_type.corpusImageInfo:
+    #         #     result.extend([mt for modalityInfo in
+    #         #                    media_type.corpusImageInfo.modalityinfotype_model_set.all()
+    #         #                    for mt in
+    #         #                    modalityInfo.get_modalityType_display_list()])
+    #         # if media_type.corpusTextNumericalInfo:
+    #         #     result.extend([mt for modalityInfo in
+    #         #             media_type.corpusTextNumericalInfo.modalityinfotype_model_set.all()
+    #         #             for mt in modalityInfo.get_modalityType_display_list()])
+    #
+    #     elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+    #         lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
+    #         if lcr_media_type.lexicalConceptualResourceTextInfo:
+    #             result.extend([mt for modalityInfo in lcr_media_type \
+    #                     .lexicalConceptualResourceTextInfo.modalityinfotype_model_set.all()
+    #                     for mt in modalityInfo.get_modalityType_display_list()])
+    #         # if lcr_media_type.lexicalConceptualResourceAudioInfo:
+    #         #     result.extend([mt for modalityInfo in lcr_media_type \
+    #         #             .lexicalConceptualResourceAudioInfo.modalityinfotype_model_set.all()
+    #         #             for mt in modalityInfo.get_modalityType_display_list()])
+    #         # if lcr_media_type.lexicalConceptualResourceVideoInfo:
+    #         #     result.extend([mt for modalityInfo in lcr_media_type \
+    #         #             .lexicalConceptualResourceVideoInfo.modalityinfotype_model_set.all()
+    #         #             for mt in modalityInfo.get_modalityType_display_list()])
+    #         # if lcr_media_type.lexicalConceptualResourceImageInfo:
+    #         #     result.extend([mt for modalityInfo in lcr_media_type \
+    #         #             .lexicalConceptualResourceImageInfo.modalityinfotype_model_set.all()
+    #         #             for mt in modalityInfo.get_modalityType_display_list()])
+    #
+    #     # elif isinstance(corpus_media, languageDescriptionInfoType_model):
+    #     #     ld_media_type = corpus_media.languageDescriptionMediaType
+    #     #     if ld_media_type.languageDescriptionTextInfo and \
+    #     #             ld_media_type.languageDescriptionTextInfo.modalityInfo:
+    #     #         result.extend(ld_media_type.languageDescriptionTextInfo \
+    #     #                       .modalityInfo.get_modalityType_display_list())
+    #         # if ld_media_type.languageDescriptionVideoInfo:
+    #         #     result.extend([mt for modalityInfo in ld_media_type \
+    #         #             .languageDescriptionVideoInfo.modalityinfotype_model_set.all()
+    #         #             for mt in modalityInfo.get_modalityType_display_list()])
+    #         # if ld_media_type.languageDescriptionImageInfo:
+    #         #     result.extend([mt for modalityInfo in ld_media_type \
+    #         #             .languageDescriptionImageInfo.modalityinfotype_model_set.all()
+    #         #             for mt in modalityInfo.get_modalityType_display_list()])
+    #
+    #     # elif isinstance(corpus_media, toolServiceInfoType_model):
+    #     #     if corpus_media.inputInfo:
+    #     #         result.extend(corpus_media.inputInfo \
+    #     #                       .get_modalityType_display_list())
+    #     #     if corpus_media.outputInfo:
+    #     #         result.extend(corpus_media.outputInfo \
+    #     #                       .get_modalityType_display_list())
+    #
+    #     return result
 
     def prepare_mimeTypeFilter(self, obj):
         """
@@ -815,9 +815,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             # if media_type.corpusAudioInfo:
             #     mimeType_list.extend([mimeType.mimeType for mimeType in
             #             media_type.corpusAudioInfo.audioformatinfotype_model_set.all()])
-            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                mimeType_list.extend([mimeType.mimeType for mimeType in
-                                      corpus_info.videoformatinfotype_model_set.all()])
+            # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+            #     mimeType_list.extend([mimeType.mimeType for mimeType in
+            #                           corpus_info.videoformatinfotype_model_set.all()])
             # if media_type.corpusTextNgramInfo:
             #     mimeType_list.extend([mimeType.mimeType for mimeType in
             #             media_type.corpusTextNgramInfo.textformatinfotype_model_set.all()])
@@ -882,9 +882,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             # if media_type.corpusAudioInfo:
             #     for annotation_info in media_type.corpusAudioInfo.annotationinfotype_model_set.all():
             #         result.extend(annotation_info.get_conformanceToStandardsBestPractices_display_list())
-            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                for annotation_info in corpus_info.annotationinfotype_model_set.all():
-                    result.extend(annotation_info.get_conformanceToStandardsBestPractices_display_list())
+            # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+            #     for annotation_info in corpus_info.annotationinfotype_model_set.all():
+            #         result.extend(annotation_info.get_conformanceToStandardsBestPractices_display_list())
             # if media_type.corpusTextNgramInfo:
             #     for annotation_info in media_type.corpusTextNgramInfo.annotationinfotype_model_set.all():
             #         result.extend(annotation_info.get_conformanceToStandardsBestPractices_display_list())
@@ -930,9 +930,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             # if media_type.corpusAudioInfo:
             #     result.extend([domain_info.domain for domain_info in
             #                    media_type.corpusAudioInfo.domaininfotype_model_set.all()])
-            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                result.extend([domain_info.domain for domain_info in
-                               corpus_info.domaininfotype_model_set.all()])
+            # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+            #     result.extend([domain_info.domain for domain_info in
+            #                    corpus_info.domaininfotype_model_set.all()])
             # if media_type.corpusTextNgramInfo:
             #     result.extend([domain_info.domain for domain_info in
             #                    media_type.corpusTextNgramInfo.domaininfotype_model_set.all()])
@@ -992,9 +992,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             #     result.extend([gc_info.geographicCoverage for gc_info in
             #                    media_type.corpusAudioInfo \
             #                         .geographiccoverageinfotype_model_set.all()])
-            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                result.extend([gc_info.geographicCoverage for gc_info in
-                               corpus_info.geographiccoverageinfotype_model_set.all()])
+            # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+            #     result.extend([gc_info.geographicCoverage for gc_info in
+            #                    corpus_info.geographiccoverageinfotype_model_set.all()])
             # if media_type.corpusTextNgramInfo:
             #     result.extend([gc_info.geographicCoverage for gc_info in
             #                    media_type.corpusTextNgramInfo \
@@ -1040,7 +1040,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return result
 
-    def prepare_timeCoverageFilter(self, obj):
+    def prepare_languageNameFilter(self, obj):
         """
         Collect the data to filter the resources on Time Coverage
         """
@@ -1055,9 +1055,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             # if media_type.corpusAudioInfo:
             #     result.extend([timeCoverage.timeCoverage for timeCoverage in
             #             media_type.corpusAudioInfo.timecoverageinfotype_model_set.all()])
-            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                result.extend([timeCoverage.timeCoverage for timeCoverage in
-                               corpus_info.timecoverageinfotype_model_set.all()])
+            # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+            #     result.extend([timeCoverage.timeCoverage for timeCoverage in
+            #                    corpus_info.timecoverageinfotype_model_set.all()])
             # if media_type.corpusTextNgramInfo:
             #     result.extend([timeCoverage.timeCoverage for timeCoverage in
             #             media_type.corpusTextNgramInfo.timecoverageinfotype_model_set.all()])
@@ -1118,13 +1118,13 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             # if media_type.corpusAudioInfo:
             #     sf = [class_info.subject_topic for class_info in
             #         media_type.corpusAudioInfo.audioclassificationinfotype_model_set.all()]
-                if sf != ['']:
-                    result.extend(sf)
-            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                sf = [class_info.subject_topic for class_info in
-                        corpus_info.videoclassificationinfotype_model_set.all()]
-                if sf != ['']:
-                    result.extend(sf)
+            #     if sf != ['']:
+            #         result.extend(sf)
+            # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+            #     sf = [class_info.subject_topic for class_info in
+            #             corpus_info.videoclassificationinfotype_model_set.all()]
+            #     if sf != ['']:
+            #         result.extend(sf)
             # if media_type.corpusTextNgramInfo:
             #     sf = [class_info.subject_topic for class_info in
             #             media_type.corpusTextNgramInfo \
@@ -1157,9 +1157,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             # if media_type.corpusAudioInfo:
             #     for annotation_info in media_type.corpusAudioInfo.annotationinfotype_model_set.all():
             #         result.append(annotation_info.get_annotationType_display())
-            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                for annotation_info in corpus_info.annotationinfotype_model_set.all():
-                    result.append(annotation_info.get_annotationType_display())
+            # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+            #     for annotation_info in corpus_info.annotationinfotype_model_set.all():
+            #         result.append(annotation_info.get_annotationType_display())
             # if media_type.corpusTextNgramInfo:
             #     for annotation_info in media_type.corpusTextNgramInfo.annotationinfotype_model_set.all():
             #         result.append(annotation_info.get_annotationType_display())
@@ -1189,9 +1189,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             # if media_type.corpusAudioInfo:
             #     for annotation_info in media_type.corpusAudioInfo.annotationinfotype_model_set.all():
             #         result.append(annotation_info.annotationFormat)
-            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                for annotation_info in corpus_info.annotationinfotype_model_set.all():
-                    result.append(annotation_info.annotationFormat)
+            # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+            #     for annotation_info in corpus_info.annotationinfotype_model_set.all():
+            #         result.append(annotation_info.annotationFormat)
             # if media_type.corpusTextNgramInfo:
             #     for annotation_info in media_type.corpusTextNgramInfo.annotationinfotype_model_set.all():
             #         result.append(annotation_info.annotationFormat)
@@ -1282,133 +1282,133 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         return result
     
 
-    def prepare_toolServiceToolServiceTypeFilter(self, obj):
-        """
-        Collect the data to filter the resources on Resource Type children
-        """
-        result = []
-
-        corpus_media = obj.resourceComponentType.as_subclass()
-
-        # Filter for toolService
-        # if isinstance(corpus_media, toolServiceInfoType_model):
-        #     result.append(corpus_media.get_toolServiceType_display())
-
-        return result
-    
-    def prepare_toolServiceToolServiceSubTypeFilter(self, obj):
-        """
-        Collect the data to filter the resources on Resource Type children
-        """
-        result = []
-
-        corpus_media = obj.resourceComponentType.as_subclass()
-
-        # Filter for toolService
-        # if isinstance(corpus_media, toolServiceInfoType_model):
-        #     result.extend(corpus_media.toolServiceSubtype)
-
-        return result
-
-    def prepare_toolServiceLanguageDependentTypeFilter(self, obj):
-        """
-        Collect the data to filter the resources on Resource Type children
-        """
-        result = []
-
-        corpus_media = obj.resourceComponentType.as_subclass()
-
-        # Filter for toolService
-        # if isinstance(corpus_media, toolServiceInfoType_model):
-        #     result.append(corpus_media.get_languageDependent_display())
-
-        return result
-    
-    def prepare_toolServiceInputOutputResourceTypeFilter(self, obj):
-        """
-        Collect the data to filter the resources on Resource Type children
-        """
-        result = []
-
-        corpus_media = obj.resourceComponentType.as_subclass()
-
-        # Filter for toolService
-        # if isinstance(corpus_media, toolServiceInfoType_model):
-        #     if corpus_media.inputInfo:
-        #         result.extend(
-        #             corpus_media.inputInfo.get_resourceType_display_list())
-        #     if corpus_media.outputInfo:
-        #         result.extend(
-        #             corpus_media.outputInfo.get_resourceType_display_list())
-
-        return result
-    
-    def prepare_toolServiceInputOutputMediaTypeFilter(self, obj):
-        """
-        Collect the data to filter the resources on Resource Type children
-        """
-        result = []
-
-        corpus_media = obj.resourceComponentType.as_subclass()
-
-        # Filter for toolService
-        # if isinstance(corpus_media, toolServiceInfoType_model):
-        #     if corpus_media.inputInfo:
-        #         result.append(corpus_media.inputInfo.get_mediaType_display())
-        #     if corpus_media.outputInfo:
-        #         result.append(corpus_media.outputInfo.get_mediaType_display())
-
-        return result
-    
-    def prepare_toolServiceAnnotationTypeFilter(self, obj):
-        """
-        Collect the data to filter the resources on Resource Type children
-        """
-        result = []
-
-        corpus_media = obj.resourceComponentType.as_subclass()
-
-        # if isinstance(corpus_media, toolServiceInfoType_model):
-        #     if corpus_media.inputInfo:
-        #         result.extend(corpus_media.inputInfo.get_annotationType_display_list())
-        #     if corpus_media.outputInfo:
-        #         result.extend(corpus_media.outputInfo.get_annotationType_display_list())
-
-        return result
-    
-    def prepare_toolServiceAnnotationFormatFilter(self, obj):
-        """
-        Collect the data to filter the resources on Resource Type children
-        """
-        result = []
-
-        corpus_media = obj.resourceComponentType.as_subclass()
-
-        # Filter for toolService
-        # if isinstance(corpus_media, toolServiceInfoType_model):
-        #     if corpus_media.inputInfo:
-        #         if corpus_media.inputInfo.annotationFormat:
-        #             result.extend(corpus_media.inputInfo.annotationFormat)
-        #     if corpus_media.outputInfo:
-        #         if corpus_media.outputInfo.annotationFormat:
-        #             result.extend(corpus_media.outputInfo.annotationFormat)
-
-        return result
-    
-    def prepare_toolServiceEvaluatedFilter(self, obj):
-        """
-        Collect the data to filter the resources on Resource Type children
-        """
-        result = []
-
-        corpus_media = obj.resourceComponentType.as_subclass()
-
-        # Filter for toolService
-        # if isinstance(corpus_media, toolServiceInfoType_model):
-        #     if corpus_media.toolServiceEvaluationInfo:
-        #         result.append(corpus_media.toolServiceEvaluationInfo.get_evaluated_display())
-
-        return result
+    # def prepare_toolServiceToolServiceTypeFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Resource Type children
+    #     """
+    #     result = []
+    #
+    #     corpus_media = obj.resourceComponentType.as_subclass()
+    #
+    #     # Filter for toolService
+    #     # if isinstance(corpus_media, toolServiceInfoType_model):
+    #     #     result.append(corpus_media.get_toolServiceType_display())
+    #
+    #     return result
+    #
+    # def prepare_toolServiceToolServiceSubTypeFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Resource Type children
+    #     """
+    #     result = []
+    #
+    #     corpus_media = obj.resourceComponentType.as_subclass()
+    #
+    #     # Filter for toolService
+    #     # if isinstance(corpus_media, toolServiceInfoType_model):
+    #     #     result.extend(corpus_media.toolServiceSubtype)
+    #
+    #     return result
+    #
+    # def prepare_toolServiceLanguageDependentTypeFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Resource Type children
+    #     """
+    #     result = []
+    #
+    #     corpus_media = obj.resourceComponentType.as_subclass()
+    #
+    #     # Filter for toolService
+    #     # if isinstance(corpus_media, toolServiceInfoType_model):
+    #     #     result.append(corpus_media.get_languageDependent_display())
+    #
+    #     return result
+    #
+    # def prepare_toolServiceInputOutputResourceTypeFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Resource Type children
+    #     """
+    #     result = []
+    #
+    #     corpus_media = obj.resourceComponentType.as_subclass()
+    #
+    #     # Filter for toolService
+    #     # if isinstance(corpus_media, toolServiceInfoType_model):
+    #     #     if corpus_media.inputInfo:
+    #     #         result.extend(
+    #     #             corpus_media.inputInfo.get_resourceType_display_list())
+    #     #     if corpus_media.outputInfo:
+    #     #         result.extend(
+    #     #             corpus_media.outputInfo.get_resourceType_display_list())
+    #
+    #     return result
+    #
+    # def prepare_toolServiceInputOutputMediaTypeFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Resource Type children
+    #     """
+    #     result = []
+    #
+    #     corpus_media = obj.resourceComponentType.as_subclass()
+    #
+    #     # Filter for toolService
+    #     # if isinstance(corpus_media, toolServiceInfoType_model):
+    #     #     if corpus_media.inputInfo:
+    #     #         result.append(corpus_media.inputInfo.get_mediaType_display())
+    #     #     if corpus_media.outputInfo:
+    #     #         result.append(corpus_media.outputInfo.get_mediaType_display())
+    #
+    #     return result
+    #
+    # def prepare_toolServiceAnnotationTypeFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Resource Type children
+    #     """
+    #     result = []
+    #
+    #     corpus_media = obj.resourceComponentType.as_subclass()
+    #
+    #     # if isinstance(corpus_media, toolServiceInfoType_model):
+    #     #     if corpus_media.inputInfo:
+    #     #         result.extend(corpus_media.inputInfo.get_annotationType_display_list())
+    #     #     if corpus_media.outputInfo:
+    #     #         result.extend(corpus_media.outputInfo.get_annotationType_display_list())
+    #
+    #     return result
+    #
+    # def prepare_toolServiceAnnotationFormatFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Resource Type children
+    #     """
+    #     result = []
+    #
+    #     corpus_media = obj.resourceComponentType.as_subclass()
+    #
+    #     # Filter for toolService
+    #     # if isinstance(corpus_media, toolServiceInfoType_model):
+    #     #     if corpus_media.inputInfo:
+    #     #         if corpus_media.inputInfo.annotationFormat:
+    #     #             result.extend(corpus_media.inputInfo.annotationFormat)
+    #     #     if corpus_media.outputInfo:
+    #     #         if corpus_media.outputInfo.annotationFormat:
+    #     #             result.extend(corpus_media.outputInfo.annotationFormat)
+    #
+    #     return result
+    #
+    # def prepare_toolServiceEvaluatedFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Resource Type children
+    #     """
+    #     result = []
+    #
+    #     corpus_media = obj.resourceComponentType.as_subclass()
+    #
+    #     # Filter for toolService
+    #     # if isinstance(corpus_media, toolServiceInfoType_model):
+    #     #     if corpus_media.toolServiceEvaluationInfo:
+    #     #         result.append(corpus_media.toolServiceEvaluationInfo.get_evaluated_display())
+    #
+    #     return result
 
     def prepare_textTextGenreFilter(self, obj):
         """
@@ -1641,56 +1641,56 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
     #     return result
     
-    def prepare_videoNaturalityFilter(self, obj):
-        """
-        Collect the data to filter the resources on Media Type children
-        """
-        result = []
-
-        corpus_media = obj.resourceComponentType.as_subclass()
-
-        # Filter for corpus
-        if isinstance(corpus_media, corpusInfoType_model):
-            media_type = corpus_media.corpusMediaType
-            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                if corpus_info.settingInfo:
-                    result.append(corpus_info.settingInfo.get_naturality_display())
-
-        return result
+    # def prepare_videoNaturalityFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Media Type children
+    #     """
+    #     result = []
+    #
+    #     corpus_media = obj.resourceComponentType.as_subclass()
+    #
+    #     # Filter for corpus
+    #     if isinstance(corpus_media, corpusInfoType_model):
+    #         media_type = corpus_media.corpusMediaType
+    #         for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+    #             if corpus_info.settingInfo:
+    #                 result.append(corpus_info.settingInfo.get_naturality_display())
+    #
+    #     return result
     
-    def prepare_videoConversationalTypeFilter(self, obj):
-        """
-        Collect the data to filter the resources on Media Type children
-        """
-        result = []
-
-        corpus_media = obj.resourceComponentType.as_subclass()
-
-        # Filter for corpus
-        if isinstance(corpus_media, corpusInfoType_model):
-            media_type = corpus_media.corpusMediaType
-            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                if corpus_info.settingInfo:
-                    result.append(corpus_info.settingInfo.get_conversationalType_display())
-
-        return result
+    # def prepare_videoConversationalTypeFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Media Type children
+    #     """
+    #     result = []
+    #
+    #     corpus_media = obj.resourceComponentType.as_subclass()
+    #
+    #     # Filter for corpus
+    #     if isinstance(corpus_media, corpusInfoType_model):
+    #         media_type = corpus_media.corpusMediaType
+    #         for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+    #             if corpus_info.settingInfo:
+    #                 result.append(corpus_info.settingInfo.get_conversationalType_display())
+    #
+    #     return result
     
-    def prepare_videoScenarioTypeFilter(self, obj):
-        """
-        Collect the data to filter the resources on Media Type children
-        """
-        result = []
-
-        corpus_media = obj.resourceComponentType.as_subclass()
-
-        # Filter for corpus
-        if isinstance(corpus_media, corpusInfoType_model):
-            media_type = corpus_media.corpusMediaType
-            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                if corpus_info.settingInfo:
-                    result.append(corpus_info.settingInfo.get_scenarioType_display())
-
-        return result
+    # def prepare_videoScenarioTypeFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Media Type children
+    #     """
+    #     result = []
+    #
+    #     corpus_media = obj.resourceComponentType.as_subclass()
+    #
+    #     # Filter for corpus
+    #     if isinstance(corpus_media, corpusInfoType_model):
+    #         media_type = corpus_media.corpusMediaType
+    #         for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+    #             if corpus_info.settingInfo:
+    #                 result.append(corpus_info.settingInfo.get_scenarioType_display())
+    #
+    #     return result
     
     # def prepare_imageImageGenreFilter(self, obj):
     #     """
@@ -1785,27 +1785,27 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     #             return [str(media_type.corpusTextNgramInfo.ngramInfo.order)]
     #     return []
 
-    def prepare_languageVarietyFilter(self, obj):
-        """
-        Collect the data to filter the resources on Language Variety
-        """
-        result = []
-        corpus_media = obj.resourceComponentType.as_subclass()
-
-        if isinstance(corpus_media, corpusInfoType_model):
-            media_type = corpus_media.corpusMediaType
-            for corpus_info in media_type.corpustextinfotype_model_set.all():
-                for lang in corpus_info.languageinfotype_model_set.all():
-                    result.extend([variety.languageVarietyName for variety in
-                               lang.languageVarietyInfo.all()])
+    # def prepare_languageVarietyFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Language Variety
+    #     """
+    #     result = []
+    #     corpus_media = obj.resourceComponentType.as_subclass()
+    #
+    #     if isinstance(corpus_media, corpusInfoType_model):
+    #         media_type = corpus_media.corpusMediaType
+    #         for corpus_info in media_type.corpustextinfotype_model_set.all():
+    #             for lang in corpus_info.languageinfotype_model_set.all():
+    #                 result.extend([variety.languageVarietyName for variety in
+    #                            lang.languageVarietyInfo.all()])
             # if media_type.corpusAudioInfo:
             #     for lang in media_type.corpusAudioInfo.languageinfotype_model_set.all():
             #         result.extend([variety.languageVarietyName for variety in
             #                    lang.languageVarietyInfo.all()])
-            for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-                for lang in corpus_info.languageinfotype_model_set.all():
-                    result.extend([variety.languageVarietyName for variety in
-                               lang.languageVarietyInfo.all()])
+            # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+            #     for lang in corpus_info.languageinfotype_model_set.all():
+            #         result.extend([variety.languageVarietyName for variety in
+            #                    lang.languageVarietyInfo.all()])
             # if media_type.corpusTextNgramInfo:
             #     for lang in media_type.corpusTextNgramInfo.languageinfotype_model_set.all():
             #         result.extend([variety.languageVarietyName for variety in
@@ -1815,18 +1815,18 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             #         result.extend([variety.languageVarietyName for variety in
             #                    lang.languageVarietyInfo.all()])
 
-        elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
-            lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
-            # if lcr_media_type.lexicalConceptualResourceAudioInfo:
-            #     for lang in lcr_media_type.lexicalConceptualResourceAudioInfo. \
-            #       languageinfotype_model_set.all():
-            #         result.extend([variety.languageVarietyName for variety in
-            #                    lang.languageVarietyInfo.all()])
-            if lcr_media_type.lexicalConceptualResourceTextInfo:
-                for lang in lcr_media_type.lexicalConceptualResourceTextInfo. \
-                  languageinfotype_model_set.all():
-                    result.extend([variety.languageVarietyName for variety in
-                               lang.languageVarietyInfo.all()])
+        # elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+        #     lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
+        #     # if lcr_media_type.lexicalConceptualResourceAudioInfo:
+        #     #     for lang in lcr_media_type.lexicalConceptualResourceAudioInfo. \
+        #     #       languageinfotype_model_set.all():
+        #     #         result.extend([variety.languageVarietyName for variety in
+        #     #                    lang.languageVarietyInfo.all()])
+        #     if lcr_media_type.lexicalConceptualResourceTextInfo:
+        #         for lang in lcr_media_type.lexicalConceptualResourceTextInfo. \
+        #           languageinfotype_model_set.all():
+        #             result.extend([variety.languageVarietyName for variety in
+        #                        lang.languageVarietyInfo.all()])
             # if lcr_media_type.lexicalConceptualResourceVideoInfo:
             #     for lang in lcr_media_type.lexicalConceptualResourceVideoInfo. \
             #       languageinfotype_model_set.all():
@@ -1838,13 +1838,13 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             #         result.extend([variety.languageVarietyName for variety in
             #                    lang.languageVarietyInfo.all()])
 
-        elif isinstance(corpus_media, languageDescriptionInfoType_model):
-            ld_media_type = corpus_media.languageDescriptionMediaType
-            if ld_media_type.languageDescriptionTextInfo:
-                for lang in ld_media_type.languageDescriptionTextInfo. \
-                  languageinfotype_model_set.all():
-                    result.extend([variety.languageVarietyName for variety in
-                               lang.languageVarietyInfo.all()])
+        # elif isinstance(corpus_media, languageDescriptionInfoType_model):
+        #     ld_media_type = corpus_media.languageDescriptionMediaType
+        #     if ld_media_type.languageDescriptionTextInfo:
+        #         for lang in ld_media_type.languageDescriptionTextInfo. \
+        #           languageinfotype_model_set.all():
+        #             result.extend([variety.languageVarietyName for variety in
+        #                        lang.languageVarietyInfo.all()])
             # if ld_media_type.languageDescriptionVideoInfo:
             #     for lang in ld_media_type.languageDescriptionVideoInfo. \
             #       languageinfotype_model_set.all():
