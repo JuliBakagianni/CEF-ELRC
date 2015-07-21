@@ -1040,66 +1040,66 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     #
     #     return result
 
-    def prepare_languageNameFilter(self, obj):
-        """
-        Collect the data to filter the resources on Time Coverage
-        """
-        result = []
-        corpus_media = obj.resourceComponentType.as_subclass()
-
-        if isinstance(corpus_media, corpusInfoType_model):
-            media_type = corpus_media.corpusMediaType
-            for corpus_info in media_type.corpustextinfotype_model_set.all():
-                result.extend([timeCoverage.timeCoverage for timeCoverage in
-                               corpus_info.timecoverageinfotype_model_set.all()])
-            # if media_type.corpusAudioInfo:
-            #     result.extend([timeCoverage.timeCoverage for timeCoverage in
-            #             media_type.corpusAudioInfo.timecoverageinfotype_model_set.all()])
-            # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-            #     result.extend([timeCoverage.timeCoverage for timeCoverage in
-            #                    corpus_info.timecoverageinfotype_model_set.all()])
-            # if media_type.corpusTextNgramInfo:
-            #     result.extend([timeCoverage.timeCoverage for timeCoverage in
-            #             media_type.corpusTextNgramInfo.timecoverageinfotype_model_set.all()])
-            # if media_type.corpusImageInfo:
-            #     result.extend([timeCoverage.timeCoverage for timeCoverage in
-            #             media_type.corpusImageInfo.timecoverageinfotype_model_set.all()])
-
-        elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
-            lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
-            if lcr_media_type.lexicalConceptualResourceTextInfo:
-                result.extend([timeCoverage.timeCoverage for timeCoverage in
-                            lcr_media_type.lexicalConceptualResourceTextInfo \
-                                .timecoverageinfotype_model_set.all()])
-            # if lcr_media_type.lexicalConceptualResourceAudioInfo:
-            #     result.extend([timeCoverage.timeCoverage for timeCoverage in
-            #                 lcr_media_type.lexicalConceptualResourceAudioInfo \
-            #                     .timecoverageinfotype_model_set.all()])
-            # if lcr_media_type.lexicalConceptualResourceVideoInfo:
-            #     result.extend([timeCoverage.timeCoverage for timeCoverage in
-            #                 lcr_media_type.lexicalConceptualResourceVideoInfo \
-            #                     .timecoverageinfotype_model_set.all()])
-            # if lcr_media_type.lexicalConceptualResourceImageInfo:
-            #     result.extend([timeCoverage.timeCoverage for timeCoverage in
-            #                 lcr_media_type.lexicalConceptualResourceImageInfo \
-            #                     .timecoverageinfotype_model_set.all()])
-
-        elif isinstance(corpus_media, languageDescriptionInfoType_model):
-            ld_media_type = corpus_media.languageDescriptionMediaType
-            if ld_media_type.languageDescriptionTextInfo:
-                result.extend([timeCoverage.timeCoverage for timeCoverage in
-                        ld_media_type.languageDescriptionTextInfo \
-                            .timecoverageinfotype_model_set.all()])
-            # if ld_media_type.languageDescriptionVideoInfo:
-            #     result.extend([timeCoverage.timeCoverage for timeCoverage in
-            #             ld_media_type.languageDescriptionVideoInfo \
-            #                 .timecoverageinfotype_model_set.all()])
-            # if ld_media_type.languageDescriptionImageInfo:
-            #     result.extend([timeCoverage.timeCoverage for timeCoverage in
-            #             ld_media_type.languageDescriptionImageInfo \
-            #                 .timecoverageinfotype_model_set.all()])
-
-        return result
+    # def prepare_timeCoverageFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Time Coverage
+    #     """
+    #     result = []
+    #     corpus_media = obj.resourceComponentType.as_subclass()
+    #
+    #     if isinstance(corpus_media, corpusInfoType_model):
+    #         media_type = corpus_media.corpusMediaType
+    #         for corpus_info in media_type.corpustextinfotype_model_set.all():
+    #             result.extend([timeCoverage.timeCoverage for timeCoverage in
+    #                            corpus_info.timecoverageinfotype_model_set.all()])
+    #         # if media_type.corpusAudioInfo:
+    #         #     result.extend([timeCoverage.timeCoverage for timeCoverage in
+    #         #             media_type.corpusAudioInfo.timecoverageinfotype_model_set.all()])
+    #         # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
+    #         #     result.extend([timeCoverage.timeCoverage for timeCoverage in
+    #         #                    corpus_info.timecoverageinfotype_model_set.all()])
+    #         # if media_type.corpusTextNgramInfo:
+    #         #     result.extend([timeCoverage.timeCoverage for timeCoverage in
+    #         #             media_type.corpusTextNgramInfo.timecoverageinfotype_model_set.all()])
+    #         # if media_type.corpusImageInfo:
+    #         #     result.extend([timeCoverage.timeCoverage for timeCoverage in
+    #         #             media_type.corpusImageInfo.timecoverageinfotype_model_set.all()])
+    #
+    #     elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+    #         lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
+    #         if lcr_media_type.lexicalConceptualResourceTextInfo:
+    #             result.extend([timeCoverage.timeCoverage for timeCoverage in
+    #                         lcr_media_type.lexicalConceptualResourceTextInfo \
+    #                             .timecoverageinfotype_model_set.all()])
+    #         # if lcr_media_type.lexicalConceptualResourceAudioInfo:
+    #         #     result.extend([timeCoverage.timeCoverage for timeCoverage in
+    #         #                 lcr_media_type.lexicalConceptualResourceAudioInfo \
+    #         #                     .timecoverageinfotype_model_set.all()])
+    #         # if lcr_media_type.lexicalConceptualResourceVideoInfo:
+    #         #     result.extend([timeCoverage.timeCoverage for timeCoverage in
+    #         #                 lcr_media_type.lexicalConceptualResourceVideoInfo \
+    #         #                     .timecoverageinfotype_model_set.all()])
+    #         # if lcr_media_type.lexicalConceptualResourceImageInfo:
+    #         #     result.extend([timeCoverage.timeCoverage for timeCoverage in
+    #         #                 lcr_media_type.lexicalConceptualResourceImageInfo \
+    #         #                     .timecoverageinfotype_model_set.all()])
+    #
+    #     elif isinstance(corpus_media, languageDescriptionInfoType_model):
+    #         ld_media_type = corpus_media.languageDescriptionMediaType
+    #         if ld_media_type.languageDescriptionTextInfo:
+    #             result.extend([timeCoverage.timeCoverage for timeCoverage in
+    #                     ld_media_type.languageDescriptionTextInfo \
+    #                         .timecoverageinfotype_model_set.all()])
+    #         # if ld_media_type.languageDescriptionVideoInfo:
+    #         #     result.extend([timeCoverage.timeCoverage for timeCoverage in
+    #         #             ld_media_type.languageDescriptionVideoInfo \
+    #         #                 .timecoverageinfotype_model_set.all()])
+    #         # if ld_media_type.languageDescriptionImageInfo:
+    #         #     result.extend([timeCoverage.timeCoverage for timeCoverage in
+    #         #             ld_media_type.languageDescriptionImageInfo \
+    #         #                 .timecoverageinfotype_model_set.all()])
+    #
+    #     return result
 
     # def prepare_subjectFilter(self, obj):
     #     """
