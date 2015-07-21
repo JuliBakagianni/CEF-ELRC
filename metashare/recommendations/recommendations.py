@@ -168,16 +168,16 @@ def get_more_from_same_creators_qs(resource):
     return resourceInfoType_model.objects.none()
 
 
-def get_more_from_same_projects(resource):
-    """
-    Returns all resources where at least one of the projects of the given
-    resource is also an assigned project.
-    """
-    # get all projects of the resource
-    creation_info = resource.resourceCreationInfo
-    if creation_info:
-        return tuple(get_more_from_same_projects_qs(resource))
-    return ()
+# def get_more_from_same_projects(resource):
+#     """
+#     Returns all resources where at least one of the projects of the given
+#     resource is also an assigned project.
+#     """
+#     # get all projects of the resource
+#     creation_info = resource.resourceCreationInfo
+#     if creation_info:
+#         return tuple(get_more_from_same_projects_qs(resource))
+#     return ()
 
 
 def get_more_from_same_projects_qs(resource):
