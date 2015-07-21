@@ -19,8 +19,8 @@ LANGUAGE_ID_NAME_FIELDS = {
    #     {'type': 'multiple', 'id': "languageId", 'name': "languageName"},
    # outputInfoType_model:
    #     {'type': 'multiple', 'id': "languageId", 'name': "languageName"},
-   languageInfoType_model:
-       {'type': 'single', 'id': "languageId", 'name': "languageName"},
+   # languageInfoType_model:
+   #     {'type': 'single', 'id': "languageId", 'name': "languageName"},
    metadataInfoType_model:
        {'type': 'multiple', 'id': "metadataLanguageId", 'name': "metadataLanguageName"},
    documentInfoType_model:
