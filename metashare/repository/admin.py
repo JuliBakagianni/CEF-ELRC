@@ -19,7 +19,6 @@ from metashare.repository.models import \
     documentListType_model, \
     documentationInfoType_model, \
     domainInfoType_model, \
-    dynamicElementInfoType_model, \
     languageDescriptionEncodingInfoType_model, \
     languageDescriptionInfoType_model, \
     languageDescriptionMediaTypeType_model, \
@@ -47,6 +46,7 @@ from metashare.repository.models import \
     identificationInfoType_model
     # videoFormatInfoType_model
     # languageVarietyInfoType_model, \
+    # dynamicElementInfoType_model, \
     # languageDescriptionImageInfoType_model, \
     # versionInfoType_model, \
     # geographicCoverageInfoType_model, \
@@ -111,17 +111,17 @@ from metashare.repository.models import \
 
 
 # pylint: disable-msg=C0103
-class annotationInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
-    model = annotationInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpusaudioinfotype_model'
+# class annotationInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
+#     model = annotationInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_corpusaudioinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class annotationInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
-    model = annotationInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpusimageinfotype_model'
+# class annotationInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
+#     model = annotationInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_corpusimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -132,24 +132,24 @@ class annotationInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
-class annotationInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
-    model = annotationInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpustextngraminfotype_model'
+# class annotationInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
+#     model = annotationInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_corpustextngraminfotype_model'
 
 
 # pylint: disable-msg=C0103
-class annotationInfo_model_inline_corpusTextNumericalInfoType_model(SchemaModelInline):
-    model = annotationInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpustextnumericalinfotype_model'
+# class annotationInfo_model_inline_corpusTextNumericalInfoType_model(SchemaModelInline):
+#     model = annotationInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_corpustextnumericalinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class annotationInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
-    model = annotationInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpusvideoinfotype_model'
+# class annotationInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
+#     model = annotationInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_corpusvideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -180,10 +180,10 @@ class characterEncodingInfo_model_inline_corpusTextInfoType_model(SchemaModelInl
 
 
 # pylint: disable-msg=C0103
-class characterEncodingInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
-    model = characterEncodingInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpustextngraminfotype_model'
+# class characterEncodingInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
+#     model = characterEncodingInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpustextngraminfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -223,17 +223,17 @@ class documentInfo_model_inline(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
-class domainInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
-    model = domainInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpusaudioinfotype_model'
+# class domainInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
+#     model = domainInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpusaudioinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class domainInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
-    model = domainInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpusimageinfotype_model'
+# class domainInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
+#     model = domainInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpusimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -244,24 +244,24 @@ class domainInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
-class domainInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
-    model = domainInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpustextngraminfotype_model'
+# class domainInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
+#     model = domainInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpustextngraminfotype_model'
 
 
 # pylint: disable-msg=C0103
-class domainInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
-    model = domainInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpusvideoinfotype_model'
+# class domainInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
+#     model = domainInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpusvideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class domainInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
-    model = domainInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_languagedescriptionimageinfotype_model'
+# class domainInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
+#     model = domainInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_languagedescriptionimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -272,24 +272,24 @@ class domainInfo_model_inline_languageDescriptionTextInfoType_model(SchemaModelI
 
 
 # pylint: disable-msg=C0103
-class domainInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
-    model = domainInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_languagedescriptionvideoinfotype_model'
+# class domainInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
+#     model = domainInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_languagedescriptionvideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class domainInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(SchemaModelInline):
-    model = domainInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
+# class domainInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(SchemaModelInline):
+#     model = domainInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class domainInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
-    model = domainInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
+# class domainInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
+#     model = domainInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -300,10 +300,10 @@ class domainInfo_model_inline_lexicalConceptualResourceTextInfoType_model(Schema
 
 
 # pylint: disable-msg=C0103
-class domainInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
-    model = domainInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
+# class domainInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
+#     model = domainInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -441,16 +441,16 @@ class languageDescriptionInfo_model_inline(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
-class languageInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
-    model = languageInfoType_model
-    fk_name = 'back_to_corpusaudioinfotype_model'
+# class languageInfo_model_inline_corpusAudioInfoType_model(SchemaModelInline):
+#     model = languageInfoType_model
+#     fk_name = 'back_to_corpusaudioinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class languageInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
-    model = languageInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpusimageinfotype_model'
+# class languageInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
+#     model = languageInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_corpusimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -460,23 +460,23 @@ class languageInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
-class languageInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
-    model = languageInfoType_model
-    fk_name = 'back_to_corpustextngraminfotype_model'
+# class languageInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
+#     model = languageInfoType_model
+#     fk_name = 'back_to_corpustextngraminfotype_model'
 
 
 # pylint: disable-msg=C0103
-class languageInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
-    model = languageInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpusvideoinfotype_model'
+# class languageInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
+#     model = languageInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_corpusvideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class languageInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
-    model = languageInfoType_model
-    collapse = True
-    fk_name = 'back_to_languagedescriptionimageinfotype_model'
+# class languageInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
+#     model = languageInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_languagedescriptionimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -486,24 +486,24 @@ class languageInfo_model_inline_languageDescriptionTextInfoType_model(SchemaMode
 
 
 # pylint: disable-msg=C0103
-class languageInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
-    model = languageInfoType_model
-    collapse = True
-    fk_name = 'back_to_languagedescriptionvideoinfotype_model'
+# class languageInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
+#     model = languageInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_languagedescriptionvideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class languageInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(SchemaModelInline):
-    model = languageInfoType_model
-    collapse = True
-    fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
+# class languageInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(SchemaModelInline):
+#     model = languageInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class languageInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
-    model = languageInfoType_model
-    collapse = True
-    fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
+# class languageInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
+#     model = languageInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -513,10 +513,10 @@ class languageInfo_model_inline_lexicalConceptualResourceTextInfoType_model(Sche
 
 
 # pylint: disable-msg=C0103
-class languageInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
-    model = languageInfoType_model
-    collapse = True
-    fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
+# class languageInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
+#     model = languageInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -677,17 +677,17 @@ class personInfo_model_inline(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
-class sizeInfo_model_inline_audioSizeInfoType_model(SchemaModelInline):
-    model = sizeInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_audiosizeinfotype_model'
+# class sizeInfo_model_inline_audioSizeInfoType_model(SchemaModelInline):
+#     model = sizeInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_audiosizeinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class sizeInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
-    model = sizeInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpusimageinfotype_model'
+# class sizeInfo_model_inline_corpusImageInfoType_model(SchemaModelInline):
+#     model = sizeInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpusimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -698,31 +698,31 @@ class sizeInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
-class sizeInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
-    model = sizeInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpustextngraminfotype_model'
+# class sizeInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
+#     model = sizeInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpustextngraminfotype_model'
 
 
 # pylint: disable-msg=C0103
-class sizeInfo_model_inline_corpusTextNumericalInfoType_model(SchemaModelInline):
-    model = sizeInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpustextnumericalinfotype_model'
+# class sizeInfo_model_inline_corpusTextNumericalInfoType_model(SchemaModelInline):
+#     model = sizeInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpustextnumericalinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class sizeInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
-    model = sizeInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpusvideoinfotype_model'
+# class sizeInfo_model_inline_corpusVideoInfoType_model(SchemaModelInline):
+#     model = sizeInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpusvideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class sizeInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
-    model = sizeInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_languagedescriptionimageinfotype_model'
+# class sizeInfo_model_inline_languageDescriptionImageInfoType_model(SchemaModelInline):
+#     model = sizeInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_languagedescriptionimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -733,24 +733,24 @@ class sizeInfo_model_inline_languageDescriptionTextInfoType_model(SchemaModelInl
 
 
 # pylint: disable-msg=C0103
-class sizeInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
-    model = sizeInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_languagedescriptionvideoinfotype_model'
+# class sizeInfo_model_inline_languageDescriptionVideoInfoType_model(SchemaModelInline):
+#     model = sizeInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_languagedescriptionvideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class sizeInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(SchemaModelInline):
-    model = sizeInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
+# class sizeInfo_model_inline_lexicalConceptualResourceAudioInfoType_model(SchemaModelInline):
+#     model = sizeInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_lexicalconceptualresourceaudioinfotype_model'
 
 
 # pylint: disable-msg=C0103
-class sizeInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
-    model = sizeInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
+# class sizeInfo_model_inline_lexicalConceptualResourceImageInfoType_model(SchemaModelInline):
+#     model = sizeInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_lexicalconceptualresourceimageinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -761,10 +761,10 @@ class sizeInfo_model_inline_lexicalConceptualResourceTextInfoType_model(SchemaMo
 
 
 # pylint: disable-msg=C0103
-class sizeInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
-    model = sizeInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
+# class sizeInfo_model_inline_lexicalConceptualResourceVideoInfoType_model(SchemaModelInline):
+#     model = sizeInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -775,10 +775,10 @@ class textClassificationInfo_model_inline_corpusTextInfoType_model(SchemaModelIn
 
 
 # pylint: disable-msg=C0103
-class textClassificationInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
-    model = textClassificationInfoType_model
-    collapse = True
-    fk_name = 'back_to_corpustextngraminfotype_model'
+# class textClassificationInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
+#     model = textClassificationInfoType_model
+#     collapse = True
+#     fk_name = 'back_to_corpustextngraminfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -789,10 +789,10 @@ class textFormatInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
-class textFormatInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
-    model = textFormatInfoType_model
-    template = 'admin/edit_inline/tabular.html'
-    fk_name = 'back_to_corpustextngraminfotype_model'
+# class textFormatInfo_model_inline_corpusTextNgramInfoType_model(SchemaModelInline):
+#     model = textFormatInfoType_model
+#     template = 'admin/edit_inline/tabular.html'
+#     fk_name = 'back_to_corpustextngraminfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -964,7 +964,7 @@ admin.site.register(documentationInfoType_model, SchemaModelAdmin)
 admin.site.register(domainInfoType_model, SchemaModelAdmin)
 # admin.site.register(durationOfAudioInfoType_model, SchemaModelAdmin)
 # admin.site.register(durationOfEffectiveSpeechInfoType_model, SchemaModelAdmin)
-admin.site.register(dynamicElementInfoType_model, SchemaModelAdmin)
+# admin.site.register(dynamicElementInfoType_model, SchemaModelAdmin)
 # admin.site.register(foreseenUseInfoType_model, SchemaModelAdmin)
 # admin.site.register(geographicCoverageInfoType_model, SchemaModelAdmin)
 admin.site.register(identificationInfoType_model, SchemaModelAdmin)
