@@ -10,7 +10,7 @@ from django.utils.translation import ugettext as _
 from metashare.settings import LOG_HANDLER
 from metashare.repository.models import resourceInfoType_model
 from metashare.repository.search_indexes import resourceInfoType_modelIndex
-from metashare.recommendations.recommendations import get_more_from_same_creators
+# from metashare.recommendations.recommendations import get_more_from_same_creators
     # get_more_from_same_projects
 
 from haystack.forms import FacetedSearchForm
@@ -131,8 +131,8 @@ def _process_special_query(query):
             resource_id, query_type)
         return []
     # get related resources
-    if query_type == MORE_FROM_SAME_CREATORS:
-        rel_res = get_more_from_same_creators(res)
+    # if query_type == MORE_FROM_SAME_CREATORS:
+    #     rel_res = get_more_from_same_creators(res)
     # elif query_type == MORE_FROM_SAME_PROJECTS:
     #     rel_res = get_more_from_same_projects(res)
     else:
