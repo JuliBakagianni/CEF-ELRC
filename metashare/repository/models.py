@@ -395,12 +395,12 @@ class identificationInfoType_model(SchemaModel):
       'uage.',
       blank=True)
 
-    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=0, max_length=1000),
+    url = XmlCharField(
       verbose_name='Url', validators=[HTTPURI_VALIDATOR],
       help_text='A URL used as homepage of an entity (e.g. of a person, ' \
       'organization, resource etc.) and/or where an entity (e.g.LR, docu' \
       'ment etc.) is located',
-      blank=True, )
+      blank=True, max_length=1000,)
 
     metaShareId = XmlCharField(
       verbose_name='Meta share id',
@@ -1068,12 +1068,12 @@ class resourceDocumentationInfoType_model(SchemaModel):
         return self.unicode_(formatstring, formatargs)
 
 DOMAININFOTYPE_DOMAIN_CHOICES = (
-  (u"advertisingPublicRelationsDDC659", u"Advertising &amp; Public Relations (DDC659)"),
+  (u"advertisingPublicRelationsDDC659", u"Advertising & Public Relations (DDC659)"),
   (u"agricultureDDC630", u"Agriculture (DDC630)"),
   (u"animalsZoologyDDC590", u"Animals (Zoology) (DDC590)"),
   (u"appliedPhysicsDDC621", u"Applied Physics (DDC621)"),
   (u"architectureDDC720", u"Architecture (DDC720)"),
-  (u"artsRecreationDDC700", u"Arts &amp; Recreation (DDC700)"),
+  (u"artsRecreationDDC700", u"Arts & Recreation (DDC700)"),
   (u"astrononmyDDC520", u"Astronomy (DDC520)"),
   (u"biochemistryDDC572", u"Biochemistry (DDC572)"),
   (u"biologyDDC570", u"Biology (DDC570)"),
@@ -1081,25 +1081,25 @@ DOMAININFOTYPE_DOMAIN_CHOICES = (
   (u"chemistryDDC540", u"Chemistry (DDC540)"),
   (u"commerceTradeDDC381", u"Commerce (Trade) (DDC381)"),
   (u"communicationsDDC384", u"Communications (DDC384)"),
-  (u"computerScienceInformationGeneralWorksDDC000", u"Computer Science, Information &amp; General Works (DDC000)"),
+  (u"computerScienceInformationGeneralWorksDDC000", u"Computer Science, Information & General Works (DDC000)"),
   (u"constructionOfBuildingsDDC690", u"Construction of Buildings (DDC690)"),
-  (u"culture", u"Culture"), (u"earthSciencesGeologyDDC550", u"Earth Sciences &amp; Geology (DDC550)"),
+  (u"culture", u"Culture"), (u"earthSciencesGeologyDDC550", u"Earth Sciences & Geology (DDC550)"),
   (u"economicsDDC330", u"Economics (DDC330)"), (u"educationDDC370", u"Education (DDC370)"),
   (u"energy", u"Energy"), (u"engineeringDDC620", u"Engineering (DDC620)"),
   (u"environment", u"Environment"), (u"general", u"General"),
-  (u"geographyTravelDDC910", u"Geography &amp; Travel (DDC910)"),
-  (u"graphicArtsDecorativeArtsDDC740", u"Graphic Arts &amp; Decorative Arts (DDC740)"),
-  (u"hardwareHouseholdAppliancesDDC683", u"Hardware &amp; Household Appliances (DDC683)"),
+  (u"geographyTravelDDC910", u"Geography & Travel (DDC910)"),
+  (u"graphicArtsDecorativeArtsDDC740", u"Graphic Arts & Decorative Arts (DDC740)"),
+  (u"hardwareHouseholdAppliancesDDC683", u"Hardware & Household Appliances (DDC683)"),
   (u"historyDDC900", u"History (DDC900)"),
-  (u"homeFamilyManagementDDC640", u"Home &amp; Family Management (DDC640)"),
+  (u"homeFamilyManagementDDC640", u"Home & Family Management (DDC640)"),
   (u"humanities", u"Humanities"), (u"industry", u"Industry"),
   (u"languageDDC400", u"Language (DDC400)"), (u"lawDDC340", u"Law (DDC340)"),
   (u"linguisticsDDC410", u"Linguistics (DDC410)"),
-  (u"literatureRhetoricCriticismDDC800", u"Literature, Rhetoric &amp; Criticism (DDC800)"),
-  (u"managementPublicRelationsDDC650", u"Management &amp; Public Relations (DDC650)"),
+  (u"literatureRhetoricCriticismDDC800", u"Literature, Rhetoric & Criticism (DDC800)"),
+  (u"managementPublicRelationsDDC650", u"Management & Public Relations (DDC650)"),
   (u"manufacturingDDC670", u"Manufacturing (DDC670)"), (u"mathematicsDDC510", u"Mathematics (DDC510)"),
-  (u"medicineHealthDDC610", u"Medicine &amp; Health (DDC610)"), (u"musicDDC780", u"Music (DDC780)"),
-  (u"newsMediaJournalismPublishingDDC070", u"News Media, Journalism &amp; Publishing (DDC070)"),
+  (u"medicineHealthDDC610", u"Medicine & Health (DDC610)"), (u"musicDDC780", u"Music (DDC780)"),
+  (u"newsMediaJournalismPublishingDDC070", u"News Media, Journalism & Publishing (DDC070)"),
   (u"paintingDDC750", u"Painting (DDC750)"), (u"paleontologyDDC560", u"Paleontology (DDC560)"),
   (u"philosophyDDC100", u"Philosophy (DDC100)"),
   (u"photographyComputerArtFilmVideoDDC770", u"Photography, Computer Art, Film, Video (DDC770)"),
@@ -1108,11 +1108,11 @@ DOMAININFOTYPE_DOMAIN_CHOICES = (
   (u"psychologyDDC150", u"Psychology (DDC150)"),
   (u"publicAdministrationDDC351", u"Public Administration (DDC351)"),
   (u"religionDDC200", u"Religion (DDC200)"), (u"scienceDDC500", u"Science (DDC500)"),
-  (u"sculptureCeramicsMetalworkDDC730", u"Sculpture, Ceramics, &amp; Metalwork (DDC730)"),
-  (u"socialProblemsSocialServicesDDC360", u"Social Problems &amp; Social Services (DDC360)"),
+  (u"sculptureCeramicsMetalworkDDC730", u"Sculpture, Ceramics, & Metalwork (DDC730)"),
+  (u"socialProblemsSocialServicesDDC360", u"Social Problems & Social Services (DDC360)"),
   (u"socialSciencesDDC300", u"Social Sciences (DDC300)"),
-  (u"sociologyAnthropologyDDC301", u"Sociology &amp; Anthropology (DDC301)"),
-  (u"sportsGamesEntertainmentDDC790", u"Sports, Games &amp; Entertainment (DDC790)"),
+  (u"sociologyAnthropologyDDC301", u"Sociology & Anthropology (DDC301)"),
+  (u"sportsGamesEntertainmentDDC790", u"Sports, Games & Entertainment (DDC790)"),
   (u"statisticsDDC310", u"Statistics (DDC310)"),
   (u"technologyDDC600", u"Technology (DDC600)"),
   (u"transportationDDC388", u"Transportation (DDC388)"),
@@ -2546,12 +2546,12 @@ class communicationInfoType_model(SchemaModel):
       help_text='The email address of a person or an organization',
       )
 
-    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=14, max_length=1000), 
+    url = XmlCharField(
       verbose_name='Url', validators=[HTTPURI_VALIDATOR], 
       help_text='A URL used as homepage of an entity (e.g. of a person, ' \
       'organization, resource etc.) and/or where an entity (e.g.LR, docu' \
       'ment etc.) is located',
-      blank=True, )
+      blank=True, max_length=1000,)
 
     address = XmlCharField(
       verbose_name='Address', 
@@ -3443,8 +3443,8 @@ def languageinfotype_languagename_optgroup_choices():
     Group the choices in groups. The first group the EU languages
     and the second group contains the rest.
     """
-    most_used_choices = ('', LANGUAGENAME_CHOICES['choices'][:23])
-    more_choices = ('More', LANGUAGENAME_CHOICES['choices'][23:])
+    most_used_choices = ('', LANGUAGENAME_CHOICES['choices'][:24])
+    more_choices = ('More', LANGUAGENAME_CHOICES['choices'][24:])
     optgroup = [most_used_choices, more_choices]
     return optgroup
 
