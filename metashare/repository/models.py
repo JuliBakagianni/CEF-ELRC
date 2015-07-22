@@ -1046,11 +1046,11 @@ class resourceDocumentationInfoType_model(SchemaModel):
       'resource',
       blank=True, null=True, related_name="documentation_%(class)s_related", )
 
-    samplesLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=8, max_length=1000), 
+    samplesLocation = XmlCharField(
       verbose_name='Samples location', validators=[HTTPURI_VALIDATOR], 
       help_text='A url with samples of the resource or, in the case of t' \
       'ools, of samples of the output',
-      blank=True, )
+      blank=True, max_length=1000,)
 
     # toolDocumentationType = MultiSelectField(
     #   verbose_name='Tool documentation',
