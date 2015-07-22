@@ -658,7 +658,13 @@ class MutuallyExclusiveValueModelField(models.Field):
 
         if not self.blank and value in validators.EMPTY_VALUES:
             raise exceptions.ValidationError(self.error_messages['blank'], code='blank')
-
+    def get_prep_value(self, value):
+        """
+       Takes a Python value and converts it into a database String.
+        """
+        if not value:
+            value = ''
+        return super(MutuallyExclusiveValueModelField, self).get_prep_value(value)
 
     def get_internal_type(self):
         return 'CharField'
