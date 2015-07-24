@@ -52,16 +52,8 @@
 						<xs:maxLength value="30"/>
 						<xs:enumeration value="terms"/>
 						<xs:enumeration value="entries"/>
-						<xs:enumeration value="turns"/>
-						<xs:enumeration value="utterances"/>
-						<xs:enumeration value="articles"/>
 						<xs:enumeration value="files"/>
 						<xs:enumeration value="items"/>
-						<xs:enumeration value="seconds"/>
-						<xs:enumeration value="elements"/>
-						<xs:enumeration value="units"/>
-						<xs:enumeration value="minutes"/>
-						<xs:enumeration value="hours"/>
 						<xs:enumeration value="texts"/>
 						<xs:enumeration value="sentences"/>
 						<xs:enumeration value="bytes"/>
@@ -72,32 +64,12 @@
 						<xs:enumeration value="neologisms"/>
 						<xs:enumeration value="multiWordUnits"/>
 						<xs:enumeration value="expressions"/>
-						<xs:enumeration value="synsets"/>
-						<xs:enumeration value="classes"/>
 						<xs:enumeration value="concepts"/>
 						<xs:enumeration value="lexicalTypes"/>
-						<xs:enumeration value="phoneticUnits"/>
-						<xs:enumeration value="syntacticUnits"/>
-						<xs:enumeration value="semanticUnits"/>
-						<xs:enumeration value="predicates"/>
-						<xs:enumeration value="phonemes"/>
-						<xs:enumeration value="diphones"/>
-						<xs:enumeration value="T-HPairs"/>
-						<xs:enumeration value="syllables"/>
-						<xs:enumeration value="frames"/>
-						<xs:enumeration value="images"/>
 						<xs:enumeration value="kb"/>
 						<xs:enumeration value="mb"/>
 						<xs:enumeration value="gb"/>
-						<xs:enumeration value="rb"/>
-						<xs:enumeration value="shots"/>
-						<xs:enumeration value="unigrams"/>
-						<xs:enumeration value="bigrams"/>
-						<xs:enumeration value="trigrams"/>
-						<xs:enumeration value="4-grams"/>
-						<xs:enumeration value="5-grams"/>
 						<xs:enumeration value="rules"/>
-						<xs:enumeration value="questions"/>
 						<xs:enumeration value="other"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -348,11 +320,7 @@
 				<xs:enumeration value="semanticAnnotation-wordSenses"/>
 				<xs:enumeration value="speechAnnotation"/>
 				<xs:enumeration value="speechAnnotation-orthographicTranscription"/>
-				<xs:enumeration value="speechAnnotation-paralanguageAnnotation"/>
-				<xs:enumeration value="speechAnnotation-phoneticTranscription"/>
-				<xs:enumeration value="speechAnnotation-prosodicAnnotation"/>
 				<xs:enumeration value="speechAnnotation-soundEvents"/>
-				<xs:enumeration value="speechAnnotation-soundToTextAlignment"/>
 				<xs:enumeration value="speechAnnotation-speakerIdentification"/>
 				<xs:enumeration value="speechAnnotation-speakerTurns"/>
 				<xs:enumeration value="stemming"/>
@@ -365,13 +333,6 @@
 				<xs:enumeration value="syntacticosemanticAnnotation-links"/>
 				<xs:enumeration value="translation"/>
 				<xs:enumeration value="transliteration"/>
-				<xs:enumeration value="modalityAnnotation-bodyMovements"/>
-				<xs:enumeration value="modalityAnnotation-facialExpressions"/>
-				<xs:enumeration value="modalityAnnotation-gazeEyeMovements"/>
-				<xs:enumeration value="modalityAnnotation-handArmGestures"/>
-				<xs:enumeration value="modalityAnnotation-handManipulationOfObjects"/>
-				<xs:enumeration value="modalityAnnotation-headMovements"/>
-				<xs:enumeration value="modalityAnnotation-lipMovements"/>
 				<xs:enumeration value="other"/>
 			</xs:restriction>
 		</xs:simpleType>
@@ -509,16 +470,7 @@
 				<xs:enumeration value="token"/>
 				<xs:enumeration value="wordGroup"/>
 				<xs:enumeration value="utterance"/>
-				<xs:enumeration value="topic"/>
-				<xs:enumeration value="signal"/>
-				<xs:enumeration value="phoneme"/>
-				<xs:enumeration value="syllable"/>
 				<xs:enumeration value="phrase"/>
-				<xs:enumeration value="diphone"/>
-				<xs:enumeration value="prosodicBoundaries"/>
-				<xs:enumeration value="frame"/>
-				<xs:enumeration value="scene"/>
-				<xs:enumeration value="shot"/>
 				<xs:enumeration value="other"/>
 			</xs:restriction>
 		</xs:simpleType>
