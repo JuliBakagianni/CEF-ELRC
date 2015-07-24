@@ -270,15 +270,11 @@ class resourceInfoType_model(SchemaModel):
 
 
 SIZEINFOTYPE_SIZEUNIT_CHOICES = _make_choices_from_list([
-  u'terms', u'entries', u'turns', u'utterances', u'articles', u'files',
-  u'items',u'seconds', u'elements', u'units', u'minutes', u'hours',
-  u'texts',u'sentences', u'bytes', u'tokens', u'words', u'keywords',
+  u'terms', u'entries', u'files', u'items', u'texts',
+  u'sentences', u'bytes', u'tokens', u'words', u'keywords',
   u'idiomaticExpressions',u'neologisms', u'multiWordUnits', u'expressions',
-  u'synsets',u'classes', u'concepts', u'lexicalTypes', u'phoneticUnits',
-  u'syntacticUnits',u'semanticUnits', u'predicates', u'phonemes',
-  u'diphones',u'T-HPairs', u'syllables', u'frames', u'images', u'kb', u'mb',
-  u'gb',u'rb', u'shots', u'unigrams', u'bigrams', u'trigrams', u'4-grams',
-  u'5-grams',u'rules', u'questions', u'other', 
+  u'concepts', u'lexicalTypes', u'kb', u'mb',
+  u'gb', u'rules', u'other',
 ])
 
 # pylint: disable-msg=C0103
