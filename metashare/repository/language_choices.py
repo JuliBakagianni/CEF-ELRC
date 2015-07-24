@@ -58,11 +58,11 @@ u"za", u"znd", u"zu", u"zun", u"zza"])
 
 LANGUAGENAME_CHOICES = _make_choices_from_list([
 #EU
-u"Bulgarian", u"Czech", u"Danish",
+u"Bulgarian", u"Czech", u"Croatian", u"Danish",
 u"Dutch; Flemish", u"English", u"Estonian",
 u"Finnish", u"French", u"German",
-u"Greek, Modern (1453-)", u"Croatian",
-u"Hungarian", u"Irish", u"Italian", u"Latvian",
+u"Greek, Modern (1453-)",u"Hungarian",
+u"Irish", u"Italian", u"Latvian",
 u"Lithuanian", u"Maltese", u"Polish",
 u"Portuguese", u"Romanian", u"Slovak",
 u"Slovenian", u"Spanish; Castilian", u"Swedish",
