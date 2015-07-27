@@ -1215,23 +1215,29 @@ ANNOTATIONINFOTYPE_ANNOTATIONTYPE_CHOICES = _make_choices_from_list([
   u'semanticAnnotation-semanticRoles',u'semanticAnnotation-speechActs',
   u'semanticAnnotation-temporalExpressions',
   u'semanticAnnotation-textualEntailment',u'semanticAnnotation-wordSenses',
-  u'speechAnnotation',u'speechAnnotation-orthographicTranscription',
-  u'speechAnnotation-paralanguageAnnotation',
-  u'speechAnnotation-phoneticTranscription',
-  u'speechAnnotation-prosodicAnnotation',u'speechAnnotation-soundEvents',
-  u'speechAnnotation-soundToTextAlignment',
+  u'speechAnnotation-orthographicTranscription',
+  # u'speechAnnotation-paralanguageAnnotation',
+  # u'speechAnnotation-phoneticTranscription',
+  # u'speechAnnotation-prosodicAnnotation',
+  u'speechAnnotation-soundEvents',
+  # u'speechAnnotation-soundToTextAlignment',
   u'speechAnnotation-speakerIdentification',
-  u'speechAnnotation-speakerTurns',u'speechAnnotation', u'stemming',
-  u'structuralAnnotation',u'syntacticAnnotation-shallowParsing',
+  u'speechAnnotation-speakerTurns',
+  u'speechAnnotation',
+  u'stemming',
+  u'structuralAnnotation',
+  u'syntacticAnnotation-shallowParsing',
   u'syntacticAnnotation-subcategorizationFrames',
-  u'syntacticAnnotation-treebanks',u'syntacticosemanticAnnotation-links',
-  u'translation',u'transliteration', u'discourseAnnotation-dialogueActs',
-  u'modalityAnnotation-bodyMovements',
-  u'modalityAnnotation-facialExpressions',
-  u'modalityAnnotation-gazeEyeMovements',
-  u'modalityAnnotation-handArmGestures',
-  u'modalityAnnotation-handManipulationOfObjects',
-  u'modalityAnnotation-headMovements',u'modalityAnnotation-lipMovements',
+  u'syntacticAnnotation-treebanks',
+  u'syntacticosemanticAnnotation-links',
+  u'translation',u'transliteration',
+  u'discourseAnnotation-dialogueActs',
+  # u'modalityAnnotation-bodyMovements',
+  # u'modalityAnnotation-facialExpressions',
+  # u'modalityAnnotation-gazeEyeMovements',
+  # u'modalityAnnotation-handArmGestures',
+  # u'modalityAnnotation-handManipulationOfObjects',
+  # u'modalityAnnotation-headMovements',u'modalityAnnotation-lipMovements',
   u'semanticAnnotation-emotions',u'other', 
 ])
 
@@ -1242,8 +1248,7 @@ ANNOTATIONINFOTYPE_ANNOTATIONTYPE_CHOICES = _make_choices_from_list([
 
 ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES = _make_choices_from_list([
   u'paragraph', u'sentence', u'clause', u'word', u'wordGroup', u'utterance',
-  u'topic',u'signal', u'phoneme', u'syllable', u'phrase', u'diphone',
-  u'prosodicBoundaries',u'frame', u'scene', u'shot', u'other', 
+  u'phrase', u'diphone', u'other',
 ])
 
 ANNOTATIONINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_list([
@@ -2812,8 +2817,7 @@ class personInfoType_model(actorInfoType_model):
         return self.unicode_(formatstring, formatargs)
 
 DISTRIBUTIONINFOTYPE_AVAILABILITY_CHOICES = _make_choices_from_list([
-  u'available-unrestrictedUse', u'available-restrictedUse',
-  u'availableThroughOtherDistributor',u'underNegotiation',
+  u'available-unrestrictedUse', u'available-restrictedUse', u'underNegotiation',
 ])
 
 # pylint: disable-msg=C0103
@@ -2829,7 +2833,7 @@ class distributionInfoType_model(SchemaModel):
     __schema_name__ = 'distributionInfoType'
     __schema_fields__ = (
       ( u'availability', u'availability', REQUIRED ),
-      ( u'licenceInfo', u'licenceinfotype_model_set', OPTIONAL ),
+      ( u'licenceInfo', u'licenceinfotype_model_set', REQUIRED ),
       ( 'iprHolder/personInfo', 'iprHolder', OPTIONAL ),
       ( 'iprHolder/organizationInfo', 'iprHolder', OPTIONAL ),
       # ( u'availabilityEndDate', u'availabilityEndDate', OPTIONAL ),
@@ -2931,23 +2935,20 @@ class distributionInfoType_model(SchemaModel):
 
 LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
   u'CC-BY', u'CC-BY-NC', u'CC-BY-NC-ND', u'CC-BY-NC-SA', u'CC-BY-ND',
-  u'CC-BY-SA',u'CC-ZERO', u'MS-NoReD', u'MS-NoReD-FF', u'MS-NoReD-ND',
-  u'MS-NoReD-ND-FF',u'MS-NC-NoReD', u'MS-NC-NoReD-FF', u'MS-NC-NoReD-ND',
-  u'MS-NC-NoReD-ND-FF', u'AGPL', u'ApacheLicence_2.0',u'BSD',
-  u'BSD-style', u'GFDL', u'GPL', u'LGPL', u'Princeton_Wordnet',
+  u'CC-BY-SA',u'CC-ZERO',
+  # u'MS-NoReD', u'MS-NoReD-FF', u'MS-NoReD-ND',
+  # u'MS-NoReD-ND-FF',u'MS-NC-NoReD', u'MS-NC-NoReD-FF', u'MS-NC-NoReD-ND',
+  # u'MS-NC-NoReD-ND-FF', u'AGPL', u'ApacheLicence_2.0',u'BSD',
+  # u'BSD-style', u'GFDL', u'GPL', u'LGPL', u'Princeton_Wordnet',
   u'proprietary', u'underNegotiation', u'other',
-  u'openForReuseWithRestrictions', u'termsOfService',
+  u'openForReuseWithRestrictions', u'termsOfUse',
 ])
 
 LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES = _make_choices_from_list([
-  u'informLicensor', u'redeposit', u'nonCommercialUse',
-  u'evaluationUse', u'commercialUse', u'attribution',
-  u'shareAlike', u'noDerivatives', u'noRedistribution',
-  u'personalDataIncluded',u'sensitiveDataIncluded',
-  u'languageEngineeringResearch', u'requestPlan',
-  u'spatialConstraint',u'userIdentified',
-  u'research', u'education', u'compensate',
-  u'other',
+  u'nonCommercialUse',u'commercialUse',
+  u'attribution',  u'shareAlike',
+  u'noDerivatives', u'research',
+  u'education', u'other',
 ])
 
 LICENCEINFOTYPE_DISTRIBUTIONACCESSMEDIUM_CHOICES = _make_choices_from_list([
@@ -2963,7 +2964,7 @@ LICENCEINFOTYPE_USERNATURE_CHOICES = _make_choices_from_list([
 class licenceInfoType_model(SchemaModel):
     """
     Groups information on licences for the resource; can be repeated to
-    allow for different modes of access and restrictions of use
+    allow for different modes of access and conditions of use
     (e.g. free for academic use, on-a-fee basis for commercial use,
     download of a sample for free use etc.)
     """
@@ -2975,13 +2976,15 @@ class licenceInfoType_model(SchemaModel):
     __schema_name__ = 'licenceInfoType'
     __schema_fields__ = (
       ( u'licence', u'licence', REQUIRED ),
-      ( u'conditionsOfUse', u'conditionsOfUse', OPTIONAL ),
-      ( u'termsOfServiceText', u'termsOfServiceText', OPTIONAL ),
-      ( u'termsOfServiceURL', u'termsOfServiceURL', OPTIONAL ),
-      ( u'distributionAccessMedium', u'distributionAccessMedium', RECOMMENDED ),
-      ( u'downloadLocation', u'downloadLocation', OPTIONAL ),
-      ( u'executionLocation', u'executionLocation', OPTIONAL ),
-      ( u'fee', u'fee', OPTIONAL ),
+      ( u'personalDataIncluded', u'personalDataIncluded', REQUIRED ),
+      ( u'sensitiveDataIncluded', u'sensitiveDataIncluded', REQUIRED ),
+      ( u'restrictionsOfUse', u'restrictionsOfUse', OPTIONAL ),
+      ( u'termsOfUseText', u'termsOfUseText', OPTIONAL ),
+      ( u'termsOfUseURL', u'termsOfUseURL', OPTIONAL ),
+      # ( u'distributionAccessMedium', u'distributionAccessMedium', RECOMMENDED ),
+      # ( u'downloadLocation', u'downloadLocation', OPTIONAL ),
+      # ( u'executionLocation', u'executionLocation', OPTIONAL ),
+      # ( u'fee', u'fee', OPTIONAL ),
       ( u'attributionText', u'attributionText', OPTIONAL ),
       # ( 'licensor/personInfo', 'licensor', RECOMMENDED ),
       # ( 'licensor/organizationInfo', 'licensor', RECOMMENDED ),
@@ -2996,18 +2999,34 @@ class licenceInfoType_model(SchemaModel):
     #   u'personInfo': "personInfoType_model",
     # }
 
-    licence = MultiSelectField(
+    licence = models.CharField(
       verbose_name='Licence', 
       help_text='The licence of use for the resource; for an overview of' \
       ' licences, please visit: http://www.meta-net.eu/meta-share/licens' \
       'es',
       
-      max_length=1 + len(LICENCEINFOTYPE_LICENCE_CHOICES['choices']) / 4,
+      max_length=40,
       choices=LICENCEINFOTYPE_LICENCE_CHOICES['choices'],
       )
 
-    conditionsOfUse = MultiSelectField(
-      verbose_name='Restrictions of use', 
+    personalDataIncluded = models.BooleanField(
+        verbose_name='Personal Data Included',
+        help_text= 'Specifies whether the resource contains or ' \
+                   'not personal data; this might mean that ' \
+                   'special handling of the resource is required ' \
+                   '(e.g. anonymisation)'
+    )
+
+    sensitiveDataIncluded = models.BooleanField(
+        verbose_name='Sensitive Data Included',
+        help_text= 'Specifies whether the resource contains or ' \
+                   'not sensitive data; this might mean that ' \
+                   'special handling of the resource is required ' \
+                   '(e.g. anonymisation)'
+    )
+
+    restrictionsOfUse = MultiSelectField(
+      verbose_name='Conditions of use',
       help_text='Specifies terms and conditions of use ' \
                 '(e.g. attribution, payment etc.) imposed by ' \
                 'the licence',
@@ -3016,47 +3035,48 @@ class licenceInfoType_model(SchemaModel):
       choices=LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES['choices'],
       )
 
-    termsOfServiceText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
+    termsOfUseText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever,
-      verbose_name='Terms of service text',
+      verbose_name='Terms of use text',
       max_val_length=10000,
-      help_text='Used to provide a free text description of the terms as' \
-      'sociated with a web service (e.g. time and space restrictions, et' \
-      'c.).',
+      help_text='Used to provide a free text description ' \
+                'of the terms of use associated with a resource ' \
+                '(mainly for non-standard licences)',
       blank=True)
 
-    termsOfServiceURL = models.URLField(
-      verbose_name='Terms of service URL',
-      help_text='Used to provide a hyperlink to a url describing the ter' \
-      'ms of service for the language resource.',
+    termsOfUseURL = models.URLField(
+      verbose_name= 'Terms of use URL',
+      help_text= 'Used to provide a hyperlink to a url describing' \
+            'the terms of use for a language resource (mainly ' \
+            'for non-standard licences)',
       blank=True,
     )
 
-    distributionAccessMedium = MultiSelectField(
-      verbose_name='Distribution access medium', 
-      help_text='Specifies the medium (channel) used for delivery or pro' \
-      'viding access to the resource',
-      blank=True, 
-      max_length=1 + len(LICENCEINFOTYPE_DISTRIBUTIONACCESSMEDIUM_CHOICES['choices']) / 4,
-      choices=LICENCEINFOTYPE_DISTRIBUTIONACCESSMEDIUM_CHOICES['choices'],
-      )
+    # distributionAccessMedium = MultiSelectField(
+    #   verbose_name='Distribution access medium',
+    #   help_text='Specifies the medium (channel) used for delivery or pro' \
+    #   'viding access to the resource',
+    #   blank=True,
+    #   max_length=1 + len(LICENCEINFOTYPE_DISTRIBUTIONACCESSMEDIUM_CHOICES['choices']) / 4,
+    #   choices=LICENCEINFOTYPE_DISTRIBUTIONACCESSMEDIUM_CHOICES['choices'],
+    #   )
 
-    downloadLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=17, max_length=1000), 
-      verbose_name='Download location', validators=[HTTPURI_VALIDATOR], 
-      help_text='Any url where the resource can be downloaded from',
-      blank=True, )
+    # downloadLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=17, max_length=1000),
+    #   verbose_name='Download location', validators=[HTTPURI_VALIDATOR],
+    #   help_text='Any url where the resource can be downloaded from',
+    #   blank=True, )
 
-    executionLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=18, max_length=1000), 
-      verbose_name='Execution location', validators=[HTTPURI_VALIDATOR], 
-      help_text='Any url where the service providing access to a resourc' \
-      'e is being executed',
-      blank=True, )
+    # executionLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=18, max_length=1000),
+    #   verbose_name='Execution location', validators=[HTTPURI_VALIDATOR],
+    #   help_text='Any url where the service providing access to a resourc' \
+    #   'e is being executed',
+    #   blank=True, )
 
-    fee = XmlCharField(
-      verbose_name='Fee', 
-      help_text='Specifies the costs that are required to access the res' \
-      'ource, a fragment of the resource or to use a tool or service',
-      blank=True, max_length=100, )
+    # fee = XmlCharField(
+    #   verbose_name='Fee',
+    #   help_text='Specifies the costs that are required to access the res' \
+    #   'ource, a fragment of the resource or to use a tool or service',
+    #   blank=True, max_length=100, )
 
     attributionText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever, 
@@ -3123,8 +3143,14 @@ class licenceInfoType_model(SchemaModel):
         return self.unicode_(formatstring, formatargs)
 
 CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES = _make_choices_from_list([
-    u'UTF-8', u'ISO-8859-7', u'windows-1253', u'MacGreek', u'ISO-8859-1',
-    u'ISO-8859-2', u'US-ASCII', u'Big5', u'Big5-HKSCS', u'Big5_Solaris',
+    u'UTF-8', u'MacGreek',
+    u'US-ASCII', u'Big5', u'Big5-HKSCS', u'Big5_Solaris',
+    u'ISO-8859-1', u'ISO-8859-2', u'ISO-8859-3',
+    u'ISO-8859-4', u'ISO-8859-5', u'ISO-8859-6',
+    u'ISO-8859-7', u'ISO-8859-8', u'ISO-8859-9',
+    u'ISO-8859-13', u'ISO-8859-15',
+    u'windows-1250', u'windows-1251', u'windows-1252', u'windows-1253',
+
     u'Cp037', u'Cp1006', u'Cp1025', u'Cp1026',u'Cp1046', u'Cp1047',
     u'Cp1097', u'Cp1098', u'Cp1112', u'Cp1122', u'Cp1123', u'Cp1124',
     u'Cp1140', u'Cp1141', u'Cp1142', u'Cp1143', u'Cp1144', u'Cp1145', u'Cp1146',
@@ -3136,15 +3162,12 @@ CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES = _make_choices_from_list([
     u'Cp918', u'Cp921', u'Cp922', u'Cp930', u'Cp933', u'Cp935', u'Cp937', u'Cp939',
     u'Cp942', u'Cp942C', u'Cp943', u'Cp943C', u'Cp948', u'Cp949', u'Cp949C',
     u'Cp950', u'Cp964', u'Cp970', u'EUC-JP', u'EUC-KR', u'GB18030', u'GBK',
-    u'ISCII91', u'ISO-2022-JP', u'ISO-2022-KR', u'ISO-8859-13', u'ISO-8859-15',
-    u'ISO-8859-3', u'ISO-8859-4', u'ISO-8859-5', u'ISO-8859-6', u'ISO-8859-8',
-    u'ISO-8859-9', u'ISO2022_CN_CNS', u'ISO2022_CN_GB', u'JISAutoDetect',
+    u'ISCII91', u'ISO-2022-JP', u'ISO-2022-KR', u'ISO2022_CN_CNS', u'ISO2022_CN_GB', u'JISAutoDetect',
     u'KOI8-R', u'MS874', u'MacArabic', u'MacCentralEurope', u'MacCroatian',
     u'MacCyrillic', u'MacDingbat', u'MacHebrew', u'MacIceland',
     u'MacRoman', u'MacRomania', u'MacSymbol', u'MacThai', u'MacTurkish',
     u'MacUkraine', u'Shift_JIS', u'TIS-620', u'UTF-16',
-    u'UTF-16BE', u'UTF-16LE', u'windows-1250', u'windows-1251',
-    u'windows-1252', u'windows-1254', u'windows-1255',
+    u'UTF-16BE', u'UTF-16LE', u'windows-1254', u'windows-1255',
     u'windows-1256', u'windows-1257', u'windows-1258', u'windows-31j',
     u'x-EUC-CN', u'x-EUC-JP-LINUX', u'x-EUC-TW', u'x-MS950-HKSCS',
     u'x-mswin-936', u'x-windows-949', u'x-windows-950'
@@ -3155,8 +3178,8 @@ def characterencodinginfotype_characterencoding_optgroup_choices():
     Group the choices in groups. The first group is the most used choices
     and the second group is the rest.
     """
-    most_used_choices = ('', CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES['choices'][:7])
-    more_choices = ('More', CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES['choices'][7:])
+    most_used_choices = ('', CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES['choices'][:21])
+    more_choices = ('More', CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES['choices'][21:])
     optgroup = [most_used_choices, more_choices]
     return optgroup
 
