@@ -195,9 +195,8 @@ def get_resource_license_types(res_obj):
     Returns a list of license under which the given language resource is
     available.
     """
-    return [licence for licence_info in
-            res_obj.distributionInfo.licenceinfotype_model_set.all()
-            for licence in licence_info.get_licence_display_list()]
+    return [licence for licence in res_obj.distributionInfo.licenceinfotype_model_set.all()]
+            # for licence in licence_info.get_licence_display_list()]
 
 
 def get_resource_media_types(res_obj):
