@@ -239,7 +239,7 @@ class documentInfo_model_inline(SchemaModelInline):
 # pylint: disable-msg=C0103
 class domainInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
     model = domainInfoType_model
-    template = 'admin/edit_inline/tabular.html'
+    template = 'admin/edit_inline_one2one/stacked.html'
     fk_name = 'back_to_corpustextinfotype_model'
 
 
@@ -527,7 +527,7 @@ class lexicalConceptualResourceInfo_model_inline(SchemaModelInline):
 # pylint: disable-msg=C0103
 class licenceInfo_model_inline(SchemaModelInline):
     model = licenceInfoType_model
-    collapse = True
+    # collapse = True
 
 
 # pylint: disable-msg=C0103
