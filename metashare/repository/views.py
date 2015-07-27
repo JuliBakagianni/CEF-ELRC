@@ -181,19 +181,17 @@ def _get_licences(resource, user_membership):
     licence_infos = tuple(licenceInfoType_model.objects \
         .filter(back_to_distributioninfotype_model__id=\
                 resource.distributionInfo.id))
-    
-    all_licenses = dict([(l_name, l_info) for l_info in licence_infos
-                         for l_name in l_info.licence])
+    all_licenses = dict([(l_info.licence, l_info) for l_info in licence_infos])
     result = {}
     for name, info in all_licenses.items():
         access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
+        # print info, access
         if access == None:
             LOGGER.warn("Unknown license name discovered in the database for " \
                         "object #{}: {}".format(resource.id, name))
             del all_licenses[name]
         elif user_membership >= access[1] \
-                and (info.downloadLocation \
-                     or resource.storage_object.get_download()):
+                and (resource.storage_object.get_download()):
             # the resource can be downloaded somewhere under the current license
             # terms and the user's membership allows her to immediately download
             # the resource
@@ -217,7 +215,6 @@ def download(request, object_id):
                                  storage_object__identifier=object_id,
                                  storage_object__publication_status=PUBLISHED)
     licences = _get_licences(resource, user_membership)
-
     # Check whether the resource is from the current node, or whether it must be
     # redirected to the master copy
     if not resource.storage_object.master_copy:
@@ -236,7 +233,7 @@ def download(request, object_id):
                 # that the user hasn't tried to circumvent the permission system
                 if licences[licence_choice][1]:
                     return _provide_download(request, resource,
-                                licences[licence_choice][0].downloadLocation)
+                                licences[licence_choice][0])
             else:
                 return render_to_response('repository/licence_agreement.html',
                     { 'form': la_form, 'resource': resource,
@@ -246,7 +243,6 @@ def download(request, object_id):
                     context_instance=RequestContext(request))
         elif licence_choice and not licence_choice in licences:
             licence_choice = None
-
     if len(licences) == 1:
         # no need to manually choose amongst 1 license ...
         licence_choice = licences.iterkeys().next()
