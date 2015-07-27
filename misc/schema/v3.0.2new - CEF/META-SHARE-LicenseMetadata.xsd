@@ -34,20 +34,22 @@
 								<xs:documentation>For resources available but with restrictions of uses imposed by the type of licence</xs:documentation>
 							</xs:annotation>
 						</xs:enumeration>
-						<xs:enumeration value="availableThroughOtherDistributor">
-							<xs:annotation>
-								<xs:documentation>For resources that are not available through META-SHARE</xs:documentation>
-							</xs:annotation>
-						</xs:enumeration>
 						<xs:enumeration value="underNegotiation">
 							<xs:annotation>
 								<xs:documentation>for resources that their availability is still pending</xs:documentation>
 							</xs:annotation>
 						</xs:enumeration>
+						<!--
+						<xs:enumeration value="availableThroughOtherDistributor">
+							<xs:annotation>
+								<xs:documentation>For resources that are not available through META-SHARE</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+-->
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element ref="ms:licenceInfo" minOccurs="0" maxOccurs="unbounded">
+			<xs:element ref="ms:licenceInfo" minOccurs="1" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Groups information on licences for the resource; can be repeated to allow for different modes of access and restrictions of use (e.g. free for academic use, on-a-fee basis for commercial use, download of a sample for free use etc.)</xs:documentation>
 					<xs:appinfo>
@@ -108,7 +110,7 @@
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="licence" maxOccurs="unbounded">
+			<xs:element name="licence">
 				<xs:annotation>
 					<xs:documentation>The licence of use for the resource; for an overview of licences, please visit: http://www.meta-net.eu/meta-share/licenses</xs:documentation>
 					<xs:appinfo>
@@ -125,6 +127,12 @@
 						<xs:enumeration value="CC-BY-ND"/>
 						<xs:enumeration value="CC-BY-SA"/>
 						<xs:enumeration value="CC-ZERO"/>
+						<xs:enumeration value="proprietary"/>
+						<xs:enumeration value="underNegotiation"/>
+						<xs:enumeration value="other"/>
+						<xs:enumeration value="openForReuseWithRestrictions"/>
+						<xs:enumeration value="termsOfUse"/>
+						<!---
 						<xs:enumeration value="MS-NoReD"/>
 						<xs:enumeration value="MS-NoReD-FF"/>
 						<xs:enumeration value="MS-NoReD-ND"/>
@@ -141,13 +149,19 @@
 						<xs:enumeration value="GPL"/>
 						<xs:enumeration value="LGPL"/>
 						<xs:enumeration value="Princeton_Wordnet"/>
-						<xs:enumeration value="proprietary"/>
-						<xs:enumeration value="underNegotiation"/>
-						<xs:enumeration value="other"/>
-						<xs:enumeration value="openForReuseWithRestrictions"/>
-						<xs:enumeration value="termsOfService"/>
+-->
 					</xs:restriction>
 				</xs:simpleType>
+			</xs:element>
+			<xs:element name="personalDataIncluded" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Specifies whether the resource contains or not personal data; this might mean that special handling of the resource is required (e.g. anonymisation)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sensitiveDataIncluded" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Specifies whether the resource contains or not sensitive data; this might mean that special handling of the resource is required (e.g. anonymisation)</xs:documentation>
+				</xs:annotation>
 			</xs:element>
 			<xs:element name="conditionsOfUse" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
@@ -159,31 +173,20 @@
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
 						<xs:maxLength value="100"/>
-						<xs:enumeration value="informLicensor"/>
-						<xs:enumeration value="redeposit"/>
 						<xs:enumeration value="nonCommercialUse"/>
-						<xs:enumeration value="evaluationUse"/>
 						<xs:enumeration value="commercialUse"/>
 						<xs:enumeration value="attribution"/>
 						<xs:enumeration value="shareAlike"/>
 						<xs:enumeration value="noDerivatives"/>
-						<xs:enumeration value="noRedistribution"/>
-						<xs:enumeration value="personalDataIncluded"/>
-						<xs:enumeration value="sensitiveDataIncluded"/>
-						<xs:enumeration value="languageEngineeringResearch"/>
-						<xs:enumeration value="requestPlan"/>
-						<xs:enumeration value="spatialConstraint"/>
-						<xs:enumeration value="userIdentified"/>
 						<xs:enumeration value="research"/>
 						<xs:enumeration value="education"/>
-						<xs:enumeration value="compensate"/>
 						<xs:enumeration value="other"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="termsOfServiceText" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="termsOfUseText" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Used to provide a free text description of the terms associated with a web service (e.g. time and space restrictions, etc.)</xs:documentation>
+					<xs:documentation>Used to provide a free text description of the terms of use associated with a resource (mainly for non-standard licences)</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:simpleContent>
@@ -197,11 +200,12 @@
 					<xs:field xpath="@lang"/>
 				</xs:unique>
 			</xs:element>
-			<xs:element name="termsOfServiceURL" type="ms:httpURI" minOccurs="0">
+			<xs:element name="termsOfUseURL" type="ms:httpURI" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Used to provide a hyperlink to a url describing the terms of service for the language resource</xs:documentation>
+					<xs:documentation>Used to provide a hyperlink to a url describing the terms of use for a language resource (mainly for non-standard licences)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<!--
 			<xs:element name="distributionAccessMedium" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Specifies the medium (channel) used for delivery or providing access to the resource</xs:documentation>
@@ -254,6 +258,7 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
+-->
 			<xs:element name="attributionText" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>The text that must be quoted for attribution purposes when using a resource - for cases where a resource is provided with a restriction on attribution</xs:documentation>
@@ -285,7 +290,7 @@
 	</xs:element>
 	<xs:element name="licenceInfo" type="ms:licenceInfoType">
 		<xs:annotation>
-			<xs:documentation>Groups information on licences for the resource; can be repeated to allow for different modes of access and restrictions of use (e.g. free for academic use, on-a-fee basis for commercial use, download of a sample for free use etc.)</xs:documentation>
+			<xs:documentation>Groups information on licences for the resource; can be repeated to allow for different modes of access and conditions of use (e.g. free for academic use, on-a-fee basis for commercial use, download of a sample for free use etc.)</xs:documentation>
 			<xs:appinfo>
 				<relation>one-to-one</relation>
 			</xs:appinfo>
