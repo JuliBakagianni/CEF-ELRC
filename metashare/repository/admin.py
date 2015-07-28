@@ -239,7 +239,7 @@ class documentInfo_model_inline(SchemaModelInline):
 # pylint: disable-msg=C0103
 class domainInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
     model = domainInfoType_model
-    template = 'admin/edit_inline_one2one/stacked.html'
+    template = 'admin/edit_inline/stacked.html'
     fk_name = 'back_to_corpustextinfotype_model'
 
 
