@@ -12,18 +12,11 @@ sqs = SearchQuerySet() \
   .facet("availabilityFilter") \
   .facet("licenceFilter") \
   .facet("restrictionsOfUseFilter") \
-  .facet("validatedFilter") \
-  .facet("foreseenUseFilter") \
-  .facet("useNlpSpecificFilter") \
   .facet("lingualityTypeFilter") \
   .facet("multilingualityTypeFilter") \
-  .facet("modalityTypeFilter") \
   .facet("mimeTypeFilter") \
   .facet("bestPracticesFilter") \
   .facet("domainFilter") \
-  .facet("geographicCoverageFilter") \
-  .facet("timeCoverageFilter") \
-  .facet("subjectFilter") \
   .facet("corpusAnnotationTypeFilter") \
   .facet("corpusAnnotationFormatFilter") \
   .facet("languageDescriptionLDTypeFilter") \
@@ -32,35 +25,42 @@ sqs = SearchQuerySet() \
   .facet("lexicalConceptualResourceLRTypeFilter") \
   .facet("lexicalConceptualResourceEncodingLevelFilter") \
   .facet("lexicalConceptualResourceLinguisticInformationFilter") \
-  .facet("toolServiceToolServiceTypeFilter") \
-  .facet("toolServiceToolServiceSubTypeFilter") \
-  .facet("toolServiceLanguageDependentTypeFilter") \
-  .facet("toolServiceInputOutputResourceTypeFilter") \
-  .facet("toolServiceInputOutputMediaTypeFilter") \
-  .facet("toolServiceAnnotationTypeFilter") \
-  .facet("toolServiceAnnotationFormatFilter") \
-  .facet("toolServiceEvaluatedFilter") \
   .facet("textTextGenreFilter") \
   .facet("textTextTypeFilter") \
-  .facet("textRegisterFilter") \
-  .facet("audioAudioGenreFilter") \
-  .facet("audioSpeechGenreFilter") \
-  .facet("audioRegisterFilter") \
-  .facet("audioSpeechItemsFilter") \
-  .facet("audioNaturalityFilter") \
-  .facet("audioConversationalTypeFilter") \
-  .facet("audioScenarioTypeFilter") \
-  .facet("videoVideoGenreFilter") \
-  .facet("videoTypeOfVideoContentFilter") \
-  .facet("videoNaturalityFilter") \
-  .facet("videoConversationalTypeFilter") \
-  .facet("videoScenarioTypeFilter") \
-  .facet("imageImageGenreFilter") \
-  .facet("imageTypeOfImageContentFilter") \
-  .facet("textnumericalTypeOfTnContentFilter") \
-  .facet("textngramBaseItemFilter") \
-  .facet("textngramOrderFilter") \
-  .facet("languageVarietyFilter")
+  # .facet("toolServiceToolServiceTypeFilter") \
+  # .facet("toolServiceToolServiceSubTypeFilter") \
+  # .facet("toolServiceLanguageDependentTypeFilter") \
+  # .facet("toolServiceInputOutputResourceTypeFilter") \
+  # .facet("toolServiceInputOutputMediaTypeFilter") \
+  # .facet("toolServiceAnnotationTypeFilter") \
+  # .facet("toolServiceAnnotationFormatFilter") \
+  # .facet("toolServiceEvaluatedFilter") \
+  # .facet("geographicCoverageFilter") \
+  # .facet("timeCoverageFilter") \
+  # .facet("subjectFilter") \
+  # .facet("modalityTypeFilter") \
+  # .facet("validatedFilter") \
+  # .facet("foreseenUseFilter") \
+  # .facet("useNlpSpecificFilter") \
+  # .facet("textRegisterFilter") \
+  # .facet("audioAudioGenreFilter") \
+  # .facet("audioSpeechGenreFilter") \
+  # .facet("audioRegisterFilter") \
+  # .facet("audioSpeechItemsFilter") \
+  # .facet("audioNaturalityFilter") \
+  # .facet("audioConversationalTypeFilter") \
+  # .facet("audioScenarioTypeFilter") \
+  # .facet("videoVideoGenreFilter") \
+  # .facet("videoTypeOfVideoContentFilter") \
+  # .facet("videoNaturalityFilter") \
+  # .facet("videoConversationalTypeFilter") \
+  # .facet("videoScenarioTypeFilter") \
+  # .facet("imageImageGenreFilter") \
+  # .facet("imageTypeOfImageContentFilter") \
+  # .facet("textnumericalTypeOfTnContentFilter") \
+  # .facet("textngramBaseItemFilter") \
+  # .facet("textngramOrderFilter") \
+  # .facet("languageVarietyFilter")
 
 urlpatterns = patterns('metashare.repository.views',
   (r'^browse/(?P<resource_name>[\w\-]*)/(?P<object_id>\w+)/$',
