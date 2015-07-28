@@ -101,8 +101,7 @@
 	</div>
 
 	<div id="tabs_content_container">
-		{% for fieldset in adminform %}		
-
+		{% for fieldset in adminform %}
 				<div id="field-{{forloop.counter}}" class="tab_content" {% if "Required administration" in fieldset.name %} style="display:inline;" {% endif %}>
 					{% include "admin/repository/fieldset.html" %}
 				</div>	

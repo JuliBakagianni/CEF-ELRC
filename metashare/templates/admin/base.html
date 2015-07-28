@@ -30,7 +30,9 @@
   {# Content #}{% with help_icon_url=MEDIA_URL|add:"css/sexybuttons/images/icons/silk/help.png" %}
   <div id="content" class="{% block coltype %}colM{% endblock %}">
     {% block pretitle %}{% endblock %}
-    {% block content_title %}{% if title %}<h1 class="customtitle">{{ title }}</h1>{% if kb_link and comp_name %}<span class="helpLink" kbbase="{{ kb_link }}" kbcomp="{{ comp_name|to_field_name }}"><img class="help_icon" src="{{ help_icon_url }}" kbbase="{{ kb_link }}" kbcomp="{{ comp_name|to_field_name }}"></img></span>{% endif %}<div style="clear: both"></div>{% endif %}{% endblock %}
+    {% block content_title %}{% if title %}<h1 class="customtitle">{{ title }}</h1>
+{#        {% if kb_link and comp_name %}<span class="helpLink" kbbase="{{ kb_link }}" kbcomp="{{ comp_name|to_field_name }}"><img class="help_icon" src="{{ help_icon_url }}" kbbase="{{ kb_link }}" kbcomp="{{ comp_name|to_field_name }}"></img></span>{% endif %}#}
+        <div style="clear: both"></div>{% endif %}{% endblock %}
     {% block content %}
     {% block object-tools %}{% endblock %}
     {{ content }}
