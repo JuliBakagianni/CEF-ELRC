@@ -136,7 +136,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                                 label=_('Licence'), facet_id=5, parent_id=0,
                                 faceted=True)
     restrictionsOfUseFilter = LabeledMultiValueField(
-                                label=_('Restrictions of Use'), facet_id=6, parent_id=0,
+                                label=_('Conditions of Use'), facet_id=6, parent_id=0,
                                 faceted=True)
     # validatedFilter = LabeledMultiValueField(
     #                             label=_('Validated'), facet_id=7, parent_id=0,

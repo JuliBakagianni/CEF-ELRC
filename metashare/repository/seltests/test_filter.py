@@ -51,7 +51,7 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("Media Type", driver.find_element_by_link_text("Media Type").text)
         self.assertEqual("Availability", driver.find_element_by_link_text("Availability").text)
         self.assertEqual("Licence", driver.find_element_by_link_text("Licence").text)
-        self.assertEqual("Restrictions of Use", driver.find_element_by_link_text("Restrictions of Use").text)
+        self.assertEqual("Conditions of Use", driver.find_element_by_link_text("Restrictions of Use").text)
         self.assertEqual("Validated", driver.find_element_by_link_text("Validated").text)
         self.assertEqual("Foreseen Use", driver.find_element_by_link_text("Foreseen Use").text)
         self.assertEqual("Use Is NLP Specific", driver.find_element_by_link_text("Use Is NLP Specific").text)
@@ -185,7 +185,7 @@ class FilterTest(SeleniumTestCase):
         click_and_wait(driver.find_element_by_link_text("Licence"))
        
         # check Restrictions of Use filter        
-        click_and_wait(driver.find_element_by_link_text("Restrictions of Use"))
+        click_and_wait(driver.find_element_by_link_text("Conditions of Use"))
         self.assertEqual("Academic - Non Commercial Use (18)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[12]/div[1]").text)
         self.assertEqual("Commercial Use (15)", driver.find_element_by_xpath(
@@ -196,7 +196,7 @@ class FilterTest(SeleniumTestCase):
           "//div[@id='searchFilters']/div[12]/div[4]").text)
         self.assertEqual("Share Alike (1)", driver.find_element_by_xpath(
           "//div[@id='searchFilters']/div[12]/div[5]").text)
-        click_and_wait(driver.find_element_by_link_text("Restrictions of Use"))
+        click_and_wait(driver.find_element_by_link_text("Conditions of Use"))
        
         # check Validated filter        
         click_and_wait(driver.find_element_by_link_text("Validated"))
@@ -448,7 +448,7 @@ class FilterTest(SeleniumTestCase):
         driver.find_element_by_link_text("Text").click()
         self.assertEqual("5 Language Resources", driver.find_element_by_css_selector("h3").text)
         # additionally filter by restriction of use
-        driver.find_element_by_link_text("Restrictions of Use").click()
+        driver.find_element_by_link_text("Conditions of Use").click()
         driver.find_element_by_link_text("Commercial Use").click()
         self.assertEqual("5 Language Resources", driver.find_element_by_css_selector("h3").text)
         driver.get_screenshot_as_file('{0}/{1}.png'.format(ss_path, time.time()))
