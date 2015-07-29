@@ -115,7 +115,7 @@ fields:
 - Media Type 
 - Availability
 - Licence
-- Restrictions of Use
+- Conditions of Use
 - Validated
 - Foreseen Use
 - Use is NLP Specific
