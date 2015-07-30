@@ -269,14 +269,20 @@ class resourceInfoType_model(SchemaModel):
         return resource_component.as_subclass()._meta.verbose_name
 
 
-SIZEINFOTYPE_SIZEUNIT_CHOICES = _make_choices_from_list([
-  u'terms', u'entries', u'files', u'items', u'texts',
-  u'sentences', u'bytes', u'tokens', u'words', u'keywords',
-  u'idiomaticExpressions',u'neologisms', u'multiWordUnits', u'expressions',
-  u'concepts', u'lexicalTypes', u'kb', u'mb',
-  u'gb', u'rules', u'other',
-])
+# SIZEINFOTYPE_SIZEUNIT_CHOICES = _make_choices_from_list([
+#   u'terms', u'entries', u'files', u'items', u'texts',
+#   u'sentences', u'bytes', u'tokens', u'words', u'keywords',
+#   u'idiomaticExpressions',u'neologisms', u'multiWordUnits', u'expressions',
+#   u'concepts', u'lexicalTypes', u'kb', u'mb',
+#   u'gb', u'rules', u'other',
+# ])
 
+SIZEINFOTYPE_SIZEUNIT_CHOICES = _make_choices_from_list([
+u'sentences',u'texts',u'files',u'tokens',u'words',
+u'items',u'entries',u'lexicalTypes',u'terms',u'concepts',
+u'keywords',u'neologisms',u'multiWordUnits',u'idiomaticExpressions',
+u'expressions',u'bytes',u'kb',u'mb',u'gb',u'rules',u'other',
+])
 # pylint: disable-msg=C0103
 class sizeInfoType_model(SchemaModel):
     """
@@ -305,8 +311,7 @@ class sizeInfoType_model(SchemaModel):
       'ion on the size of the resource or of resource parts',
       
       max_length=30,
-      choices=sorted(SIZEINFOTYPE_SIZEUNIT_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
+      choices=SIZEINFOTYPE_SIZEUNIT_CHOICES['choices'],
       )
 
     # back_to_audiosizeinfotype_model = models.ForeignKey("audioSizeInfoType_model",  blank=True, null=True)
@@ -1198,48 +1203,71 @@ class domainInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
+# ANNOTATIONINFOTYPE_ANNOTATIONTYPE_CHOICES = _make_choices_from_list([
+#   u'alignment', u'segmentation', u'structuralAnnotation',
+#   u'lemmatization', u'stemming', u'morphosyntacticAnnotation-posTagging',
+#   u'morphosyntacticAnnotation-bPosTagging', u'discourseAnnotation',
+#   u'discourseAnnotation-audienceReactions',
+#   u'discourseAnnotation-coreference',u'discourseAnnotation-dialogueActs',
+#   u'discourseAnnotation-discourseRelations',
+#
+#
+#   u'semanticAnnotation',u'semanticAnnotation-certaintyLevel',
+#   u'semanticAnnotation-emotions',u'semanticAnnotation-entityMentions',
+#   u'semanticAnnotation-events',u'semanticAnnotation-namedEntities',
+#   u'semanticAnnotation-polarity',
+#   u'semanticAnnotation-questionTopicalTarget',
+#   u'semanticAnnotation-semanticClasses',
+#   u'semanticAnnotation-semanticRelations',
+#   u'semanticAnnotation-semanticRoles',u'semanticAnnotation-speechActs',
+#   u'semanticAnnotation-temporalExpressions',
+#   u'semanticAnnotation-textualEntailment',u'semanticAnnotation-wordSenses',
+#   u'speechAnnotation-orthographicTranscription',
+#   # u'speechAnnotation-paralanguageAnnotation',
+#   # u'speechAnnotation-phoneticTranscription',
+#   # u'speechAnnotation-prosodicAnnotation',
+#   # u'speechAnnotation-soundEvents',
+#   # u'speechAnnotation-soundToTextAlignment',
+#   u'speechAnnotation-speakerIdentification',
+#   u'speechAnnotation-speakerTurns',
+#   u'speechAnnotation',
+#
+#   u'syntacticAnnotation-shallowParsing',
+#   u'syntacticAnnotation-subcategorizationFrames',
+#   u'syntacticAnnotation-treebanks',
+#   u'syntacticosemanticAnnotation-links',
+#   u'translation',u'transliteration',
+#   u'discourseAnnotation-dialogueActs',
+#   # u'modalityAnnotation-bodyMovements',
+#   # u'modalityAnnotation-facialExpressions',
+#   # u'modalityAnnotation-gazeEyeMovements',
+#   # u'modalityAnnotation-handArmGestures',
+#   # u'modalityAnnotation-handManipulationOfObjects',
+#   # u'modalityAnnotation-headMovements',u'modalityAnnotation-lipMovements',
+#   u'semanticAnnotation-emotions',u'other',
+# ])
+
 ANNOTATIONINFOTYPE_ANNOTATIONTYPE_CHOICES = _make_choices_from_list([
-  u'alignment', u'discourseAnnotation',
-  u'discourseAnnotation-audienceReactions',
-  u'discourseAnnotation-coreference',u'discourseAnnotation-dialogueActs',
-  u'discourseAnnotation-discourseRelations',u'lemmatization',
-  u'morphosyntacticAnnotation-bPosTagging',
-  u'morphosyntacticAnnotation-posTagging',u'segmentation',
-  u'semanticAnnotation',u'semanticAnnotation-certaintyLevel',
-  u'semanticAnnotation-emotions',u'semanticAnnotation-entityMentions',
-  u'semanticAnnotation-events',u'semanticAnnotation-namedEntities',
-  u'semanticAnnotation-polarity',
-  u'semanticAnnotation-questionTopicalTarget',
-  u'semanticAnnotation-semanticClasses',
-  u'semanticAnnotation-semanticRelations',
-  u'semanticAnnotation-semanticRoles',u'semanticAnnotation-speechActs',
-  u'semanticAnnotation-temporalExpressions',
-  u'semanticAnnotation-textualEntailment',u'semanticAnnotation-wordSenses',
-  u'speechAnnotation-orthographicTranscription',
-  # u'speechAnnotation-paralanguageAnnotation',
-  # u'speechAnnotation-phoneticTranscription',
-  # u'speechAnnotation-prosodicAnnotation',
-  # u'speechAnnotation-soundEvents',
-  # u'speechAnnotation-soundToTextAlignment',
-  u'speechAnnotation-speakerIdentification',
-  u'speechAnnotation-speakerTurns',
-  u'speechAnnotation',
-  u'stemming',
-  u'structuralAnnotation',
-  u'syntacticAnnotation-shallowParsing',
-  u'syntacticAnnotation-subcategorizationFrames',
-  u'syntacticAnnotation-treebanks',
-  u'syntacticosemanticAnnotation-links',
-  u'translation',u'transliteration',
-  u'discourseAnnotation-dialogueActs',
-  # u'modalityAnnotation-bodyMovements',
-  # u'modalityAnnotation-facialExpressions',
-  # u'modalityAnnotation-gazeEyeMovements',
-  # u'modalityAnnotation-handArmGestures',
-  # u'modalityAnnotation-handManipulationOfObjects',
-  # u'modalityAnnotation-headMovements',u'modalityAnnotation-lipMovements',
-  u'semanticAnnotation-emotions',u'other', 
-])
+u'alignment',u'segmentation',u'structuralAnnotation',
+u'lemmatization',u'stemming',u'morphosyntacticAnnotation-posTagging',
+u'morphosyntacticAnnotation-bPosTagging',u'syntacticAnnotation-constituencyTrees',
+u'syntacticAnnotation-dependencyTrees',u'syntacticAnnotation-shallowParsing',
+u'syntacticAnnotation-subcategorizationFrames',u'syntacticAnnotation-treebanks',
+u'syntacticosemanticAnnotation-links',u'semanticAnnotation',
+u'semanticAnnotation-namedEntities',u'semanticAnnotation-events',
+u'semanticAnnotation-temporalExpressions',u'semanticAnnotation-entityMentions',
+u'semanticAnnotation-emotions',u'semanticAnnotation-polarity',
+u'semanticAnnotation-certaintyLevel',u'semanticAnnotation-semanticClasses',
+u'semanticAnnotation-semanticRelations',u'semanticAnnotation-semanticRoles',
+u'semanticAnnotation-wordSenses',u'semanticAnnotation-speechActs',
+u'semanticAnnotation-textualEntailment',u'semanticAnnotation-questionTopicalTarget',
+u'discourseAnnotation',u'discourseAnnotation-coreference',
+u'discourseAnnotation-dialogueActs',u'discourseAnnotation-discourseRelations',
+u'discourseAnnotation-audienceReactions',u'speechAnnotation',
+u'speechAnnotation-orthographicTranscription',u'speechAnnotation-speakerIdentification',
+u'speechAnnotation-speakerTurns',u'translation',
+u'transliteration',u'other',
+    ])
 
 # ANNOTATIONINFOTYPE_ANNOTATEDELEMENTS_CHOICES = _make_choices_from_list([
 #   u'speakerNoise', u'backgroundNoise', u'mispronunciations', u'truncation',
@@ -1316,8 +1344,7 @@ class annotationInfoType_model(SchemaModel):
       'nnotation type a tool/ service requires or produces as an output',
       
       max_length=150,
-      choices=sorted(ANNOTATIONINFOTYPE_ANNOTATIONTYPE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
+      choices=ANNOTATIONINFOTYPE_ANNOTATIONTYPE_CHOICES['choices'],
       )
 
     # annotatedElements = MultiSelectField(
@@ -4613,13 +4640,22 @@ class corpusTextInfoType_model(SchemaModel):
         formatstring = u'text ({} {})'
         return self.unicode_(formatstring, formatargs)
 
-TEXTFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
-  u'application/pdf', u'text/csv', u'text/html', u'application/x-latex',
-  u'application/rdf+xml', u'application/rtf', u'text/sgml',
-  u'text/tab-separated-values', u'application/x-tex', u'text/plain',
-  u'application/xhtml+xml', u'application/xml', u'application/tei+xml',
-  u'application/x-msaccess', u'application/x-tmx+xml', u'application/x-xces+xml',
-  u'application/vnd.xmi+xml', u'other'
+# TEXTFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
+#   u'application/pdf', u'text/csv', u'text/html', u'application/x-latex',
+#   u'application/rdf+xml', u'application/rtf', u'text/sgml',
+#   u'text/tab-separated-values', u'application/x-tex', u'text/plain',
+#   u'application/xhtml+xml', u'application/xml', u'application/tei+xml',
+#   u'application/x-msaccess', u'application/x-tmx+xml', u'application/x-xces+xml',
+#   u'application/vnd.xmi+xml', u'other'
+# ])
+
+TEXTFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([u'text/plain',
+u'application/xml',u'text/html',u'application/xhtml+xml',
+u'application/pdf',u'application/rtf',u'application/x-tex',
+u'application/x-latex',u'application/x-tmx+xml',u'application/x-xces+xml',
+u'application/tei+xml',u'application/vnd.xmi+xm',u'application/rdf+xml',
+u'text/sgml',u'text/csv',u'text/tab-separated-values',
+u'application/x-msaccess',u'other',
 ])
 
 # pylint: disable-msg=C0103
@@ -4651,8 +4687,7 @@ class textFormatInfoType_model(SchemaModel):
         'THE IANA MEDIA MIMETYPE RECOMMENDED VALUES ' \
         '(http://www.iana.org/assignments/media-types/media-types.xhtml)',
       max_length=50,
-      choices=sorted(TEXTFORMATINFOTYPE_MIMETYPE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
+      choices=TEXTFORMATINFOTYPE_MIMETYPE_CHOICES['choices'],
     )
 
     sizePerTextFormat = models.OneToOneField("sizeInfoType_model", 
@@ -5876,10 +5911,10 @@ LANGUAGEDESCRIPTIONENCODINGINFOTYPE_ENCODINGLEVEL_CHOICES = _make_choices_from_l
 ])
 
 LANGUAGEDESCRIPTIONENCODINGINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_list([
-  u'BLM', u'CES', u'EAGLES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys',
-  u'InkML',u'ISO12620', u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042',
-  u'ISO704',u'LMF', u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
-  u'multimodalInteractionFramework',u'OAXAL', u'OWL', u'pennTreeBank',
+  u'CES', u'EAGLES', u'EML', u'GMX', u'GrAF',
+  u'ISO12620', u'ISO16642', u'ISO26162', u'ISO30042',
+  u'ISO704',u'LMF', u'MAF', u'MLIF', u'MULTEXT',
+  u'OAXAL', u'OWL', u'pennTreeBank',
   u'pragueTreebank',u'RDF', u'SemAF', u'SemAF_DA', u'SemAF_NE',
   u'SemAF_SRL',u'SemAF_DS', u'SKOS', u'SRX', u'SynAF', u'TBX', u'TMX',
   u'TEI',u'TEI_P3', u'TEI_P4', u'TEI_P5', u'TimeML', u'XCES', u'XLIFF',
@@ -6358,14 +6393,14 @@ LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_LINGUISTICINFORMATION_CHOICES = _make_
 ])
 
 LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_list([
-  u'BLM', u'CES', u'EAGLES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys',
-  u'InkML',u'ISO12620', u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042',
-  u'ISO704',u'LMF', u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
-  u'multimodalInteractionFramework',u'OAXAL', u'OWL', u'pennTreeBank',
+  u'CES', u'EAGLES', u'EML', u'GMX', u'GrAF',
+  u'ISO12620', u'ISO16642', u'ISO26162', u'ISO30042',
+  u'ISO704',u'LMF', u'MAF', u'MLIF', u'MULTEXT',
+  u'OAXAL', u'OWL', u'pennTreeBank',
   u'pragueTreebank',u'RDF', u'SemAF', u'SemAF_DA', u'SemAF_NE',
   u'SemAF_SRL',u'SemAF_DS', u'SKOS', u'SRX', u'SynAF', u'TBX', u'TMX',
   u'TEI',u'TEI_P3', u'TEI_P4', u'TEI_P5', u'TimeML', u'XCES', u'XLIFF',
-  u'WordNet',u'other', 
+  u'WordNet',u'other',
 ])
 
 LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_EXTRATEXTUALINFORMATION_CHOICES = _make_choices_from_list([
