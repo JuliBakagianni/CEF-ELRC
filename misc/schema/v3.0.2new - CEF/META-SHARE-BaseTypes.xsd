@@ -2181,18 +2181,13 @@
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
 				<xs:maxLength value="100"/>
-				<xs:enumeration value="BLM"/>
 				<xs:enumeration value="CES"/>
 				<xs:enumeration value="EAGLES"/>
 				<xs:enumeration value="EML"/>
-				<xs:enumeration value="EMMA"/>
 				<xs:enumeration value="GMX"/>
 				<xs:enumeration value="GrAF"/>
-				<xs:enumeration value="HamNoSys"/>
-				<xs:enumeration value="InkML"/>
 				<xs:enumeration value="ISO12620"/>
 				<xs:enumeration value="ISO16642"/>
-				<xs:enumeration value="ISO1987"/>
 				<xs:enumeration value="ISO26162"/>
 				<xs:enumeration value="ISO30042"/>
 				<xs:enumeration value="ISO704"/>
@@ -2200,8 +2195,6 @@
 				<xs:enumeration value="MAF"/>
 				<xs:enumeration value="MLIF"/>
 				<xs:enumeration value="MULTEXT"/>
-				<xs:enumeration value="MUMIN"/>
-				<xs:enumeration value="multimodalInteractionFramework"/>
 				<xs:enumeration value="OAXAL"/>
 				<xs:enumeration value="OWL"/>
 				<xs:enumeration value="pennTreeBank"/>
