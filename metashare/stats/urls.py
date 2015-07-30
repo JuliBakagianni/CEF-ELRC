@@ -7,9 +7,9 @@ urlpatterns = patterns('metashare.stats.views',
     'mystats'),
   (r'usage/$',
     'usagestats'),
-  (r'days',
-    'statdays'),
-  (r'get.*',
-    'getstats'),
+  # (r'days',
+  #   'statdays'),
+  # (r'get.*',
+  #   'getstats'),
 )
 

@@ -59,8 +59,8 @@ def callServerStats():
         LOGGER.debug('WARNING! Failed contacting statistics server on %s' % STATS_SERVER_URL)
     return True
                   
-thread = Timer(2.0, callServerStats)
-thread.start()
+# thread = Timer(2.0, callServerStats)
+# thread.start()
     
 def mystats (request):
     data = []
