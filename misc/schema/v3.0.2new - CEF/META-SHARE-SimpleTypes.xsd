@@ -320,7 +320,6 @@
 				<xs:enumeration value="semanticAnnotation-wordSenses"/>
 				<xs:enumeration value="speechAnnotation"/>
 				<xs:enumeration value="speechAnnotation-orthographicTranscription"/>
-				<xs:enumeration value="speechAnnotation-soundEvents"/>
 				<xs:enumeration value="speechAnnotation-speakerIdentification"/>
 				<xs:enumeration value="speechAnnotation-speakerTurns"/>
 				<xs:enumeration value="stemming"/>
@@ -513,9 +512,6 @@
 				<xs:enumeration value="application/tei+xml"/>
 				<xs:enumeration value="application/rdf+xml"/>
 				<xs:enumeration value="application/xhtml+xml"/>
-				<xs:enumeration value="application/emma+xml"/>
-				<xs:enumeration value="application/pls+xml"/>
-				<xs:enumeration value="application/voicexml+xml"/>
 				<xs:enumeration value="text/sgml"/>
 				<xs:enumeration value="text/html"/>
 				<xs:enumeration value="application/x-tex"/>
@@ -525,22 +521,6 @@
 				<xs:enumeration value="text/tab-separated-values"/>
 				<xs:enumeration value="application/pdf"/>
 				<xs:enumeration value="application/x-msaccess"/>
-				<xs:enumeration value="audio/mp4"/>
-				<xs:enumeration value="audio/mpeg"/>
-				<xs:enumeration value="audio/x-wav"/>
-				<xs:enumeration value="image/bmp"/>
-				<xs:enumeration value="image/gif"/>
-				<xs:enumeration value="image/jpeg"/>
-				<xs:enumeration value="image/png"/>
-				<xs:enumeration value="image/svg+xml"/>
-				<xs:enumeration value="image/tiff"/>
-				<xs:enumeration value="video/jpeg"/>
-				<xs:enumeration value="video/mp4"/>
-				<xs:enumeration value="application/mp4"/>
-				<xs:enumeration value="video/mpeg"/>
-				<xs:enumeration value="video/x-flv"/>
-				<xs:enumeration value="video/x-msvideo"/>
-				<xs:enumeration value="video/x-ms-wmv"/>
 				<xs:enumeration value="other"/>
 			</xs:restriction>
 		</xs:simpleType>

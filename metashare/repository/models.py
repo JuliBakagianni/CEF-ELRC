@@ -1219,7 +1219,7 @@ ANNOTATIONINFOTYPE_ANNOTATIONTYPE_CHOICES = _make_choices_from_list([
   # u'speechAnnotation-paralanguageAnnotation',
   # u'speechAnnotation-phoneticTranscription',
   # u'speechAnnotation-prosodicAnnotation',
-  u'speechAnnotation-soundEvents',
+  # u'speechAnnotation-soundEvents',
   # u'speechAnnotation-soundToTextAlignment',
   u'speechAnnotation-speakerIdentification',
   u'speechAnnotation-speakerTurns',
@@ -4614,13 +4614,12 @@ class corpusTextInfoType_model(SchemaModel):
         return self.unicode_(formatstring, formatargs)
 
 TEXTFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([
-  u'application/pdf', u'text/csv', u'application/emma+xml',
-  u'text/html', u'application/x-latex', u'application/pls+xml',
+  u'application/pdf', u'text/csv', u'text/html', u'application/x-latex',
   u'application/rdf+xml', u'application/rtf', u'text/sgml',
   u'text/tab-separated-values', u'application/x-tex', u'text/plain',
   u'application/xhtml+xml', u'application/xml', u'application/tei+xml',
   u'application/x-msaccess', u'application/x-tmx+xml', u'application/x-xces+xml',
-  u'application/vnd.xmi+xml'
+  u'application/vnd.xmi+xml', u'other'
 ])
 
 # pylint: disable-msg=C0103
