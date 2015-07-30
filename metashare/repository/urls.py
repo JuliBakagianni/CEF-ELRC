@@ -21,12 +21,13 @@ sqs = SearchQuerySet() \
   .facet("corpusAnnotationFormatFilter") \
   .facet("languageDescriptionLDTypeFilter") \
   .facet("languageDescriptionEncodingLevelFilter") \
-  .facet("languageDescriptionGrammaticalPhenomenaCoverageFilter") \
   .facet("lexicalConceptualResourceLRTypeFilter") \
   .facet("lexicalConceptualResourceEncodingLevelFilter") \
   .facet("lexicalConceptualResourceLinguisticInformationFilter") \
   .facet("textTextGenreFilter") \
   .facet("textTextTypeFilter") \
+
+  # .facet("languageDescriptionGrammaticalPhenomenaCoverageFilter") \
   # .facet("toolServiceToolServiceTypeFilter") \
   # .facet("toolServiceToolServiceSubTypeFilter") \
   # .facet("toolServiceLanguageDependentTypeFilter") \
