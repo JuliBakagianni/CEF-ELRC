@@ -1248,7 +1248,7 @@ ANNOTATIONINFOTYPE_ANNOTATIONTYPE_CHOICES = _make_choices_from_list([
 
 ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES = _make_choices_from_list([
   u'paragraph', u'sentence', u'clause', u'word', u'wordGroup', u'utterance',
-  u'phrase', u'diphone', u'other',
+  u'phrase', u'other',
 ])
 
 ANNOTATIONINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_list([
