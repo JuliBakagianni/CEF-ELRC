@@ -1252,10 +1252,10 @@ ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES = _make_choices_from_list([
 ])
 
 ANNOTATIONINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_list([
-  u'BLM', u'CES', u'EAGLES', u'EML', u'EMMA', u'GMX', u'GrAF', u'HamNoSys',
-  u'InkML',u'ISO12620', u'ISO16642', u'ISO1987', u'ISO26162', u'ISO30042',
-  u'ISO704',u'LMF', u'MAF', u'MLIF', u'MULTEXT', u'MUMIN',
-  u'multimodalInteractionFramework',u'OAXAL', u'OWL', u'pennTreeBank',
+  u'CES', u'EAGLES', u'EML', u'GMX', u'GrAF',
+  u'ISO12620', u'ISO16642', u'ISO26162', u'ISO30042',
+  u'ISO704',u'LMF', u'MAF', u'MLIF', u'MULTEXT',
+  u'OAXAL', u'OWL', u'pennTreeBank',
   u'pragueTreebank',u'RDF', u'SemAF', u'SemAF_DA', u'SemAF_NE',
   u'SemAF_SRL',u'SemAF_DS', u'SKOS', u'SRX', u'SynAF', u'TBX', u'TMX',
   u'TEI',u'TEI_P3', u'TEI_P4', u'TEI_P5', u'TimeML', u'XCES', u'XLIFF',
