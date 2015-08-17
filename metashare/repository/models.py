@@ -4655,7 +4655,7 @@ TEXTFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([u'text/plain',
 u'application/xml',u'text/html',u'application/xhtml+xml',
 u'application/pdf',u'application/rtf',u'application/x-tex',
 u'application/x-latex',u'application/x-tmx+xml',u'application/x-xces+xml',
-u'application/tei+xml',u'application/vnd.xmi+xm',u'application/rdf+xml',
+u'application/tei+xml',u'application/vnd.xmi+xml',u'application/rdf+xml',
 u'text/sgml',u'text/csv',u'text/tab-separated-values',
 u'application/x-msaccess',u'other',
 ])
