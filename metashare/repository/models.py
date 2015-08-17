@@ -363,9 +363,9 @@ class identificationInfoType_model(SchemaModel):
       ( u'resourceShortName', u'resourceShortName', OPTIONAL ),
       ( u'url', u'url', RECOMMENDED ),
       ( u'metaShareId', u'metaShareId', REQUIRED ),
+      ( u'ISLRN', u'ISLRN', RECOMMENDED ),
       ( u'identifier', u'identifier', OPTIONAL ),
       ( u'PID', u'PID', RECOMMENDED),
-      ( u'ISLRN', u'ISLRN', RECOMMENDED ),
     )
 
     resourceName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
@@ -410,8 +410,14 @@ class identificationInfoType_model(SchemaModel):
       ' the MetaShare software',
       max_length=100, default="NOT_DEFINED_FOR_V2", )
 
+    ISLRN = XmlCharField(
+      verbose_name='Islrn',
+      help_text='Reference to the unique ISLRN number',
+      blank=True, max_length=17,
+      validators=[validate_matches_xml_char_production], )
+
     identifier = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=1, max_length=100),
-      verbose_name='Identifier',
+      verbose_name='Other identifiers',
       help_text='A reference to the resource like a pid or an internal i' \
       'dentifier used by the resource provider',
       blank=True, validators=[validate_matches_xml_char_production], )
@@ -422,12 +428,6 @@ class identificationInfoType_model(SchemaModel):
         'system and thus not viewable on the editor; '
         'at a later stage, we might consider having it '
         'also editable for PIDs assigned by other entities')
-
-    ISLRN = XmlCharField(
-      verbose_name='Islrn',
-      help_text='Reference to the unique ISLRN number',
-      blank=True, max_length=17,
-      validators=[validate_matches_xml_char_production], )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -2967,8 +2967,9 @@ LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
   # u'MS-NoReD-ND-FF',u'MS-NC-NoReD', u'MS-NC-NoReD-FF', u'MS-NC-NoReD-ND',
   # u'MS-NC-NoReD-ND-FF', u'AGPL', u'ApacheLicence_2.0',u'BSD',
   # u'BSD-style', u'GFDL', u'GPL', u'LGPL', u'Princeton_Wordnet',
-  u'proprietary', u'underNegotiation', u'other',
+  u'underNegotiation',
   u'openForReuseWithRestrictions', u'termsOfUse',
+  u'proprietary', u'other',
 ])
 
 LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES = _make_choices_from_list([
@@ -3004,6 +3005,7 @@ class licenceInfoType_model(SchemaModel):
     __schema_fields__ = (
       ( u'licence', u'licence', REQUIRED ),
       ( u'personalDataIncluded', u'personalDataIncluded', REQUIRED ),
+      # ( u'personalDataAdditionalInfo', u'personalDataAdditionalInfo', OPTIONAL ),
       ( u'sensitiveDataIncluded', u'sensitiveDataIncluded', REQUIRED ),
       ( u'restrictionsOfUse', u'restrictionsOfUse', OPTIONAL ),
       ( u'termsOfUseText', u'termsOfUseText', OPTIONAL ),

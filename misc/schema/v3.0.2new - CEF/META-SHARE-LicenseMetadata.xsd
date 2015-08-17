@@ -127,11 +127,11 @@
 						<xs:enumeration value="CC-BY-ND"/>
 						<xs:enumeration value="CC-BY-SA"/>
 						<xs:enumeration value="CC-ZERO"/>
-						<xs:enumeration value="proprietary"/>
 						<xs:enumeration value="underNegotiation"/>
-						<xs:enumeration value="other"/>
 						<xs:enumeration value="openForReuseWithRestrictions"/>
 						<xs:enumeration value="termsOfUse"/>
+						<xs:enumeration value="proprietary"/>
+						<xs:enumeration value="other"/>
 						<!---
 						<xs:enumeration value="MS-NoReD"/>
 						<xs:enumeration value="MS-NoReD-FF"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End user (free.org) -->
+<!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by uni (uni) -->
 <!-- edited by ILSP/Athena R.C. -->
 <xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en">
 	<xs:include schemaLocation="./META-SHARE-SimpleTypes.xsd"/>
@@ -81,6 +81,16 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
+			<xs:element name="ISLRN" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Reference to the unique ISLRN number</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="17"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
 			<xs:element name="identifier" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>A reference to the resource like a pid or an internal identifier used by the resource provider</xs:documentation>
@@ -95,16 +105,6 @@
 				<xs:annotation>
 					<xs:documentation>To be used for CLARIN-EL purposes; automatically assigned by the system and thus not viewable on the editor; at a later stage, we might consider having it also editable for PIDs assigned by other entities</xs:documentation>
 				</xs:annotation>
-			</xs:element>
-			<xs:element name="ISLRN" minOccurs="0" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Reference to the unique ISLRN number</xs:documentation>
-				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="17"/>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
