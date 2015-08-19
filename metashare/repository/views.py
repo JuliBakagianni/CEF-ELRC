@@ -136,7 +136,6 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
   # 'ELRA_EVALUATION': (MEDIA_URL + 'licences/EVALUATION.htm', MEMBER_TYPES.GOD),
   # 'ELRA_VAR': (MEDIA_URL + 'licences/VAR-v3_2007.htm', MEMBER_TYPES.GOD),
   # 'ELRA_END_USER': (MEDIA_URL + 'licences/ENDUSER-v3_2007.htm', MEMBER_TYPES.GOD),
-  'proprietary': ('', MEMBER_TYPES.GOD),
   # 'CLARIN_PUB': (MEDIA_URL + 'licences/CLARIN_PUB.html', MEMBER_TYPES.GOD),
   # 'CLARIN_ACA-NC': (MEDIA_URL + 'licences/CLARIN_ACA.html', MEMBER_TYPES.GOD),
   # 'CLARIN_ACA': (MEDIA_URL + 'licences/CLARIN_ACA.html', MEMBER_TYPES.GOD),
@@ -152,6 +151,7 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
   'underNegotiation': ('', MEMBER_TYPES.GOD),
   'openForReuseWithRestrictions': ('', MEMBER_TYPES.NON),
   'termsOfUse': ('', MEMBER_TYPES.NON),
+  'proprietary': ('', MEMBER_TYPES.GOD),
   'other': ('', MEMBER_TYPES.GOD)
 }
 
