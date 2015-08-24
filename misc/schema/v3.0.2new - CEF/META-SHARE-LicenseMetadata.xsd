@@ -158,9 +158,19 @@
 					<xs:documentation>Specifies whether the resource contains or not personal data; this might mean that special handling of the resource is required (e.g. anonymisation)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="personalDataAdditionalInfo" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>If the resource includes personal data, this field can be used for entering more information, e.g. whether special handling of the resource is required (e.g. anonymisation, further request for use etc.)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="sensitiveDataIncluded" type="xs:boolean">
 				<xs:annotation>
 					<xs:documentation>Specifies whether the resource contains or not sensitive data; this might mean that special handling of the resource is required (e.g. anonymisation)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sensitiveDataAdditionalInfo" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>If the resource includes sensitive data, this field can be used for entering more information, e.g. whether special handling of the resource is required (e.g. anonymisation)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="conditionsOfUse" minOccurs="0" maxOccurs="unbounded">
