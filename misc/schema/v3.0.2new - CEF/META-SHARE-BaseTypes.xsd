@@ -94,6 +94,9 @@
 			<xs:element name="identifier" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>A reference to the resource like a pid or an internal identifier used by the resource provider</xs:documentation>
+					<xs:appInfo>
+						<xs:label>Other identifiers</xs:label>
+					</xs:appInfo>
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
