@@ -109,6 +109,22 @@
 					<xs:documentation>To be used for CLARIN-EL purposes; automatically assigned by the system and thus not viewable on the editor; at a later stage, we might consider having it also editable for PIDs assigned by other entities</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="appropriatenessForDSI" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Specifies whether the resource is appropriate for use in one or more of the DSIs (Digital Service Infrastructures)</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="100"/>
+						<xs:enumeration value="OnlineDisputeResolution"/>
+						<xs:enumeration value="Europeana"/>
+						<xs:enumeration value="OpenDataPortal"/>
+						<xs:enumeration value="eJustice"/>
+						<xs:enumeration value="ElectronicExchangeOfSocialSecurityInformation"/>
+						<xs:enumeration value="eHealth"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="versionInfoType">
