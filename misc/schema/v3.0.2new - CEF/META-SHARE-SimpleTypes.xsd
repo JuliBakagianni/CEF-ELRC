@@ -504,23 +504,125 @@
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
 				<xs:maxLength value="50"/>
-				<xs:enumeration value="text/plain"/>
-				<xs:enumeration value="application/vnd.xmi+xml"/>
-				<xs:enumeration value="application/xml"/>
-				<xs:enumeration value="application/x-tmx+xml"/>
-				<xs:enumeration value="application/x-xces+xml"/>
-				<xs:enumeration value="application/tei+xml"/>
-				<xs:enumeration value="application/rdf+xml"/>
-				<xs:enumeration value="application/xhtml+xml"/>
-				<xs:enumeration value="text/sgml"/>
-				<xs:enumeration value="text/html"/>
-				<xs:enumeration value="application/x-tex"/>
-				<xs:enumeration value="application/rtf"/>
-				<xs:enumeration value="application/x-latex"/>
-				<xs:enumeration value="text/csv"/>
-				<xs:enumeration value="text/tab-separated-values"/>
-				<xs:enumeration value="application/pdf"/>
-				<xs:enumeration value="application/x-msaccess"/>
+				<xs:enumeration value="text/plain">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>plain text<xs:label>
+						</xs:appinfo>
+					/xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="application/vnd.xmi+xml">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>XMI<xs:label>
+						</xs:appinfo>
+					/xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="application/xml">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>XML<xs:label>
+						</xs:appinfo>
+					/xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="application/x-tmx+xml">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>TMX<xs:label>
+						</xs:appinfo>
+					/xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="application/x-xces+xml">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>XCES<xs:label>
+						</xs:appinfo>
+					/xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="application/tei+xml">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>TEI<xs:label>
+						</xs:appinfo>
+					/xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="application/rdf+xml">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>RDF<xs:label>
+						</xs:appinfo>
+					/xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="application/xhtml+xml">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>XHTML<xs:label>
+						</xs:appinfo>
+					/xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="text/sgml">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>SGML<xs:label>
+						</xs:appinfo>
+					/xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="text/html">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>HTML<xs:label>
+						</xs:appinfo>
+					/xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="application/x-tex">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>TEX<xs:label>
+						</xs:appinfo>
+					/xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="application/rtf">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>RTF<xs:label>
+						</xs:appinfo>
+					/xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="application/x-latex">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>LATEX<xs:label>
+						</xs:appinfo>
+					/xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="text/csv">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>CSV<xs:label>
+						</xs:appinfo>
+					/xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="text/tab-separated-values">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>text with tab-separated-values<xs:label>
+						</xs:appinfo>
+					/xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="application/pdf">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>PDF<xs:label>
+						</xs:appinfo>
+					/xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="application/x-msaccess">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>MS-Access database<xs:label>
+						</xs:appinfo>
+					/xs:annotation>
+				</xs:enumeration>
 				<xs:enumeration value="other"/>
 			</xs:restriction>
 		</xs:simpleType>
