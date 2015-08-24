@@ -5,6 +5,8 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.contrib.admin import forms
+from django.forms import Textarea
 
 from metashare.accounts.models import EditorGroup
 # pylint: disable-msg=W0611
@@ -3005,8 +3007,9 @@ class licenceInfoType_model(SchemaModel):
     __schema_fields__ = (
       ( u'licence', u'licence', REQUIRED ),
       ( u'personalDataIncluded', u'personalDataIncluded', REQUIRED ),
-      # ( u'personalDataAdditionalInfo', u'personalDataAdditionalInfo', OPTIONAL ),
+      ( u'personalDataAdditionalInfo', u'personalDataAdditionalInfo', OPTIONAL ),
       ( u'sensitiveDataIncluded', u'sensitiveDataIncluded', REQUIRED ),
+      ( u'sensitiveDataAdditionalInfo', u'sensitiveDataAdditionalInfo', OPTIONAL ),
       ( u'restrictionsOfUse', u'restrictionsOfUse', OPTIONAL ),
       ( u'termsOfUseText', u'termsOfUseText', OPTIONAL ),
       ( u'termsOfUseURL', u'termsOfUseURL', OPTIONAL ),
@@ -3046,12 +3049,22 @@ class licenceInfoType_model(SchemaModel):
                    '(e.g. anonymisation)'
     )
 
+    personalDataAdditionalInfo = models.TextField(
+        verbose_name = 'Additional Information',
+        blank=True
+    )
+
     sensitiveDataIncluded = models.BooleanField(
         verbose_name='Sensitive Data Included',
         help_text= 'Specifies whether the resource contains or ' \
                    'not sensitive data; this might mean that ' \
                    'special handling of the resource is required ' \
                    '(e.g. anonymisation)'
+    )
+
+    sensitiveDataAdditionalInfo = models.TextField(
+        verbose_name = 'Additional Information',
+        blank=True
     )
 
     restrictionsOfUse = MultiSelectField(
@@ -3170,6 +3183,14 @@ class licenceInfoType_model(SchemaModel):
         formatargs = ['licence', ]
         formatstring = u'{}'
         return self.unicode_(formatstring, formatargs)
+
+    def has_personal_data(self):
+        return self.personalDataIncluded
+
+    def has_sensitive_data(self):
+        return self.sensitiveDataIncluded
+
+
 
 CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES = _make_choices_from_list([
     u'UTF-8', u'MacGreek',
@@ -3433,58 +3454,58 @@ class lingualityInfoType_model(SchemaModel):
         formatstring = u'{}'
         return self.unicode_(formatstring, formatargs)
 
-# LANGUAGEVARIETYINFOTYPE_LANGUAGEVARIETYTYPE_CHOICES = _make_choices_from_list([
-#   u'dialect', u'jargon', u'other',
-# ])
+LANGUAGEVARIETYINFOTYPE_LANGUAGEVARIETYTYPE_CHOICES = _make_choices_from_list([
+  u'dialect', u'jargon', u'other',
+])
 
 # pylint: disable-msg=C0103
-# class languageVarietyInfoType_model(SchemaModel):
-#     """
-#     Groups information on language varieties occurred in the resource
-#     (e.g. dialects)
-#     """
-#
-#     class Meta:
-#         verbose_name = "Language variety"
-#
-#
-#     __schema_name__ = 'languageVarietyInfoType'
-#     __schema_fields__ = (
-#       ( u'languageVarietyType', u'languageVarietyType', REQUIRED ),
-#       ( u'languageVarietyName', u'languageVarietyName', REQUIRED ),
-#       ( u'sizePerLanguageVariety', u'sizePerLanguageVariety', OPTIONAL ),
-#     )
-#     __schema_classes__ = {
-#       u'sizePerLanguageVariety': "sizeInfoType_model",
-#     }
-#
-#     languageVarietyType = models.CharField(
-#       verbose_name='Language variety type',
-#       help_text='Specifies the type of the language variety that occurs ' \
-#       'in the resource or is supported by a tool/service',
-#
-#       max_length=20,
-#       choices=sorted(LANGUAGEVARIETYINFOTYPE_LANGUAGEVARIETYTYPE_CHOICES['choices'],
-#                      key=lambda choice: choice[1].lower()),
-#       )
-#
-#     languageVarietyName = XmlCharField(
-#       verbose_name='Language variety name',
-#       help_text='The name of the language variety that occurs in the res' \
-#       'ource or is supported by a tool/service',
-#       max_length=100, )
-#
-#     sizePerLanguageVariety = models.OneToOneField("sizeInfoType_model",
-#       verbose_name='Size per language variety',
-#       help_text='Provides information on the size per language variety c' \
-#       'omponent',
-#       blank=True, null=True, on_delete=models.SET_NULL, )
-#
-#     def real_unicode_(self):
-#         # pylint: disable-msg=C0301
-#         formatargs = ['languageVarietyName', 'languageVarietyType', ]
-#         formatstring = u'{} ({})'
-#         return self.unicode_(formatstring, formatargs)
+class languageVarietyInfoType_model(SchemaModel):
+    """
+    Groups information on language varieties occurred in the resource
+    (e.g. dialects)
+    """
+
+    class Meta:
+        verbose_name = "Language variety"
+
+
+    __schema_name__ = 'languageVarietyInfoType'
+    __schema_fields__ = (
+      ( u'languageVarietyType', u'languageVarietyType', REQUIRED ),
+      ( u'languageVarietyName', u'languageVarietyName', REQUIRED ),
+      ( u'sizePerLanguageVariety', u'sizePerLanguageVariety', OPTIONAL ),
+    )
+    __schema_classes__ = {
+      u'sizePerLanguageVariety': "sizeInfoType_model",
+    }
+
+    languageVarietyType = models.CharField(
+      verbose_name='Language variety type',
+      help_text='Specifies the type of the language variety that occurs ' \
+      'in the resource or is supported by a tool/service',
+
+      max_length=20,
+      choices=sorted(LANGUAGEVARIETYINFOTYPE_LANGUAGEVARIETYTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
+      )
+
+    languageVarietyName = XmlCharField(
+      verbose_name='Language variety name',
+      help_text='The name of the language variety that occurs in the res' \
+      'ource or is supported by a tool/service',
+      max_length=100, )
+
+    sizePerLanguageVariety = models.OneToOneField("sizeInfoType_model",
+      verbose_name='Size per language variety',
+      help_text='Provides information on the size per language variety c' \
+      'omponent',
+      blank=True, null=True, on_delete=models.SET_NULL, )
+
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['languageVarietyName', 'languageVarietyType', ]
+        formatstring = u'{} ({})'
+        return self.unicode_(formatstring, formatargs)
 
 def languageinfotype_languagename_optgroup_choices():
     """
@@ -3512,10 +3533,10 @@ class languageInfoType_model(SchemaModel):
       ( u'languageName', u'languageName', REQUIRED ),
       # ( u'languageScript', u'languageScript', OPTIONAL ),
       ( u'sizePerLanguage', u'sizePerLanguage', OPTIONAL ),
-      # ( u'languageVarietyInfo', u'languageVarietyInfo', OPTIONAL ),
+      ( u'languageVarietyInfo', u'languageVarietyInfo', OPTIONAL ),
     )
     __schema_classes__ = {
-      # u'languageVarietyInfo': "languageVarietyInfoType_model",
+      u'languageVarietyInfo': "languageVarietyInfoType_model",
       u'sizePerLanguage': "sizeInfoType_model",
     }
 
@@ -3554,11 +3575,11 @@ class languageInfoType_model(SchemaModel):
       '',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    # languageVarietyInfo = models.ManyToManyField("languageVarietyInfoType_model",
-    #   verbose_name='Language variety',
-    #   help_text='Groups information on language varieties occurred in th' \
-    #   'e resource (e.g. dialects)',
-    #   blank=True, null=True, related_name="languageVarietyInfo_%(class)s_related", )
+    languageVarietyInfo = models.ManyToManyField("languageVarietyInfoType_model",
+      verbose_name='Language variety',
+      help_text='Groups information on language varieties occurred in th' \
+      'e resource (e.g. dialects)',
+      blank=True, null=True, related_name="languageVarietyInfo_%(class)s_related", )
 
     # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
