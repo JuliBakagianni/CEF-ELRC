@@ -348,6 +348,13 @@ class sizeInfoType_model(SchemaModel):
         formatstring = u'{} {}'
         return self.unicode_(formatstring, formatargs)
 
+APPROPRIATENESS_FOR_DSI_CHOICES = _make_choices_from_list([
+u'OnlineDisputeResolution',u'Europeana',
+u'OpenDataPortal',u'eJustice',
+u'ElectronicExchangeOfSocialSecurityInformation',
+u'eHealth',
+])
+
 # pylint: disable-msg=C0103
 class identificationInfoType_model(SchemaModel):
     """
@@ -368,6 +375,7 @@ class identificationInfoType_model(SchemaModel):
       ( u'ISLRN', u'ISLRN', RECOMMENDED ),
       ( u'identifier', u'identifier', OPTIONAL ),
       ( u'PID', u'PID', RECOMMENDED),
+      ( u'appropriatenessForDSI', u'appropriatenessForDSI', OPTIONAL ),
     )
 
     resourceName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
@@ -430,6 +438,17 @@ class identificationInfoType_model(SchemaModel):
         'system and thus not viewable on the editor; '
         'at a later stage, we might consider having it '
         'also editable for PIDs assigned by other entities')
+
+    appropriatenessForDSI = models.CharField(
+      verbose_name='Appropriateness for DSI',
+      help_text='Specifies whether the resource is appropriate '\
+            'for use in one or more of the DSIs (Digital Service '
+            '\Infrastructures)',
+      blank=True,
+      null=True,
+      max_length=100,
+      choices=APPROPRIATENESS_FOR_DSI_CHOICES['choices'],
+      )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -3533,10 +3552,10 @@ class languageInfoType_model(SchemaModel):
       ( u'languageName', u'languageName', REQUIRED ),
       # ( u'languageScript', u'languageScript', OPTIONAL ),
       ( u'sizePerLanguage', u'sizePerLanguage', OPTIONAL ),
-      ( u'languageVarietyInfo', u'languageVarietyInfo', OPTIONAL ),
+      # ( u'languageVarietyInfo', u'languageVarietyInfo', OPTIONAL ),
     )
     __schema_classes__ = {
-      u'languageVarietyInfo': "languageVarietyInfoType_model",
+      # u'languageVarietyInfo': "languageVarietyInfoType_model",
       u'sizePerLanguage': "sizeInfoType_model",
     }
 
@@ -3575,11 +3594,11 @@ class languageInfoType_model(SchemaModel):
       '',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    languageVarietyInfo = models.ManyToManyField("languageVarietyInfoType_model",
-      verbose_name='Language variety',
-      help_text='Groups information on language varieties occurred in th' \
-      'e resource (e.g. dialects)',
-      blank=True, null=True, related_name="languageVarietyInfo_%(class)s_related", )
+    # languageVarietyInfo = models.ManyToManyField("languageVarietyInfoType_model",
+    #   verbose_name='Language variety',
+    #   help_text='Groups information on language varieties occurred in th' \
+    #   'e resource (e.g. dialects)',
+    #   blank=True, null=True, related_name="languageVarietyInfo_%(class)s_related", )
 
     # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
