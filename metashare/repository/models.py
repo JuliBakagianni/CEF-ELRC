@@ -3070,6 +3070,11 @@ class licenceInfoType_model(SchemaModel):
 
     personalDataAdditionalInfo = models.TextField(
         verbose_name = 'Additional Information',
+        help_text='If the resource includes personal data, '\
+                  'this field can be used for entering more '\
+                  'information, e.g. whether special handling '\
+                  'of the resource is required (e.g. anonymisation, '\
+                  'further request for use etc.)',
         blank=True
     )
 
@@ -3083,6 +3088,10 @@ class licenceInfoType_model(SchemaModel):
 
     sensitiveDataAdditionalInfo = models.TextField(
         verbose_name = 'Additional Information',
+        help_text='If the resource includes sensitive data, '\
+                  'this field can be used for entering more '\
+                  'information, e.g. whether special handling '\
+                  'of the resource is required (e.g. anonymisation)',
         blank=True
     )
 
