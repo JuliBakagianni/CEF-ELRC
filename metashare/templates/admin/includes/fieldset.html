@@ -29,3 +29,55 @@
         </div>
     {% endfor %}
 </fieldset>
+
+{% comment %}
+Handle special case for personalDataIncluded and sensitiveDataIncluded in licenceInfo.
+If a checkbox is checked then a textarea is available for the respective *AdditionalInfo field.
+If the checkbox gets unchecked then the textarea is disabled. This way we are sure that the user cannot, for example, give additional info for personal data unless they have checked the respective checkbox first.
+{% endcomment %}
+<script type="text/javascript">
+(function($) {
+    $(document).ready(function(){
+        $("input[id*='personalDataIncluded']").each(function(){
+            $(this).parent().parent().next().find("textarea").attr({"rows": "2",
+                        "cols": "10"
+            });
+            if (!this.checked) {
+                $(this).parent().parent().next().hide();
+            }
+        })
+
+        $("input[id*='sensitiveDataIncluded']").each(function(){
+            $(this).parent().parent().next().find("textarea").attr({"rows": "2",
+                        "cols": "10"
+            });
+            if (!this.checked) {
+                $(this).parent().parent().next().hide();
+            }
+        })
+
+        $("input[id*='personalDataIncluded']").change(function() {
+            if (!this.checked) {
+                $(this).parent().parent().next().hide();
+                $(this).parent().parent().next().find("textarea").attr('disabled','disabled');
+                //$(this).parent().parent().next().find( "textarea" ).val("");
+            } else {
+                $(this).parent().parent().next().show();
+                $(this).parent().parent().next().find("textarea").removeAttr('disabled');
+            }
+        });
+
+        $("input[id*='sensitiveDataIncluded']").change(function() {
+            if (!this.checked) {
+                $(this).parent().parent().next().hide();
+                $(this).parent().parent().next().find( "textarea" ).val("");
+            } else {
+                $(this).parent().parent().next().show();
+                $(this).parent().parent().next().removeAttr('disabled');
+            }
+        })
+        //alert($("input[id*='personalDataIncluded']").prop('id'));
+        //alert($("input[id*='0-personalDataIncluded']").prev.is(":checked"));
+});
+})(django.jQuery);
+</script>
