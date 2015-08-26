@@ -18,20 +18,19 @@ from metashare.repository.models import actorInfoType_model, \
     organizationInfoType_model, \
     personInfoType_model, \
     targetResourceInfoType_model, documentInfoType_model, \
-    sizeInfoType_model
+    sizeInfoType_model, \
+    languageVarietyInfoType_model
 
     # audioSizeInfoType_model
     # resolutionInfoType_model
     # membershipInfoType_model, \
-    # languageVarietyInfoType_model, \
     # projectInfoType_model, \
 
 from metashare.repository.editor.lookups import ActorLookup, \
     OrganizationLookup, ProjectLookup, \
     PersonLookup, TargetResourceLookup, DocumentLookup, \
-    DocumentationLookup, SizeDummyLookup
+    DocumentationLookup, SizeDummyLookup, LanguageVarietyDummyLookup
     # ResolutionDummyLookup
-    # LanguageVarietyDummyLookup,
     # AudioSizeDummyLookup, \
     #  MembershipDummyLookup, \
 from metashare.repository.editor.widgets import AutoCompleteSelectMultipleSubClsWidget
@@ -56,7 +55,7 @@ class RelatedAdminMixin(object):
         targetResourceInfoType_model: AutoCompleteSelectMultipleEditWidget(lookup_class=TargetResourceLookup, **kwargs),
         # Custom one-to-many widgets needed to avoid nested inlines:
         # membershipInfoType_model: OneToManyWidget(lookup_class=MembershipDummyLookup),
-        # languageVarietyInfoType_model: OneToManyWidget(lookup_class=LanguageVarietyDummyLookup),
+        languageVarietyInfoType_model: OneToManyWidget(lookup_class=LanguageVarietyDummyLookup),
         sizeInfoType_model: OneToManyWidget(lookup_class=SizeDummyLookup),
         # resolutionInfoType_model: OneToManyWidget(lookup_class=ResolutionDummyLookup),
         # audioSizeInfoType_model: OneToManyWidget(lookup_class=AudioSizeDummyLookup),

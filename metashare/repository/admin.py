@@ -43,9 +43,9 @@ from metashare.repository.models import \
     targetResourceInfoType_model, \
     textClassificationInfoType_model, \
     textFormatInfoType_model, \
-    identificationInfoType_model
+    identificationInfoType_model, \
+    languageVarietyInfoType_model
     # videoFormatInfoType_model
-    # languageVarietyInfoType_model, \
     # dynamicElementInfoType_model, \
     # languageDescriptionImageInfoType_model, \
     # versionInfoType_model, \
@@ -981,7 +981,7 @@ admin.site.register(languageDescriptionMediaTypeType_model, SchemaModelAdmin)
 admin.site.register(languageDescriptionTextInfoType_model, SchemaModelAdmin)
 # admin.site.register(languageDescriptionVideoInfoType_model, SchemaModelAdmin)
 admin.site.register(languageInfoType_model, SchemaModelAdmin)
-# admin.site.register(languageVarietyInfoType_model, SchemaModelAdmin)
+admin.site.register(languageVarietyInfoType_model, SchemaModelAdmin)
 # admin.site.register(lexicalConceptualResourceAudioInfoType_model, SchemaModelAdmin)
 admin.site.register(lexicalConceptualResourceEncodingInfoType_model, SchemaModelAdmin)
 # admin.site.register(lexicalConceptualResourceImageInfoType_model, SchemaModelAdmin)

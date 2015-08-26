@@ -9,9 +9,9 @@ from metashare.repository.models import personInfoType_model, \
     actorInfoType_model, documentInfoType_model, documentationInfoType_model,\
     organizationInfoType_model,\
     targetResourceInfoType_model, sizeInfoType_model, \
-    annotationInfoType_model
+    annotationInfoType_model, \
+    languageVarietyInfoType_model
     # videoFormatInfoType_model
-    # languageVarietyInfoType_model, \
     # audioSizeInfoType_model \
     # membershipInfoType_model, \
     # imageFormatInfoType_model, \
@@ -168,13 +168,13 @@ class AnnotationLookup(ModelLookup):
 #     '''
 #     model = resolutionInfoType_model
 
-# class LanguageVarietyDummyLookup(ModelLookup):
-#     '''
-#         Dummy class for use with OneToOneWidget.
-#         Should be removed when unnecessary dependencies are
-#         removed from OneToOneWidget
-#     '''
-#     model = languageVarietyInfoType_model
+class LanguageVarietyDummyLookup(ModelLookup):
+    '''
+        Dummy class for use with OneToOneWidget.
+        Should be removed when unnecessary dependencies are
+        removed from OneToOneWidget
+    '''
+    model = languageVarietyInfoType_model
 
 class SizeDummyLookup(ModelLookup):
     '''
