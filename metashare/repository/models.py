@@ -28,6 +28,8 @@ from metashare.recommendations.models import ResourceCountPair, \
     ResourceCountDict
 from metashare.repository.language_choices import LANGUAGEID_CHOICES, \
     LANGUAGENAME_CHOICES, LANGUAGENAME_TO_LANGUAGEID
+from metashare.repository.mimetype_choices import TEXTFORMATINFOTYPE_MIMETYPE_CHOICES, \
+    MIMETYPELABEL_TO_MIMETYPEVALUE
 
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
@@ -406,12 +408,12 @@ class identificationInfoType_model(SchemaModel):
       'uage.',
       blank=True)
 
-    url = XmlCharField(
+    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=0, max_length=1000),
       verbose_name='Url', validators=[HTTPURI_VALIDATOR],
       help_text='A URL used as homepage of an entity (e.g. of a person, ' \
       'organization, resource etc.) and/or where an entity (e.g.LR, docu' \
       'ment etc.) is located',
-      blank=True, max_length=1000,)
+      blank=True,)
 
     metaShareId = XmlCharField(
       verbose_name='Meta share id',
@@ -428,8 +430,10 @@ class identificationInfoType_model(SchemaModel):
 
     identifier = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=1, max_length=100),
       verbose_name='Other identifiers',
-      help_text='A reference to the resource like a pid or an internal i' \
-      'dentifier used by the resource provider',
+      help_text='A reference to the resource; to be used, ' \
+                'for instance, for internal identifiers ' \
+                'created by resource providers, as ISLRN ' \
+                'and PID are distinct elements',
       blank=True, validators=[validate_matches_xml_char_production], )
 
     PID = models.URLField(editable=False,
@@ -439,14 +443,13 @@ class identificationInfoType_model(SchemaModel):
         'at a later stage, we might consider having it '
         'also editable for PIDs assigned by other entities')
 
-    appropriatenessForDSI = models.CharField(
+    appropriatenessForDSI = MultiSelectField(
       verbose_name='Appropriateness for DSI',
       help_text='Specifies whether the resource is appropriate '\
             'for use in one or more of the DSIs (Digital Service '
             '\Infrastructures)',
       blank=True,
-      null=True,
-      max_length=100,
+      max_length=1 + len(APPROPRIATENESS_FOR_DSI_CHOICES['choices']) / 4,
       choices=APPROPRIATENESS_FOR_DSI_CHOICES['choices'],
       )
 
@@ -1068,11 +1071,11 @@ class resourceDocumentationInfoType_model(SchemaModel):
       'resource',
       blank=True, null=True, related_name="documentation_%(class)s_related", )
 
-    samplesLocation = XmlCharField(
+    samplesLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=8, max_length=1000),
       verbose_name='Samples location', validators=[HTTPURI_VALIDATOR], 
       help_text='A url with samples of the resource or, in the case of t' \
       'ools, of samples of the output',
-      blank=True, max_length=1000,)
+      blank=True, )
 
     # toolDocumentationType = MultiSelectField(
     #   verbose_name='Tool documentation',
@@ -2595,12 +2598,12 @@ class communicationInfoType_model(SchemaModel):
       help_text='The email address of a person or an organization',
       )
 
-    url = XmlCharField(
+    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=14, max_length=1000),
       verbose_name='Url', validators=[HTTPURI_VALIDATOR], 
       help_text='A URL used as homepage of an entity (e.g. of a person, ' \
       'organization, resource etc.) and/or where an entity (e.g.LR, docu' \
       'ment etc.) is located',
-      blank=True, max_length=1000,)
+      blank=True, )
 
     address = XmlCharField(
       verbose_name='Address', 
@@ -2845,7 +2848,7 @@ class personInfoType_model(actorInfoType_model):
 
     affiliation = models.ManyToManyField("organizationInfoType_model", 
       verbose_name='Affiliation', 
-      help_text='Groups information on organization to whomtheperson is ' \
+      help_text='Groups information on organization to whom the person is ' \
       'affiliated',
       blank=True, null=True, related_name="affiliation_%(class)s_related", )
 
@@ -3561,10 +3564,10 @@ class languageInfoType_model(SchemaModel):
       ( u'languageName', u'languageName', REQUIRED ),
       # ( u'languageScript', u'languageScript', OPTIONAL ),
       ( u'sizePerLanguage', u'sizePerLanguage', OPTIONAL ),
-      # ( u'languageVarietyInfo', u'languageVarietyInfo', OPTIONAL ),
+      ( u'languageVarietyInfo', u'languageVarietyInfo', OPTIONAL ),
     )
     __schema_classes__ = {
-      # u'languageVarietyInfo': "languageVarietyInfoType_model",
+      u'languageVarietyInfo': "languageVarietyInfoType_model",
       u'sizePerLanguage': "sizeInfoType_model",
     }
 
@@ -3581,7 +3584,7 @@ class languageInfoType_model(SchemaModel):
 
 
     languageName = models.CharField(
-      verbose_name='Language name', 
+      verbose_name='Language name',
       help_text='A human understandable name of the language that is use' \
       'd in the resource or supported by the tool/service; an autocomple' \
       'tion mechanism with values from the ISO 639 is provided in the ed' \
@@ -3603,11 +3606,11 @@ class languageInfoType_model(SchemaModel):
       '',
       blank=True, null=True, on_delete=models.SET_NULL, )
 
-    # languageVarietyInfo = models.ManyToManyField("languageVarietyInfoType_model",
-    #   verbose_name='Language variety',
-    #   help_text='Groups information on language varieties occurred in th' \
-    #   'e resource (e.g. dialects)',
-    #   blank=True, null=True, related_name="languageVarietyInfo_%(class)s_related", )
+    languageVarietyInfo = models.ManyToManyField("languageVarietyInfoType_model",
+      verbose_name='Language variety',
+      help_text='Groups information on language varieties occurred in th' \
+      'e resource (e.g. dialects)',
+      blank=True, null=True, related_name="languageVarietyInfo_%(class)s_related", )
 
     # back_to_corpusaudioinfotype_model = models.ForeignKey("corpusAudioInfoType_model",  blank=True, null=True)
 
@@ -4700,14 +4703,14 @@ class corpusTextInfoType_model(SchemaModel):
 #   u'application/vnd.xmi+xml', u'other'
 # ])
 
-TEXTFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([u'text/plain',
-u'application/xml',u'text/html',u'application/xhtml+xml',
-u'application/pdf',u'application/rtf',u'application/x-tex',
-u'application/x-latex',u'application/x-tmx+xml',u'application/x-xces+xml',
-u'application/tei+xml',u'application/vnd.xmi+xml',u'application/rdf+xml',
-u'text/sgml',u'text/csv',u'text/tab-separated-values',
-u'application/x-msaccess',u'other',
-])
+# TEXTFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list([u'text/plain',
+# u'application/xml',u'text/html',u'application/xhtml+xml',
+# u'application/pdf',u'application/rtf',u'application/x-tex',
+# u'application/x-latex',u'application/x-tmx+xml',u'application/x-xces+xml',
+# u'application/tei+xml',u'application/vnd.xmi+xml',u'application/rdf+xml',
+# u'text/sgml',u'text/csv',u'text/tab-separated-values',
+# u'application/x-msaccess',u'other',
+# ])
 
 # pylint: disable-msg=C0103
 class textFormatInfoType_model(SchemaModel):
@@ -4758,6 +4761,18 @@ class textFormatInfoType_model(SchemaModel):
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
+
+    # def save(self, *args, **kwargs):
+    #     """
+    #     Overrides the predefined save() method to assign the corresponding value to
+    #     the mimeType field. This value is taken from the MIMETYPE_TO_MIMETYPELABEL
+    #     dictionary, which maps the the labels to mimeType values.
+    #     """
+    #     if self.mimeType:
+    #         self.mimeType = MIMETYPELABEL_TO_MIMETYPEVALUE[self.mimeType]
+    #
+    #     # Call save() method from super class with all arguments.
+    #     super(textFormatInfoType_model, self).save(*args, **kwargs)
 
 TEXTCLASSIFICATIONINFOTYPE_TEXTGENRE_CHOICES = _make_choices_from_list([
     u"advertising", u"discussion", u"feature", u"fiction", u"information",
