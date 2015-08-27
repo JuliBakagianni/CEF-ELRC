@@ -51,7 +51,7 @@ class FilterTest(SeleniumTestCase):
         self.assertEqual("Media Type", driver.find_element_by_link_text("Media Type").text)
         self.assertEqual("Availability", driver.find_element_by_link_text("Availability").text)
         self.assertEqual("Licence", driver.find_element_by_link_text("Licence").text)
-        self.assertEqual("Conditions of Use", driver.find_element_by_link_text("Restrictions of Use").text)
+        self.assertEqual("Conditions of Use", driver.find_element_by_link_text("Conditions of Use").text)
         self.assertEqual("Validated", driver.find_element_by_link_text("Validated").text)
         self.assertEqual("Foreseen Use", driver.find_element_by_link_text("Foreseen Use").text)
         self.assertEqual("Use Is NLP Specific", driver.find_element_by_link_text("Use Is NLP Specific").text)
