@@ -26,6 +26,7 @@ sqs = SearchQuerySet() \
   .facet("lexicalConceptualResourceLinguisticInformationFilter") \
   .facet("textTextGenreFilter") \
   .facet("textTextTypeFilter") \
+  .facet("languageVarietyFilter") \
 
   # .facet("languageDescriptionGrammaticalPhenomenaCoverageFilter") \
   # .facet("toolServiceToolServiceTypeFilter") \
@@ -61,7 +62,6 @@ sqs = SearchQuerySet() \
   # .facet("textnumericalTypeOfTnContentFilter") \
   # .facet("textngramBaseItemFilter") \
   # .facet("textngramOrderFilter") \
-  # .facet("languageVarietyFilter")
 
 urlpatterns = patterns('metashare.repository.views',
   (r'^browse/(?P<resource_name>[\w\-]*)/(?P<object_id>\w+)/$',
