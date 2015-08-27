@@ -285,9 +285,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     # textngramOrderFilter = LabeledMultiValueField(
     #                             label=_('Order'), facet_id=54, parent_id=3,
     #                             faceted=True)
-    # languageVarietyFilter = LabeledMultiValueField(
-    #                             label=_('Language Variety'), facet_id=55, parent_id=0,
-    #                             faceted=True)
+    languageVarietyFilter = LabeledMultiValueField(
+                                label=_('Language Variety'), facet_id=55, parent_id=0,
+                                faceted=True)
 
     # we create all items that may appear in the search results list already at
     # index time
@@ -1785,19 +1785,19 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     #             return [str(media_type.corpusTextNgramInfo.ngramInfo.order)]
     #     return []
 
-    # def prepare_languageVarietyFilter(self, obj):
-    #     """
-    #     Collect the data to filter the resources on Language Variety
-    #     """
-    #     result = []
-    #     corpus_media = obj.resourceComponentType.as_subclass()
-    #
-    #     if isinstance(corpus_media, corpusInfoType_model):
-    #         media_type = corpus_media.corpusMediaType
-    #         for corpus_info in media_type.corpustextinfotype_model_set.all():
-    #             for lang in corpus_info.languageinfotype_model_set.all():
-    #                 result.extend([variety.languageVarietyName for variety in
-    #                            lang.languageVarietyInfo.all()])
+    def prepare_languageVarietyFilter(self, obj):
+        """
+        Collect the data to filter the resources on Language Variety
+        """
+        result = []
+        corpus_media = obj.resourceComponentType.as_subclass()
+
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            for corpus_info in media_type.corpustextinfotype_model_set.all():
+                for lang in corpus_info.languageinfotype_model_set.all():
+                    result.extend([variety.languageVarietyName for variety in
+                               lang.languageVarietyInfo.all()])
             # if media_type.corpusAudioInfo:
             #     for lang in media_type.corpusAudioInfo.languageinfotype_model_set.all():
             #         result.extend([variety.languageVarietyName for variety in
@@ -1815,18 +1815,18 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             #         result.extend([variety.languageVarietyName for variety in
             #                    lang.languageVarietyInfo.all()])
 
-        # elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
-        #     lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
-        #     # if lcr_media_type.lexicalConceptualResourceAudioInfo:
-        #     #     for lang in lcr_media_type.lexicalConceptualResourceAudioInfo. \
-        #     #       languageinfotype_model_set.all():
-        #     #         result.extend([variety.languageVarietyName for variety in
-        #     #                    lang.languageVarietyInfo.all()])
-        #     if lcr_media_type.lexicalConceptualResourceTextInfo:
-        #         for lang in lcr_media_type.lexicalConceptualResourceTextInfo. \
-        #           languageinfotype_model_set.all():
-        #             result.extend([variety.languageVarietyName for variety in
-        #                        lang.languageVarietyInfo.all()])
+        elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+            lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
+            # if lcr_media_type.lexicalConceptualResourceAudioInfo:
+            #     for lang in lcr_media_type.lexicalConceptualResourceAudioInfo. \
+            #       languageinfotype_model_set.all():
+            #         result.extend([variety.languageVarietyName for variety in
+            #                    lang.languageVarietyInfo.all()])
+            if lcr_media_type.lexicalConceptualResourceTextInfo:
+                for lang in lcr_media_type.lexicalConceptualResourceTextInfo. \
+                  languageinfotype_model_set.all():
+                    result.extend([variety.languageVarietyName for variety in
+                               lang.languageVarietyInfo.all()])
             # if lcr_media_type.lexicalConceptualResourceVideoInfo:
             #     for lang in lcr_media_type.lexicalConceptualResourceVideoInfo. \
             #       languageinfotype_model_set.all():
@@ -1838,13 +1838,13 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             #         result.extend([variety.languageVarietyName for variety in
             #                    lang.languageVarietyInfo.all()])
 
-        # elif isinstance(corpus_media, languageDescriptionInfoType_model):
-        #     ld_media_type = corpus_media.languageDescriptionMediaType
-        #     if ld_media_type.languageDescriptionTextInfo:
-        #         for lang in ld_media_type.languageDescriptionTextInfo. \
-        #           languageinfotype_model_set.all():
-        #             result.extend([variety.languageVarietyName for variety in
-        #                        lang.languageVarietyInfo.all()])
+        elif isinstance(corpus_media, languageDescriptionInfoType_model):
+            ld_media_type = corpus_media.languageDescriptionMediaType
+            if ld_media_type.languageDescriptionTextInfo:
+                for lang in ld_media_type.languageDescriptionTextInfo. \
+                  languageinfotype_model_set.all():
+                    result.extend([variety.languageVarietyName for variety in
+                               lang.languageVarietyInfo.all()])
             # if ld_media_type.languageDescriptionVideoInfo:
             #     for lang in ld_media_type.languageDescriptionVideoInfo. \
             #       languageinfotype_model_set.all():
@@ -1862,5 +1862,5 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         #     if corpus_media.outputInfo:
         #         result.extend(corpus_media.outputInfo.languageVarietyName)
 
-        # return result
+        return result
 
