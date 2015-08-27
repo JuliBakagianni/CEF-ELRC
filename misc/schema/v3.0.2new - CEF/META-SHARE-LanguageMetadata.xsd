@@ -211,7 +211,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<!--
 	<xs:element name="languageName">
 		<xs:annotation>
 			<xs:documentation>A human understandable name of the language that is used in the resource or supported by the tool/service; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
@@ -244,7 +243,6 @@
 				<xs:enumeration value="Spanish; Castilian"/>
 				<xs:enumeration value="Swedish"/>
 				<xs:enumeration value="other"/>
-				<!-- non-EU official languages
 				<xs:enumeration value="Afar"/>
 				<xs:enumeration value="Abkhazian"/>
 				<xs:enumeration value="Achinese"/>
@@ -309,8 +307,6 @@
 				<xs:enumeration value="Batak languages"/>
 				<xs:enumeration value="Buriat"/>
 				<xs:enumeration value="Buginese"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Burmese"/>
 				<xs:enumeration value="Blin; Bilin"/>
 				<xs:enumeration value="Caddo"/>
@@ -346,11 +342,7 @@
 				<xs:enumeration value="Creoles and pidgins"/>
 				<xs:enumeration value="Kashubian"/>
 				<xs:enumeration value="Cushitic languages"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Dakota"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Dargwa"/>
 				<xs:enumeration value="Land Dayak languages"/>
 				<xs:enumeration value="Delaware"/>
@@ -363,20 +355,14 @@
 				<xs:enumeration value="Lower Sorbian"/>
 				<xs:enumeration value="Duala"/>
 				<xs:enumeration value="Dutch, Middle (ca. 1050-1350)"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Dyula"/>
 				<xs:enumeration value="Dzongkha"/>
 				<xs:enumeration value="Efik"/>
 				<xs:enumeration value="Egyptian (Ancient)"/>
 				<xs:enumeration value="Ekajuk"/>
 				<xs:enumeration value="Elamite"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="English, Middle (1100-1500)"/>
 				<xs:enumeration value="Esperanto"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Ewe"/>
 				<xs:enumeration value="Ewondo"/>
 				<xs:enumeration value="Fang"/>
@@ -384,12 +370,8 @@
 				<xs:enumeration value="Fanti"/>
 				<xs:enumeration value="Fijian"/>
 				<xs:enumeration value="Filipino; Pilipino"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Finno-Ugrian languages"/>
 				<xs:enumeration value="Fon"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="French, Middle (ca. 1400-1600)"/>
 				<xs:enumeration value="French, Old (842-ca. 1400)"/>
 				<xs:enumeration value="Northern Frisian"/>
@@ -402,13 +384,9 @@
 				<xs:enumeration value="Gbaya"/>
 				<xs:enumeration value="Germanic languages"/>
 				<xs:enumeration value="Georgian"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Geez"/>
 				<xs:enumeration value="Gilbertese"/>
 				<xs:enumeration value="Gaelic; Scottish Gaelic"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Galician"/>
 				<xs:enumeration value="Manx"/>
 				<xs:enumeration value="German, Middle High (ca. 1050-1500)"/>
@@ -418,8 +396,6 @@
 				<xs:enumeration value="Gothic"/>
 				<xs:enumeration value="Grebo"/>
 				<xs:enumeration value="Greek, Ancient (to 1453)"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Guarani"/>
 				<xs:enumeration value="Swiss German; Alemannic; Alsatian"/>
 				<xs:enumeration value="Gujarati"/>
@@ -436,11 +412,7 @@
 				<xs:enumeration value="Hittite"/>
 				<xs:enumeration value="Hmong; Mong"/>
 				<xs:enumeration value="Hiri Motu"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Upper Sorbian"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Hupa"/>
 				<xs:enumeration value="Iban"/>
 				<xs:enumeration value="Igbo"/>
@@ -459,8 +431,6 @@
 				<xs:enumeration value="Inupiaq"/>
 				<xs:enumeration value="Iranian languages"/>
 				<xs:enumeration value="Iroquoian languages"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Javanese"/>
 				<xs:enumeration value="Lojban"/>
 				<xs:enumeration value="Japanese"/>
@@ -505,13 +475,9 @@
 				<xs:enumeration value="Lamba"/>
 				<xs:enumeration value="Lao"/>
 				<xs:enumeration value="Latin"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Lezghian"/>
 				<xs:enumeration value="Limburgan; Limburger; Limburgish"/>
 				<xs:enumeration value="Lingala"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Mongo"/>
 				<xs:enumeration value="Lozi"/>
 				<xs:enumeration value="Luxembourgish; Letzeburgesch"/>
@@ -544,8 +510,6 @@
 				<xs:enumeration value="Uncoded languages"/>
 				<xs:enumeration value="Mon-Khmer languages"/>
 				<xs:enumeration value="Malagasy"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Manchu"/>
 				<xs:enumeration value="Manipuri"/>
 				<xs:enumeration value="Manobo languages"/>
@@ -608,11 +572,7 @@
 				<xs:enumeration value="Philippine languages"/>
 				<xs:enumeration value="Phoenician"/>
 				<xs:enumeration value="Pali"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Pohnpeian"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Prakrit languages"/>
 				<xs:enumeration value="ProvenC'al, Old (to 1500); Occitan, Old (to 1500)"/>
 				<xs:enumeration value="Pushto; Pashto"/>
@@ -623,8 +583,6 @@
 				<xs:enumeration value="Romance languages"/>
 				<xs:enumeration value="Romansh"/>
 				<xs:enumeration value="Romany"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Rundi"/>
 				<xs:enumeration value="Aromanian; Arumanian; Macedo-Romanian"/>
 				<xs:enumeration value="Russian"/>
@@ -649,8 +607,6 @@
 				<xs:enumeration value="Siouan languages"/>
 				<xs:enumeration value="Sino-Tibetan languages"/>
 				<xs:enumeration value="Slavic languages"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Southern Sami"/>
 				<xs:enumeration value="Northern Sami"/>
 				<xs:enumeration value="Sami languages"/>
@@ -665,8 +621,6 @@
 				<xs:enumeration value="Somali"/>
 				<xs:enumeration value="Songhai languages"/>
 				<xs:enumeration value="Sotho, Southern"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Sardinian"/>
 				<xs:enumeration value="Sranan Tongo"/>
 				<xs:enumeration value="Serbian"/>
@@ -678,8 +632,6 @@
 				<xs:enumeration value="Susu"/>
 				<xs:enumeration value="Sumerian"/>
 				<xs:enumeration value="Swahili"/>
--->
-				<!-- non-EU official languages
 				<xs:enumeration value="Classical Syriac"/>
 				<xs:enumeration value="Syriac"/>
 				<xs:enumeration value="Tahitian"/>
@@ -754,7 +706,6 @@
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:element>
-	-->
 	<xs:element name="languageId">
 		<xs:annotation>
 			<xs:documentation>The identifier of the language that is included in the resource or supported by the tool/service; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
@@ -4176,7 +4127,6 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<!--
 			<xs:element ref="ms:languageName">
 				<xs:annotation>
 					<xs:documentation>A human understandable name of the language that is used in the resource or supported by the tool/service; an autocompletion mechanism with values from the ISO 639 is provided in the editor, but the values can be subsequently edited for further specification (according to the IETF BCP47 guidelines)</xs:documentation>
@@ -4185,7 +4135,6 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			-->
 			<xs:element name="sizePerLanguage" type="ms:sizeInfoType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Provides information on the size per language component</xs:documentation>
