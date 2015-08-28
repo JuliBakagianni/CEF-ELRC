@@ -53,5 +53,4 @@ u'application/xhtml+xml', u'text/sgml',
 u'text/html', u'application/x-tex',
 u'application/rtf', u'application/x-latex',
 u'text/csv',u'text/tab-separated-values',
-u'application/pdf',u'application/x-msaccess',
-u'other'],MIMETYPEVALUE_TO_MIMETYPELABEL)
+u'application/pdf',u'application/x-msaccess'],MIMETYPEVALUE_TO_MIMETYPELABEL)
