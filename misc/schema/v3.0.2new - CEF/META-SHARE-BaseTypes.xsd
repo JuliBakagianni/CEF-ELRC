@@ -81,7 +81,7 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="ISLRN" minOccurs="0">
+			<xs:element name="ISLRN" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Reference to the unique ISLRN number</xs:documentation>
 				</xs:annotation>
