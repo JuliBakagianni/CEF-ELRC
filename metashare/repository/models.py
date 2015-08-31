@@ -7669,8 +7669,8 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
     """
 
     class Meta:
-        verbose_name = "Language description"
-
+        # verbose_name = "Language description"
+        verbose_name = "Grammar"
 
     __schema_name__ = 'languageDescriptionInfoType'
     __schema_fields__ = (
@@ -7698,11 +7698,13 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
     languageDescriptionType = models.CharField(
       verbose_name='Language description type', 
       help_text='The type of the language description',
-      
+      default="grammar",
       max_length=30,
-      choices=sorted(LANGUAGEDESCRIPTIONINFOTYPE_LANGUAGEDESCRIPTIONTYPE_CHOICES['choices'],
-                     key=lambda choice: choice[1].lower()),
-      )
+      editable=False
+    )
+      # choices=sorted(LANGUAGEDESCRIPTIONINFOTYPE_LANGUAGEDESCRIPTIONTYPE_CHOICES['choices'],
+      #                key=lambda choice: choice[1].lower()),
+      # )
 
     languageDescriptionEncodingInfo = models.OneToOneField("languageDescriptionEncodingInfoType_model", 
       verbose_name='Language description encoding', 

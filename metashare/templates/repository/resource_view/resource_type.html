@@ -2,7 +2,9 @@
 
 {% spaceless %}
 
-<label class='component'>{% if type == "lexicalConceptualResource" %}Lexical Conceptual Resource{% else %}Language Description{% endif %} General Information</label>
+{#<label class='component'>{% if type == "lexicalConceptualResource" %}Lexical Conceptual Resource{% else %}Language Description{% endif %} General Information</label>#}
+
+    <label class='component'>{% if type == "lexicalConceptualResource" %}Lexical Conceptual Resource{% else %}Grammar{% endif %} General Information</label>
 
 {# Lexical Conceptual Resource #}
 {% if type == "lexicalConceptualResource" %}
