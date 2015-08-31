@@ -1299,8 +1299,7 @@ u'transliteration',u'other',
 # ])
 
 ANNOTATIONINFOTYPE_SEGMENTATIONLEVEL_CHOICES = _make_choices_from_list([
-  u'paragraph', u'sentence', u'clause', u'word', u'wordGroup', u'utterance',
-  u'phrase', u'other',
+  u'paragraph', u'sentence', u'clause', u'word', u'token', u'wordGroup', u'utterance',  u'phrase', u'other',
 ])
 
 ANNOTATIONINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_from_list([
