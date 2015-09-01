@@ -194,6 +194,14 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
+			<xs:element name="allowsUsesBesidesDGT" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Whether the resource can be used for purposes other than those of the DGT</xs:documentation>
+					<xs:appinfo>
+						<relation>one-to-one</relation>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="termsOfUseText" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Used to provide a free text description of the terms of use associated with a resource (mainly for non-standard licences)</xs:documentation>
