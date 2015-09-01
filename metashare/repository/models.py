@@ -7699,11 +7699,10 @@ class languageDescriptionInfoType_model(resourceComponentTypeType_model):
       help_text='The type of the language description',
       default="grammar",
       max_length=30,
-      editable=False
-    )
-      # choices=sorted(LANGUAGEDESCRIPTIONINFOTYPE_LANGUAGEDESCRIPTIONTYPE_CHOICES['choices'],
-      #                key=lambda choice: choice[1].lower()),
-      # )
+      editable=False,
+      choices=sorted(LANGUAGEDESCRIPTIONINFOTYPE_LANGUAGEDESCRIPTIONTYPE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
+      )
 
     languageDescriptionEncodingInfo = models.OneToOneField("languageDescriptionEncodingInfoType_model", 
       verbose_name='Language description encoding', 
