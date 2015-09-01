@@ -121,7 +121,7 @@
 						<xs:enumeration value="OpenDataPortal"/>
 						<xs:enumeration value="eJustice"/>
 						<xs:enumeration value="ElectronicExchangeOfSocialSecurityInformation"/>
-						<xs:enumeration value="eHealth"/>
+						<xs:enumeration value="saferInternet"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
