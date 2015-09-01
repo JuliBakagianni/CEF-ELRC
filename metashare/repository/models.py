@@ -3239,6 +3239,18 @@ class licenceInfoType_model(SchemaModel):
     def has_sensitive_data(self):
         return self.sensitiveDataIncluded
 
+    def save(self, *args, **kwargs):
+        """
+        Overrides the predefined save() method to assign the corresponding value to
+        the languageId field. This value is taken from the LANGUAGENAME_TO_LANGUAGEID
+        dictionary, which maps the the languageName values to languageId values.
+        """
+        if self.licence.startswith(u"CC") or self.licence==u"openForReuseWithRestrictions":
+            self.allowsUsesBesidesDGT = True
+
+        # Call save() method from super class with all arguments.
+        super(licenceInfoType_model, self).save(*args, **kwargs)
+
 
 
 CHARACTERENCODINGINFOTYPE_CHARACTERENCODING_CHOICES = _make_choices_from_list([
