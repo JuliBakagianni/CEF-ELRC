@@ -354,7 +354,7 @@ APPROPRIATENESS_FOR_DSI_CHOICES = _make_choices_from_list([
 u'OnlineDisputeResolution',u'Europeana',
 u'OpenDataPortal',u'eJustice',
 u'ElectronicExchangeOfSocialSecurityInformation',
-u'eHealth',
+u'saferInternet',
 ])
 
 # pylint: disable-msg=C0103
@@ -378,6 +378,7 @@ class identificationInfoType_model(SchemaModel):
       ( u'identifier', u'identifier', OPTIONAL ),
       ( u'PID', u'PID', RECOMMENDED),
       ( u'appropriatenessForDSI', u'appropriatenessForDSI', OPTIONAL ),
+      ( u'createdUsingELRCServices', u'createdUsingELRCServices', OPTIONAL ),
     )
 
     resourceName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
@@ -452,6 +453,15 @@ class identificationInfoType_model(SchemaModel):
       max_length=1 + len(APPROPRIATENESS_FOR_DSI_CHOICES['choices']) / 4,
       choices=APPROPRIATENESS_FOR_DSI_CHOICES['choices'],
       )
+
+    createdUsingELRCServices = models.BooleanField(
+        verbose_name='Created Using ELRC Services',
+        help_text= 'Specifies whether ELRC services ' \
+                   'have been exploited in the creation ' \
+                   'process of the resource; if so, please ' \
+                   'specify the services used in the description ' \
+                   'field of the metadata record'
+    )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -3032,6 +3042,7 @@ class licenceInfoType_model(SchemaModel):
       ( u'sensitiveDataIncluded', u'sensitiveDataIncluded', REQUIRED ),
       ( u'sensitiveDataAdditionalInfo', u'sensitiveDataAdditionalInfo', OPTIONAL ),
       ( u'restrictionsOfUse', u'restrictionsOfUse', OPTIONAL ),
+      (u'allowsUsesBesidesDGT', u'allowsUsesBesidesDGT', REQUIRED),
       ( u'termsOfUseText', u'termsOfUseText', OPTIONAL ),
       ( u'termsOfUseURL', u'termsOfUseURL', OPTIONAL ),
       # ( u'distributionAccessMedium', u'distributionAccessMedium', RECOMMENDED ),
@@ -3106,6 +3117,14 @@ class licenceInfoType_model(SchemaModel):
       max_length=1 + len(LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES['choices']) / 4,
       choices=LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES['choices'],
       )
+
+    allowsUsesBesidesDGT = models.BooleanField(
+        verbose_name='Allows Uses Besides DGT',
+        help_text= 'Whether the resource ' \
+                   'can be used for purposes ' \
+                   'other than those of the DGT',
+        default=True
+    )
 
     termsOfUseText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
       default_retriever=best_lang_value_retriever,
