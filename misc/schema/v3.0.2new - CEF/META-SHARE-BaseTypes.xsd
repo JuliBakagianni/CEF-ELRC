@@ -125,6 +125,11 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
+			<xs:element name="createdUsingELRCServices" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Specifies whether ELRC services have been exploited in the creation process of the resource; if so, please specify the services used in the description field of the metadata record</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="versionInfoType">
