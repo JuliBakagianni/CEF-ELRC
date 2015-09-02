@@ -2,7 +2,7 @@ html * { padding:0; margin:0; }
 body * { padding:10px 10px; }
 body * * { padding:0; }
 body {
-	font-family:"Trebuchet MS", Helvetica, sans-serif;
+	font-family: Arimo,Arial,sans-serif;
 	font-size:0.8em;
 }
 body>div { border-bottom:1px solid #ddd; }
