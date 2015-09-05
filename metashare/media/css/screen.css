@@ -13,10 +13,10 @@ div.container{
 	-moz-box-shadow: 0px  5px 10px #CCCCCC;
 	-webkit-box-shadow: 0px  5px 10px #CCCCCC;
 	box-shadow: 0px  5px 10px #CCCCCC;
-	background: #089ED4;
-	background: -moz-linear-gradient(top, #058DBE, #089ED4);
-	background: -webkit-gradient(linear, left top, left bottom, from(#058DBE), to(#089ED4));
-	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#058DBE', startColorstr='#089ED4', gradientType='0');
+	background: #058dbe;
+	/*background: -moz-linear-gradient(top, #058DBE, #089ED4);*/
+	/*background: -webkit-gradient(linear, left top, left bottom, from(#058DBE), to(#089ED4));*/
+	/*filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#058DBE', startColorstr='#089ED4', gradientType='0');*/
 	/*background: #FF6633;*/
 	/*background: -moz-linear-gradient(top, #FFCC00, #FF6633);*/
 	/*background: -webkit-gradient(linear, left top, left bottom, from(#FFCC00), to(#FF6633));	*/
@@ -43,20 +43,24 @@ div.popup{
 	font-weight: bold;
 	padding: 3px;
 	display: none;
-	position: absolute;
-	background-color: #999999;
-	color: 	white;
-	
+	/*position: absolute;*/
+	/*background-color: #999999;*/
+	color: 	#ffd500;
+    -webkit-transition: background 200ms linear;
+    -moz-transition: all 1s ease-in-out;
+    -ms-transition: background 200ms linear;
+    -o-transition: background 200ms linear;
+    transition: background 200ms linear;
 	height: 25px;
-	width: 160px;
+	width: 110px;
 	
-	font-size: 16px;
-	text-shadow: 0px -1px 1px #333333;	
-	text-align: center;	
-	-webkit-border-radius: 	5px;
-	-khtml-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+	font-size: 14px;
+	/*text-shadow: 0px -1px 1px #333333;	*/
+	text-align: center;
+	/*-webkit-border-radius: 	5px;*/
+	/*-khtml-border-radius: 5px;*/
+	/*-moz-border-radius: 5px;*/
+	/*border-radius: 5px;*/
 	z-index: 20;	
     
 }
@@ -102,8 +106,13 @@ a:hover span.desc{
 }
 
 .middle_button{
-	background-image: url(../images/button_top_bg.png);
-	background-repeat: repeat-x;	
+	/*background-image: url(../images/button_top_bg.png);*/
+	/*background-repeat: repeat-x;	*/
+    background-color: #058dbe;
+    -moz-transition: background 200ms linear;
+    -ms-transition: background 200ms linear;
+    -o-transition: background 200ms linear;
+    transition: background 200ms linear;
 	border: none;
 	display: block;	
 	margin-top: 7px;
@@ -118,7 +127,13 @@ a:hover span.desc{
     	border-radius: 5px;
 }
 .middle_button:hover{
-	background-image: url(../images/button_top_bg2.png);
+	background-color: #ffd500;
+    color: #333333 !important;
+    -webkit-transition: background 200ms linear;
+    -moz-transition: background 200ms linear;
+    -ms-transition: background 200ms linear;
+    -o-transition: background 200ms linear;
+    transition: background 200ms linear;
 }
 
 
@@ -145,9 +160,11 @@ a:hover span.desc{
 
 
 .big_button{
-	background-image: url(../images/button_bg.png);
-	background-repeat: repeat-x;
-	
+	background-color: #058dbe;
+	-moz-transition: background 200ms linear;
+    -ms-transition: background 200ms linear;
+    -o-transition: background 200ms linear;
+    transition: background 200ms linear;
 	border: 		none;
 	display: 		block;
 	
@@ -155,48 +172,53 @@ a:hover span.desc{
 	padding-top: 		4px;
 	height: 			49px;
 	width: 250px; 				;
-  	text-shadow: 				0px -1px 1px #bbbaba;
-	text-decoration: 			none;
-	
-    -webkit-border-radius: 		8px;
-    -khtml-border-radius: 		8px;
-    -moz-border-radius: 		8px;
+  	/*text-shadow: 				0px -1px 1px #bbbaba;*/
+	/*text-decoration: 			none;*/
+	/**/
+    /*-webkit-border-radius: 		8px;*/
+    /*-khtml-border-radius: 		8px;*/
+    /*-moz-border-radius: 		8px;*/
     border-radius: 				8px;
 
 }
 .big_button:hover{
-	background-image: url(../images/button_bg2.png);
+	background-color: #ffd500;
+    color: #333333 !important;-webkit-transition: background 200ms linear;
+    -moz-transition: background 200ms linear;
+    -ms-transition: background 200ms linear;
+    -o-transition: background 200ms linear;
+    transition: background 200ms linear;
 }
 button.search_hover{
 	background-image: url(../images/button_bg2.png);
 }
 
-.topright {	
-	
+.topright {
 	display: block;
-	background-image: url(../images/button_top_bg2.png);
-	background-repeat: repeat-x;
+	/*background-image: url(../images/button_top_bg2.png);*/
+	/*background-repeat: repeat-x;*/
 	border: none;
 	width: 70px;
 	height: 20px;
 	margin-top: 12px;
 	padding-top: 2px;
 	text-decoration: none;
-	-webkit-border-radius: 5px;
-	-khtml-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+	/*-webkit-border-radius: 5px;*/
+	/*-khtml-border-radius: 5px;*/
+	/*-moz-border-radius: 5px;*/
+	/*border-radius: 5px;*/
 	white-space: nowrap;
 	font-family: 'TitilliumText', "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 600;
-  	text-shadow: 0px -1px 1px #FF9900;
+  	/*text-shadow: 0px -1px 1px #FF9900;*/
 	color: white;
 	font-size: 12px;   	
 }
 
 a:hover .topright{	
-	background-image: url(../images/button_top_bg.png);
-	text-decoration: none; 
+	/*background-image: url(../images/button_top_bg.png);*/
+    color: #ffd500;
+	text-decoration: underline;
 }
 
 
@@ -209,8 +231,8 @@ div#header a:link, a:visited,a:hover,a:active{
 /* banner end */
 
 input{
-	background-image: 		url(../images/bg_search.png);
-	background-repeat: 		repeat-x;
+	/*background-image: 		url(../images/bg_search.png);*/
+	/*background-repeat: 		repeat-x;*/
 	
     -webkit-border-radius: 	10px;
     -khtml-border-radius: 	10px;
@@ -717,66 +739,92 @@ table.result_table tr.odd{
 #jsddm{	
 	margin: 0;
 	padding: 0;
+    position: relative;
+    bottom: -2px;
 }
 
 #jsddm li{
 	float: left;
 	list-style: none;
-	font: 12px Tahoma, Arial;
+    font: 12px Tahoma, Arial;
 }
 
 #jsddm li a{	
 	display: block;
-	background-image: url(../images/button_top_bg.png);
-	background-repeat: repeat-x;
+	/*background-image: url(../images/button_top_bg.png);*/
+	/*background-repeat: repeat-x;*/
 	border: none;
 	padding: 5px 12px;
-	margin-left:5px;
+	/*margin-left:5px;*/
 	text-decoration: none;
-	-webkit-border-radius: 5px;
-	-khtml-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+	/*-webkit-border-radius: 5px;*/
+	/*-khtml-border-radius: 5px;*/
+	/*-moz-border-radius: 5px;*/
+	/*border-radius: 5px;*/
 	white-space: nowrap
-	font-family: 'TitilliumText', "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-weight: 600;
-  	text-shadow: 0px -1px 1px #FF9900;
+	font-family: Arimo, Arial, sans-serif;
+	font-weight: bold;
+  	/*text-shadow: 0px -1px 1px #FF9900;*/
 	color: white !important;
-	font-size: 12px; 
+	font-size: 12px;
+    -moz-transition: background 200ms linear;
+    -ms-transition: background 200ms linear;
+    -o-transition: background 200ms linear;
+    transition: background 200ms linear;
 }
 
-#jsddm li a:link, #jsddm li a:visited, #jsddm li a:hover{ 
-	color: #224; 
-}
+/*#jsddm li a:link, #jsddm li a:visited, #jsddm li a:hover{ */
+	/*color: #224; */
+/*}*/
 
 #jsddm li a:hover
 {	
-	background-image: url(../images/button_top_bg2.png);
-	text-decoration: none; 
+	background-color:#ffd500;
+    color: #333333 !important;
+	text-decoration: none;
+    -webkit-transition: background 200ms linear;
+    -moz-transition: background 200ms linear;
+    -ms-transition: background 200ms linear;
+    -o-transition: background 200ms linear;
+    transition: background 200ms linear;
 }
+
+/*#jsddm  > li:hover ul li {*/
+    /*height:28px;*/
+/*}*/
 
 #jsddm li ul{
 	margin-top: 0;
 	padding: 0;
 	z-index: 10;
 	position: absolute;
-	visibility: hidden; 
+	visibility: hidden;
 }
 
 #jsddm li ul li	{
 	float: none;
 	display: inline;
+    /*height:0;*/
+    /*-webkit-transition:height 200ms ease-in;*/
+    /*-moz-transition:height 200ms ease-in;*/
+    /*-o-transition:height 200ms ease-in;*/
+    /*transition:height 200ms ease-in;*/
 }
 	
 #jsddm li ul li a{
 	width: auto;
-	background-image: url(../images/button_top_gray_bg.png); 
+	background-color:#37A4CB;
+    opacity: .94;
+    color: white;
+	text-decoration: none;
 	text-shadow: none !important;
 	
 }
 	
 #jsddm li ul li a:hover{
-	background-image: url(../images/button_top_bg.png); 
+	background-color:#ffd500;
+    color: #333333 !important;
+	text-decoration: none;
 	text-shadow: none !important;
 }
 

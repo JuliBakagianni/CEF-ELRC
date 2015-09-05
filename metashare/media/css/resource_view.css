@@ -54,7 +54,7 @@ div.right-corner{
 	font-weight:bold;
 	font-style:normal;
 	font-size:14px;
-	color: #FF9900;
+	/*color: #FF9900;*/
 	text-decoration:none;
 	}
 
@@ -71,9 +71,9 @@ div.right-corner{
 label.title{
 	display:block;
 	font-size:14px;
-	background:#FFDDAA;
+	/*background:#FFDDAA;*/
 	border-bottom:solid 1px #ccc;
-	border-left:solid 1px #ccc;
+	/*border-left:solid 1px #ccc;*/
 	padding-left:2px;
 	color:#000;
 }
@@ -92,13 +92,13 @@ label.tab_content, label.component {
 
 label.component{
 	/*background-color: #fda;*/
-	color: #fff;
+	color: #333;
 	font-size: 16px;
 	padding:3px;
-	background: #FF6633;
-	background: -moz-linear-gradient(top, #FFCC00, #FF6633);
-	background: -webkit-gradient(linear, left top, left bottom, from(#FFCC00), to(#FF6633));
-	filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FF6633', gradientType='0');
+	background: #ffd500;
+	/*background: -moz-linear-gradient(top, #FFCC00, #FF6633);*/
+	/*background: -webkit-gradient(linear, left top, left bottom, from(#FFCC00), to(#FF6633));*/
+	/*filter:progid:DXImageTransform.Microsoft.Gradient(endColorstr='#FFCC00', startColorstr='#FF6633', gradientType='0');*/
 	position:relative;
 }
 
@@ -460,7 +460,7 @@ img.line{
 }
 
 a .indented{
-	color: #FF9900;
+	color: #058dbe;
 	float:left;
 }
 

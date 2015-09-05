@@ -1,19 +1,19 @@
 @font-face {
-    font-family: 'TitilliumText';
-    src: url('../fonts/TitilliumTextRegular.woff') format('woff');
+    font-family: 'Arimo';
+    src: url('../fonts/Arimo-Regular.ttf') format('ttf');
 }
 
 @font-face {
-    font-family: 'TitilliumText';
-    src: url('../fonts/TitilliumTextBold.woff') format('woff');
+    font-family: 'Arimo';
+    src: url('../fonts/Arimo-Bold.ttf') format('ttf');
     font-weight: bold;
 }
 
 
 body{
-	font-family: 'TitilliumText', "Helvetica Neue", "Helvetica", Arial, sans-serif;
+	font-family: Arimo,Arial,sans-serif;
 	font-weight: 200;
-
+    /*background: #fff;*/
 }
 
 p.bold{
@@ -21,7 +21,7 @@ p.bold{
 }
 
 h1,h2,h3,h4,h5,h6{
-	font-family: "TitilliumText", "Helvetica Neue", "Helvetica", Arial, sans-serif;
+	font-family: Arimo,Arial,sans-serif;
 }
 
 h1{
@@ -34,26 +34,25 @@ h1{
   	
 }
 h2{
-	color: 			#FF6600;
-	font-size: 		25pt;
-  	line-height:    20pt;
+	/*color: 			#058DBE;*/
+	font-size: 		28px;
+  	line-height:    150%;
   	margin: 20px 0px 20px 0px;
 }
 
 p, span{
-	font-family: 	'TitilliumText', "Helvetica",arial, serif;
-	font-size: 16px;
+	font-family: Arimo,Arial,sans-serif;
+	font-size: 15px;
 	line-height: 	1.6;
 	color: 			#FF6600;
-	font-size: 		16pt;
 	vertical-align: middle;
 }
 
 
 .button{
-	font-family: 	'TitilliumText', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: Arimo,Arial,sans-serif;
 	font-weight: 	600;
-  	text-shadow: 	0px -1px 1px #FF9900;
+  	/*text-shadow: 	0px -1px 1px #FF9900;*/
 	color: 			white;
 	font-size: 		18px;  	
 }
@@ -63,14 +62,14 @@ p, span{
 }
 
 input{
-	font-family: 	'TitilliumText', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: Arimo,Arial,sans-serif;
 	color: 			#999999;
 	font-size: 		28px;
 	font-weight: 	600;
 }
 
 textarea {
-	font-family: 	'TitilliumText', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: Arimo,Arial,sans-serif;
 	color: 			#999999;
 	font-size: 		18px;
 	font-weight: 	600;
@@ -95,10 +94,11 @@ input.middle_input:focus{
 }
 
 div#content p, span{
-	font-family: 	'TitilliumText', "Helvetica Neue", "Helvetica", Arial, sans-serif;
-	color: #666666;
+	font-family: Arimo,Arial,sans-serif;
+    text-align: justify;
+	color: #333333;
 	line-height: 1.7;
-	font-size: 16px;
+	font-size: 15px;
 }
 
 .text_header{
@@ -114,7 +114,7 @@ div#footer{
 	text-align: center;
 	text-shadow: 0px 1px white;
 	font-weight: 600;
-	color: #BBBBBB;
+	color: #817A7A;
 	font-size: 12px;	
 	margin-left:auto;
 	margin-right:auto;
@@ -126,7 +126,7 @@ div#footer{
 
 div#footer a, a:active, a:visited, a:focus, a:link{
 	text-decoration: 	none;
-	color: 				#FF9900;
+	color: 				#058dbe;
 }
 div#footer a:hover{
 	text-decoration: 	underline;

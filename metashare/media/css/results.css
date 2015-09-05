@@ -28,6 +28,7 @@ div.searchbox table{
 #searchbox img{
     width: 200px;
     margin-right: 20px;
+    margin-top:-19%;
 }
 
 div.filters{
@@ -62,7 +63,7 @@ div.content_box{
 
 div.resourceName{
 	width: 95%;
-	background-color: #EFF;
+	background-color: #f5f5f5;
 	padding: 4px 4px 4px 4px;
 	margin: .9em 0 .3em 0;
 	color: #777;
@@ -85,11 +86,11 @@ div.resourceName>div.accessStats>img {
 div.resourceName ul li {
 	list-style-type: none;
 	margin: 2px 2px 2px 2px;
-	padding: 1px 1px 1px 1px;
+	padding: 2px;
 	font-size: 7pt;
 	font-weight: bold;
-	color: #889;
-	background-color: #F5ECCE;
+	color: #333;
+	background-color: #ebebeb;
 	float: left;
 	border-radius: 5px 5px 5px 5px;
 	border:1px solid #bbc; 
