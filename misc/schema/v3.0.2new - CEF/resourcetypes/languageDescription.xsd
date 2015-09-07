@@ -126,6 +126,11 @@
 								<xs:documentation>Value for languageDescriptionType; to be used for resources describing the morphological, syntactic etc. system (or part therof) of a language</xs:documentation>
 							</xs:annotation>
 						</xs:enumeration>
+						<xs:enumeration value="languageModel">
+							<xs:annotation>
+								<xs:documentation>Value for languageDescriptionType; to be used for language models</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
 						<xs:enumeration value="other"/>
 					</xs:restriction>
 				</xs:simpleType>
