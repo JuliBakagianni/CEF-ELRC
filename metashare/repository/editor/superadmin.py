@@ -150,7 +150,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
         result = super(SchemaModelAdmin, self) \
             .has_change_permission(request, obj)
         if result and obj:
-            if request.user.is_superuser:
+            if request.user.is_superuser or request.user.is_staff:
                 return True
             # find out to which resourceInfoType_model instance the obj belongs
             root_resources = get_root_resources(obj)
@@ -219,7 +219,7 @@ class SchemaModelAdmin(admin.ModelAdmin, RelatedAdminMixin, SchemaModelLookup):
             if not 'DELETE' in req_form.changed_data:
                 req_form.empty_permitted = False
                 break
-        
+
     @csrf_protect_m
     @transaction.commit_on_success
     def add_view(self, request, form_url='', extra_context=None):
