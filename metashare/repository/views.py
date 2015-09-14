@@ -19,8 +19,8 @@ from haystack.views import FacetedSearchView
 
 from metashare.repository.editor.resource_editor import has_edit_permission
 from metashare.repository.forms import LicenseSelectionForm, \
-    LicenseAgreementForm, DownloadContactForm, MORE_FROM_SAME_CREATORS, \
-    MORE_FROM_SAME_PROJECTS
+    LicenseAgreementForm, DownloadContactForm, DownloadUnregisteredContactForm #MORE_FROM_SAME_CREATORS, \
+  #  MORE_FROM_SAME_PROJECTS
 from metashare.repository import model_utils
 from metashare.repository.models import licenceInfoType_model, \
     resourceInfoType_model
@@ -334,7 +334,7 @@ def _update_download_stats(resource, request):
     request.session['tracker'] = tracker
 
 
-@login_required
+# @login_required
 def download_contact(request, object_id):
     """
     Renders the download contact view to request information regarding a resource
@@ -367,8 +367,13 @@ def download_contact(request, object_id):
 
     # Check if the edit form has been submitted.
     if request.method == "POST":
-        # If so, bind the creation form to HTTP POST values.
-        form = DownloadContactForm(initial={'userEmail': request.user.email,
+        # If so, bind the creation form to HTTP POST values
+        if hasattr(request.user,'email'):
+            form = DownloadContactForm(initial={'userEmail': request.user.email,
+                                            'message': default_message},
+                                   data=request.POST)
+        else:
+            form = DownloadUnregisteredContactForm(initial={'userName':"",'userEmail': "",
                                             'message': default_message},
                                    data=request.POST)
         # Check if the form has validated successfully.
@@ -377,9 +382,15 @@ def download_contact(request, object_id):
             user_email = form.cleaned_data['userEmail']
 
             # Render notification email template with correct values.
-            data = {'message': message, 'resource': resource,
-                'resourceContactName': resource_contacts, 'user': request.user,
-                'user_email': user_email, 'node_url': DJANGO_URL}
+            if hasattr(request.user,'email'):
+                data = {'message': message, 'resource': resource,
+                    'resourceContactName': resource_contacts, 'user': request.user,
+                    'user_email': user_email, 'node_url': DJANGO_URL}
+            else:
+                userName = form.cleaned_data['userName']
+                data = {'message': message, 'resource': resource,
+                    'resourceContactName': resource_contacts, 'user': userName,
+                    'user_email': user_email, 'node_url': DJANGO_URL}
             try:
                 # Send out email to the resource contacts
                 send_mail('Request for information regarding a resource',
@@ -400,8 +411,11 @@ def download_contact(request, object_id):
 
     # Otherwise, render a new DownloadContactForm instance
     else:
-        form = DownloadContactForm(initial={'userEmail': request.user.email,
+        if hasattr(request.user,'email'):
+            form = DownloadContactForm(initial={'userEmail': request.user.email,
                                             'message': default_message})
+        else:
+            form = DownloadUnregisteredContactForm(initial={'userName':"",'userEmail': "", 'message': default_message})
 
     dictionary = { 'username': request.user,
       'resource': resource,
