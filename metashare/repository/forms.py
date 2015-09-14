@@ -221,3 +221,12 @@ class DownloadContactForm(forms.Form):
     """
     userEmail = forms.EmailField(label=_("Your e-mail"))
     message = forms.CharField(label=_("Your message"), widget=forms.Textarea())
+
+class DownloadUnregisteredContactForm(forms.Form):
+    """
+    A `Form` for sending a contact request regarding the download of a resource
+    """
+    userName= forms.CharField(label = _("Your name"))
+    userEmail = forms.EmailField(label=_("Your e-mail"))
+    message = forms.CharField(label=_("Your message"), widget=forms.Textarea())
+
