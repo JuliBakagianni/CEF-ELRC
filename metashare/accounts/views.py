@@ -1,6 +1,7 @@
 import logging
 from smtplib import SMTPException
 
+from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
@@ -36,6 +37,9 @@ def confirm(request, uuid):
     # Activate the corresponding User instance.
     user = registration_request.user
     user.is_active = True
+    # Set user as staff/ editor
+    user.is_staff = True
+    user.groups.add(Group.objects.get(name='editors'))
     # For convenience, log user in:
     # (We would actually have to authenticate the user before logging in,
     # however, as we don't know the password, we manually set the authenication
@@ -53,7 +57,7 @@ def confirm(request, uuid):
     email = render_to_string('accounts/activation.email', data)
     try:
         # Send an activation email.
-        send_mail(_('Your META-SHARE user account has been activated'),
+        send_mail(_('Your CEF-ELRC user account has been activated'),
         email, 'no-reply@meta-share.eu', [user.email], fail_silently=False)
     except: # SMTPException:
         # there was a problem sending the activation e-mail -- not too bad
