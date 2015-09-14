@@ -321,7 +321,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         _("Unpublish selected published resources")
 
     def ingest_action(self, request, queryset):
-        if has_publish_permission(request, queryset):
+        if has_publish_permission(request, queryset) or request.user.is_staff:
             successful = 0
             for obj in queryset:
                 if change_resource_status(obj, status=INGESTED,
@@ -1023,22 +1023,29 @@ class ResourceModelAdmin(SchemaModelAdmin):
         # it hasn't previously been removed, yet)
         if 'delete_selected' in result:
             del result['delete_selected']
-        if not request.user.is_superuser:
+        # if request.user.is_staff:
+        #     del result['remove_group']
+        #     del result['remove_owner']
+        #     if not 'myresources' in request.POST:
+        #         del result['add_group']
+        #         del result['add_owner']
+        if request.user.is_staff:
             del result['remove_group']
             del result['remove_owner']
-            if not 'myresources' in request.POST:
-                del result['add_group']
-                del result['add_owner']
+            del result['add_group']
+            del result['add_owner']
             # only users with delete permissions can see the delete action:
             if not self.has_delete_permission(request):
                 del result['delete']
             # only users who are the manager of some group can see the
             # ingest/publish/unpublish actions:
-            if EditorGroupManagers.objects.filter(name__in=
-                        request.user.groups.values_list('name', flat=True)) \
-                    .count() == 0:
-                for action in (self.publish_action, self.unpublish_action,
-                               self.ingest_action):
+            # if EditorGroupManagers.objects.filter(name__in=
+            #             request.user.groups.values_list('name', flat=True)) \
+            #         .count() == 0:
+            #     for action in (self.publish_action, self.unpublish_action,):
+            #         del result[action.__name__]
+            if not request.user.is_superuser:
+                for action in (self.publish_action, self.unpublish_action,):
                     del result[action.__name__]
         return result
 
