@@ -5,8 +5,13 @@
 {% spaceless %}
 <div class="span-24">
   <div style="text-align:center;margin-top: 20px;margin-bottom: 20px;">
-    <p><img src="{{ MEDIA_URL }}meta-share-logo.png" style="border: 1px solid #cccccc;width: 850px;padding:10px;background-color:white;" /></p>
-    <p>{{resources|intcomma}} language resource{{resources|pluralize}} at your disposal</p>
+    <p><img src="{{ MEDIA_URL }}logocombo.png" style=" display: block; margin-left: auto; margin-right: auto;" usemap="#logomap" />
+  <map name="logomap">
+    <area shape="rect" coords="20,0,476,150" alt="European Language Resource Coordination" href="http://www.lr-coordination.eu/" target="_blank">
+    <area shape="rect" coords="90,58,3" alt="Metashare" href="http://www.meta-share.eu/">
+</map>
+    </p>
+    <p style="text-align: center; color: #058dbe;font-weight: bold;">{{resources|intcomma}} language resource{{resources|pluralize}} at your disposal</p>
   </div>
   <form method="get" action="{% url metashare.views.frontpage %}repository/search/" class="form_helper">
     <div id="search">
@@ -19,9 +24,9 @@
 <div class="span-24" style="vertical-align: middle; margin-top:30px;">
 <table>
   <tr>
-    <td>
-      <span class="span-7 append-1" style="vertical-align: middle;"><img src="{{ MEDIA_URL }}images/teaser02.png" /></span>
-    </td>
+{#    <td>#}
+{#      <span class="span-7 append-1" style="vertical-align: middle;"><img src="{{ MEDIA_URL }}images/teaser02.png" /></span>#}
+{#    </td>#}
     <td>
       <span class="span-15 last" style="">
         <h2>What is the European Language Resource Coordination (ELRC) action?</h2>
@@ -53,9 +58,9 @@
       <p>The European Language Resource Coordination action is looking for open data that can be made available for re-use through open data initiatives, but also for commercially available datasets.</p>
       </span>
     </td>
-    <td>
-      <span class="span-7 last" style="vertical-align: middle;"><img src="{{ MEDIA_URL }}images/teaser03.png" /></span>
-    </td>
+{#    <td>#}
+{#      <span class="span-7 last" style="vertical-align: middle;"><img src="{{ MEDIA_URL }}images/teaser03.png" /></span>#}
+{#    </td>#}
   </tr>
 </table>
 </div>
@@ -69,9 +74,9 @@
 <div class="span-24" style="vertical-align: middle; margin-top:35px;">
 <table>
   <tr>
-    <td>
-      <span class="span-7 append-1" style="vertical-align: middle;"><img src="{{ MEDIA_URL }}images/teaser04.png" /></span>
-    </td>
+{#    <td>#}
+{#      <span class="span-7 append-1" style="vertical-align: middle;"><img src="{{ MEDIA_URL }}images/teaser04.png" /></span>#}
+{#    </td>#}
     <td>
       <span class="span-15 last" style="">
         <h2>What is the CEF-ELRC META-SHARE repository?</h2>
