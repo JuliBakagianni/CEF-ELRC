@@ -234,14 +234,16 @@ class UserProfile(models.Model):
         """
         if not self.user:
             super(UserProfile, self).delete(*args, **kwargs)
-                
+
+    def is_superuser(self):
+        return self.user.is_superuser
 
     def has_editor_permission(self):
         """
         Returns `True` if there are any resources that the user behind this
         profile can edit or create; `False` otherwise.
         """
-        if self.user.is_superuser:
+        if self.user.is_staff:
             return True      
 
         return self.user.is_staff and \
