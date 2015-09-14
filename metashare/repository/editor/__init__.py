@@ -70,7 +70,7 @@ class MetashareBackendSite(AdminSite):
         Allows to upload a resource description into the Django database.
         """
         # Check if the current user is actually allowed to upload...
-        if not request.user.is_superuser and not request.user.has_perm('repository.add_resourceinfotype_model'):
+        if not request.user.is_staff and not request.user.has_perm('repository.add_resourceinfotype_model'):
             raise PermissionDenied
 
         if request.method == 'POST':
