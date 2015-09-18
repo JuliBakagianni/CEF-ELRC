@@ -418,6 +418,7 @@ input[type=text], input[type=password], textarea, select, .vTextField {
     border: 1px solid #ccc;
     margin-bottom: 5px;
     background: white;
+    margin-top: 10px;
 }
 
 .module p, .module ul, .module h3, .module h4, .module dl, .module pre {
@@ -709,7 +710,7 @@ table#change-history tbody th {
 }
 
 .popup .colM {
-    width: 95%;
+    width: 96%;
 }
 
 .subcol {

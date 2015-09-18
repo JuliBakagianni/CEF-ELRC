@@ -310,12 +310,13 @@ div.form-row.distributionInfo > div.field-box, div.form-row.usageInfo > div.fiel
 #tabs_container {
 	float:left;
 	margin-right: 15px;
+    width: 13%
 }
 
 #tabs_content_container {
 	float:center;
 	padding: 10px 10px 10px 10px;
-	margin: 0 10px 0 10px;
+	margin: -10px 10px 0 14%;
 }
 
 .submit-row {
@@ -337,7 +338,7 @@ a.error{
 .accordion h1 {
 	background-color: #eee;
 	padding: 4px 4px 4px 4px;
-	width: 240px;
+	width: 167px;
 	font-size: 14px;
 	margin: .9em 0 .3em 0;
 	color: #777;
@@ -346,7 +347,8 @@ a.error{
 }
 
 .accordion {
-	width: 246px;
+	width: 188px;
+    margin-top: 20%;
 }
 
 
