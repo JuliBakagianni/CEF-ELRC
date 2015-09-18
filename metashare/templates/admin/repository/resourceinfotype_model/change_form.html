@@ -73,20 +73,19 @@
     </p>
     {{ adminform.form.non_field_errors }}
 {% endif %}
-
 <div>
+
 	<div id="tabs_container">
 		<div id="firstlevel" class="accordion">
-			<h1><a href="#">Administrative Information</a></h1>
-			<div class="fields">
-				<ul>
-					{% for fieldset in adminform %}
-						{% if "administration" in fieldset.name %}						
-							<li{% if "Required" in fieldset.name %} class= "active"	{% endif %}><a href="#field-{{forloop.counter}}">{{fieldset.name|truncatewords:1|slice:":-4"}}</a></li>
-						{% endif %}
-					{% endfor %}	
-				</ul>		
-			</div>
+{#			<div class="fields">#}
+{#				<ul>#}
+{#					{% for fieldset in adminform %}#}
+{#						{% if "administration" in fieldset.name %}						#}
+{#							<li{% if "Required" in fieldset.name %} class= "active"	{% endif %}><a href="#field-{{forloop.counter}}">{{fieldset.name|truncatewords:1|slice:":-4"}}</a></li>#}
+{#						{% endif %}#}
+{#					{% endfor %}	#}
+{#				</ul>		#}
+{#			</div>#}
 	
 		<script type="text/javascript">
 
@@ -101,8 +100,9 @@
 	</div>
 
 	<div id="tabs_content_container">
+        <h1>Administrative Information</h1>
 		{% for fieldset in adminform %}
-				<div id="field-{{forloop.counter}}" class="tab_content" {% if "Required administration" in fieldset.name %} style="display:inline;" {% endif %}>
+				<div id="field-{{forloop.counter}}" class="tab_content" {% if "Required administration" in fieldset.name or "Recommended administration" in fieldset.name or "Optional administration" in fieldset.name %} style="display:inline;" {% endif %}>
 					{% include "admin/repository/fieldset.html" %}
 				</div>	
 				
