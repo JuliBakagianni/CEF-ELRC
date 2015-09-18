@@ -44,7 +44,7 @@
     </li>
     {% endif %}
     {% if user.is_superuser or user.get_profile.has_organization_manager_permission or user.get_profile.has_manager_permission %}
-    <li title="Manage users"><a>Administration</a>
+    <li title="Manage users"><a href={% url metashare.views.frontpage %}admin>Administration</a>
       <ul>
       {% if user.is_superuser %}
         <li><a href="{% url admin:auth_user_changelist %}">Users</a></li>
