@@ -301,7 +301,7 @@ class MultiFieldWidget(widgets.Widget):
             if self.max_length > _MAX_TEXT_INPUT_SIZE:
                 result = Textarea().render(name, value, attrs)
             else:
-                result = TextInput(attrs={ 'maxlength': self.max_length }) \
+                result = TextInput(attrs={'maxlength': self.max_length }) \
                             .render(name, value, attrs)
         else:
             result = TextInput().render(name, value, attrs)
@@ -341,7 +341,8 @@ class MultiFieldWidget(widgets.Widget):
         # We collect all rendered widgets inside _field_widgets.
         _field_widgets = []
         _field_attrs = {'id': 'id_{0}'.format(name), 'class': 'input',
-          'style': self.attrs.get('style', 'width:250px;')}
+          'style': self.attrs.get('style', 'width:480px')
+          }
         
         # Iterate over all sub values for this MultiFieldWidget instance,
         # adding an index number 0..n-1 to support container id generation.
