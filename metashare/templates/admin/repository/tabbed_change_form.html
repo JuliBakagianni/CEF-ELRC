@@ -50,24 +50,24 @@
 {% endif %}
 
 <div>
-	<div id="tabs_container">	
-		<div id="firstlevel" class="accordion">
-			<h1><a href="#">Information</a></h1>
-			<div class="fields">
-				<ul>
-					{% for fieldset in adminform %}
-						{% if fieldset.name %}{# fieldset "None" in fact does not have a name, so it is not displayed #}													
-							<li{% if "Required" in fieldset.name %} class= "active"{% endif %}><a href="#field-{{forloop.counter}}">{{fieldset.name|truncatewords:1|slice:":-4"}}</a></li>
-						{% endif %}						
-					{% endfor %}	
-				</ul>		
-			</div>
-		</div>
-	</div>
+{#	<div id="tabs_container">	#}
+{#		<div id="firstlevel" class="accordion">#}
+{#			<div class="fields">#}
+{#				<ul>#}
+{#					{% for fieldset in adminform %}#}
+{#						{% if fieldset.name %}{# fieldset "None" in fact does not have a name, so it is not displayed #}
+{#							<li{% if "Required" in fieldset.name %} class= "active"{% endif %}><a href="#field-{{forloop.counter}}">{{fieldset.name|truncatewords:1|slice:":-4"}}</a></li>#}
+{#						{% endif %}#}
+{#					{% endfor %}#}
+{#				</ul>#}
+{#			</div>#}
+{#		</div>#}
+{#	</div>#}
 			
 	<div id="tabs_content_container">
+        <h1>Information</h1>
 		{% for fieldset in adminform %}				
-				<div id="field-{{forloop.counter}}" class="tab_content" {% if "Required" in fieldset.name %} style="display:inline;" {% endif %}>
+				<div id="field-{{forloop.counter}}" class="tab_content" {% if "Required" in fieldset.name or "Recommended" in fieldset.name or "Optional" in fieldset.name %} style="display:inline;" {% endif %}>
 					{% include "admin/repository/fieldset.html" %}
 				</div>					
 		{% endfor %}		
