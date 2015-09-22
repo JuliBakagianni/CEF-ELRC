@@ -770,7 +770,7 @@ class sizeInfo_model_inline_lexicalConceptualResourceTextInfoType_model(SchemaMo
 # pylint: disable-msg=C0103
 class textClassificationInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
     model = textClassificationInfoType_model
-    collapse = True
+    collapse = False
     fk_name = 'back_to_corpustextinfotype_model'
 
 
