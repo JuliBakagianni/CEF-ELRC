@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django import forms
+from metashare import settings
 from metashare.repository.editor.superadmin import SchemaModelAdmin
 from metashare.repository.editor.inlines import SchemaModelInline
 
@@ -209,7 +211,6 @@ class corpusInfo_model_inline(SchemaModelInline):
 class corpusTextInfo_model_inline(SchemaModelInline):
     model = corpusTextInfoType_model
     collapse = True
-
 
 # pylint: disable-msg=C0103
 # class corpusVideoInfo_model_inline(SchemaModelInline):
@@ -527,6 +528,8 @@ class lexicalConceptualResourceInfo_model_inline(SchemaModelInline):
 # pylint: disable-msg=C0103
 class licenceInfo_model_inline(SchemaModelInline):
     model = licenceInfoType_model
+    class Media:
+        js = (settings.ADMIN_MEDIA_PREFIX + '/js/showHideFields.js',)
     # collapse = True
 
 
