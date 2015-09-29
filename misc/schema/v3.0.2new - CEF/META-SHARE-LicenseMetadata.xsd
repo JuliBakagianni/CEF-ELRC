@@ -136,7 +136,7 @@
 						<xs:enumeration value="FreeOpenDataLicenceForNon-CommercialRe-use_Belgium"/>
 						<xs:enumeration value="OpenDataLicenceAtAFairCostForCommercialRe-use_Belgium"/>
 						<xs:enumeration value="NLSOpenDataLicence_Finland"/>
-						<xs:enumeration value="LicenceOuverte-OpenLincence_France"/>
+						<xs:enumeration value="LicenceOuverte-OpenLicence_France"/>
 						<xs:enumeration value="DL-DE-BY_Germany"/>
 						<xs:enumeration value="DL-DE-ZERO_Germany"/>
 						<xs:enumeration value="IODL_Italy"/>
@@ -208,6 +208,7 @@
 						<xs:enumeration value="noDerivatives"/>
 						<xs:enumeration value="research"/>
 						<xs:enumeration value="education"/>
+						<xs:enumeration value="compensate"/>
 						<xs:enumeration value="other"/>
 					</xs:restriction>
 				</xs:simpleType>
@@ -281,6 +282,8 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
+-->
+
 			<xs:element name="fee" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Specifies the costs that are required to access the resource, a fragment of the resource or to use a tool or service</xs:documentation>
@@ -294,7 +297,6 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
--->
 			<xs:element name="attributionText" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>The text that must be quoted for attribution purposes when using a resource - for cases where a resource is provided with a restriction on attribution</xs:documentation>
