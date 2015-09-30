@@ -4,10 +4,12 @@
         <div class="description">{{ fieldset.description|safe }}</div>
     {% endif %}
     {% for line in fieldset %}
-        <div class="form-row{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% for field in line %} {{ field.field.name }}{% if field.field.is_hidden %} display_none{% endif %}{% endfor %}">
+        <div class="form-row{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% for field in line %}
+            {{ field.field.name }}{% if field.field.is_hidden %} display_none{% endif %}{% endfor %}">
             {% if line.fields|length_is:'1' %}{{ line.errors }}{% endif %}
             {% for field in line %}
-                <div{% if not line.fields|length_is:'1' %} class="field-box{% if not field.is_readonly and field.errors %} errors{% endif %}"{% endif %}>
+                <div{% if not line.fields|length_is:'1' %}
+                    class="field-box{% if not field.is_readonly and field.errors %} errors{% endif %}"{% endif %}>
                     {% if not line.fields|length_is:'1' and not field.is_readonly %}{{ field.errors }}{% endif %}
                     {% if field.is_checkbox %}
                         {{ field.field }}{{ field.label_tag }}
@@ -21,7 +23,7 @@
                     {% endif %}
                     {% if field.field.help_text %}
                         <p class="help">{{ field.field.help_text|safe }}
-{#                            <span class="helpLink" kblink="{{ kb_link }}{{ field.field.name }}"><img class="help_icon" src="{{ help_icon_url }}" kblink="{{ kb_link }}{{ field.field.name }}"></img></span>#}
+                            {#                            <span class="helpLink" kblink="{{ kb_link }}{{ field.field.name }}"><img class="help_icon" src="{{ help_icon_url }}" kblink="{{ kb_link }}{{ field.field.name }}"></img></span>#}
                         </p>
                     {% endif %}
                 </div>
@@ -36,48 +38,24 @@ If a checkbox is checked then a textarea is available for the respective *Additi
 If the checkbox gets unchecked then the textarea is disabled. This way we are sure that the user cannot, for example, give additional info for personal data unless they have checked the respective checkbox first.
 {% endcomment %}
 <script type="text/javascript">
-(function($) {
-    $(document).ready(function(){
-        $("input[id*='personalDataIncluded']").each(function(){
-            $(this).parent().parent().next().find("textarea").attr({"rows": "2",
-                        "cols": "10"
+    (function ($) {
+        $(document).ready(function () {
+            lingualityOptions = ["bilingual", "multilingual"];
+            $(".form-row.lingualityType").each(function () {
+                if (jQuery.inArray($(this).find("select option:selected").val(), lingualityOptions) != -1) {
+                    $(this).siblings("div").show();
+                } else {
+                    $(this).siblings("div").hide();
+                }
             });
-            if (!this.checked) {
-                $(this).parent().parent().next().hide();
-            }
-        })
 
-        $("input[id*='sensitiveDataIncluded']").each(function(){
-            $(this).parent().parent().next().find("textarea").attr({"rows": "2",
-                        "cols": "10"
-            });
-            if (!this.checked) {
-                $(this).parent().parent().next().hide();
-            }
+            $(".form-row.lingualityType").find("select").on('change', function () {
+                if (jQuery.inArray($(this).val(),                                lingualityOptions) != -1) {
+                    $(this).parent().parent().siblings("div").show();
+                } else {
+                    $(this).parent().parent().siblings("div").hide();
+                }
+            })
         })
-
-        $("input[id*='personalDataIncluded']").change(function() {
-            if (!this.checked) {
-                $(this).parent().parent().next().hide();
-                $(this).parent().parent().next().find("textarea").attr('disabled','disabled');
-                //$(this).parent().parent().next().find( "textarea" ).val("");
-            } else {
-                $(this).parent().parent().next().show();
-                $(this).parent().parent().next().find("textarea").removeAttr('disabled');
-            }
-        });
-
-        $("input[id*='sensitiveDataIncluded']").change(function() {
-            if (!this.checked) {
-                $(this).parent().parent().next().hide();
-                $(this).parent().parent().next().find( "textarea" ).val("");
-            } else {
-                $(this).parent().parent().next().show();
-                $(this).parent().parent().next().removeAttr('disabled');
-            }
-        })
-        //alert($("input[id*='personalDataIncluded']").prop('id'));
-        //alert($("input[id*='0-personalDataIncluded']").prev.is(":checked"));
-});
-})(django.jQuery);
+    })(django.jQuery);
 </script>
