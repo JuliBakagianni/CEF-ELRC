@@ -179,7 +179,7 @@ class LicenseSelectionForm(forms.Form):
                 of the given license information.
                 """
                 result = u'<div><p>{0}</p>\n<ul>' \
-                    .format(_('Restrictions of use:'))
+                    .format(_('Conditions of use:'))
                 r_list = licence_info.get_restrictionsOfUse_display_list()
                 if r_list:
                     for restr in r_list:
