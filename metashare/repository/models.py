@@ -126,28 +126,28 @@ class resourceInfoType_model(SchemaModel):
     }
 
     identificationInfo = models.OneToOneField("identificationInfoType_model",
-            verbose_name='Identification',
-            help_text='Groups together information needed to identify the reso' \
-                        'urce',
-            )
+                                              verbose_name='Identification',
+                                              help_text='Groups together information needed to identify the reso' \
+                                                        'urce',
+                                              )
 
     distributionInfo = models.OneToOneField("distributionInfoType_model",
-            verbose_name='Distribution',
-            help_text='Groups information on the distribution of the resource',
-            )
+                                            verbose_name='Distribution',
+                                            help_text='Groups information on the distribution of the resource',
+                                            )
 
     contactPerson = models.ManyToManyField("personInfoType_model",
-            verbose_name='Contact person',
-            help_text='Groups information on the person(s) that is/are respons' \
-                       'ible for providing further information regarding the resource',
-            related_name="contactPerson_%(class)s_related",)
+                                           verbose_name='Contact person',
+                                           help_text='Groups information on the person(s) that is/are respons' \
+                                                     'ible for providing further information regarding the resource',
+                                           related_name="contactPerson_%(class)s_related", )
 
     metadataInfo = models.OneToOneField("metadataInfoType_model",
-            verbose_name='Metadata',
-            help_text='Groups information on the metadata record itself',)
+                                        verbose_name='Metadata',
+                                        help_text='Groups information on the metadata record itself', )
 
     # versionInfo = models.OneToOneField("versionInfoType_model",
-    #   verbose_name='Version',
+    # verbose_name='Version',
     #   help_text='Groups information on a specific version or release of ' \
     #   'the resource',
     #   blank=True, null=True, on_delete=models.SET_NULL, )
@@ -273,7 +273,7 @@ class resourceInfoType_model(SchemaModel):
 
 
 # SIZEINFOTYPE_SIZEUNIT_CHOICES = _make_choices_from_list([
-#   u'terms', u'entries', u'files', u'items', u'texts',
+# u'terms', u'entries', u'files', u'items', u'texts',
 #   u'sentences', u'bytes', u'tokens', u'words', u'keywords',
 #   u'idiomaticExpressions',u'neologisms', u'multiWordUnits', u'expressions',
 #   u'concepts', u'lexicalTypes', u'kb', u'mb',
@@ -410,7 +410,7 @@ class identificationInfoType_model(SchemaModel):
                                             'uage.',
                                   blank=True)
 
-    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=0, max_length=1000),
+    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=0, attrs={'size': '250'}),
                          verbose_name='Url', validators=[HTTPURI_VALIDATOR],
                          help_text='A URL used as homepage of an entity (e.g. of a person, ' \
                                    'organization, resource etc.) and/or where an entity (e.g.LR, docu' \
@@ -812,23 +812,23 @@ class metadataInfoType_model(SchemaModel):
     #   blank=True, max_length=1000, )
 
     metadataLanguageName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=2, max_length=150),
-             verbose_name='Metadata language name',
-             help_text='The name of the language in which the metadata descript' \
-                       'ion is written; an autocompletion mechanism with values from the ' \
-                       'ISO 639 is provided in the editor, but the values can be subseque' \
-                       'ntly edited for further specification (according to the IETF BCP4' \
-                       '7 guidelines)',
-             blank=True, validators=[validate_matches_xml_char_production], )
+                                          verbose_name='Metadata language name',
+                                          help_text='The name of the language in which the metadata descript' \
+                                                    'ion is written; an autocompletion mechanism with values from the ' \
+                                                    'ISO 639 is provided in the editor, but the values can be subseque' \
+                                                    'ntly edited for further specification (according to the IETF BCP4' \
+                                                    '7 guidelines)',
+                                          blank=True, validators=[validate_matches_xml_char_production], )
 
     #TEST MILTOS
     metadataLanguageId = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=3, max_length=150),
-             verbose_name='Metadata language id',
-             help_text='The identifier of the language in which the metadata de' \
-                    'scription is written; an autocompletion mechanism with values fro' \
-                    'm the ISO 639 is provided in the editor, but the values can be su' \
-                    'bsequently edited for further specification (according to the IET' \
-                    'F BCP47 guidelines)',
-             blank=True, validators=[validate_matches_xml_char_production],)
+                                        verbose_name='Metadata language id',
+                                        help_text='The identifier of the language in which the metadata de' \
+                                                  'scription is written; an autocompletion mechanism with values fro' \
+                                                  'm the ISO 639 is provided in the editor, but the values can be su' \
+                                                  'bsequently edited for further specification (according to the IET' \
+                                                  'F BCP47 guidelines)',
+                                        blank=True, validators=[validate_matches_xml_char_production], )
 
     metadataLastDateUpdated = models.DateField(
         verbose_name='Metadata last date updated',
@@ -1027,7 +1027,6 @@ class documentInfoType_model(documentationInfoType_model):
                   'her specification (according to the IETF BCP47 guidelines)',
         blank=True, max_length=20, )
 
-
     source_url = models.URLField(verify_exists=False,
                                  default=DJANGO_URL,
                                  help_text="(Read-only) base URL for the server where the master copy of " \
@@ -1051,6 +1050,7 @@ class documentInfoType_model(documentationInfoType_model):
         formatargs = ['author', 'title', ]
         formatstring = u'{}: {}'
         return self.unicode_(formatstring, formatargs)
+
 
 # RESOURCEDOCUMENTATIONINFOTYPE_TOOLDOCUMENTATIONTYPE_CHOICES = _make_choices_from_list([
 #   u'online', u'manual', u'helpFunctions', u'none', u'other',
@@ -1084,7 +1084,7 @@ class resourceDocumentationInfoType_model(SchemaModel):
                                                      'resource',
                                            blank=True, null=True, related_name="documentation_%(class)s_related", )
 
-    samplesLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=8, max_length=1000),
+    samplesLocation = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=8, attrs={'size': '250'}),
                                      verbose_name='Samples location', validators=[HTTPURI_VALIDATOR],
                                      help_text='A url with samples of the resource or, in the case of t' \
                                                'ools, of samples of the output',
@@ -1104,6 +1104,7 @@ class resourceDocumentationInfoType_model(SchemaModel):
         formatargs = ['documentation', ]
         formatstring = u'{}'
         return self.unicode_(formatstring, formatargs)
+
 
 DOMAININFOTYPE_DOMAIN_CHOICES = (
     (u"advertisingPublicRelationsDDC659", u"Advertising & Public Relations (DDC659)"),
@@ -1534,6 +1535,7 @@ class annotationInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
+
 # pylint: disable-msg=C0103
 class targetResourceInfoType_model(SchemaModel):
     """
@@ -1562,6 +1564,7 @@ class targetResourceInfoType_model(SchemaModel):
         formatargs = ['targetResourceNameURI', ]
         formatstring = u'{}'
         return self.unicode_(formatstring, formatargs)
+
 
 # pylint: disable-msg=C0103
 # class relationInfoType_model(SchemaModel):
@@ -2564,7 +2567,6 @@ class targetResourceInfoType_model(SchemaModel):
 
 # pylint: disable-msg=C0103
 class documentListType_model(SchemaModel):
-
     class Meta:
         verbose_name = "Document list"
 
@@ -2583,6 +2585,7 @@ class documentListType_model(SchemaModel):
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
+
 
 # pylint: disable-msg=C0103
 class communicationInfoType_model(SchemaModel):
@@ -2613,7 +2616,7 @@ class communicationInfoType_model(SchemaModel):
                            help_text='The email address of a person or an organization',
                            )
 
-    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=14, max_length=1000),
+    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=14, max_length=150),
                          verbose_name='Url', validators=[HTTPURI_VALIDATOR],
                          help_text='A URL used as homepage of an entity (e.g. of a person, ' \
                                    'organization, resource etc.) and/or where an entity (e.g.LR, docu' \
@@ -2669,9 +2672,9 @@ class communicationInfoType_model(SchemaModel):
         formatstring = u'{} {}'
         return self.unicode_(formatstring, formatargs)
 
+
 # pylint: disable-msg=C0103
 class personListType_model(SchemaModel):
-
     class Meta:
         verbose_name = "Person list"
 
@@ -2691,9 +2694,9 @@ class personListType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
+
 # pylint: disable-msg=C0103
 class organizationListType_model(SchemaModel):
-
     class Meta:
         verbose_name = "Organization list"
 
@@ -2713,6 +2716,7 @@ class organizationListType_model(SchemaModel):
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
+
 
 # pylint: disable-msg=C0103
 class actorInfoType_model(SubclassableModel):
@@ -2778,7 +2782,6 @@ class organizationInfoType_model(actorInfoType_model):
                                                        ' or an organization',
                                              )
 
-
     source_url = models.URLField(verify_exists=False,
                                  default=DJANGO_URL,
                                  help_text="(Read-only) base URL for the server where the master copy of " \
@@ -2792,6 +2795,7 @@ class organizationInfoType_model(actorInfoType_model):
         formatargs = ['organizationName', 'departmentName', ]
         formatstring = u'{} \u2013 department: {}'
         return self.unicode_(formatstring, formatargs)
+
 
 PERSONINFOTYPE_SEX_CHOICES = _make_choices_from_list([
     u'male', u'female', u'unknown',
@@ -2868,7 +2872,6 @@ class personInfoType_model(actorInfoType_model):
                                                    'affiliated',
                                          blank=True, null=True, related_name="affiliation_%(class)s_related", )
 
-
     source_url = models.URLField(verify_exists=False,
                                  default=DJANGO_URL,
                                  help_text="(Read-only) base URL for the server where the master copy of " \
@@ -2882,6 +2885,7 @@ class personInfoType_model(actorInfoType_model):
         formatargs = ['surname', 'givenName', 'communicationInfo/email', 'affiliation', ]
         formatstring = u'{} {} {} {}'
         return self.unicode_(formatstring, formatargs)
+
 
 DISTRIBUTIONINFOTYPE_AVAILABILITY_CHOICES = _make_choices_from_list([
     u'available-unrestrictedUse', u'available-restrictedUse', u'underNegotiation',
@@ -2968,7 +2972,7 @@ class distributionInfoType_model(SchemaModel):
                                        u'FreeOpenDataLicence_Belgium', u'OpenDataLicenceAtAFairCost_Belgium',
                                        u'FreeOpenDataLicenceForNon-CommercialRe-use_Belgium',
                                        u'OpenDataLicenceAtAFairCostForCommercialRe-use_Belgium',
-                                       u'NLSOpenDataLicence_Finland', u'LicenceOuverte-OpenLincence_France',
+                                       u'NLSOpenDataLicence_Finland', u'LicenceOuverte-OpenLicence_France',
                                        u'DL-DE-BY_Germany', u'IODL_Italy', u'NLOD_Norway', u'IGCYL-NC_Spain',
                                        u'ColorIURIS_Spain', u'OGL_UK', u'NCGL_UK', u'openForReuseWithRestrictions',
                                        u'termsOfUse', u'proprietary', u'other', ])):
@@ -3030,7 +3034,7 @@ LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
     u'FreeOpenDataLicence_Belgium',
     u'OpenDataLicenceAtAFairCost_Belgium', u'FreeOpenDataLicenceForNon-CommercialRe-use_Belgium',
     u'OpenDataLicenceAtAFairCostForCommercialRe-use_Belgium', u'NLSOpenDataLicence_Finland',
-    u'LicenceOuverte-OpenLincence_France',
+    u'LicenceOuverte-OpenLicence_France',
     u'DL-DE-BY_Germany', u'DL-DE-ZERO_Germany', u'IODL_Italy',
     u'NLOD_Norway', u'IGCYL-NC_Spain', u'ColorIURIS_Spain',
     u'OGL_UK', u'NCGL_UK', u'openForReuseWithRestrictions',
@@ -3047,8 +3051,36 @@ LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES = _make_choices_from_list([
     u'nonCommercialUse', u'commercialUse',
     u'attribution', u'shareAlike',
     u'noDerivatives', u'research',
-    u'education', u'other',
+    u'education', u'other', u'compensate'
 ])
+
+LICENCES_TO_CONDITIONS = {
+    u'ODC-BY': [u'attribution'],
+    u'PSI-licence': [u'attribution'],
+    u'ODbL': [u'attribution', u'shareAlike'],
+    u'CC-BY': [u'attribution'],
+    u'CC-BY-NC': [u'attribution', u'nonCommercialUse'],
+    u'CC-BY-NC-ND': [u'attribution', u'nonCommercialUse', u'noDerivatives'],
+    u'CC-BY-NC-SA': [u'attribution', u'nonCommercialUse', u'shareAlike'],
+    u'CC-BY-ND': [u'attribution', u'noDerivatives'],
+    u'CC-BY-SA': [u'attribution', u'shareAlike'],
+    u'FreeOpenDataLicence_Belgium': [u'attribution'],
+    u'OpenDataLicenceAtAFairCost_Belgium': [u'attribution', u'compensate'],
+    u'FreeOpenDataLicenceForNon-CommercialRe-use_Belgium': [u'attribution', u'nonCommercialUse'],
+    u'OpenDataLicenceAtAFairCostForCommercialRe-use_Belgium': [u'attribution', u'compensate'],
+    u'NLSOpenDataLicence_Finland': [u'attribution'],
+    u'LicenceOuverte-OpenLicence_France': [u'attribution'],
+    u'DL-DE-BY_Germany': [u'attribution'],
+    u'IODL_Italy': [u'attribution'],
+    u'NLOD_Norway': [u'attribution'],
+    u'OGL_UK': [u'attribution'],
+    u'NCGL_UK': [u'attribution', u'nonCommercialUse'],
+    u'IGCYL-NC_Spain': [u'attribution', u'nonCommercialUse'],
+}
+
+LICENCES_NO_CONDITIONS = [
+    u'PDDL', u'CC-ZERO', u'DL-DE-ZERO_Germany'
+]
 
 LICENCEINFOTYPE_DISTRIBUTIONACCESSMEDIUM_CHOICES = _make_choices_from_list([
     u'webExecutable', u'paperCopy', u'hardDisk', u'bluRay', u'DVD-R',
@@ -3202,10 +3234,10 @@ class licenceInfoType_model(SchemaModel):
     #   blank=True, )
 
     fee = XmlCharField(
-      verbose_name='Fee',
-      help_text='Specifies the costs that are required to access the res' \
-      'ource, a fragment of the resource or to use a tool or service',
-      blank=True, max_length=100, )
+        verbose_name='Fee',
+        help_text='Specifies the costs that are required to access the res' \
+                  'ource, a fragment of the resource or to use a tool or service',
+        blank=True, max_length=100, )
 
     attributionText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
                                 default_retriever=best_lang_value_retriever,
@@ -3278,14 +3310,13 @@ class licenceInfoType_model(SchemaModel):
         return self.sensitiveDataIncluded
 
     def save(self, *args, **kwargs):
-        """
-        Overrides the predefined save() method to assign the corresponding value to
-        the languageId field. This value is taken from the LANGUAGENAME_TO_LANGUAGEID
-        dictionary, which maps the the languageName values to languageId values.
-        """
+
         if self.licence.startswith(u"CC") or self.licence == u"openForReuseWithRestrictions":
             self.allowsUsesBesidesDGT = True
-
+        if self.licence in LICENCES_TO_CONDITIONS:
+            self.restrictionsOfUse = LICENCES_TO_CONDITIONS[self.licence]
+        elif self.licence in LICENCES_NO_CONDITIONS:
+            self.restrictionsOfUse = None
         # Call save() method from super class with all arguments.
         super(licenceInfoType_model, self).save(*args, **kwargs)
 
@@ -3553,6 +3584,14 @@ class lingualityInfoType_model(SchemaModel):
         help_text='Provides further information on multilinguality of a re' \
                   'source in free text',
         blank=True, max_length=512, )
+
+    def save(self, *args, **kwargs):
+        if self.lingualityType == u'monolingual':
+            self.multilingualityType = "";
+            self.multilingualityTypeDetails = "";
+
+        # Call save() method from super class with all arguments.
+        super(lingualityInfoType_model, self).save(*args, **kwargs)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
@@ -4103,131 +4142,131 @@ class projectListType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
-    # pylint: disable-msg=C0103
-    # class corpusAudioInfoType_model(SchemaModel):
-    # """
-    # Groups together information on the audio module of a corpus
-    # """
-    #
-    # class Meta:
-    #     verbose_name = "Corpus audio"
-    #
-    #
-    # __schema_name__ = 'corpusAudioInfoType'
-    # __schema_fields__ = (
-    #   ( u'mediaType', u'mediaType', REQUIRED ),
-    #   ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
-    #   ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
-    #   ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
-    #   ( u'audioSizeInfo', u'audioSizeInfo', REQUIRED ),
-    #   ( u'audioContentInfo', u'audioContentInfo', RECOMMENDED ),
-    #   ( u'settingInfo', u'settingInfo', RECOMMENDED ),
-    #   ( u'audioFormatInfo', u'audioformatinfotype_model_set', RECOMMENDED ),
-    #   ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
-    #   ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
-    #   ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
-    #   ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
-    #   ( u'audioClassificationInfo', u'audioclassificationinfotype_model_set', RECOMMENDED ),
-    #   ( u'recordingInfo', u'recordingInfo', RECOMMENDED ),
-    #   ( u'captureInfo', u'captureInfo', RECOMMENDED ),
-    #   ( u'creationInfo', u'creationInfo', OPTIONAL ),
-    #   ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', OPTIONAL ),
-    # )
-    # __schema_classes__ = {
-    #   u'annotationInfo': "annotationInfoType_model",
-    #   u'audioClassificationInfo': "audioClassificationInfoType_model",
-    #   u'audioContentInfo': "audioContentInfoType_model",
-    #   u'audioFormatInfo': "audioFormatInfoType_model",
-    #   u'audioSizeInfo': "audioSizeInfoType_model",
-    #   u'captureInfo': "captureInfoType_model",
-    #   u'creationInfo': "creationInfoType_model",
-    #   u'domainInfo': "domainInfoType_model",
-    #   u'geographicCoverageInfo': "geographicCoverageInfoType_model",
-    #   u'languageInfo': "languageInfoType_model",
-    #   u'lingualityInfo': "lingualityInfoType_model",
-    #   u'linkToOtherMediaInfo': "linkToOtherMediaInfoType_model",
-    #   u'modalityInfo': "modalityInfoType_model",
-    #   u'recordingInfo': "recordingInfoType_model",
-    #   u'settingInfo': "settingInfoType_model",
-    #   u'timeCoverageInfo': "timeCoverageInfoType_model",
-    # }
-    #
-    # mediaType = XmlCharField(
-    #   verbose_name='Media',
-    #   help_text='Specifies the media type of the resource and basically ' \
-    #   'corresponds to the physical medium of the content representation.' \
-    #   ' Each media type is described through a distinctive set of featur' \
-    #   'es. A resource may consist of parts attributed to different types' \
-    #   ' of media. A tool/service may take as input/output more than one ' \
-    #   'different media types.',
-    #   default="audio", editable=False, max_length=1000, )
-    #
-    # lingualityInfo = models.OneToOneField("lingualityInfoType_model",
-    #   verbose_name='Linguality',
-    #   help_text='Groups information on the number of languages of the re' \
-    #   'source part and of the way they are combined to each other',
-    #   )
-    #
-    # # OneToMany field: languageInfo
-    #
-    # # OneToMany field: modalityInfo
-    #
-    # audioSizeInfo = models.ManyToManyField("audioSizeInfoType_model",
-    #   verbose_name='Audio size',
-    #   help_text='SizeInfo Element for Audio parts of a resource',
-    #   related_name="audioSizeInfo_%(class)s_related", )
-    #
-    # audioContentInfo = models.OneToOneField("audioContentInfoType_model",
-    #   verbose_name='Audio content',
-    #   help_text='Groups together information on the contents of the audi' \
-    #   'o part of a resource',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
-    #
-    # settingInfo = models.OneToOneField("settingInfoType_model",
-    #   verbose_name='Setting',
-    #   help_text='Groups together information on the setting of the audio' \
-    #   ' and/or video part of a resource',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
-    #
-    # # OneToMany field: audioFormatInfo
-    #
-    # # OneToMany field: annotationInfo
-    #
-    # # OneToMany field: domainInfo
-    #
-    # # OneToMany field: timeCoverageInfo
-    #
-    # # OneToMany field: geographicCoverageInfo
-    #
-    # # OneToMany field: audioClassificationInfo
-    #
-    # recordingInfo = models.OneToOneField("recordingInfoType_model",
-    #   verbose_name='Recording',
-    #   help_text='Groups together information on the recording of the aud' \
-    #   'io or video part of a resource',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
-    #
-    # captureInfo = models.OneToOneField("captureInfoType_model",
-    #   verbose_name='Capture',
-    #   help_text='Groups together information on the capture of the audio' \
-    #   ' or video part of a corpus',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
-    #
-    # creationInfo = models.OneToOneField("creationInfoType_model",
-    #   verbose_name='Creation',
-    #   help_text='Groups together information on the resource creation (e' \
-    #   '.g. for corpora, selection of texts/audio files/ video files etc.' \
-    #   ' and structural encoding thereof; for lexica, construction of lem' \
-    #   'ma list etc.)',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
-    #
-    # # OneToMany field: linkToOtherMediaInfo
-    #
-    # def real_unicode_(self):
-    #     # pylint: disable-msg=C0301
-    #     formatargs = ['lingualityInfo', 'languageInfo', ]
-    #     formatstring = u'audio ({} {})'
-    #     return self.unicode_(formatstring, formatargs)
+        # pylint: disable-msg=C0103
+        # class corpusAudioInfoType_model(SchemaModel):
+        # """
+        # Groups together information on the audio module of a corpus
+        # """
+        #
+        # class Meta:
+        #     verbose_name = "Corpus audio"
+        #
+        #
+        # __schema_name__ = 'corpusAudioInfoType'
+        # __schema_fields__ = (
+        #   ( u'mediaType', u'mediaType', REQUIRED ),
+        #   ( u'lingualityInfo', u'lingualityInfo', REQUIRED ),
+        #   ( u'languageInfo', u'languageinfotype_model_set', REQUIRED ),
+        #   ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
+        #   ( u'audioSizeInfo', u'audioSizeInfo', REQUIRED ),
+        #   ( u'audioContentInfo', u'audioContentInfo', RECOMMENDED ),
+        #   ( u'settingInfo', u'settingInfo', RECOMMENDED ),
+        #   ( u'audioFormatInfo', u'audioformatinfotype_model_set', RECOMMENDED ),
+        #   ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
+        #   ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
+        #   ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
+        #   ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
+        #   ( u'audioClassificationInfo', u'audioclassificationinfotype_model_set', RECOMMENDED ),
+        #   ( u'recordingInfo', u'recordingInfo', RECOMMENDED ),
+        #   ( u'captureInfo', u'captureInfo', RECOMMENDED ),
+        #   ( u'creationInfo', u'creationInfo', OPTIONAL ),
+        #   ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', OPTIONAL ),
+        # )
+        # __schema_classes__ = {
+        #   u'annotationInfo': "annotationInfoType_model",
+        #   u'audioClassificationInfo': "audioClassificationInfoType_model",
+        #   u'audioContentInfo': "audioContentInfoType_model",
+        #   u'audioFormatInfo': "audioFormatInfoType_model",
+        #   u'audioSizeInfo': "audioSizeInfoType_model",
+        #   u'captureInfo': "captureInfoType_model",
+        #   u'creationInfo': "creationInfoType_model",
+        #   u'domainInfo': "domainInfoType_model",
+        #   u'geographicCoverageInfo': "geographicCoverageInfoType_model",
+        #   u'languageInfo': "languageInfoType_model",
+        #   u'lingualityInfo': "lingualityInfoType_model",
+        #   u'linkToOtherMediaInfo': "linkToOtherMediaInfoType_model",
+        #   u'modalityInfo': "modalityInfoType_model",
+        #   u'recordingInfo': "recordingInfoType_model",
+        #   u'settingInfo': "settingInfoType_model",
+        #   u'timeCoverageInfo': "timeCoverageInfoType_model",
+        # }
+        #
+        # mediaType = XmlCharField(
+        #   verbose_name='Media',
+        #   help_text='Specifies the media type of the resource and basically ' \
+        #   'corresponds to the physical medium of the content representation.' \
+        #   ' Each media type is described through a distinctive set of featur' \
+        #   'es. A resource may consist of parts attributed to different types' \
+        #   ' of media. A tool/service may take as input/output more than one ' \
+        #   'different media types.',
+        #   default="audio", editable=False, max_length=1000, )
+        #
+        # lingualityInfo = models.OneToOneField("lingualityInfoType_model",
+        #   verbose_name='Linguality',
+        #   help_text='Groups information on the number of languages of the re' \
+        #   'source part and of the way they are combined to each other',
+        #   )
+        #
+        # # OneToMany field: languageInfo
+        #
+        # # OneToMany field: modalityInfo
+        #
+        # audioSizeInfo = models.ManyToManyField("audioSizeInfoType_model",
+        #   verbose_name='Audio size',
+        #   help_text='SizeInfo Element for Audio parts of a resource',
+        #   related_name="audioSizeInfo_%(class)s_related", )
+        #
+        # audioContentInfo = models.OneToOneField("audioContentInfoType_model",
+        #   verbose_name='Audio content',
+        #   help_text='Groups together information on the contents of the audi' \
+        #   'o part of a resource',
+        #   blank=True, null=True, on_delete=models.SET_NULL, )
+        #
+        # settingInfo = models.OneToOneField("settingInfoType_model",
+        #   verbose_name='Setting',
+        #   help_text='Groups together information on the setting of the audio' \
+        #   ' and/or video part of a resource',
+        #   blank=True, null=True, on_delete=models.SET_NULL, )
+        #
+        # # OneToMany field: audioFormatInfo
+        #
+        # # OneToMany field: annotationInfo
+        #
+        # # OneToMany field: domainInfo
+        #
+        # # OneToMany field: timeCoverageInfo
+        #
+        # # OneToMany field: geographicCoverageInfo
+        #
+        # # OneToMany field: audioClassificationInfo
+        #
+        # recordingInfo = models.OneToOneField("recordingInfoType_model",
+        #   verbose_name='Recording',
+        #   help_text='Groups together information on the recording of the aud' \
+        #   'io or video part of a resource',
+        #   blank=True, null=True, on_delete=models.SET_NULL, )
+        #
+        # captureInfo = models.OneToOneField("captureInfoType_model",
+        #   verbose_name='Capture',
+        #   help_text='Groups together information on the capture of the audio' \
+        #   ' or video part of a corpus',
+        #   blank=True, null=True, on_delete=models.SET_NULL, )
+        #
+        # creationInfo = models.OneToOneField("creationInfoType_model",
+        #   verbose_name='Creation',
+        #   help_text='Groups together information on the resource creation (e' \
+        #   '.g. for corpora, selection of texts/audio files/ video files etc.' \
+        #   ' and structural encoding thereof; for lexica, construction of lem' \
+        #   'ma list etc.)',
+        #   blank=True, null=True, on_delete=models.SET_NULL, )
+        #
+        # # OneToMany field: linkToOtherMediaInfo
+        #
+        # def real_unicode_(self):
+        #     # pylint: disable-msg=C0301
+        #     formatargs = ['lingualityInfo', 'languageInfo', ]
+        #     formatstring = u'audio ({} {})'
+        #     return self.unicode_(formatstring, formatargs)
 
 
 AUDIOCONTENTINFOTYPE_SPEECHITEMS_CHOICES = _make_choices_from_list([
@@ -4768,6 +4807,34 @@ class corpusTextInfoType_model(SchemaModel):
     # OneToMany field: linkToOtherMediaInfo
 
     back_to_corpusmediatypetype_model = models.ForeignKey("corpusMediaTypeType_model", blank=True, null=True)
+
+
+    # def validate(self):
+    #
+    #     lingualityInfo = self.lingualityInfo.lingualityType
+    #     languages= self.languageinfotype_model_set.count()
+    #     if lingualityInfo == \
+    #             u"monolingual" and languages > 1:
+    #         raise ValidationError('There is an inconsistency between the value '
+    #                               'of "linguality type" and the number of languages '
+    #                               'you have entered. Linguality type: Monolingual, '
+    #                               '# Languages: {}'.format(languages))
+    #     elif lingualityInfo == u"bilingual" and languages != 2:
+    #         raise ValidationError('There is an inconsistency between the value '
+    #                               'of "linguality type" and the number of languages '
+    #                               'you have entered. Linguality type: Bilingual, '
+    #                               '# Languages: {}'.format(languages))
+    #     elif lingualityInfo == u"multilingual" and languages < 3:
+    #         raise ValidationError('There is an inconsistency between the value '
+    #                               'of "linguality type" and the number of languages '
+    #                               'you have entered. Linguality type: Multilingual, '
+    #                               '# Languages: {}'.format(languages))
+    #     return True
+    #
+    # def save(self, *args, **kwargs):
+    #     if self.validate():
+    #     #  Call save() method from super class with all arguments.
+    #         super(corpusTextInfoType_model, self).save(*args, **kwargs)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
