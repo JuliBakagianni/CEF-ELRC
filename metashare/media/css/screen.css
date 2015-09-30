@@ -117,7 +117,7 @@ a:hover span.desc{
 	display: block;	
 	margin-top: 7px;
 	height: 26px;
-	width: 130px;
+	width: 150px;
 	color: white;
 	font-size: 16px !important;	
 	text-decoration: none;	
@@ -432,6 +432,10 @@ form.form_helper ul.errorlist {
 	padding:0px;
 	color:#FF6633;
 	text-align:right;
+}
+
+ul.errorlist{
+    color: red;
 }
 
 form.form_helper tr.error {
