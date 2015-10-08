@@ -7,7 +7,9 @@ from django.core.exceptions import ValidationError
 from metashare.storage.models import ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.settings import LOG_HANDLER, MAXIMUM_UPLOAD_SIZE
 from zipfile import is_zipfile
-
+import subprocess
+from metashare.settings import ROOT_PATH
+from os.path import dirname
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
@@ -44,12 +46,12 @@ def _validate_resource_description(value):
         _xml_raw = ''
         for _chunk in value.chunks():
             _xml_raw += _chunk
-        
         try:
             _xml_tree = fromstring(_xml_raw)
+
         except Exception, _msg:
             raise ValidationError(_msg)
-
+        schema_validate_xml(_xml_raw)
     elif filename.endswith('.zip'):
         valid = False
         try:
@@ -67,6 +69,24 @@ def _validate_resource_description(value):
     # could run an XML validation script here or perform other checks...
     return value
 
+#MILTOS
+def schema_validate_xml(value):
+    command=[]
+    path = '{0}/'.format((dirname(ROOT_PATH)))
+    command.append('java')
+    command.append('-jar')
+    command.append('{}xmlValidator_schema1.1/schemaValidator.jar'.format(path))
+    command.append('{}misc/schema/v3.0.2new-CEF/META-SHARE-Resource.xsd'.format(path))
+    value = value.replace('\r','').replace('\n','').replace('\t','')
+    command.append(value)
+
+    p = subprocess.Popen(command,
+                         stdout=subprocess.PIPE,
+                         stderr=subprocess.STDOUT)
+    _msg = p.communicate()[0]
+    if not _msg == "\nPassed\n":
+        raise ValidationError("Schema Validation {}".format(_msg))
+    return value
 
 class StorageObjectUploadForm(forms.Form):
     """
