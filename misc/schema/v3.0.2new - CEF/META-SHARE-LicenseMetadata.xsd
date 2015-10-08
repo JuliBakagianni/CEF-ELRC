@@ -120,10 +120,7 @@
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
 						<xs:maxLength value="100"/>
-						<xs:enumeration value="PDDL"/>
-						<xs:enumeration value="ODC-BY"/>
-						<xs:enumeration value="PSI-licence"/>
-						<xs:enumeration value="ODbL"/>
+						<xs:enumeration value="PSI-directive"/>
 						<xs:enumeration value="CC-BY"/>
 						<xs:enumeration value="CC-BY-NC"/>
 						<xs:enumeration value="CC-BY-NC-ND"/>
@@ -131,6 +128,10 @@
 						<xs:enumeration value="CC-BY-ND"/>
 						<xs:enumeration value="CC-BY-SA"/>
 						<xs:enumeration value="CC-ZERO"/>
+						<xs:enumeration value="PDDL"/>
+						<xs:enumeration value="ODC-BY"/>
+						<xs:enumeration value="ODbL"/>
+						<xs:enumeration value="openForReuseWithRestrictions"/>
 						<xs:enumeration value="FreeOpenDataLicence_Belgium"/>
 						<xs:enumeration value="OpenDataLicenceAtAFairCost_Belgium"/>
 						<xs:enumeration value="FreeOpenDataLicenceForNon-CommercialRe-use_Belgium"/>
@@ -139,17 +140,23 @@
 						<xs:enumeration value="LicenceOuverte-OpenLicence_France"/>
 						<xs:enumeration value="DL-DE-BY_Germany"/>
 						<xs:enumeration value="DL-DE-ZERO_Germany"/>
+						<xs:enumeration value="PSI-licence_Ireland"/>
 						<xs:enumeration value="IODL_Italy"/>
 						<xs:enumeration value="NLOD_Norway"/>
-						<xs:enumeration value="IGCYL-NC_Spain"/>
-						<xs:enumeration value="ColorIURIS_Spain"/>
 						<xs:enumeration value="OGL_UK"/>
 						<xs:enumeration value="NCGL_UK"/>
-						<xs:enumeration value="openForReuseWithRestrictions"/>
-						<xs:enumeration value="termsOfUse"/>
-						<xs:enumeration value="proprietary"/>
+						<xs:enumeration value="non-standard_Other_Licence_Terms">
+							<xs:annotation>
+								<xs:appinfo>
+									<xs:label>non-standard/other licence/terms</xs:label>
+								</xs:appinfo>
+							</xs:annotation>
+						</xs:enumeration>
 						<xs:enumeration value="underNegotiation"/>
-						<xs:enumeration value="other"/>
+						<!--
+						<xs:enumeration value="IGCYL-NC_Spain"/>
+						<xs:enumeration value="ColorIURIS_Spain"/>
+-->
 						<!---
 						<xs:enumeration value="MS-NoReD"/>
 						<xs:enumeration value="MS-NoReD-FF"/>
@@ -191,11 +198,12 @@
 					<xs:documentation>If the resource includes sensitive data, this field can be used for entering more information, e.g. whether special handling of the resource is required (e.g. anonymisation)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="conditionsOfUse" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="restrictionsOfUse" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Specifies terms and conditions of use (e.g. attribution, payment etc.) imposed by the licence</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-many</relation>
+						<label>Conditions of Use</label>
 					</xs:appinfo>
 				</xs:annotation>
 				<xs:simpleType>
@@ -221,9 +229,10 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="termsOfUseText" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="otherLicenceName" type="xs:string" minOccurs="0"/>
+			<xs:element name="otherLicence_TermsText" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Used to provide a free text description of the terms of use associated with a resource (mainly for non-standard licences)</xs:documentation>
+					<xs:documentation>Used for inputting the text of licences that are not included in the pre-defined list or terms of use statements associated with a resource</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:simpleContent>
@@ -237,9 +246,9 @@
 					<xs:field xpath="@lang"/>
 				</xs:unique>
 			</xs:element>
-			<xs:element name="termsOfUseURL" type="ms:httpURI" minOccurs="0">
+			<xs:element name="otherLicence_TermsURL" type="ms:httpURI" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Used to provide a hyperlink to a url describing the terms of use for a language resource (mainly for non-standard licences)</xs:documentation>
+					<xs:documentation>Used to provide a hyperlink to a url containing the text of a licence not included in the predefined list or describing the terms of use for a language resource</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<!--
@@ -283,7 +292,6 @@
 				</xs:annotation>
 			</xs:element>
 -->
-
 			<xs:element name="fee" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Specifies the costs that are required to access the resource, a fragment of the resource or to use a tool or service</xs:documentation>
