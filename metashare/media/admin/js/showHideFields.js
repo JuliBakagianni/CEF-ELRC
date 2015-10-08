@@ -1,14 +1,20 @@
 $(document).ready(function () {
-    // show restrictionsOfUse field only for specific licences
-    var licences = ["openForReuseWithRestrictions", "termsOfUse", "proprietary", "underNegotiation", "other"];
-    $("select option:selected").each(function () {
-        if (jQuery.inArray($(this).val(), licences) != -1) {
-            $(this).parent().parent().parent().siblings(".form-row.restrictionsOfUse").show();
-        }
-        else {
-            $(this).parent().parent().parent().siblings(".form-row.restrictionsOfUse").hide();
-        }
-    });
+    // show conditionsOfUse field only for specific licences
+    var licences = ["openForReuseWithRestrictions", "non-standard_Other_Licence_Terms", "underNegotiation"];
+    $(window).load(function () {
+        $("select option:selected").each(function () {
+            if ($(this).val() != "non-standard_Other_Licence_Terms") {
+                $(this).parent().parent().parent().siblings(".form-row.otherLicenceName").hide();
+            }
+            if (jQuery.inArray($(this).val(), licences) != -1) {
+                $(this).parent().parent().parent().siblings(".form-row.restrictionsOfUse").show();
+            }
+            else {
+                $(this).parent().parent().parent().siblings(".form-row.restrictionsOfUse").hide();
+            }
+        });
+    })
+
 
     $('select').on('change', function () {
         if (jQuery.inArray($(this).val(), licences) != -1) {
@@ -16,6 +22,14 @@ $(document).ready(function () {
         }
         else {
             $(this).parent().parent().siblings(".form-row.restrictionsOfUse").hide();
+        }
+        if ($(this).val() == 'non-standard_Other_Licence_Terms') {
+            $(this).parent().parent().siblings(".form-row.otherLicenceName").show();
+            $(this).parent().parent().siblings(".form-row.otherLicenceName").find("input").removeAttr('disabled');
+        }
+        else {
+            $(this).parent().parent().siblings(".form-row.otherLicenceName").hide();
+            $(this).parent().parent().siblings(".form-row.otherLicenceName").find("input").attr('disabled', 'disabled');
         }
     })
 
