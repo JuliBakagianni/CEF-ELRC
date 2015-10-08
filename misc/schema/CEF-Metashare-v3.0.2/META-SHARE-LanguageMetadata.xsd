@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited by ILSP/Athena R.C. -->
 <xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xerces="http://xerces.apache.org" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en">
-	<xs:include schemaLocation="./META-SHARE-SimpleTypes.xsd"/>
-	<xs:include schemaLocation="./META-SHARE-RoleTypes.xsd"/>
-	<xs:include schemaLocation="./META-SHARE-LicenseMetadata.xsd"/>
+	<xs:include schemaLocation="META-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="META-SHARE-RoleTypes.xsd"/>
+	<xs:include schemaLocation="META-SHARE-LicenseMetadata.xsd"/>
 	<!-- definition of complex types -->
 	<!-- media type info TextInfo/imageInfo/AudioInfo/VideInfo etc-->
 	<xs:complexType name="characterEncodingInfoType">

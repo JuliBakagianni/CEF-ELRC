@@ -2,12 +2,12 @@
 <!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by uni (uni) -->
 <!-- edited by ILSP/Athena R.C. -->
 <xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en">
-	<xs:include schemaLocation="./META-SHARE-SimpleTypes.xsd"/>
-	<xs:include schemaLocation="./META-SHARE-RoleTypes.xsd"/>
-	<xs:include schemaLocation="./META-SHARE-LicenseMetadata.xsd"/>
-	<xs:include schemaLocation="./META-SHARE-LanguageMetadata.xsd"/>
-	<xs:include schemaLocation="./META-SHARE-UsageMetadata.xsd"/>
-	<xs:include schemaLocation="./META-SHARE-LanguageMetadata.xsd"/>
+	<xs:include schemaLocation="META-SHARE-SimpleTypes.xsd"/>
+	<xs:include schemaLocation="META-SHARE-RoleTypes.xsd"/>
+	<xs:include schemaLocation="META-SHARE-LicenseMetadata.xsd"/>
+	<xs:include schemaLocation="META-SHARE-LanguageMetadata.xsd"/>
+	<xs:include schemaLocation="META-SHARE-UsageMetadata.xsd"/>
+	<xs:include schemaLocation="META-SHARE-LanguageMetadata.xsd"/>
 	<!-- definition of complex types -->
 	<xs:complexType name="identificationInfoType">
 		<xs:annotation>
