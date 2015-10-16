@@ -2905,6 +2905,7 @@ class distributionInfoType_model(SchemaModel):
     __schema_fields__ = (
         ( u'availability', u'availability', REQUIRED ),
         ( u'licenceInfo', u'licenceinfotype_model_set', REQUIRED ),
+        (u'allowsUsesBesidesDGT', u'allowsUsesBesidesDGT', REQUIRED),
         ( 'iprHolder/personInfo', 'iprHolder', OPTIONAL ),
         ( 'iprHolder/organizationInfo', 'iprHolder', OPTIONAL ),
         # ( u'availabilityEndDate', u'availabilityEndDate', OPTIONAL ),
@@ -2928,6 +2929,14 @@ class distributionInfoType_model(SchemaModel):
     )
 
     # OneToMany field: licenceInfo
+
+    allowsUsesBesidesDGT = models.BooleanField(
+        verbose_name='Allows Uses Besides DGT',
+        help_text='Whether the resource ' \
+                  'can be used for purposes ' \
+                  'other than those of the DGT',
+        default=True,
+    )
 
     iprHolder = models.ManyToManyField("actorInfoType_model",
                                        verbose_name='Ipr holder',
@@ -2965,9 +2974,14 @@ class distributionInfoType_model(SchemaModel):
         licences = []
         for licenceInfo in self.licenceinfotype_model_set.all():
             licences.append(licenceInfo.licence)
+
+        for l in licences:
+            if l.startswith(u"CC") or l == u"openForReuseWithRestrictions":
+                self.allowsUsesBesidesDGT = True
+
         if u'underNegotiation' in licences:
             self.availability = u'underNegotiation'
-        elif bool(set(licences) & set([u'ODC-BY', u'PSI-licence', u'ODbL', u'CC-BY',
+        elif bool(set(licences) & set([u'ODC-BY', u'PSI-licence_Ireland', u'ODbL', u'CC-BY',
                                        u'CC-BY-NC', u'CC-BY-NC-ND', u'CC-BY-NC-SA', u'CC-BY-ND', u'CC-BY-SA',
                                        u'FreeOpenDataLicence_Belgium', u'OpenDataLicenceAtAFairCost_Belgium',
                                        u'FreeOpenDataLicenceForNon-CommercialRe-use_Belgium',
@@ -2975,7 +2989,9 @@ class distributionInfoType_model(SchemaModel):
                                        u'NLSOpenDataLicence_Finland', u'LicenceOuverte-OpenLicence_France',
                                        u'DL-DE-BY_Germany', u'IODL_Italy', u'NLOD_Norway', u'IGCYL-NC_Spain',
                                        u'ColorIURIS_Spain', u'OGL_UK', u'NCGL_UK', u'openForReuseWithRestrictions',
-                                       u'termsOfUse', u'proprietary', u'other', ])):
+                                       u'non-standard_Other_Licence_Terms',
+                                       # u'proprietary', u'other',
+                                       ])):
             self.availability = u'available-restrictedUse'
 
         else:
@@ -3028,24 +3044,38 @@ class distributionInfoType_model(SchemaModel):
 #         return self.unicode_(formatstring, formatargs)
 
 LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
-    u'PDDL', u'ODC-BY', u'PSI-licence', u'ODbL',
-    u'CC-BY', u'CC-BY-NC', u'CC-BY-NC-ND',
-    u'CC-BY-NC-SA', u'CC-BY-ND', u'CC-BY-SA', u'CC-ZERO',
+    u'PSI-directive', u'CC-BY', u'CC-BY-NC', u'CC-BY-NC-ND',
+    u'CC-BY-NC-SA', u'CC-BY-ND', u'CC-BY-SA', u'CC-ZERO', u'PDDL',
+    u'ODC-BY', u'ODbL', u'openForReuseWithRestrictions',
     u'FreeOpenDataLicence_Belgium',
     u'OpenDataLicenceAtAFairCost_Belgium', u'FreeOpenDataLicenceForNon-CommercialRe-use_Belgium',
     u'OpenDataLicenceAtAFairCostForCommercialRe-use_Belgium', u'NLSOpenDataLicence_Finland',
     u'LicenceOuverte-OpenLicence_France',
-    u'DL-DE-BY_Germany', u'DL-DE-ZERO_Germany', u'IODL_Italy',
-    u'NLOD_Norway', u'IGCYL-NC_Spain', u'ColorIURIS_Spain',
-    u'OGL_UK', u'NCGL_UK', u'openForReuseWithRestrictions',
-    u'termsOfUse', u'proprietary', u'underNegotiation', u'other',
+    u'DL-DE-BY_Germany', u'DL-DE-ZERO_Germany', u'PSI-licence_Ireland',
+    u'IODL_Italy', u'NLOD_Norway', u'OGL_UK', u'NCGL_UK',
+    u'non-standard_Other_Licence_Terms',
+    u'underNegotiation',
+    # u'termsOfUse', u'proprietary',
+    # u'IGCYL-NC_Spain', u'ColorIURIS_Spain',
     # u'MS-NoReD', u'MS-NoReD-FF', u'MS-NoReD-ND',
     # u'MS-NoReD-ND-FF',u'MS-NC-NoReD', u'MS-NC-NoReD-FF', u'MS-NC-NoReD-ND',
     # u'MS-NC-NoReD-ND-FF', u'AGPL', u'ApacheLicence_2.0',u'BSD',
     # u'BSD-style', u'GFDL', u'GPL', u'LGPL', u'Princeton_Wordnet',
-
-
 ])
+
+def licenceinfotype_licence_optgroup_choices():
+    """
+    Group the choices in groups. The first group is the most used choices
+    and the second group is the rest.
+    """
+    international = ('International Open Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][:12])
+    national = ('National Open Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][12 :25])
+    other = ('More', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][25:])
+    optgroup = [international, national, other]
+    return optgroup
+
+
+
 
 LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES = _make_choices_from_list([
     u'nonCommercialUse', u'commercialUse',
@@ -3056,7 +3086,7 @@ LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES = _make_choices_from_list([
 
 LICENCES_TO_CONDITIONS = {
     u'ODC-BY': [u'attribution'],
-    u'PSI-licence': [u'attribution'],
+    u'PSI-licence_Ireland': [u'attribution'],
     u'ODbL': [u'attribution', u'shareAlike'],
     u'CC-BY': [u'attribution'],
     u'CC-BY-NC': [u'attribution', u'nonCommercialUse'],
@@ -3107,12 +3137,12 @@ class licenceInfoType_model(SchemaModel):
     __schema_name__ = 'licenceInfoType'
     __schema_fields__ = (
         ( u'licence', u'licence', REQUIRED ),
+        ( u'otherLicenceName', u'otherLicenceName', OPTIONAL),
         ( u'personalDataIncluded', u'personalDataIncluded', REQUIRED ),
         ( u'personalDataAdditionalInfo', u'personalDataAdditionalInfo', OPTIONAL ),
         ( u'sensitiveDataIncluded', u'sensitiveDataIncluded', REQUIRED ),
         ( u'sensitiveDataAdditionalInfo', u'sensitiveDataAdditionalInfo', OPTIONAL ),
         ( u'restrictionsOfUse', u'restrictionsOfUse', OPTIONAL ),
-        (u'allowsUsesBesidesDGT', u'allowsUsesBesidesDGT', REQUIRED),
         ( u'termsOfUseText', u'termsOfUseText', OPTIONAL ),
         ( u'termsOfUseURL', u'termsOfUseURL', OPTIONAL ),
         # ( u'distributionAccessMedium', u'distributionAccessMedium', RECOMMENDED ),
@@ -3136,12 +3166,19 @@ class licenceInfoType_model(SchemaModel):
     licence = models.CharField(
         verbose_name='Licence',
         help_text='The licence of use for the resource; for an overview of' \
-                  ' licences, please visit: http://www.meta-net.eu/meta-share/licens' \
-                  'es',
+                  ' licences, please visit: <a href="http://www.meta-net.eu/meta-share/licens' \
+                  'es" target="_blank">http://www.meta-net.eu/meta-share/licens' \
+                  'es</a>',
 
         max_length=100,
-        choices=LICENCEINFOTYPE_LICENCE_CHOICES['choices'],
+        choices=licenceinfotype_licence_optgroup_choices(),
     )
+
+    otherLicenceName = XmlCharField(
+        verbose_name='Other Licence Name',
+        help_text='Specifies the costs that are required to access the res' \
+                  'ource, a fragment of the resource or to use a tool or service',
+        blank=True, null=True, max_length=200, )
 
     personalDataIncluded = models.BooleanField(
         verbose_name='Personal Data Included',
@@ -3152,7 +3189,7 @@ class licenceInfoType_model(SchemaModel):
     )
 
     personalDataAdditionalInfo = models.TextField(
-        verbose_name='Additional Information',
+        verbose_name='Personal Data Additional Information',
         help_text='If the resource includes personal data, ' \
                   'this field can be used for entering more ' \
                   'information, e.g. whether special handling ' \
@@ -3170,7 +3207,7 @@ class licenceInfoType_model(SchemaModel):
     )
 
     sensitiveDataAdditionalInfo = models.TextField(
-        verbose_name='Additional Information',
+        verbose_name='Sensitive Data Additional Information',
         help_text='If the resource includes sensitive data, ' \
                   'this field can be used for entering more ' \
                   'information, e.g. whether special handling ' \
@@ -3186,14 +3223,6 @@ class licenceInfoType_model(SchemaModel):
         blank=True,
         max_length=1 + len(LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES['choices']) / 4,
         choices=LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES['choices'],
-    )
-
-    allowsUsesBesidesDGT = models.BooleanField(
-        verbose_name='Allows Uses Besides DGT',
-        help_text='Whether the resource ' \
-                  'can be used for purposes ' \
-                  'other than those of the DGT',
-        default=True,
     )
 
     termsOfUseText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
@@ -3309,10 +3338,13 @@ class licenceInfoType_model(SchemaModel):
     def has_sensitive_data(self):
         return self.sensitiveDataIncluded
 
+    # def clean(self):
+    #
+    #     if self.licence == u'termsOfUse' and not self.restrictionsOfUse:
+    #         raise forms.ValidationError(u'You have not defined conditions for {} licence'.format(self.licence))
+
     def save(self, *args, **kwargs):
 
-        if self.licence.startswith(u"CC") or self.licence == u"openForReuseWithRestrictions":
-            self.allowsUsesBesidesDGT = True
         if self.licence in LICENCES_TO_CONDITIONS:
             self.restrictionsOfUse = LICENCES_TO_CONDITIONS[self.licence]
         elif self.licence in LICENCES_NO_CONDITIONS:
@@ -3679,6 +3711,7 @@ class languageInfoType_model(SchemaModel):
     __schema_fields__ = (
         ( u'languageId', u'languageId', REQUIRED ),
         ( u'languageName', u'languageName', REQUIRED ),
+        # ( u'language', u'language', REQUIRED ),
         # ( u'languageScript', u'languageScript', OPTIONAL ),
         ( u'sizePerLanguage', u'sizePerLanguage', OPTIONAL ),
         ( u'languageVarietyInfo', u'languageVarietyInfo', OPTIONAL ),
@@ -3709,6 +3742,18 @@ class languageInfoType_model(SchemaModel):
         max_length=100,
         choices=languageinfotype_languagename_optgroup_choices(),
     )
+
+    # language = LanguageField(widget=LanguageWidget(),
+    #     verbose_name='Language',
+    #     help_text='A human understandable name of the language that is use' \
+    #               'd in the resource or supported by the tool/service; an autocomple' \
+    #               'tion mechanism with values from the ISO 639 is provided in the ed' \
+    #               'itor, but the values can be subsequently edited for further speci' \
+    #               'fication (according to the IETF BCP47 guidelines)',
+    #     max_length=100,
+    #     choices=languageinfotype_languagename_optgroup_choices(),
+    #     null=True,
+    # )
 
     # languageScript = XmlCharField(
     #   verbose_name='Language script',
@@ -4807,34 +4852,6 @@ class corpusTextInfoType_model(SchemaModel):
     # OneToMany field: linkToOtherMediaInfo
 
     back_to_corpusmediatypetype_model = models.ForeignKey("corpusMediaTypeType_model", blank=True, null=True)
-
-
-    # def validate(self):
-    #
-    #     lingualityInfo = self.lingualityInfo.lingualityType
-    #     languages= self.languageinfotype_model_set.count()
-    #     if lingualityInfo == \
-    #             u"monolingual" and languages > 1:
-    #         raise ValidationError('There is an inconsistency between the value '
-    #                               'of "linguality type" and the number of languages '
-    #                               'you have entered. Linguality type: Monolingual, '
-    #                               '# Languages: {}'.format(languages))
-    #     elif lingualityInfo == u"bilingual" and languages != 2:
-    #         raise ValidationError('There is an inconsistency between the value '
-    #                               'of "linguality type" and the number of languages '
-    #                               'you have entered. Linguality type: Bilingual, '
-    #                               '# Languages: {}'.format(languages))
-    #     elif lingualityInfo == u"multilingual" and languages < 3:
-    #         raise ValidationError('There is an inconsistency between the value '
-    #                               'of "linguality type" and the number of languages '
-    #                               'you have entered. Linguality type: Multilingual, '
-    #                               '# Languages: {}'.format(languages))
-    #     return True
-    #
-    # def save(self, *args, **kwargs):
-    #     if self.validate():
-    #     #  Call save() method from super class with all arguments.
-    #         super(corpusTextInfoType_model, self).save(*args, **kwargs)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
