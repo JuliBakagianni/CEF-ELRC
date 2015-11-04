@@ -27,6 +27,7 @@ sqs = SearchQuerySet() \
   .facet("textTextGenreFilter") \
   .facet("textTextTypeFilter") \
   .facet("languageVarietyFilter") \
+  .facet("appropriatenessForDSIFilter") \
 
   # .facet("languageDescriptionGrammaticalPhenomenaCoverageFilter") \
   # .facet("toolServiceToolServiceTypeFilter") \
