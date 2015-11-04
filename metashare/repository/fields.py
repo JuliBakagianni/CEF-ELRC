@@ -98,6 +98,12 @@ class MultiTextField(models.Field):
         if 'label' in kwargs:
             self.label = kwargs.pop('label')
 
+        if 'choices' in kwargs:
+            self.widget.choices = kwargs.pop('choices')
+
+
+
+
         super(MultiTextField, self).__init__(*args, **kwargs)
 
     def validate(self, value, model_instance):
