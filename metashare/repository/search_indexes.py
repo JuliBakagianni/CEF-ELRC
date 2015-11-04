@@ -286,9 +286,11 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     #                             label=_('Order'), facet_id=54, parent_id=3,
     #                             faceted=True)
     languageVarietyFilter = LabeledMultiValueField(
-                                label=_('Language Variety'), facet_id=55, parent_id=0,
+                                label=_('Language Variety'), facet_id=7, parent_id=0,
                                 faceted=True)
-
+    appropriatenessForDSIFilter = LabeledMultiValueField(
+                                label=_('Appropriateness For DSI'), facet_id=56, parent_id=0,
+                                faceted=True)
     # we create all items that may appear in the search results list already at
     # index time
     rendered_result = CharField(use_template=True, indexed=False)
@@ -1864,3 +1866,8 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return result
 
+    def prepare_appropriatenessForDSIFilter(self, obj):
+        """
+        Collect the data to filter the resources on appropriatenessForDSIFilter
+        """
+        return obj.identificationInfo.get_appropriatenessForDSI_display_list()
