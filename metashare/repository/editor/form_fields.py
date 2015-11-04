@@ -4,10 +4,10 @@ from django.forms import fields as django_fields
 from django.utils.translation import ugettext_lazy as _
 
 from metashare.repository import validators
-from metashare.repository.editor.widgets import LangDictWidget
 from xorformfields.forms import MutuallyExclusiveValueField
 from metashare.repository.editor.widgets import LangDictWidget, \
-    AdminMutuallyExclusiveRadioWidget
+    AdminMutuallyExclusiveRadioWidget, MultiSelect3Widget
+
 
 class DictField(django_fields.Field):
     """
@@ -21,7 +21,7 @@ class DictField(django_fields.Field):
         'duplicate_key': _(u'There may be only one entry with key "{}".'),
     }
 
-    def __init__(self, max_key_length=None, max_val_length=None, **kwargs):
+    def __init__(self, max_key_length=None, max_val_length=None , **kwargs):
         """
         Initializes a new `DictField`.
         
@@ -95,3 +95,38 @@ class AdminMutuallyExclusiveValueField(MutuallyExclusiveValueField):
 
         super(AdminMutuallyExclusiveValueField, self).__init__(
             fields, *args, **kwargs)
+
+# class LanguageField(MultiValueField):
+#     """
+#     A MultiValueField that aggregates two CharFields. It uses
+#     the AdminMutuallyExclusiveRadioWidget, which has a Select
+#     widget and a TextInput widget.
+#     """
+#     def __init__(self, fields=(), *args, **kwargs):
+#         self.choices = kwargs.pop('choices', [])
+#         if 'widget' not in kwargs:
+#             kwargs['widget'] = LanguageWidget(widgets=[
+#                     forms.Select(choices=self.choices),
+#                     forms.Select(choices=self.choices),
+#                     forms.Select(choices=self.choices),
+#                     forms.Select(choices=self.choices)])
+#
+#         if len(fields)==0:
+#             fields = (forms.CharField(), forms.CharField(), forms.CharField(), forms.CharField())
+#
+#         super(LanguageField, self).__init__(
+#             fields, *args, **kwargs)
+
+class MultiSelect3Field(forms.MultiValueField):
+    widget = MultiSelect3Widget
+
+    def __init__(self, *args, **kwargs):
+        super(MultiSelect3Field, self).__init__(*args, **kwargs)
+        fields = (
+            forms.CharField(),
+            forms.CharField(),
+            forms.CharField()
+        )
+
+    def compress(self, data_list):
+        return ' '.join(data_list)

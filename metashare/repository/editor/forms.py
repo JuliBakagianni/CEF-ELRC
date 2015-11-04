@@ -4,6 +4,7 @@ from xml.etree.ElementTree import fromstring
 
 from django import forms
 from django.core.exceptions import ValidationError
+from django.utils.safestring import mark_safe
 from metashare.storage.models import ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.settings import LOG_HANDLER, MAXIMUM_UPLOAD_SIZE
 from zipfile import is_zipfile
@@ -85,7 +86,7 @@ def schema_validate_xml(value):
                          stderr=subprocess.STDOUT)
     _msg = p.communicate()[0]
     if not _msg == "\nPassed\n":
-        raise ValidationError("Schema Validation {}".format(_msg))
+        raise ValidationError(mark_safe('<b>Schema Validation</b><br/> {}'.format(_msg)))
     return value
 
 class StorageObjectUploadForm(forms.Form):

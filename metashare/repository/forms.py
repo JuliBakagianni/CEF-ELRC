@@ -15,8 +15,8 @@ from metashare.repository.search_indexes import resourceInfoType_modelIndex
 
 from haystack.forms import FacetedSearchForm
 from haystack.query import SQ
-
-
+from metashare.utils import prettify_camel_case_string
+from metashare.settings import MEDIA_URL
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
@@ -161,34 +161,47 @@ class LicenseSelectionForm(forms.Form):
             """
             def __iter__(self):
                 for i, choice in enumerate(self.choices):
+                    l_name=(choice[0],prettify_camel_case_string(licences[choice[0]][0].licence))
                     yield (licences[choice[0]][0],
                            forms.widgets.RadioInput(self.name, self.value,
-                                                self.attrs.copy(), choice, i))
+                                                self.attrs.copy(), l_name, i))
 
             def render(self):
                 return mark_safe(u'<ul>{0}\n</ul>'.format(
                     u'\n'.join([u'<li><div>{0}</div>\n{1}</li>' \
                                     .format(force_unicode(w),
-                                            self._create_restrictions_block(l,
-                                                                w.choice_value))
+                                            self._create_restrictions_block(l, l.id, w.choice_value))
                                 for (l, w) in self])))
 
-            def _create_restrictions_block(self, licence_info, licence_name):
+            def _create_restrictions_block(self, licence_info, licence_id, licence_name):
                 """
                 Creates an HTML block element string containing the restrictions
                 of the given license information.
                 """
-                result = u'<div><p>{0}</p>\n<ul>' \
-                    .format(_('Conditions of use:'))
                 r_list = licence_info.get_restrictionsOfUse_display_list()
+                try:
+                    if licences[licence_id][1]:
+                        direct_download_msg = u'<img src="'+MEDIA_URL + "images/ok.png"+u' " alt="&#10003;" style="width:20px;height:20px;"> {0}'.format(_('Direct download available'))
+                    else:
+                        direct_download_msg = u'<img src="'+MEDIA_URL + "images/warning.png"+u' " alt="&#9888;" style="width:20px;height:20px;"> {0}'.format(_('No direct download available'))
+                        # direct_download_msg = u'<span style="color:orange;font-size:16pt;font-weight:bold">&#9888; </span>{0}'.format(_('No direct download available'))
+                except KeyError:
+                    if licences[licence_name][1]:
+                        direct_download_msg = u'<img src="'+MEDIA_URL + "images/ok.png"+u' " alt="&#10003;" style="width:20px;height:20px;"> {0}'.format(_('Direct download available'))
+                    else:
+                        direct_download_msg = u'<img src="'+MEDIA_URL + "images/warning.png"+u' " alt="&#9888;" style="width:20px;height:20px;"> {0}'.format(_('No direct download available'))
                 if r_list:
+                    result = u'<div><p>{0}</p><p>{1}</p>' \
+                    .format(direct_download_msg, _('Conditions of use:'))
+                    result += u'\n<ul>'
                     for restr in r_list:
-                        result += u'<li>{0}</li>'.format(restr)
-                if licences[licence_name][1]:
-                    direct_download_msg = _('direct download available')
+                        result += u'<li style="font-style:italic">{0}</li>'.format(restr)
+                    result += u'</ul>'
                 else:
-                    direct_download_msg = _('no direct download available')
-                result += u'<li>{0}</li></ul></div>'.format(direct_download_msg)
+                    result = u'<div><p>{0}</p>' \
+                    .format(direct_download_msg,)
+
+                # result += u'<li>{0}</li></ul></div>'.format(direct_download_msg)
                 return result
 
         self.fields['licence'] = \
