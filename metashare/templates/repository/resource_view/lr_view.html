@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load get_icon %}
+{% load url_target %}
+{% load replace %}
 
 {% block title %}
   {{ resourceName }} &ndash; META-SHARE
@@ -41,7 +43,7 @@
 	            fixedArrows: false,
 	            arrowsOpacity: 0.8,
 	            width: 273,
-	            height:24,
+	            height:24
         	});	
 		
 			$(".tab_content").hide();
@@ -164,11 +166,12 @@
 			 	{% for address in url %}
 					<h3 style="font-size:14px;">
 						<label>
-							{{ address|urlize }}{% if not forloop.last %},{% endif %}
+							{{ address|urlize|url_target:'_blank' }}{% if not forloop.last %},{% endif %}
 						</label>
 					</h3>
 				{% endfor %}
 			{% endif %}
+
 			
 			{% if not 'NOT_DEFINED' in metaShareId %}<h4 class="identifier">{{ metaShareId }}</h4>{% endif %}
 			{% if identifier %}
@@ -179,6 +182,7 @@
 		 		{% endfor %}
 		 		</div>
 	 		{% endif %}
+
 	 		
 		<h4 style="text-align:justify" class="readmore desc">{{ description|linebreaksbr }}</h4>
 		
@@ -188,7 +192,23 @@
 			{% for desc in other_descriptions %}<h4 style="text-align:justify" class="readmore">{{ desc|linebreaksbr }}</h4>{% endfor %} 
 			</div> 
 		{% endifnotequal %}
-		
+
+         {% if elrcServices %}
+					<h3 style="font-size:14px;">
+							<label>Created Using ELRC Services</label>
+					</h3>
+			{% endif %}
+
+            {% if dsi %}
+					<h3 style="font-size:14px;">
+
+							<label>Appropriateness for DSI:</label>
+                            {% for d in dsi %}
+                                {{ d|pretty_camel }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+					</h3>
+			{% endif %}
+
 		<div style="clear: both;">
 			<a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
 		    <a href="{% url metashare.repository.views.download resource.storage_object.identifier %}">

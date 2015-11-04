@@ -51,12 +51,12 @@
         {% for fieldset in inline_admin_form %}
           {% for line in fieldset %}
             {% for field in line %}
-              <td class="{{ field.field.name }}">
+              <td class="{{ field.field.name }}" {% if field.field.help_text %} title="{{ field.field.help_text|safe }}"{% endif %}>
               {% if field.is_readonly %}
                   <p>{{ field.contents }}</p>
               {% else %}
                   {{ field.field.errors.as_ul }}
-                  <span{% if field.field.help_text %} title="{{ field.field.help_text|safe }}"{% endif %}>{{ field.field }}</span>
+                  {{ field.field }}
               {% endif %}
               </td>
             {% endfor %}

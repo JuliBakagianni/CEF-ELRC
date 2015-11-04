@@ -1,3 +1,4 @@
+{% load htmlattributes %}
 <fieldset class="module aligned {{ fieldset.classes }}">
     {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
     {% if fieldset.description %}
@@ -8,7 +9,7 @@
             {{ field.field.name }}{% if field.field.is_hidden %} display_none{% endif %}{% endfor %}">
             {% if line.fields|length_is:'1' %}{{ line.errors }}{% endif %}
             {% for field in line %}
-                <div{% if not line.fields|length_is:'1' %}
+                <div {% if field.field.help_text %}title="{{ field.field.help_text|safe|dq_to_sq }}" {% endif %} {% if not line.fields|length_is:'1' %}
                     class="field-box{% if not field.is_readonly and field.errors %} errors{% endif %}"{% endif %}>
                     {% if not line.fields|length_is:'1' and not field.is_readonly %}{{ field.errors }}{% endif %}
                     {% if field.is_checkbox %}
@@ -21,11 +22,11 @@
                             {{ field.field }}
                         {% endif %}
                     {% endif %}
-                    {% if field.field.help_text %}
-                        <p class="help">{{ field.field.help_text|safe }}
-                            {#                            <span class="helpLink" kblink="{{ kb_link }}{{ field.field.name }}"><img class="help_icon" src="{{ help_icon_url }}" kblink="{{ kb_link }}{{ field.field.name }}"></img></span>#}
-                        </p>
-                    {% endif %}
+{#                    {% if field.field.help_text %}#}
+{#                        <p class="help_info">{{ field.field.help_text|safe }}#}
+{#                                                        <span class="helpLink" kblink="{{ kb_link }}{{ field.field.name }}"><img class="help_icon" src="{{ help_icon_url }}" kblink="{{ kb_link }}{{ field.field.name }}"></img></span>#}
+{#                        </p>#}
+{#                    {% endif %}#}
                 </div>
             {% endfor %}
         </div>
@@ -40,9 +41,9 @@ If the checkbox gets unchecked then the textarea is disabled. This way we are su
 <script type="text/javascript">
     (function ($) {
         $(document).ready(function () {
-            lingualityOptions = ["bilingual", "multilingual"];
+            lingualityOptions = ["monolingual", "bilingual", "multilingual"];
             $(".form-row.lingualityType").each(function () {
-                if (jQuery.inArray($(this).find("select option:selected").val(), lingualityOptions) != -1) {
+                if (jQuery.inArray($(this).find("select option:selected").val(), lingualityOptions.slice(1)) != -1) {
                     $(this).siblings("div").show();
                 } else {
                     $(this).siblings("div").hide();
@@ -50,12 +51,15 @@ If the checkbox gets unchecked then the textarea is disabled. This way we are su
             });
 
             $(".form-row.lingualityType").find("select").on('change', function () {
-                if (jQuery.inArray($(this).val(),                                lingualityOptions) != -1) {
+                if (jQuery.inArray($(this).val(), lingualityOptions.slice(1)) != -1) {
                     $(this).parent().parent().siblings("div").show();
                 } else {
                     $(this).parent().parent().siblings("div").hide();
                 }
             })
+
         })
     })(django.jQuery);
+    //on submit compare the linguality type and the number of languages
+    // (in admin/includes/tabbed_change_form.html
 </script>

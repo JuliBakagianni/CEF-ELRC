@@ -27,7 +27,7 @@
     <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
   {% endfor %}</ul>
   {% endif %}
-  {# Content #}{% with help_icon_url=MEDIA_URL|add:"css/sexybuttons/images/icons/silk/help.png" %}
+  {# Content #}{% with help_icon_url=MEDIA_URL|add:"images/info.png" %}
   <div id="content" class="{% block coltype %}colM{% endblock %}">
     {% block pretitle %}{% endblock %}
     {% block content_title %}{% if title %}<h1 class="customtitle">{{ title }}</h1>
