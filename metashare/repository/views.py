@@ -96,14 +96,17 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
     'CC-BY': (MEDIA_URL + 'licences/CC-BYv3.0.htm', MEMBER_TYPES.NON),
     'PDDL': (MEDIA_URL + 'licences/ODC_PDDL.htm', MEMBER_TYPES.NON),
     'ODC-BY': (MEDIA_URL + 'licences/ODC-BYv1.0.htm', MEMBER_TYPES.NON),
-    'PSI-licence': ('http://psi.gov.ie/files/2010/03/PSI-Licence.pdf', MEMBER_TYPES.NON),
+    'PSI-licence_Ireland': ('http://psi.gov.ie/files/2010/03/PSI-Licence.pdf', MEMBER_TYPES.NON),
     'ODbL': (MEDIA_URL + 'licences/ODbLv1.0.htm', MEMBER_TYPES.NON),
     'FreeOpenDataLicence_Belgium': (MEDIA_URL + 'licences/FreeOpenDataLicence_Belgium.htm', MEMBER_TYPES.NON),
     'OpenDataLicenceAtAFairCost_Belgium': (MEDIA_URL + 'licences/ODLAtAFairCost_Belgium.htm', MEMBER_TYPES.GOD),
-    'FreeOpenDataLicenceForNon-CommercialRe-use_Belgium': (MEDIA_URL + 'licences/FreeODL-NCRe-use_Belgium.htm', MEMBER_TYPES.NON),
-    'OpenDataLicenceAtAFairCostForCommercialRe-use_Belgium': (MEDIA_URL + 'licences/ODLAtAFairCostForCommercialRe-use_Belgium.htm', MEMBER_TYPES.GOD),
+    'FreeOpenDataLicenceForNon-CommercialRe-use_Belgium': (
+    MEDIA_URL + 'licences/FreeODL-NCRe-use_Belgium.htm', MEMBER_TYPES.NON),
+    'OpenDataLicenceAtAFairCostForCommercialRe-use_Belgium': (
+    MEDIA_URL + 'licences/ODLAtAFairCostForCommercialRe-use_Belgium.htm', MEMBER_TYPES.GOD),
     'NLSOpenDataLicence_Finland': (MEDIA_URL + 'licences/NLSOpenDataLicence_Finland.htm', MEMBER_TYPES.NON),
-    'LicenceOuverte-OpenLicence_France': ('https://www.etalab.gouv.fr/wp-content/uploads/2014/05/Open_Licence.pdf', MEMBER_TYPES.NON),
+    'LicenceOuverte-OpenLicence_France': (
+    'https://www.etalab.gouv.fr/wp-content/uploads/2014/05/Open_Licence.pdf', MEMBER_TYPES.NON),
     'NCGL_UK': (MEDIA_URL + 'licences/NCGL_UK.htm', MEMBER_TYPES.NON),
     'DL-DE-BY_Germany': (MEDIA_URL + 'licences/DL-DE-BY_Germany.htm', MEMBER_TYPES.NON),
     'DL-DE-ZERO_Germany': (MEDIA_URL + 'licences/DL-DE-ZERO_Germany.htm', MEMBER_TYPES.NON),
@@ -113,13 +116,13 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
     'IGCYL-NC_Spain': ('http://ftp.itacyl.es/cartografia/LICENCIA-IGCYL-NC-2012.pdf', MEMBER_TYPES.NON),
     'underNegotiation': ('', MEMBER_TYPES.GOD),
     'openForReuseWithRestrictions': ('', MEMBER_TYPES.NON),
-    'termsOfUse': ('', MEMBER_TYPES.NON),
-    'proprietary': ('', MEMBER_TYPES.NON),
-    'other': ('', MEMBER_TYPES.GOD)
+    'non-standard/Other_Licence/Terms': ('', MEMBER_TYPES.NON),
+    # 'proprietary': ('', MEMBER_TYPES.NON),
+    # 'other': ('', MEMBER_TYPES.GOD)
     # 'MSCommons-BY': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BY_v1.0.htm',
     # MEMBER_TYPES.FULL),
     # 'MSCommons-BY-NC': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNC_v1.0.htm',
-    #                     MEMBER_TYPES.FULL),
+    # MEMBER_TYPES.FULL),
     # 'MSCommons-BY-NC-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCND_' \
     #                        'v1.0.htm', MEMBER_TYPES.FULL),
     # 'MSCommons-BY-NC-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCSA' \
@@ -196,27 +199,50 @@ def _get_licences(resource, user_membership):
     whether the resource may (and can) be directly downloaded or if there need
     to be further negotiations of some sort.
     """
+    special_licences = [u'non-standard/Other_Licence/Terms']
+
     licence_infos = tuple(licenceInfoType_model.objects \
                           .filter(back_to_distributioninfotype_model__id= \
                                       resource.distributionInfo.id))
-    all_licenses = dict([(l_info.licence, l_info) for l_info in licence_infos])
+    all_licenses = dict([(l_info.id, l_info) for l_info in licence_infos])
     result = {}
-    for name, info in all_licenses.items():
-        access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(name, None)
-        # print info, access
+    for licence_id, info in all_licenses.items():
+
+        access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(info.licence, None)
+
+        no_terms = LICENCEINFOTYPE_URLS_LICENCE_CHOICES[info.licence][0]=='' \
+                   and info.termsOfUseURL == '' \
+                   and not info.termsOfUseText
+        special_conditions = (u"Compensate" in \
+                   info.get_restrictionsOfUse_display_list() \
+                   or u"Other" in info.get_restrictionsOfUse_display_list())
         if access == None:
             LOGGER.warn("Unknown license name discovered in the database for " \
-                        "object #{}: {}".format(resource.id, name))
-            del all_licenses[name]
+                        "object #{}: {}".format(resource.id, licence_id))
+            del all_licenses[licence_id]
         elif user_membership >= access[1] \
                 and (resource.storage_object.get_download()):
             # the resource can be downloaded somewhere under the current license
             # terms and the user's membership allows her to immediately download
             # the resource
-            result[name] = (info, True)
+
+            if info.licence in special_licences:
+                if  special_conditions or no_terms:
+                    result[licence_id] = [info, False]
+                else:
+                    result[licence_id] = [info, True]
+            else:
+                if special_conditions \
+                        or no_terms:
+                    result[licence_id] = [info, False]
+                else:
+                    result[info.licence] = [info, True]
         else:
             # further negotiations are required with the current license
-            result[name] = (info, False)
+            if info.licence in special_licences:
+                result[licence_id] = [info, False]
+            else:
+                result[info.licence] = [info, False]
     return result
 
 
@@ -244,48 +270,57 @@ def download(request, object_id):
     licence_choice = None
     if request.method == "POST":
         licence_choice = request.POST.get('licence', None)
+        if licence_choice:
+            try:
+                l_id = int(licence_choice)
+                licence_choice_name = licences[l_id][0].licence
+            except ValueError:
+                l_id = licence_choice
+                licence_choice_name = licence_choice
+
         if licence_choice and 'in_licence_agree_form' in request.POST:
-            la_form = LicenseAgreementForm(licence_choice, data=request.POST)
+            la_form = LicenseAgreementForm(licence_choice_name, data=request.POST)
             if la_form.is_valid():
                 # before really providing the download, we have to make sure
                 # that the user hasn't tried to circumvent the permission system
-                if licences[licence_choice][1]:
+                if licences[l_id][1]:
                     return _provide_download(request, resource,
-                                             licences[licence_choice][0])
+                                             licences[l_id][0])
             else:
                 return render_to_response('repository/licence_agreement.html',
                                           {'form': la_form, 'resource': resource,
-                                           'licence_name': prettify_camel_case_string(licence_choice), 'licence_path': \
-                                              LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
-                                           'download_available': licences[licence_choice][1],
-                                           'l_url': licenceInfoType_model.objects \
-                                          .get(back_to_distributioninfotype_model__id= \
-                                                   resource.distributionInfo.id, licence=licence_choice).termsOfUseURL,
-                                           'l_text': licenceInfoType_model.objects \
-                                          .get(back_to_distributioninfotype_model__id= \
-                                                   resource.distributionInfo.id,
-                                               licence=licence_choice).termsOfUseText.values()
+                                           'licence_name': \
+                                               prettify_camel_case_string(licence_choice_name), \
+                                           'licence_path': \
+                                               LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice_name][0],
+                                           'download_available': licences[l_id][1],
+                                           'l_url': licences[l_id][0].termsOfUseURL,
+                                           'l_text': licences[l_id][0].termsOfUseText.values()
                                            },
                                           context_instance=RequestContext(request))
-        elif licence_choice and not licence_choice in licences:
+        elif licence_choice and not l_id in licences:
             licence_choice = None
     if len(licences) == 1:
         # no need to manually choose amongst 1 license ...
         licence_choice = licences.iterkeys().next()
 
     if licence_choice:
+        try:
+            l_id = int(licence_choice)
+            licence_choice_name = licences[l_id][0].licence
+        except ValueError:
+            l_id = licence_choice
+            licence_choice_name = licence_choice
+
         return render_to_response('repository/licence_agreement.html',
                                   {'form': LicenseAgreementForm(licence_choice),
-                                   'resource': resource, 'licence_name': prettify_camel_case_string(licence_choice),
+                                   'resource': resource,
+                                   'licence_name': prettify_camel_case_string(licence_choice_name),
                                    'licence_path': \
-                                       LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice][0],
-                                   'download_available': licences[licence_choice][1],
-                                   'l_url': licenceInfoType_model.objects \
-                                  .get(back_to_distributioninfotype_model__id= \
-                                           resource.distributionInfo.id, licence=licence_choice).termsOfUseURL,
-                                   'l_text': licenceInfoType_model.objects \
-                                  .get(back_to_distributioninfotype_model__id= \
-                                           resource.distributionInfo.id, licence=licence_choice).termsOfUseText.values()
+                                       LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice_name][0],
+                                   'download_available': licences[l_id][1],
+                                   'l_url': licences[l_id][0].termsOfUseURL,
+                                   'l_text': licences[l_id][0].termsOfUseText.values()
                                    },
 
                                   context_instance=RequestContext(request))
@@ -475,11 +510,12 @@ def view(request, resource_name=None, object_id=None):
     # Convert resource to ElementTree and then to template tuples.
     lr_content = _convert_to_template_tuples(
         resource.export_to_elementtree(pretty=True))
-
+    dsi = list(resource.identificationInfo.appropriatenessForDSI)
     # get the 'best' language version of a "DictField" and all other versions
     resource_name = resource.identificationInfo.get_default_resourceName()
     res_short_names = resource.identificationInfo.resourceShortName.values()
     description = resource.identificationInfo.get_default_description()
+    elrcServices = resource.identificationInfo.createdUsingELRCServices
     other_res_names = [name for name in resource.identificationInfo \
         .resourceName.itervalues() if name != resource_name]
     other_descriptions = [name for name in resource.identificationInfo \
@@ -487,9 +523,9 @@ def view(request, resource_name=None, object_id=None):
 
     # Create fields lists
     url = resource.identificationInfo.url
-    # metashare_id = resource.identificationInfo.metaShareId
-    # pid = resource.identificationInfo.PID
-    # islrn = resource.identificationInfo.ISLRN
+    metashare_id = resource.identificationInfo.metaShareId
+    pid = resource.identificationInfo.PID
+    islrn = resource.identificationInfo.ISLRN
     identifier = resource.identificationInfo.identifier
     resource_type = resource.resourceComponentType.as_subclass().resourceType
     media_types = set(model_utils.get_resource_media_types(resource))
@@ -635,13 +671,15 @@ def view(request, resource_name=None, object_id=None):
     context = {
         'contact_person_dicts': contact_person_dicts,
         'description': description,
+        'elrcServices':elrcServices,
+        'dsi':dsi,
         'distribution_dict': distribution_dict,
         'documentation_dict': documentation_dict,
         'license_types': license_types,
         'linguality_infos': linguality_infos,
         'mediaTypes': media_types,
         'metadata_dict': metadata_dict,
-        # 'metaShareId': metashare_id,
+        'metaShareId': metashare_id,
         'identifier': identifier,
         'other_res_names': other_res_names,
         'other_descriptions': other_descriptions,
@@ -691,7 +729,7 @@ def view(request, resource_name=None, object_id=None):
     # Add 'more from same' links
     # if get_more_from_same_projects_qs(resource).count():
     # context['search_rel_projects'] = '{}/repository/search?q={}:{}'.format(
-    #         DJANGO_URL, MORE_FROM_SAME_PROJECTS,
+    # DJANGO_URL, MORE_FROM_SAME_PROJECTS,
     #         resource.storage_object.identifier)
     # if get_more_from_same_creators_qs(resource).count():
     #     context['search_rel_creators'] = '{}/repository/search?q={}:{}'.format(
