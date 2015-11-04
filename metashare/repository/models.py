@@ -5,16 +5,14 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
 from django.template.defaultfilters import slugify
-from django.contrib.admin import forms
-from django.forms import Textarea
+from metashare.bcp47 import iana
 
 from metashare.accounts.models import EditorGroup
 # pylint: disable-msg=W0611
 from metashare.repository.supermodel import SchemaModel, SubclassableModel, \
     _make_choices_from_list, InvisibleStringModel, \
-    REQUIRED, OPTIONAL, RECOMMENDED, \
-    _make_choices_from_int_list
-from metashare.repository.editor.widgets import MultiFieldWidget
+    REQUIRED, OPTIONAL, RECOMMENDED
+from metashare.repository.editor.widgets import MultiFieldWidget, MultiChoiceWidget
 from metashare.repository.fields import MultiTextField, MetaBooleanField, \
     MultiSelectField, DictField, XmlCharField, best_lang_value_retriever, \
     MutuallyExclusiveValueModelField
@@ -26,8 +24,7 @@ from metashare.stats.model_utils import saveLRStats, DELETE_STAT, UPDATE_STAT
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 from metashare.recommendations.models import ResourceCountPair, \
     ResourceCountDict
-from metashare.repository.language_choices import LANGUAGEID_CHOICES, \
-    LANGUAGENAME_CHOICES, LANGUAGENAME_TO_LANGUAGEID
+from metashare.repository.language_choices import LANGUAGENAME_CHOICES
 from metashare.repository.mimetype_choices import TEXTFORMATINFOTYPE_MIMETYPE_CHOICES
 # MIMETYPELABEL_TO_MIMETYPEVALUE
 
@@ -55,6 +52,7 @@ HTTPURI_VALIDATOR = RegexValidator(r"^(?i)((http|ftp)s?):\/\/"
 SCHEMA_NAMESPACE = 'http://www.ilsp.gr/META-XMLSchema'
 # version of the META-SHARE metadata XML Schema
 SCHEMA_VERSION = '3.0'
+
 
 def _compute_documentationInfoType_key():
     '''
@@ -148,8 +146,8 @@ class resourceInfoType_model(SchemaModel):
 
     # versionInfo = models.OneToOneField("versionInfoType_model",
     # verbose_name='Version',
-    #   help_text='Groups information on a specific version or release of ' \
-    #   'the resource',
+    # help_text='Groups information on a specific version or release of ' \
+    # 'the resource',
     #   blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: validationInfo
@@ -274,8 +272,8 @@ class resourceInfoType_model(SchemaModel):
 
 # SIZEINFOTYPE_SIZEUNIT_CHOICES = _make_choices_from_list([
 # u'terms', u'entries', u'files', u'items', u'texts',
-#   u'sentences', u'bytes', u'tokens', u'words', u'keywords',
-#   u'idiomaticExpressions',u'neologisms', u'multiWordUnits', u'expressions',
+# u'sentences', u'bytes', u'tokens', u'words', u'keywords',
+# u'idiomaticExpressions',u'neologisms', u'multiWordUnits', u'expressions',
 #   u'concepts', u'lexicalTypes', u'kb', u'mb',
 #   u'gb', u'rules', u'other',
 # ])
@@ -350,6 +348,7 @@ class sizeInfoType_model(SchemaModel):
         formatargs = ['size', 'sizeUnit', ]
         formatstring = u'{} {}'
         return self.unicode_(formatstring, formatargs)
+
 
 APPROPRIATENESS_FOR_DSI_CHOICES = _make_choices_from_list([
     u'OnlineDisputeResolution', u'Europeana',
@@ -468,6 +467,7 @@ class identificationInfoType_model(SchemaModel):
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
+
 
 # pylint: disable-msg=C0103
 # class versionInfoType_model(SchemaModel):
@@ -846,6 +846,7 @@ class metadataInfoType_model(SchemaModel):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
 
+
 # pylint: disable-msg=C0103
 class documentationInfoType_model(SubclassableModel):
     """
@@ -1107,54 +1108,54 @@ class resourceDocumentationInfoType_model(SchemaModel):
 
 
 DOMAININFOTYPE_DOMAIN_CHOICES = (
-    (u"advertisingPublicRelationsDDC659", u"Advertising & Public Relations (DDC659)"),
-    (u"agricultureDDC630", u"Agriculture (DDC630)"),
-    (u"animalsZoologyDDC590", u"Animals (Zoology) (DDC590)"),
-    (u"appliedPhysicsDDC621", u"Applied Physics (DDC621)"),
-    (u"architectureDDC720", u"Architecture (DDC720)"),
-    (u"artsRecreationDDC700", u"Arts & Recreation (DDC700)"),
-    (u"astrononmyDDC520", u"Astronomy (DDC520)"),
-    (u"biochemistryDDC572", u"Biochemistry (DDC572)"),
-    (u"biologyDDC570", u"Biology (DDC570)"),
-    (u"chemicalEngineeringDDC660", "Chemical Engineering (DDC660)"),
-    (u"chemistryDDC540", u"Chemistry (DDC540)"),
-    (u"commerceTradeDDC381", u"Commerce (Trade) (DDC381)"),
-    (u"communicationsDDC384", u"Communications (DDC384)"),
-    (u"computerScienceInformationGeneralWorksDDC000", u"Computer Science, Information & General Works (DDC000)"),
-    (u"constructionOfBuildingsDDC690", u"Construction of Buildings (DDC690)"),
-    (u"culture", u"Culture"), (u"earthSciencesGeologyDDC550", u"Earth Sciences & Geology (DDC550)"),
-    (u"economicsDDC330", u"Economics (DDC330)"), (u"educationDDC370", u"Education (DDC370)"),
-    (u"energy", u"Energy"), (u"engineeringDDC620", u"Engineering (DDC620)"),
+    (u"advertisingPublicRelations_DDC659", u"Advertising & Public Relations (DDC659)"),
+    (u"agriculture_DDC630", u"Agriculture (DDC630)"),
+    (u"animalsZoology_DDC590", u"Animals (Zoology) (DDC590)"),
+    (u"appliedPhysics_DDC621", u"Applied Physics (DDC621)"),
+    (u"architecture_DDC720", u"Architecture (DDC720)"),
+    (u"artsRecreation_DDC700", u"Arts & Recreation (DDC700)"),
+    (u"astrononmy_DDC520", u"Astronomy (DDC520)"),
+    (u"biochemistry_DDC572", u"Biochemistry (DDC572)"),
+    (u"biology_DDC570", u"Biology (DDC570)"),
+    (u"chemicalEngineering_DDC660", u"Chemical Engineering (DDC660)"),
+    (u"chemistry_DDC540", u"Chemistry (DDC540)"),
+    (u"commerceTrade_DDC381", u"Commerce (Trade) (DDC381)"),
+    (u"communications_DDC384", u"Communications (DDC384)"),
+    (u"computerScienceInformationGeneralWorks_DDC000", u"Computer Science, Information & General Works (DDC000)"),
+    (u"constructionOfBuildings_DDC690", u"Construction of Buildings (DDC690)"),
+    (u"culture", u"Culture"), (u"earthSciencesGeology_DDC550", u"Earth Sciences & Geology (DDC550)"),
+    (u"economics_DDC330", u"Economics (DDC330)"), (u"education_DDC370", u"Education (DDC370)"),
+    (u"energy", u"Energy"), (u"engineering_DDC620", u"Engineering (DDC620)"),
     (u"environment", u"Environment"), (u"general", u"General"),
-    (u"geographyTravelDDC910", u"Geography & Travel (DDC910)"),
-    (u"graphicArtsDecorativeArtsDDC740", u"Graphic Arts & Decorative Arts (DDC740)"),
-    (u"hardwareHouseholdAppliancesDDC683", u"Hardware & Household Appliances (DDC683)"),
-    (u"historyDDC900", u"History (DDC900)"),
-    (u"homeFamilyManagementDDC640", u"Home & Family Management (DDC640)"),
+    (u"geographyTravel_DDC910", u"Geography & Travel (DDC910)"),
+    (u"graphicArtsDecorativeArts_DDC740", u"Graphic Arts & Decorative Arts (DDC740)"),
+    (u"hardwareHouseholdAppliances_DDC683", u"Hardware & Household Appliances (DDC683)"),
+    (u"history_DDC900", u"History (DDC900)"),
+    (u"homeFamilyManagement_DDC640", u"Home & Family Management (DDC640)"),
     (u"humanities", u"Humanities"), (u"industry", u"Industry"),
-    (u"languageDDC400", u"Language (DDC400)"), (u"lawDDC340", u"Law (DDC340)"),
-    (u"linguisticsDDC410", u"Linguistics (DDC410)"),
-    (u"literatureRhetoricCriticismDDC800", u"Literature, Rhetoric & Criticism (DDC800)"),
-    (u"managementPublicRelationsDDC650", u"Management & Public Relations (DDC650)"),
-    (u"manufacturingDDC670", u"Manufacturing (DDC670)"), (u"mathematicsDDC510", u"Mathematics (DDC510)"),
-    (u"medicineHealthDDC610", u"Medicine & Health (DDC610)"), (u"musicDDC780", u"Music (DDC780)"),
-    (u"newsMediaJournalismPublishingDDC070", u"News Media, Journalism & Publishing (DDC070)"),
-    (u"paintingDDC750", u"Painting (DDC750)"), (u"paleontologyDDC560", u"Paleontology (DDC560)"),
-    (u"philosophyDDC100", u"Philosophy (DDC100)"),
-    (u"photographyComputerArtFilmVideoDDC770", u"Photography, Computer Art, Film, Video (DDC770)"),
-    (u"physicsDDC530", u"Physics (DDC530)"), (u"plantsDDC580", u"Plants (DDC580)"),
-    (u"politicalScienceDDC320", u"Political Science (DDC320)"),
-    (u"psychologyDDC150", u"Psychology (DDC150)"),
-    (u"publicAdministrationDDC351", u"Public Administration (DDC351)"),
-    (u"religionDDC200", u"Religion (DDC200)"), (u"scienceDDC500", u"Science (DDC500)"),
-    (u"sculptureCeramicsMetalworkDDC730", u"Sculpture, Ceramics, & Metalwork (DDC730)"),
-    (u"socialProblemsSocialServicesDDC360", u"Social Problems & Social Services (DDC360)"),
-    (u"socialSciencesDDC300", u"Social Sciences (DDC300)"),
-    (u"sociologyAnthropologyDDC301", u"Sociology & Anthropology (DDC301)"),
-    (u"sportsGamesEntertainmentDDC790", u"Sports, Games & Entertainment (DDC790)"),
-    (u"statisticsDDC310", u"Statistics (DDC310)"),
-    (u"technologyDDC600", u"Technology (DDC600)"),
-    (u"transportationDDC388", u"Transportation (DDC388)"),
+    (u"language_DDC400", u"Language (DDC400)"), (u"law_DDC340", u"Law (DDC340)"),
+    (u"linguistics_DDC410", u"Linguistics (DDC410)"),
+    (u"literatureRhetoricCriticism_DDC800", u"Literature, Rhetoric & Criticism (DDC800)"),
+    (u"managementPublicRelations_DDC650", u"Management & Public Relations (DDC650)"),
+    (u"manufacturing_DDC670", u"Manufacturing (DDC670)"), (u"mathematics_DDC510", u"Mathematics (DDC510)"),
+    (u"medicineHealth_DDC610", u"Medicine & Health (DDC610)"), (u"music_DDC780", u"Music (DDC780)"),
+    (u"newsMediaJournalismPublishing_DDC070", u"News Media, Journalism & Publishing (DDC070)"),
+    (u"painting_DDC750", u"Painting (DDC750)"), (u"paleontology_DDC560", u"Paleontology (DDC560)"),
+    (u"philosophy_DDC100", u"Philosophy (DDC100)"),
+    (u"photographyComputerArtFilmVideo_DDC770", u"Photography, Computer Art, Film, Video (DDC770)"),
+    (u"physics_DDC530", u"Physics (DDC530)"), (u"plants_DDC580", u"Plants (DDC580)"),
+    (u"politicalScience_DDC320", u"Political Science (DDC320)"),
+    (u"psychology_DDC150", u"Psychology (DDC150)"),
+    (u"publicAdministration_DDC351", u"Public Administration (DDC351)"),
+    (u"religion_DDC200", u"Religion (DDC200)"), (u"science_DDC500", u"Science (DDC500)"),
+    (u"sculptureCeramicsMetalwork_DDC730", u"Sculpture, Ceramics, & Metalwork (DDC730)"),
+    (u"socialProblemsSocialServices_DDC360", u"Social Problems & Social Services (DDC360)"),
+    (u"socialSciences_DDC300", u"Social Sciences (DDC300)"),
+    (u"sociologyAnthropology_DDC301", u"Sociology & Anthropology (DDC301)"),
+    (u"sportsGamesEntertainment_DDC790", u"Sports, Games & Entertainment (DDC790)"),
+    (u"statistics_DDC310", u"Statistics (DDC310)"),
+    (u"technology_DDC600", u"Technology (DDC600)"),
+    (u"transportation_DDC388", u"Transportation (DDC388)"),
 )
 
 DOMAININFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES = _make_choices_from_list([
@@ -2989,7 +2990,7 @@ class distributionInfoType_model(SchemaModel):
                                        u'NLSOpenDataLicence_Finland', u'LicenceOuverte-OpenLicence_France',
                                        u'DL-DE-BY_Germany', u'IODL_Italy', u'NLOD_Norway', u'IGCYL-NC_Spain',
                                        u'ColorIURIS_Spain', u'OGL_UK', u'NCGL_UK', u'openForReuseWithRestrictions',
-                                       u'non-standard_Other_Licence_Terms',
+                                       u'non-standard/Other_Licence/Terms',
                                        # u'proprietary', u'other',
                                        ])):
             self.availability = u'available-restrictedUse'
@@ -3053,7 +3054,7 @@ LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
     u'LicenceOuverte-OpenLicence_France',
     u'DL-DE-BY_Germany', u'DL-DE-ZERO_Germany', u'PSI-licence_Ireland',
     u'IODL_Italy', u'NLOD_Norway', u'OGL_UK', u'NCGL_UK',
-    u'non-standard_Other_Licence_Terms',
+    u'non-standard/Other_Licence/Terms',
     u'underNegotiation',
     # u'termsOfUse', u'proprietary',
     # u'IGCYL-NC_Spain', u'ColorIURIS_Spain',
@@ -3063,18 +3064,17 @@ LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
     # u'BSD-style', u'GFDL', u'GPL', u'LGPL', u'Princeton_Wordnet',
 ])
 
+
 def licenceinfotype_licence_optgroup_choices():
     """
     Group the choices in groups. The first group is the most used choices
     and the second group is the rest.
     """
     international = ('International Open Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][:12])
-    national = ('National Open Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][12 :25])
+    national = ('National Open Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][12:25])
     other = ('More', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][25:])
     optgroup = [international, national, other]
     return optgroup
-
-
 
 
 LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES = _make_choices_from_list([
@@ -3166,9 +3166,8 @@ class licenceInfoType_model(SchemaModel):
     licence = models.CharField(
         verbose_name='Licence',
         help_text='The licence of use for the resource; for an overview of' \
-                  ' licences, please visit: <a href="http://www.meta-net.eu/meta-share/licens' \
-                  'es" target="_blank">http://www.meta-net.eu/meta-share/licens' \
-                  'es</a>',
+                  ' licences, please visit: "http://www.meta-net.eu/meta-share/licens' \
+                  'es"',
 
         max_length=100,
         choices=licenceinfotype_licence_optgroup_choices(),
@@ -3712,7 +3711,10 @@ class languageInfoType_model(SchemaModel):
         ( u'languageId', u'languageId', REQUIRED ),
         ( u'languageName', u'languageName', REQUIRED ),
         # ( u'language', u'language', REQUIRED ),
-        # ( u'languageScript', u'languageScript', OPTIONAL ),
+        ( u'languageScript', u'languageScript', OPTIONAL ),
+        ( u'region', u'region', OPTIONAL ),
+        ( u'variants', u'variants', OPTIONAL ),
+        # (u'languageRegion', u'languageRegion', OPTIONAL)
         ( u'sizePerLanguage', u'sizePerLanguage', OPTIONAL ),
         ( u'languageVarietyInfo', u'languageVarietyInfo', OPTIONAL ),
     )
@@ -3729,8 +3731,7 @@ class languageInfoType_model(SchemaModel):
                   ' the values can be subsequently edited for further specification ' \
                   '(according to the IETF BCP47 guidelines)',
         max_length=100,
-        editable=False,
-        choices=LANGUAGEID_CHOICES['choices'])
+        editable=False,)
 
     languageName = models.CharField(
         verbose_name='Language name',
@@ -3740,26 +3741,31 @@ class languageInfoType_model(SchemaModel):
                   'itor, but the values can be subsequently edited for further speci' \
                   'fication (according to the IETF BCP47 guidelines)',
         max_length=100,
+
         choices=languageinfotype_languagename_optgroup_choices(),
     )
 
-    # language = LanguageField(widget=LanguageWidget(),
-    #     verbose_name='Language',
-    #     help_text='A human understandable name of the language that is use' \
-    #               'd in the resource or supported by the tool/service; an autocomple' \
-    #               'tion mechanism with values from the ISO 639 is provided in the ed' \
-    #               'itor, but the values can be subsequently edited for further speci' \
-    #               'fication (according to the IETF BCP47 guidelines)',
-    #     max_length=100,
-    #     choices=languageinfotype_languagename_optgroup_choices(),
-    #     null=True,
-    # )
+    languageScript = models.CharField(
+        verbose_name='Language script',
+        help_text='Specifies the writing system used to represent the lang' \
+                  'uage in form of a four letter code as it is defined in ISO-15924',
+        blank=True, max_length=100, null=True,
+        choices = _make_choices_from_list(sorted(iana.get_all_scripts()))['choices'])
 
-    # languageScript = XmlCharField(
-    #   verbose_name='Language script',
-    #   help_text='Specifies the writing system used to represent the lang' \
-    #   'uage in form of a four letter code as it is defined in ISO-15924',
-    #   blank=True, max_length=100, )
+    region = models.CharField(
+        verbose_name='Region',
+        help_text='Region',
+        blank=True, max_length=100, null=True,
+        choices =_make_choices_from_list(sorted(iana.get_all_regions()))['choices'])
+
+    variants = MultiTextField(max_length=500, widget=MultiChoiceWidget(widget_id=65, choices = _make_choices_from_list(sorted(iana.get_all_variants()))['choices']),
+         verbose_name='Variants',
+         help_text='Variants',
+         blank=True,
+         null = True,
+         # max_length=1 + len(VARIANT_CHOICES['choices']) / 4,
+         # choices=VARIANT_CHOICES['choices'],
+    )
 
     sizePerLanguage = models.OneToOneField("sizeInfoType_model",
                                            verbose_name='Size per language',
@@ -3801,21 +3807,18 @@ class languageInfoType_model(SchemaModel):
     # back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        """
-        Overrides the predefined save() method to assign the corresponding value to
-        the languageId field. This value is taken from the LANGUAGENAME_TO_LANGUAGEID
-        dictionary, which maps the the languageName values to languageId values.
-        """
         if self.languageName:
-            self.languageId = LANGUAGENAME_TO_LANGUAGEID[self.languageName]
+            if not self.languageScript:
+                self.languageScript = iana.get_suppressed_script_description(self.languageName)
+            self.languageId = iana.make_id(self.languageName, self.languageScript, self.region, self.variants)
 
-        # Call save() method from super class with all arguments.
+    #     # # Call save() method from super class with all arguments.
         super(languageInfoType_model, self).save(*args, **kwargs)
 
     def real_unicode_(self):
         # pylint: disable-msg=C0301
-        formatargs = ['languageName', 'languageVarietyInfo', ]
-        formatstring = u'{} {}'
+        formatargs = ['languageName', 'languageId']
+        formatstring = u'{} ({})'
         return self.unicode_(formatstring, formatargs)
 
 
