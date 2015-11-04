@@ -1,3 +1,4 @@
+import urllib
 from metashare.bcp47 import iana
 from django.http import HttpResponse
 

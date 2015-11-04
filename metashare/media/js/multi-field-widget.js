@@ -229,12 +229,14 @@ function update_lang_variants_with_script(e) {
 function update_var_variants(prevRef, element) {
     var selElement = element.find("select:first");
     var selected = element.find("select option:selected").val();
-    param = prevRef.find("option:selected").val();
+    var param = prevRef.find("option:selected").val();
+    var dataValue = prevRef.find("option:selected").val();
     if (param != "") {
         $.ajax({
             url: "http://194.177.192.69/update_var_variants/",
             type: 'POST',
-            data: {'variant': prevRef.find("option:selected").val()},
+            data: {'variant': unescape(dataValue)},
+            contentType: "text/html; charset=utf-8",
             success: function (result) {
                 vars = result.split("//");
                 selElement.empty();

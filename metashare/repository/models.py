@@ -3690,8 +3690,8 @@ def languageinfotype_languagename_optgroup_choices():
     Group the choices in groups. The first group the EU languages
     and the second group contains the rest.
     """
-    most_used_choices = ('', LANGUAGENAME_CHOICES['choices'][:24])
-    more_choices = ('More', LANGUAGENAME_CHOICES['choices'][24:])
+    most_used_choices = ('', _make_choices_from_list(iana.get_most_used_languages())['choices'])
+    more_choices = ('More', _make_choices_from_list(sorted(iana.get_rest_of_languages()))['choices'])
     optgroup = [most_used_choices, more_choices]
     return optgroup
 
