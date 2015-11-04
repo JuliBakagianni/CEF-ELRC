@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from metashare.repository import validators
 from xorformfields.forms import MutuallyExclusiveValueField
 from metashare.repository.editor.widgets import LangDictWidget, \
-    AdminMutuallyExclusiveRadioWidget, MultiSelect3Widget
+    AdminMutuallyExclusiveRadioWidget
 
 
 class DictField(django_fields.Field):
