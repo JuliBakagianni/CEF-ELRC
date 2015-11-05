@@ -5,8 +5,12 @@ from haystack.query import SearchQuerySet
 from metashare.repository.forms import FacetedBrowseForm
 from metashare.repository.views import MetashareFacetedSearchView
 
+
 sqs = SearchQuerySet() \
   .facet("languageNameFilter") \
+  .facet("languageScriptFilter") \
+  .facet("languageRegionFilter") \
+  .facet("languageVariantFilter") \
   .facet("resourceTypeFilter") \
   .facet("mediaTypeFilter") \
   .facet("availabilityFilter") \

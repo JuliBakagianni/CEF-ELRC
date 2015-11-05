@@ -357,6 +357,15 @@
     
     <field name="languageNameFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
+
+    <field name="languageScriptFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+
+    <field name="languageRegionFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
+
+    <field name="languageVariantFilter" type="text_en" indexed="true"
+      stored="true" multiValued="true" />
     
     <field name="mediaTypeFilter" type="text_en" indexed="true"
       stored="true" multiValued="true" />
@@ -440,6 +449,15 @@
       stored="true" multiValued="true" />
     
     <field name="languageNameFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+
+    <field name="languageScriptFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+
+    <field name="languageRegionFilter_exact" type="string" indexed="true"
+      stored="true" multiValued="true" />
+
+    <field name="languageVariantFilter_exact" type="string" indexed="true"
       stored="true" multiValued="true" />
     
     <field name="lexicalConceptualResourceEncodingLevelFilter_exact" type="string" indexed="true"
