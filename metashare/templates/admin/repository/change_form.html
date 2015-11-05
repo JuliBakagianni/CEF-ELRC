@@ -91,12 +91,11 @@
                 var licence = $(this).text();
                 var aboutToDelete = $(this).parent().parent().parent().parent()
                         .parent().find(".delete").find("input").is(':checked');
-
                 if (jQuery.inArray($(this).val(), specialLicences) != -1 &&
                         aboutToDelete == false &&
-                        $(this).parent().parent().parent()
+                        $(this).parent().parent().parent().parent()
                                 .siblings(".form-row.restrictionsOfUse")
-                                .find(".selector-chosen").find("select")
+                                .find(".selector-chosen").find("select.filtered")
                                 .find("option").length == 0) {
                     licenceList.push("\n\"" + licence + "\"");
                 }
