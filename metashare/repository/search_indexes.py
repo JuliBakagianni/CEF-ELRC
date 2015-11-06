@@ -96,7 +96,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     # the access to the sorting results is made in the MetashareFacetedSearchView function of views.py
     resourceNameSort = CharField(indexed=True, faceted=True)
     resourceTypeSort = CharField(indexed=True, faceted=True)
-    mediaTypeSort = CharField(indexed=True, faceted=True)
+    # mediaTypeSort = CharField(indexed=True, faceted=True)
     languageNameSort = CharField(indexed=True, faceted=True)
 
     # list of filters
@@ -121,7 +121,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     #
     # the creation of the filter structure is made in the _create_filters_structure function of views.py
     languageNameFilter = LabeledMultiValueField(
-                                label=_('Language'), facet_id=1, parent_id=0,
+                                label=_('Language Name'), facet_id=1, parent_id=0,
                                 faceted=True)
 
 
@@ -143,9 +143,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     resourceTypeFilter = LabeledMultiValueField(
                                 label=_('Resource Type'), facet_id=6, parent_id=0,
                                 faceted=True)
-    mediaTypeFilter = LabeledMultiValueField(
-                                label=_('Media Type'), facet_id=7, parent_id=0,
-                                faceted=True)
+    # mediaTypeFilter = LabeledMultiValueField(
+    #                             label=_('Media Type'), facet_id=7, parent_id=0,
+    #                             faceted=True)
     availabilityFilter = LabeledCharField(
                                 label=_('Availability'), facet_id=8, parent_id=0,
                                 faceted=True)
@@ -243,10 +243,10 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     #                             faceted=True)
     #Start sub filters
     textTextGenreFilter = LabeledMultiValueField(
-                                label=_('Text Genre'), facet_id=35, parent_id=7,
+                                label=_('Text Genre'), facet_id=35, parent_id=0,
                                 faceted=True)
     textTextTypeFilter = LabeledMultiValueField(
-                                label=_('Text Type'), facet_id=36, parent_id=7,
+                                label=_('Text Type'), facet_id=36, parent_id=0,
                                 faceted=True)
     # textRegisterFilter = LabeledMultiValueField(
     #                             label=_('Register'), facet_id=37, parent_id=7,
@@ -485,24 +485,24 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
         return resourceTypeSort
 
-    def prepare_mediaTypeSort(self, obj):
-        """
-        Collect the data to sort the Media Types
-        """
-        # get the list of Media Types
-        mediaTypeSort = self.prepare_mediaTypeFilter(obj)
-        # render unique list of Media Types
-        mediaTypeSort = list(set(mediaTypeSort))
-        # sort Media Types
-        mediaTypeSort.sort()
-        # join Media Types into a string
-        mediaTypeSort = ",".join(mediaTypeSort)
-        # keep alphanumeric characters only
-        mediaTypeSort = re.sub('[\W_]', '', mediaTypeSort)
-        # set list of Media Types to lower case
-        mediaTypeSort = mediaTypeSort.lower()
-
-        return mediaTypeSort
+    # def prepare_mediaTypeSort(self, obj):
+    #     """
+    #     Collect the data to sort the Media Types
+    #     """
+    #     # get the list of Media Types
+    #     mediaTypeSort = self.prepare_mediaTypeFilter(obj)
+    #     # render unique list of Media Types
+    #     mediaTypeSort = list(set(mediaTypeSort))
+    #     # sort Media Types
+    #     mediaTypeSort.sort()
+    #     # join Media Types into a string
+    #     mediaTypeSort = ",".join(mediaTypeSort)
+    #     # keep alphanumeric characters only
+    #     mediaTypeSort = re.sub('[\W_]', '', mediaTypeSort)
+    #     # set list of Media Types to lower case
+    #     mediaTypeSort = mediaTypeSort.lower()
+    #
+    #     return mediaTypeSort
 
     def prepare_languageNameSort(self, obj):
         """
@@ -533,8 +533,10 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
-                result.extend([lang.languageName for lang in
-                               corpus_info.languageinfotype_model_set.all()])
+                for language_info in corpus_info.languageinfotype_model_set.all():
+                    result.append(language_info.get_languageName_display())
+                # result.extend([lang.languageName for lang in
+                #                corpus_info.languageinfotype_model_set.all()])
             # if media_type.corpusAudioInfo:
             #     result.extend([lang.languageName for lang in
             #                    media_type.corpusAudioInfo.languageinfotype_model_set.all()])
@@ -554,8 +556,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             #     result.extend([lang.languageName for lang in lcr_media_type \
             #             .lexicalConceptualResourceAudioInfo.languageinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceTextInfo:
-                result.extend([lang.languageName for lang in lcr_media_type \
-                        .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all()])
+                for language_info in lcr_media_type \
+                        .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all():
+                    result.append(language_info.get_languageName_display())
             # if lcr_media_type.lexicalConceptualResourceVideoInfo:
             #     result.extend([lang.languageName for lang in lcr_media_type \
             #             .lexicalConceptualResourceVideoInfo.languageinfotype_model_set.all()])
@@ -566,8 +569,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
-                result.extend([lang.languageName for lang in ld_media_type \
-                            .languageDescriptionTextInfo.languageinfotype_model_set.all()])
+                for language_info in ld_media_type \
+                        .languageDescriptionTextInfo.languageinfotype_model_set.all():
+                    result.append(language_info.get_languageName_display())
             # if ld_media_type.languageDescriptionVideoInfo:
             #     result.extend([lang.languageName for lang in ld_media_type \
             #                 .languageDescriptionVideoInfo.languageinfotype_model_set.all()])
@@ -593,8 +597,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
-                result.extend([lang.languageScript for lang in
-                               corpus_info.languageinfotype_model_set.all()])
+                for lang in corpus_info.languageinfotype_model_set.all():
+                    if lang.languageScript:
+                        result.append(lang.languageScript)
             # if media_type.corpusAudioInfo:
             #     result.extend([lang.languageScript for lang in
             #                    media_type.corpusAudioInfo.languageinfotype_model_set.all()])
@@ -614,8 +619,10 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             #     result.extend([lang.languageScript for lang in lcr_media_type \
             #             .lexicalConceptualResourceAudioInfo.languageinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceTextInfo:
-                result.extend([lang.languageScript for lang in lcr_media_type \
-                        .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all()])
+                for lang in lcr_media_type \
+                        .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all():
+                    if lang.languageScript:
+                        result.append(lang.languageScript)
             # if lcr_media_type.lexicalConceptualResourceVideoInfo:
             #     result.extend([lang.languageScript for lang in lcr_media_type \
             #             .lexicalConceptualResourceVideoInfo.languageinfotype_model_set.all()])
@@ -626,8 +633,10 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
-                result.extend([lang.languageScript for lang in ld_media_type \
-                            .languageDescriptionTextInfo.languageinfotype_model_set.all()])
+                for lang in ld_media_type \
+                        .languageDescriptionTextInfo.languageinfotype_model_set.all():
+                    if lang.languageScript:
+                        result.append(lang.languageScript)
             # if ld_media_type.languageDescriptionVideoInfo:
             #     result.extend([lang.languageScript for lang in ld_media_type \
             #                 .languageDescriptionVideoInfo.languageinfotype_model_set.all()])
@@ -645,7 +654,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
 
     def prepare_languageRegionFilter(self, obj):
         """
-        Collect the data to filter the resources on Language Script
+        Collect the data to filter the resources on Language Region
         """
         result = []
         corpus_media = obj.resourceComponentType.as_subclass()
@@ -653,19 +662,20 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
-                result.extend([lang.region for lang in
-                               corpus_info.languageinfotype_model_set.all()])
+                for lang in corpus_info.languageinfotype_model_set.all():
+                    if lang.region:
+                        result.append(lang.region)
             # if media_type.corpusAudioInfo:
-            #     result.extend([lang.region for lang in
+            #     result.extend([lang.languageRegion for lang in
             #                    media_type.corpusAudioInfo.languageinfotype_model_set.all()])
             # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-            #     result.extend([lang.region for lang in
+            #     result.extend([lang.languageRegion for lang in
             #                    corpus_info.languageinfotype_model_set.all()])
             # if media_type.corpusTextNgramInfo:
-            #     result.extend([lang.region for lang in
+            #     result.extend([lang.languageRegion for lang in
             #                 media_type.corpusTextNgramInfo.languageinfotype_model_set.all()])
             # if media_type.corpusImageInfo:
-            #     result.extend([lang.region for lang in
+            #     result.extend([lang.languageRegion for lang in
             #                    media_type.corpusImageInfo.languageinfotype_model_set.all()])
 
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
@@ -674,32 +684,36 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             #     result.extend([lang.region for lang in lcr_media_type \
             #             .lexicalConceptualResourceAudioInfo.languageinfotype_model_set.all()])
             if lcr_media_type.lexicalConceptualResourceTextInfo:
-                result.extend([lang.region for lang in lcr_media_type \
-                        .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all()])
+                for lang in lcr_media_type \
+                        .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all():
+                    if lang.region:
+                        result.append(lang.region)
             # if lcr_media_type.lexicalConceptualResourceVideoInfo:
-            #     result.extend([lang.region for lang in lcr_media_type \
+            #     result.extend([lang.languageRegion for lang in lcr_media_type \
             #             .lexicalConceptualResourceVideoInfo.languageinfotype_model_set.all()])
             # if lcr_media_type.lexicalConceptualResourceImageInfo:
-            #     result.extend([lang.region for lang in lcr_media_type \
+            #     result.extend([lang.languageRegion for lang in lcr_media_type \
             #             .lexicalConceptualResourceImageInfo.languageinfotype_model_set.all()])
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
-                result.extend([lang.region for lang in ld_media_type \
-                            .languageDescriptionTextInfo.languageinfotype_model_set.all()])
+                for lang in ld_media_type \
+                        .languageDescriptionTextInfo.languageinfotype_model_set.all():
+                    if lang.region:
+                        result.append(lang.region)
             # if ld_media_type.languageDescriptionVideoInfo:
-            #     result.extend([lang.region for lang in ld_media_type \
+            #     result.extend([lang.languageRegion for lang in ld_media_type \
             #                 .languageDescriptionVideoInfo.languageinfotype_model_set.all()])
             # if ld_media_type.languageDescriptionImageInfo:
-            #     result.extend([lang.region for lang in ld_media_type \
+            #     result.extend([lang.languageRegion for lang in ld_media_type \
             #                 .languageDescriptionImageInfo.languageinfotype_model_set.all()])
 
         # elif isinstance(corpus_media, toolServiceInfoType_model):
         #     if corpus_media.inputInfo:
-        #         result.extend(corpus_media.inputInfo.region)
+        #         result.extend(corpus_media.inputInfo.languageRegion)
         #     if corpus_media.outputInfo:
-        #         result.extend(corpus_media.outputInfo.region)
+        #         result.extend(corpus_media.outputInfo.languageRegion)
 
         return result
 
@@ -774,11 +788,11 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             return [resType]
         return []
 
-    def prepare_mediaTypeFilter(self, obj):
-        """
-        Collect the data to filter the resources on Media Type
-        """
-        return model_utils.get_resource_media_types(obj)
+    # def prepare_mediaTypeFilter(self, obj):
+    #     """
+    #     Collect the data to filter the resources on Media Type
+    #     """
+    #     return model_utils.get_resource_media_types(obj)
 
     def prepare_availabilityFilter(self, obj):
         """
