@@ -89,8 +89,7 @@
             $(".form-row.licence").find("select option:selected").each(function () {
 
                 var licence = $(this).text();
-                var aboutToDelete = $(this).parent().parent().parent().parent()
-                        .parent().find(".delete").find("input").is(':checked');
+                var aboutToDelete = $(this).closest(".inline-related").find(".delete").find("input").is(':checked');
                 if (jQuery.inArray($(this).val(), specialLicences) != -1 &&
                         aboutToDelete == false &&
                         $(this).parent().parent().parent().parent()
