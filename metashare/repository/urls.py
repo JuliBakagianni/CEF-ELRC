@@ -12,7 +12,6 @@ sqs = SearchQuerySet() \
   .facet("languageRegionFilter") \
   .facet("languageVariantFilter") \
   .facet("resourceTypeFilter") \
-  .facet("mediaTypeFilter") \
   .facet("availabilityFilter") \
   .facet("licenceFilter") \
   .facet("restrictionsOfUseFilter") \
@@ -32,7 +31,7 @@ sqs = SearchQuerySet() \
   .facet("textTextTypeFilter") \
   .facet("languageVarietyFilter") \
   .facet("appropriatenessForDSIFilter") \
-
+  # .facet("mediaTypeFilter") \
   # .facet("languageDescriptionGrammaticalPhenomenaCoverageFilter") \
   # .facet("toolServiceToolServiceTypeFilter") \
   # .facet("toolServiceToolServiceSubTypeFilter") \
