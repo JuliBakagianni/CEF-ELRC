@@ -20,6 +20,10 @@ def get_rest_of_languages():
     xpath = u"//language[position()>25]/description/text()"
     return registry.xpath(xpath)
 
+def get_languages_by_substring():
+    xpath = u"//language[matches(lower-case(description),\"\\b{}\")]/description/text()"
+    return registry.xpath(xpath)
+
 def get_all_scripts():
     xpath = u"//script/description/text()"
     return registry.xpath(xpath)
