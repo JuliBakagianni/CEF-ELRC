@@ -524,7 +524,7 @@ def view(request, resource_name=None, object_id=None):
     # Create fields lists
     url = resource.identificationInfo.url
     metashare_id = resource.identificationInfo.metaShareId
-    pid = resource.identificationInfo.PID
+    # pid = resource.identificationInfo.PID
     islrn = resource.identificationInfo.ISLRN
     identifier = resource.identificationInfo.identifier
     resource_type = resource.resourceComponentType.as_subclass().resourceType
