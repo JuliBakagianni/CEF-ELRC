@@ -375,8 +375,8 @@ class identificationInfoType_model(SchemaModel):
         ( u'url', u'url', RECOMMENDED ),
         ( u'metaShareId', u'metaShareId', REQUIRED ),
         ( u'ISLRN', u'ISLRN', RECOMMENDED ),
+        # ( u'PID', u'PID', RECOMMENDED),
         ( u'identifier', u'identifier', OPTIONAL ),
-        ( u'PID', u'PID', RECOMMENDED),
         ( u'appropriatenessForDSI', u'appropriatenessForDSI', OPTIONAL ),
         ( u'createdUsingELRCServices', u'createdUsingELRCServices', OPTIONAL ),
     )
@@ -430,6 +430,15 @@ class identificationInfoType_model(SchemaModel):
         validators=[validate_matches_xml_char_production],
     )
 
+    # PID = models.URLField(verbose_name='PID',
+    #                       validators=[HTTPURI_VALIDATOR],
+    #                       help_text='To be used for CLARIN-EL '
+    #                                 'purposes; automatically assigned by the '
+    #                                 'system and thus not viewable on the editor; '
+    #                                 'at a later stage, we might consider having it '
+    #                                 'also editable for PIDs assigned by other entities',
+    #                       blank=True)
+
     identifier = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=1, max_length=100),
                                 verbose_name='Other identifiers',
                                 help_text='A reference to the resource; to be used, ' \
@@ -438,12 +447,6 @@ class identificationInfoType_model(SchemaModel):
                                           'and PID are distinct elements',
                                 blank=True, validators=[validate_matches_xml_char_production], )
 
-    PID = models.URLField(editable=False,
-                          help_text='To be used for CLARIN-EL '
-                                    'purposes; automatically assigned by the '
-                                    'system and thus not viewable on the editor; '
-                                    'at a later stage, we might consider having it '
-                                    'also editable for PIDs assigned by other entities')
 
     appropriatenessForDSI = MultiSelectField(
         verbose_name='Appropriateness for DSI',
@@ -2889,7 +2892,7 @@ class personInfoType_model(actorInfoType_model):
 
 
 DISTRIBUTIONINFOTYPE_AVAILABILITY_CHOICES = _make_choices_from_list([
-    u'available-unrestrictedUse', u'available-restrictedUse', u'underNegotiation',
+    u'available', u'underNegotiation',
 ])
 
 # pylint: disable-msg=C0103
@@ -2982,21 +2985,21 @@ class distributionInfoType_model(SchemaModel):
 
         if u'underNegotiation' in licences:
             self.availability = u'underNegotiation'
-        elif bool(set(licences) & set([u'ODC-BY', u'PSI-licence_Ireland', u'ODbL', u'CC-BY',
-                                       u'CC-BY-NC', u'CC-BY-NC-ND', u'CC-BY-NC-SA', u'CC-BY-ND', u'CC-BY-SA',
-                                       u'FreeOpenDataLicence_Belgium', u'OpenDataLicenceAtAFairCost_Belgium',
-                                       u'FreeOpenDataLicenceForNon-CommercialRe-use_Belgium',
-                                       u'OpenDataLicenceAtAFairCostForCommercialRe-use_Belgium',
-                                       u'NLSOpenDataLicence_Finland', u'LicenceOuverte-OpenLicence_France',
-                                       u'DL-DE-BY_Germany', u'IODL_Italy', u'NLOD_Norway', u'IGCYL-NC_Spain',
-                                       u'ColorIURIS_Spain', u'OGL_UK', u'NCGL_UK', u'openForReuseWithRestrictions',
-                                       u'non-standard/Other_Licence/Terms',
-                                       # u'proprietary', u'other',
-                                       ])):
-            self.availability = u'available-restrictedUse'
+        # elif bool(set(licences) & set([u'ODC-BY', u'PSI-licence_Ireland', u'ODbL', u'CC-BY',
+        #                                u'CC-BY-NC', u'CC-BY-NC-ND', u'CC-BY-NC-SA', u'CC-BY-ND', u'CC-BY-SA',
+        #                                u'FreeOpenDataLicence_Belgium', u'OpenDataLicenceAtAFairCost_Belgium',
+        #                                u'FreeOpenDataLicenceForNon-CommercialRe-use_Belgium',
+        #                                u'OpenDataLicenceAtAFairCostForCommercialRe-use_Belgium',
+        #                                u'NLSOpenDataLicence_Finland', u'LicenceOuverte-OpenLicence_France',
+        #                                u'DL-DE-BY_Germany', u'IODL_Italy', u'NLOD_Norway', u'IGCYL-NC_Spain',
+        #                                u'ColorIURIS_Spain', u'OGL_UK', u'NCGL_UK', u'openForReuseWithRestrictions',
+        #                                u'non-standard/Other_Licence/Terms',
+        #                                # u'proprietary', u'other',
+        #                                ])):
+        #     self.availability = u'available-restrictedUse'
 
         else:
-            self.availability = u'available-unrestrictedUse'
+            self.availability = u'available'
 
         # Call save() method from super class with all arguments.
         super(distributionInfoType_model, self).save(*args, **kwargs)
@@ -3138,13 +3141,13 @@ class licenceInfoType_model(SchemaModel):
     __schema_fields__ = (
         ( u'licence', u'licence', REQUIRED ),
         ( u'otherLicenceName', u'otherLicenceName', OPTIONAL),
+        ( u'termsOfUseText', u'termsOfUseText', OPTIONAL ),
+        ( u'termsOfUseURL', u'termsOfUseURL', OPTIONAL ),
         ( u'personalDataIncluded', u'personalDataIncluded', REQUIRED ),
         ( u'personalDataAdditionalInfo', u'personalDataAdditionalInfo', OPTIONAL ),
         ( u'sensitiveDataIncluded', u'sensitiveDataIncluded', REQUIRED ),
         ( u'sensitiveDataAdditionalInfo', u'sensitiveDataAdditionalInfo', OPTIONAL ),
         ( u'restrictionsOfUse', u'restrictionsOfUse', OPTIONAL ),
-        ( u'termsOfUseText', u'termsOfUseText', OPTIONAL ),
-        ( u'termsOfUseURL', u'termsOfUseURL', OPTIONAL ),
         # ( u'distributionAccessMedium', u'distributionAccessMedium', RECOMMENDED ),
         # ( u'downloadLocation', u'downloadLocation', OPTIONAL ),
         # ( u'executionLocation', u'executionLocation', OPTIONAL ),
@@ -3178,6 +3181,23 @@ class licenceInfoType_model(SchemaModel):
         help_text='Specifies the costs that are required to access the res' \
                   'ource, a fragment of the resource or to use a tool or service',
         blank=True, null=True, max_length=200, )
+
+    termsOfUseText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
+                               default_retriever=best_lang_value_retriever,
+                               verbose_name='Other licence text',
+                               max_val_length=10000,
+                               help_text='Used to provide a free text description ' \
+                                         'of the terms of use associated with a resource ' \
+                                         '(mainly for non-standard licences)',
+                               blank=True)
+
+    termsOfUseURL = models.URLField(
+        verbose_name='Other licence URL',
+        help_text='Used to provide a hyperlink to a url describing' \
+                  'the terms of use for a language resource (mainly ' \
+                  'for non-standard licences)',
+        blank=True,
+    )
 
     personalDataIncluded = models.BooleanField(
         verbose_name='Personal Data Included',
@@ -3222,23 +3242,6 @@ class licenceInfoType_model(SchemaModel):
         blank=True,
         max_length=1 + len(LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES['choices']) / 4,
         choices=LICENCEINFOTYPE_CONDITIONSOFUSE_CHOICES['choices'],
-    )
-
-    termsOfUseText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
-                               default_retriever=best_lang_value_retriever,
-                               verbose_name='Terms of use text',
-                               max_val_length=10000,
-                               help_text='Used to provide a free text description ' \
-                                         'of the terms of use associated with a resource ' \
-                                         '(mainly for non-standard licences)',
-                               blank=True)
-
-    termsOfUseURL = models.URLField(
-        verbose_name='Terms of use URL',
-        help_text='Used to provide a hyperlink to a url describing' \
-                  'the terms of use for a language resource (mainly ' \
-                  'for non-standard licences)',
-        blank=True,
     )
 
     # distributionAccessMedium = MultiSelectField(
