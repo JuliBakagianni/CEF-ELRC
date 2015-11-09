@@ -3710,11 +3710,9 @@ class languageInfoType_model(SchemaModel):
     __schema_fields__ = (
         ( u'languageId', u'languageId', REQUIRED ),
         ( u'languageName', u'languageName', REQUIRED ),
-        # ( u'language', u'language', REQUIRED ),
         ( u'languageScript', u'languageScript', OPTIONAL ),
         ( u'region', u'region', OPTIONAL ),
         ( u'variants', u'variants', OPTIONAL ),
-        # (u'languageRegion', u'languageRegion', OPTIONAL)
         ( u'sizePerLanguage', u'sizePerLanguage', OPTIONAL ),
         ( u'languageVarietyInfo', u'languageVarietyInfo', OPTIONAL ),
     )
