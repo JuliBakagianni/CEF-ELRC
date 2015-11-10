@@ -3141,8 +3141,8 @@ class licenceInfoType_model(SchemaModel):
     __schema_fields__ = (
         ( u'licence', u'licence', REQUIRED ),
         ( u'otherLicenceName', u'otherLicenceName', OPTIONAL),
-        ( u'termsOfUseText', u'termsOfUseText', OPTIONAL ),
-        ( u'termsOfUseURL', u'termsOfUseURL', OPTIONAL ),
+        ( u'otherLicence_TermsText', u'otherLicence_TermsText', OPTIONAL ),
+        ( u'otherLicence_TermsURL', u'otherLicence_TermsURL', OPTIONAL ),
         ( u'personalDataIncluded', u'personalDataIncluded', REQUIRED ),
         ( u'personalDataAdditionalInfo', u'personalDataAdditionalInfo', OPTIONAL ),
         ( u'sensitiveDataIncluded', u'sensitiveDataIncluded', REQUIRED ),

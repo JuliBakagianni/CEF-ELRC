@@ -5,8 +5,8 @@ $(document).ready(function () {
         $("select option:selected").each(function () {
             if ($(this).val() != "non-standard/Other_Licence/Terms") {
                 $(this).parent().parent().parent().parent().siblings(".form-row.otherLicenceName").hide();
-                $(this).parent().parent().parent().parent().siblings(".form-row.termsOfUseText").hide();
-                $(this).parent().parent().parent().parent().siblings(".form-row.termsOfUseURL").hide();
+                $(this).parent().parent().parent().parent().siblings(".form-row.otherLicence_TermsText").hide();
+                $(this).parent().parent().parent().parent().siblings(".form-row.otherLicence_TermsURL").hide();
             }
             if (jQuery.inArray($(this).val(), licences) != -1) {
                 $(this).parent().parent().parent().parent().siblings(".form-row.restrictionsOfUse").show();

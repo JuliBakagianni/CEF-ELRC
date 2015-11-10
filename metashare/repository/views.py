@@ -211,8 +211,8 @@ def _get_licences(resource, user_membership):
         access = LICENCEINFOTYPE_URLS_LICENCE_CHOICES.get(info.licence, None)
 
         no_terms = LICENCEINFOTYPE_URLS_LICENCE_CHOICES[info.licence][0]=='' \
-                   and info.termsOfUseURL == '' \
-                   and not info.termsOfUseText
+                   and info.otherLicence_TermsURL == '' \
+                   and not info.otherLicence_TermsText
         special_conditions = (u"Compensate" in \
                    info.get_restrictionsOfUse_display_list() \
                    or u"Other" in info.get_restrictionsOfUse_display_list())
@@ -294,8 +294,8 @@ def download(request, object_id):
                                            'licence_path': \
                                                LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice_name][0],
                                            'download_available': licences[l_id][1],
-                                           'l_url': licences[l_id][0].termsOfUseURL,
-                                           'l_text': licences[l_id][0].termsOfUseText.values()
+                                           'l_url': licences[l_id][0].otherLicence_TermsURL,
+                                           'l_text': licences[l_id][0].otherLicence_TermsText.values()
                                            },
                                           context_instance=RequestContext(request))
         elif licence_choice and not l_id in licences:
@@ -319,8 +319,8 @@ def download(request, object_id):
                                    'licence_path': \
                                        LICENCEINFOTYPE_URLS_LICENCE_CHOICES[licence_choice_name][0],
                                    'download_available': licences[l_id][1],
-                                   'l_url': licences[l_id][0].termsOfUseURL,
-                                   'l_text': licences[l_id][0].termsOfUseText.values()
+                                   'l_url': licences[l_id][0].otherLicence_TermsURL,
+                                   'l_text': licences[l_id][0].otherLicence_TermsText.values()
                                    },
 
                                   context_instance=RequestContext(request))
