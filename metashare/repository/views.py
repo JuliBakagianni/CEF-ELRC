@@ -522,7 +522,7 @@ def view(request, resource_name=None, object_id=None):
         .description.itervalues() if name != description]
 
     # Create fields lists
-    url = resource.identificationInfo.url
+    url = resource.identificationInfo.landingPage
     metashare_id = resource.identificationInfo.metaShareId
     # pid = resource.identificationInfo.PID
     islrn = resource.identificationInfo.ISLRN
