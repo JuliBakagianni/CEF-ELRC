@@ -5,10 +5,7 @@
 	<xs:include schemaLocation="../META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="../META-SHARE-BaseTypes.xsd"/>
 	<!-- include media choices -->
-	<xs:include schemaLocation="mediaTypes/lexicalConceptualResource/lexicalConceptualResourceAudioInfo.xsd"/>
 	<xs:include schemaLocation="mediaTypes/lexicalConceptualResource/lexicalConceptualResourceTextInfo.xsd"/>
-	<xs:include schemaLocation="mediaTypes/lexicalConceptualResource/lexicalConceptualResourceVideoInfo.xsd"/>
-	<xs:include schemaLocation="mediaTypes/lexicalConceptualResource/lexicalConceptualResourceImageInfo.xsd"/>
 	<xs:complexType name="lexicalConceptualResourceInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups together information specific to lexical/conceptual resources</xs:documentation>

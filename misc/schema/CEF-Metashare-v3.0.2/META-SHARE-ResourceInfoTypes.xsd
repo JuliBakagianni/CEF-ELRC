@@ -5,5 +5,4 @@
 	<xs:include schemaLocation="./resourceTypes/Corpus.xsd"/>
 	<xs:include schemaLocation="./resourceTypes/languageDescription.xsd"/>
 	<xs:include schemaLocation="./resourceTypes/lexicalConceptualResource.xsd"/>
-	<xs:include schemaLocation="./resourceTypes/toolService.xsd"/>
 </xs:schema>

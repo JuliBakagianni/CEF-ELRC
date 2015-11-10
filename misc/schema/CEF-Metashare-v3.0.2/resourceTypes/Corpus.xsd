@@ -5,11 +5,7 @@
 	<xs:include schemaLocation="../META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="../META-SHARE-BaseTypes.xsd"/>
 	<!-- media type possible choices -->
-	<xs:include schemaLocation="mediaTypes/Corpus/corpusAudioInfo.xsd"/>
 	<xs:include schemaLocation="mediaTypes/Corpus/corpusTextInfo.xsd"/>
-	<xs:include schemaLocation="mediaTypes/Corpus/corpusVideoInfo.xsd"/>
-	<xs:include schemaLocation="mediaTypes/Corpus/corpusImageInfo.xsd"/>
-	<xs:include schemaLocation="mediaTypes/Corpus/corpusTextNumericalInfo.xsd"/>
 	<xs:include schemaLocation="mediaTypes/Corpus/corpusTextNgramInfo.xsd"/>
 	<xs:complexType name="corpusInfoType">
 		<xs:annotation>

@@ -372,7 +372,7 @@ class identificationInfoType_model(SchemaModel):
         ( u'resourceName', u'resourceName', REQUIRED ),
         ( u'description', u'description', REQUIRED ),
         ( u'resourceShortName', u'resourceShortName', OPTIONAL ),
-        ( u'url', u'url', RECOMMENDED ),
+        ( u'landingPage', u'landingPage', RECOMMENDED ),
         ( u'metaShareId', u'metaShareId', REQUIRED ),
         ( u'ISLRN', u'ISLRN', RECOMMENDED ),
         # ( u'PID', u'PID', RECOMMENDED),
@@ -409,11 +409,11 @@ class identificationInfoType_model(SchemaModel):
                                             'uage.',
                                   blank=True)
 
-    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=0, attrs={'size': '250'}),
-                         verbose_name='Url', validators=[HTTPURI_VALIDATOR],
-                         help_text='A URL used as homepage of an entity (e.g. of a person, ' \
-                                   'organization, resource etc.) and/or where an entity (e.g.LR, docu' \
-                                   'ment etc.) is located',
+    landingPage = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=0, attrs={'size': '250'}),
+                         verbose_name='Landing Page', validators=[HTTPURI_VALIDATOR],
+                         help_text='A Web page that can be navigated to in a Web browser '
+                                   'to gain access to the resource, its distributions '
+                                   'and/or additional information.',
                          blank=True, )
 
     metaShareId = XmlCharField(
@@ -424,8 +424,10 @@ class identificationInfoType_model(SchemaModel):
         max_length=100, default="NOT_DEFINED_FOR_V2", )
 
     ISLRN = XmlCharField(
-        verbose_name='Islrn',
-        help_text='Reference to the unique ISLRN number',
+        verbose_name='ISLRN',
+        help_text="Reference to the unique ISLRN number; if you don't "
+                  "have an ISLRN for your resource, "
+                  "please visit http://www.islrn.org/ to request.",
         blank=True, max_length=17,
         validators=[validate_matches_xml_char_production],
     )
@@ -441,10 +443,10 @@ class identificationInfoType_model(SchemaModel):
 
     identifier = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=1, max_length=100),
                                 verbose_name='Other identifiers',
-                                help_text='A reference to the resource; to be used, ' \
-                                          'for instance, for internal identifiers ' \
-                                          'created by resource providers, as ISLRN ' \
-                                          'and PID are distinct elements',
+                                help_text="A reference to the resource; to be used, "
+                                          "for instance, for internal identifiers "
+                                          "created by resource providers, DOI, "
+                                          "handle PID, etc.",
                                 blank=True, validators=[validate_matches_xml_char_production], )
 
 
@@ -786,15 +788,15 @@ class metadataInfoType_model(SchemaModel):
 
     metadataCreationDate = models.DateField(
         verbose_name='Metadata creation date',
-        help_text='The date of creation of this metadata description (auto' \
-                  'matically inserted by the MetaShare software)',
+        help_text='The date of creation of this metadata description '
+                  '(automatically inserted by the repo software)',
     )
 
     metadataCreator = models.ManyToManyField("personInfoType_model",
-                                             verbose_name='Metadata creator',
-                                             help_text='Groups information on the person that has created the m' \
-                                                       'etadata record',
-                                             blank=True, null=True, related_name="metadataCreator_%(class)s_related", )
+        verbose_name='Metadata creator',
+        help_text='Groups information on the person(s) that has/have '
+                  'created the metadata record',
+        blank=True, null=True, related_name="metadataCreator_%(class)s_related", )
 
     # source = XmlCharField(
     #   verbose_name='Source',
@@ -815,28 +817,26 @@ class metadataInfoType_model(SchemaModel):
     #   blank=True, max_length=1000, )
 
     metadataLanguageName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=2, max_length=150),
-                                          verbose_name='Metadata language name',
-                                          help_text='The name of the language in which the metadata descript' \
-                                                    'ion is written; an autocompletion mechanism with values from the ' \
-                                                    'ISO 639 is provided in the editor, but the values can be subseque' \
-                                                    'ntly edited for further specification (according to the IETF BCP4' \
-                                                    '7 guidelines)',
-                                          blank=True, validators=[validate_matches_xml_char_production], )
+         verbose_name='Metadata language name',
+         help_text='The name of the language in which the metadata '
+                   'description is written; an autocompletion '
+                   'mechanism with values from the ISO 639 is '
+                   'provided in the editor',
+         blank=True, validators=[validate_matches_xml_char_production], )
 
     #TEST MILTOS
     metadataLanguageId = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=3, max_length=150),
-                                        verbose_name='Metadata language id',
-                                        help_text='The identifier of the language in which the metadata de' \
-                                                  'scription is written; an autocompletion mechanism with values fro' \
-                                                  'm the ISO 639 is provided in the editor, but the values can be su' \
-                                                  'bsequently edited for further specification (according to the IET' \
-                                                  'F BCP47 guidelines)',
-                                        blank=True, validators=[validate_matches_xml_char_production], )
+        verbose_name='Metadata language id',
+        help_text='The id of the language in which the '
+                  'metadata description is written, '
+                  'as specified by ISO 639',
+        blank=True, validators=[validate_matches_xml_char_production],
+        editable=False)
 
     metadataLastDateUpdated = models.DateField(
         verbose_name='Metadata last date updated',
-        help_text='The date of the last updating of the metadata record (a' \
-                  'utomatically inserted by the MetaShare software)',
+        help_text='The date of the last updating of the metadata '
+                  'record (automatically inserted by the repo software)',
         blank=True, null=True, )
 
     # revision = XmlCharField(
@@ -1017,19 +1017,17 @@ class documentInfoType_model(documentationInfoType_model):
 
     documentLanguageName = XmlCharField(
         verbose_name='Document language name',
-        help_text='The name of the language the document is written in; an' \
-                  ' autocompletion mechanism with values from the ISO 639 is provide' \
-                  'd in the editor, but the values can be subsequently edited for fu' \
-                  'rther specification (according to the IETF BCP47 guidelines)',
+        help_text='The name of the language the document is '
+                  'written in; an autocompletion mechanism '
+                  'with values from the ISO 639 is provided '
+                  'in the editor',
         blank=True, max_length=150, )
 
     documentLanguageId = XmlCharField(
         verbose_name='Document language id',
-        help_text='The id of the language the document is written in; an a' \
-                  'utocompletion mechanism with values from the ISO 639 is provided ' \
-                  'in the editor, but the values can be subsequently edited for furt' \
-                  'her specification (according to the IETF BCP47 guidelines)',
-        blank=True, max_length=20, )
+        help_text='The id of the language the document is written in '
+                  'as specified by ISO 639',
+        blank=True, max_length=20, editable=False)
 
     source_url = models.URLField(verify_exists=False,
                                  default=DJANGO_URL,
@@ -2622,9 +2620,8 @@ class communicationInfoType_model(SchemaModel):
 
     url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=14, max_length=150),
                          verbose_name='Url', validators=[HTTPURI_VALIDATOR],
-                         help_text='A URL used as homepage of an entity (e.g. of a person, ' \
-                                   'organization, resource etc.) and/or where an entity (e.g.LR, docu' \
-                                   'ment etc.) is located',
+                         help_text='A URL used as homepage of an entity '
+                                   '(e.g. of a person, organization, resource etc.)',
                          blank=True, )
 
     address = XmlCharField(
@@ -2943,16 +2940,18 @@ class distributionInfoType_model(SchemaModel):
     )
 
     iprHolder = models.ManyToManyField("actorInfoType_model",
-                                       verbose_name='Ipr holder',
-                                       help_text='Groups information on a person or an organization who h' \
-                                                 'olds the full Intellectual Property Rights (Copyright, trademark ' \
-                                                 'etc) that subsist in the resource. The IPR holder could be differ' \
-                                                 'ent from the creator that may have assigned the rights to the IPR' \
-                                                 ' holder (e.g. an author as a creator assigns her rights to the pu' \
-                                                 'blisher who is the IPR holder) and the distributor that holds a s' \
-                                                 'pecific licence (i.e. a permission) to distribute the work within' \
-                                                 ' the META-SHARE network.',
-                                       blank=True, null=True, related_name="iprHolder_%(class)s_related", )
+         verbose_name='Ipr holder',
+         help_text='Groups information on a person or an organization '
+                   'who holds the full Intellectual Property Rights '
+                   '(Copyright, trademark etc) that subsist in the '
+                   'resource. The IPR holder could be different '
+                   'from the creator that may have assigned the '
+                   'rights to the IPR holder (e.g. an author as a '
+                   'creator assigns her rights to the publisher who '
+                   'is the IPR holder) and the distributor that '
+                   'holds a specific licence (i.e. a permission) '
+                   'to distribute the work.',
+         blank=True, null=True, related_name="iprHolder_%(class)s_related", )
 
     # availabilityEndDate = models.DateField(
     #   verbose_name='Availability end date',
@@ -3127,9 +3126,10 @@ LICENCEINFOTYPE_USERNATURE_CHOICES = _make_choices_from_list([
 # pylint: disable-msg=C0103
 class licenceInfoType_model(SchemaModel):
     """
-    Groups information on licences for the resource; can be repeated to
-    allow for different modes of access and conditions of use
-    (e.g. free for academic use, on-a-fee basis for commercial use,
+    Groups information on different forms of distribution of the resource
+    and the corresponding licences under which they are distributed;
+    can be repeated to allow for different modes of access and conditions
+    of use (e.g. free for academic use, on-a-fee basis for commercial use,
     download of a sample for free use etc.)
     """
 
@@ -3178,59 +3178,62 @@ class licenceInfoType_model(SchemaModel):
 
     otherLicenceName = XmlCharField(
         verbose_name='Other Licence Name',
-        help_text='Specifies the costs that are required to access the res' \
-                  'ource, a fragment of the resource or to use a tool or service',
+        help_text='The name with which a licence is known; to '
+                  'be used for licences not included in the pre-defined '
+                  'list of recommended licences',
         blank=True, null=True, max_length=200, )
 
-    termsOfUseText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
+    otherLicence_TermsText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
                                default_retriever=best_lang_value_retriever,
                                verbose_name='Other licence text',
                                max_val_length=10000,
-                               help_text='Used to provide a free text description ' \
-                                         'of the terms of use associated with a resource ' \
-                                         '(mainly for non-standard licences)',
+                               help_text='Used for inputting the text of '
+                                         'licences that are not included '
+                                         'in the pre-defined list or terms '
+                                         'of use statements associated with '
+                                         'a resource',
                                blank=True)
 
-    termsOfUseURL = models.URLField(
+    otherLicence_TermsURL = models.URLField(
         verbose_name='Other licence URL',
-        help_text='Used to provide a hyperlink to a url describing' \
-                  'the terms of use for a language resource (mainly ' \
-                  'for non-standard licences)',
+        help_text='Used to provide a hyperlink to a url containing '
+                  'the text of a licence not included in the '
+                  'predefined list or describing the terms of '
+                  'use for a language resource',
         blank=True,
     )
 
     personalDataIncluded = models.BooleanField(
         verbose_name='Personal Data Included',
-        help_text='Specifies whether the resource contains or ' \
-                  'not personal data; this might mean that ' \
-                  'special handling of the resource is required ' \
-                  '(e.g. anonymisation)'
+        help_text='Specifies whether the resource contains or not '
+                  'personal data; this might mean that special '
+                  'handling of the resource is required (e.g. anonymisation)'
     )
 
     personalDataAdditionalInfo = models.TextField(
         verbose_name='Personal Data Additional Information',
-        help_text='If the resource includes personal data, ' \
-                  'this field can be used for entering more ' \
-                  'information, e.g. whether special handling ' \
-                  'of the resource is required (e.g. anonymisation, ' \
-                  'further request for use etc.)',
+        help_text='If the resource includes personal data, this '
+                  'field can be used for entering more information, '
+                  'e.g. whether special handling of the resource is '
+                  'required (e.g. anonymisation, further request for '
+                  'use etc.)',
         blank=True
     )
 
     sensitiveDataIncluded = models.BooleanField(
         verbose_name='Sensitive Data Included',
-        help_text='Specifies whether the resource contains or ' \
-                  'not sensitive data; this might mean that ' \
-                  'special handling of the resource is required ' \
-                  '(e.g. anonymisation)'
+        help_text='Specifies whether the resource contains '
+                  'or not sensitive data; this might mean '
+                  'that special handling of the resource is '
+                  'required (e.g. anonymisation)'
     )
 
     sensitiveDataAdditionalInfo = models.TextField(
         verbose_name='Sensitive Data Additional Information',
-        help_text='If the resource includes sensitive data, ' \
-                  'this field can be used for entering more ' \
-                  'information, e.g. whether special handling ' \
-                  'of the resource is required (e.g. anonymisation)',
+        help_text='If the resource includes sensitive data, this '
+                  'field can be used for entering more information, '
+                  'e.g. whether special handling of the resource is '
+                  'required (e.g. anonymisation)',
         blank=True
     )
 
@@ -3271,13 +3274,13 @@ class licenceInfoType_model(SchemaModel):
         blank=True, max_length=100, )
 
     attributionText = DictField(validators=[validate_lang_code_keys, validate_dict_values],
-                                default_retriever=best_lang_value_retriever,
-                                verbose_name='Attribution text',
-                                max_val_length=1000,
-                                help_text='The text that must be quoted for attribution purposes w' \
-                                          'hen using a resource - for cases where a resource is provided wit' \
-                                          'h a restriction on attribution',
-                                blank=True)
+        default_retriever=best_lang_value_retriever,
+        verbose_name='Attribution text',
+        max_val_length=1000,
+        help_text='The text that must be quoted for attribution purposes '
+                  'when using a resource - for cases where a resource is '
+                  'provided with a request for attribution',
+        blank=True)
 
     # licensor = models.ManyToManyField("actorInfoType_model",
     #   verbose_name='Licensor',

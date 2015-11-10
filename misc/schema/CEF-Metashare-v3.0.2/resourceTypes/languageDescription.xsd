@@ -6,8 +6,6 @@
 	<xs:include schemaLocation="../META-SHARE-BaseTypes.xsd"/>
 	<!-- media type possible choices -->
 	<xs:include schemaLocation="mediaTypes/languageDescription/LanguageDescTextInfo.xsd"/>
-	<xs:include schemaLocation="mediaTypes/languageDescription/LanguageDescvideoInfo.xsd"/>
-	<xs:include schemaLocation="mediaTypes/languageDescription/LanguageDescimageInfo.xsd"/>
 	<!--  populate here for possible extensions
 	<xs:include schemaLocation="./mediaTypes/languageDescription/LanguageDescAudioInfo.xsd"/>
 	<xs:include schemaLocation="./mediaTypes/languageDescription/LanguageDescTextNumericalInfo.xsd"/>
