@@ -82,8 +82,10 @@ function add_container(widget_id) {
         input = django.jQuery('#container_' + widget_id + '_' + id + ' .input');
 
     }
-    //alert(new_container.attr("id"));
-    update_var_variants(new_container.prev("li"), new_container);
+    //call the update variants function only for language variants
+    if(new_container.closest("div").attr("title")=='Variants'){
+      update_var_variants(new_container.prev("li"), new_container);
+    }
     input.focus();
 }
 
@@ -247,14 +249,14 @@ function update_var_variants(prevRef, element) {
                         attr("value", vars[r]).text(vars[r]));
                 }
                 selElement.val(selected);
-                if (result.length) {
-                    selElement.parent().show().prop('disabled', false);
-                    selElement.parent().next("li").has("a").prop('disabled', false);
-                }
-                else {
-                    selElement.parent().next("li").has("a").prop('disabled', true);
-                    selElement.parent().hide().prop('disabled', true);
-                }
+                //if (result.length) {
+                //    selElement.parent().show().prop('disabled', false);
+                //    selElement.parent().next("li").has("a").prop('disabled', false);
+                //}
+                //else {
+                //    selElement.parent().next("li").has("a").prop('disabled', true);
+                //    selElement.parent().hide().prop('disabled', true);
+                //}
             }
         })
     };
