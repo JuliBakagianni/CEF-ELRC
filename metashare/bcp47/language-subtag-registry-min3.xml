@@ -1,264 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <registry xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions">
 	<languages>
-		<language subtag="bg">
-			<description>Bulgarian</description>
-			<suppress-script>Cyrl</suppress-script>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="cs">
-			<description>Czech</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="hr">
-			<description>Croatian</description>
-			<suppress-script>Latn</suppress-script>
-			<macrolanguage>sh</macrolanguage>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="da">
-			<description>Danish</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="nl">
-			<description>Dutch; Flemish</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="en">
-			<description>English</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="boont">Boontling</variant>
-				<variant subtag="emodeng">Early Modern English (1500-1700)</variant>
-				<variant subtag="scotland">Scottish Standard English</variant>
-				<variant subtag="scouse">Scouse</variant>
-				<variant subtag="unifon">Unifon phonetic alphabet</variant>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="et">
-			<description>Estonian</description>
-			<suppress-script>Latn</suppress-script>
-			<scope>macrolanguage</scope>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="fi">
-			<description>Finnish</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="fr">
-			<description>French</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="1694acad">Early Modern French</variant>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="de">
-			<description>German</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="1901">Traditional German orthography</variant>
-				<variant subtag="1996">German orthography of 1996</variant>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="hu">
-			<description>Hungarian</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="ga">
-			<description>Irish</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="it">
-			<description>Italian</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="lv">
-			<description>Latvian</description>
-			<suppress-script>Latn</suppress-script>
-			<scope>macrolanguage</scope>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="lt">
-			<description>Lithuanian</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="mt">
-			<description>Maltese</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="el">
-			<description>Modern Greek (1453-)</description>
-			<suppress-script>Grek</suppress-script>
-			<variants>
-				<variant subtag="monoton">Monotonic Greek</variant>
-				<variant subtag="polyton">Polytonic Greek</variant>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="pl">
-			<description>Polish</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="pt">
-			<description>Portuguese</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="ro">
-			<description>Romanian; Moldavian; Moldovan</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="sk">
-			<description>Slovak</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="sl">
-			<description>Slovenian</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="bohoric">Slovene in Bohorič alphabet</variant>
-				<variant subtag="dajnko">Slovene in Dajnko alphabet</variant>
-				<variant subtag="metelko">Slovene in Metelko alphabet</variant>
-				<variant subtag="nedis">Natisone dialect; Nadiza dialect</variant>
-				<variant subtag="rozaj">Resian; Resianic; Rezijan</variant>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="es">
-			<description>Spanish; Castilian</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="sv">
-			<description>Swedish</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
 		<language subtag="aa">
 			<description>Afar</description>
 			<variants>
@@ -400,6 +142,16 @@
 				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
 			</variants>
 		</language>
+		<language subtag="bg">
+			<description>Bulgarian</description>
+			<suppress-script>Cyrl</suppress-script>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
 		<language subtag="bh">
 			<description>Bihari languages</description>
 			<scope>collection</scope>
@@ -516,6 +268,16 @@
 				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
 			</variants>
 		</language>
+		<language subtag="cs">
+			<description>Czech</description>
+			<suppress-script>Latn</suppress-script>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
 		<language subtag="cu">
 			<description>Church Slavic; Church Slavonic; Old Bulgarian; Old Church Slavonic; Old Slavonic</description>
 			<variants>
@@ -538,6 +300,28 @@
 			<description>Welsh</description>
 			<suppress-script>Latn</suppress-script>
 			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
+		<language subtag="da">
+			<description>Danish</description>
+			<suppress-script>Latn</suppress-script>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
+		<language subtag="de">
+			<description>German</description>
+			<suppress-script>Latn</suppress-script>
+			<variants>
+				<variant subtag="1901">Traditional German orthography</variant>
+				<variant subtag="1996">German orthography of 1996</variant>
 				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
 				<variant subtag="fonipa">International Phonetic Alphabet</variant>
 				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
@@ -573,9 +357,57 @@
 				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
 			</variants>
 		</language>
+		<language subtag="el">
+			<description>Modern Greek (1453-)</description>
+			<suppress-script>Grek</suppress-script>
+			<variants>
+				<variant subtag="monoton">Monotonic Greek</variant>
+				<variant subtag="polyton">Polytonic Greek</variant>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
+		<language subtag="en">
+			<description>English</description>
+			<suppress-script>Latn</suppress-script>
+			<variants>
+				<variant subtag="boont">Boontling</variant>
+				<variant subtag="emodeng">Early Modern English (1500-1700)</variant>
+				<variant subtag="scotland">Scottish Standard English</variant>
+				<variant subtag="scouse">Scouse</variant>
+				<variant subtag="unifon">Unifon phonetic alphabet</variant>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
 		<language subtag="eo">
 			<description>Esperanto</description>
 			<suppress-script>Latn</suppress-script>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
+		<language subtag="es">
+			<description>Spanish; Castilian</description>
+			<suppress-script>Latn</suppress-script>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
+		<language subtag="et">
+			<description>Estonian</description>
+			<suppress-script>Latn</suppress-script>
+			<scope>macrolanguage</scope>
 			<variants>
 				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
 				<variant subtag="fonipa">International Phonetic Alphabet</variant>
@@ -615,6 +447,16 @@
 				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
 			</variants>
 		</language>
+		<language subtag="fi">
+			<description>Finnish</description>
+			<suppress-script>Latn</suppress-script>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
 		<language subtag="fj">
 			<description>Fijian</description>
 			<suppress-script>Latn</suppress-script>
@@ -635,8 +477,29 @@
 				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
 			</variants>
 		</language>
+		<language subtag="fr">
+			<description>French</description>
+			<suppress-script>Latn</suppress-script>
+			<variants>
+				<variant subtag="1694acad">Early Modern French</variant>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
 		<language subtag="fy">
 			<description>Western Frisian</description>
+			<suppress-script>Latn</suppress-script>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
+		<language subtag="ga">
+			<description>Irish</description>
 			<suppress-script>Latn</suppress-script>
 			<variants>
 				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
@@ -733,8 +596,29 @@
 				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
 			</variants>
 		</language>
+		<language subtag="hr">
+			<description>Croatian</description>
+			<suppress-script>Latn</suppress-script>
+			<macrolanguage>sh</macrolanguage>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
 		<language subtag="ht">
 			<description>Haitian; Haitian Creole</description>
+			<suppress-script>Latn</suppress-script>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
+		<language subtag="hu">
+			<description>Hungarian</description>
 			<suppress-script>Latn</suppress-script>
 			<variants>
 				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
@@ -765,8 +649,7 @@
 			</variants>
 		</language>
 		<language subtag="ia">
-			<description>Interlingua (International Auxiliary Language
-  Association)</description>
+			<description>Interlingua (International Auxiliary Language Association)</description>
 			<variants>
 				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
 				<variant subtag="fonipa">International Phonetic Alphabet</variant>
@@ -833,6 +716,16 @@
 		</language>
 		<language subtag="is">
 			<description>Icelandic</description>
+			<suppress-script>Latn</suppress-script>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
+		<language subtag="it">
+			<description>Italian</description>
 			<suppress-script>Latn</suppress-script>
 			<variants>
 				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
@@ -1079,8 +972,29 @@
 				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
 			</variants>
 		</language>
+		<language subtag="lt">
+			<description>Lithuanian</description>
+			<suppress-script>Latn</suppress-script>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
 		<language subtag="lu">
 			<description>Luba-Katanga</description>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
+		<language subtag="lv">
+			<description>Latvian</description>
+			<suppress-script>Latn</suppress-script>
+			<scope>macrolanguage</scope>
 			<variants>
 				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
 				<variant subtag="fonipa">International Phonetic Alphabet</variant>
@@ -1169,6 +1083,16 @@
 				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
 			</variants>
 		</language>
+		<language subtag="mt">
+			<description>Maltese</description>
+			<suppress-script>Latn</suppress-script>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
 		<language subtag="my">
 			<description>Burmese</description>
 			<suppress-script>Mymr</suppress-script>
@@ -1223,6 +1147,16 @@
 		</language>
 		<language subtag="ng">
 			<description>Ndonga</description>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
+		<language subtag="nl">
+			<description>Dutch; Flemish</description>
+			<suppress-script>Latn</suppress-script>
 			<variants>
 				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
 				<variant subtag="fonipa">International Phonetic Alphabet</variant>
@@ -1351,10 +1285,30 @@
 				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
 			</variants>
 		</language>
+		<language subtag="pl">
+			<description>Polish</description>
+			<suppress-script>Latn</suppress-script>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
 		<language subtag="ps">
 			<description>Pushto; Pashto</description>
 			<suppress-script>Arab</suppress-script>
 			<scope>macrolanguage</scope>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
+		<language subtag="pt">
+			<description>Portuguese</description>
+			<suppress-script>Latn</suppress-script>
 			<variants>
 				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
 				<variant subtag="fonipa">International Phonetic Alphabet</variant>
@@ -1392,6 +1346,16 @@
 		</language>
 		<language subtag="rn">
 			<description>Rundi</description>
+			<suppress-script>Latn</suppress-script>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
+		<language subtag="ro">
+			<description>Romanian; Moldavian; Moldovan</description>
 			<suppress-script>Latn</suppress-script>
 			<variants>
 				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
@@ -1494,6 +1458,31 @@
 				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
 			</variants>
 		</language>
+		<language subtag="sk">
+			<description>Slovak</description>
+			<suppress-script>Latn</suppress-script>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
+		<language subtag="sl">
+			<description>Slovenian</description>
+			<suppress-script>Latn</suppress-script>
+			<variants>
+				<variant subtag="bohoric">Slovene in Bohorič alphabet</variant>
+				<variant subtag="dajnko">Slovene in Dajnko alphabet</variant>
+				<variant subtag="metelko">Slovene in Metelko alphabet</variant>
+				<variant subtag="nedis">Natisone dialect; Nadiza dialect</variant>
+				<variant subtag="rozaj">Resian; Resianic; Rezijan</variant>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
 		<language subtag="sm">
 			<description>Samoan</description>
 			<suppress-script>Latn</suppress-script>
@@ -1568,6 +1557,16 @@
 		</language>
 		<language subtag="su">
 			<description>Sundanese</description>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
+		<language subtag="sv">
+			<description>Swedish</description>
+			<suppress-script>Latn</suppress-script>
 			<variants>
 				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
 				<variant subtag="fonipa">International Phonetic Alphabet</variant>
@@ -74395,7 +74394,7 @@
 			</variants>
 		</variant>
 		<variant subtag="1959acad">
-			<description>'Academic' ('governmental') variant of Belarusian as codified in 1959</description>
+			<description>"Academic" ("governmental") variant of Belarusian as codified in 1959</description>
 			<variants>
 				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
 				<variant subtag="fonipa">International Phonetic Alphabet</variant>
@@ -74813,6 +74812,10 @@
 		<variant subtag="rozaj">
 			<description>Resian; Resianic; Rezijan</description>
 			<variants>
+				<variant subtag="1994">Standardized Resian orthography</variant>
+				<variant subtag="1994">Standardized Resian orthography</variant>
+				<variant subtag="1994">Standardized Resian orthography</variant>
+				<variant subtag="1994">Standardized Resian orthography</variant>
 				<variant subtag="1994">Standardized Resian orthography</variant>
 				<variant subtag="biske">The San Giorgio dialect of Resian; The Bila dialect of Resian</variant>
 				<variant subtag="lipaw">The Lipovaz dialect of Resian; The Lipovec dialect of Resian</variant>
