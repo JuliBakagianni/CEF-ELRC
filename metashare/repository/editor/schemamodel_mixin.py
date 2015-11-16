@@ -21,12 +21,12 @@ LANGUAGE_ID_NAME_FIELDS = {
    #     {'type': 'multiple', 'id': "languageId", 'name': "languageName"},
    # languageInfoType_model:
    #     {'type': 'single', 'id': "languageId", 'name': "languageName"},
-   metadataInfoType_model:
-       {'type': 'multiple', 'id': "metadataLanguageId", 'name': "metadataLanguageName"},
-   documentInfoType_model:
-       {'type': 'single', 'id': "documentLanguageId", 'name': "documentLanguageName"},
-   annotationInfoType_model:
-       {'type': 'single', 'id': "tagsetLanguageId", 'name': "tagsetLanguageName"},
+   # metadataInfoType_model:
+   #     {'type': 'multiple', 'id': "metadataLanguageId", 'name': "metadataLanguageName"},
+   # documentInfoType_model:
+   #     {'type': 'single', 'id': "documentLanguageId", 'name': "documentLanguageName"},
+   # annotationInfoType_model:
+   #     {'type': 'single', 'id': "tagsetLanguageId", 'name': "tagsetLanguageName"},
 }
 
 
