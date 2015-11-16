@@ -4,7 +4,7 @@ from metashare.settings import ROOT_PATH
 
 path = '{0}/'.format((dirname(ROOT_PATH)))
 
-registry = etree.parse('{}metashare/bcp47/language-subtag-registry-min3.xml'.format(path))
+registry = etree.parse('{}metashare/bcp47/language-subtag-registry-min4.xml'.format(path))
 
 # LISTS
 
@@ -31,6 +31,9 @@ def get_all_scripts():
 def get_all_regions():
     xpath = u"//region/description/text()"
     return registry.xpath(xpath)
+
+def get_bcp47_description(iso_description):
+    pass
 
 def get_all_variants():
     xpath = u"//registry/variants/variant/description/text()"
