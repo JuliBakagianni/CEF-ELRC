@@ -2,6 +2,14 @@ $(document).ready(function () {
     // show conditionsOfUse field only for specific licences
     var licences = ["openForReuseWithRestrictions", "non-standard/Other_Licence/Terms", "underNegotiation"];
 
+    $(".form-row.otherLicenceName input").each(function() {
+            if($(this).val()!=""){
+                var l = $(this).val();
+                $(this).closest(".module.aligned").find(".otherLicence_TermsText label").text(l+" text:");
+                $(this).closest(".module.aligned").find(".otherLicence_TermsURL label").text(l+" URL:");
+            }
+        });
+
         $("select option:selected").each(function () {
             if ($(this).val() != "non-standard/Other_Licence/Terms") {
                 $(this).parent().parent().parent().parent().siblings(".form-row.otherLicenceName").hide();
@@ -18,6 +26,14 @@ $(document).ready(function () {
     })
 
 
+    $(".form-row.otherLicenceName input").change(function() {
+            if($(this).val()!=""){
+                var l = $(this).val();
+                $(this).closest(".module.aligned").find(".otherLicence_TermsText label").text(l+" text:");
+                $(this).closest(".module.aligned").find(".otherLicence_TermsURL label").text(l+" URL:");
+            }
+    });
+
     $('select').change(function () {
         if (jQuery.inArray($(this).val(), licences) != -1) {
             $(this).parent().parent().siblings(".form-row.restrictionsOfUse").show();
@@ -28,14 +44,14 @@ $(document).ready(function () {
         if ($(this).val() == 'non-standard/Other_Licence/Terms') {
             $(this).parent().parent().siblings(".form-row.otherLicenceName").show();
             $(this).parent().parent().siblings(".form-row.otherLicenceName").find("input").removeAttr('disabled');
-            $(this).parent().parent().siblings(".form-row.termsOfUseText").show();
-            $(this).parent().parent().siblings(".form-row.termsOfUseURL").show();
+            $(this).parent().parent().siblings(".form-row.otherLicence_TermsText").show();
+            $(this).parent().parent().siblings(".form-row.otherLicence_TermsURL").show();
         }
         else {
             $(this).parent().parent().siblings(".form-row.otherLicenceName").hide();
             $(this).parent().parent().siblings(".form-row.otherLicenceName").find("input").attr('disabled', 'disabled');
-            $(this).parent().parent().siblings(".form-row.termsOfUseText").hide();
-            $(this).parent().parent().siblings(".form-row.termsOfUseURL").hide();
+            $(this).parent().parent().siblings(".form-row.otherLicence_TermsText").hide();
+            $(this).parent().parent().siblings(".form-row.otherLicence_TermsURL").hide();
         }
     });
 
