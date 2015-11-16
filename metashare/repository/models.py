@@ -815,8 +815,8 @@ class metadataInfoType_model(SchemaModel):
     #   help_text='A link to the original metadata record, in cases of har' \
     #   'vesting',
     #   blank=True, max_length=1000, )
-
-    metadataLanguageName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=2, max_length=150),
+    metadataLanguageName = MultiTextField(max_length=100, widget=MultiChoiceWidget(widget_id=2, choices = _make_choices_from_list(sorted(iana.get_most_used_languages()))['choices']),
+    # metadataLanguageName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=2, max_length=150),
          verbose_name='Metadata language name',
          help_text='The name of the language in which the metadata '
                    'description is written; an autocompletion '
@@ -844,6 +844,13 @@ class metadataInfoType_model(SchemaModel):
     #   help_text='Provides an account of the revisions in free text or a ' \
     #   'link to a document with revisions',
     #   blank=True, max_length=500, )
+
+    def save(self, *args, **kwargs):
+        if self.metadataLanguageName:
+            self.metadataLanguageId[:] = []
+            for ml in self.metadataLanguageName:
+                self.metadataLanguageId.append(iana.get_language_subtag(ml))
+        super(metadataInfoType_model, self).save(*args, **kwargs)
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -1021,7 +1028,8 @@ class documentInfoType_model(documentationInfoType_model):
                   'written in; an autocompletion mechanism '
                   'with values from the ISO 639 is provided '
                   'in the editor',
-        blank=True, max_length=150, )
+        blank=True, max_length=150,
+    choices=_make_choices_from_list(sorted(iana.get_most_used_languages()))['choices'])
 
     documentLanguageId = XmlCharField(
         verbose_name='Document language id',
@@ -1045,6 +1053,8 @@ class documentInfoType_model(documentationInfoType_model):
         if not self.id:
             # pylint: disable-msg=W0201
             self.id = _compute_documentationInfoType_key()
+        if self.documentLanguageName:
+            self.documentLanguageId = iana.get_language_subtag(self.documentLanguageName)
         super(documentInfoType_model, self).save(*args, **kwargs)
 
     def real_unicode_(self):
