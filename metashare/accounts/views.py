@@ -57,7 +57,7 @@ def confirm(request, uuid):
     email = render_to_string('accounts/activation.email', data)
     try:
         # Send an activation email.
-        send_mail(_('Your CEF-ELRC user account has been activated'),
+        send_mail(_('Your ELRC META-SHARE user account has been activated'),
         email, 'no-reply@meta-share.eu', [user.email], fail_silently=False)
     except: # SMTPException:
         # there was a problem sending the activation e-mail -- not too bad
