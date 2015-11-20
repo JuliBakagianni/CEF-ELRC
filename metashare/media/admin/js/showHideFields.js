@@ -1,6 +1,9 @@
 $(document).ready(function () {
     // show conditionsOfUse field only for specific licences
     var licences = ["openForReuseWithRestrictions", "non-standard/Other_Licence/Terms", "underNegotiation"];
+    var licencesNoAttrAndFee = ['PSI-directive','CC-ZERO','PDDL','DL-DE-ZERO_Germany','non-standard/Other_Licence/Terms',
+'underNegotiation'];
+    var licenceAttrAndFee = ['OpenDataLicenceAtAFairCost_Belgium','OpenDataLicenceAtAFairCostForCommercialRe-use_Belgium'];
 
     $(".form-row.otherLicenceName input").each(function() {
             if($(this).val()!=""){
@@ -11,16 +14,28 @@ $(document).ready(function () {
         });
 
         $("select option:selected").each(function () {
-            if ($(this).val() != "non-standard/Other_Licence/Terms") {
-                $(this).parent().parent().parent().parent().siblings(".form-row.otherLicenceName").hide();
-                $(this).parent().parent().parent().parent().siblings(".form-row.otherLicence_TermsText").hide();
-                $(this).parent().parent().parent().parent().siblings(".form-row.otherLicence_TermsURL").hide();
+            if (jQuery.inArray($(this).val(), licencesNoAttrAndFee) != -1 || $(this).val() == ""){
+                $(this).closest(".licence").siblings(".form-row.fee").hide();
+                $(this).closest(".licence").siblings(".form-row.attributionText").hide();
             }
-            if (jQuery.inArray($(this).val(), licences) != -1) {
-                $(this).parent().parent().parent().parent().siblings(".form-row.restrictionsOfUse").show();
+            else if(jQuery.inArray($(this).val(), licenceAttrAndFee) != -1){
+                $(this).closest(".licence").siblings(".form-row.fee").show();
+                $(this).closest(".licence").siblings(".form-row.attributionText").show();
             }
             else {
-                $(this).parent().parent().parent().parent().siblings(".form-row.restrictionsOfUse").hide();
+                $(this).closest(".licence").siblings(".form-row.fee").hide();
+                $(this).closest(".licence").siblings(".form-row.attributionText").show();
+            }
+            if ($(this).val() != "non-standard/Other_Licence/Terms") {
+                $(this).closest(".licence").siblings(".form-row.otherLicenceName").hide();
+                $(this).closest(".licence").siblings(".form-row.otherLicence_TermsText").hide();
+                $(this).closest(".licence").siblings(".form-row.otherLicence_TermsURL").hide();
+            }
+            if (jQuery.inArray($(this).val(), licences) != -1) {
+                $(this).closest(".licence").siblings(".form-row.restrictionsOfUse").show();
+            }
+            else {
+                $(this).closest(".licence").siblings(".form-row.restrictionsOfUse").hide();
             }
 
     })
@@ -35,6 +50,18 @@ $(document).ready(function () {
     });
 
     $('select').change(function () {
+        if (jQuery.inArray($(this).val(), licencesNoAttrAndFee) != -1 || $(this).val() == ""){
+                $(this).closest(".licence").siblings(".form-row.fee").hide();
+                $(this).closest(".licence").siblings(".form-row.attributionText").hide();
+            }
+            else if(jQuery.inArray($(this).val(), licenceAttrAndFee) != -1){
+                $(this).closest(".licence").siblings(".form-row.fee").show();
+                $(this).closest(".licence").siblings(".form-row.attributionText").show();
+            }
+            else {
+                $(this).closest(".licence").siblings(".form-row.fee").hide();
+                $(this).closest(".licence").siblings(".form-row.attributionText").show();
+            }
         if (jQuery.inArray($(this).val(), licences) != -1) {
             $(this).parent().parent().siblings(".form-row.restrictionsOfUse").show();
         }
