@@ -448,3 +448,28 @@ ul.related_resources {
 input.ui-state-not-found {
 	background:#FF8888;
 }
+
+.resourceTypeExplanation {
+	width:40%;
+}
+.resourceTypeTitle{
+    line-height:170%;
+	font-size:14px;
+	color:#058dbe;
+	font-weight:bold;
+	text-align: justify;
+    text-justify: inter-word;
+}
+
+.resourceTypeExplanation ul li ul li{
+    line-height:170%;
+	font-size:12px;
+    text-justify: inter-word;
+}
+
+.resourceTypeExplanation ul li{
+    line-height:170%;
+	font-size:12px;
+    text-justify: inter-word;
+}
+
