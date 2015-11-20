@@ -365,6 +365,8 @@ input, textarea, select, .form-row p {
 
 textarea {
     vertical-align: top !important;
+    height: 16px;
+
 }
 
 input[type=text], input[type=password], textarea, select, .vTextField {

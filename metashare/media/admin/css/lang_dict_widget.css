@@ -1,23 +1,28 @@
 ul.keyLangValuePairs,ul.keyLangValuePairs>li {
   list-style: none;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 ul.keyLangValuePairs>li>textarea {
-  width: 70%;
-  height: 75px;
+  vertical-align: top !important;
+  width: 68%;
+  max-width: 68%;
+  min-width: 68%;
+  height: 45px;
+  min-height: 45px;
+  overflow-scrolling: auto;
   margin-left: 5px;
   margin-right: 5px;
 }
 
 ul.keyLangValuePairs>li>input {
-  width: 70%;
+  width: 69%;
 }
 
 ul.keyLangValuePairs>li>div {
   display: block;
   float: right;
-  max-width: 20%;
+  max-width: 26%;
 }
 
 a.kvLangPairDeleteButton {
