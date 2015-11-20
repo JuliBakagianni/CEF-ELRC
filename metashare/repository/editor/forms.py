@@ -77,7 +77,7 @@ def schema_validate_xml(value):
     command.append('java')
     command.append('-jar')
     command.append('{}xmlValidator_schema1.1/schemaValidator.jar'.format(path))
-    command.append('{}misc/schema/CEF-Metashare-v3.0.2/META-SHARE-Resource.xsd'.format(path))
+    command.append('{}misc/schema/CEF-SHARE/META-SHARE-Resource.xsd'.format(path))
     value = value.replace('\r','').replace('\n','').replace('\t','')
     command.append(value)
 
@@ -94,7 +94,7 @@ class StorageObjectUploadForm(forms.Form):
     Form to upload resource data into a StorageObject instance.
     """
     resource = forms.FileField(label="Resource",
-      help_text="You can upload resource data (<{:.3} MB) using this " \
+      help_text="You can upload resource data (<={:.3} MB) using this " \
       "widget. Note that this will overwrite the current data!".format(
         float(MAXIMUM_UPLOAD_SIZE/(1024*1024))),
       validators=[_validate_resource_data])
