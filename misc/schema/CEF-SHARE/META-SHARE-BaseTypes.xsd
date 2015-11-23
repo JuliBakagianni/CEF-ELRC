@@ -1773,105 +1773,105 @@
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
 				<xs:maxLength value="100"/>
-				<xs:enumeration value="advertisingPublicRelationsDDC659">
+				<xs:enumeration value="advertisingPublicRelations_DDC659">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Advertising &amp; Public Relations (DDC659)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="agricultureDDC630">
+				<xs:enumeration value="agriculture_DDC630">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Agriculture (DDC630)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="animalsZoologyDDC590">
+				<xs:enumeration value="animalsZoology_DDC590">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Animals (Zoology) (DDC590)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="appliedPhysicsDDC621">
+				<xs:enumeration value="appliedPhysics_DDC621">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Applied Physics (DDC621)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="architectureDDC720">
+				<xs:enumeration value="architecture_DDC720">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Architecture (DDC720)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="artsRecreationDDC700">
+				<xs:enumeration value="artsRecreation_DDC700">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Arts &amp; Recreation (DDC700)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="astrononmyDDC520">
+				<xs:enumeration value="astrononmy_DDC520">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Astronomy (DDC520)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="biochemistryDDC572">
+				<xs:enumeration value="biochemistry_DDC572">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Biochemistry (DDC572)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="biologyDDC570">
+				<xs:enumeration value="biology_DDC570">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Biology (DDC570)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="chemicalEngineeringDDC660">
+				<xs:enumeration value="chemicalEngineering_DDC660">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Chemical Engineering (DDC660)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="chemistryDDC540">
+				<xs:enumeration value="chemistry_DDC540">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Chemistry (DDC540)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="commerceTradeDDC381">
+				<xs:enumeration value="commerceTrade_DDC381">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Commerce (Trade) (DDC381)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="communicationsDDC384">
+				<xs:enumeration value="communications_DDC384">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Communications (DDC384)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="computerScienceInformationGeneralWorksDDC000">
+				<xs:enumeration value="computerScienceInformationGeneralWorks_DDC000">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Computer Science, Information &amp; General Works (DDC000)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="constructionOfBuildingsDDC690">
+				<xs:enumeration value="constructionOfBuildings_DDC690">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Construction of Buildings (DDC690)</xs:label>
@@ -1885,21 +1885,21 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="earthSciencesGeologyDDC550">
+				<xs:enumeration value="earthSciencesGeology_DDC550">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Earth Sciences &amp; Geology (DDC550)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="economicsDDC330">
+				<xs:enumeration value="economics_DDC330">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Economics (DDC330)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="educationDDC370">
+				<xs:enumeration value="education_DDC370">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Education (DDC370)</xs:label>
@@ -1913,7 +1913,7 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="engineeringDDC620">
+				<xs:enumeration value="engineering_DDC620">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Engineering (DDC620)</xs:label>
@@ -1934,35 +1934,35 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="geographyTravelDDC910">
+				<xs:enumeration value="geographyTravel_DDC910">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Geography &amp; Travel (DDC910)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="graphicArtsDecorativeArtsDDC740">
+				<xs:enumeration value="graphicArtsDecorativeArts_DDC740">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Graphic Arts &amp; Decorative Arts (DDC740)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="hardwareHouseholdAppliancesDDC683">
+				<xs:enumeration value="hardwareHouseholdAppliances_DDC683">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Hardware &amp; Household Appliances (DDC683)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="historyDDC900">
+				<xs:enumeration value="history_DDC900">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>History (DDC900)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="homeFamilyManagementDDC640">
+				<xs:enumeration value="homeFamilyManagement_DDC640">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Home &amp; Family Management (DDC640)</xs:label>
@@ -1983,70 +1983,70 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="languageDDC400">
+				<xs:enumeration value="language_DDC400">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Language (DDC400)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="lawDDC340">
+				<xs:enumeration value="law_DDC340">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Law (DDC340)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="linguisticsDDC410">
+				<xs:enumeration value="linguistics_DDC410">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Linguistics (DDC410)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="literatureRhetoricCriticismDDC800">
+				<xs:enumeration value="literatureRhetoricCriticism_DDC800">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Literature, Rhetoric &amp; Criticism (DDC800)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="managementPublicRelationsDDC650">
+				<xs:enumeration value="managementPublicRelations_DDC650">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Management &amp; Public Relations (DDC650)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="manufacturingDDC670">
+				<xs:enumeration value="manufacturing_DDC670">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Manufacturing (DDC670)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="mathematicsDDC510">
+				<xs:enumeration value="mathematics_DDC510">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Mathematics (DDC510)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="medicineHealthDDC610">
+				<xs:enumeration value="medicineHealth_DDC610">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Medicine &amp; Health (DDC610)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="musicDDC780">
+				<xs:enumeration value="music_DDC780">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Music (DDC780)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="newsMediaJournalismPublishingDDC070">
+				<xs:enumeration value="newsMediaJournalismPublishing_DDC070">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>News Media, Journalism &amp; Publishing (DDC070)</xs:label>
@@ -2060,133 +2060,133 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="paintingDDC750">
+				<xs:enumeration value="painting_DDC750">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Painting (DDC750)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="paleontologyDDC560">
+				<xs:enumeration value="paleontology_DDC560">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Paleontology (DDC560)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="philosophyDDC100">
+				<xs:enumeration value="philosophy_DDC100">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Philosophy (DDC100)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="photographyComputerArtFilmVideoDDC770">
+				<xs:enumeration value="photographyComputerArtFilmVideo_DDC770">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Photography, Computer Art, Film, Video (DDC770)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="physicsDDC530">
+				<xs:enumeration value="physics_DDC530">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Physics (DDC530)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="plantsDDC580">
+				<xs:enumeration value="plants_DDC580">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Plants (DDC580)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="politicalScienceDDC320">
+				<xs:enumeration value="politicalScience_DDC320">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Political Science (DDC320)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="psychologyDDC150">
+				<xs:enumeration value="psychology_DDC150">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Psychology (DDC150)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="publicAdministrationDDC351">
+				<xs:enumeration value="publicAdministration_DDC351">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Public Administration (DDC351)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="religionDDC200">
+				<xs:enumeration value="religion_DDC200">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Religion (DDC200)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="scienceDDC500">
+				<xs:enumeration value="science_DDC500">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Science (DDC500)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="sculptureCeramicsMetalworkDDC730">
+				<xs:enumeration value="sculptureCeramicsMetalwork_DDC730">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Sculpture, Ceramics, &amp; Metalwork (DDC730)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="socialProblemsSocialServicesDDC360">
+				<xs:enumeration value="socialProblemsSocialServices_DDC360">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Social Problems &amp; Social Services (DDC360)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="socialSciencesDDC300">
+				<xs:enumeration value="socialSciences_DDC300">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Social Sciences (DDC300)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="sociologyAnthropologyDDC301">
+				<xs:enumeration value="sociologyAnthropology_DDC301">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Sociology &amp; Anthropology (DDC301)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="sportsGamesEntertainmentDDC790">
+				<xs:enumeration value="sportsGamesEntertainment_DDC790">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Sports, Games &amp; Entertainment (DDC790)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="statisticsDDC310">
+				<xs:enumeration value="statistics_DDC310">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Statistics (DDC310)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="technologyDDC600">
+				<xs:enumeration value="technology_DDC600">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Technology (DDC600)</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
-				<xs:enumeration value="transportationDDC388">
+				<xs:enumeration value="transportation_DDC388">
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>Transportation (DDC388)</xs:label>

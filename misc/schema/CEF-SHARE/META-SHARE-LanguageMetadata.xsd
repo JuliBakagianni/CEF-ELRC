@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited by ILSP/Athena R.C. -->
-<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xerces="http://xerces.apache.org" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en">
+<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xerces="http://xerces.apache.org" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en"
+    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1">
 	<xs:include schemaLocation="META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="META-SHARE-RoleTypes.xsd"/>
 	<xs:include schemaLocation="META-SHARE-LicenseMetadata.xsd"/>
@@ -227,7 +228,7 @@
 			<xs:documentation>For linguistic variations associated with or appropriate for a specific country or region, according to the IETF BCP47 specifications; the element is optional and should only be used for extraordinary cases (e.g. English as spoken in the United States etc.)</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	<xs:element name="variant" type="ms:variantNameType">
+	<xs:element name="variants" type="ms:variantNameType">
 		<xs:annotation>
 			<xs:documentation>For linguistic variants, according to the IETF BCP47 specifications; the element is optional and should only be used for extraordinary cases (e.g. polytonic Greek)</xs:documentation>
 		</xs:annotation>
@@ -264,7 +265,7 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element ref="ms:region" minOccurs="0"/>
-			<xs:element ref="ms:variant" minOccurs="0"/>
+			<xs:element ref="ms:variants" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="ms:languageId">
 				<xs:annotation>
 					<xs:documentation>The identifier of the language that is included in the resource or supported by the tool/service, according to the IETF BCP47 specifications</xs:documentation>
@@ -323,8 +324,9 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
-				<xs:extension base="ms:lingualityInfoType"/>
-				<xs:assert test="if (ms:lingualityType = 'monolingual') then (count(ms:multilingualityType) = 0  and count(ms:multilingualityTypeDetails) = 0) else true()" xerces:message="Monolingual linguality type cannot have either multilingualityType or multilingualityTypeDetails"/>
+				<xs:extension base="ms:lingualityInfoType">
+					<xs:assert test="if (ms:lingualityType = 'monolingual') then (count(ms:multilingualityType) = 0  and count(ms:multilingualityTypeDetails) = 0) else true()" xerces:message="Monolingual linguality type cannot have either multilingualityType or multilingualityTypeDetails"/>
+				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>

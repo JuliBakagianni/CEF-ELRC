@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End user (free.org) -->
 <!-- edited by ILSP/Athena R.C. -->
-<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xerces="http://xerces.apache.org" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en">
+<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xerces="http://xerces.apache.org" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en"
+    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1">
 	<xs:include schemaLocation="META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="META-SHARE-RoleTypes.xsd"/>
 	<!-- definition of complex types -->
@@ -361,7 +362,7 @@
 		<xs:complexType>
 			<xs:complexContent>
 				<xs:extension base="ms:distributionInfoType">
-					<xs:assert test="if (starts-with(ms:licenceInfo/ms:licence, 'CC') or ms:licenceInfo/ms:licence eq 'openForReuseWithRestrictions')
+					<xs:assert test="if (count(.//ms:licenceInfo/ms:licence[starts-with(., 'CC')])> 0 or (count(.//licenceInfo/licence[. = 'openForReuseWithRestrictions']> 0)))
                         then ms:allowsUsesBesidesDGT = true()
                         else (ms:allowsUsesBesidesDGT)" xerces:message="CC licences and openForReuseWithRestrictions should allow use besides DGT (allowsUsesBesidesDGT = true)"/>
 				</xs:extension>
