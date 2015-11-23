@@ -306,7 +306,7 @@
 			</xs:element>
 			<xs:element name="affiliation" type="ms:organizationInfoType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Groups information on organization to whomtheperson is affiliated</xs:documentation>
+					<xs:documentation>Groups information on organization to whom the person is affiliated</xs:documentation>
 					<xs:appinfo>
 						<relation>many-to-many</relation>
 					</xs:appinfo>
@@ -316,7 +316,7 @@
 	</xs:complexType>
 	<xs:element name="personInfo" type="ms:personInfoType">
 		<xs:annotation>
-			<xs:documentation>Groups information relevant to personsrelated to the resource; to be used mainly for contact persons, resource creators, validators, annotators etc. for whom personal data can be provided</xs:documentation>
+			<xs:documentation>Groups information relevant to persons related to the resource; to be used mainly for contact persons, resource creators, validators, annotators etc. for whom personal data can be provided</xs:documentation>
 			<xs:appinfo>
 				<relation>one-to-one</relation>
 			</xs:appinfo>

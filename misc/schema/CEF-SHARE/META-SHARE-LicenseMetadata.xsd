@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End user (free.org) -->
 <!-- edited by ILSP/Athena R.C. -->
-<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xerces="http://xerces.apache.org" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en"
-    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1">
+<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xerces="http://xerces.apache.org" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en">
 	<xs:include schemaLocation="META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="META-SHARE-RoleTypes.xsd"/>
 	<!-- definition of complex types -->
@@ -17,8 +16,7 @@
 		<xs:sequence>
 			<xs:element name="availability">
 				<xs:annotation>
-					<xs:documentation>Specifies the availability status of the resource; restrictionsOfUse can be
-                        further used to indicate the specific terms of availability
+					<xs:documentation>Specifies the availability status of the resource; restrictionsOfUse can be further used to indicate the specific terms of availability
                     </xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
@@ -130,8 +128,7 @@
 		<xs:sequence>
 			<xs:element name="licence">
 				<xs:annotation>
-					<xs:documentation>The licence of use for the resource; for an overview of licences, please visit:
-                    </xs:documentation>
+					<xs:documentation>The licence of use for the resource; for an overview of licences, please visit: </xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-many</relation>
 					</xs:appinfo>
@@ -320,8 +317,7 @@
 			</xs:element>
 			<xs:element name="fee" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Specifies the costs that are required to access the resource, a fragment of the
-                        resource or to use a tool or service
+					<xs:documentation>Specifies the costs that are required to access the resource, a fragment of the resource or to use a tool or service
                     </xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
@@ -365,9 +361,9 @@
 		<xs:complexType>
 			<xs:complexContent>
 				<xs:extension base="ms:distributionInfoType">
-					<!--<xs:assert test="if (starts-with(ms:licenceInfo/ms:licence, 'CC') or ms:licenceInfo/ms:licence eq 'openForReuseWithRestrictions')
+					<xs:assert test="if (starts-with(ms:licenceInfo/ms:licence, 'CC') or ms:licenceInfo/ms:licence eq 'openForReuseWithRestrictions')
                         then ms:allowsUsesBesidesDGT = true()
-                        else (ms:allowsUsesBesidesDGT)" xerces:message="CC licences and openForReuseWithRestrictions should allow use besides DGT (allowsUsesBesidesDGT = true)"/>-->
+                        else (ms:allowsUsesBesidesDGT)" xerces:message="CC licences and openForReuseWithRestrictions should allow use besides DGT (allowsUsesBesidesDGT = true)"/>
 				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>
@@ -385,6 +381,7 @@
 		<xs:complexType>
 			<xs:complexContent>
 				<xs:extension base="ms:licenceInfoType">
+					<!-- ASSERTIONS FOR LICENCES WITH PREDEFINED SETS OF RESTRICTIONS OF USE-->
 					<xs:assert test="if (ms:licence = 'ODC-BY') then
 					ms:restrictionsOfUse = 'attribution' and count(ms:restrictionsOfUse) = 1 
 					else true()" xerces:message="The licence 'ODC-BY' can only contain an 'attribution' condition (restrictionsOfUse = attribution)'"/>
@@ -454,6 +451,7 @@
 					<xs:assert test="if (ms:licence = 'IGCYL-NC_Spain') then
 					ms:restrictionsOfUse = 'attribution' and ms:restrictionsOfUse = 'nonCommercialUse' and count(ms:restrictionsOfUse) = 2
 					else true()" xerces:message="The licence 'IGCYL-NC_Spain' can only contain the following conditions (restrictionsOfUse = attribution, nonCommercialUse)'"/>
+					<!--THE FOLLOWING LICENCES PERMIT NO CONDITIONS OF USE-->
 					<xs:assert test="if (ms:licence = 'PDDL') then count(ms:restrictionsOfUse) = 0
 					else true()" xerces:message="The licence 'PDDL' should not include any conditions of use'"/>
 					<xs:assert test="if (ms:licence = 'CC-ZERO') then count(ms:restrictionsOfUse) = 0
@@ -461,8 +459,6 @@
 					<xs:assert test="if (ms:licence = 'DL-DE-ZERO_Germany') then count(ms:restrictionsOfUse) = 0
 					else true()" xerces:message="The licence ''DL-DE-ZERO_Germany' should not include any conditions of use'"/>
 				</xs:extension>
-				<!--ASSERTIONS FOR LICENCES WITH PREDEFINED SETS OF RESTRICTIONS OF USE-->
-				<!--THE FOLLOWING LICENCES PERMIT NO CONDITIONS OF USE-->
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>

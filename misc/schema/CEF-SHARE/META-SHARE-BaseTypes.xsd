@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End user (free.org) -->
+<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End User (free.org) -->
 <!-- edited by ILSP/Athena R.C. -->
-<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en"
-    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1">
+<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en">
 	<xs:include schemaLocation="META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="META-SHARE-RoleTypes.xsd"/>
 	<xs:include schemaLocation="META-SHARE-LicenseMetadata.xsd"/>
 	<xs:include schemaLocation="META-SHARE-LanguageMetadata.xsd"/>
 	<xs:include schemaLocation="META-SHARE-UsageMetadata.xsd"/>
 	<xs:include schemaLocation="META-SHARE-LanguageMetadata.xsd"/>
+	<xs:include schemaLocation="META-SHARE-bcp47_LanguageValues.xsd"/>
 	<!-- definition of complex types -->
 	<xs:complexType name="identificationInfoType">
 		<xs:annotation>
@@ -82,7 +82,7 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="ISLRN" minOccurs="0" maxOccurs="1">
+			<xs:element name="ISLRN" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Reference to the unique ISLRN number; if you don't have an ISLRN for your resource, please visit http://www.islrn.org/ to request.</xs:documentation>
 				</xs:annotation>
@@ -304,14 +304,14 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="metadataLanguageName" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="metadataLanguageName" type="ms:languageNameType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>The name of the language in which the metadata description is written; an autocompletion mechanism with values from the ISO 639 is provided in the editor</xs:documentation>
+					<xs:documentation>The name of the language in which the metadata description is written; an autocompletion mechanism with values compatible with the BCP47 (ISO 639) is included in the editor</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="metadataLanguageId" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="metadataLanguageId" type="ms:languageTagType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>The id of the language in which the metadata description is written, as specified by ISO 639</xs:documentation>
+					<xs:documentation>The id of the language in which the metadata description is written, as specified by BCP47</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="metadataLastDateUpdated" type="xs:date" minOccurs="0">
@@ -561,25 +561,15 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="documentLanguageName" minOccurs="0">
+			<xs:element name="documentLanguageName" type="ms:languageNameType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>The name of the language the document is written in; an autocompletion mechanism with values from the ISO 639 is provided in the editor</xs:documentation>
+					<xs:documentation>The name of the language the document is written in according to the BCP47 specifications</xs:documentation>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="150"/>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
-			<xs:element name="documentLanguageId" minOccurs="0">
+			<xs:element name="documentLanguageId" type="ms:languageTagType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>The id of the language the document is written in as specified by ISO 639</xs:documentation>
+					<xs:documentation>The id of the language the document is written in as specified by the BCP47 specifications</xs:documentation>
 				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="20"/>
-					</xs:restriction>
-				</xs:simpleType>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
