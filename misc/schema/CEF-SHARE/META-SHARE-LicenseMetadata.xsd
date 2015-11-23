@@ -137,7 +137,6 @@
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
 						<xs:maxLength value="100"/>
-						<xs:enumeration value="PSI-directive"/>
 						<xs:enumeration value="CC-BY"/>
 						<xs:enumeration value="CC-BY-NC"/>
 						<xs:enumeration value="CC-BY-NC-ND"/>
