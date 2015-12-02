@@ -271,14 +271,11 @@ def portalstats(request):
     from django.contrib.auth.models import User
 
     data = {}
+
     # data to gather from the portal specified managing node
     data['language resources'] = resourceInfoType_model.objects.filter(
         storage_object__publication_status=PUBLISHED,
         storage_object__deleted=False).count()
-    # data['text corpora'] = corpusInfoType_model.objects.filter(
-    #     corpusMediaType__corpustextinfotype_model__mediaType = 'text',
-    #     resourceinfotype_model__storage_object__publication_status=PUBLISHED,
-    #     resourceinfotype_model__storage_object__deleted=False).count()
     data['text corpora'] = UsageStats.objects.filter(elname = 'corpusTextInfo').count()
 
     # data to gather from all partners including managing nodes
