@@ -147,7 +147,6 @@
 						<xs:enumeration value="PDDL"/>
 						<xs:enumeration value="ODC-BY"/>
 						<xs:enumeration value="ODbL"/>
-						<xs:enumeration value="openForReuseWithRestrictions"/>
 						<xs:enumeration value="FreeOpenDataLicence_Belgium"/>
 						<xs:enumeration value="OpenDataLicenceAtAFairCost_Belgium"/>
 						<xs:enumeration value="FreeOpenDataLicenceForNon-CommercialRe-use_Belgium"/>
