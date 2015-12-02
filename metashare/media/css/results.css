@@ -1,99 +1,108 @@
 /*override container size*/
-div#content{
-	width: 900px;
-	position: relative;
+div#content {
+    width: 900px;
+    position: relative;
 }
 
-div.searchbox{		
-	position: relative;
-	width:827px;
-	margin-bottom:10px;
-	background-color: white;
-	padding: 5% 2% 2% 5%;	
-	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
-	-moz-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
-	box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+div.searchbox {
+    position: relative;
+    width: 827px;
+    margin-bottom: 10px;
+    background-color: white;
+    padding: 5% 2% 2% 5%;
+    -webkit-box-shadow: 0px 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+    -moz-box-shadow: 0px 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+    box-shadow: 0px 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
 }
 
-div.searchbox table{
-	width:40%;
-	padding-left:20px;	
-	padding-top:20px;	
+div.searchbox table {
+    width: 40%;
+    padding-left: 20px;
+    padding-top: 20px;
 }
 
-#search_button{
+#search_button {
     width: 6em;
 }
 
-#searchbox img{
+#searchbox img {
     width: 200px;
     margin-right: 20px;
-    margin-top:-19%;
+    margin-top: -19%;
 }
 
-div.filters{
-	position: relative;
-	background-color: white;
-	padding: 20px 20px 20px 20px;	
-	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
-	-moz-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
-	box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
-    	
+div.filters {
+    position: relative;
+    background-color: white;
+    padding: 20px 20px 20px 20px;
+    -webkit-box-shadow: 0px 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+    -moz-box-shadow: 0px 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+    box-shadow: 0px 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+
 }
 
-div.explanation_box{	
-	margin-top: 10px;	
-	background-color: white;
-	padding-top: 25px;
-	padding-left: 25px;
-	-webkit-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
-	-moz-box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
-	box-shadow: 0px  3px 10px #CCCCCC, 1px  3px 5px #CCCCCC, -1px  3px 5px #CCCCCC;
+div.explanation_box {
+    margin-top: 10px;
+    background-color: white;
+    padding-top: 25px;
+    padding-left: 25px;
+    -webkit-box-shadow: 0px 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+    -moz-box-shadow: 0px 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
+    box-shadow: 0px 3px 10px #CCCCCC, 1px 3px 5px #CCCCCC, -1px 3px 5px #CCCCCC;
 }
 
-div.explanation{
+div.explanation {
 
-	padding: 3% 3% 3% 3%;	
+    padding: 3% 3% 3% 3%;
 }
 
-div.content_box{	
-	width: 541px;
-	margin-right:10px;
+div.content_box {
+    width: 541px;
+    margin-right: 10px;
 }
 
-div.resourceName{
-	width: 95%;
-	background-color: #f5f5f5;
-	padding: 4px 4px 4px 4px;
-	margin: .9em 0 .3em 0;
-	color: #777;
-	border-radius: 10px 10px 10px 10px;
-	border: 2px solid #dde;  
-	font-size: 10pt;
-	font-weight: bold;
-	display: inline-block;
+div.resourceName {
+    width: 95%;
+    background-color: #f5f5f5;
+    padding: 4px 4px 4px 4px;
+    margin: .9em 0 .3em 0;
+    color: #777;
+    border-radius: 10px 10px 10px 10px;
+    border: 2px solid #dde;
+    font-size: 10pt;
+    font-weight: bold;
+    display: inline-block;
 }
 
-div.resourceName>div.accessStats {
+div.resourceName > div.accessStats {
     float: right;
 }
 
-div.resourceName>div.accessStats>img {
+div.resourceName > div.accessStats > img {
     vertical-align: middle;
     margin: 0 0.25em 0 0.3em;
 }
 
-div.resourceName ul li {
-	list-style-type: none;
-	margin: 2px 2px 2px 2px;
-	padding: 2px;
-	font-size: 7pt;
-	font-weight: bold;
-	color: #333;
-	background-color: #ebebeb;
-	float: left;
-	border-radius: 5px 5px 5px 5px;
-	border:1px solid #bbc; 
+div.resourceName ul li.languages {
+    list-style-type: none;
+    margin: 2px 2px 2px 2px;
+    padding: 2px;
+    font-size: 7pt;
+    font-weight: bold;
+    color: #333;
+    background-color: #ebebeb;
+    float: left;
+    border-radius: 5px 5px 5px 5px;
+    border: 1px solid #bbc;
+}
+
+div.resourceName ul li.licence {
+    margin: -3px;
+    /*display:block;*/
+    /*padding: 2px;*/
+    list-style-type: none;
+    text-align: right;
+    /*float: right;*/
 }
 
 div.results {
@@ -103,10 +112,13 @@ div.results {
 /*end override container size*/
 
 ul.errorlist {
-	background:#ffcb00;
-	border:1px solid #ffaa00;
-	padding:2px;
-	list-style-type:none;
-	margin:0em;
+    background: #ffcb00;
+    border: 1px solid #ffaa00;
+    padding: 2px;
+    list-style-type: none;
+    margin: 0em;
 }
-ul.errorlist li { padding:0px; }
+
+ul.errorlist li {
+    padding: 0px;
+}
