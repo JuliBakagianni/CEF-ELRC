@@ -33,8 +33,8 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     lexicalConceptualResourceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
-    licenceInfoType_model, User
-    # toolServiceInfoType_model,
+    licenceInfoType_model, User, personInfoType_model, communicationInfoType_model
+# toolServiceInfoType_model,
 from metashare.repository.supermodel import SchemaModel
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, DELETE_STAT
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
@@ -268,7 +268,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                               'metadataInfo':MetadataInline, }
 
     content_fields = ('resourceComponentType',)
-    list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
+    # list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
+    list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_Owners',)
     list_filter = ('storage_object__publication_status',)
     actions = ('publish_action', 'unpublish_action', 'ingest_action',
         'export_xml_action', 'delete', 'add_group', 'remove_group',
@@ -1196,6 +1197,22 @@ class ResourceModelAdmin(SchemaModelAdmin):
         
 
     def save_model(self, request, obj, form, change):
+        # Automatically add metadataCreator.
+        # If the person exists, use that person, else create a new person object
+        # from request user values.
+        try:
+            comm = communicationInfoType_model.objects.filter(email = [request.user.email])[0]
+        except IndexError:
+            comm = communicationInfoType_model.objects.create(email = [request.user.email])
+        try:
+            person = personInfoType_model.objects.filter(surname = {'en':request.user.last_name},
+                givenName = {'en':request.user.first_name}, communicationInfo = comm)[0]
+        except IndexError:
+            person = personInfoType_model.objects.create(surname = {'en':request.user.last_name},
+                givenName = {'en':request.user.first_name}, communicationInfo = comm)
+
+        obj.metadataInfo.metadataCreator.add(person)
+
         super(ResourceModelAdmin, self).save_model(request, obj, form, change)
         # update statistics
         if hasattr(obj, 'storage_object') and obj.storage_object is not None:
