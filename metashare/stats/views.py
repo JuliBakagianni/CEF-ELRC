@@ -12,6 +12,7 @@ from metashare.storage.models import StorageObject
 # pylint: disable-msg=W0611, W0401
 from metashare.repository.models import *
 
+from django.contrib.auth.decorators import user_passes_test
 from django.utils.importlib import import_module
 import django.utils.encoding
 from django.shortcuts import render_to_response
@@ -51,6 +52,8 @@ class CountIf(aggregates.Count):
     sql_function = 'COUNT'
     sql_template = '%(function)s(IF(%(condition)s,TRUE,NULL))'
 
+def check_user(user):
+    return user.is_superuser
 
 def callServerStats():
     url = urllib.urlencode({'url': DJANGO_URL})
@@ -65,7 +68,7 @@ def callServerStats():
 
 # thread = Timer(2.0, callServerStats)
 # thread.start()
-
+@user_passes_test(check_user)
 def mystats(request):
     data = []
     entry_list = getMyResources(request.user.username)
@@ -97,7 +100,7 @@ def isOwner(username):
         return True
     return False
 
-
+@user_passes_test(check_user)
 def usagestats(request):
     """  Get usage of fields LR """
     expand_all = request.POST.get('expandall')
@@ -284,6 +287,7 @@ def portalstats(request):
     return HttpResponse(JSONEncoder().encode(data), mimetype="application/json")
 
 
+@user_passes_test(check_user)
 def topstats(request):
     """ viewing statistics about the top LR and latest queries. """
     topdata = []
@@ -383,7 +387,7 @@ def topstats(request):
                                'myres': isOwner(request.user.username)},
                               context_instance=RequestContext(request))
 
-
+@user_passes_test(check_user)
 def statdays(request):
     """ get dates where there are some statistics """
     dates = []
@@ -391,7 +395,7 @@ def statdays(request):
         dates.append(day.strftime("%Y-%m-%d"))
     return HttpResponse(JSONEncoder().encode(dates), mimetype="application/json")
 
-
+@user_passes_test(check_user)
 def getstats(request):
     """ get statistics for a date in terms of user action made, amount of resources, info about usage, ... """
     data = {}
