@@ -3114,9 +3114,9 @@ def licenceinfotype_licence_optgroup_choices():
     Group the choices in groups. The first group is the most used choices
     and the second group is the rest.
     """
-    international = ('International Open Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][:12])
-    national = ('National Open Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][12:25])
-    other = ('More', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][25:])
+    international = ('International Open Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][:10])
+    national = ('National Open Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][10:24])
+    other = ('More', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][24:])
     optgroup = [international, national, other]
     return optgroup
 
