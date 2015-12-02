@@ -3097,9 +3097,10 @@ LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
     u'OpenDataLicenceAtAFairCostForCommercialRe-use_Belgium', u'NLSOpenDataLicence_Finland',
     u'LicenceOuverte-OpenLicence_France',
     u'DL-DE-BY_Germany', u'DL-DE-ZERO_Germany', u'PSI-licence_Ireland',
-    u'IODL_Italy', u'NLOD_Norway', u'OGL_UK', u'NCGL_UK', u'IGCYL-NC_Spain',
+    u'IODL_Italy', u'NLOD_Norway', u'OGL_UK', u'NCGL_UK',
     u'non-standard/Other_Licence/Terms',
     u'underNegotiation',
+    # u'IGCYL-NC_Spain',
     # u'termsOfUse', u'proprietary',
     #  u'ColorIURIS_Spain',
     # u'MS-NoReD', u'MS-NoReD-FF', u'MS-NoReD-ND',
@@ -3115,8 +3116,8 @@ def licenceinfotype_licence_optgroup_choices():
     and the second group is the rest.
     """
     international = ('International Open Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][:10])
-    national = ('National Open Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][10:24])
-    other = ('More', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][24:])
+    national = ('National Open Licences', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][10:23])
+    other = ('More', LICENCEINFOTYPE_LICENCE_CHOICES['choices'][23:])
     optgroup = [international, national, other]
     return optgroup
 
