@@ -77,6 +77,7 @@
             .append(
                 $('<div>')
                 .addClass('selectable-deck-remove')
+                .append("&nbsp;")
                 .append(
                     $('<a>')
                     .attr('href', '#')
@@ -86,6 +87,7 @@
                     	.attr('width', '10px')
                     	.attr('height', '10px')
                     	.attr('alt', 'Delete related model')
+                        .attr('title', 'Delete related model')
                     )
                     .click(function() {
                         if(self.allowEditing)
@@ -119,6 +121,7 @@
                 jqItem.append(
                         $('<div>')
                         .addClass('selectable-deck-edit')
+                        .append("&nbsp;")
                         .append(
                             $('<a>')
                             .attr('href', '#')
@@ -129,6 +132,7 @@
                             	.attr('width', '10px')
                             	.attr('height', '10px')
                             	.attr('alt', 'Edit related model')
+                                .attr('title', 'Edit related model')
                             )
                             .click(function() {
                                 var recId = $(input).attr('value');
