@@ -115,8 +115,8 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
     'OGL_UK': (MEDIA_URL + 'licences/OGL_UK.htm', MEMBER_TYPES.NON),
     'IGCYL-NC_Spain': ('http://ftp.itacyl.es/cartografia/LICENCIA-IGCYL-NC-2012.pdf', MEMBER_TYPES.NON),
     'underNegotiation': ('', MEMBER_TYPES.GOD),
-    'openForReuseWithRestrictions': ('', MEMBER_TYPES.NON),
     'non-standard/Other_Licence/Terms': ('', MEMBER_TYPES.NON),
+    # 'openForReuseWithRestrictions': ('', MEMBER_TYPES.NON),
     # 'proprietary': ('', MEMBER_TYPES.NON),
     # 'other': ('', MEMBER_TYPES.GOD)
     # 'MSCommons-BY': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BY_v1.0.htm',
