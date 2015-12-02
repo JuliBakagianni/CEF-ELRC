@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End user (free.org) -->
 <!-- edited by ILSP/Athena R.C. -->
-<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xerces="http://xerces.apache.org" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en"
-    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1">
+<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xerces="http://xerces.apache.org" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en" vc:minVersion="1.1">
 	<xs:include schemaLocation="META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="META-SHARE-RoleTypes.xsd"/>
 	<!-- definition of complex types -->
@@ -147,6 +146,7 @@
 						<xs:enumeration value="PDDL"/>
 						<xs:enumeration value="ODC-BY"/>
 						<xs:enumeration value="ODbL"/>
+						<xs:enumeration value="openForReuseWithRestrictions"/>
 						<xs:enumeration value="FreeOpenDataLicence_Belgium"/>
 						<xs:enumeration value="OpenDataLicenceAtAFairCost_Belgium"/>
 						<xs:enumeration value="FreeOpenDataLicenceForNon-CommercialRe-use_Belgium"/>
@@ -360,9 +360,9 @@
 		<xs:complexType>
 			<xs:complexContent>
 				<xs:extension base="ms:distributionInfoType">
-					<xs:assert test="if (count(.//ms:licenceInfo/ms:licence[starts-with(., 'CC')])> 0 or (count(.//licenceInfo/licence[. = 'openForReuseWithRestrictions']> 0)))
+					<xs:assert test="if (count(.//ms:licenceInfo/ms:licence[starts-with(., 'CC')])> 0 )
                         then ms:allowsUsesBesidesDGT = true()
-                        else (ms:allowsUsesBesidesDGT)" xerces:message="CC licences and openForReuseWithRestrictions should allow use besides DGT (allowsUsesBesidesDGT = true)"/>
+                        else (ms:allowsUsesBesidesDGT)" xerces:message="CC licences should allow use besides DGT (allowsUsesBesidesDGT = true)"/>
 				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>
@@ -380,13 +380,9 @@
 		<xs:complexType>
 			<xs:complexContent>
 				<xs:extension base="ms:licenceInfoType">
-					<!-- ASSERTIONS FOR LICENCES WITH PREDEFINED SETS OF RESTRICTIONS OF USE-->
 					<xs:assert test="if (ms:licence = 'ODC-BY') then
 					ms:restrictionsOfUse = 'attribution' and count(ms:restrictionsOfUse) = 1 
 					else true()" xerces:message="The licence 'ODC-BY' can only contain an 'attribution' condition (restrictionsOfUse = attribution)'"/>
-					<xs:assert test="if (ms:licence = 'PSI-licence') then
-					ms:restrictionsOfUse = 'attribution' and count(ms:restrictionsOfUse) = 1 
-					else true()" xerces:message="The licence 'PSI-licence' can only contain an 'attribution' condition (restrictionsOfUse = attribution)'"/>
 					<xs:assert test="if (ms:licence = 'ODbL') then
 					ms:restrictionsOfUse = 'attribution' and ms:restrictionsOfUse = 'shareAlike' and count(ms:restrictionsOfUse) = 2 
 					else true()" xerces:message="The licence 'ODbL' can only contain the following conditions (restrictionsOfUse = attribution, shareAlike)'"/>
@@ -435,6 +431,9 @@
 					<xs:assert test="if (ms:licence = 'DL-DE-BY_Germany') then
 					ms:restrictionsOfUse = 'attribution' and count(ms:restrictionsOfUse) = 1
 					else true()" xerces:message="The licence 'DL-DE-BY_Germany' can only contain an 'attribution' condition (restrictionsOfUse = attribution)'"/>
+					<xs:assert test="if (ms:licence = 'PSI-licence_Ireland') then
+					ms:restrictionsOfUse = 'attribution' and count(ms:restrictionsOfUse) = 1 
+					else true()" xerces:message="The licence 'PSI-licence_Ireland' can only contain an 'attribution' condition (restrictionsOfUse = attribution)'"/>
 					<xs:assert test="if (ms:licence = 'IODL_Italy') then
 					ms:restrictionsOfUse = 'attribution' and count(ms:restrictionsOfUse) = 1
 					else true()" xerces:message="The licence 'IODL_Italy' can only contain an 'attribution' condition (restrictionsOfUse = attribution)'"/>
@@ -447,17 +446,18 @@
 					<xs:assert test="if (ms:licence = 'NCGL_UK') then
 					ms:restrictionsOfUse = 'attribution' and ms:restrictionsOfUse = 'nonCommercialUse' and count(ms:restrictionsOfUse) = 2
 					else true()" xerces:message="The licence 'NCGL_UK' can only contain the following conditions (restrictionsOfUse = attribution, nonCommercialUse)'"/>
-					<xs:assert test="if (ms:licence = 'IGCYL-NC_Spain') then
+<!--					<xs:assert test="if (ms:licence = 'IGCYL-NC_Spain') then
 					ms:restrictionsOfUse = 'attribution' and ms:restrictionsOfUse = 'nonCommercialUse' and count(ms:restrictionsOfUse) = 2
 					else true()" xerces:message="The licence 'IGCYL-NC_Spain' can only contain the following conditions (restrictionsOfUse = attribution, nonCommercialUse)'"/>
-					<!--THE FOLLOWING LICENCES PERMIT NO CONDITIONS OF USE-->
-					<xs:assert test="if (ms:licence = 'PDDL') then count(ms:restrictionsOfUse) = 0
+-->					<xs:assert test="if (ms:licence = 'PDDL') then count(ms:restrictionsOfUse) = 0
 					else true()" xerces:message="The licence 'PDDL' should not include any conditions of use'"/>
 					<xs:assert test="if (ms:licence = 'CC-ZERO') then count(ms:restrictionsOfUse) = 0
 					else true()" xerces:message="The licence 'CC-ZERO' should not include any conditions of use'"/>
 					<xs:assert test="if (ms:licence = 'DL-DE-ZERO_Germany') then count(ms:restrictionsOfUse) = 0
 					else true()" xerces:message="The licence ''DL-DE-ZERO_Germany' should not include any conditions of use'"/>
 				</xs:extension>
+				<!-- ASSERTIONS FOR LICENCES WITH PREDEFINED SETS OF RESTRICTIONS OF USE-->
+				<!--THE FOLLOWING LICENCES PERMIT NO CONDITIONS OF USE-->
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
