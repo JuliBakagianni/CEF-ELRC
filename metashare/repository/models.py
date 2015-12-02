@@ -24,7 +24,7 @@ from metashare.stats.model_utils import saveLRStats, DELETE_STAT, UPDATE_STAT
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
 from metashare.recommendations.models import ResourceCountPair, \
     ResourceCountDict
-from metashare.repository.language_choices import LANGUAGENAME_CHOICES
+# from metashare.repository.language_choices import LANGUAGENAME_CHOICES
 from metashare.repository.mimetype_choices import TEXTFORMATINFOTYPE_MIMETYPE_CHOICES
 # MIMETYPELABEL_TO_MIMETYPEVALUE
 
@@ -214,8 +214,21 @@ class resourceInfoType_model(SchemaModel):
         # resourceInfoType_modelIndex._setup_save() accordingly!
 
         # Call save() method from super class with all arguments.
+
+        resource_lang = list(self.identificationInfo.description.iterkeys())
+        # self.metadataInfo.metadataLanguageName[:]=[]
+        # for l in resource_lang:
+        #     self.metadataInfo.metadataLanguageName. \
+        #     extend(iana.get_language_by_subtag(l))
+        # self.metadataInfo.clean()
+
+
+
         super(resourceInfoType_model, self).save(*args, **kwargs)
 
+        # get the metadataInfo and update the languages to match the description
+        # languages
+        self.metadataInfo.save(langs = resource_lang)
         # update statistics
         saveLRStats(self, UPDATE_STAT)
 
@@ -382,6 +395,7 @@ class identificationInfoType_model(SchemaModel):
     )
 
     resourceName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
+
                              default_retriever=best_lang_value_retriever,
                              verbose_name='Resource name',
                              max_val_length=500,
@@ -390,7 +404,7 @@ class identificationInfoType_model(SchemaModel):
                                        '"lang" attribute to specify the language.',
                              )
 
-    description = DictField(validators=[validate_lang_code_keys, validate_dict_values],
+    description = DictField(validators=[validate_lang_code_keys, ],
                             default_retriever=best_lang_value_retriever,
                             verbose_name='Description',
                             max_val_length=10000,
@@ -410,7 +424,7 @@ class identificationInfoType_model(SchemaModel):
                                   blank=True)
 
     landingPage = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=0, attrs={'size': '250'}),
-                         verbose_name='Landing Page', validators=[HTTPURI_VALIDATOR],
+                         verbose_name='URL (additional information)', validators=[HTTPURI_VALIDATOR],
                          help_text='A Web page that can be navigated to in a Web browser '
                                    'to gain access to the resource, its distributions '
                                    'and/or additional information.',
@@ -472,7 +486,6 @@ class identificationInfoType_model(SchemaModel):
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
         return _unicode
-
 
 # pylint: disable-msg=C0103
 # class versionInfoType_model(SchemaModel):
@@ -818,11 +831,13 @@ class metadataInfoType_model(SchemaModel):
     metadataLanguageName = MultiTextField(max_length=100, widget=MultiChoiceWidget(widget_id=2, choices = _make_choices_from_list(sorted(iana.get_most_used_languages()))['choices']),
     # metadataLanguageName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=2, max_length=150),
          verbose_name='Metadata language name',
+
          help_text='The name of the language in which the metadata '
                    'description is written; an autocompletion '
                    'mechanism with values from the ISO 639 is '
                    'provided in the editor',
-         blank=True, validators=[validate_matches_xml_char_production], )
+         blank=True, validators=[validate_matches_xml_char_production],
+         editable=False)
 
     #TEST MILTOS
     metadataLanguageId = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=3, max_length=150),
@@ -845,11 +860,29 @@ class metadataInfoType_model(SchemaModel):
     #   'link to a document with revisions',
     #   blank=True, max_length=500, )
 
+    # def save_from_resource(self, langs, *args, **kwargs):
+    #     self.metadataLanguageName = u"English"
+    #     # for ml in langs:
+    #     #     langName = iana.get_language_by_subtag(ml)
+    #     #     self.metadataLanguageName.extend(langName)
+    #     # for ln in self.metadataLanguageName:
+    #     #             self.metadataLanguageId.append(iana.get_language_subtag(ln))
+    #     # lang_names =  self.metadataLanguageName
+    #     # lang_ids = self.metadataLanguageId
+    #     super(metadataInfoType_model, self).save(*args, **kwargs)
+
     def save(self, *args, **kwargs):
-        if self.metadataLanguageName:
-            self.metadataLanguageId[:] = []
-            for ml in self.metadataLanguageName:
-                self.metadataLanguageId.append(iana.get_language_subtag(ml))
+        # Since this field is hidden, language information are drawn from
+        # the resource description dictionary and are converted to bcp47 valid
+        # values
+        self.metadataLanguageName[:] = []
+        self.metadataLanguageId[:] = []
+        if 'langs' in kwargs:
+            ls = kwargs.pop('langs')
+            for i in ls:
+                langName = iana.get_language_by_subtag(i)
+                self.metadataLanguageName.append(langName)
+                self.metadataLanguageId.append(iana.get_language_subtag(langName))
         super(metadataInfoType_model, self).save(*args, **kwargs)
 
     def __unicode__(self):
@@ -2989,7 +3022,7 @@ class distributionInfoType_model(SchemaModel):
             licences.append(licenceInfo.licence)
 
         for l in licences:
-            if l.startswith(u"CC") or l == u"openForReuseWithRestrictions":
+            if l.startswith(u"CC") or l == u"non-standard/Other_Licence/Terms":
                 self.allowsUsesBesidesDGT = True
 
         if u'underNegotiation' in licences:
@@ -3057,19 +3090,18 @@ class distributionInfoType_model(SchemaModel):
 #         return self.unicode_(formatstring, formatargs)
 
 LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
-    u'PSI-directive', u'CC-BY', u'CC-BY-NC', u'CC-BY-NC-ND',
+    u'CC-BY', u'CC-BY-NC', u'CC-BY-NC-ND',
     u'CC-BY-NC-SA', u'CC-BY-ND', u'CC-BY-SA', u'CC-ZERO', u'PDDL',
-    u'ODC-BY', u'ODbL', u'openForReuseWithRestrictions',
-    u'FreeOpenDataLicence_Belgium',
+    u'ODC-BY', u'ODbL', u'FreeOpenDataLicence_Belgium',
     u'OpenDataLicenceAtAFairCost_Belgium', u'FreeOpenDataLicenceForNon-CommercialRe-use_Belgium',
     u'OpenDataLicenceAtAFairCostForCommercialRe-use_Belgium', u'NLSOpenDataLicence_Finland',
     u'LicenceOuverte-OpenLicence_France',
     u'DL-DE-BY_Germany', u'DL-DE-ZERO_Germany', u'PSI-licence_Ireland',
-    u'IODL_Italy', u'NLOD_Norway', u'OGL_UK', u'NCGL_UK',
+    u'IODL_Italy', u'NLOD_Norway', u'OGL_UK', u'NCGL_UK', u'IGCYL-NC_Spain',
     u'non-standard/Other_Licence/Terms',
     u'underNegotiation',
     # u'termsOfUse', u'proprietary',
-    # u'IGCYL-NC_Spain', u'ColorIURIS_Spain',
+    #  u'ColorIURIS_Spain',
     # u'MS-NoReD', u'MS-NoReD-FF', u'MS-NoReD-ND',
     # u'MS-NoReD-ND-FF',u'MS-NC-NoReD', u'MS-NC-NoReD-FF', u'MS-NC-NoReD-ND',
     # u'MS-NC-NoReD-ND-FF', u'AGPL', u'ApacheLicence_2.0',u'BSD',
@@ -3724,11 +3756,11 @@ class languageInfoType_model(SchemaModel):
 
     __schema_name__ = 'languageInfoType'
     __schema_fields__ = (
-        ( u'languageId', u'languageId', REQUIRED ),
         ( u'languageName', u'languageName', REQUIRED ),
         ( u'languageScript', u'languageScript', OPTIONAL ),
         ( u'region', u'region', OPTIONAL ),
         ( u'variants', u'variants', OPTIONAL ),
+        ( u'languageId', u'languageId', REQUIRED ),
         ( u'sizePerLanguage', u'sizePerLanguage', OPTIONAL ),
         ( u'languageVarietyInfo', u'languageVarietyInfo', OPTIONAL ),
     )
@@ -3736,16 +3768,6 @@ class languageInfoType_model(SchemaModel):
         u'languageVarietyInfo': "languageVarietyInfoType_model",
         u'sizePerLanguage': "sizeInfoType_model",
     }
-
-    languageId = XmlCharField(
-        verbose_name='Language id',
-        help_text='The identifier of the language that is included in the ' \
-                  'resource or supported by the tool/service; an autocompletion mech' \
-                  'anism with values from the ISO 639 is provided in the editor, but' \
-                  ' the values can be subsequently edited for further specification ' \
-                  '(according to the IETF BCP47 guidelines)',
-        max_length=100,
-        editable=False,)
 
     languageName = models.CharField(
         verbose_name='Language name',
@@ -3780,6 +3802,16 @@ class languageInfoType_model(SchemaModel):
          # max_length=1 + len(VARIANT_CHOICES['choices']) / 4,
          # choices=VARIANT_CHOICES['choices'],
     )
+
+    languageId = XmlCharField(
+        verbose_name='Language id',
+        help_text='The identifier of the language that is included in the ' \
+                  'resource or supported by the tool/service; an autocompletion mech' \
+                  'anism with values from the ISO 639 is provided in the editor, but' \
+                  ' the values can be subsequently edited for further specification ' \
+                  '(according to the IETF BCP47 guidelines)',
+        max_length=100,
+        editable=False,)
 
     sizePerLanguage = models.OneToOneField("sizeInfoType_model",
                                            verbose_name='Size per language',
@@ -4797,7 +4829,7 @@ class corpusTextInfoType_model(SchemaModel):
         # ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
         ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
         ( u'textFormatInfo', u'textformatinfotype_model_set', REQUIRED ),
-        ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', REQUIRED ),
+        ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', RECOMMENDED ),
         ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
         ( u'textClassificationInfo', u'textclassificationinfotype_model_set', RECOMMENDED ),
         ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
@@ -6850,7 +6882,7 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
         # ( u'modalityInfo', u'modalityinfotype_model_set', RECOMMENDED ),
         ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
         ( u'textFormatInfo', u'textformatinfotype_model_set', RECOMMENDED ),
-        ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', OPTIONAL ),
+        ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', RECOMMENDED ),
         ( u'domainInfo', u'domaininfotype_model_set', OPTIONAL ),
         # ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', OPTIONAL ),
         # ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', OPTIONAL ),
