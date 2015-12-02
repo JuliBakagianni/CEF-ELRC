@@ -464,6 +464,7 @@ input.ui-state-not-found {
 .resourceTypeExplanation ul li ul li{
     line-height:170%;
 	font-size:12px;
+	text-align: justify;
     text-justify: inter-word;
 }
 
