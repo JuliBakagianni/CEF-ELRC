@@ -11,7 +11,7 @@
 {% block content %}
 {% spaceless %}
 <h2>Create Account</h2>
-    <h3>All fields are required</h3>
+    <h3><span style='color:red'>*</span>All fields are required</h3>
 <div class="content_box">
   <form class="form_helper" method="post" action="{% url metashare.accounts.views.create %}">
     {% csrf_token %}

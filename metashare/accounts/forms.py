@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.safestring import mark_safe
 from metashare.accounts.models import UserProfile, EditorGroupApplication, \
     OrganizationApplication, Organization, OrganizationManagers, EditorGroup, \
     EditorGroupManagers
@@ -61,25 +62,25 @@ class RegistrationRequestForm(Form):
     Form used to create user account requests from new users.
     """
     shortname = forms.CharField(User._meta.get_field('username').max_length,
-                                label=_("Desired account name"))
+                                label=mark_safe(_("Desired account name<span style='color:red'>*</span>")))
     first_name = forms.CharField(User._meta.get_field('first_name').max_length,
-                                 label=_("First name"))
+                                 label=mark_safe(_("First name<span style='color:red'>*</span>")))
     last_name = forms.CharField(User._meta.get_field('last_name').max_length,
-                                label=_("Last name"))
-    email = forms.EmailField(label=_("E-mail"))
+                                label=mark_safe(_("Last name<span style='color:red'>*</span>")))
+    email = forms.EmailField(label=mark_safe(_("E-mail<span style='color:red'>*</span>")))
     country = forms.ChoiceField(UserProfile._meta.get_field('country').choices,
                                 UserProfile._meta.get_field('country').max_length,
-                                label=_("Country"))
+                                label=mark_safe(_("Country<span style='color:red'>*</span>")))
 
     organization = forms.CharField(UserProfile._meta.get_field('affiliation').max_length,
-                                label=_("Organization"))
+                                label=mark_safe(_("Organization<span style='color:red'>*</span>")))
     phone_number = forms.CharField(UserProfile._meta.get_field('phone_number').max_length,
-                                label=_("Phone number"))
+                                label=mark_safe(_("Phone number<span style='color:red'>*</span>")))
     password = forms.CharField(User._meta.get_field('password').max_length,
-        label=_("Password"), widget=forms.PasswordInput())
+        label=mark_safe(_("Password<span style='color:red'>*</span>")), widget=forms.PasswordInput())
     confirm_password = forms.CharField(
         User._meta.get_field('password').max_length,
-        label=_("Password confirmation"), widget=forms.PasswordInput())
+        label=mark_safe(_("Password confirmation<span style='color:red'>*</span>")), widget=forms.PasswordInput())
     accepted_tos = forms.BooleanField()
 
     def clean_shortname(self):
@@ -132,10 +133,10 @@ class ContactForm(Form):
         error_messages={'min_length': _('Please provide a meaningful and '
                                         'sufficiently indicative subject.')})
     message = forms.CharField(min_length=30, max_length=2500,
-        widget=forms.Textarea, error_messages={'min_length': _('Your message '
-            'appears to be rather short. Please make sure to phrase your '
-            'request as precise as possible. This will help us to process it '
-            'as quick as possible.')})
+        widget=forms.Textarea, error_messages={'min_length': _('Your message appears' \
+                             ' to be rather short. Please make sure you have ' \
+                             'phrased your request as precisely as possible. ' \
+                             'This will help us process it as quickly as possible')})
 
 
 class ResetRequestForm(Form):
