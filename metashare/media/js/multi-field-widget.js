@@ -184,7 +184,7 @@ function update_lang_variants(e) {
     var selected = variants.find("select option:selected").val();
     if (e.val() != "") {
         $.ajax({
-            url: "http://194.177.192.69/update_lang_variants/",
+            url: "/update_lang_variants/",
             type: 'POST',
             data: {'lang': e.val()},
             success: function (result) {
