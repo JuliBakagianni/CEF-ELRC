@@ -1,9 +1,9 @@
 Dear {{ resourceContactName|join:", " }},
-the CEF user {% if user.is_authenticated %}{{ user.username }} ({{ user.first_name }} {{ user.last_name }}, {{ user_email }}){% else %}{{ user }} ({{ user_email }}) requests information on the language resource “{{ resource }}” ([1]). You can find the request below; please reply as soon as possible.
+the CEF-ELRC user {% if user.is_authenticated %}{{ user.username }} ({{ user.first_name }} {{ user.last_name }}, {{ user_email }}){% else %}{{ user }} ({{ user_email }}) requests information on the language resource “{{ resource }}” ([1]). You can find the request below; please reply as soon as possible.
 {% endif %}
 
 Best regards,
-CEF node at [2]
+CEF-ELRC node at [2]
 
 [1] {{ node_url }}/{{ resource.get_relative_url }}
 [2] {{ node_url }}
