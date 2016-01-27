@@ -33,6 +33,9 @@
 {% if change %}{% if not is_popup %}
  <ul class="object-tools">
    {% block object-tools-items %}
+   {% if original.storage_object.get_download %}
+       <li><a href="datadl/" class="downloadresourcelink">{% trans "Download resource"%}</a></li>
+   {% endif %}
    <li><a href="upload-data/" class="uploadresourcelink">{% trans "Upload resource"%}</a></li>
    <li><a href="export-xml/" class="exportxmllink">{% trans "Export Resource Description to XML"%}</a></li>
    <li><a href="history/" class="historylink">{% trans "History" %}</a></li>
