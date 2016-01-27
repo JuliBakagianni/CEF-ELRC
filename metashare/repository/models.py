@@ -3791,13 +3791,15 @@ class languageInfoType_model(SchemaModel):
 
     region = models.CharField(
         verbose_name='Region',
-        help_text='Region',
+        help_text='Name of the region where the language of the resource i' \
+        's spoken (e.g. for English as spoken in the US or the UK etc.)',
         blank=True, max_length=100, null=True,
         choices =_make_choices_from_list(sorted(iana.get_all_regions()))['choices'])
 
     variants = MultiTextField(max_length=500, widget=MultiChoiceWidget(widget_id=65, choices = _make_choices_from_list(sorted(iana.get_all_variants()))['choices']),
          verbose_name='Variants',
-         help_text='Variants',
+         help_text='Name of the variant of the language of the resource is ' \
+         'spoken (according to IETF BCP47)',
          blank=True,
          null = True,
          # max_length=1 + len(VARIANT_CHOICES['choices']) / 4,
@@ -4869,7 +4871,7 @@ class corpusTextInfoType_model(SchemaModel):
                                           verbose_name='Linguality',
                                           help_text='Groups information on the number of languages of the re' \
                                                     'source part and of the way they are combined to each other',
-                                          )
+                                          null=True, blank=True)
 
     # OneToMany field: languageInfo
 
@@ -6445,7 +6447,7 @@ class languageDescriptionTextInfoType_model(SchemaModel):
                                           verbose_name='Linguality',
                                           help_text='Groups information on the number of languages of the re' \
                                                     'source part and of the way they are combined to each other',
-                                          )
+                                          null=True, blank=True)
 
     # OneToMany field: languageInfo
 
@@ -6914,7 +6916,7 @@ class lexicalConceptualResourceTextInfoType_model(SchemaModel):
                                           verbose_name='Linguality',
                                           help_text='Groups information on the number of languages of the re' \
                                                     'source part and of the way they are combined to each other',
-                                          )
+                                          null=True, blank=True)
 
     # OneToMany field: languageInfo
 
