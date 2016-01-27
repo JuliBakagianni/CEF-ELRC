@@ -36,7 +36,7 @@ logging.basicConfig(format=LOG_FORMAT, datefmt=LOG_DATE, level=LOG_LEVEL)
 # The default is a cautious value in order to protect the server
 # against resource starvation; if you think your server can handle
 # bigger files, feel free to try and increase this value.
-MAXIMUM_UPLOAD_SIZE = 30 * 1024 * 1024
+MAXIMUM_UPLOAD_SIZE = 50 * 1024 * 1024
 
 # Synchronization info:
 SYNC_NEEDS_AUTHENTICATION = True
