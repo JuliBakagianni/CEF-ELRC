@@ -7,7 +7,8 @@ from django.contrib.admin import widgets
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
-
+from metashare.repository.supermodel import _make_choices_from_list
+from metashare.bcp47 import iana
 
 class ModelForm(forms.ModelForm):
     """
@@ -53,7 +54,7 @@ class Form(forms.Form):
             row_ender = u'</td></tr>',
             help_text_html = u'<br /><span class="helptext">%s</span>',
             errors_on_separate_row = False)
-    
+
 
 class RegistrationRequestForm(Form):
     """
@@ -66,6 +67,14 @@ class RegistrationRequestForm(Form):
     last_name = forms.CharField(User._meta.get_field('last_name').max_length,
                                 label=_("Last name"))
     email = forms.EmailField(label=_("E-mail"))
+    country = forms.ChoiceField(UserProfile._meta.get_field('country').choices,
+                                UserProfile._meta.get_field('country').max_length,
+                                label=_("Country"))
+
+    organization = forms.CharField(UserProfile._meta.get_field('affiliation').max_length,
+                                label=_("Organization"))
+    phone_number = forms.CharField(UserProfile._meta.get_field('phone_number').max_length,
+                                label=_("Phone number"))
     password = forms.CharField(User._meta.get_field('password').max_length,
         label=_("Password"), widget=forms.PasswordInput())
     confirm_password = forms.CharField(
