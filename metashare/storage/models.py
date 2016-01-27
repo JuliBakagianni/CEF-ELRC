@@ -23,7 +23,8 @@ import glob
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
-ALLOWED_ARCHIVE_EXTENSIONS = ('zip', 'tar.gz', 'gz', 'tgz', 'tar', 'bzip2')
+# ALLOWED_ARCHIVE_EXTENSIONS = ('zip', 'tar.gz', 'gz', 'tgz', 'tar', 'bzip2')
+ALLOWED_ARCHIVE_EXTENSIONS = ('zip',)
 MAXIMUM_MD5_BLOCK_SIZE = 1024
 XML_DECL = re.compile(r'\s*<\?xml version=".+" encoding=".+"\?>\s*\n?',
   re.I|re.S|re.U)
