@@ -81,4 +81,7 @@ urlpatterns = patterns('metashare.repository.views',
                         form_class=FacetedBrowseForm,
                         template='repository/search.html',
                         searchqueryset=sqs)),
+  url(r'simple_form', 'simple_form'),
+  url(r'contributions','manage_contributed_data'),
+  (r'addtodb/$', 'addtodb'),
 )
