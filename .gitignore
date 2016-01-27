@@ -24,3 +24,29 @@ lighttpd.pid
 lighttpd/
 opt/
 ._*
+.idea/.name
+.idea/dataSources.ids
+.idea/dataSources.local.xml
+.idea/dataSources.xml
+.idea/encodings.xml
+.idea/workspace.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/scopes/scope_settings.xml
+.idea/vcs.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/miltosD_CEF_ELRC.iml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/libraries/Django_Lib.xml
+metashare/metadb
+.idea/bashsupport_project.xml
+misc/schema/v3.0.2new - CEF
+metashare/storage/1a7ff195362211e5818e00155d026502f322ae2dd16a4a1f8daae8e4d60d0e3a/metadata-0002.xml
+metashare/storage/1a7ff195362211e5818e00155d026502f322ae2dd16a4a1f8daae8e4d60d0e3a/metadata-0003.xml
+metashare/storage/1a7ff195362211e5818e00155d026502f322ae2dd16a4a1f8daae8e4d60d0e3a/resource.zip
+metashare/storage/1a7ff195362211e5818e00155d026502f322ae2dd16a4a1f8daae8e4d60d0e3a/storage-global.json
+metashare/storage/1a7ff195362211e5818e00155d026502f322ae2dd16a4a1f8daae8e4d60d0e3a/storage-local.json
+metashare/metadb9
+clarinel.conf
+licences conditionsOfUse.docx
+metashare.conf
