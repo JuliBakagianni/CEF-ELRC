@@ -72855,7 +72855,7 @@
 			</variants>
 		</language>
 	</languages>
-	<scipts>
+	<scripts>
 		<script subtag="Afak">
 			<description>Afaka</description>
 			<variants/>
@@ -73539,7 +73539,7 @@
 			<description>Code for uncoded script</description>
 			<variants/>
 		</script>
-	</scipts>
+	</scripts>
 	<regions>
 		<region subtag="AA">
 			<description>Private use</description>
@@ -74871,10 +74871,6 @@
 		<variant subtag="rozaj">
 			<description>Resian; Resianic; Rezijan</description>
 			<variants>
-				<variant subtag="1994">Standardized Resian orthography</variant>
-				<variant subtag="1994">Standardized Resian orthography</variant>
-				<variant subtag="1994">Standardized Resian orthography</variant>
-				<variant subtag="1994">Standardized Resian orthography</variant>
 				<variant subtag="1994">Standardized Resian orthography</variant>
 				<variant subtag="biske">The San Giorgio dialect of Resian; The Bila dialect of Resian</variant>
 				<variant subtag="lipaw">The Lipovaz dialect of Resian; The Lipovec dialect of Resian</variant>
