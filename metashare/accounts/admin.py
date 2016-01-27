@@ -39,11 +39,10 @@ class UserProfileAdmin(admin.ModelAdmin):
     """
     Administration interface for user profiles.
     """
-    list_display = ('user', 'modified', 'birthdate', 'affiliation', 'position',
-      'homepage', '_editor_group_display', '_managed_editor_groups_display',
-      '_organization_display', '_managed_organizations_display')
+    list_display = ('user', 'modified', 'birthdate', 'phone_number', 'country', 'affiliation', 'position','homepage', '_editor_group_display',
+      '_organization_display')
     search_fields = ('user__username', 'user__first_name', 'user__last_name',
-      'birthdate', 'affiliation', 'position', 'homepage')
+      'birthdate', 'phone_number', 'country', 'affiliation', 'position', 'homepage')
 
     def _editor_group_display(self, obj):
         """
