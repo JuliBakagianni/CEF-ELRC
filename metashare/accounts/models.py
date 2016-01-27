@@ -6,6 +6,8 @@ from django.contrib.auth.models import User, Group
 from django.db import models
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from metashare.bcp47 import iana
+from metashare.repository.supermodel import _make_choices_from_list
 
 from metashare.settings import LOG_HANDLER
 from metashare import repository
@@ -189,6 +191,11 @@ class OrganizationManagers(Group):
     def get_members(self):
         return User.objects.filter(groups__name=self.name)
 
+EUCOUNTRIES = [
+   "Germany", "Austria", "Luxembourg", "Netherlands", "Hungary", "Czech Republic","United Kingdom",
+"Ireland", "Spain", "Portugal", "Belgium", "Italy", "Malta", "France", "Latvia", "Estonia", "Lithuania",
+"Finland", "Sweden", "Denmark", "Iceland", "Norway","Greece", "Cyprus", "Slovakia", "Slovenia", "Bulgaria",
+"Poland", "Romania", "Croatia"]
 
 class UserProfile(models.Model):
     """
@@ -210,16 +217,18 @@ class UserProfile(models.Model):
     birthdate = models.DateField("Date of birth", blank=True,
       null=True)
     affiliation = models.TextField("Affiliation(s)", blank=True)
+    phone_number = models.CharField("Phone Number", max_length=50, null=True, blank=True)
+    country = models.CharField('Country', choices=_make_choices_from_list(sorted(EUCOUNTRIES))['choices'], max_length=100, null=True, blank=True)
     position = models.CharField(max_length=50, blank=True)
     homepage = models.URLField(blank=True)
     
     default_editor_groups = models.ManyToManyField(EditorGroup, blank=True)
 
     # These fields can be edited by the user in the browser.
-    __editable_fields__ = ('birthdate', 'affiliation', 'position', 'homepage')
+    __editable_fields__ = ('birthdate', 'phone_number', 'country', 'affiliation', 'position', 'homepage')
     
     # These fields are synchronized between META-SHARE nodes.
-    __synchronized_fields__ = ('modified', 'birthdate',
+    __synchronized_fields__ = ('modified', 'phone_number', 'country', 'birthdate',
       'affiliation', 'position', 'homepage')
     
     def __unicode__(self):
@@ -289,22 +298,22 @@ class UserProfile(models.Model):
             return org_mgr_groups.count() != 0
 
 
-@receiver(post_save, sender=User)
-def create_profile(sender, instance, created, **kwargs):
-    """
-    Create a corresponding profile whenever a User object is created.
-    
-    Also, make sure to synchronise local changes with other nodes.
-    """
-    # Check if the User instance has just been created; if so, create the
-    # corresponding UserProfile instance.
-    if created:
-        # pylint: disable-msg=W0612
-        profile, new = UserProfile.objects.get_or_create(user=instance)
-    
-    # Otherwise, the corresponding UserProfile for this User instance has to
-    # be saved in order to update the modified timestamp.  This will trigger
-    # synchronise_profile() and perform synchronisation if required.
-    else:
-        profile = instance.get_profile()
-        profile.save()
+# @receiver(post_save, sender=User)
+# def create_profile(sender, instance, created, **kwargs):
+#     """
+#     Create a corresponding profile whenever a User object is created.
+#
+#     Also, make sure to synchronise local changes with other nodes.
+#     """
+#     # Check if the User instance has just been created; if so, create the
+#     # corresponding UserProfile instance.
+#     if created:
+#         # pylint: disable-msg=W0612
+#         profile, new = UserProfile.objects.get_or_create(user=instance)
+#     # Otherwise, the corresponding UserProfile for this User instance has to
+#     # be saved in order to update the modified timestamp.  This will trigger
+#     # synchronise_profile() and perform synchronisation if required.
+#
+#     else:
+#         profile = instance.get_profile()
+#         profile.save()
