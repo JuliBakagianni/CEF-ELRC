@@ -75,7 +75,7 @@
             .addClass('selectable-deck-item')
             .appendTo(this.deck)
             .append(
-                $('<div>')
+                $('<span>')
                 .addClass('selectable-deck-remove')
                 .append("&nbsp;")
                 .append(
@@ -119,7 +119,7 @@
             if(self.allowEditing && ((self.baseEditingUrl != null) || self.isSubclassable))
             {
                 jqItem.append(
-                        $('<div>')
+                        $('<span>')
                         .addClass('selectable-deck-edit')
                         .append("&nbsp;")
                         .append(
