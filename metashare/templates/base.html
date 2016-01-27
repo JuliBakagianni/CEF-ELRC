@@ -32,6 +32,7 @@
     {% block header %}
     {% include "header.html" with page="frontpage" %}
     {% endblock %}
+    {% block back %}{% endblock %}
    <div class="container">
     <div id="content">
       <div id="messages">
@@ -42,6 +43,7 @@
         {% endfor %}
         {% endif %}
       </div>
+
       {% block content %}{% endblock %}
     </div>
   </div>
