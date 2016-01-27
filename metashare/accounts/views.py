@@ -17,7 +17,7 @@ from metashare.accounts.forms import RegistrationRequestForm, ResetRequestForm, 
     UserProfileForm, EditorGroupApplicationForm, UpdateDefaultEditorGroupForm, \
     OrganizationApplicationForm, ContactForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
-    EditorGroupApplication, EditorGroupManagers, EditorGroup, \
+    EditorGroupApplication, EditorGroupManagers, EditorGroup, UserProfile, \
     OrganizationApplication, OrganizationManagers, Organization
 from metashare.settings import DJANGO_URL, LOG_HANDLER
 
@@ -37,9 +37,9 @@ def confirm(request, uuid):
     # Activate the corresponding User instance.
     user = registration_request.user
     user.is_active = True
-    # Set user as staff/ editor
-    user.is_staff = True
-    user.groups.add(Group.objects.get(name='editors'))
+    # Do not set user as staff/ editor
+    user.is_staff = False
+    user.groups.add(Group.objects.get(name='data_donors'))
     # For convenience, log user in:
     # (We would actually have to authenticate the user before logging in,
     # however, as we don't know the password, we manually set the authenication
@@ -67,7 +67,7 @@ def confirm(request, uuid):
     messages.success(request, _("We have activated your user account."))
     
     # Redirect the user to the front page.
-    return redirect('metashare.views.frontpage')
+    return redirect('metashare.repository.views.simple_form')
 
 
 @login_required
@@ -88,10 +88,11 @@ def contact(request):
             email_msg = render_to_string('accounts/contact_maintainers.email',
                                          data)
             # send out the email to all superusers
+            # TODO or send to lr-coordination helpdesk help@cef-at-helpdesk.org
             superuser_emails = User.objects.filter(is_superuser=True) \
                 .values_list('email', flat=True)
             try:
-                send_mail(_('[META-SHARE] Contact Form Request: %s')
+                send_mail(_('[CEF-ELRC] Contact Form Request: %s')
                         % (data['subject'],), email_msg,
                     'no-reply@meta-share.eu', superuser_emails,
                     fail_silently=False)
@@ -104,8 +105,8 @@ def contact(request):
             else:
                 # show a message to the user after successfully sending the mail
                 messages.success(request, _("We have received your message and "
-                    "successfully sent it to the node maintainers. Please give "
-                    "them some days to get back to you."))
+                    "successfully sent it to the node maintainers. PWe will get "
+                    "back to you as soon as possible."))
             # redirect the user to the front page
             return redirect('metashare.views.frontpage')
     else:
@@ -135,6 +136,14 @@ def create(request):
             _user.last_name = form.cleaned_data['last_name']
             _user.is_active = False
             _user.save()
+
+            _profile = UserProfile.objects.create(user= _user, \
+                        affiliation = form.cleaned_data['organization'], \
+                        country = form.cleaned_data['country'], \
+                        phone_number = form.cleaned_data['phone_number']
+                        )
+            _profile.save()
+            # UserProfileForm
             # Create new RegistrationRequest instance.
             new_object = RegistrationRequest(user=_user)
             # Save new RegistrationRequest instance to django database.
@@ -189,7 +198,6 @@ def edit_profile(request):
     """
     # Get UserProfile instance corresponding to the current user.
     profile = request.user.get_profile()
-
     # Check if the edit form has been submitted.
     if request.method == "POST":
         # If so, bind the creation form to HTTP POST values.
@@ -224,7 +232,7 @@ def edit_profile(request):
     # Otherwise, fill UserProfileForm instance from current UserProfile.
     else:
         form = UserProfileForm({'birthdate': profile.birthdate,
-          'affiliation': profile.affiliation, 'position': profile.position,
+          'affiliation': profile.affiliation, 'phone_number': profile.phone_number, 'country': profile.country, 'position': profile.position,
           'homepage': profile.homepage})
 
     if request.user.has_perm('accounts.ms_full_member'):
