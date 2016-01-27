@@ -1,4 +1,5 @@
 import datetime
+from mimetypes import guess_type
 
 from django import forms
 from django.contrib import admin, messages
@@ -7,7 +8,7 @@ from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.db.models import Q
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
@@ -17,6 +18,7 @@ from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _, ungettext
 from django.views.decorators.csrf import csrf_protect
+from django.contrib.admin.views.decorators import staff_member_required
 
 from metashare import settings
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
@@ -36,11 +38,13 @@ from metashare.repository.models import resourceComponentTypeType_model, \
     licenceInfoType_model, User, personInfoType_model, communicationInfoType_model
 # toolServiceInfoType_model,
 from metashare.repository.supermodel import SchemaModel
+# from metashare.repository.views import MAXIMUM_READ_BLOCK_SIZE
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, DELETE_STAT
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass, create_breadcrumb_template_params
 
+from os.path import split, getsize
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -699,6 +703,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
             url(r'^(.+)/upload-data/$',
                 wrap(self.uploaddata_view),
                 name='%s_%s_uploaddata' % info),
+            url(r'^(.+)/datadl/$',
+                wrap(self.datadl),
+                name='%s_%s_datadl' % info),
            url(r'^my/$',
                 wrap(self.changelist_view_filtered),
                 name='%s_%s_myresources' % info),
@@ -707,8 +714,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                 name='%s_%s_exportxml' % info),
         ) + urlpatterns
         return urlpatterns
-    
-    
+
+
     @csrf_protect_m
     def changelist_view_filtered(self, request, extra_context=None):
         '''
@@ -829,6 +836,63 @@ class ResourceModelAdmin(SchemaModelAdmin):
         return render_to_response(
           ['admin/repository/resourceinfotype_model/upload_resource.html'], context,
           context_instance)
+
+    @csrf_protect_m
+    def datadl(self, request, object_id, extra_context=None):
+
+        # return HttpResponse("OK")
+        """
+        Returns an HTTP response with a download of the given resource.
+        """
+
+        model = self.model
+        opts = model._meta
+
+        obj = self.get_object(request, unquote(object_id))
+        storage_object = obj.storage_object
+        dl_path = storage_object.get_download()
+        if dl_path:
+            try:
+                def dl_stream_generator():
+                    with open(dl_path, 'rb') as _local_data:
+                        _chunk = _local_data.read(4096)
+                        while _chunk:
+                            yield _chunk
+                            _chunk = _local_data.read(4096)
+
+                # build HTTP response with a guessed mime type; the response
+                # content is a stream of the download file
+                filemimetype = guess_type(dl_path)[0] or "application/octet-stream"
+                response = HttpResponse(dl_stream_generator(),
+                    mimetype=filemimetype)
+                response['Content-Length'] = getsize(dl_path)
+                response['Content-Disposition'] = 'attachment; filename={0}' \
+                    .format(split(dl_path)[1])
+                # LOGGER.info("Offering a local editor download of resource #{0}." \
+                #             .format(object_id))
+                return response
+            except:
+                pass
+        # redirect to a download location, if available
+        # elif download_urls:
+        #     for url in download_urls:
+        #         status_code = urlopen(url).getcode()
+        #         if not status_code or status_code < 400:
+        #             LOGGER.info("Redirecting to {0} for the download of resource " \
+        #                         "#{1}.".format(url, resource.id))
+        #             return redirect(url)
+        #     LOGGER.warn("No download could be offered for resource #{0}. These " \
+        #                 "URLs were tried: {1}".format(resource.id, download_urls))
+        # else:
+        #     LOGGER.error("No download could be offered for resource #{0} with " \
+        #                  "storage object identifier #{1} although our code " \
+        #                  "considered it to be downloadable!".format(resource.id,
+        #                                                             resource.storage_object.identifier))
+
+        # no download could be provided
+        return render_to_response('repository/lr_not_downloadable.html',
+                                  {'resource': obj, 'reason': 'internal'},
+                                  context_instance=RequestContext(request))
 
     @csrf_protect_m
     def exportxml(self, request, object_id, extra_context=None):
