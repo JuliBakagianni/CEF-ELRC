@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End User (free.org) -->
 <!-- edited by ILSP/Athena R.C. -->
 <xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en">
 	<xs:include schemaLocation="META-SHARE-SimpleTypes.xsd"/>
@@ -293,7 +292,7 @@
 		<xs:sequence>
 			<xs:element name="metadataCreationDate" type="xs:date">
 				<xs:annotation>
-					<xs:documentation>The date of creation of this metadata description (automatically inserted by the repo software)</xs:documentation>
+					<xs:documentation>The date of creation of this metadata description (automatically inserted by the MetaShare software)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="metadataCreator" type="ms:personInfoType" minOccurs="0" maxOccurs="unbounded">
@@ -615,6 +614,7 @@
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element ref="ms:domain" maxOccurs="unbounded"/>
+			<xs:element ref="ms:domainId" maxOccurs="unbounded"/>
 			<xs:element name="sizePerDomain" type="ms:sizeInfoType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Specifies the size of resource parts per domain</xs:documentation>
@@ -1763,9 +1763,9 @@
 		</xs:annotation>
 	</xs:element>
 	<xs:element name="documentInfo" type="ms:documentInfoType"/>
-	<xs:element name="domain">
+	<xs:element name="domainId">
 		<xs:annotation>
-			<xs:documentation>Specifies the application domain of the resource or the tool/service; please, select one of the values supplied (taken mainly from the Dewey Decimal Classification system) or, in case none of these describes your domain, add a new value, if possible, from the DDC recommended values (https://en.wikipedia.org/wiki/List_of_Dewey_Decimal_classes)</xs:documentation>
+			<xs:documentation>The identifier of the application domain of the resource or the tool/service, taken from the EUROVOC domains: http://eurovoc.europa.eu/drupal</xs:documentation>
 			<xs:appinfo>
 				<inline-type>tabular</inline-type>
 			</xs:appinfo>
@@ -1773,6 +1773,155 @@
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
 				<xs:maxLength value="100"/>
+				<xs:enumeration value="04">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>POLITICS</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="INTERNATIONAL RELATIONS">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>INTERNATIONAL RELATIONS</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="10">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>EUROPEAN UNION</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="12">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>LAW</xs:label>>
+					</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="16">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>ECONOMICS</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="20">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>TRADE</xs:label>>
+					</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="24">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>FINANCE</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="28">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>SOCIAL QUESTIONS</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="32">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>EDUCATION AND COMMUNICATIONS</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="36">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>SCIENCE</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="40">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>BUSINESS AND COMPETITION</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="44">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>EMPLOYMENT AND WORKING CONDITIONS</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="48">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>TRANSPORT</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="52">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>ENVIRONMENT</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="56">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>AGRICULTURE, FORESTRY AND FISHERIES</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="60">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>AGRI-FOODSTUFFS</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="64">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>PRODUCTION, TECHNOLOGY AND RESEARCH</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="66">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>ENERGY</xs:label>>
+					</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="68">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>INDUSTRY</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="72">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>GEOGRAPHY</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="76">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>INTERNATIONAL ORGANISATIONS</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="other"/>
+				<!-- commented out DDC values
 				<xs:enumeration value="advertisingPublicRelations_DDC659">
 					<xs:annotation>
 						<xs:appinfo>
@@ -2193,6 +2342,42 @@
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
+				-->
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="domain">
+		<xs:annotation>
+			<xs:documentation>Specifies the application domain of the resource or the tool/service; please, select one of the values supplied (taken from the EUROVOC domains, cf. http://eurovoc.europa.eu) or, in case none of these describes your domain, add a new value at the free text field</xs:documentation>
+			<xs:appinfo>
+				<inline-type>tabular</inline-type>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="100"/>
+				<xs:enumeration value="POLITICS"/>
+				<xs:enumeration value="INTERNATIONAL RELATIONS"/>
+				<xs:enumeration value="EUROPEAN UNION"/>
+				<xs:enumeration value="LAW"/>
+				<xs:enumeration value="ECONOMICS"/>
+				<xs:enumeration value="TRADE"/>
+				<xs:enumeration value="FINANCE"/>
+				<xs:enumeration value="SOCIAL QUESTIONS"/>
+				<xs:enumeration value="EDUCATION AND COMMUNICATIONS"/>
+				<xs:enumeration value="SCIENCE"/>
+				<xs:enumeration value="BUSINESS AND COMPETITION"/>
+				<xs:enumeration value="EMPLOYMENT AND WORKING CONDITIONS"/>
+				<xs:enumeration value="TRANSPORT"/>
+				<xs:enumeration value="ENVIRONMENT"/>
+				<xs:enumeration value="AGRICULTURE, FORESTRY AND FISHERIES"/>
+				<xs:enumeration value="AGRI-FOODSTUFFS"/>
+				<xs:enumeration value="PRODUCTION, TECHNOLOGY AND RESEARCH"/>
+				<xs:enumeration value="ENERGY"/>
+				<xs:enumeration value="INDUSTRY"/>
+				<xs:enumeration value="GEOGRAPHY"/>
+				<xs:enumeration value="INTERNATIONAL ORGANISATIONS"/>
+				<xs:enumeration value="other"/>
 			</xs:restriction>
 		</xs:simpleType>
 	</xs:element>
