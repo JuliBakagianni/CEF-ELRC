@@ -5,7 +5,7 @@
 <head>
     {% analytical_head_top %}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>{% spaceless %}{% block title %}ELRC META-SHARE Repository{% endblock %}{% endspaceless %}</title>
+    <title>{% spaceless %}{% block title %}ELRC-SHARE Repository{% endblock %}{% endspaceless %}</title>
     <meta name="description" content="
 
 
@@ -56,10 +56,10 @@
 {#            crossorigin="anonymous"></script>#}
     <style type="text/css">
         .form-group.required label:after {content: "*"; color: red; font-size: 1.3em;}
-        .failure {text-align: center; width: 400px; margin: 10px auto;
+        .failure {text-align: center; width: 800px; margin: 10px auto;
             padding: 5px; border-radius: 5px; background: #f2df00}
 
-        .success {text-align: center; width: 400px; margin: 10px auto; padding: 5px; border-radius: 5px;}
+        .success {text-align: center; width: 800px; margin: 10px auto; padding: 5px; border-radius: 5px;}
     </style>
 </head>
 <body>
@@ -70,6 +70,9 @@
 {% if message %}
     <div class="{{ type }}">{{ message }}</div>
 {% endif %}
+{% for message in messages %}
+<div class="{{ message.tags }}">{{ message|linebreaksbr }}</div>
+{% endfor %}
 <form class="form-horizontal" action="{% url metashare.repository.views.simple_form %}" method="post"
       data-toggle="validator" enctype="multipart/form-data">
     <fieldset>
@@ -84,7 +87,7 @@
             <div class="col-md-4">
                 <input id="resourceTitle" name="resourceTitle" placeholder="" class="form-control input-md" required=""
                        type="text">
-                <span class="help-block">The name by which the resource is or may be known; e.g. "the set of translations of the official documents of the Ministry of Justice"</span>
+                <span class="help-block">The name by which the resource is already known or by which you would like it to be known; e.g. "The GSRT bilingual corpus of Greek-English bulletins"</span>
             </div>
         </div>
 
@@ -94,7 +97,7 @@
 
             <div class="col-md-4">
                 <textarea class="form-control" id="shortDescription" name="shortDescription" required=""></textarea>
-                <span class="help-block">A short description, including any information considered useful about the resource (e.g. languages, size)</span>
+                <span class="help-block">A short description, including any information considered useful about the resource, e.g. whether it's a dataset (collection of documents) or a lexicon, glossary, terminological resource, etc., its size, language(s), classification information (e.g. health reports, news bulletins, lexicon of sports terminology etc.)</span>
             </div>
         </div>
 
