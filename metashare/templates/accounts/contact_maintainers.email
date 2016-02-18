@@ -1,6 +1,6 @@
-Dear superuser,
+Dear administrator,
 
-{{ user_first_name }} {{ user_last_name }} (user account: {{ user_account_name }}) has sent you a message through the contact form of the CEF-ELRC node at [1].
+{{ user_first_name }} {{ user_last_name }} (user account: {{ user_account_name }}) has sent you a message through the contact form of the ELRC-SHARE repository at [1].
 
 Subject: {{ subject }}
 Message: see below
@@ -8,7 +8,7 @@ Message: see below
 Please try to answer this request soon by responding to {{ user_email }}.
 
 Best regards,
-your CEF-ELRC node
+The ELRC-SHARE team
 
 [1] {{ node_url }}
 
