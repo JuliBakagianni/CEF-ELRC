@@ -77,7 +77,7 @@ def schema_validate_xml(value):
     command.append('java')
     command.append('-jar')
     command.append('{}xmlValidator_schema1.1/schemaValidator.jar'.format(path))
-    command.append('{}misc/schema/CEF-SHARE/META-SHARE-Resource.xsd'.format(path))
+    command.append('{}misc/schema/ELRC-SHARE/META-SHARE-Resource.xsd'.format(path))
     value = value.replace('\r','').replace('\n','').replace('\t','')
     command.append(value)
 
