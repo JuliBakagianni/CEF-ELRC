@@ -107,7 +107,7 @@ div#header a:link, a:visited,a:hover,a:active{
 	/*-moz-border-radius: 5px;*/
 	/*border-radius: 5px;*/
 	white-space: nowrap;
-	font-family: 'TitilliumText', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: Arimo,Arial,sans-serif;
 	font-weight: 600;
   	/*text-shadow: 0px -1px 1px #FF9900;*/
 	color: white;
@@ -414,7 +414,7 @@ div#footer{
 	text-shadow: 0px 1px white;
 	font-weight: 600;
 	color: #818181;
-    font-family: "TitilliumText","Helvetica Neue","Helvetica",Arial,sans-serif;
+    font-family: Arimo,Arial,sans-serif;
 	font-size: 12px;
 	margin-left:auto;
 	margin-right:auto;
