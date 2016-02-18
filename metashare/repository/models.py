@@ -49,9 +49,9 @@ HTTPURI_VALIDATOR = RegexValidator(r"^(?i)((http|ftp)s?):\/\/"
                                    " see also RFC 2396).", ValidationError)
 
 # namespace of the META-SHARE metadata XML Schema
-SCHEMA_NAMESPACE = 'http://www.ilsp.gr/META-XMLSchema'
+SCHEMA_NAMESPACE = 'http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/'
 # version of the META-SHARE metadata XML Schema
-SCHEMA_VERSION = '3.0'
+SCHEMA_VERSION = '1.0'
 
 
 def _compute_documentationInfoType_key():
@@ -99,7 +99,7 @@ class resourceInfoType_model(SchemaModel):
         # ( u'validationInfo', u'validationinfotype_model_set', RECOMMENDED ),
         # ( u'usageInfo', u'usageInfo', RECOMMENDED ),
         ( u'resourceDocumentationInfo', u'resourceDocumentationInfo', RECOMMENDED ),
-        # ( u'resourceCreationInfo', u'resourceCreationInfo', RECOMMENDED ),
+        ( u'resourceCreationInfo', u'resourceCreationInfo', RECOMMENDED ),
         # ( u'relationInfo', u'relationinfotype_model_set', RECOMMENDED ),
         ( 'resourceComponentType/corpusInfo', 'resourceComponentType', REQUIRED ),
         # ( 'resourceComponentType/toolServiceInfo', 'resourceComponentType', REQUIRED ),
@@ -115,7 +115,7 @@ class resourceInfoType_model(SchemaModel):
         u'lexicalConceptualResourceInfo': "lexicalConceptualResourceInfoType_model",
         u'metadataInfo': "metadataInfoType_model",
         # u'relationInfo': "relationInfoType_model",
-        # u'resourceCreationInfo': "resourceCreationInfoType_model",
+        u'resourceCreationInfo': "resourceCreationInfoType_model",
         u'resourceDocumentationInfo': "resourceDocumentationInfoType_model",
         # u'toolServiceInfo': "toolServiceInfoType_model",
         # u'usageInfo': "usageInfoType_model",
@@ -164,11 +164,11 @@ class resourceInfoType_model(SchemaModel):
                                                                'the resource',
                                                      blank=True, null=True, on_delete=models.SET_NULL, )
 
-    # resourceCreationInfo = models.OneToOneField("resourceCreationInfoType_model",
-    #   verbose_name='Resource creation',
-    #   help_text='Groups information on the creation procedure of a resou' \
-    #   'rce',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
+    resourceCreationInfo = models.OneToOneField("resourceCreationInfoType_model",
+      verbose_name='Resource creation',
+      help_text='Groups information on the creation procedure of a resou' \
+      'rce',
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: relationInfo
 
@@ -189,7 +189,7 @@ class resourceInfoType_model(SchemaModel):
 
     storage_object = models.ForeignKey(StorageObject, blank=True, null=True,
                                        unique=True)
-
+    lr_quality = models.ForeignKey('LrQuality', editable=False, null=True, blank=True)
     def save(self, *args, **kwargs):
         """
         Overrides the predefined save() method to ensure that a corresponding
@@ -214,6 +214,8 @@ class resourceInfoType_model(SchemaModel):
         # resourceInfoType_modelIndex._setup_save() accordingly!
 
         # Call save() method from super class with all arguments.
+
+
 
         resource_lang = list(self.identificationInfo.description.iterkeys())
         # self.metadataInfo.metadataLanguageName[:]=[]
@@ -295,7 +297,7 @@ SIZEINFOTYPE_SIZEUNIT_CHOICES = _make_choices_from_list([
     u'sentences', u'texts', u'files', u'tokens', u'words',
     u'items', u'entries', u'lexicalTypes', u'terms', u'concepts',
     u'keywords', u'neologisms', u'multiWordUnits', u'idiomaticExpressions',
-    u'expressions', u'bytes', u'kb', u'mb', u'gb', u'rules', u'other',
+    u'expressions', u'bytes', u'kb', u'mb', u'gb', u'rules', u'translationUnits', u'other',
 ])
 # pylint: disable-msg=C0103
 class sizeInfoType_model(SchemaModel):
@@ -386,7 +388,7 @@ class identificationInfoType_model(SchemaModel):
         ( u'description', u'description', REQUIRED ),
         ( u'resourceShortName', u'resourceShortName', OPTIONAL ),
         ( u'landingPage', u'landingPage', RECOMMENDED ),
-        ( u'metaShareId', u'metaShareId', REQUIRED ),
+        ( u'metaShareId', u'metaShareId', OPTIONAL ),
         ( u'ISLRN', u'ISLRN', RECOMMENDED ),
         # ( u'PID', u'PID', RECOMMENDED),
         ( u'identifier', u'identifier', OPTIONAL ),
@@ -435,7 +437,7 @@ class identificationInfoType_model(SchemaModel):
         help_text='An unambiguous referent to the resource within META-SHA' \
                   'RE; it reflects to the unique system id provided automatically by' \
                   ' the MetaShare software',
-        max_length=100, default="NOT_DEFINED_FOR_V2", )
+        max_length=100, blank=True, )
 
     ISLRN = XmlCharField(
         verbose_name='ISLRN',
@@ -660,118 +662,113 @@ class identificationInfoType_model(SchemaModel):
 #         return _unicode
 
 # pylint: disable-msg=C0103
-# class resourceCreationInfoType_model(SchemaModel):
-#     """
-#     Groups information on the creation procedure of a resource
-#     """
-#
-#     class Meta:
-#         verbose_name = "Resource creation"
-#
-#
-#     __schema_name__ = 'resourceCreationInfoType'
-#     __schema_fields__ = (
-#       ( 'resourceCreator/personInfo', 'resourceCreator', RECOMMENDED ),
-#       ( 'resourceCreator/organizationInfo', 'resourceCreator', RECOMMENDED ),
-#       ( u'fundingProject', u'fundingProject', OPTIONAL ),
-#       ( u'creationStartDate', u'creationStartDate', RECOMMENDED ),
-#       ( u'creationEndDate', u'creationEndDate', RECOMMENDED ),
-#     )
-#     __schema_classes__ = {
-#       u'fundingProject': "projectInfoType_model",
-#       u'organizationInfo': "organizationInfoType_model",
-#       u'personInfo': "personInfoType_model",
-#     }
-#
-#     resourceCreator = models.ManyToManyField("actorInfoType_model",
-#       verbose_name='Resource creator',
-#       help_text='Groups information on the person or the organization th' \
-#       'at has created the resource',
-#       blank=True, null=True, related_name="resourceCreator_%(class)s_related", )
-#
-#     # fundingProject = models.ManyToManyField("projectInfoType_model",
-#     #   verbose_name='Funding project',
-#     #   help_text='Groups information on the project that has funded the r' \
-#     #   'esource',
-#     #   blank=True, null=True, related_name="fundingProject_%(class)s_related", )
-#
-#     creationStartDate = models.DateField(
-#       verbose_name='Creation start date',
-#       help_text='The date in which the creation process was started',
-#       blank=True, null=True, )
-#
-#     creationEndDate = models.DateField(
-#       verbose_name='Creation end date',
-#       help_text='The date in which the creation process was completed',
-#       blank=True, null=True, )
-#
-#     def real_unicode_(self):
-#         # pylint: disable-msg=C0301
-#         formatargs = ['resourceCreator', 'fundingProject', 'creationStartDate', 'creationEndDate', ]
-#         formatstring = u'{} {} {}-{}'
-#         return self.unicode_(formatstring, formatargs)
+class resourceCreationInfoType_model(SchemaModel):
+    """
+    Groups information on the creation procedure of a resource
+    """
 
-# CREATIONINFOTYPE_CREATIONMODE_CHOICES = _make_choices_from_list([
-#   u'automatic', u'manual', u'mixed', u'interactive',
-# ])
+    class Meta:
+        verbose_name = "Resource creation"
+
+
+    __schema_name__ = 'resourceCreationInfoType'
+    __schema_fields__ = (
+      ( 'resourceCreator/personInfo', 'resourceCreator', RECOMMENDED ),
+      ( 'resourceCreator/organizationInfo', 'resourceCreator', RECOMMENDED ),
+      ( u'fundingProject', u'fundingProject', OPTIONAL ),
+      ( u'creationStartDate', u'creationStartDate', RECOMMENDED ),
+      ( u'creationEndDate', u'creationEndDate', RECOMMENDED ),
+    )
+    __schema_classes__ = {
+      u'fundingProject': "projectInfoType_model",
+      u'organizationInfo': "organizationInfoType_model",
+      u'personInfo': "personInfoType_model",
+    }
+
+    resourceCreator = models.ManyToManyField("actorInfoType_model",
+      verbose_name='Resource creator',
+      help_text='Groups information on the person or the organization that has created the resource',
+      blank=True, null=True, related_name="resourceCreator_%(class)s_related", )
+
+    fundingProject = models.ManyToManyField("projectInfoType_model",
+      verbose_name='Funding project',
+      help_text='Groups information on the project that has funded the resource',
+      blank=True, null=True, related_name="fundingProject_%(class)s_related", )
+
+    creationStartDate = models.DateField(
+      verbose_name='Creation start date',
+      help_text='The date in which the creation process was started',
+      blank=True, null=True, )
+
+    creationEndDate = models.DateField(
+      verbose_name='Creation end date',
+      help_text='The date in which the creation process was completed',
+      blank=True, null=True, )
+
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['resourceCreator', 'fundingProject', 'creationStartDate', 'creationEndDate', ]
+        formatstring = u'{} {} {}-{}'
+        return self.unicode_(formatstring, formatargs)
+
+CREATIONINFOTYPE_CREATIONMODE_CHOICES = _make_choices_from_list([
+  u'automatic', u'manual', u'mixed', u'interactive',
+])
 
 # pylint: disable-msg=C0103
-# class creationInfoType_model(SchemaModel):
-#     """
-#     Groups together information on the resource creation (e.g. for
-#     corpora, selection of texts/audio files/ video files etc. and
-#     structural encoding thereof; for lexica, construction of lemma
-#     list etc.)
-#     """
-#
-#     class Meta:
-#         verbose_name = "Creation"
-#
-#
-#     __schema_name__ = 'creationInfoType'
-#     __schema_fields__ = (
-#       ( u'originalSource', u'originalSource', RECOMMENDED ),
-#       ( u'creationMode', u'creationMode', RECOMMENDED ),
-#       ( u'creationModeDetails', u'creationModeDetails', OPTIONAL ),
-#       ( u'creationTool', u'creationTool', OPTIONAL ),
-#     )
-#     __schema_classes__ = {
-#       u'creationTool': "targetResourceInfoType_model",
-#       u'originalSource': "targetResourceInfoType_model",
-#     }
-#
-#     originalSource = models.ManyToManyField("targetResourceInfoType_model",
-#       verbose_name='Original source',
-#       help_text='The name, the identifier or the url of thethe original ' \
-#       'resources that were at the base of the creation process of the re' \
-#       'source',
-#       blank=True, null=True, related_name="originalSource_%(class)s_related", )
-#
-#     creationMode = models.CharField(
-#       verbose_name='Creation mode',
-#       help_text='Specifies whether the resource is created automatically' \
-#       ' or in a manual or interactive mode',
-#       blank=True,
-#       max_length=30,
-#       choices=sorted(CREATIONINFOTYPE_CREATIONMODE_CHOICES['choices'],
-#                      key=lambda choice: choice[1].lower()),
-#       )
-#
-#     creationModeDetails = XmlCharField(
-#       verbose_name='Creation mode details',
-#       help_text='Provides further information on the creation methods an' \
-#       'd processes',
-#       blank=True, max_length=200, )
-#
-#     creationTool = models.ManyToManyField("targetResourceInfoType_model",
-#       verbose_name='Creation tool',
-#       help_text='The name, the identifier or the url of the tool used in' \
-#       ' the creation process',
-#       blank=True, null=True, related_name="creationTool_%(class)s_related", )
-#
-#     def __unicode__(self):
-#         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
-#         return _unicode
+class creationInfoType_model(SchemaModel):
+    """
+    Groups together information on the resource creation (e.g. for
+    corpora, selection of texts/audio files/ video files etc. and
+    structural encoding thereof; for lexica, construction of lemma
+    list etc.)
+    """
+
+    class Meta:
+        verbose_name = "Creation"
+
+
+    __schema_name__ = 'creationInfoType'
+    __schema_fields__ = (
+      ( u'originalSource', u'originalSource', RECOMMENDED ),
+      ( u'creationMode', u'creationMode', RECOMMENDED ),
+      ( u'creationModeDetails', u'creationModeDetails', OPTIONAL ),
+      ( u'creationTool', u'creationTool', OPTIONAL ),
+    )
+    __schema_classes__ = {
+      u'creationTool': "targetResourceInfoType_model",
+      u'originalSource': "targetResourceInfoType_model",
+    }
+
+    originalSource = models.ManyToManyField("targetResourceInfoType_model",
+      verbose_name='Original source',
+      help_text='The name, the identifier or the url of thethe original '\
+                'resources that were at the base of the creation process '\
+                'of the resource',
+      blank=True, null=True, related_name="originalSource_%(class)s_related", )
+
+    creationMode = models.CharField(
+      verbose_name='Creation mode',
+      help_text='Specifies whether the resource is created automatically or in a manual or interactive mode',
+      blank=True,
+      max_length=30,
+      choices=sorted(CREATIONINFOTYPE_CREATIONMODE_CHOICES['choices'],
+                     key=lambda choice: choice[1].lower()),
+      )
+
+    creationModeDetails = XmlCharField(
+      verbose_name='Creation mode details',
+      help_text='Provides further information on the creation methods and processes',
+      blank=True, max_length=200, )
+
+    creationTool = models.ManyToManyField("targetResourceInfoType_model",
+      verbose_name='Creation tool',
+      help_text='The name, the identifier or the url of the tool used in the creation process',
+      blank=True, null=True, related_name="creationTool_%(class)s_related", )
+
+    def __unicode__(self):
+        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+        return _unicode
 
 # pylint: disable-msg=C0103
 class metadataInfoType_model(SchemaModel):
@@ -1150,56 +1147,52 @@ class resourceDocumentationInfoType_model(SchemaModel):
         formatstring = u'{}'
         return self.unicode_(formatstring, formatargs)
 
+DOMAIN_CODE = {
+    u"POLITICS": u"04",
+    u"INTERNATIONAL RELATIONS": u"08",
+    u"EUROPEAN UNION": u"10",
+    u"LAW": u"12",
+    u"ECONOMICS": u"16",
+    u"TRADE": u"20",
+    u"FINANCE": u"24",
+    u"SOCIAL QUESTIONS": u"28",
+    u"EDUCATION AND COMMUNICATIONS": u"32",
+    u"SCIENCE": u"36",
+    u"BUSINESS AND COMPETITION": u"40",
+    u"EMPLOYMENT AND WORKING CONDITIONS": u"44",
+    u"TRANSPORT": u"48",
+    u"ENVIRONMENT": u"52",
+    u"AGRICULTURE, FORESTRY AND FISHERIES": u"56",
+    u"AGRI-FOODSTUFFS": u"60",
+    u"PRODUCTION, TECHNOLOGY AND RESEARCH": u"64",
+    u"ENERGY": u"66",
+    u"INDUSTRY": u"68",
+    u"GEOGRAPHY": u"72",
+    u"INTERNATIONAL ORGANISATIONS": u"76",
+}
 
 DOMAININFOTYPE_DOMAIN_CHOICES = (
-    (u"advertisingPublicRelations_DDC659", u"Advertising & Public Relations (DDC659)"),
-    (u"agriculture_DDC630", u"Agriculture (DDC630)"),
-    (u"animalsZoology_DDC590", u"Animals (Zoology) (DDC590)"),
-    (u"appliedPhysics_DDC621", u"Applied Physics (DDC621)"),
-    (u"architecture_DDC720", u"Architecture (DDC720)"),
-    (u"artsRecreation_DDC700", u"Arts & Recreation (DDC700)"),
-    (u"astrononmy_DDC520", u"Astronomy (DDC520)"),
-    (u"biochemistry_DDC572", u"Biochemistry (DDC572)"),
-    (u"biology_DDC570", u"Biology (DDC570)"),
-    (u"chemicalEngineering_DDC660", u"Chemical Engineering (DDC660)"),
-    (u"chemistry_DDC540", u"Chemistry (DDC540)"),
-    (u"commerceTrade_DDC381", u"Commerce (Trade) (DDC381)"),
-    (u"communications_DDC384", u"Communications (DDC384)"),
-    (u"computerScienceInformationGeneralWorks_DDC000", u"Computer Science, Information & General Works (DDC000)"),
-    (u"constructionOfBuildings_DDC690", u"Construction of Buildings (DDC690)"),
-    (u"culture", u"Culture"), (u"earthSciencesGeology_DDC550", u"Earth Sciences & Geology (DDC550)"),
-    (u"economics_DDC330", u"Economics (DDC330)"), (u"education_DDC370", u"Education (DDC370)"),
-    (u"energy", u"Energy"), (u"engineering_DDC620", u"Engineering (DDC620)"),
-    (u"environment", u"Environment"), (u"general", u"General"),
-    (u"geographyTravel_DDC910", u"Geography & Travel (DDC910)"),
-    (u"graphicArtsDecorativeArts_DDC740", u"Graphic Arts & Decorative Arts (DDC740)"),
-    (u"hardwareHouseholdAppliances_DDC683", u"Hardware & Household Appliances (DDC683)"),
-    (u"history_DDC900", u"History (DDC900)"),
-    (u"homeFamilyManagement_DDC640", u"Home & Family Management (DDC640)"),
-    (u"humanities", u"Humanities"), (u"industry", u"Industry"),
-    (u"language_DDC400", u"Language (DDC400)"), (u"law_DDC340", u"Law (DDC340)"),
-    (u"linguistics_DDC410", u"Linguistics (DDC410)"),
-    (u"literatureRhetoricCriticism_DDC800", u"Literature, Rhetoric & Criticism (DDC800)"),
-    (u"managementPublicRelations_DDC650", u"Management & Public Relations (DDC650)"),
-    (u"manufacturing_DDC670", u"Manufacturing (DDC670)"), (u"mathematics_DDC510", u"Mathematics (DDC510)"),
-    (u"medicineHealth_DDC610", u"Medicine & Health (DDC610)"), (u"music_DDC780", u"Music (DDC780)"),
-    (u"newsMediaJournalismPublishing_DDC070", u"News Media, Journalism & Publishing (DDC070)"),
-    (u"painting_DDC750", u"Painting (DDC750)"), (u"paleontology_DDC560", u"Paleontology (DDC560)"),
-    (u"philosophy_DDC100", u"Philosophy (DDC100)"),
-    (u"photographyComputerArtFilmVideo_DDC770", u"Photography, Computer Art, Film, Video (DDC770)"),
-    (u"physics_DDC530", u"Physics (DDC530)"), (u"plants_DDC580", u"Plants (DDC580)"),
-    (u"politicalScience_DDC320", u"Political Science (DDC320)"),
-    (u"psychology_DDC150", u"Psychology (DDC150)"),
-    (u"publicAdministration_DDC351", u"Public Administration (DDC351)"),
-    (u"religion_DDC200", u"Religion (DDC200)"), (u"science_DDC500", u"Science (DDC500)"),
-    (u"sculptureCeramicsMetalwork_DDC730", u"Sculpture, Ceramics, & Metalwork (DDC730)"),
-    (u"socialProblemsSocialServices_DDC360", u"Social Problems & Social Services (DDC360)"),
-    (u"socialSciences_DDC300", u"Social Sciences (DDC300)"),
-    (u"sociologyAnthropology_DDC301", u"Sociology & Anthropology (DDC301)"),
-    (u"sportsGamesEntertainment_DDC790", u"Sports, Games & Entertainment (DDC790)"),
-    (u"statistics_DDC310", u"Statistics (DDC310)"),
-    (u"technology_DDC600", u"Technology (DDC600)"),
-    (u"transportation_DDC388", u"Transportation (DDC388)"),
+    (u"POLITICS", u"POLITICS"),
+    (u"INTERNATIONAL RELATIONS", u"INTERNATIONAL RELATIONS"),
+    (u"EUROPEAN UNION", u"EUROPEAN UNION"),
+    (u"LAW", u"LAW"),
+    (u"ECONOMICS", u"ECONOMICS"),
+    (u"TRADE", u"TRADE"),
+    (u"FINANCE", u"FINANCE"),
+    (u"SOCIAL QUESTIONS", u"SOCIAL QUESTIONS"),
+    (u"EDUCATION AND COMMUNICATIONS", u"EDUCATION AND COMMUNICATIONS"),
+    (u"SCIENCE", u"SCIENCE"),
+    (u"BUSINESS AND COMPETITION", u"BUSINESS AND COMPETITION"),
+    (u"EMPLOYMENT AND WORKING CONDITIONS", u"EMPLOYMENT AND WORKING CONDITIONS"),
+    (u"TRANSPORT", u"TRANSPORT"),
+    (u"ENVIRONMENT", u"ENVIRONMENT"),
+    (u"AGRICULTURE, FORESTRY AND FISHERIES", u"AGRICULTURE, FORESTRY AND FISHERIES"),
+    (u"AGRI-FOODSTUFFS", u"AGRI-FOODSTUFFS"),
+    (u"PRODUCTION, TECHNOLOGY AND RESEARCH", u"PRODUCTION, TECHNOLOGY AND RESEARCH"),
+    (u"ENERGY", u"ENERGY"),
+    (u"INDUSTRY", u"INDUSTRY"),
+    (u"GEOGRAPHY", u"GEOGRAPHY"),
+    (u"INTERNATIONAL ORGANISATIONS", u"INTERNATIONAL ORGANISATIONS"),
 )
 
 DOMAININFOTYPE_CONFORMANCETOCLASSIFICATIONSCHEME_CHOICES = _make_choices_from_list([
@@ -1225,6 +1218,7 @@ class domainInfoType_model(SchemaModel):
     __schema_name__ = 'domainInfoType'
     __schema_fields__ = (
         ( u'domain', u'domain', REQUIRED ),
+        ( u'domainId', u'domainId', OPTIONAL ),
         ( u'sizePerDomain', u'sizePerDomain', OPTIONAL ),
         ( u'conformanceToClassificationScheme', u'conformanceToClassificationScheme', OPTIONAL ),
     )
@@ -1243,6 +1237,18 @@ class domainInfoType_model(SchemaModel):
         max_length=100,
         choices=sorted(DOMAININFOTYPE_DOMAIN_CHOICES,
                        key=lambda choice: choice[1].lower()), )
+
+    domainId = models.CharField(
+            verbose_name='Domain Identifier',
+            help_text='The identifier of the application domain of the '
+                      'resource or the tool/service, taken from the '
+                      'EUROVOC domains: '
+                      'http://eurovoc.europa.eu/drupal/?q=navigation&cl=en',
+            editable=False,
+            max_length=3,
+            null=True,
+            blank=True
+        )
 
     sizePerDomain = models.OneToOneField("sizeInfoType_model",
                                          verbose_name='Size per domain',
@@ -1285,59 +1291,25 @@ class domainInfoType_model(SchemaModel):
     # back_to_lexicalconceptualresourceimageinfotype_model = models.ForeignKey("lexicalConceptualResourceImageInfoType_model",  blank=True, null=True)
 
     def __unicode__(self):
-        _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
+        _unicode = u'{}, id: {}'.format(self.domain, self.domainId)
         return _unicode
 
-# ANNOTATIONINFOTYPE_ANNOTATIONTYPE_CHOICES = _make_choices_from_list([
-#   u'alignment', u'segmentation', u'structuralAnnotation',
-#   u'lemmatization', u'stemming', u'morphosyntacticAnnotation-posTagging',
-#   u'morphosyntacticAnnotation-bPosTagging', u'discourseAnnotation',
-#   u'discourseAnnotation-audienceReactions',
-#   u'discourseAnnotation-coreference',u'discourseAnnotation-dialogueActs',
-#   u'discourseAnnotation-discourseRelations',
-#
-#
-#   u'semanticAnnotation',u'semanticAnnotation-certaintyLevel',
-#   u'semanticAnnotation-emotions',u'semanticAnnotation-entityMentions',
-#   u'semanticAnnotation-events',u'semanticAnnotation-namedEntities',
-#   u'semanticAnnotation-polarity',
-#   u'semanticAnnotation-questionTopicalTarget',
-#   u'semanticAnnotation-semanticClasses',
-#   u'semanticAnnotation-semanticRelations',
-#   u'semanticAnnotation-semanticRoles',u'semanticAnnotation-speechActs',
-#   u'semanticAnnotation-temporalExpressions',
-#   u'semanticAnnotation-textualEntailment',u'semanticAnnotation-wordSenses',
-#   u'speechAnnotation-orthographicTranscription',
-#   # u'speechAnnotation-paralanguageAnnotation',
-#   # u'speechAnnotation-phoneticTranscription',
-#   # u'speechAnnotation-prosodicAnnotation',
-#   # u'speechAnnotation-soundEvents',
-#   # u'speechAnnotation-soundToTextAlignment',
-#   u'speechAnnotation-speakerIdentification',
-#   u'speechAnnotation-speakerTurns',
-#   u'speechAnnotation',
-#
-#   u'syntacticAnnotation-shallowParsing',
-#   u'syntacticAnnotation-subcategorizationFrames',
-#   u'syntacticAnnotation-treebanks',
-#   u'syntacticosemanticAnnotation-links',
-#   u'translation',u'transliteration',
-#   u'discourseAnnotation-dialogueActs',
-#   # u'modalityAnnotation-bodyMovements',
-#   # u'modalityAnnotation-facialExpressions',
-#   # u'modalityAnnotation-gazeEyeMovements',
-#   # u'modalityAnnotation-handArmGestures',
-#   # u'modalityAnnotation-handManipulationOfObjects',
-#   # u'modalityAnnotation-headMovements',u'modalityAnnotation-lipMovements',
-#   u'semanticAnnotation-emotions',u'other',
-# ])
+    def save(self, *args, **kwargs):
+        # automatically save the EUROVOC domain id
+        if self.domain:
+            try:
+                self.domainId = DOMAIN_CODE[self.domain]
+                self.conformanceToClassificationScheme = u'EUROVOC'
+            except KeyError:
+                self.domainId = "N/A"
+        # Call save() method from super class with all arguments.
+        super(domainInfoType_model, self).save(*args, **kwargs)
 
 ANNOTATIONINFOTYPE_ANNOTATIONTYPE_CHOICES = _make_choices_from_list([
     u'alignment', u'segmentation', u'structuralAnnotation',
     u'lemmatization', u'stemming', u'morphosyntacticAnnotation-posTagging',
     u'morphosyntacticAnnotation-bPosTagging', u'syntacticAnnotation-constituencyTrees',
-    u'syntacticAnnotation-dependencyTrees', u'syntacticAnnotation-shallowParsing',
-    u'syntacticAnnotation-subcategorizationFrames', u'syntacticAnnotation-treebanks',
+    u'syntacticAnnotation-dependencyTrees', u'syntacticAnnotation-subcategorizationFrames',
     u'syntacticosemanticAnnotation-links', u'semanticAnnotation',
     u'semanticAnnotation-namedEntities', u'semanticAnnotation-events',
     u'semanticAnnotation-temporalExpressions', u'semanticAnnotation-entityMentions',
@@ -1376,6 +1348,15 @@ ANNOTATIONINFOTYPE_CONFORMANCETOSTANDARDSBESTPRACTICES_CHOICES = _make_choices_f
 
 ANNOTATIONINFOTYPE_ANNOTATIONMODE_CHOICES = _make_choices_from_list([
     u'automatic', u'manual', u'mixed', u'interactive',
+])
+
+ANNOTATIONINFOTYPE_ANNOTATIONFORMAT_CHOICES = _make_choices_from_list([
+  u'application/pdf', u'text/csv', u'text/html', u'application/x-latex',
+  u'application/rdf+xml', u'application/rtf', u'text/sgml',
+  u'text/tab-separated-values', u'application/x-tex', u'text/plain',
+  u'application/xhtml+xml', u'application/xml', u'application/tei+xml',
+  u'application/x-msaccess', u'application/x-tmx+xml', u'application/x-xces+xml',
+  u'application/vnd.xmi+xml', u'other'
 ])
 
 # pylint: disable-msg=C0103
@@ -1461,7 +1442,10 @@ class annotationInfoType_model(SchemaModel):
         help_text='Specifies the format that is used in the annotation pro' \
                   'cess since often the mime type will not be sufficient for machine' \
                   ' processing',
-        blank=True, max_length=100, )
+        blank=True, max_length=100,
+        # mimetype values
+        # choices=ANNOTATIONINFOTYPE_ANNOTATIONFORMAT_CHOICES['choices'],
+    )
 
     tagset = XmlCharField(
         verbose_name='Tagset',
@@ -2979,7 +2963,7 @@ class distributionInfoType_model(SchemaModel):
         help_text='Whether the resource ' \
                   'can be used for purposes ' \
                   'other than those of the DGT',
-        default=True,
+        default=True
     )
 
     iprHolder = models.ManyToManyField("actorInfoType_model",
@@ -3021,25 +3005,19 @@ class distributionInfoType_model(SchemaModel):
         for licenceInfo in self.licenceinfotype_model_set.all():
             licences.append(licenceInfo.licence)
 
-        for l in licences:
-            if l.startswith(u"CC") or l == u"non-standard/Other_Licence/Terms":
-                self.allowsUsesBesidesDGT = True
+        # for l in licences:
+        #     if not self.allowsUsesBesidesDGT:
+        #         if l == u'underNegotiation':
+        #             self.allowsUsesBesidesDGT = False
+        #
+        #         else:
+        #             self.allowsUsesBesidesDGT = True
+            # if l.startswith(u"CC") or l == u"non-standard/Other_Licence/Terms":
+            #     self.allowsUsesBesidesDGT = True
+
 
         if u'underNegotiation' in licences:
             self.availability = u'underNegotiation'
-        # elif bool(set(licences) & set([u'ODC-BY', u'PSI-licence_Ireland', u'ODbL', u'CC-BY',
-        #                                u'CC-BY-NC', u'CC-BY-NC-ND', u'CC-BY-NC-SA', u'CC-BY-ND', u'CC-BY-SA',
-        #                                u'FreeOpenDataLicence_Belgium', u'OpenDataLicenceAtAFairCost_Belgium',
-        #                                u'FreeOpenDataLicenceForNon-CommercialRe-use_Belgium',
-        #                                u'OpenDataLicenceAtAFairCostForCommercialRe-use_Belgium',
-        #                                u'NLSOpenDataLicence_Finland', u'LicenceOuverte-OpenLicence_France',
-        #                                u'DL-DE-BY_Germany', u'IODL_Italy', u'NLOD_Norway', u'IGCYL-NC_Spain',
-        #                                u'ColorIURIS_Spain', u'OGL_UK', u'NCGL_UK', u'openForReuseWithRestrictions',
-        #                                u'non-standard/Other_Licence/Terms',
-        #                                # u'proprietary', u'other',
-        #                                ])):
-        #     self.availability = u'available-restrictedUse'
-
         else:
             self.availability = u'available'
 
@@ -3816,11 +3794,12 @@ class languageInfoType_model(SchemaModel):
         max_length=100,
         editable=False,)
 
-    sizePerLanguage = models.OneToOneField("sizeInfoType_model",
-                                           verbose_name='Size per language',
-                                           help_text='Provides information on the size per language component' \
-                                                     '',
-                                           blank=True, null=True, on_delete=models.SET_NULL, )
+    sizePerLanguage = models.ManyToManyField("sizeInfoType_model",
+            verbose_name='Size per language',
+            help_text='Provides information on the size per language component',
+            blank=True, null=True, related_name="sizePerLanguage_%(class)s_related", )
+
+
 
     languageVarietyInfo = models.ManyToManyField("languageVarietyInfoType_model",
                                                  verbose_name='Language variety',
@@ -3871,106 +3850,106 @@ class languageInfoType_model(SchemaModel):
         return self.unicode_(formatstring, formatargs)
 
 
-# PROJECTINFOTYPE_FUNDINGTYPE_CHOICES = _make_choices_from_list([
-#   u'other', u'ownFunds', u'nationalFunds', u'euFunds',
-# ])
+PROJECTINFOTYPE_FUNDINGTYPE_CHOICES = _make_choices_from_list([
+  u'other', u'ownFunds', u'nationalFunds', u'euFunds',
+])
 
 # pylint: disable-msg=C0103
-# class projectInfoType_model(SchemaModel):
-#     """
-#     Groups information on a project related to the resource(e.g. a
-#     project the resource has been used in; a funded project that led
-#     to the resource creation etc.)
-#     """
-#
-#     class Meta:
-#         verbose_name = "Project"
-#
-#
-#     __schema_name__ = 'projectInfoType'
-#     __schema_fields__ = (
-#       ( u'projectName', u'projectName', REQUIRED ),
-#       ( u'projectShortName', u'projectShortName', OPTIONAL ),
-#       ( u'projectID', u'projectID', OPTIONAL ),
-#       ( u'url', u'url', OPTIONAL ),
-#       ( u'fundingType', u'fundingType', REQUIRED ),
-#       ( u'funder', u'funder', RECOMMENDED ),
-#       ( u'fundingCountry', u'fundingCountry', RECOMMENDED ),
-#       ( u'projectStartDate', u'projectStartDate', OPTIONAL ),
-#       ( u'projectEndDate', u'projectEndDate', OPTIONAL ),
-#     )
-#
-#     projectName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
-#       default_retriever=best_lang_value_retriever,
-#       verbose_name='Project name',
-#       max_val_length=500,
-#       help_text='The full name of a project related to the resource',
-#       )
-#
-#     projectShortName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
-#       default_retriever=best_lang_value_retriever,
-#       verbose_name='Project short name',
-#       max_val_length=500,
-#       help_text='A short name or abbreviation of a project related to th' \
-#       'e resource',
-#       blank=True)
-#
-#     projectID = XmlCharField(
-#       verbose_name='Project id',
-#       help_text='An unambiguous referent to a project related to the res' \
-#       'ource',
-#       blank=True, max_length=100, )
-#
-#     url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=19, max_length=1000),
-#       verbose_name='Url', validators=[HTTPURI_VALIDATOR],
-#       help_text='A URL used as homepage of an entity (e.g. of a person, ' \
-#       'organization, resource etc.) and/or where an entity (e.g.LR, docu' \
-#       'ment etc.) is located',
-#       blank=True, )
-#
-#     fundingType = MultiSelectField(
-#       verbose_name='Funding type',
-#       help_text='Specifies the type of funding of the project',
-#
-#       max_length=1 + len(PROJECTINFOTYPE_FUNDINGTYPE_CHOICES['choices']) / 4,
-#       choices=PROJECTINFOTYPE_FUNDINGTYPE_CHOICES['choices'],
-#       )
-#
-#     funder = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=20, max_length=100),
-#       verbose_name='Funder',
-#       help_text='The full name of the funder of the project',
-#       blank=True, validators=[validate_matches_xml_char_production], )
-#
-#     fundingCountry = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=21, max_length=100),
-#       verbose_name='Funding country',
-#       help_text='The name of the funding country, in case of national fu' \
-#       'nding as mentioned in ISO3166',
-#       blank=True, validators=[validate_matches_xml_char_production], )
-#
-#     projectStartDate = models.DateField(
-#       verbose_name='Project start date',
-#       help_text='The starting date of a project related to the resource',
-#       blank=True, null=True, )
-#
-#     projectEndDate = models.DateField(
-#       verbose_name='Project end date',
-#       help_text='The end date of a project related to the resources',
-#       blank=True, null=True, )
-#
-#
-#     source_url = models.URLField(verify_exists=False,
-#       default=DJANGO_URL,
-#       help_text="(Read-only) base URL for the server where the master copy of " \
-#       "the associated entity instance is located.")
-#
-#     copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
-#         help_text="Generalized copy status flag for this entity instance.")
-#
-#     def real_unicode_(self):
-#         # pylint: disable-msg=C0301
-#         formatargs = ['projectName', 'projectShortName', ]
-#         formatstring = u'{} ({})'
-#         return self.unicode_(formatstring, formatargs)
+class projectInfoType_model(SchemaModel):
+    """
+    Groups information on a project related to the resource(e.g. a
+    project the resource has been used in; a funded project that led
+    to the resource creation etc.)
+    """
+
+    class Meta:
+        verbose_name = "Project"
+
+
+    __schema_name__ = 'projectInfoType'
+    __schema_fields__ = (
+      ( u'projectName', u'projectName', REQUIRED ),
+      ( u'projectShortName', u'projectShortName', OPTIONAL ),
+      ( u'projectID', u'projectID', OPTIONAL ),
+      ( u'url', u'url', OPTIONAL ),
+      ( u'fundingType', u'fundingType', REQUIRED ),
+      ( u'funder', u'funder', RECOMMENDED ),
+      ( u'fundingCountry', u'fundingCountry', RECOMMENDED ),
+      ( u'projectStartDate', u'projectStartDate', OPTIONAL ),
+      ( u'projectEndDate', u'projectEndDate', OPTIONAL ),
+    )
+
+    projectName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
+      default_retriever=best_lang_value_retriever,
+      verbose_name='Project name',
+      max_val_length=500,
+      help_text='The full name of a project related to the resource',
+      )
+
+    projectShortName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
+      default_retriever=best_lang_value_retriever,
+      verbose_name='Project short name',
+      max_val_length=500,
+      help_text='A short name or abbreviation of a project related to th' \
+      'e resource',
+      blank=True)
+
+    projectID = XmlCharField(
+      verbose_name='Project id',
+      help_text='An unambiguous referent to a project related to the res' \
+      'ource',
+      blank=True, max_length=100, )
+
+    url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=19, max_length=1000),
+      verbose_name='Url', validators=[HTTPURI_VALIDATOR],
+      help_text='A URL used as homepage of an entity (e.g. of a person, ' \
+      'organization, resource etc.) and/or where an entity (e.g.LR, docu' \
+      'ment etc.) is located',
+      blank=True, )
+
+    fundingType = MultiSelectField(
+      verbose_name='Funding type',
+      help_text='Specifies the type of funding of the project',
+
+      max_length=1 + len(PROJECTINFOTYPE_FUNDINGTYPE_CHOICES['choices']) / 4,
+      choices=PROJECTINFOTYPE_FUNDINGTYPE_CHOICES['choices'],
+      )
+
+    funder = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=20, max_length=100),
+      verbose_name='Funder',
+      help_text='The full name of the funder of the project',
+      blank=True, validators=[validate_matches_xml_char_production], )
+
+    fundingCountry = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=21, max_length=100),
+      verbose_name='Funding country',
+      help_text='The name of the funding country, in case of national fu' \
+      'nding as mentioned in ISO3166',
+      blank=True, validators=[validate_matches_xml_char_production], )
+
+    projectStartDate = models.DateField(
+      verbose_name='Project start date',
+      help_text='The starting date of a project related to the resource',
+      blank=True, null=True, )
+
+    projectEndDate = models.DateField(
+      verbose_name='Project end date',
+      help_text='The end date of a project related to the resources',
+      blank=True, null=True, )
+
+
+    source_url = models.URLField(verify_exists=False,
+      default=DJANGO_URL,
+      help_text="(Read-only) base URL for the server where the master copy of " \
+      "the associated entity instance is located.")
+
+    copy_status = models.CharField(default=MASTER, max_length=1, choices=COPY_CHOICES,
+        help_text="Generalized copy status flag for this entity instance.")
+
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['projectName', 'projectShortName', ]
+        formatstring = u'{} ({})'
+        return self.unicode_(formatstring, formatargs)
 
 # pylint: disable-msg=C0103
 # class usageInfoType_model(SchemaModel):
@@ -4224,16 +4203,15 @@ class projectListType_model(SchemaModel):
 
 
     __schema_name__ = 'projectListType'
-    # mdel ??
-    # __schema_fields__ = (
-    #   ( u'projectInfo', u'projectInfo', REQUIRED ),
-    # )
-    # __schema_classes__ = {
-    #   u'projectInfo': "projectInfoType_model",
-    # }
+    __schema_fields__ = (
+      ( u'projectInfo', u'projectInfo', REQUIRED ),
+    )
+    __schema_classes__ = {
+      u'projectInfo': "projectInfoType_model",
+    }
 
-    # projectInfo = models.ManyToManyField("projectInfoType_model",
-    #   verbose_name='Project', related_name="projectInfo_%(class)s_related", )
+    projectInfo = models.ManyToManyField("projectInfoType_model",
+      verbose_name='Project', related_name="projectInfo_%(class)s_related", )
 
     def __unicode__(self):
         _unicode = u'<{} id="{}">'.format(self.__schema_name__, self.id)
@@ -4833,18 +4811,18 @@ class corpusTextInfoType_model(SchemaModel):
         ( u'sizeInfo', u'sizeinfotype_model_set', REQUIRED ),
         ( u'textFormatInfo', u'textformatinfotype_model_set', REQUIRED ),
         ( u'characterEncodingInfo', u'characterencodinginfotype_model_set', RECOMMENDED ),
+        ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
         ( u'domainInfo', u'domaininfotype_model_set', RECOMMENDED ),
         ( u'textClassificationInfo', u'textclassificationinfotype_model_set', RECOMMENDED ),
-        ( u'annotationInfo', u'annotationinfotype_model_set', RECOMMENDED ),
         # ( u'timeCoverageInfo', u'timecoverageinfotype_model_set', RECOMMENDED ),
         # ( u'geographicCoverageInfo', u'geographiccoverageinfotype_model_set', RECOMMENDED ),
-        # ( u'creationInfo', u'creationInfo', RECOMMENDED ),
+        ( u'creationInfo', u'creationInfo', RECOMMENDED ),
         # ( u'linkToOtherMediaInfo', u'linktoothermediainfotype_model_set', OPTIONAL ),
     )
     __schema_classes__ = {
         u'annotationInfo': "annotationInfoType_model",
         u'characterEncodingInfo': "characterEncodingInfoType_model",
-        # u'creationInfo': "creationInfoType_model",
+        u'creationInfo': "creationInfoType_model",
         u'domainInfo': "domainInfoType_model",
         # u'geographicCoverageInfo': "geographicCoverageInfoType_model",
         u'languageInfo': "languageInfoType_model",
@@ -4893,13 +4871,13 @@ class corpusTextInfoType_model(SchemaModel):
 
     # OneToMany field: geographicCoverageInfo
 
-    # creationInfo = models.OneToOneField("creationInfoType_model",
-    #   verbose_name='Creation',
-    #   help_text='Groups together information on the resource creation (e' \
-    #   '.g. for corpora, selection of texts/audio files/ video files etc.' \
-    #   ' and structural encoding thereof; for lexica, construction of lem' \
-    #   'ma list etc.)',
-    #   blank=True, null=True, on_delete=models.SET_NULL, )
+    creationInfo = models.OneToOneField("creationInfoType_model",
+      verbose_name='Creation',
+      help_text='Groups together information on the resource creation (e' \
+      '.g. for corpora, selection of texts/audio files/ video files etc.' \
+      ' and structural encoding thereof; for lexica, construction of lem' \
+      'ma list etc.)',
+      blank=True, null=True, on_delete=models.SET_NULL, )
 
     # OneToMany field: linkToOtherMediaInfo
 
@@ -8470,3 +8448,59 @@ class documentUnstructuredString_model(InvisibleStringModel, documentationInfoTy
             # pylint: disable-msg=W0201
             self.id = _compute_documentationInfoType_key()
         super(documentUnstructuredString_model, self).save(*args, **kwargs)
+
+
+class LrQuality(models.Model):
+
+    class Meta:
+        verbose_name = "LR Quality"
+        verbose_name_plural = "LR Qualities"
+
+    # Add a foreign key to resourceInfoType_model
+
+    # source_quality
+    source_creator = models.CharField(max_length=1000, null=True)
+    creation_time = models.DateTimeField(null=True)
+    source_document_format = models.CharField(max_length=1000, null=True)
+
+    #translation_quality: OneToMany
+
+    # technical_quality
+    segmentation_quality = models.CharField(max_length=1000, null=True)
+    alignment_quality = models.CharField(max_length=1000, null=True)
+    annotation = models.CharField(max_length=1000, null=True)
+
+    # volume
+    total = models.IntegerField(null=True)
+    quality = models.IntegerField(null=True)
+
+    # focus
+    domain = models.CharField(max_length=1000, null=True)
+
+    # legal_readiness
+    ipr_cleared = models.NullBooleanField()
+    anonymization_required = models.NullBooleanField()
+
+    # def real_unicode_(self):
+    #     # pylint: disable-msg=C0301
+    #     formatargs = ['resource',]
+    #     formatstring = u'{}'
+    #     return self.unicode_(formatstring, formatargs)
+
+
+class TranslationQuality(models.Model):
+    class Meta:
+        verbose_name = "Translation Quality"
+        verbose_name_plural = "Translation Qualities"
+
+    language = models.CharField(max_length=100,)
+    source = models.CharField(max_length=1000)
+    document_format = models.CharField(max_length=1000)
+    #text_quality
+    parent_quality = models.ForeignKey("LrQuality", blank=True, null=True, editable=False)
+
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['language',]
+        formatstring = u'{} {}'
+        return self.unicode_(formatstring, formatargs)
