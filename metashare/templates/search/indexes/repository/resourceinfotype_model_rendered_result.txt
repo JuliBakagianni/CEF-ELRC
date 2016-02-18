@@ -25,9 +25,9 @@
 </ul>
 <ul>
    {% for l in object.distributionInfo.licenceinfotype_model_set.all %}
-    <li class="licence">{{ l.licence|licence_icon|safe }}{% for c in l.restrictionsOfUse %}{{ c|condition_icon|safe }}{% endfor %}</li>
+    <li class="licence">{{ l.licence|licence_icon|safe }}</li>
    {% endfor %}
 </ul>
-
+{# {% for c in l.restrictionsOfUse %}{{ c|condition_icon|safe }}{% endfor %} #}
 </div>
 {% endspaceless %}
