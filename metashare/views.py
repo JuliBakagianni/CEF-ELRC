@@ -21,7 +21,7 @@ def frontpage(request):
     lr_count = resourceInfoType_model.objects.filter(
         storage_object__publication_status=PUBLISHED,
         storage_object__deleted=False).count()
-    dictionary = {'title': 'Welcome to ELRC META-SHARE!', 'resources': lr_count}
+    dictionary = {'title': 'Welcome to ELRC-SHARE!', 'resources': lr_count}
     return render_to_response('frontpage.html', dictionary,
       context_instance=RequestContext(request))
 
