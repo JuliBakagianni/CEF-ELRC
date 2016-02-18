@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.db.models import Q
 from django.http import Http404, HttpResponseRedirect, HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect, render
 from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_unicode
@@ -18,10 +18,11 @@ from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _, ungettext
 from django.views.decorators.csrf import csrf_protect
-from django.contrib.admin.views.decorators import staff_member_required
+# from django.contrib.admin.views.decorators import staff_member_required
 
 from metashare import settings
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
+from metashare.repository.models import LrQuality, TranslationQuality
 from metashare.repository.editor.editorutils import FilteredChangeList
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
@@ -29,14 +30,14 @@ from metashare.repository.editor.inlines import ReverseInlineFormSet, \
 # from metashare.repository.editor.lookups import MembershipDummyLookup
 from metashare.repository.editor.schemamodel_mixin import encode_as_inline
 from metashare.repository.editor.superadmin import SchemaModelAdmin
-from metashare.repository.editor.widgets import OneToManyWidget
+# from metashare.repository.editor.widgets import OneToManyWidget
 from metashare.repository.models import resourceComponentTypeType_model, \
     corpusInfoType_model, languageDescriptionInfoType_model, \
     lexicalConceptualResourceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
-    licenceInfoType_model, User, personInfoType_model, communicationInfoType_model
-# toolServiceInfoType_model,
+    licenceInfoType_model, User
+
 from metashare.repository.supermodel import SchemaModel
 # from metashare.repository.views import MAXIMUM_READ_BLOCK_SIZE
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, DELETE_STAT
@@ -700,18 +701,21 @@ class ResourceModelAdmin(SchemaModelAdmin):
         info = self.model._meta.app_label, self.model._meta.module_name
         
         urlpatterns = patterns('',
-            url(r'^(.+)/upload-data/$',
-                wrap(self.uploaddata_view),
-                name='%s_%s_uploaddata' % info),
-            url(r'^(.+)/datadl/$',
-                wrap(self.datadl),
-                name='%s_%s_datadl' % info),
-           url(r'^my/$',
-                wrap(self.changelist_view_filtered),
-                name='%s_%s_myresources' % info),
-            url(r'^(.+)/export-xml/$',
-                wrap(self.exportxml),
-                name='%s_%s_exportxml' % info),
+                               url(r'^(.+)/upload-data/$',
+                                   wrap(self.uploaddata_view),
+                                   name='%s_%s_uploaddata' % info),
+                               url(r'^(.+)/datadl/$',
+                                   wrap(self.datadl),
+                                   name='%s_%s_datadl' % info),
+                               url(r'^(.+)/lrquality/$',
+                                   wrap(self.lrquality),
+                                   name='%s_%s_lrquality' % info),
+                               url(r'^my/$',
+                                   wrap(self.changelist_view_filtered),
+                                   name='%s_%s_myresources' % info),
+                               url(r'^(.+)/export-xml/$',
+                                   wrap(self.exportxml),
+                                   name='%s_%s_exportxml' % info),
         ) + urlpatterns
         return urlpatterns
 
@@ -836,6 +840,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         return render_to_response(
           ['admin/repository/resourceinfotype_model/upload_resource.html'], context,
           context_instance)
+
 
     @csrf_protect_m
     def datadl(self, request, object_id, extra_context=None):
@@ -1094,10 +1099,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
         #     if not 'myresources' in request.POST:
         #         del result['add_group']
         #         del result['add_owner']
-        if request.user.is_staff:
-            del result['remove_group']
+        del result['remove_group']
+        del result['add_group']
+        if not request.user.is_superuser:
             del result['remove_owner']
-            del result['add_group']
             del result['add_owner']
             # only users with delete permissions can see the delete action:
             if not self.has_delete_permission(request):
@@ -1109,7 +1114,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
             #         .count() == 0:
             #     for action in (self.publish_action, self.unpublish_action,):
             #         del result[action.__name__]
-            if not request.user.is_superuser:
+            if not request.user.is_staff:
                 for action in (self.publish_action, self.unpublish_action,):
                     del result[action.__name__]
         return result
@@ -1264,18 +1269,18 @@ class ResourceModelAdmin(SchemaModelAdmin):
         # Automatically add metadataCreator.
         # If the person exists, use that person, else create a new person object
         # from request user values.
-        try:
-            comm = communicationInfoType_model.objects.filter(email = [request.user.email])[0]
-        except IndexError:
-            comm = communicationInfoType_model.objects.create(email = [request.user.email])
-        try:
-            person = personInfoType_model.objects.filter(surname = {'en':request.user.last_name},
-                givenName = {'en':request.user.first_name}, communicationInfo = comm)[0]
-        except IndexError:
-            person = personInfoType_model.objects.create(surname = {'en':request.user.last_name},
-                givenName = {'en':request.user.first_name}, communicationInfo = comm)
-
-        obj.metadataInfo.metadataCreator.add(person)
+        # try:
+        #     comm = communicationInfoType_model.objects.filter(email = [request.user.email])[0]
+        # except IndexError:
+        #     comm = communicationInfoType_model.objects.create(email = [request.user.email])
+        # try:
+        #     person = personInfoType_model.objects.filter(surname = {'en':request.user.last_name},
+        #         givenName = {'en':request.user.first_name}, communicationInfo = comm)[0]
+        # except IndexError:
+        #     person = personInfoType_model.objects.create(surname = {'en':request.user.last_name},
+        #         givenName = {'en':request.user.first_name}, communicationInfo = comm)
+        #
+        # obj.metadataInfo.metadataCreator.add(person)
 
         super(ResourceModelAdmin, self).save_model(request, obj, form, change)
         # update statistics
@@ -1296,6 +1301,44 @@ class ResourceModelAdmin(SchemaModelAdmin):
         _structures = self.get_hidden_structures(request, object_id)
         _extra_context.update(_structures)
         return super(ResourceModelAdmin, self).change_view(request, object_id, _extra_context)
+
+    @csrf_protect_m
+    def lrquality(self, request, object_id):
+        model = self.model
+        opts = model._meta
+        obj = self.get_object(request, unquote(object_id))
+        if not obj.lr_quality:
+            obj.lr_quality = LrQuality.objects.create()
+        corpus_media = obj.resourceComponentType.as_subclass()
+        result = []
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            for corpus_info in media_type.corpustextinfotype_model_set.all():
+                for language_info in corpus_info.languageinfotype_model_set.all():
+                    result.append(language_info.get_languageName_display())
+        elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+            lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
+
+            if lcr_media_type.lexicalConceptualResourceTextInfo:
+                for language_info in lcr_media_type \
+                        .lexicalConceptualResourceTextInfo \
+                        .languageinfotype_model_set.all():
+                    result.append(language_info.get_languageName_display())
+
+        elif isinstance(corpus_media, languageDescriptionInfoType_model):
+            ld_media_type = corpus_media.languageDescriptionMediaType
+            if ld_media_type.languageDescriptionTextInfo:
+                for language_info in ld_media_type \
+                        .languageDescriptionTextInfo.languageinfotype_model_set.all():
+                    result.append(language_info.get_languageName_display())
+
+        for r in result:
+            if not TranslationQuality.objects.filter \
+                            (parent_quality=obj.lr_quality, language=r).exists():
+                TranslationQuality.objects.create(parent_quality=obj.lr_quality,
+                language = r)
+        return result
+
 
 class LicenceForm(forms.ModelForm):
     class Meta:
