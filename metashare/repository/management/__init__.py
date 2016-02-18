@@ -7,9 +7,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from metashare.utils import get_class_by_name
 from metashare.repository.models import organizationInfoType_model, \
     targetResourceInfoType_model, personInfoType_model, \
-    documentInfoType_model, documentationInfoType_model, actorInfoType_model
+    documentInfoType_model, documentationInfoType_model, actorInfoType_model, \
+    projectInfoType_model
 
-# projectInfoType_model,
+
 
 GROUP_GLOBAL_EDITORS = 'globaleditors'
 
@@ -50,8 +51,8 @@ def setup_group_global_editors(app, created_models, verbosity, **kwargs):
                             documentInfoType_model,
                             personInfoType_model,
                             targetResourceInfoType_model,
-                            organizationInfoType_model)
-                            # projectInfoType_model)
+                            organizationInfoType_model,
+                            projectInfoType_model)
 
     def get_optional_modelnames():
         optionals = set()
