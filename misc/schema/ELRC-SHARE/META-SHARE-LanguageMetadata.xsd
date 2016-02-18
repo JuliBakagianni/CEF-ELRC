@@ -274,7 +274,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="sizePerLanguage" type="ms:sizeInfoType" minOccurs="0">
+			<xs:element name="sizePerLanguage" type="ms:sizeInfoType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Provides information on the size per language component</xs:documentation>
 					<xs:appinfo>

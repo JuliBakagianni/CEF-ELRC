@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End user (free.org) -->
 <!-- edited by ILSP/Athena R.C. -->
 <xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xerces="http://xerces.apache.org" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en" vc:minVersion="1.1">
 	<xs:include schemaLocation="META-SHARE-SimpleTypes.xsd"/>
@@ -16,8 +15,7 @@
 		<xs:sequence>
 			<xs:element name="availability">
 				<xs:annotation>
-					<xs:documentation>Specifies the availability status of the resource; restrictionsOfUse can be further used to indicate the specific terms of availability
-                    </xs:documentation>
+					<xs:documentation>Specifies the availability status of the resource; restrictionsOfUse can be further used to indicate the specific terms of availability</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
 					</xs:appinfo>
@@ -32,8 +30,7 @@
 						</xs:enumeration>
 						<xs:enumeration value="underNegotiation">
 							<xs:annotation>
-								<xs:documentation>for resources that their availability is still pending
-                                </xs:documentation>
+								<xs:documentation>for resources that their availability is still pending</xs:documentation>
 							</xs:annotation>
 						</xs:enumeration>
 						<!--
@@ -48,8 +45,7 @@
 			</xs:element>
 			<xs:element ref="ms:licenceInfo" minOccurs="1" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Groups information on different forms of distribution of the resource and the corresponding licences under which they are distributed; can be repeated to allow for different modes of access and conditions of use (e.g. free for academic use, on-a-fee basis for commercial use, download of a sample for free use etc.)
-                    </xs:documentation>
+					<xs:documentation>Groups information on different forms of distribution of the resource and the corresponding licences under which they are distributed; can be repeated to allow for different modes of access and conditions of use (e.g. free for academic use, on-a-fee basis for commercial use, download of a sample for free use etc.)</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-many</relation>
 					</xs:appinfo>
@@ -77,10 +73,7 @@
 	</xs:complexType>
 	<xs:complexType name="membershipInfoType">
 		<xs:annotation>
-			<xs:documentation>The conditions imposed by the user being member of some association/institution (e.g.,
-                ELRA, LDC) distributing the resource. This indicates the availability conditions (and prices) for users
-                who are members or not.
-            </xs:documentation>
+			<xs:documentation>The conditions imposed by the user being member of some association/institution (e.g., ELRA, LDC) distributing the resource. This indicates the availability conditions (and prices) for users who are members or not.</xs:documentation>
 			<xs:appinfo>
 				<render-short>member:{member} {membershipInstitution}</render-short>
 			</xs:appinfo>
@@ -96,9 +89,7 @@
 			</xs:element>
 			<xs:element name="membershipInstitution" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>This lists the different institutions releasing the resources and establishing
-                        membership conditions
-                    </xs:documentation>
+					<xs:documentation>This lists the different institutions releasing the resources and establishing membership conditions</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-many</relation>
 					</xs:appinfo>
@@ -117,10 +108,7 @@
 	</xs:complexType>
 	<xs:complexType name="licenceInfoType">
 		<xs:annotation>
-			<xs:documentation>Groups information on licences for the resource; can be repeated to allow for different
-                modes of access and restrictions of use (e.g. free for academic use, on-a-fee basis for commercial use,
-                download of a sample for free use etc.)
-            </xs:documentation>
+			<xs:documentation>Groups information on licences for the resource; can be repeated to allow for different modes of access and restrictions of use (e.g. free for academic use, on-a-fee basis for commercial use, download of a sample for free use etc.)</xs:documentation>
 			<xs:appinfo>
 				<render-short>{licence}</render-short>
 			</xs:appinfo>
@@ -316,8 +304,7 @@
 			</xs:element>
 			<xs:element name="fee" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Specifies the costs that are required to access the resource, a fragment of the resource or to use a tool or service
-                    </xs:documentation>
+					<xs:documentation>Specifies the costs that are required to access the resource, a fragment of the resource or to use a tool or service</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
 					</xs:appinfo>
@@ -330,8 +317,7 @@
 			</xs:element>
 			<xs:element name="attributionText" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>The text that must be quoted for attribution purposes when using a resource - for cases where a resource is provided with a request for attribution
-                    </xs:documentation>
+					<xs:documentation>The text that must be quoted for attribution purposes when using a resource - for cases where a resource is provided with a request for attribution; you can use a standard text such as "Resource X by Resource Creator Y used under licence Z"</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-many</relation>
 					</xs:appinfo>
@@ -369,10 +355,8 @@
 	</xs:element>
 	<xs:element name="licenceInfo">
 		<xs:annotation>
-			<xs:documentation>Groups information on licences for the resource; can be repeated to allow for different
-                modes of access and conditions of use (e.g. free for academic use, on-a-fee basis for commercial use,
-                download of a sample for free use etc.)
-            </xs:documentation>
+			<xs:documentation>Groups information on licences for the resource; can be repeated to allow for different modes of access and conditions of use (e.g. free for academic use, on-a-fee basis for commercial use,
+                download of a sample for free use etc.)</xs:documentation>
 			<xs:appinfo>
 				<relation>one-to-one</relation>
 			</xs:appinfo>

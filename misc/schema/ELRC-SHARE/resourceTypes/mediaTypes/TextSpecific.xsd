@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2011 sp1 (http://www.altova.com) by End user (free.org) -->
 <!-- edited by ILSP/Athena R.C. -->
 <xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en">
 	<xs:include schemaLocation="../../META-SHARE-SimpleTypes.xsd"/>
@@ -54,7 +53,7 @@
 		<xs:annotation>
 			<xs:documentation>Genre: The conventionalized discourse or text types of the content of the resource, based on extra-linguistic and internal linguistic criteria; please, select one of the predefined values (taken from the PAROLE text genre list) as it increases the interoperability between resources and processing tools and services; if none fits the contents of your resource, you can add your own value</xs:documentation>
 			<xs:appinfo>
-				<label>Text type</label>
+				<label>Text genre</label>
 			</xs:appinfo>
 		</xs:annotation>
 		<xs:simpleType>

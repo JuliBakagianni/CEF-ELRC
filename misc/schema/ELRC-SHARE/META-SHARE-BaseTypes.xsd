@@ -71,7 +71,7 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="metaShareId">
+			<xs:element name="metaShareId" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>An unambiguous referent to the resource within META-SHARE; it reflects to the unique system id provided automatically by the MetaShare software</xs:documentation>
 				</xs:annotation>
