@@ -1192,8 +1192,9 @@ def manage_contributed_data(request):
 
 @staff_member_required
 def addtodb(request):
-
-    # get the list of maintainers
+    recipients=[]
+    total_res= 0
+    # get the list of maintainers from the dat file
     maintainers = {}
     with open('{}/maintainers.dat'.format(WEB_FORM_STORAGE)) as f:
         for line in f:
@@ -1212,54 +1213,73 @@ def addtodb(request):
     # we will create descriptions only for those resources that have a
     # resource type specified
     valid={}
-    email_countries = {}
+    recipients_resources = {}
     for key, value in dictionary.items():
         if dictionary[key] != "":
             valid[key]= dictionary[key]
     for file, type in valid.iteritems():
         d = create_description(file, type, request.user)
-        maintainer = User.objects.get(username=maintainers[d[2]])
-        maintainer_email = maintainer.email
-        d[0].owners.add(maintainer.id)
-        d[0].contactPerson.add(d[1])
-        if not d[2] in email_countries.keys():
-            email_countries[d[2]] = 1
+        # d[0]: resource, d[1]:person, d[2]: country
+
+        res_maintainers = maintainers[d[2]].split(",")
+        users = []
+        for rm in res_maintainers:
+            rm_user = User.objects.get(username=rm)
+            users.append(rm_user)
+            d[0].owners.add(rm_user.id)
+            d[0].contactPerson.add(d[1])
+            info = "\nContact Details:\n" \
+                   "First Name: {}\n" \
+                   "Last Name: {}\n" \
+                   "Email: {}\n" \
+                   "Tel No: {}\n" \
+                   "Organization: {}".format\
+                    (d[1].givenName,d[1].surname,d[1].communicationInfo.email,
+                     d[1].communicationInfo.telephoneNumber, d[1].affiliation)
+
+            if not rm_user.first_name+" "+rm_user.last_name in recipients:
+                recipients.append(rm_user.first_name+" "+rm_user.last_name)
+
+        if not recipients_resources.has_key(maintainers[d[2]]):
+            recipients_resources[maintainers[d[2]]] = {"count" : 1}
+            recipients_resources[maintainers[d[2]]]["email"] = [rm.email for rm in users]
         else:
-            email_countries[d[2]] += 1
-        # send emails. Aggregate by country and send one email for each one
+            recipients_resources[maintainers[d[2]]]["count"] += 1
 
-    for country in email_countries.iterkeys():
-        if email_countries[country] > 0:
-            if email_countries[country] > 1:
-                title = "{} new resources from donors".format(email_countries[country])
-                text = "You have received {} new resources from donors. " \
-                          "Please check your CEF-ELRC repository account".format(email_countries[country])
+        total_res += 1
+
+    for recipient in recipients_resources.iterkeys():
+        if recipients_resources[recipient]["count"] > 0:
+            if recipients_resources[recipient]["count"] > 1:
+                title = "{} new resources from contributors".format(recipients_resources[recipient]["count"])
+                text = "You have received {} new resources from contributors. " \
+                          "Please check your CEF-ELRC repository account.".format(recipients_resources[recipient]["count"])
             else:
-                title = "1 new resource from donors"
-                text = "You have received 1 new resource from donors. " \
+                title = "1 new resource from contributors"
+                text = "You have received 1 new resource from contributors. " \
                           "Please check your CEF-ELRC repository account"
-            if country == d[2]:
-                try:
-                    send_mail(title, text, \
-                        'no-reply@meta-share.eu', [maintainer_email], fail_silently=False)
-                except:
-                    if email_countries[country] > 1:
-                        msg = '{} resources have been successfully imported into the database. '.format(email_countries[country])
-                    else:
-                        msg = '1 resource has been successfully imported into the database. '
-                    messages.error(request, msg+'However, there was a problem sending email to the maintainers')
-                    return redirect(manage_contributed_data)
 
-            if email_countries[country] > 1:
-                msg = '{} resources have been successfully imported into the database.' \
-                      'A notification has been sent to the following users:\n ' \
-                      '{} ({})'.format(email_countries[country], maintainers[d[2]], maintainer_email)
-                messages.success(request, msg)
-            else:
-                msg = '1 resource has been successfully imported into the database. ' \
-                      'A notification has been sent to the following users:\n ' \
-                      '{} ({})'.format(maintainers[d[2]], maintainer_email)
-                messages.success(request, msg)
+            try:
+                send_mail(title, text, \
+                        'no-reply@meta-share.eu', recipients_resources[recipient]["email"], fail_silently=False)
+            except:
+                if total_res > 1:
+                    msg = '{} resources have been successfully imported into the database. '.format(total_res)
+                else:
+                    msg = '1 resource has been successfully imported into the database. '
+                messages.error(request, msg+'However, there was a problem sending email to the maintainers')
+                return redirect(manage_contributed_data)
+
+    if total_res > 1:
+        msg = '{} resources have been successfully imported into ' \
+              'the database. ' \
+              'A notification email has been sent to the maintainers ({})'.format(total_res, ", ".join(recipients))
+    else:
+         msg = '1 resource has been successfully imported into ' \
+               'the database. ' \
+               'A notification email has been sent to ' \
+               '{}'.format(", ".join(recipients))
+    messages.success(request, msg)
     return redirect(manage_contributed_data)
 
 
