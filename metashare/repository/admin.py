@@ -46,7 +46,12 @@ from metashare.repository.models import \
     textClassificationInfoType_model, \
     textFormatInfoType_model, \
     identificationInfoType_model, \
-    languageVarietyInfoType_model
+    languageVarietyInfoType_model, \
+    TranslationQuality, \
+    resourceCreationInfoType_model, \
+    creationInfoType_model, \
+    projectInfoType_model, \
+    LrQuality
     # videoFormatInfoType_model
     # dynamicElementInfoType_model, \
     # languageDescriptionImageInfoType_model, \
@@ -70,7 +75,6 @@ from metashare.repository.models import \
     # textNumericalContentInfoType_model, \
     # relationInfoType_model, \
     # resolutionInfoType_model, \
-    # resourceCreationInfoType_model, \
     # relatedLexiconInfoType_model, \
     # lexicalConceptualResourceVideoInfoType_model, \
     # lexicalConceptualResourceImageInfoType_model, \
@@ -78,7 +82,6 @@ from metashare.repository.models import \
     # languageDescriptionOperationInfoType_model, \
     # membershipInfoType_model, \
     # actualUseInfoType_model, \
-    # projectInfoType_model, \
     # ngramInfoType_model, \
     # outputInfoType_model, \
     # modalityInfoType_model, \
@@ -96,7 +99,6 @@ from metashare.repository.models import \
     # corpusTextNumericalInfoType_model, \
     # participantInfoType_model, \
     # corpusVideoInfoType_model, \
-    # creationInfoType_model, \
     # durationOfAudioInfoType_model, \
     # durationOfEffectiveSpeechInfoType_model, \
     # foreseenUseInfoType_model, \
@@ -680,10 +682,10 @@ class personInfo_model_inline(SchemaModelInline):
 
 
 # pylint: disable-msg=C0103
-# class sizeInfo_model_inline_audioSizeInfoType_model(SchemaModelInline):
-#     model = sizeInfoType_model
-#     template = 'admin/edit_inline/tabular.html'
-#     fk_name = 'back_to_audiosizeinfotype_model'
+class sizeInfo_model_inline_languageInfoType_model(SchemaModelInline):
+    model = sizeInfoType_model
+    template = 'admin/edit_inline/tabular.html'
+    fk_name = 'back_to_languageinfotype_model'
 
 
 # pylint: disable-msg=C0103
@@ -939,6 +941,36 @@ class textFormatInfo_model_inline_lexicalConceptualResourceTextInfoType_model(Sc
 #     collapse = True
 #     fk_name = 'back_to_lexicalconceptualresourcevideoinfotype_model'
 
+class TranslationQualityAdminInline(admin.StackedInline):
+    model = TranslationQuality
+    readonly_fields = ('language',)
+    extra = 1
+
+class LrQualityAdmin(admin.ModelAdmin):
+  # list_display = ('resource',)
+  inlines = (TranslationQualityAdminInline, )
+  fieldsets = (
+      ('Source Quality', {
+          'fields': ('source_creator', 'creation_time', 'source_document_format')
+      }),
+
+      ('Technical Quality', {
+          'fields': ('segmentation_quality', 'alignment_quality', 'annotation')
+      }),
+
+      ('Volume', {
+          'fields': ('total', 'quality' )
+      }),
+
+      ('Focus', {
+          'fields': ('domain',)
+      }),
+
+      ('Legal Readiness', {
+          'fields': ('ipr_cleared', 'anonymization_required')
+      }),
+   )
+
 
 admin.site.register(actorInfoType_model, SchemaModelAdmin)
 # admin.site.register(actualUseInfoType_model, SchemaModelAdmin)
@@ -959,7 +991,7 @@ admin.site.register(corpusTextInfoType_model, SchemaModelAdmin)
 # admin.site.register(corpusTextNgramInfoType_model, SchemaModelAdmin)
 # admin.site.register(corpusTextNumericalInfoType_model, SchemaModelAdmin)
 # admin.site.register(corpusVideoInfoType_model, SchemaModelAdmin)
-# admin.site.register(creationInfoType_model, SchemaModelAdmin)
+admin.site.register(creationInfoType_model, SchemaModelAdmin)
 admin.site.register(distributionInfoType_model, SchemaModelAdmin)
 admin.site.register(documentInfoType_model, SchemaModelAdmin)
 admin.site.register(documentListType_model, SchemaModelAdmin)
@@ -1006,14 +1038,14 @@ admin.site.register(organizationListType_model, SchemaModelAdmin)
 admin.site.register(personInfoType_model, SchemaModelAdmin)
 admin.site.register(personListType_model, SchemaModelAdmin)
 # admin.site.register(personSourceSetInfoType_model, SchemaModelAdmin)
-# admin.site.register(projectInfoType_model, SchemaModelAdmin)
+admin.site.register(projectInfoType_model, SchemaModelAdmin)
 admin.site.register(projectListType_model, SchemaModelAdmin)
 # admin.site.register(recordingInfoType_model, SchemaModelAdmin)
 # admin.site.register(relatedLexiconInfoType_model, SchemaModelAdmin)
 # admin.site.register(relationInfoType_model, SchemaModelAdmin)
 # admin.site.register(resolutionInfoType_model, SchemaModelAdmin)
 admin.site.register(resourceComponentTypeType_model, SchemaModelAdmin)
-# admin.site.register(resourceCreationInfoType_model, SchemaModelAdmin)
+admin.site.register(resourceCreationInfoType_model, SchemaModelAdmin)
 admin.site.register(resourceDocumentationInfoType_model, SchemaModelAdmin)
 admin.site.register(resourceInfoType_model, SchemaModelAdmin)
 # admin.site.register(runningEnvironmentInfoType_model, SchemaModelAdmin)
@@ -1036,7 +1068,7 @@ admin.site.register(textFormatInfoType_model, SchemaModelAdmin)
 # admin.site.register(videoClassificationInfoType_model, SchemaModelAdmin)
 # admin.site.register(videoContentInfoType_model, SchemaModelAdmin)
 # admin.site.register(videoFormatInfoType_model, SchemaModelAdmin)
-
+admin.site.register(LrQuality)
 
 from metashare.repository.editor import manual_admin_registration
 manual_admin_registration.register()
