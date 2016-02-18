@@ -39,7 +39,7 @@ def confirm(request, uuid):
     user.is_active = True
     # Do not set user as staff/ editor
     user.is_staff = False
-    user.groups.add(Group.objects.get(name='data_donors'))
+    user.groups.add(Group.objects.get(name='contributors'))
     # For convenience, log user in:
     # (We would actually have to authenticate the user before logging in,
     # however, as we don't know the password, we manually set the authenication
@@ -57,14 +57,15 @@ def confirm(request, uuid):
     email = render_to_string('accounts/activation.email', data)
     try:
         # Send an activation email.
-        send_mail(_('Your ELRC META-SHARE user account has been activated'),
+        send_mail(_('Your ELRC-SHARE user account has been activated'),
         email, 'no-reply@meta-share.eu', [user.email], fail_silently=False)
     except: # SMTPException:
         # there was a problem sending the activation e-mail -- not too bad
         pass
 
     # Add a message to the user after successful creation.
-    messages.success(request, _("We have activated your user account."))
+    messages.success(request, _("Your account has been activated. \n" \
+                                "You can now proceed to contributing resources."))
     
     # Redirect the user to the front page.
     return redirect('metashare.repository.views.simple_form')
@@ -104,14 +105,14 @@ def contact(request):
                     "again later: <pre>%s</pre>") % (escape(data['message']),))
             else:
                 # show a message to the user after successfully sending the mail
-                messages.success(request, _("We have received your message and "
-                    "successfully sent it to the node maintainers. PWe will get "
-                    "back to you as soon as possible."))
+                messages.success(request, _("We have received your message " \
+                                            "and will get back to you as soon " \
+                                            "as possible"))
             # redirect the user to the front page
             return redirect('metashare.views.frontpage')
     else:
         form = ContactForm()
-    dictionary = {'title': 'Contact Node Maintainers', 'form': form}
+    dictionary = {'title': 'Contact Us', 'form': form}
     return render_to_response('accounts/contact_maintainers.html', dictionary,
                               context_instance=RequestContext(request))
 
@@ -176,8 +177,11 @@ def create(request):
             
             # Add a message to the user after successful creation.
             messages.success(request,
-              _("We have received your registration data and sent you an " \
-                "email with further activation instructions."))
+              _("We have received your registration data and sent you an email " \
+                "with further activation instructions. If you do not see the " \
+                "message in your Inbox within the next 5 minutes, please " \
+                "check your Spam/Junk folder, or contact us at " \
+                "help@cef-at-helpdesk.org"))
             
             # Redirect the user to the front page.
             return redirect('metashare.views.frontpage')
