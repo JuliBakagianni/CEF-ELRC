@@ -20,7 +20,9 @@ from metashare.repository.models import resourceInfoType_model, \
     licenceInfoType_model, personInfoType_model, \
     documentInfoType_model, organizationInfoType_model, \
     identificationInfoType_model, \
-    documentUnstructuredString_model
+    documentUnstructuredString_model, \
+    projectInfoType_model, \
+    LrQuality
 
     # actualUseInfoType_model, \
     # videoClassificationInfoType_model, \
@@ -28,7 +30,6 @@ from metashare.repository.models import resourceInfoType_model, \
     # textNumericalFormatInfoType_model, \
     # toolServiceInfoType_model, \
     # relationInfoType_model, \
-    # projectInfoType_model, \
     # languageDescriptionImageInfoType_model, \
     # participantInfoType_model, \
     # lexicalConceptualResourceVideoInfoType_model, \
@@ -217,6 +218,7 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
         context.update(extra_context or {})
         return self.render_change_form(request, context, change=True, obj=obj)
 
+
 # Models which are always rendered inline so they don't need their own admin form:
 purely_inline_models = (
     # actualUseInfoType_model,
@@ -227,6 +229,7 @@ purely_inline_models = (
     # relationInfoType_model,
     # foreseenUseInfoType_model,
     corpusMediaTypeType_model,
+
     # textNumericalFormatInfoType_model,
     # videoClassificationInfoType_model,
     # imageClassificationInfoType_model,
@@ -254,7 +257,7 @@ custom_admin_classes = {
     licenceInfoType_model: LicenceModelAdmin,
     personInfoType_model: PersonModelAdmin, 
     organizationInfoType_model: OrganizationModelAdmin, 
-    # projectInfoType_model: ProjectModelAdmin,
+    projectInfoType_model: ProjectModelAdmin,
     documentInfoType_model: DocumentModelAdmin,
     documentUnstructuredString_model: DocumentUnstructuredStringModelAdmin, 
 }
