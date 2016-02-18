@@ -1,7 +1,7 @@
 import os
 import sys
 
-path = '/var/www/CEF-ELRC'
+path = '/var/opt/ELRCSHARE'
 if path not in sys.path:
  sys.path.insert(0, path)
 sys.path.insert(0, '{0}/metashare'.format(path))
