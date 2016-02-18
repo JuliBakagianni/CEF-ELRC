@@ -1,6 +1,6 @@
-CEF-ELRC
+ELRC-SHARE
 ===================
-Public repository of the CEF-ELRC project based on the META-SHARE software
+Public repository of the ELRC-SHARE project based on the META-SHARE software
 
 META-SHARE SOFTWARE
 ===================
