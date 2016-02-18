@@ -43,6 +43,7 @@
     {% if distribution.Distribution.Allows_Uses_Besides_DGT %}
         {% for key, value in distribution.Distribution.items %}
             {% if "Allows_Uses_Besides_DGT" in key and value == 'true' %}
+                <hr/>
                  <label class="indented"><strong>Allows Uses Besides DGT</strong>&nbsp;&nbsp;&nbsp;<span style="color: green">&#10004;</span></label>
             {% endif %}
         {% endfor %}

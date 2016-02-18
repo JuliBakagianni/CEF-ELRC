@@ -5,7 +5,7 @@
 {% block content %}
 <h2>{{ title }}</h2>
 <div class="content_box">
-  <p>With this form you can send messages to the CEF-ELRC maintainers.</p>
+  <p>Please, use the following form to contact us.</p>
   <form class="form_helper" method="post" action="{% url metashare.accounts.views.contact %}">
     {% csrf_token %}
     <table>
@@ -13,6 +13,6 @@
     </table>
     <input class="button middle_button" style="margin-left:auto;margin-right:auto;" type="submit" value="Send Message" />
   </form>
-  <p>Note: along with your message, the CEF-ELRC maintainers will automatically receive your name and the e-mail address which is set in <a href="{% url metashare.accounts.views.edit_profile %}">your user profile</a>.</p>
+  <p>Note: we will reply to you at the e-mail address that is set in <a href="{% url metashare.accounts.views.edit_profile %}">your user profile</a>.</p>
 </div>
 {% endblock %}
