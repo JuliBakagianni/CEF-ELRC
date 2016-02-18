@@ -3,9 +3,11 @@ import logging
 from uuid import uuid1
 
 from django.contrib.auth.models import User, Group
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from django.core.validators import RegexValidator
 from metashare.bcp47 import iana
 from metashare.repository.supermodel import _make_choices_from_list
 
@@ -197,6 +199,9 @@ EUCOUNTRIES = [
 "Finland", "Sweden", "Denmark", "Iceland", "Norway","Greece", "Cyprus", "Slovakia", "Slovenia", "Bulgaria",
 "Poland", "Romania", "Croatia"]
 
+PHONENUMBER_VALIDATOR = RegexValidator(r'^\+(?:[0-9] ?){6,14}[0-9]$',
+'Not a valid phone number', ValidationError)
+
 class UserProfile(models.Model):
     """
     Contains additional user data related to a Django User instance.
@@ -217,7 +222,8 @@ class UserProfile(models.Model):
     birthdate = models.DateField("Date of birth", blank=True,
       null=True)
     affiliation = models.TextField("Affiliation(s)", blank=True)
-    phone_number = models.CharField("Phone Number", max_length=50, null=True, blank=True)
+    phone_number = models.CharField("Phone Number", max_length=50, null=True, \
+                                    blank=True, validators=[PHONENUMBER_VALIDATOR])
     country = models.CharField('Country', choices=_make_choices_from_list(sorted(EUCOUNTRIES))['choices'], max_length=100, null=True, blank=True)
     position = models.CharField(max_length=50, blank=True)
     homepage = models.URLField(blank=True)
