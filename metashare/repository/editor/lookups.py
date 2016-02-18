@@ -10,12 +10,13 @@ from metashare.repository.models import personInfoType_model, \
     organizationInfoType_model,\
     targetResourceInfoType_model, sizeInfoType_model, \
     annotationInfoType_model, \
-    languageVarietyInfoType_model
+    languageVarietyInfoType_model, \
+    projectInfoType_model
     # videoFormatInfoType_model
     # audioSizeInfoType_model \
     # membershipInfoType_model, \
     # imageFormatInfoType_model, \
-    # projectInfoType_model, \
+
     # resolutionInfoType_model
 
 from metashare.storage.models import MASTER
@@ -189,7 +190,7 @@ class SizeDummyLookup(ModelLookup):
 
 
 class ProjectLookup(ModelLookup):
-    # model = projectInfoType_model
+    model = projectInfoType_model
     search_fields = ('projectName__contains', )
     filters = {}
     
