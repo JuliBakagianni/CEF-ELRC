@@ -42,6 +42,8 @@ MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/pdf'] = u"PDF"
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/xhtml+xml'] = u"XHTML"
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'text/csv'] = u"CSV"
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'text/tab-separated-values'] = u"text with tab-separated-values"
+MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/vnd.openxmlformats-officedocument.wordprocessingml.document'] = u"MS-Word docx"
+MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/msword'] = u"MS-Word doc"
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/rdf+xml'] = u"RDF"
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/x-xces+xml'] = u"XCES"
 
@@ -53,4 +55,6 @@ u'application/xhtml+xml', u'text/sgml',
 u'text/html', u'application/x-tex',
 u'application/rtf', u'application/x-latex',
 u'text/csv',u'text/tab-separated-values',
+u'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+u'application/msword',
 u'application/pdf',u'application/x-msaccess'],MIMETYPEVALUE_TO_MIMETYPELABEL)
