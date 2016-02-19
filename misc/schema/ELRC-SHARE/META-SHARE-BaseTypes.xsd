@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited by ILSP/Athena R.C. -->
-<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en">
+<xs:schema xmlns:ms="http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en">
 	<xs:include schemaLocation="META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="META-SHARE-RoleTypes.xsd"/>
 	<xs:include schemaLocation="META-SHARE-LicenseMetadata.xsd"/>
@@ -615,6 +615,8 @@
 		<xs:sequence>
 			<xs:element ref="ms:domain" maxOccurs="unbounded"/>
 			<xs:element ref="ms:domainId" maxOccurs="unbounded"/>
+			<xs:element name="subdomain" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="subdomainId" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="sizePerDomain" type="ms:sizeInfoType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Specifies the size of resource parts per domain</xs:documentation>
