@@ -48,6 +48,7 @@ function add_container(widget_id) {
     // check if the container will manage language variants. We do this because
     //each selection determines the available options for the next selection
     var isVariant = input.closest("div").attr("title") == "Variants";
+    var isSubdomain = input.closest("div").attr("title") == "Subdomain";
 
     if (input.length === 0) {
         // First, we clone the empty_widget for this widget id and turn it
@@ -149,6 +150,12 @@ django.jQuery(document).ready(function () {
         }
     );
 
+    $(this).find(".domain select").each(
+        function () {
+                update_subdomains($(this));
+        }
+    );
+
     $(this).find(".form-row.languageName select").change(
         function () {
             $(this).parent().parent().siblings(".languageScript").find("select").val("");
@@ -172,6 +179,14 @@ django.jQuery(document).ready(function () {
         function () {
             //if($(this).parent().next("li").attr("id") != null){
                 update_var_variants($(this), $(this).parent().next("li"));
+            //}
+        }
+    );
+
+    $(this).find(".domain select").change(
+        function () {
+            //if($(this).parent().next("li").attr("id") != null){
+                update_subdomains($(this));
             //}
         }
     );
@@ -209,7 +224,7 @@ function update_lang_variants_with_script(e) {
     var selected = variants.find("select option:selected").val();
     if (e.val() != "") {
         $.ajax({
-            url: "http://194.177.192.69/update_lang_variants_with_script/",
+            url: "http://elrc-share.ilsp.gr/update_lang_variants_with_script/",
             type: 'POST',
             data: {'script': e.val(), 'lang': e.parent().parent().prev(".languageName").find("select option:selected").val()},
             success: function (result) {
@@ -235,7 +250,7 @@ function update_var_variants(prevRef, element) {
     var dataValue = prevRef.find("option:selected").val();
     if (param != "") {
         $.ajax({
-            url: "http://194.177.192.69/update_var_variants/",
+            url: "http://elrc-share.ilsp.gr/update_var_variants/",
             type: 'POST',
             data: {'variant': unescape(dataValue)},
             contentType: "text/html; charset=utf-8",
@@ -249,14 +264,31 @@ function update_var_variants(prevRef, element) {
                         attr("value", vars[r]).text(vars[r]));
                 }
                 selElement.val(selected);
-                //if (result.length) {
-                //    selElement.parent().show().prop('disabled', false);
-                //    selElement.parent().next("li").has("a").prop('disabled', false);
-                //}
-                //else {
-                //    selElement.parent().next("li").has("a").prop('disabled', true);
-                //    selElement.parent().hide().prop('disabled', true);
-                //}
+            }
+        })
+    };
+}
+
+function update_subdomains(e) {
+    var root = $(e).closest(".module.aligned");
+    var subdomain = root.find(".subdomain:first");
+    var selected = subdomain.find("select option:selected").val();
+    if (e.val() != "-") {
+        $.ajax({
+            url: "/update_subdomains/",
+            type: 'POST',
+            data: {'domain': e.val()},
+            success: function (result) {
+                vars = result.split("//");
+                selElement = subdomain.find("select:first");
+                selElement.empty();
+                selElement.append($("<option></option>").
+                    attr("value", "").text("--------"));
+                for (var r in vars) {
+                    selElement.append($("<option></option>").
+                        attr("value", vars[r]).text(vars[r]));
+                }
+                selElement.val(selected);
             }
         })
     };

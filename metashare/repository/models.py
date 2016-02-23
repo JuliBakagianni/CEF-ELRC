@@ -6,6 +6,7 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django.template.defaultfilters import slugify
 from metashare.bcp47 import iana
+from metashare.eurovoc import eurovoc
 
 from metashare.accounts.models import EditorGroup
 # pylint: disable-msg=W0611
@@ -1219,6 +1220,8 @@ class domainInfoType_model(SchemaModel):
     __schema_fields__ = (
         ( u'domain', u'domain', REQUIRED ),
         ( u'domainId', u'domainId', OPTIONAL ),
+        ( u'subdomain', u'subdomain', OPTIONAL ),
+        ( u'subdomainId', u'subdomainId', OPTIONAL ),
         ( u'sizePerDomain', u'sizePerDomain', OPTIONAL ),
         ( u'conformanceToClassificationScheme', u'conformanceToClassificationScheme', OPTIONAL ),
     )
@@ -1235,12 +1238,39 @@ class domainInfoType_model(SchemaModel):
                   'value, if possible, from the DDC recommended values ' \
                   '(https://en.wikipedia.org/wiki/List_of_Dewey_Decimal_classes)',
         max_length=100,
-        choices=sorted(DOMAININFOTYPE_DOMAIN_CHOICES,
-                       key=lambda choice: choice[1].lower()), )
+        choices=_make_choices_from_list(sorted(eurovoc.get_all_domains()))['choices'])
 
     domainId = models.CharField(
             verbose_name='Domain Identifier',
             help_text='The identifier of the application domain of the '
+                      'resource or the tool/service, taken from the '
+                      'EUROVOC domains: '
+                      'http://eurovoc.europa.eu/drupal/?q=navigation&cl=en',
+            editable=False,
+            max_length=3,
+            null=True,
+            blank=True
+        )
+
+    subdomain = models.CharField(
+        max_length=100,
+        verbose_name='Subdomain',
+        help_text='Specifies the application subdomain of the resource or ' \
+                  'the tool/service; please, select one of the values supplied ' \
+                  '(taken mainly from the Dewey Decimal Classification system) ' \
+                  'or, in case none of these describes your domain, add a new ' \
+                  'value, if possible, from the DDC recommended values ' \
+                  '(https://en.wikipedia.org/wiki/List_of_Dewey_Decimal_classes)',
+        null=True,
+        blank=True,
+        choices = _make_choices_from_list \
+                (sorted(eurovoc.get_all_subdomains()))['choices'])
+
+
+
+    subdomainId = models.CharField(
+            verbose_name='Subdomain Identifier',
+            help_text='The identifier of the application subdomain of the '
                       'resource or the tool/service, taken from the '
                       'EUROVOC domains: '
                       'http://eurovoc.europa.eu/drupal/?q=navigation&cl=en',
@@ -1298,7 +1328,9 @@ class domainInfoType_model(SchemaModel):
         # automatically save the EUROVOC domain id
         if self.domain:
             try:
-                self.domainId = DOMAIN_CODE[self.domain]
+                self.domainId = eurovoc.get_domain_id(self.domain)
+                if self.subdomain:
+                    self.subdomainId = eurovoc.get_subdomain_id(''.join(self.subdomain))
                 self.conformanceToClassificationScheme = u'EUROVOC'
             except KeyError:
                 self.domainId = "N/A"
@@ -1350,14 +1382,14 @@ ANNOTATIONINFOTYPE_ANNOTATIONMODE_CHOICES = _make_choices_from_list([
     u'automatic', u'manual', u'mixed', u'interactive',
 ])
 
-ANNOTATIONINFOTYPE_ANNOTATIONFORMAT_CHOICES = _make_choices_from_list([
-  u'application/pdf', u'text/csv', u'text/html', u'application/x-latex',
-  u'application/rdf+xml', u'application/rtf', u'text/sgml',
-  u'text/tab-separated-values', u'application/x-tex', u'text/plain',
-  u'application/xhtml+xml', u'application/xml', u'application/tei+xml',
-  u'application/x-msaccess', u'application/x-tmx+xml', u'application/x-xces+xml',
-  u'application/vnd.xmi+xml', u'other'
-])
+# ANNOTATIONINFOTYPE_ANNOTATIONFORMAT_CHOICES = _make_choices_from_list([
+#   u'application/pdf', u'text/csv', u'text/html', u'application/x-latex',
+#   u'application/rdf+xml', u'application/rtf', u'text/sgml',
+#   u'text/tab-separated-values', u'application/x-tex', u'text/plain',
+#   u'application/xhtml+xml', u'application/xml', u'application/tei+xml',
+#   u'application/x-msaccess', u'application/x-tmx+xml', u'application/x-xces+xml',
+#   u'application/vnd.xmi+xml', u'other'
+# ])
 
 # pylint: disable-msg=C0103
 class annotationInfoType_model(SchemaModel):
