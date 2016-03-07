@@ -3160,7 +3160,7 @@ LICENCES_TO_CONDITIONS = {
     u'NLOD_Norway': [u'attribution'],
     u'OGL_UK': [u'attribution'],
     u'NCGL_UK': [u'attribution', u'nonCommercialUse'],
-    u'IGCYL-NC_Spain': [u'attribution', u'nonCommercialUse'],
+    # u'IGCYL-NC_Spain': [u'attribution', u'nonCommercialUse'],
 }
 
 LICENCES_NO_CONDITIONS = [
@@ -3883,7 +3883,7 @@ class languageInfoType_model(SchemaModel):
 
 
 PROJECTINFOTYPE_FUNDINGTYPE_CHOICES = _make_choices_from_list([
-  u'other', u'ownFunds', u'nationalFunds', u'euFunds',
+  u'other', u'ownFunds', u'nationalFunds', u'euFunds', u'serviceContract',
 ])
 
 # pylint: disable-msg=C0103
