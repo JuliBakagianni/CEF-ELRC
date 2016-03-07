@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import patterns, include
 from django.contrib import admin
 from django.views.generic.simple import direct_to_template
+from metashare.local_settings import SCHEMA_ROOT
 
 from metashare.repository.editor import admin_site as editor_site
 from metashare.repository.sitemap import RepositorySitemap
@@ -28,6 +29,8 @@ urlpatterns = patterns('',
     'metashare.bcp47.views.update_var_variants'),
   (r'^{0}update_lang_variants_with_script/'.format(DJANGO_BASE),
     'metashare.bcp47.views.update_lang_variants_with_script'),
+  (r'^{0}update_subdomains/'.format(DJANGO_BASE),
+    'metashare.eurovoc.views.update_subdomains'),
 )
 
 urlpatterns += patterns('metashare.accounts.views',
@@ -62,6 +65,16 @@ if DJANGO_BASE == "":
     urlpatterns += patterns('',
       (r'^{}robots\.txt$'.format(DJANGO_BASE), direct_to_template, 
         {'template': 'robots.txt', 'mimetype': 'text/plain', 'extra_context' : { 'sitemap_url' : SITEMAP_URL }}),
+    )
+
+urlpatterns += patterns('',
+      (r'^{0}ELRC-SHARE_SCHEMA/v1.0/(?P<path>.*)$'.format(DJANGO_BASE),
+        'django.views.static.serve', {'document_root': SCHEMA_ROOT})
+    )
+
+urlpatterns += patterns('',
+      (r'^{0}ToS/$'.format(DJANGO_BASE),
+        'django.views.static.serve', {'document_root': SCHEMA_ROOT})
     )
 
 if DEBUG:
