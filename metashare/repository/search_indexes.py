@@ -1140,18 +1140,6 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
             for corpus_info in media_type.corpustextinfotype_model_set.all():
                 result.extend([domain_info.domain for domain_info in
                                corpus_info.domaininfotype_model_set.all()])
-            # if media_type.corpusAudioInfo:
-            #     result.extend([domain_info.domain for domain_info in
-            #                    media_type.corpusAudioInfo.domaininfotype_model_set.all()])
-            # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-            #     result.extend([domain_info.domain for domain_info in
-            #                    corpus_info.domaininfotype_model_set.all()])
-            # if media_type.corpusTextNgramInfo:
-            #     result.extend([domain_info.domain for domain_info in
-            #                    media_type.corpusTextNgramInfo.domaininfotype_model_set.all()])
-            # if media_type.corpusImageInfo:
-            #     result.extend([domain_info.domain for domain_info in
-            #                    media_type.corpusImageInfo.domaininfotype_model_set.all()])
 
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
@@ -1159,18 +1147,6 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                 result.extend([domain_info.domain for domain_info in
                         lcr_media_type.lexicalConceptualResourceTextInfo \
                                 .domaininfotype_model_set.all()])
-            # if lcr_media_type.lexicalConceptualResourceAudioInfo:
-            #     result.extend([domain_info.domain for domain_info in
-            #             lcr_media_type.lexicalConceptualResourceAudioInfo \
-            #                     .domaininfotype_model_set.all()])
-            # if lcr_media_type.lexicalConceptualResourceVideoInfo:
-            #     result.extend([domain_info.domain for domain_info in
-            #             lcr_media_type.lexicalConceptualResourceVideoInfo \
-            #                     .domaininfotype_model_set.all()])
-            # if lcr_media_type.lexicalConceptualResourceImageInfo:
-            #     result.extend([domain_info.domain for domain_info in
-            #             lcr_media_type.lexicalConceptualResourceImageInfo \
-            #                     .domaininfotype_model_set.all()])
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
@@ -1178,14 +1154,6 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
                 result.extend([domain_info.domain for domain_info in
                                ld_media_type.languageDescriptionTextInfo \
                                     .domaininfotype_model_set.all()])
-            # if ld_media_type.languageDescriptionVideoInfo:
-            #     result.extend([domain_info.domain for domain_info in
-            #                    ld_media_type.languageDescriptionVideoInfo \
-            #                         .domaininfotype_model_set.all()])
-            # if ld_media_type.languageDescriptionImageInfo:
-            #     result.extend([domain_info.domain for domain_info in
-            #                    ld_media_type.languageDescriptionImageInfo \
-            #                         .domaininfotype_model_set.all()])
 
         return result
 
