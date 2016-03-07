@@ -7,7 +7,10 @@ register = template.Library()
 
 @register.filter("licence_icon")
 def licence_icon(licence):
-    img_location = "{}images/licence_icons/licences/{}.png".format(MEDIA_URL,licence)
+    if licence == "non-standard/Other_Licence/Terms":
+        img_location = "{}images/licence_icons/licences/other.png".format(MEDIA_URL)
+    else:
+        img_location = "{}images/licence_icons/licences/{}.png".format(MEDIA_URL,licence)
     return u"".join(u"<img style=\"padding:1px\" src=\"{}\" title=\"{}\" alt=\"{}\" height=\"19\"/>" \
                     .format(img_location, pretty_camel(licence), pretty_camel(licence)))
 
