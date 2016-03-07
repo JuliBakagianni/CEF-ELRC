@@ -15,7 +15,9 @@
 {#    <area shape="rect" coords="550,172,400,145" alt="Metashare" href="http://www.meta-share.eu/" target="_blank">#}
 {#</map>#}
 {#    </p>#}
+      {% if user.get_profile.has_editor_permission %}
     <p style="text-align: center; color: #058dbe;font-weight: bold;">{{resources|intcomma}} language resource{{resources|pluralize}} at your disposal</p>
+
   </div>
   <form method="get" action="{% url metashare.views.frontpage %}repository/search/" class="form_helper">
     <div id="search">
@@ -24,7 +26,7 @@
     </div>
   </form>
 </div>
-
+{% endif %}
 <div class="span-24" style="vertical-align: middle; margin-top:30px;">
 <table>
   <tr>
@@ -33,68 +35,12 @@
 {#    </td>#}
     <td>
       <span class="span-15 last" style="">
-        <h2>What is the European Language Resource Coordination (ELRC) action?</h2>
-        <p>Public administrations in Europe need to communicate with each other and with the citizens across borders. This communication is often hampered by the language barriers created by the many languages in Europe. The European Commission is supporting public administrations and citizens in their communication tasks by building an <b>Automated Translation platform</b> within the Connecting Europe Facility (CEF) Programme.</p>
-        <p>The Automated Translation platform of the Connecting Europe Facility (CEF.AT) will be based on statistical data-driven machine translation (MT) technology, which learns how to translate from existing human translations. To create MT engines that can deliver useful results for European public administrations and for users of public online services, appropriate <b>language resources</b> are needed.</p>
-        <p>Therefore, in April 2015 the European Commission launched a comprehensive <b>European Language Resource Coordination</b> effort. The objective is to identify and gather language and translation data relevant to national public services, administrations and governmental institutions across all 30 European countries participating in the CEF programme.</p>
-        <p>All data resources gathered in the initiative will be provided exclusively to the European Commission for use in the CEF Automated Translation platform.</p>
-      </span>
-    </td>
-  </tr>
-</table>
-</div>
-
-<div class="split span-24">
-  <div class="navigation_box push-18 last">
-    <a href="#content" class="scroll"><img src="{{ MEDIA_URL }}images/gototop.png" /></a>
-  </div>
-</div>
-
-<div class="span-24" style="vertical-align: middle; margin-top:35px;">
-<table>
-  <tr>
-    <td>
-      <span class="span-15 append-1" style="">
-        <h2>What are language resources?</h2>
-        <p>To improve the quality of services offered by the CEF Automated Translation platform, the underlying automated translation systems must be trained with <b>relevant Language Resources (LRs) in all official languages</b> of the countries participating in the CEF programme.</p>
-        <p>Significant amounts of valuable linguistic data are generated every day by national Member States and CEF affiliated state governmental, NGO, and private organisations. Much of this data is likely to be very valuable as Language Resources for the CEF.AT platform. A number of the data is produced specifically for Automated Translation (aligned corpora from translation memories, terminology resources, lexica and dictionaries), whereas many others are being published as information documents (reports, guides, records of administrative decisions, etc.).</p>
-       <p>Language Resources are need to improve the general quality of machine translation. The required resources include large general domain parallel corpora, large monolingual corpora (e.g. official corpora of national languages), and domain-specific language resources including parallel corpora, term collections, taxonomies in the public administration domain, and the domains of the public online services that will make use of the CEF.AT platform. The domains can consist of consumer affairs, culture and tourism (painting, literature, museum & library classifications), legal sphere, social security, and many others.</p>
-      <p>The European Language Resource Coordination action is looking for open data that can be made available for re-use through open data initiatives, but also for commercially available datasets.</p>
-      </span>
-    </td>
-{#    <td>#}
-{#      <span class="span-7 last" style="vertical-align: middle;"><img src="{{ MEDIA_URL }}images/teaser03.png" /></span>#}
-{#    </td>#}
-  </tr>
-</table>
-</div>
-
-<div class="split span-24">
-  <div class="navigation_box push-18 last">
-    <a href="#content" class="scroll"><img src="{{ MEDIA_URL }}images/gototop.png" /></a>
-  </div>
-</div>
-
-<div class="span-24" style="vertical-align: middle; margin-top:35px;">
-<table>
-  <tr>
-{#    <td>#}
-{#      <span class="span-7 append-1" style="vertical-align: middle;"><img src="{{ MEDIA_URL }}images/teaser04.png" /></span>#}
-{#    </td>#}
-    <td>
-      <span class="span-15 last" style="">
-        <h2>What is the ELRC-SHARE repository?</h2>
-        <p>The ELRC-SHARE repository is used for documenting, storing, browsing and accessing LRs that are considered useful for feeding the CEF.AT platform. All LRs are documented with the ELRC metadata schema, based on the META-SHARE schema.</p>.
-        <p>More specifically, the following types of LRs are expected:
-            <ul>
-                <li><b>Translation memories:</b> linguistic databases that capture translations made by humans. They can be used to facilitate future translations tasks but also for training automated translation systems</li>
-                <li><b>Translation/language models:</b> statistic information that assigns a probability to a piece of unseen text, based on some training data</li>
-                <li><b>Corpora:</b> monolingual and multilingual corpora, comparable, aligned, parallel documents</li>
-                <li><b>Lexica:</b> monolingual and multilingual lists of words, multi-words, sentences, etc. in general or specific subject fields</li>
-                <li><b>Terminological resources:</b> structured sets of concepts, with associated linguistic information in a specific subject field</li>
-                <li><b>Grammars:</b> sets of rules that formalize a language</li>
-            </ul>
-        </p>
+        <h2>Welcome to the ELRC-SHARE repository!</h2>
+        <p>The ELRC-SHARE repository is used for documenting, storing, browsing and accessing <a href="http://lr-coordination.eu/resources">Language Resources</a> that are collected through the <a href="http://lr-coordination.eu">European Language Resource Coordination</a> and considered useful for feeding the CEF.AT platform.</p>
+		<p>If you want to contribute resources, all you have to do is register <a href="/accounts/create/">here</a> and go on to describe and upload your data with a simple form.
+        <br/>
+        <div><img src="{{ MEDIA_URL }}images/diagram.png" width="476" style="display:block; margin: 0 auto;"/></div></p>
+        <p>All data resources gathered by this initiative will be provided exclusively to the European Commission for use in the CEF Automated Translation platform.</p>
       </span>
     </td>
   </tr>

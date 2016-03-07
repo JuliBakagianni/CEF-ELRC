@@ -1,13 +1,15 @@
 {% spaceless %}
 <div id="header">
-    <img style="float:right; margin: 10px 20px 0 0" src="/site_media/images/meta-share_elrc_small.png"/>
+    <a href="http://lr-coordination.eu/" title="Languages — the heart of Multilingual Europe | ELRC" target="_blank"><img style="float:right; margin: 10px 20px 0 0" src="/site_media/images/meta-share_elrc_small.png"/></a>
 {#        <div style="font-size: 20px; color:#000; font-weight: bold; font-family: TitilliumText, 'Helvetica Neue', 'Helvetica', Arial, sans-serif; display:block; width:371px; margin: 20px auto">The ELRC#}
 {#        <img class="icon" src="{{ MEDIA_URL }}images/metashare.png" />#}
 {#         repository</div>#}
 <div class="jsddm">
   <ul id="jsddm">
     <li title="Home"><a href="{% url metashare.views.frontpage %}">Home</a></li>
-    <li title="Browse the resources of the ELRC catalogue"><a href="{% url metashare.views.frontpage %}repository/search/">Browse Resources</a></li>
+    {% if user.get_profile.has_editor_permission %}
+      <li title="Browse the resources of the ELRC catalogue"><a href="{% url metashare.views.frontpage %}repository/search/">Browse Resources</a></li>
+  {% endif %}
   {% if user.is_authenticated %}
       <li><a href="{% url metashare.repository.views.simple_form %}">Contribute Resources</a></li>
   {% endif %}
@@ -23,9 +25,9 @@
 {#        <li title="Create/edit project object metadata"><a href="{% url editor:repository_projectinfotype_model_changelist %}">Manage project objects</a></li>#}
             <li title="Create/edit document/paper object metadata"><a href="{% url editor:repository_documentinfotype_model_changelist %}">Manage document objects</a></li>
         {% endif %}
-        {% if user.get_profile.has_editor_permission and not user.get_profile.is_superuser %}
-            <li title="View unmanaged contributed resources"><a href="{% url metashare.repository.views.manage_contributed_data %}">View unmanaged contributed resources</a></li>
-        {% endif %}
+{#        {% if user.get_profile.has_editor_permission and not user.get_profile.is_superuser %}#}
+{#            <li title="View unmanaged contributed resources"><a href="{% url metashare.repository.views.manage_contributed_data %}">View unmanaged contributed resources</a></li>#}
+{#        {% endif %}#}
         <li title="Upload XML resource descriptions"><a href="{% url editor:upload_xml %}">Upload resource descriptions</a></li>
       </ul>
     </li>
