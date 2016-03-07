@@ -15,7 +15,8 @@ from django.db.models.fields import related
 from django.db.models.fields.related import ForeignRelatedObjectsDescriptor, \
     OneToOneField
 
-import metashare.repository.models
+# import metashare.repository.models
+
 from metashare.repository.fields import MultiSelectField, MultiTextField, \
     MetaBooleanField, DictField
 from metashare.settings import LOG_HANDLER, \
@@ -41,7 +42,7 @@ OPTIONAL = 2
 RECOMMENDED = 3
 
 # template of a META-SHARE metadata XML schema URL
-SCHEMA_URL = 'http://elrc-share.ilsp.gr/META-XMLSchema/v{0}/' \
+SCHEMA_URL = 'http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v{0}/' \
   'META-SHARE-Resource.xsd'
 
 METASHARE_ID_REGEXP = re.compile('<metashareId>.+</metashareId>',
@@ -263,7 +264,8 @@ class SchemaModel(models.Model):
 
             # xs:anyURI values are internally stored as valid URIs which may
             # contain escaped characters; unescape them again for the export
-            if field and metashare.repository.models.HTTPURI_VALIDATOR in \
+            from metashare.repository.models import HTTPURI_VALIDATOR
+            if field and HTTPURI_VALIDATOR in \
                     field.validators and value:
                 try:
                     value = urllib.unquote(str(value)).decode('utf8')
@@ -326,7 +328,8 @@ class SchemaModel(models.Model):
         # If we have an xs:anyURI value, then it must be a URI according to RFC
         # 2396 or it must result in such a URI after applying the algorithm from
         # <http://www.w3.org/TR/2001/REC-xlink-20010627/#link-locators>.
-        if metashare.repository.models.HTTPURI_VALIDATOR in field.validators \
+        from metashare.repository.models import HTTPURI_VALIDATOR
+        if HTTPURI_VALIDATOR in field.validators \
                 and result is not None:
             result = urllib.quote(result.encode('utf8'),
                 r'''!#$%&'()*+,/:;=?@[]~''')
