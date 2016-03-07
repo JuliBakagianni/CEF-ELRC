@@ -1142,7 +1142,14 @@ def simple_form(request):
             xml_file.write(xml)
             xml_file.closed
             f.closed
-            # TODO: change this
+        try:
+            send_mail("New unmanaged contributions",
+                "You have new unmanaged contributed resources", \
+                'no-reply@elrc-share.ilsp.gr', ["penny@ilsp.gr"], \
+                fail_silently=False)
+        except:
+            pass
+
         return render_to_response('repository/editor/simple_form/simple_form.html',
                                   {'type': 'success', 'message': 'Your data has been successfully submitted. '
                                     'You can continue uploading more resources if you want.'}, \
@@ -1253,15 +1260,15 @@ def addtodb(request):
             if recipients_resources[recipient]["count"] > 1:
                 title = "{} new resources from contributors".format(recipients_resources[recipient]["count"])
                 text = "You have received {} new resources from contributors. " \
-                          "Please check your CEF-ELRC repository account.".format(recipients_resources[recipient]["count"])
+                          "Please check your ELRC-SHARE repository account.".format(recipients_resources[recipient]["count"])
             else:
                 title = "1 new resource from contributors"
                 text = "You have received 1 new resource from contributors. " \
-                          "Please check your CEF-ELRC repository account"
+                          "Please check your ELRC-SHARE repository account."
 
             try:
                 send_mail(title, text, \
-                        'no-reply@meta-share.eu', recipients_resources[recipient]["email"], fail_silently=False)
+                        'no-reply@elrc-share.ilsp.gr', recipients_resources[recipient]["email"], fail_silently=False)
             except:
                 if total_res > 1:
                     msg = '{} resources have been successfully imported into the database. '.format(total_res)
@@ -1271,14 +1278,15 @@ def addtodb(request):
                 return redirect(manage_contributed_data)
 
     if total_res > 1:
-        msg = '{} resources have been successfully imported into ' \
-              'the database. ' \
-              'A notification email has been sent to the maintainers ({})'.format(total_res, ", ".join(recipients))
+
+        msg = u'{} resources have been successfully imported into ' \
+              u'the database. ' \
+              u'A notification email has been sent to the maintainers ({})'.format(total_res, u", ".join(recipients))
     else:
-         msg = '1 resource has been successfully imported into ' \
-               'the database. ' \
-               'A notification email has been sent to ' \
-               '{}'.format(", ".join(recipients))
+         msg = u'1 resource has been successfully imported into ' \
+               u'the database. ' \
+               u'A notification email has been sent to ' \
+               u'{}'.format(u", ".join(recipients))
     messages.success(request, msg)
     return redirect(manage_contributed_data)
 
