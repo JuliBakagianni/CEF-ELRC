@@ -239,16 +239,18 @@ def has_publish_permission(request, queryset):
     Returns `True` if the given request has permission to change the publication
     status of all given language resources, `False` otherwise.
     """
-    if not request.user.is_superuser:
-        for obj in queryset:
-            res_groups = obj.editor_groups.all()
-            # we only allow a user to ingest/publish/unpublish a resource if she
-            # is a manager of one of the resource's `EditorGroup`s
-            if not any(res_group.name == mgr_group.managed_group.name
-                       for res_group in res_groups
-                       for mgr_group in EditorGroupManagers.objects.filter(name__in=
-                           request.user.groups.values_list('name', flat=True))):
-                return False
+    # if not request.user.is_superuser:
+    #     for obj in queryset:
+    #         res_groups = obj.editor_groups.all()
+    #         # we only allow a user to ingest/publish/unpublish a resource if she
+    #         # is a manager of one of the resource's `EditorGroup`s
+    #         if not any(res_group.name == mgr_group.managed_group.name
+    #                    for res_group in res_groups
+    #                    for mgr_group in EditorGroupManagers.objects.filter(name__in=
+    #                        request.user.groups.values_list('name', flat=True))):
+    #             return False
+    if not request.user.is_staff:
+            return False
     return True
 
 
