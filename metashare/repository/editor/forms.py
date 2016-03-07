@@ -86,7 +86,7 @@ def schema_validate_xml(value):
                          stderr=subprocess.STDOUT)
     _msg = p.communicate()[0]
     if not _msg == "\nPassed\n":
-        raise ValidationError(mark_safe('<b>Schema Validation</b><br/> {}'.format(_msg)))
+        raise ValidationError(mark_safe('<b>Schema Validation</b><br/>{}'.format(_msg,)))
     return value
 
 class StorageObjectUploadForm(forms.Form):
