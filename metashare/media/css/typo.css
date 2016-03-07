@@ -10,6 +10,20 @@
 }
 
 
+.back h2::before {
+    background: #ffd500 none repeat scroll 0 0;
+}
+
+h1::before, h2::before {
+    background: #058dbe none repeat scroll 0 0;
+    content: "";
+    display: block;
+    height: 5px;
+    margin-bottom: 20px;
+    position: relative;
+    width: 100px;
+}
+
 body{
 	font-family: Arimo,Arial,sans-serif;
 	font-weight: 200;
