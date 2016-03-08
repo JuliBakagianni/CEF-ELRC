@@ -1274,7 +1274,7 @@ def addtodb(request):
                     msg = '{} resources have been successfully imported into the database. '.format(total_res)
                 else:
                     msg = '1 resource has been successfully imported into the database. '
-                messages.error(request, msg+'However, there was a problem sending email to the maintainers')
+                messages.error(request, msg+'However, there was a problem sending email to the maintainers.')
                 return redirect(manage_contributed_data)
 
     if total_res > 1:
@@ -1377,6 +1377,16 @@ def create_description(xml_file, type, user):
             for lang in info['languages']:
                 languageInfoType_model.objects.create(languageName = lang, \
                     back_to_corpustextinfotype_model = corpus_text)
+        if len(info['languages']) == 1:
+            corpus_text.lingualityInfo.lingualityType = u'monolingual'
+            corpus_text.lingualityInfo.save()
+        elif len(info['languages']) == 2:
+            corpus_text.lingualityInfo.lingualityType = u'bilingual'
+            corpus_text.lingualityInfo.save()
+        elif len(info['languages']) > 2:
+            corpus_text.lingualityInfo.lingualityType = u'multilingual'
+            corpus_text.lingualityInfo.save()
+
 
         corpus_info = corpusInfoType_model.objects.create(corpusMediaType=corpus_media_type)
 
@@ -1396,6 +1406,16 @@ def create_description(xml_file, type, user):
                 languageInfoType_model.objects.create(languageName = lang, \
                     back_to_languagedescriptiontextinfotype_model = langdesc_text)
 
+        if len(info['languages']) == 1:
+            langdesc_text.lingualityInfo.lingualityType = u'monolingual'
+            langdesc_text.lingualityInfo.save()
+        elif len(info['languages']) == 2:
+            langdesc_text.lingualityInfo.lingualityType = u'bilingual'
+            langdesc_text.lingualityInfo.save()
+        elif len(info['languages']) > 2:
+            langdesc_text.lingualityInfo.lingualityType = u'multilingual'
+            langdesc_text.lingualityInfo.save()
+
         langdesc_info = languageDescriptionInfoType_model.objects.create(
                 languageDescriptionMediaType=language_description_media_type)
 
@@ -1411,6 +1431,16 @@ def create_description(xml_file, type, user):
             for lang in info['languages']:
                 languageInfoType_model.objects.create(languageName = lang, \
                     back_to_lexicalconceptualresourcetextinfotype_model = lexicalConceptual_text)
+
+        if len(info['languages']) == 1:
+            lexicalConceptual_text.lingualityInfo.lingualityType = u'monolingual'
+            lexicalConceptual_text.lingualityInfo.save()
+        elif len(info['languages']) == 2:
+            lexicalConceptual_text.lingualityInfo.lingualityType = u'bilingual'
+            lexicalConceptual_text.lingualityInfo.save()
+        elif len(info['languages']) > 2:
+            lexicalConceptual_text.lingualityInfo.lingualityType = u'multilingual'
+            lexicalConceptual_text.lingualityInfo.save()
 
         lexicon_info = lexicalConceptualResourceInfoType_model.objects.create(
                 lexicalConceptualResourceMediaType=lexicon_media_type)
