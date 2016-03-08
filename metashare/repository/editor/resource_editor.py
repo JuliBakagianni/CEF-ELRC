@@ -253,6 +253,68 @@ def has_publish_permission(request, queryset):
             return False
     return True
 
+# Check if resource is valid for contributed resources that are imported
+# in the repository as internal and can be published by mistake
+# without the remaining required data filled in
+def resourceIsValid(res):
+    dist_ok = False
+    linguality_ok = False
+    lang_ok = False
+    size_ok = False
+    lcrt_ok = False
+    ldt_ok = False
+    from django.core.exceptions import ObjectDoesNotExist
+    try:
+        if res.distributionInfo:
+            dist_ok = True
+    except ObjectDoesNotExist:
+        pass
+
+    ## based on resource type:
+    corpus_media = res.resourceComponentType.as_subclass()
+    # 2. check if lingualityType exists
+    if isinstance(corpus_media, corpusInfoType_model):
+        media_type = corpus_media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            if corpus_info.lingualityInfo.lingualityType:
+                linguality_ok = True
+                break
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            if corpus_info.languageinfotype_model_set.all().count() > 0:
+                lang_ok = True
+                break
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            if corpus_info.sizeinfotype_model_set.all().count() > 0:
+                size_ok = True
+                break
+        return dist_ok and linguality_ok and lang_ok and size_ok
+
+    elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
+        if corpus_media.lexicalConceptualResourceType:
+            lcrt_ok = True
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            if lcr_media_type.lexicalConceptualResourceTextInfo.lingualityInfo.lingualityType:
+                linguality_ok = True
+            if lcr_media_type.lexicalConceptualResourceTextInfo.languageinfotype_model_set.all().count() > 0:
+                lang_ok = True
+            if lcr_media_type.lexicalConceptualResourceTextInfo.sizeinfotype_model_set.all().count() > 0:
+                size_ok = True
+        return dist_ok and lcrt_ok and linguality_ok and lang_ok and size_ok
+
+    elif isinstance(corpus_media, languageDescriptionInfoType_model):
+        ld_media_type = corpus_media.languageDescriptionMediaType
+        if corpus_media.languageDescriptionType:
+            ldt_ok = True
+        if ld_media_type.languageDescriptionTextInfo:
+            if ld_media_type.languageDescriptionTextInfo.lingualityInfo.lingualityType:
+                linguality_ok = True
+            if ld_media_type.languageDescriptionTextInfo.languageinfotype_model_set.all().count() > 0:
+                lang_ok = True
+            if ld_media_type.languageDescriptionTextInfo.sizeinfotype_model_set.all().count() > 0:
+                size_ok = True
+            return dist_ok and ldt_ok and linguality_ok and lang_ok and size_ok
+        return dist_ok and ldt_ok
 
 class MetadataForm(forms.ModelForm):
     def save(self, commit=True):
@@ -287,10 +349,16 @@ class ResourceModelAdmin(SchemaModelAdmin):
         if has_publish_permission(request, queryset):
             successful = 0
             for obj in queryset:
-                if change_resource_status(obj, status=PUBLISHED,
-                                          precondition_status=INGESTED):
-                    successful += 1
-                    saveLRStats(obj, UPDATE_STAT, request)
+                if resourceIsValid(obj):
+                    if change_resource_status(obj, status=PUBLISHED,
+                                              precondition_status=INGESTED):
+                        successful += 1
+                        saveLRStats(obj, UPDATE_STAT, request)
+                else:
+                    messages.error(request,
+                        _('Only valid resources can be published; '
+                          'please, edit the resource and re-try'))
+                    return
             if successful > 0:
                 messages.info(request, ungettext(
                     'Successfully published %(ingested)s ingested resource.',
@@ -332,10 +400,16 @@ class ResourceModelAdmin(SchemaModelAdmin):
         if has_publish_permission(request, queryset) or request.user.is_staff:
             successful = 0
             for obj in queryset:
-                if change_resource_status(obj, status=INGESTED,
-                                          precondition_status=INTERNAL):
-                    successful += 1
-                    saveLRStats(obj, INGEST_STAT, request)
+                if resourceIsValid(obj):
+                    if change_resource_status(obj, status=INGESTED,
+                                              precondition_status=INTERNAL):
+                        successful += 1
+                        saveLRStats(obj, INGEST_STAT, request)
+                else:
+                    messages.error(request,
+                        _('Only valid resources can be ingested; '
+                          'please, edit the resource and re-try'))
+                    return
             if successful > 0:
                 messages.info(request, ungettext(
                     'Successfully ingested %(internal)s internal resource.',
