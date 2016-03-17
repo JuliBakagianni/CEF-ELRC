@@ -16,6 +16,8 @@ import os
 from lxml import etree
 import shutil
 
+from django.contrib.auth.models import User
+from django.contrib.sessions.models import Session
 
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
@@ -58,6 +60,19 @@ MAXIMUM_READ_BLOCK_SIZE = 4096
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
 
+def get_all_logged_in_users():
+    # Query all non-expired sessions
+    # use timezone.now() instead of datetime.now() in latest versions of Django
+    sessions = Session.objects.filter(expire_date__gte=datetime.datetime.now())
+    uid_list = []
+
+    # Build a list of user ids from that query
+    for session in sessions:
+        data = session.get_decoded()
+        uid_list.append(data.get('_auth_user_id', None))
+
+    # Query all logged in users based on id list
+    return User.objects.filter(id__in=uid_list)
 
 def _convert_to_template_tuples(element_tree):
     """
@@ -1253,11 +1268,11 @@ def addtodb(request):
             if recipients_resources[recipient]["count"] > 1:
                 title = "{} new resources from contributors".format(recipients_resources[recipient]["count"])
                 text = "You have received {} new resources from contributors. " \
-                          "Please check your CEF-ELRC repository account.".format(recipients_resources[recipient]["count"])
+                          "Please check your ELRC-SHARE repository account.".format(recipients_resources[recipient]["count"])
             else:
                 title = "1 new resource from contributors"
                 text = "You have received 1 new resource from contributors. " \
-                          "Please check your CEF-ELRC repository account"
+                          "Please check your ELRC-SHARE repository account."
 
             try:
                 send_mail(title, text, \
@@ -1267,7 +1282,7 @@ def addtodb(request):
                     msg = '{} resources have been successfully imported into the database. '.format(total_res)
                 else:
                     msg = '1 resource has been successfully imported into the database. '
-                messages.error(request, msg+'However, there was a problem sending email to the maintainers')
+                messages.error(request, msg+'However, there was a problem sending email to the maintainers.')
                 return redirect(manage_contributed_data)
 
     if total_res > 1:
@@ -1275,10 +1290,10 @@ def addtodb(request):
               'the database. ' \
               'A notification email has been sent to the maintainers ({})'.format(total_res, ", ".join(recipients))
     else:
-         msg = '1 resource has been successfully imported into ' \
-               'the database. ' \
-               'A notification email has been sent to ' \
-               '{}'.format(", ".join(recipients))
+         msg = u'1 resource has been successfully imported into ' \
+               u'the database. ' \
+               u'A notification email has been sent to ' \
+               u'{}'.format(u", ".join(recipients))
     messages.success(request, msg)
     return redirect(manage_contributed_data)
 
@@ -1369,6 +1384,16 @@ def create_description(xml_file, type, user):
             for lang in info['languages']:
                 languageInfoType_model.objects.create(languageName = lang, \
                     back_to_corpustextinfotype_model = corpus_text)
+        if len(info['languages']) == 1:
+            corpus_text.lingualityInfo.lingualityType = u'monolingual'
+            corpus_text.lingualityInfo.save()
+        elif len(info['languages']) == 2:
+            corpus_text.lingualityInfo.lingualityType = u'bilingual'
+            corpus_text.lingualityInfo.save()
+        elif len(info['languages']) > 2:
+            corpus_text.lingualityInfo.lingualityType = u'multilingual'
+            corpus_text.lingualityInfo.save()
+
 
         corpus_info = corpusInfoType_model.objects.create(corpusMediaType=corpus_media_type)
 
@@ -1388,6 +1413,16 @@ def create_description(xml_file, type, user):
                 languageInfoType_model.objects.create(languageName = lang, \
                     back_to_languagedescriptiontextinfotype_model = langdesc_text)
 
+        if len(info['languages']) == 1:
+            langdesc_text.lingualityInfo.lingualityType = u'monolingual'
+            langdesc_text.lingualityInfo.save()
+        elif len(info['languages']) == 2:
+            langdesc_text.lingualityInfo.lingualityType = u'bilingual'
+            langdesc_text.lingualityInfo.save()
+        elif len(info['languages']) > 2:
+            langdesc_text.lingualityInfo.lingualityType = u'multilingual'
+            langdesc_text.lingualityInfo.save()
+
         langdesc_info = languageDescriptionInfoType_model.objects.create(
                 languageDescriptionMediaType=language_description_media_type)
 
@@ -1403,6 +1438,16 @@ def create_description(xml_file, type, user):
             for lang in info['languages']:
                 languageInfoType_model.objects.create(languageName = lang, \
                     back_to_lexicalconceptualresourcetextinfotype_model = lexicalConceptual_text)
+
+        if len(info['languages']) == 1:
+            lexicalConceptual_text.lingualityInfo.lingualityType = u'monolingual'
+            lexicalConceptual_text.lingualityInfo.save()
+        elif len(info['languages']) == 2:
+            lexicalConceptual_text.lingualityInfo.lingualityType = u'bilingual'
+            lexicalConceptual_text.lingualityInfo.save()
+        elif len(info['languages']) > 2:
+            lexicalConceptual_text.lingualityInfo.lingualityType = u'multilingual'
+            lexicalConceptual_text.lingualityInfo.save()
 
         lexicon_info = lexicalConceptualResourceInfoType_model.objects.create(
                 lexicalConceptualResourceMediaType=lexicon_media_type)

@@ -1,3 +1,4 @@
+{% load logged_in_users %}
 {% spaceless %}
 <div id="header">
     <img style="float:right; margin: 10px 20px 0 0" src="/site_media/images/meta-share_elrc_small.png"/>
@@ -7,7 +8,9 @@
 <div class="jsddm">
   <ul id="jsddm">
     <li title="Home"><a href="{% url metashare.views.frontpage %}">Home</a></li>
-    <li title="Browse the resources of the ELRC catalogue"><a href="{% url metashare.views.frontpage %}repository/search/">Browse Resources</a></li>
+     {% if user.get_profile.has_editor_permission %}
+      <li title="Browse the resources of the ELRC catalogue"><a href="{% url metashare.views.frontpage %}repository/search/">Browse Resources</a></li>
+  {% endif %}
   {% if user.is_authenticated %}
       <li><a href="{% url metashare.repository.views.simple_form %}">Contribute Resources</a></li>
   {% endif %}
@@ -78,6 +81,9 @@
       </ul>
     </li>
     {% endif %}
+      {% if user.get_profile.is_superuser %}
+        <li><a>View Logged in Users</a>{% render_logged_in_user_list %}</li>
+      {% endif %}
         {% if user.username %}
 {#        <a href="{% url metashare.views.logout %}?next={{ request.path }}" style="float:right; margin-right:20px;"><div class="topright">Logout</div></a>#}
       <li><a href="{% url metashare.views.logout %}?next=/">Logout</a></li>
