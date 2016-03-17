@@ -1157,7 +1157,14 @@ def simple_form(request):
             xml_file.write(xml)
             xml_file.closed
             f.closed
-            # TODO: change this
+        try:
+            send_mail("New unmanaged contributions",
+                "You have new unmanaged contributed resources", \
+                'no-reply@elrc-share.ilsp.gr', ["penny@ilsp.gr"], \
+                fail_silently=False)
+        except:
+            pass
+
         return render_to_response('repository/editor/simple_form/simple_form.html',
                                   {'type': 'success', 'message': 'Your data has been successfully submitted. '
                                     'You can continue uploading more resources if you want.'}, \
@@ -1276,7 +1283,7 @@ def addtodb(request):
 
             try:
                 send_mail(title, text, \
-                        'no-reply@meta-share.eu', recipients_resources[recipient]["email"], fail_silently=False)
+                        'no-reply@elrc-share.ilsp.gr', recipients_resources[recipient]["email"], fail_silently=False)
             except:
                 if total_res > 1:
                     msg = '{} resources have been successfully imported into the database. '.format(total_res)
@@ -1286,9 +1293,10 @@ def addtodb(request):
                 return redirect(manage_contributed_data)
 
     if total_res > 1:
-        msg = '{} resources have been successfully imported into ' \
-              'the database. ' \
-              'A notification email has been sent to the maintainers ({})'.format(total_res, ", ".join(recipients))
+
+        msg = u'{} resources have been successfully imported into ' \
+              u'the database. ' \
+              u'A notification email has been sent to the maintainers ({})'.format(total_res, u", ".join(recipients))
     else:
          msg = u'1 resource has been successfully imported into ' \
                u'the database. ' \

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited by ILSP/Athena R.C. -->
-<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en">
+<xs:schema xmlns:ms="http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
 	<!-- definition of global attributes -->
 	<!--
 	<xs:attribute name="lang">
@@ -594,6 +594,20 @@
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>text with tab-separated-values</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>MS-Word docx</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="application/msword">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>MS-Word doc</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>

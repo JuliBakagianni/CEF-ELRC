@@ -6,23 +6,21 @@
     {% analytical_head_top %}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>{% spaceless %}{% block title %}ELRC-SHARE Repository{% endblock %}{% endspaceless %}</title>
-    <meta name="description" content="
-
-
-            {% spaceless %}{% block description %}META-SHARE: a sustainable network of repositories of language resources documented with high-quality metadata, allowing for uniform search and access to resources.{% endblock %}{% endspaceless %}"/>
-    <meta name="keywords" content="
-
-
-            {% spaceless %}{% block keywords %}META-SHARE, language resources, language tools, META-NET{% endblock %}{% endspaceless %}"/>
+    <meta name="description" content="{% spaceless %}{% block description %}META-SHARE: a sustainable network of repositories of language resources documented with high-quality metadata, allowing for uniform search and access to resources.{% endblock %}{% endspaceless %}"/>
+    <meta name="keywords" content="{% spaceless %}{% block keywords %}META-SHARE, language resources, language tools, META-NET{% endblock %}{% endspaceless %}"/>
     <link rel="shortcut icon" href="/site_media/images/favicon.ico"/>
     <link rel="stylesheet" href="/site_media/css/blueprint/screen.css" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="/site_media/css/blueprint/print.css" type="text/css" media="print">
+
     <!--[if lt IE 8]><link rel="stylesheet" href="/site_media/css/blueprint/ie.css" type="text/css" media="screen, projection">
     <![endif]-->
-    <link rel="stylesheet" href="/site_media/css/sexybuttons/sexybuttons.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/site_media/css/upload.css" type="text/css">
     <link rel="stylesheet" href="/site_media/css/screen.css" type="text/css" media="screen">
     <link rel="stylesheet" href="/site_media/css/typo.css" type="text/css" media="screen">
+
     <script src="/site_media/js/jquery-1.7.1.min.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+    <script src="/site_media/js/upload.js"></script>
     <script type="text/javascript" src="/site_media/js/metashare.js"></script>
     {% block links %}{% endblock %}{% analytical_head_bottom %}
     <script type="text/javascript">
@@ -54,19 +52,13 @@
 {#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"#}
 {#            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"#}
 {#            crossorigin="anonymous"></script>#}
-    <style type="text/css">
-        .form-group.required label:after {content: "*"; color: red; font-size: 1.3em;}
-        .failure {text-align: center; width: 800px; margin: 10px auto;
-            padding: 5px; border-radius: 5px; background: #f2df00}
-
-        .success {text-align: center; width: 800px; margin: 10px auto; padding: 5px; border-radius: 5px;}
-    </style>
 </head>
-<body>
+<body style="position: relative;">
 {% include 'header.html' %}
 <div class="back" style="margin-top: 20px">
-    <div style="width: 100% !important; height:450px; text-align: center; background-image: url('/site_media/images/iStock_000055931356_XXXLarge_web.jpg'); background-position: center; background-repeat: no-repeat; border-bottom: 1px solid;"/>
+    <div style="width: 100% !important; height:450px; text-align: center; background-image: url('{{ MEDIA_URL }}images/iStock_000055931356_XXXLarge_web.jpg'); background-position: center; background-repeat: no-repeat; border-bottom: 1px solid;"><h2 style=" text-align: left; left: 10%; color: white;  font-size: 45px;position:relative;top:170px; text-shadow: 1px 1px #000;">Data Contribution Form</h2></div>
 </div>
+<div class="overlay"></div>
 {% if message %}
     <div class="{{ type }}">{{ message }}</div>
 {% endif %}
@@ -104,6 +96,7 @@
         <!-- Text input-->
         <div class="form-group languages">
             <label class="col-md-4 control-label" for="languages">Language(s)</label>
+
             <div class="col-md-4">
                 <div class="language"><select multiple style="padding: 6px; height:200px" name="languages[]" id="languages">
                     <option value="Bulgarian">Bulgarian</option>
@@ -157,5 +150,14 @@
         {% csrf_token %}
     </fieldset>
 </form>
+
+<div class="uploadWin">
+    <div id="status" style="padding: 3px;"></div>
+    <div class="progress">
+        <div class="bar"></div>
+        <div class="percent">0%</div>
+    </div>
+    <div id="okbtn"><button class="btn btn-success btn-sm" id="ok" onclick="$('.uploadWin').hide();$('.overlay').hide();">OK</button></div>
+</div>
 </body>
 </html>

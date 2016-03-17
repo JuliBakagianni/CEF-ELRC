@@ -270,7 +270,7 @@ class domainInfo_model_inline_corpusTextInfoType_model(SchemaModelInline):
 # pylint: disable-msg=C0103
 class domainInfo_model_inline_languageDescriptionTextInfoType_model(SchemaModelInline):
     model = domainInfoType_model
-    template = 'admin/edit_inline/tabular.html'
+    template = 'admin/edit_inline/stacked.html'
     fk_name = 'back_to_languagedescriptiontextinfotype_model'
 
 
@@ -298,7 +298,7 @@ class domainInfo_model_inline_languageDescriptionTextInfoType_model(SchemaModelI
 # pylint: disable-msg=C0103
 class domainInfo_model_inline_lexicalConceptualResourceTextInfoType_model(SchemaModelInline):
     model = domainInfoType_model
-    template = 'admin/edit_inline/tabular.html'
+    template = 'admin/edit_inline/stacked.html'
     fk_name = 'back_to_lexicalconceptualresourcetextinfotype_model'
 
 

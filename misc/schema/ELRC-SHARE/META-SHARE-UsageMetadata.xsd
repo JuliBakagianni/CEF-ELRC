@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- edited by ILSP/Athena R.C. -->
-<xs:schema xmlns:ms="http://www.ilsp.gr/META-XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ilsp.gr/META-XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0.2" xml:lang="en">
+<xs:schema xmlns:ms="http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
 	<xs:include schemaLocation="./META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="./META-SHARE-RoleTypes.xsd"/>
 	<xs:include schemaLocation="./META-SHARE-LicenseMetadata.xsd"/>
@@ -107,6 +107,11 @@
 						<xs:enumeration value="euFunds">
 							<xs:annotation>
 								<xs:documentation>Funding coming from EU sources</xs:documentation>
+							</xs:annotation>
+						</xs:enumeration>
+						<xs:enumeration value="serviceContract">
+							<xs:annotation>
+								<xs:documentation>Funding coming from a contract made between two partices for delivering specific services; the contractor can be an organisation, a public authority or an individual; the combined use of fundingType values can be used to provide further information</xs:documentation>
 							</xs:annotation>
 						</xs:enumeration>
 					</xs:restriction>
