@@ -16,9 +16,6 @@ import os
 from lxml import etree
 import shutil
 
-from django.contrib.auth.models import User
-from django.contrib.sessions.models import Session
-
 from django.contrib.sessions.models import Session
 
 from django.shortcuts import render_to_response, get_object_or_404, redirect
