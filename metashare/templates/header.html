@@ -83,7 +83,7 @@
     {% endif %}
       {% if user.get_profile.is_superuser %}
         <li><a>View Logged in Users</a>{% render_logged_in_user_list %}</li>
-    {% endif %}
+      {% endif %}
         {% if user.username %}
 {#        <a href="{% url metashare.views.logout %}?next={{ request.path }}" style="float:right; margin-right:20px;"><div class="topright">Logout</div></a>#}
       <li><a href="{% url metashare.views.logout %}?next=/">Logout</a></li>

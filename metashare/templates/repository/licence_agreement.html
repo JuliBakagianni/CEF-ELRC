@@ -29,7 +29,7 @@
             {% endif %}
         {% else %}
             {% if l_url %}
-                <h3>Licence Agreement &ndash; {{ licence_name }}</h3>
+                <h3>Licence Agreement {% if l_name %} &ndash; {{ l_name }}{% endif %}</h3>
                 <iframe src="{{ l_url }}" width="850" height="400"><a href="{{ l_url }}">View licence</a>
                 </iframe>
                 <table style="margin:15px;">
@@ -50,7 +50,7 @@
                 {% endif %}
             {% else %}
                 {% if l_text %}
-                    <h3>Licence Agreement &ndash; {{ licence_name }}</h3>
+                    <h3>Licence Agreement {% if l_name %} &ndash; {{ l_name }}{% endif %}</h3>
                     <div style="border: thin solid; padding: 3ex">
                         {% for t in l_text %}
                             <p>{{ t|linebreaksbr }}</p>
