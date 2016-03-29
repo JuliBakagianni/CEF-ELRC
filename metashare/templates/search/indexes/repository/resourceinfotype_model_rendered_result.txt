@@ -23,7 +23,7 @@
 <ul>
   {% resource_languages object.resourceComponentType.as_subclass %}
 </ul>
-<ul>
+<ul class="licences">
    {% for l in object.distributionInfo.licenceinfotype_model_set.all %}
     <li class="licence">{{ l.licence|licence_icon|safe }}</li>
    {% endfor %}
