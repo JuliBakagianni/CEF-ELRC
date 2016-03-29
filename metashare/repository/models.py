@@ -1275,7 +1275,7 @@ class domainInfoType_model(SchemaModel):
                       'EUROVOC domains: '
                       'http://eurovoc.europa.eu/drupal/?q=navigation&cl=en',
             editable=False,
-            max_length=3,
+            max_length=6,
             null=True,
             blank=True
         )
