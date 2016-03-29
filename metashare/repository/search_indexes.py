@@ -21,6 +21,7 @@ from metashare.repository.search_fields import LabeledCharField, \
 from metashare.storage.models import StorageObject, INGESTED, PUBLISHED
 from metashare.settings import LOG_HANDLER
 from metashare.stats.model_utils import DOWNLOAD_STAT, VIEW_STAT
+from metashare.repository.mimetype_choices import MIMETYPEVALUE_TO_MIMETYPELABEL
 
 
 # Setup logging support.
@@ -1023,60 +1024,21 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
-                mimeType_list.extend([mimeType.mimeType for mimeType in
+                mimeType_list.extend([MIMETYPEVALUE_TO_MIMETYPELABEL[mimeType.mimeType] for mimeType in
                                       corpus_info.textformatinfotype_model_set.all()])
-            # if media_type.corpusAudioInfo:
-            #     mimeType_list.extend([mimeType.mimeType for mimeType in
-            #             media_type.corpusAudioInfo.audioformatinfotype_model_set.all()])
-            # for corpus_info in media_type.corpusvideoinfotype_model_set.all():
-            #     mimeType_list.extend([mimeType.mimeType for mimeType in
-            #                           corpus_info.videoformatinfotype_model_set.all()])
-            # if media_type.corpusTextNgramInfo:
-            #     mimeType_list.extend([mimeType.mimeType for mimeType in
-            #             media_type.corpusTextNgramInfo.textformatinfotype_model_set.all()])
-            # if media_type.corpusImageInfo:
-            #     mimeType_list.extend([mimeType.mimeType for mimeType in
-            #             media_type.corpusImageInfo.imageformatinfotype_model_set.all()])
-
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
             if lcr_media_type.lexicalConceptualResourceTextInfo:
-                mimeType_list.extend([mimeType.mimeType for mimeType in
+                mimeType_list.extend([MIMETYPEVALUE_TO_MIMETYPELABEL[mimeType.mimeType] for mimeType in
                         lcr_media_type.lexicalConceptualResourceTextInfo \
                             .textformatinfotype_model_set.all()])
-            # if lcr_media_type.lexicalConceptualResourceAudioInfo:
-            #     mimeType_list.extend([mimeType.mimeType for mimeType in
-            #             lcr_media_type.lexicalConceptualResourceAudioInfo \
-            #                 .audioformatinfotype_model_set.all()])
-            # if lcr_media_type.lexicalConceptualResourceVideoInfo:
-            #     mimeType_list.extend([mimeType.mimeType for mimeType in
-            #             lcr_media_type.lexicalConceptualResourceVideoInfo \
-            #                 .videoformatinfotype_model_set.all()])
-            # if lcr_media_type.lexicalConceptualResourceImageInfo:
-            #     mimeType_list.extend([mimeType.mimeType for mimeType in
-            #             lcr_media_type.lexicalConceptualResourceImageInfo \
-            #                 .imageformatinfotype_model_set.all()])
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
-                mimeType_list.extend([mimeType.mimeType for mimeType in
+                mimeType_list.extend([MIMETYPEVALUE_TO_MIMETYPELABEL[mimeType.mimeType] for mimeType in
                         ld_media_type.languageDescriptionTextInfo \
                             .textformatinfotype_model_set.all()])
-            # if ld_media_type.languageDescriptionVideoInfo:
-            #     mimeType_list.extend([mimeType.mimeType for mimeType in
-            #             ld_media_type.languageDescriptionVideoInfo \
-            #                 .videoformatinfotype_model_set.all()])
-            # if ld_media_type.languageDescriptionImageInfo:
-            #     mimeType_list.extend([mimeType.mimeType for mimeType in
-            #             ld_media_type.languageDescriptionImageInfo \
-            #                 .imageformatinfotype_model_set.all()])
-
-        # elif isinstance(corpus_media, toolServiceInfoType_model):
-        #     if corpus_media.inputInfo:
-        #         mimeType_list.extend(corpus_media.inputInfo.mimeType)
-        #     if corpus_media.outputInfo:
-        #         mimeType_list.extend(corpus_media.outputInfo.mimeType)
 
         return mimeType_list
 
