@@ -79,6 +79,16 @@ def _compute_documentationInfoType_key():
     return max(_k1_id, _k2_id) + 1
 
 
+def country_optgroup_choices():
+    """
+    Group the choices in groups. The first group the EU languages
+    and the second group contains the rest.
+    """
+    eu_choices = ('EU', _make_choices_from_list(iana.get_eu_regions())['choices'])
+    more_choices = ('More', _make_choices_from_list(sorted(iana.get_rest_of_regions()))['choices'])
+    optgroup = [eu_choices, more_choices]
+    return optgroup
+
 # pylint: disable-msg=C0103
 class resourceInfoType_model(SchemaModel):
     """
@@ -2707,12 +2717,12 @@ class communicationInfoType_model(SchemaModel):
                   'ed in the postal address of a person or organization',
         blank=True, max_length=100, )
 
-    country = XmlCharField(
+    country = models.CharField(
         verbose_name='Country',
         help_text='The name of the country mentioned in the postal address' \
                   ' of a person or organization as defined in the list of values of ' \
                   'ISO 3166',
-        blank=True, max_length=100, )
+        blank=True, max_length=100, choices = country_optgroup_choices())
 
     telephoneNumber = MultiTextField(max_length=30, widget=MultiFieldWidget(widget_id=15, max_length=30),
                                      verbose_name='Telephone number',
@@ -3952,7 +3962,7 @@ class projectInfoType_model(SchemaModel):
       help_text='The full name of the funder of the project',
       blank=True, validators=[validate_matches_xml_char_production], )
 
-    fundingCountry = MultiTextField(max_length=100, widget=MultiFieldWidget(widget_id=21, max_length=100),
+    fundingCountry = MultiTextField(max_length=100, widget=MultiChoiceWidget(widget_id=21, choices=country_optgroup_choices()),
       verbose_name='Funding country',
       help_text='The name of the funding country, in case of national fu' \
       'nding as mentioned in ISO3166',

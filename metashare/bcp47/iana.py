@@ -32,6 +32,14 @@ def get_all_scripts():
     xpath = u"//script/description/text()"
     return registry.xpath(xpath)
 
+def get_eu_regions():
+    xpath = u"//region[position()<30]/description/text()"
+    return registry.xpath(xpath)
+
+def get_rest_of_regions():
+    xpath = u"//region[position()>30]/description/text()"
+    return registry.xpath(xpath)
+
 def get_all_regions():
     xpath = u"//region/description/text()"
     return registry.xpath(xpath)
