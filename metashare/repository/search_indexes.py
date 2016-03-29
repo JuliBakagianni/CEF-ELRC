@@ -1024,19 +1024,19 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         if isinstance(corpus_media, corpusInfoType_model):
             media_type = corpus_media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
-                mimeType_list.extend([MIMETYPEVALUE_TO_MIMETYPELABEL[mimeType.mimeType.lower()] for mimeType in
+                mimeType_list.extend([MIMETYPEVALUE_TO_MIMETYPELABEL[mimeType.mimeType] for mimeType in
                                       corpus_info.textformatinfotype_model_set.all()])
         elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
             if lcr_media_type.lexicalConceptualResourceTextInfo:
-                mimeType_list.extend([MIMETYPEVALUE_TO_MIMETYPELABEL[mimeType.mimeType.lower()] for mimeType in
+                mimeType_list.extend([MIMETYPEVALUE_TO_MIMETYPELABEL[mimeType.mimeType] for mimeType in
                         lcr_media_type.lexicalConceptualResourceTextInfo \
                             .textformatinfotype_model_set.all()])
 
         elif isinstance(corpus_media, languageDescriptionInfoType_model):
             ld_media_type = corpus_media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
-                mimeType_list.extend([MIMETYPEVALUE_TO_MIMETYPELABEL[mimeType.mimeType.lower()] for mimeType in
+                mimeType_list.extend([MIMETYPEVALUE_TO_MIMETYPELABEL[mimeType.mimeType] for mimeType in
                         ld_media_type.languageDescriptionTextInfo \
                             .textformatinfotype_model_set.all()])
 
