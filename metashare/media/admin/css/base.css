@@ -689,6 +689,7 @@ table#change-history tbody th {
 #footer {
     clear: both;
     padding: 10px;
+    text-align: center;
 }
 
 /* COLUMN TYPES */
