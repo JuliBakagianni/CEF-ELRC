@@ -1493,42 +1493,57 @@ def last_published(request):
     '''
     now = datetime.datetime.now()
     then = now - datetime.timedelta(days=15)
-    folder = "media"
-    filename = "reports/{}-{}_elrc-share_report.xlsx".format(
-        then.strftime("%B.%d.%Y"), now.strftime("%B.%d.%Y"))
-    workbook = xlsxwriter.Workbook('{}/{}'.format(
-        folder, filename))
-
-    ## formating
-    bold = workbook.add_format({'bold': True})
-
-    worksheet = workbook.add_worksheet(name="{}-{}_report".format(
-        then.strftime("%d.%m.%y"), now.strftime("%d.%m.%y")))
-    worksheet.write('A1', 'Resource Name', bold)
-    worksheet.write('B1', 'Date Published', bold)
-    worksheet.write('C1', 'Languages', bold)
     resources = resourceInfoType_model.objects.filter(
         storage_object__publication_status=PUBLISHED, storage_object__digest_modified__gte=then)
-    link = "{}/repository/{}".format(DJANGO_URL, filename)
-    output = "{} language resources have been published since {}.".format(len(resources), then.strftime("%B %d, %Y"))
+    print len(resources)
+    strLR = ""
+    link = None
+    if len(resources) == 0 or len(resources) > 1:
+        strLR = "language resources have"
+    else:
+        strLR = "language resource has"
 
-    output += "\n Click on the link below to download the report.\n\n{}/".format(link)
+    output = "{} {} been published since {}.".format(len(resources), strLR, then.strftime("%B %d, %Y"))
+    if len(resources) > 0:
+        folder = "/var/www/CEF-ELRC/metashare/media"
+        filename = "reports/{}-{}_elrc-share_report.xlsx".format(
+            then.strftime("%B.%d.%Y"), now.strftime("%B.%d.%Y"))
+        workbook = xlsxwriter.Workbook('{}/{}'.format(
+            folder, filename))
 
-    date_format = workbook.add_format({'num_format': 'mmmm d, yyyy'})
+        ## formating
+        bold = workbook.add_format({'bold': True})
 
-    for i in range(len(resources)):
-        res = resources[i]
-        date = datetime.datetime.strptime(unicode(res.storage_object.digest_modified).split(" ")[0], "%Y-%m-%d")
-        worksheet.write(i + 1, 0, res.identificationInfo.resourceName['en'])
-        worksheet.write_datetime(i + 1, 1, date, date_format)
-        worksheet.write(i + 1, 2, _get_resource_languages(res))
-    worksheet.write(len(resources)+3, 2, "Total Resources", bold)
-    worksheet.write_number(len(resources)+4, 2, len(resources))
-    workbook.close()
+        worksheet = workbook.add_worksheet(name="{}-{}_report".format(
+            then.strftime("%d.%m.%y"), now.strftime("%d.%m.%y")))
+        worksheet.write('A1', 'Resource Name', bold)
+        worksheet.write('B1', 'Date Published', bold)
+        worksheet.write('C1', 'Languages', bold)
+
+        link = "{}/repository/{}".format(DJANGO_URL, filename)
+
+
+
+        output += "\n Click on the link below to download the report.\n\n{}/".format(link)
+
+        date_format = workbook.add_format({'num_format': 'mmmm d, yyyy'})
+
+        for i in range(len(resources)):
+            res = resources[i]
+            date = datetime.datetime.strptime(unicode(res.storage_object.digest_modified).split(" ")[0], "%Y-%m-%d")
+            worksheet.write(i + 1, 0, res.identificationInfo.resourceName['en'])
+            worksheet.write_datetime(i + 1, 1, date, date_format)
+            worksheet.write(i + 1, 2, _get_resource_languages(res))
+        worksheet.write(len(resources)+2, 3, "Total Resources", bold)
+        worksheet.write_number(len(resources)+3, 3, len(resources))
+        workbook.close()
+    output += "\n\nThe ELRC-SHARE Team"
     send_mail("ELRC-SHARE biweekly report ({})".format(now.strftime("%B %d, %Y")), output, \
                         'no-reply@elrc-share.ilsp.gr', ["mdel@windowslive.com"], fail_silently=False)
-
-    return HttpResponse(link)
+    if link:
+        return HttpResponse(link)
+    else:
+        return HttpResponse("No Language Resources published within the last two weeks")
 
 def _get_resource_languages(resource):
     result = []
