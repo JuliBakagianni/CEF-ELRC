@@ -84,4 +84,6 @@ urlpatterns = patterns('metashare.repository.views',
   url(r'simple_form', 'simple_form'),
   url(r'contributions','manage_contributed_data'),
   (r'addtodb/$', 'addtodb'),
+  url(r'last_published','last_published'),
+  url(r'reports/(?P<file>.+\.xlsx)', "download_report"),
 )
