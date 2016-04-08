@@ -34,8 +34,9 @@
  <ul class="object-tools">
    {% block object-tools-items %}
    {% if user.get_profile.has_editor_permission %}
-{#       <li><a href="lrquality/" class="lrqualitylink">{% trans "LR Quality"%}</a></li>#}
-       <li><a href="#" class="lrqualitylink" title="Currently not available">{% trans "LR Quality"%}</a></li>
+       <li><a href="lrquality/" onclick="return showAddAnotherPopup(this);" class="lrqualitylink" title="Under Construction">{% trans "LR Quality"%}</a></li>
+{#       <li><a href="http://194.177.192.69/editor/repository/lrquality_model/{{node.pk}}/"#}
+{#     onclick="return showAddAnotherPopup(this);" title="Edit LR quality" class="lrqualitylink" title="Currently not available">{% trans "LR Quality"%}</a></li>#}
    {% endif %}
    {% if original.storage_object.get_download %}
        <li><a href="datadl/" class="downloadresourcelink">{% trans "Download resource"%}</a></li>
