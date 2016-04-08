@@ -23,6 +23,7 @@ from metashare.repository.validators import validate_lang_code_keys, \
 from metashare.settings import DJANGO_BASE, LOG_HANDLER, DJANGO_URL
 from metashare.stats.model_utils import saveLRStats, DELETE_STAT, UPDATE_STAT
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
+from metashare.lrquality.models import LrQuality,CorpusQuality,Lcrquality,LangDescquality
 from metashare.recommendations.models import ResourceCountPair, \
     ResourceCountDict
 # from metashare.repository.language_choices import LANGUAGENAME_CHOICES
@@ -62,7 +63,7 @@ def _compute_documentationInfoType_key():
     These are:
     - documentInfoType_model;
     - documentUnstructuredString_model.
-    
+
     '''
     _k1 = list(documentInfoType_model.objects.all().order_by('-id'))
     _k2 = list(documentUnstructuredString_model.objects.all().order_by('-id'))
@@ -88,6 +89,7 @@ def country_optgroup_choices():
     more_choices = ('More', _make_choices_from_list(sorted(iana.get_rest_of_regions()))['choices'])
     optgroup = [eu_choices, more_choices]
     return optgroup
+
 
 # pylint: disable-msg=C0103
 class resourceInfoType_model(SchemaModel):
@@ -200,13 +202,31 @@ class resourceInfoType_model(SchemaModel):
 
     storage_object = models.ForeignKey(StorageObject, blank=True, null=True,
                                        unique=True)
-    lr_quality = models.ForeignKey('LrQuality', editable=False, null=True, blank=True)
+    lr_quality = models.ForeignKey(LrQuality, blank=True, null=True,
+                                       unique=True)
+
     def save(self, *args, **kwargs):
+
         """
         Overrides the predefined save() method to ensure that a corresponding
         StorageObject instance is existing, creating it if missing.  Also, we
         check that the storage object instance is a local master copy.
         """
+        if not self.lr_quality:
+                mediaType=self.resourceComponentType
+                if isinstance(mediaType, corpusInfoType_model):
+                    self.lr_quality = CorpusQuality.objects.create(
+                    resource_name=self.identificationInfo.resourceName['en'])
+                elif isinstance(mediaType, lexicalConceptualResourceInfoType_model):
+                    self.lr_quality = Lcrquality.objects.create(
+                    resource_name=self.identificationInfo.resourceName['en'])
+                elif isinstance(mediaType, languageDescriptionInfoType_model):
+                    self.lr_quality = LangDescquality.objects.create(
+                    resource_name=self.identificationInfo.resourceName['en'])
+
+        if self.identificationInfo.resourceName['en'] != self.lr_quality.resource_name:
+            self.lr_quality.resource_name = self.identificationInfo.resourceName['en']
+            self.lr_quality.save()
         # If we have not yet created a StorageObject for this resource, do so.
         if not self.storage_object:
             self.storage_object = StorageObject.objects.create(
@@ -216,9 +236,11 @@ class resourceInfoType_model(SchemaModel):
         if not self.storage_object.master_copy:
             LOGGER.warning('Trying to modify non master copy {0}, ' \
                            'aborting!'.format(self.storage_object))
+
             return
 
         self.storage_object.save()
+
         # REMINDER: the SOLR indexer in search_indexes.py relies on us
         # calling storage_object.save() from resourceInfoType_model.save().
         # Should we ever change that, we must modify 
@@ -234,8 +256,10 @@ class resourceInfoType_model(SchemaModel):
         #     self.metadataInfo.metadataLanguageName. \
         #     extend(iana.get_language_by_subtag(l))
         # self.metadataInfo.clean()
-
-
+        # print self.id, self.lr_quality_id
+        # if not self.lr_quality:
+        #     self.lr_quality = LrQuality.objects.create(resource_name = self.identificationInfo.resourceName['en'])
+        #     self.lr_quality.save()
 
         super(resourceInfoType_model, self).save(*args, **kwargs)
 
@@ -244,6 +268,7 @@ class resourceInfoType_model(SchemaModel):
         self.metadataInfo.save(langs = resource_lang)
         # update statistics
         saveLRStats(self, UPDATE_STAT)
+
 
     def delete(self, keep_stats=False, *args, **kwargs):
         """
@@ -8490,59 +8515,3 @@ class documentUnstructuredString_model(InvisibleStringModel, documentationInfoTy
             # pylint: disable-msg=W0201
             self.id = _compute_documentationInfoType_key()
         super(documentUnstructuredString_model, self).save(*args, **kwargs)
-
-
-class LrQuality(models.Model):
-
-    class Meta:
-        verbose_name = "LR Quality"
-        verbose_name_plural = "LR Qualities"
-
-    # Add a foreign key to resourceInfoType_model
-
-    # source_quality
-    source_creator = models.CharField(max_length=1000, null=True)
-    creation_time = models.DateTimeField(null=True)
-    source_document_format = models.CharField(max_length=1000, null=True)
-
-    #translation_quality: OneToMany
-
-    # technical_quality
-    segmentation_quality = models.CharField(max_length=1000, null=True)
-    alignment_quality = models.CharField(max_length=1000, null=True)
-    annotation = models.CharField(max_length=1000, null=True)
-
-    # volume
-    total = models.IntegerField(null=True)
-    quality = models.IntegerField(null=True)
-
-    # focus
-    domain = models.CharField(max_length=1000, null=True)
-
-    # legal_readiness
-    ipr_cleared = models.NullBooleanField()
-    anonymization_required = models.NullBooleanField()
-
-    # def real_unicode_(self):
-    #     # pylint: disable-msg=C0301
-    #     formatargs = ['resource',]
-    #     formatstring = u'{}'
-    #     return self.unicode_(formatstring, formatargs)
-
-
-class TranslationQuality(models.Model):
-    class Meta:
-        verbose_name = "Translation Quality"
-        verbose_name_plural = "Translation Qualities"
-
-    language = models.CharField(max_length=100,)
-    source = models.CharField(max_length=1000)
-    document_format = models.CharField(max_length=1000)
-    #text_quality
-    parent_quality = models.ForeignKey("LrQuality", blank=True, null=True, editable=False)
-
-    def real_unicode_(self):
-        # pylint: disable-msg=C0301
-        formatargs = ['language',]
-        formatstring = u'{} {}'
-        return self.unicode_(formatstring, formatargs)
