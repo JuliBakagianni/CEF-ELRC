@@ -22,7 +22,6 @@ from django.views.decorators.csrf import csrf_protect
 
 from metashare import settings
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
-from metashare.repository.models import LrQuality, TranslationQuality
 from metashare.repository.editor.editorutils import FilteredChangeList
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
@@ -343,7 +342,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
     actions = ('publish_action', 'unpublish_action', 'ingest_action',
         'export_xml_action', 'delete', 'add_group', 'remove_group',
         'add_owner', 'remove_owner')
-    hidden_fields = ('storage_object', 'owners', 'editor_groups',)
+    hidden_fields = ('storage_object', 'owners', 'editor_groups', 'lr_quality')
 
     def publish_action(self, request, queryset):
         if has_publish_permission(request, queryset):
@@ -783,15 +782,15 @@ class ResourceModelAdmin(SchemaModelAdmin):
                                url(r'^(.+)/datadl/$',
                                    wrap(self.datadl),
                                    name='%s_%s_datadl' % info),
-                               url(r'^(.+)/lrquality/$',
-                                   wrap(self.lrquality),
-                                   name='%s_%s_lrquality' % info),
                                url(r'^my/$',
                                    wrap(self.changelist_view_filtered),
                                    name='%s_%s_myresources' % info),
                                url(r'^(.+)/export-xml/$',
                                    wrap(self.exportxml),
                                    name='%s_%s_exportxml' % info),
+                               url(r'^(.+)/lrquality/$',
+                                   wrap(self.lrquality),
+                                   name='%s_%s_lrquality' % info),
         ) + urlpatterns
         return urlpatterns
 
@@ -917,6 +916,19 @@ class ResourceModelAdmin(SchemaModelAdmin):
           ['admin/repository/resourceinfotype_model/upload_resource.html'], context,
           context_instance)
 
+    def lrquality(self, request, object_id):
+        obj = self.get_object(request, unquote(object_id))
+        lrq = obj.lr_quality
+        lrq_subclass = "lrquality"
+        mediaType=obj.resourceComponentType.as_subclass()
+        if isinstance(mediaType, corpusInfoType_model):
+            lrq_subclass = "corpusquality"
+        elif isinstance(mediaType, lexicalConceptualResourceInfoType_model):
+            lrq_subclass = "lcrquality"
+        elif isinstance(mediaType, languageDescriptionInfoType_model):
+            lrq_subclass = "langdescquality"
+        print lrq_subclass
+        return HttpResponseRedirect("/admin/lrquality/{}/{}".format(lrq_subclass,lrq.id))
 
     @csrf_protect_m
     def datadl(self, request, object_id, extra_context=None):
@@ -1378,44 +1390,6 @@ class ResourceModelAdmin(SchemaModelAdmin):
         _extra_context.update(_structures)
         return super(ResourceModelAdmin, self).change_view(request, object_id, _extra_context)
 
-    @csrf_protect_m
-    def lrquality(self, request, object_id):
-        model = self.model
-        opts = model._meta
-        obj = self.get_object(request, unquote(object_id))
-        if not obj.lr_quality:
-            obj.lr_quality = LrQuality.objects.create()
-        corpus_media = obj.resourceComponentType.as_subclass()
-        result = []
-        if isinstance(corpus_media, corpusInfoType_model):
-            media_type = corpus_media.corpusMediaType
-            for corpus_info in media_type.corpustextinfotype_model_set.all():
-                for language_info in corpus_info.languageinfotype_model_set.all():
-                    result.append(language_info.get_languageName_display())
-        elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
-            lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
-
-            if lcr_media_type.lexicalConceptualResourceTextInfo:
-                for language_info in lcr_media_type \
-                        .lexicalConceptualResourceTextInfo \
-                        .languageinfotype_model_set.all():
-                    result.append(language_info.get_languageName_display())
-
-        elif isinstance(corpus_media, languageDescriptionInfoType_model):
-            ld_media_type = corpus_media.languageDescriptionMediaType
-            if ld_media_type.languageDescriptionTextInfo:
-                for language_info in ld_media_type \
-                        .languageDescriptionTextInfo.languageinfotype_model_set.all():
-                    result.append(language_info.get_languageName_display())
-
-        for r in result:
-            if not TranslationQuality.objects.filter \
-                            (parent_quality=obj.lr_quality, language=r).exists():
-                TranslationQuality.objects.create(parent_quality=obj.lr_quality,
-                language = r)
-        return result
-
-
 class LicenceForm(forms.ModelForm):
     class Meta:
         model = licenceInfoType_model
@@ -1423,5 +1397,3 @@ class LicenceForm(forms.ModelForm):
 
 class LicenceModelAdmin(SchemaModelAdmin):
     form = LicenceForm
-
-    
