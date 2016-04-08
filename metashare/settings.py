@@ -168,6 +168,7 @@ INSTALLED_APPS = (
 
     'metashare.accounts',
     'metashare.storage',
+    'metashare.lrquality',
     'metashare.sync',
     'metashare.stats',
     'metashare.recommendations',
