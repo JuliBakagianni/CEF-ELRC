@@ -53,6 +53,10 @@ urlpatterns += patterns('',
   (r'^{0}selectable/'.format(DJANGO_BASE), include('selectable.urls')),
 )
 
+urlpatterns += patterns('',
+  (r'^{0}lrquality/'.format(DJANGO_BASE), include('metashare.lrquality.urls')),
+)
+
 sitemaps = {
   'site': RepositorySitemap,
 }
