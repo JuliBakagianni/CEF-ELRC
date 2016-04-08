@@ -1,5 +1,5 @@
 import logging
-
+import xlsxwriter
 import datetime
 from os.path import split, getsize
 from urllib import urlopen
@@ -1486,3 +1486,78 @@ def create_description(xml_file, type, user):
     shutil.move(xml_source, xml_destination)
 
     return (resource, cperson, info['userInfo']['country'])
+
+def last_published(request):
+    '''
+    Returns the resources published within the last to weeks
+    '''
+    now = datetime.datetime.now()
+    then = now - datetime.timedelta(days=15)
+    folder = "media"
+    filename = "reports/{}-{}_elrc-share_report.xlsx".format(
+        then.strftime("%B.%d.%Y"), now.strftime("%B.%d.%Y"))
+    workbook = xlsxwriter.Workbook('{}/{}'.format(
+        folder, filename))
+
+    ## formating
+    bold = workbook.add_format({'bold': True})
+
+    worksheet = workbook.add_worksheet(name="{}-{}_report".format(
+        then.strftime("%d.%m.%y"), now.strftime("%d.%m.%y")))
+    worksheet.write('A1', 'Resource Name', bold)
+    worksheet.write('B1', 'Date Published', bold)
+    worksheet.write('C1', 'Languages', bold)
+    resources = resourceInfoType_model.objects.filter(
+        storage_object__publication_status=PUBLISHED, storage_object__digest_modified__gte=then)
+    link = "{}/repository/{}".format(DJANGO_URL, filename)
+    output = "{} language resources have been published since {}.".format(len(resources), then.strftime("%B %d, %Y"))
+
+    output += "\n Click on the link below to download the report.\n\n{}/".format(link)
+
+    date_format = workbook.add_format({'num_format': 'mmmm d, yyyy'})
+
+    for i in range(len(resources)):
+        res = resources[i]
+        date = datetime.datetime.strptime(unicode(res.storage_object.digest_modified).split(" ")[0], "%Y-%m-%d")
+        worksheet.write(i + 1, 0, res.identificationInfo.resourceName['en'])
+        worksheet.write_datetime(i + 1, 1, date, date_format)
+        worksheet.write(i + 1, 2, _get_resource_languages(res))
+    worksheet.write(len(resources)+3, 2, "Total Resources", bold)
+    worksheet.write_number(len(resources)+4, 2, len(resources))
+    workbook.close()
+    send_mail("ELRC-SHARE biweekly report ({})".format(now.strftime("%B %d, %Y")), output, \
+                        'no-reply@elrc-share.ilsp.gr', ["mdel@windowslive.com"], fail_silently=False)
+
+    return HttpResponse(link)
+
+def _get_resource_languages(resource):
+    result = []
+    media = resource.resourceComponentType.as_subclass()
+
+    if isinstance(media, corpusInfoType_model):
+            media_type = media.corpusMediaType
+            for corpus_info in media_type.corpustextinfotype_model_set.all():
+                result.extend([lang.languageName for lang in
+                               corpus_info.languageinfotype_model_set.all()])
+
+    elif isinstance(media, lexicalConceptualResourceInfoType_model):
+            lcr_media_type = media.lexicalConceptualResourceMediaType
+            if lcr_media_type.lexicalConceptualResourceTextInfo:
+                result.extend([lang.languageName for lang in lcr_media_type \
+                        .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all()])
+
+    elif isinstance(media, languageDescriptionInfoType_model):
+            ld_media_type = media.languageDescriptionMediaType
+            if ld_media_type.languageDescriptionTextInfo:
+                result.extend([lang.languageName for lang in ld_media_type \
+                            .languageDescriptionTextInfo.languageinfotype_model_set.all()])
+    result = list(set(result))
+    result.sort()
+
+    return ', '.join(result)
+
+@login_required()
+def download_report(request, file):
+    if request.user.is_staff:
+        return redirect("/site_media/reports/{}".format(file))
+
