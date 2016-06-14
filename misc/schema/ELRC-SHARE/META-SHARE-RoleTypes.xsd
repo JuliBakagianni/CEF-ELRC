@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited by ILSP/Athena R.C. -->
-<xs:schema xmlns:ms="http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
+<xs:schema xmlns:ms="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
 	<xs:include schemaLocation="META-SHARE-SimpleTypes.xsd"/>
 	<!-- definition of complex types -->
 	<!-- media type info TextInfo/imageInfo/AudioInfo/VideInfo etc-->
@@ -22,7 +22,7 @@
 			</xs:element>
 			<xs:element name="url" type="ms:httpURI" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>A URL used as homepage of an entity (e.g. of a person, organization, resource etc.)</xs:documentation>
+					<xs:documentation>A URL used as homepage of an entity (e.g. of a person, organization, resource etc.) and/or where an entity (e.g. LR, document etc.) is located</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-many</relation>
 					</xs:appinfo>
@@ -43,7 +43,7 @@
 			</xs:element>
 			<xs:element name="zipCode" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>The zip code of the postal address of a person or organization </xs:documentation>
+					<xs:documentation>The zip code of the postal address of a person or organization</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
 					</xs:appinfo>
@@ -56,7 +56,7 @@
 			</xs:element>
 			<xs:element name="city" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>The name of the city, town or village as mentioned in the postal address of a person or organization </xs:documentation>
+					<xs:documentation>The name of the city, town or village as mentioned in the postal address of a person or organization</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
 					</xs:appinfo>

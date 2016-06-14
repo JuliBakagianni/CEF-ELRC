@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited by ILSP/Athena R.C. -->
-<xs:schema xmlns:ms="http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" xmlns:xerces="http://xerces.apache.org" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" targetNamespace="http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en" vc:minVersion="1.1">
+<xs:schema xmlns:ms="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" xmlns:xerces="http://xerces.apache.org" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" targetNamespace="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en" vc:minVersion="1.1">
 	<xs:include schemaLocation="META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="META-SHARE-RoleTypes.xsd"/>
 	<!-- definition of complex types -->
@@ -28,7 +28,7 @@
 								<xs:documentation>For resources available with no restrictions of use</xs:documentation>
 							</xs:annotation>
 						</xs:enumeration>
-						<xs:enumeration value="underNegotiation">
+						<xs:enumeration value="underReview">
 							<xs:annotation>
 								<xs:documentation>for resources that their availability is still pending</xs:documentation>
 							</xs:annotation>
@@ -62,7 +62,7 @@
 			</xs:element>
 			<xs:element name="iprHolder" type="ms:actorInfoType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Groups information on a person or an organization who holds the full Intellectual Property Rights (Copyright, trademark etc) that subsist in the resource. The IPR holder could be different from the creator that may have assigned the rights to the IPR holder (e.g. an author as a creator assigns her rights to the publisher who is the IPR holder) and the distributor that holds a specific licence (i.e. a permission) to distribute the work.
+					<xs:documentation>Groups information on a person or an organization who holds the full Intellectual Property Rights (Copyright, trademark etc.) that subsist in the resource. The IPR holder could be different from the creator that may have assigned the rights to the IPR holder (e.g. an author as a creator assigns her rights to the publisher who is the IPR holder) and the distributor that holds a specific licence (i.e. a permission) to distribute the work
                     </xs:documentation>
 					<xs:appinfo>
 						<relation>many-to-many</relation>
@@ -155,7 +155,7 @@
 								</xs:appinfo>
 							</xs:annotation>
 						</xs:enumeration>
-						<xs:enumeration value="underNegotiation"/>
+						<xs:enumeration value="underReview"/>
 						<!--
                         <xs:enumeration value="IGCYL-NC_Spain"/>
                         <xs:enumeration value="ColorIURIS_Spain"/>
@@ -430,16 +430,17 @@
 					<xs:assert test="if (ms:licence = 'NCGL_UK') then
 					ms:restrictionsOfUse = 'attribution' and ms:restrictionsOfUse = 'nonCommercialUse' and count(ms:restrictionsOfUse) = 2
 					else true()" xerces:message="The licence 'NCGL_UK' can only contain the following conditions (restrictionsOfUse = attribution, nonCommercialUse)'"/>
-<!--					<xs:assert test="if (ms:licence = 'IGCYL-NC_Spain') then
-					ms:restrictionsOfUse = 'attribution' and ms:restrictionsOfUse = 'nonCommercialUse' and count(ms:restrictionsOfUse) = 2
-					else true()" xerces:message="The licence 'IGCYL-NC_Spain' can only contain the following conditions (restrictionsOfUse = attribution, nonCommercialUse)'"/>
--->					<xs:assert test="if (ms:licence = 'PDDL') then count(ms:restrictionsOfUse) = 0
+					<xs:assert test="if (ms:licence = 'PDDL') then count(ms:restrictionsOfUse) = 0
 					else true()" xerces:message="The licence 'PDDL' should not include any conditions of use'"/>
 					<xs:assert test="if (ms:licence = 'CC-ZERO') then count(ms:restrictionsOfUse) = 0
 					else true()" xerces:message="The licence 'CC-ZERO' should not include any conditions of use'"/>
 					<xs:assert test="if (ms:licence = 'DL-DE-ZERO_Germany') then count(ms:restrictionsOfUse) = 0
 					else true()" xerces:message="The licence ''DL-DE-ZERO_Germany' should not include any conditions of use'"/>
 				</xs:extension>
+				<!--					<xs:assert test="if (ms:licence = 'IGCYL-NC_Spain') then
+					ms:restrictionsOfUse = 'attribution' and ms:restrictionsOfUse = 'nonCommercialUse' and count(ms:restrictionsOfUse) = 2
+					else true()" xerces:message="The licence 'IGCYL-NC_Spain' can only contain the following conditions (restrictionsOfUse = attribution, nonCommercialUse)'"/>
+-->
 				<!-- ASSERTIONS FOR LICENCES WITH PREDEFINED SETS OF RESTRICTIONS OF USE-->
 				<!--THE FOLLOWING LICENCES PERMIT NO CONDITIONS OF USE-->
 			</xs:complexContent>

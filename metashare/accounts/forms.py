@@ -75,7 +75,7 @@ class RegistrationRequestForm(Form):
     organization = forms.CharField(UserProfile._meta.get_field('affiliation').max_length,
                                 label=mark_safe(_("Organization<span style='color:red'>*</span>")))
     phone_number = forms.CharField(UserProfile._meta.get_field('phone_number').max_length,
-                                label=mark_safe(_("Phone number<span style='color:red'>*</span>")))
+                                label=mark_safe(_("<span style='color:grey'>Phone number</span>")), required= False)
     password = forms.CharField(User._meta.get_field('password').max_length,
         label=mark_safe(_("Password<span style='color:red'>*</span>")), widget=forms.PasswordInput())
     confirm_password = forms.CharField(

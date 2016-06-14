@@ -40,6 +40,7 @@ opt/
 .idea/libraries/Django_Lib.xml
 metashare/metadb
 .idea/bashsupport_project.xml
+.idea/ELRCSHARE.iml
 misc/schema/v3.0.2new - CEF
 metashare/storage/1a7ff195362211e5818e00155d026502f322ae2dd16a4a1f8daae8e4d60d0e3a/metadata-0002.xml
 metashare/storage/1a7ff195362211e5818e00155d026502f322ae2dd16a4a1f8daae8e4d60d0e3a/metadata-0003.xml

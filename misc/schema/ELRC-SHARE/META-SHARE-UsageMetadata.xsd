@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited by ILSP/Athena R.C. -->
-<xs:schema xmlns:ms="http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
+<xs:schema xmlns:ms="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
 	<xs:include schemaLocation="./META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="./META-SHARE-RoleTypes.xsd"/>
 	<xs:include schemaLocation="./META-SHARE-LicenseMetadata.xsd"/>
@@ -156,7 +156,7 @@
 			</xs:element>
 			<xs:element name="projectEndDate" type="xs:date" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>The end date of a project related to the resources</xs:documentation>
+					<xs:documentation>The end date of a project related to the resource</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
 					</xs:appinfo>

@@ -24,7 +24,7 @@ body {
 /* LINKS */
 
 a:link, a:visited {
-    color: #5b80b2;
+    color: #46648c;
     text-decoration: none;
 }
 
@@ -689,7 +689,6 @@ table#change-history tbody th {
 #footer {
     clear: both;
     padding: 10px;
-    text-align: center;
 }
 
 /* COLUMN TYPES */

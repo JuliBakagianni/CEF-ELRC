@@ -224,7 +224,7 @@ function update_lang_variants_with_script(e) {
     var selected = variants.find("select option:selected").val();
     if (e.val() != "") {
         $.ajax({
-            url: "http://elrc-share.ilsp.gr/update_lang_variants_with_script/",
+            url: "https://elrc-share.ilsp.gr/update_lang_variants_with_script/",
             type: 'POST',
             data: {'script': e.val(), 'lang': e.parent().parent().prev(".languageName").find("select option:selected").val()},
             success: function (result) {
@@ -250,7 +250,7 @@ function update_var_variants(prevRef, element) {
     var dataValue = prevRef.find("option:selected").val();
     if (param != "") {
         $.ajax({
-            url: "http://elrc-share.ilsp.gr/update_var_variants/",
+            url: "https://elrc-share.ilsp.gr/update_var_variants/",
             type: 'POST',
             data: {'variant': unescape(dataValue)},
             contentType: "text/html; charset=utf-8",

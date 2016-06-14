@@ -140,9 +140,10 @@ def create(request):
 
             _profile = UserProfile.objects.create(user= _user, \
                         affiliation = form.cleaned_data['organization'], \
-                        country = form.cleaned_data['country'], \
-                        phone_number = form.cleaned_data['phone_number']
+                        country = form.cleaned_data['country'],
                         )
+            if 'phone_number' in form.cleaned_data:
+                _profile.phone_number = form.cleaned_data['phone_number']
             _profile.save()
             # UserProfileForm
             # Create new RegistrationRequest instance.

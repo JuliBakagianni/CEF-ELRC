@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited by ILSP/Athena R.C. -->
-<xs:schema xmlns:ms="http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
+<xs:schema xmlns:ms="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
 	<xs:include schemaLocation="../META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="../META-SHARE-BaseTypes.xsd"/>
 	<!-- include media choices -->
@@ -198,7 +198,7 @@
 			</xs:element>
 			<xs:element name="extratextualInformation" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>An indication of the extratextual information contained in the lexicalConceptualResouce; can be used as an alternative to audio, image, videos etc. for cases where these are not considered an important part of the lcr</xs:documentation>
+					<xs:documentation>An indication of the extratextual information contained in the lexicalConceptualResouce; can be used as an alternative to audio, image, videos etc. for cases where these are not considered an important part of the lcr (lexical/conceptual resource)</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-many</relation>
 						<label>Extratextual information</label>

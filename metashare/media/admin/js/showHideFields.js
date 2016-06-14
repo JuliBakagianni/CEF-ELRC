@@ -1,8 +1,8 @@
 $(document).ready(function () {
     // show conditionsOfUse field only for specific licences
-    var licences = ["non-standard/Other_Licence/Terms", "underNegotiation"];
+    var licences = ["non-standard/Other_Licence/Terms", "underReview"];
     var licencesNoAttrAndFee = ['CC-ZERO','PDDL','DL-DE-ZERO_Germany','non-standard/Other_Licence/Terms',
-'underNegotiation'];
+'underReview'];
     var licenceAttrAndFee = ['OpenDataLicenceAtAFairCost_Belgium','OpenDataLicenceAtAFairCostForCommercialRe-use_Belgium'];
 
     $(".form-row.otherLicenceName input").each(function() {
