@@ -8,9 +8,9 @@
 <div class="jsddm">
   <ul id="jsddm">
     <li title="Home"><a href="{% url metashare.views.frontpage %}">Home</a></li>
-    {% if user.get_profile.has_editor_permission %}
+{#    {% if user.get_profile.has_editor_permission %}#}
       <li title="Browse the resources of the ELRC catalogue"><a href="{% url metashare.views.frontpage %}repository/search/">Browse Resources</a></li>
-  {% endif %}
+{#  {% endif %}#}
   {% if user.is_authenticated %}
       <li><a href="{% url metashare.repository.views.simple_form %}">Contribute Resources</a></li>
   {% endif %}

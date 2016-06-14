@@ -141,6 +141,11 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
     languageVarietyFilter = LabeledMultiValueField(
                                 label=_('Language Variety'), facet_id=5, parent_id=0,
                                 faceted=True)
+
+    publicationStatusFilter = LabeledCharField(
+                                label=_('Publication Status'), facet_id=57, parent_id=0,
+                                faceted=True)
+
     resourceTypeFilter = LabeledMultiValueField(
                                 label=_('Resource Type'), facet_id=6, parent_id=0,
                                 faceted=True)
@@ -334,7 +339,7 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         have not been deleted, yet.
         """
         return self.get_model().objects.filter(storage_object__deleted=False,
-            storage_object__publication_status=PUBLISHED)
+            storage_object__publication_status__in=[INGESTED, PUBLISHED])
 
     def should_update(self, instance, **kwargs):
         '''
@@ -387,18 +392,18 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         # has happened for some reason that the instance was not up-to-date
         instance = self.get_model().objects.get(pk=instance.id)
         # only create/update index entries of published resources
-        if instance.storage_object.publication_status == PUBLISHED:
-            LOGGER.info("Published resource #{0} scheduled for reindexing." \
+        if instance.storage_object.publication_status in (INGESTED, PUBLISHED):
+            LOGGER.info("Resource #{0} scheduled for reindexing." \
                         .format(instance.id))
             super(resourceInfoType_modelIndex, self) \
                 .update_object(instance, using=using, **kwargs)
         # make sure that there are no index entries for ingested/unpublished
         # resources
-        elif instance.storage_object.publication_status == INGESTED:
-            LOGGER.info("Will now remove the ingested resource #{0} from the "
-                        "index if it is currently indexed.".format(instance.id))
-            super(resourceInfoType_modelIndex, self) \
-                .remove_object(instance, using=using, **kwargs)
+        # elif instance.storage_object.publication_status == INGESTED:
+        #     LOGGER.info("Will now remove the ingested resource #{0} from the "
+        #                 "index if it is currently indexed.".format(instance.id))
+        #     super(resourceInfoType_modelIndex, self) \
+        #         .remove_object(instance, using=using, **kwargs)
 
     def _setup_save(self):
         """
@@ -2012,3 +2017,9 @@ class resourceInfoType_modelIndex(PatchedRealTimeSearchIndex,
         Collect the data to filter the resources on appropriatenessForDSIFilter
         """
         return obj.identificationInfo.get_appropriatenessForDSI_display_list()
+
+    def prepare_publicationStatusFilter(self, obj):
+        """
+        Collect the data to filter the resources on publication status
+        """
+        return obj.publication_status()

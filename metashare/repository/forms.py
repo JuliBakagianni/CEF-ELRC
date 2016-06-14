@@ -26,6 +26,8 @@ LOGGER.addHandler(LOG_HANDLER)
 MORE_FROM_SAME_CREATORS = "mfsc"
 MORE_FROM_SAME_PROJECTS = "mfsp"
 
+def is_member(user, group):
+    return user.groups.filter(name=group).exists()
 
 class FacetedBrowseForm(FacetedSearchForm):
     """
@@ -71,6 +73,9 @@ class FacetedBrowseForm(FacetedSearchForm):
                 continue
             if value:
                 sqs = sqs.narrow(u'%s:"%s"' % (field, sqs.query.clean(value)))
+        if not is_member(self.request.user, 'ecmembers') and not self.request.user.is_superuser:
+            sqs = sqs.filter_and(publicationStatusFilter__exact='published')
+
         return sqs
 
     def clean(self):

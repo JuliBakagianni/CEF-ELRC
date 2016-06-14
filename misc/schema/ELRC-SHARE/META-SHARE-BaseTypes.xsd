@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited by ILSP/Athena R.C. -->
-<xs:schema xmlns:ms="http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
+<xs:schema xmlns:ms="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
 	<xs:include schemaLocation="META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="META-SHARE-RoleTypes.xsd"/>
 	<xs:include schemaLocation="META-SHARE-LicenseMetadata.xsd"/>
@@ -16,7 +16,7 @@
 		<xs:sequence>
 			<xs:element name="resourceName" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>The full name by which the resource is known; the element can be repeated for the different language versions using the "lang" attribute to specify the language.</xs:documentation>
+					<xs:documentation>The full name by which the resource is known; the element can be repeated for the different language versions using the "lang" attribute to specify the language</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:simpleContent>
@@ -32,7 +32,7 @@
 			</xs:element>
 			<xs:element name="description" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Provides the description of the resource in prose; the element can be repeated for the different language versions using the "lang" attribute to specify the language.</xs:documentation>
+					<xs:documentation>Provides the description of the resource in prose; the element can be repeated for the different language versions using the "lang" attribute to specify the language</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:simpleContent>
@@ -48,7 +48,7 @@
 			</xs:element>
 			<xs:element name="resourceShortName" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>The short form (abbreviation, acronym etc.) used to identify the resource; the element can be repeated for the different language versions using the "lang" attribute to specify the language.</xs:documentation>
+					<xs:documentation>The short form (abbreviation, acronym etc.) used to identify the resource; the element can be repeated for the different language versions using the "lang" attribute to specify the language</xs:documentation>
 				</xs:annotation>
 				<xs:complexType>
 					<xs:simpleContent>
@@ -65,7 +65,7 @@
 			<!-- metashare id reflects to the UNIQUE system id provided by metashare software-->
 			<xs:element name="landingPage" type="ms:httpURI" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>A Web page that can be navigated to in a Web browser to gain access to the resource, its distributions and/or additional information.</xs:documentation>
+					<xs:documentation>A Web page that can be navigated to in a Web browser to gain access to the resource, its distributions and/or additional information</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
 					</xs:appinfo>
@@ -83,7 +83,7 @@
 			</xs:element>
 			<xs:element name="ISLRN" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Reference to the unique ISLRN number; if you don't have an ISLRN for your resource, please visit http://www.islrn.org/ to request.</xs:documentation>
+					<xs:documentation>Reference to the unique ISLRN number; if you don't have an ISLRN for your resource, please visit http://www.islrn.org/ to request one</xs:documentation>
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
@@ -241,7 +241,7 @@
 		<xs:sequence>
 			<xs:element name="originalSource" type="ms:targetResourceInfoType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>The name, the identifier or the url of thethe original resources that were at the base of the creation process of the resource</xs:documentation>
+					<xs:documentation>The name, the identifier or the url of the original resources that were at the base of the creation process of the resource</xs:documentation>
 					<xs:appinfo>
 						<recommended>true</recommended>
 						<relation>many-to-many</relation>
@@ -271,7 +271,7 @@
 				</xs:annotation>
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
-						<xs:maxLength value="200"/>
+						<xs:maxLength value="1200"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -292,12 +292,12 @@
 		<xs:sequence>
 			<xs:element name="metadataCreationDate" type="xs:date">
 				<xs:annotation>
-					<xs:documentation>The date of creation of this metadata description (automatically inserted by the MetaShare software)</xs:documentation>
+					<xs:documentation>The date of creation of this metadata description (automatically inserted by the Meta-Share software)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="metadataCreator" type="ms:personInfoType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Groups information on the person(s) that has/have created the metadata record</xs:documentation>
+					<xs:documentation>Groups information on the person that created the metadata record; to be automatically assigned</xs:documentation>
 					<xs:appinfo>
 						<relation>many-to-many</relation>
 					</xs:appinfo>
@@ -305,12 +305,12 @@
 			</xs:element>
 			<xs:element name="metadataLanguageName" type="ms:languageNameType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>The name of the language in which the metadata description is written; an autocompletion mechanism with values compatible with the BCP47 (ISO 639) is included in the editor</xs:documentation>
+					<xs:documentation>The name of the language in which the metadata description is written, according to IETF BCP47</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="metadataLanguageId" type="ms:languageTagType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>The id of the language in which the metadata description is written, as specified by BCP47</xs:documentation>
+					<xs:documentation>The identifier of the language in which the metadata description is written according to IETF BCP47</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="metadataLastDateUpdated" type="xs:date" minOccurs="0">
@@ -527,7 +527,7 @@
 			</xs:element>
 			<xs:element name="url" type="ms:httpURI" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>A URL used as homepage of an entity (e.g. of a person, organization, resource etc.) and/or where an entity (e.g.LR, document etc.) is located</xs:documentation>
+					<xs:documentation>A URL used as homepage of an entity (e.g. of a person, organization, resource etc.) and/or where an entity (e.g. LR, document etc.) is located</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ISSN" minOccurs="0">
@@ -574,7 +574,7 @@
 	</xs:complexType>
 	<xs:complexType name="documentationInfoType">
 		<xs:annotation>
-			<xs:documentation>Used to bring together information on documents (as a structured bibliographic record or in an unstructured format) and free text descriptions</xs:documentation>
+			<xs:documentation>Groups information on the documentation of the resource pointing to either structured and unstructured presentation of the relevant documents</xs:documentation>
 		</xs:annotation>
 		<xs:choice>
 			<xs:element ref="ms:documentUnstructured"/>
@@ -615,8 +615,16 @@
 		<xs:sequence>
 			<xs:element ref="ms:domain" maxOccurs="unbounded"/>
 			<xs:element ref="ms:domainId" maxOccurs="unbounded"/>
-			<xs:element name="subdomain" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="subdomainId" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="subdomain" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The name of the application subdomain of the resource or the tool/service, taken from the EUROVOC domains: http://eurovoc.europa.eu/drupal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subdomainId" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+						<xs:documentation>The identifier of the application subdomain of the resource or the tool/service, taken from the EUROVOC domains: http://eurovoc.europa.eu/drupal</xs:documentation>
+					</xs:annotation>
+			</xs:element>
 			<xs:element name="sizePerDomain" type="ms:sizeInfoType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Specifies the size of resource parts per domain</xs:documentation>

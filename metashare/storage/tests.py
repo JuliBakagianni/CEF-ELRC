@@ -159,123 +159,123 @@ class StorageObjectTestCase(unittest.TestCase):
         storage_object.save()
 
 
-class UpdateTests(unittest.TestCase):
-    """
-    Test case that checks the update mechanism used by the receiving end of synchronization.
-    """
-
-    @classmethod
-    def setUpClass(cls):
-        LOGGER.info("running '{}' tests...".format(cls.__name__))
-        set_index_active(False)
-    
-    @classmethod
-    def tearDownClass(cls):
-        set_index_active(True)
-        LOGGER.info("finished '{}' tests".format(cls.__name__))
-
-    def setUp(self):
-        """
-        Creates a new storage object instance for testing.
-        """
-        test_utils.setup_test_storage()
-        folder = '{0}/storage/test_fixtures/updatetest'.format(settings.ROOT_PATH)
-        with open('{0}/storage-global.json'.format(folder), 'rb') as storagein:
-            self.storage_json = json.load(storagein)
-        with open('{0}/metadata-before.xml'.format(folder), 'rb') as metadatain:
-            self.metadata_before = metadatain.read()
-        with open('{0}/metadata-modified.xml'.format(folder), 'rb') as metadatain:
-            self.metadata_modified = metadatain.read()
-        self.storage_id = self.storage_json['identifier']
-        self.storage_digest = None
-
-    def tearDown(self):
-        """
-        Clean DB and storage folder after testing.
-        """
-        test_utils.clean_resources_db()
-        test_utils.clean_storage()
-
-    def test_update_new(self):
-        """
-        Simulate the case where synchronization brings a new storage object to be instantiated.
-        """
-        # Exercise
-        add_or_update_resource(self.storage_json, self.metadata_before, self.storage_digest)
-        # Verify
-        self.assertEquals(1, StorageObject.objects.filter(identifier=self.storage_id).count())
-        storage_object = StorageObject.objects.get(identifier=self.storage_id)
-        self.assertEquals(self.metadata_before, storage_object.metadata)
-
-    def test_update_existing(self):
-        """
-        Simulate update for already existing storage object
-        """
-        # helper
-        def get_metadatacreationdate_for(storage_id):
-            resource = resourceInfoType_model.objects.get(storage_object__identifier=self.storage_id)
-            return resource.metadataInfo.metadataCreationDate
-        
-        # setup
-        add_or_update_resource(self.storage_json, self.metadata_before, self.storage_digest)
-        self.assertEquals(date(2005, 5, 12), get_metadatacreationdate_for(self.storage_id))
-        self.assertEquals(REMOTE, StorageObject.objects.get(identifier=self.storage_id).copy_status)
-        # exercise
-        add_or_update_resource(self.storage_json, self.metadata_modified, self.storage_digest)
-        self.assertEquals(date(2006, 12, 31), get_metadatacreationdate_for(self.storage_id))
-
-    def test_update_refuse_mastercopy(self):
-        """
-        Refuse to replace a master copy with a non-master copy during update 
-        """
-        # setup
-        add_or_update_resource(self.storage_json, self.metadata_before, self.storage_digest, MASTER)
-        self.assertEquals(MASTER, StorageObject.objects.get(identifier=self.storage_id).copy_status)
-        # exercise
-        try:
-            add_or_update_resource(self.storage_json, self.metadata_modified, self.storage_digest, REMOTE)
-            self.fail("Should have raised an exception")
-        except IllegalAccessException:
-            pass # Expected exception
-
-    def test_remote_copy(self):
-        """
-        Verify that reusable entities such as persons have copy status REMOTE
-        after synchronization.
-        """
-        # exercise
-        add_or_update_resource(self.storage_json, self.metadata_before, None, copy_status=REMOTE)
-        # verify
-        resource = resourceInfoType_model.objects.get(storage_object__identifier=self.storage_id)
-        persons = resource.contactPerson.all()
-        self.assertEquals(1, len(persons))
-        contact_person = persons[0]
-        self.assertEquals(REMOTE, contact_person.copy_status)
-        
-    def test_proxy_copy(self):
-        """
-        Verify that reusable entities such as persons have copy status PROXY
-        after synchronization.
-        """
-        # exercise
-        add_or_update_resource(self.storage_json, self.metadata_before, None, copy_status=PROXY)
-        # verify
-        resource = resourceInfoType_model.objects.get(storage_object__identifier=self.storage_id)
-        persons = resource.contactPerson.all()
-        self.assertEquals(1, len(persons))
-        contact_person = persons[0]
-        self.assertEquals(PROXY, contact_person.copy_status)
-        
-    def test_master_copy(self):
-        """
-        Verify that reusable entities such as persons have copy status MASTER
-        after synchronization.
-        """
-        # exercise
-        add_or_update_resource(self.storage_json, self.metadata_before, None, copy_status=MASTER)
-        # verify
-        resource = resourceInfoType_model.objects.get(storage_object__identifier=self.storage_id)
-        persons = resource.contactPerson.all()
-        self.assertEquals(1, len(persons))
-        contact_person = persons[0]
-        self.assertEquals(MASTER, contact_person.copy_status)
+# class UpdateTests(unittest.TestCase):
+#     """
+#     Test case that checks the update mechanism used by the receiving end of synchronization.
+#     """
+#
+#     @classmethod
+#     def setUpClass(cls):
+#         LOGGER.info("running '{}' tests...".format(cls.__name__))
+#         set_index_active(False)
+#
+#     @classmethod
+#     def tearDownClass(cls):
+#         set_index_active(True)
+#         LOGGER.info("finished '{}' tests".format(cls.__name__))
+#
+#     def setUp(self):
+#         """
+#         Creates a new storage object instance for testing.
+#         """
+#         test_utils.setup_test_storage()
+#         folder = '{0}/storage/test_fixtures/updatetest'.format(settings.ROOT_PATH)
+#         with open('{0}/storage-global.json'.format(folder), 'rb') as storagein:
+#             self.storage_json = json.load(storagein)
+#         with open('{0}/metadata-before.xml'.format(folder), 'rb') as metadatain:
+#             self.metadata_before = metadatain.read()
+#         with open('{0}/metadata-modified.xml'.format(folder), 'rb') as metadatain:
+#             self.metadata_modified = metadatain.read()
+#         self.storage_id = self.storage_json['identifier']
+#         self.storage_digest = None
+#
+#     def tearDown(self):
+#         """
+#         Clean DB and storage folder after testing.
+#         """
+#         test_utils.clean_resources_db()
+#         test_utils.clean_storage()
+#
+#     def test_update_new(self):
+#         """
+#         Simulate the case where synchronization brings a new storage object to be instantiated.
+#         """
+#         # Exercise
+#         add_or_update_resource(self.storage_json, self.metadata_before, self.storage_digest)
+#         # Verify
+#         self.assertEquals(1, StorageObject.objects.filter(identifier=self.storage_id).count())
+#         storage_object = StorageObject.objects.get(identifier=self.storage_id)
+#         self.assertEquals(self.metadata_before, storage_object.metadata)
+#
+#     def test_update_existing(self):
+#         """
+#         Simulate update for already existing storage object
+#         """
+#         # helper
+#         def get_metadatacreationdate_for(storage_id):
+#             resource = resourceInfoType_model.objects.get(storage_object__identifier=self.storage_id)
+#             return resource.metadataInfo.metadataCreationDate
+#
+#         # setup
+#         add_or_update_resource(self.storage_json, self.metadata_before, self.storage_digest)
+#         self.assertEquals(date(2005, 5, 12), get_metadatacreationdate_for(self.storage_id))
+#         self.assertEquals(REMOTE, StorageObject.objects.get(identifier=self.storage_id).copy_status)
+#         # exercise
+#         add_or_update_resource(self.storage_json, self.metadata_modified, self.storage_digest)
+#         self.assertEquals(date(2006, 12, 31), get_metadatacreationdate_for(self.storage_id))
+#
+#     def test_update_refuse_mastercopy(self):
+#         """
+#         Refuse to replace a master copy with a non-master copy during update
+#         """
+#         # setup
+#         add_or_update_resource(self.storage_json, self.metadata_before, self.storage_digest, MASTER)
+#         self.assertEquals(MASTER, StorageObject.objects.get(identifier=self.storage_id).copy_status)
+#         # exercise
+#         try:
+#             add_or_update_resource(self.storage_json, self.metadata_modified, self.storage_digest, REMOTE)
+#             self.fail("Should have raised an exception")
+#         except IllegalAccessException:
+#             pass # Expected exception
+#
+#     def test_remote_copy(self):
+#         """
+#         Verify that reusable entities such as persons have copy status REMOTE
+#         after synchronization.
+#         """
+#         # exercise
+#         add_or_update_resource(self.storage_json, self.metadata_before, None, copy_status=REMOTE)
+#         # verify
+#         resource = resourceInfoType_model.objects.get(storage_object__identifier=self.storage_id)
+#         persons = resource.contactPerson.all()
+#         self.assertEquals(1, len(persons))
+#         contact_person = persons[0]
+#         self.assertEquals(REMOTE, contact_person.copy_status)
+#
+#     def test_proxy_copy(self):
+#         """
+#         Verify that reusable entities such as persons have copy status PROXY
+#         after synchronization.
+#         """
+#         # exercise
+#         add_or_update_resource(self.storage_json, self.metadata_before, None, copy_status=PROXY)
+#         # verify
+#         resource = resourceInfoType_model.objects.get(storage_object__identifier=self.storage_id)
+#         persons = resource.contactPerson.all()
+#         self.assertEquals(1, len(persons))
+#         contact_person = persons[0]
+#         self.assertEquals(PROXY, contact_person.copy_status)
+#
+#     def test_master_copy(self):
+#         """
+#         Verify that reusable entities such as persons have copy status MASTER
+#         after synchronization.
+#         """
+#         # exercise
+#         add_or_update_resource(self.storage_json, self.metadata_before, None, copy_status=MASTER)
+#         # verify
+#         resource = resourceInfoType_model.objects.get(storage_object__identifier=self.storage_id)
+#         persons = resource.contactPerson.all()
+#         self.assertEquals(1, len(persons))
+#         contact_person = persons[0]
+#         self.assertEquals(MASTER, contact_person.copy_status)

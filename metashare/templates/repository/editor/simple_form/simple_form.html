@@ -56,7 +56,7 @@
 <body style="position: relative;">
 {% include 'header.html' %}
 <div class="back" style="margin-top: 20px">
-    <div style="width: 100% !important; height:450px; text-align: center; background-image: url('{{ MEDIA_URL }}images/iStock_000055931356_XXXLarge_web.jpg'); background-position: center; background-repeat: no-repeat; border-bottom: 1px solid;"><h2 style=" text-align: left; left: 10%; color: white;  font-size: 45px;position:relative;top:170px; text-shadow: 1px 1px #000;">Data Contribution Form</h2></div>
+    <div style="width: 100% !important; height:450px; text-align: center; background-image: url('{{ MEDIA_URL }}images/iStock_000055931356_XXXLarge_web.jpg'); background-position: center; background-repeat: no-repeat; border-bottom: 1px solid; "><h2 style=" text-align: left; left: 10%; color: white;  font-size: 45px;position:relative;top:170px; text-shadow: 1px 1px #000;">Data Contribution Form</h2></div>
 </div>
 <div class="overlay"></div>
 {% if message %}
@@ -135,7 +135,11 @@
 
             <div class="col-md-4">
                 <input accept=".zip" id="filebutton" name="filebutton" class="input-file" type="file" required="">
-                <span class="help-block">Please upload a zip file up to 50MB</span>
+                <span class="help-block">Please upload a <strong>.zip file</strong> up to 50MB.
+                </br>
+                    In case the <strong>.zip file</strong> file you wish to upload is bigger than 50MB, please contact
+                    <a href="mailto:elrc-share@ilsp.gr">elrc-share@ilsp.gr</a>
+                </span>
             </div>
         </div>
         <!-- Button (Double) -->

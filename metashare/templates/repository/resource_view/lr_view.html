@@ -2,6 +2,7 @@
 {% load get_icon %}
 {% load url_target %}
 {% load replace %}
+{% load is_member %}
 
 {% block title %}
   {{ resourceName }} &ndash; ELRC-SHARE
@@ -211,9 +212,11 @@
 
 		<div style="clear: both;">
 			<a href="javascript:history.back();"><button class="span-12 button middle_button">&laquo; Back</button></a>
-		    <a href="{% url metashare.repository.views.download resource.storage_object.identifier %}">
-		       	<button class="span-4 button middle_button">Download</button>
-		    </a>
+		    {% if user.get_profile.is_superuser or user|is_member:"ecmembers"%}
+                <a href="{% url metashare.repository.views.download resource.storage_object.identifier %}">
+                    <button class="span-4 button middle_button">Download</button>
+                </a>
+            {% endif %}
 		  	<a {% if LR_EDIT %} href="{{ LR_EDIT }}" {% else %} href="#" class="tip" {% endif %}>
 				<span class="edit">You don&rsquo;t have the permission to edit this resource.</span>
 		       	<button class="span-4 button {% if LR_EDIT %}middle_button{% else %}middle_gray_button{% endif %}">Edit Resource</button>

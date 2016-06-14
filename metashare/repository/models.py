@@ -23,7 +23,6 @@ from metashare.repository.validators import validate_lang_code_keys, \
 from metashare.settings import DJANGO_BASE, LOG_HANDLER, DJANGO_URL
 from metashare.stats.model_utils import saveLRStats, DELETE_STAT, UPDATE_STAT
 from metashare.storage.models import StorageObject, MASTER, COPY_CHOICES
-from metashare.lrquality.models import LrQuality,CorpusQuality,Lcrquality,LangDescquality
 from metashare.recommendations.models import ResourceCountPair, \
     ResourceCountDict
 # from metashare.repository.language_choices import LANGUAGENAME_CHOICES
@@ -51,7 +50,7 @@ HTTPURI_VALIDATOR = RegexValidator(r"^(?i)((http|ftp)s?):\/\/"
                                    " see also RFC 2396).", ValidationError)
 
 # namespace of the META-SHARE metadata XML Schema
-SCHEMA_NAMESPACE = 'http://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/'
+SCHEMA_NAMESPACE = 'https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/'
 # version of the META-SHARE metadata XML Schema
 SCHEMA_VERSION = '1.0'
 
@@ -63,7 +62,7 @@ def _compute_documentationInfoType_key():
     These are:
     - documentInfoType_model;
     - documentUnstructuredString_model.
-
+    
     '''
     _k1 = list(documentInfoType_model.objects.all().order_by('-id'))
     _k2 = list(documentUnstructuredString_model.objects.all().order_by('-id'))
@@ -89,7 +88,6 @@ def country_optgroup_choices():
     more_choices = ('More', _make_choices_from_list(sorted(iana.get_rest_of_regions()))['choices'])
     optgroup = [eu_choices, more_choices]
     return optgroup
-
 
 # pylint: disable-msg=C0103
 class resourceInfoType_model(SchemaModel):
@@ -202,31 +200,13 @@ class resourceInfoType_model(SchemaModel):
 
     storage_object = models.ForeignKey(StorageObject, blank=True, null=True,
                                        unique=True)
-    lr_quality = models.ForeignKey(LrQuality, blank=True, null=True,
-                                       unique=True)
-
+    # lr_quality = models.ForeignKey('LrQuality', editable=False, null=True, blank=True)
     def save(self, *args, **kwargs):
-
         """
         Overrides the predefined save() method to ensure that a corresponding
         StorageObject instance is existing, creating it if missing.  Also, we
         check that the storage object instance is a local master copy.
         """
-        if not self.lr_quality:
-                mediaType=self.resourceComponentType
-                if isinstance(mediaType, corpusInfoType_model):
-                    self.lr_quality = CorpusQuality.objects.create(
-                    resource_name=self.identificationInfo.resourceName['en'])
-                elif isinstance(mediaType, lexicalConceptualResourceInfoType_model):
-                    self.lr_quality = Lcrquality.objects.create(
-                    resource_name=self.identificationInfo.resourceName['en'])
-                elif isinstance(mediaType, languageDescriptionInfoType_model):
-                    self.lr_quality = LangDescquality.objects.create(
-                    resource_name=self.identificationInfo.resourceName['en'])
-
-        if self.identificationInfo.resourceName['en'] != self.lr_quality.resource_name:
-            self.lr_quality.resource_name = self.identificationInfo.resourceName['en']
-            self.lr_quality.save()
         # If we have not yet created a StorageObject for this resource, do so.
         if not self.storage_object:
             self.storage_object = StorageObject.objects.create(
@@ -236,11 +216,9 @@ class resourceInfoType_model(SchemaModel):
         if not self.storage_object.master_copy:
             LOGGER.warning('Trying to modify non master copy {0}, ' \
                            'aborting!'.format(self.storage_object))
-
             return
 
         self.storage_object.save()
-
         # REMINDER: the SOLR indexer in search_indexes.py relies on us
         # calling storage_object.save() from resourceInfoType_model.save().
         # Should we ever change that, we must modify 
@@ -256,10 +234,8 @@ class resourceInfoType_model(SchemaModel):
         #     self.metadataInfo.metadataLanguageName. \
         #     extend(iana.get_language_by_subtag(l))
         # self.metadataInfo.clean()
-        # print self.id, self.lr_quality_id
-        # if not self.lr_quality:
-        #     self.lr_quality = LrQuality.objects.create(resource_name = self.identificationInfo.resourceName['en'])
-        #     self.lr_quality.save()
+
+
 
         super(resourceInfoType_model, self).save(*args, **kwargs)
 
@@ -268,7 +244,6 @@ class resourceInfoType_model(SchemaModel):
         self.metadataInfo.save(langs = resource_lang)
         # update statistics
         saveLRStats(self, UPDATE_STAT)
-
 
     def delete(self, keep_stats=False, *args, **kwargs):
         """
@@ -333,7 +308,8 @@ SIZEINFOTYPE_SIZEUNIT_CHOICES = _make_choices_from_list([
     u'sentences', u'texts', u'files', u'tokens', u'words',
     u'items', u'entries', u'lexicalTypes', u'terms', u'concepts',
     u'keywords', u'neologisms', u'multiWordUnits', u'idiomaticExpressions',
-    u'expressions', u'bytes', u'kb', u'mb', u'gb', u'rules', u'translationUnits', u'other',
+    u'expressions', u'bytes', u'kb', u'mb', u'gb', u'rules', u'translationUnits',
+    u'phrases', u'other',
 ])
 # pylint: disable-msg=C0103
 class sizeInfoType_model(SchemaModel):
@@ -439,7 +415,7 @@ class identificationInfoType_model(SchemaModel):
                              max_val_length=500,
                              help_text='The full name by which the resource is known; the eleme' \
                                        'nt can be repeated for the different language versions using the ' \
-                                       '"lang" attribute to specify the language.',
+                                       '"lang" attribute to specify the language',
                              )
 
     description = DictField(validators=[validate_lang_code_keys, ],
@@ -448,7 +424,7 @@ class identificationInfoType_model(SchemaModel):
                             max_val_length=10000,
                             help_text='Provides the description of the resource in prose; the ' \
                                       'element can be repeated for the different language versions using' \
-                                      ' the "lang" attribute to specify the language.',
+                                      ' the "lang" attribute to specify the language',
                             )
 
     resourceShortName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
@@ -465,7 +441,7 @@ class identificationInfoType_model(SchemaModel):
                          verbose_name='URL (additional information)', validators=[HTTPURI_VALIDATOR],
                          help_text='A Web page that can be navigated to in a Web browser '
                                    'to gain access to the resource, its distributions '
-                                   'and/or additional information.',
+                                   'and/or additional information',
                          blank=True, )
 
     metaShareId = XmlCharField(
@@ -479,7 +455,7 @@ class identificationInfoType_model(SchemaModel):
         verbose_name='ISLRN',
         help_text="Reference to the unique ISLRN number; if you don't "
                   "have an ISLRN for your resource, "
-                  "please visit http://www.islrn.org/ to request.",
+                  "please visit http://www.islrn.org/ to request one",
         blank=True, max_length=17,
         validators=[validate_matches_xml_char_production],
     )
@@ -506,7 +482,7 @@ class identificationInfoType_model(SchemaModel):
         verbose_name='Appropriateness for DSI',
         help_text='Specifies whether the resource is appropriate ' \
                   'for use in one or more of the DSIs (Digital Service '
-                  '\Infrastructures)',
+                  'Infrastructures)',
         blank=True,
         max_length=1 + len(APPROPRIATENESS_FOR_DSI_CHOICES['choices']) / 4,
         choices=APPROPRIATENESS_FOR_DSI_CHOICES['choices'],
@@ -778,7 +754,7 @@ class creationInfoType_model(SchemaModel):
 
     originalSource = models.ManyToManyField("targetResourceInfoType_model",
       verbose_name='Original source',
-      help_text='The name, the identifier or the url of thethe original '\
+      help_text='The name, the identifier or the url of the original '\
                 'resources that were at the base of the creation process '\
                 'of the resource',
       blank=True, null=True, related_name="originalSource_%(class)s_related", )
@@ -795,7 +771,7 @@ class creationInfoType_model(SchemaModel):
     creationModeDetails = XmlCharField(
       verbose_name='Creation mode details',
       help_text='Provides further information on the creation methods and processes',
-      blank=True, max_length=200, )
+      blank=True, max_length=1200, )
 
     creationTool = models.ManyToManyField("targetResourceInfoType_model",
       verbose_name='Creation tool',
@@ -835,13 +811,13 @@ class metadataInfoType_model(SchemaModel):
     metadataCreationDate = models.DateField(
         verbose_name='Metadata creation date',
         help_text='The date of creation of this metadata description '
-                  '(automatically inserted by the repo software)',
+                  '(automatically inserted by the Meta-Share software)',
     )
 
     metadataCreator = models.ManyToManyField("personInfoType_model",
         verbose_name='Metadata creator',
-        help_text='Groups information on the person(s) that has/have '
-                  'created the metadata record',
+        help_text='Groups information on the person that '
+                  'created the metadata record; to be automatically assigned',
         blank=True, null=True, related_name="metadataCreator_%(class)s_related", )
 
     # source = XmlCharField(
@@ -865,19 +841,16 @@ class metadataInfoType_model(SchemaModel):
     # metadataLanguageName = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=2, max_length=150),
          verbose_name='Metadata language name',
 
-         help_text='The name of the language in which the metadata '
-                   'description is written; an autocompletion '
-                   'mechanism with values from the ISO 639 is '
-                   'provided in the editor',
+         help_text='The name of the language in which the '
+                   'metadata description is written, according to IETF BCP47',
          blank=True, validators=[validate_matches_xml_char_production],
          editable=False)
 
     #TEST MILTOS
     metadataLanguageId = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=3, max_length=150),
         verbose_name='Metadata language id',
-        help_text='The id of the language in which the '
-                  'metadata description is written, '
-                  'as specified by ISO 639',
+        help_text='The identifier of the language in which '
+                  'the metadata description is written according to IETF BCP47',
         blank=True, validators=[validate_matches_xml_char_production],
         editable=False)
 
@@ -1091,16 +1064,14 @@ class documentInfoType_model(documentationInfoType_model):
     documentLanguageName = XmlCharField(
         verbose_name='Document language name',
         help_text='The name of the language the document is '
-                  'written in; an autocompletion mechanism '
-                  'with values from the ISO 639 is provided '
-                  'in the editor',
+                  'written in according to the BCP47 specifications',
         blank=True, max_length=150,
     choices=_make_choices_from_list(sorted(iana.get_most_used_languages()))['choices'])
 
     documentLanguageId = XmlCharField(
         verbose_name='Document language id',
-        help_text='The id of the language the document is written in '
-                  'as specified by ISO 639',
+        help_text='The id of the language the document is written '
+                  'in as specified by the BCP47 specifications',
         blank=True, max_length=20, editable=False)
 
     source_url = models.URLField(verify_exists=False,
@@ -1266,12 +1237,12 @@ class domainInfoType_model(SchemaModel):
 
     domain = MutuallyExclusiveValueModelField(
         verbose_name='Domain',
-        help_text='Specifies the application domain of the resource or ' \
-                  'the tool/service; please, select one of the values supplied ' \
-                  '(taken mainly from the Dewey Decimal Classification system) ' \
-                  'or, in case none of these describes your domain, add a new ' \
-                  'value, if possible, from the DDC recommended values ' \
-                  '(https://en.wikipedia.org/wiki/List_of_Dewey_Decimal_classes)',
+        help_text='Specifies the application domain of the resource or '
+                  'the tool/service; please, select one of the values '
+                  'supplied (taken from the EUROVOC domains, '
+                  'cf. http://eurovoc.europa.eu) or, in case none '
+                  'of these describes your domain, add a new value '
+                  'at the free text field',
         max_length=100,
         choices=_make_choices_from_list(sorted(eurovoc.get_all_domains()))['choices'])
 
@@ -1280,7 +1251,7 @@ class domainInfoType_model(SchemaModel):
             help_text='The identifier of the application domain of the '
                       'resource or the tool/service, taken from the '
                       'EUROVOC domains: '
-                      'http://eurovoc.europa.eu/drupal/?q=navigation&cl=en',
+                      'http://eurovoc.europa.eu/drupal',
             editable=False,
             max_length=3,
             null=True,
@@ -1290,12 +1261,9 @@ class domainInfoType_model(SchemaModel):
     subdomain = models.CharField(
         max_length=100,
         verbose_name='Subdomain',
-        help_text='Specifies the application subdomain of the resource or ' \
-                  'the tool/service; please, select one of the values supplied ' \
-                  '(taken mainly from the Dewey Decimal Classification system) ' \
-                  'or, in case none of these describes your domain, add a new ' \
-                  'value, if possible, from the DDC recommended values ' \
-                  '(https://en.wikipedia.org/wiki/List_of_Dewey_Decimal_classes)',
+        help_text='The name of the application subdomain of the '
+                  'resource or the tool/service, taken from the '
+                  'EUROVOC domains: http://eurovoc.europa.eu/drupal',
         null=True,
         blank=True,
         choices = _make_choices_from_list \
@@ -1307,8 +1275,7 @@ class domainInfoType_model(SchemaModel):
             verbose_name='Subdomain Identifier',
             help_text='The identifier of the application subdomain of the '
                       'resource or the tool/service, taken from the '
-                      'EUROVOC domains: '
-                      'http://eurovoc.europa.eu/drupal/?q=navigation&cl=en',
+                      'EUROVOC domains: http://eurovoc.europa.eu/drupal',
             editable=False,
             max_length=6,
             null=True,
@@ -2715,7 +2682,9 @@ class communicationInfoType_model(SchemaModel):
     url = MultiTextField(max_length=1000, widget=MultiFieldWidget(widget_id=14, max_length=150),
                          verbose_name='Url', validators=[HTTPURI_VALIDATOR],
                          help_text='A URL used as homepage of an entity '
-                                   '(e.g. of a person, organization, resource etc.)',
+                                   '(e.g. of a person, organization, '
+                                   'resource etc.) and/or where an '
+                                   'entity (e.g. LR, document etc.) is located',
                          blank=True, )
 
     address = XmlCharField(
@@ -2983,7 +2952,7 @@ class personInfoType_model(actorInfoType_model):
 
 
 DISTRIBUTIONINFOTYPE_AVAILABILITY_CHOICES = _make_choices_from_list([
-    u'available', u'underNegotiation',
+    u'available', u'underReview',
 ])
 
 # pylint: disable-msg=C0103
@@ -3037,14 +3006,14 @@ class distributionInfoType_model(SchemaModel):
          verbose_name='Ipr holder',
          help_text='Groups information on a person or an organization '
                    'who holds the full Intellectual Property Rights '
-                   '(Copyright, trademark etc) that subsist in the '
+                   '(Copyright, trademark etc.) that subsist in the '
                    'resource. The IPR holder could be different '
                    'from the creator that may have assigned the '
                    'rights to the IPR holder (e.g. an author as a '
                    'creator assigns her rights to the publisher who '
                    'is the IPR holder) and the distributor that '
                    'holds a specific licence (i.e. a permission) '
-                   'to distribute the work.',
+                   'to distribute the work',
          blank=True, null=True, related_name="iprHolder_%(class)s_related", )
 
     # availabilityEndDate = models.DateField(
@@ -3083,8 +3052,8 @@ class distributionInfoType_model(SchemaModel):
             #     self.allowsUsesBesidesDGT = True
 
 
-        if u'underNegotiation' in licences:
-            self.availability = u'underNegotiation'
+        if u'underReview' in licences:
+            self.availability = u'underReview'
         else:
             self.availability = u'available'
 
@@ -3144,7 +3113,7 @@ LICENCEINFOTYPE_LICENCE_CHOICES = _make_choices_from_list([
     u'DL-DE-BY_Germany', u'DL-DE-ZERO_Germany', u'PSI-licence_Ireland',
     u'IODL_Italy', u'NLOD_Norway', u'OGL_UK', u'NCGL_UK',
     u'non-standard/Other_Licence/Terms',
-    u'underNegotiation',
+    u'underReview',
     # u'IGCYL-NC_Spain',
     # u'termsOfUse', u'proprietary',
     #  u'ColorIURIS_Spain',
@@ -3365,9 +3334,12 @@ class licenceInfoType_model(SchemaModel):
         default_retriever=best_lang_value_retriever,
         verbose_name='Attribution text',
         max_val_length=1000,
-        help_text='The text that must be quoted for attribution purposes '
-                  'when using a resource - for cases where a resource is '
-                  'provided with a request for attribution',
+        help_text='The text that must be quoted for attribution '
+                  'purposes when using a resource - for cases '
+                  'where a resource is provided with a request '
+                  'for attribution; you can use a standard text '
+                  'such as "Resource X by Resource Creator Y '
+                  'used under licence Z"',
         blank=True)
 
     # licensor = models.ManyToManyField("actorInfoType_model",
@@ -3712,8 +3684,8 @@ class lingualityInfoType_model(SchemaModel):
 
     def save(self, *args, **kwargs):
         if self.lingualityType == u'monolingual':
-            self.multilingualityType = "";
-            self.multilingualityTypeDetails = "";
+            self.multilingualityType = ""
+            self.multilingualityTypeDetails = ""
 
         # Call save() method from super class with all arguments.
         super(lingualityInfoType_model, self).save(*args, **kwargs)
@@ -3817,11 +3789,9 @@ class languageInfoType_model(SchemaModel):
 
     languageName = models.CharField(
         verbose_name='Language name',
-        help_text='A human understandable name of the language that is use' \
-                  'd in the resource or supported by the tool/service; an autocomple' \
-                  'tion mechanism with values from the ISO 639 is provided in the ed' \
-                  'itor, but the values can be subsequently edited for further speci' \
-                  'fication (according to the IETF BCP47 guidelines)',
+        help_text='A human understandable name of the language that '
+                  'is used in the resource; the name is selected '
+                  'according to the IETF BCP47 specifications',
         max_length=100,
 
         choices=languageinfotype_languagename_optgroup_choices(),
@@ -3829,22 +3799,31 @@ class languageInfoType_model(SchemaModel):
 
     languageScript = models.CharField(
         verbose_name='Language script',
-        help_text='Specifies the writing system used to represent the lang' \
-                  'uage in form of a four letter code as it is defined in ISO-15924',
+        help_text='A human understandable name of the script used '
+                  'for the resource, according to the IETF BCP47 '
+                  'specifications; the element is optional and '
+                  'should only be used for extraordinary cases '
+                  '(e.g. transcribed text in IPA etc.)',
         blank=True, max_length=100, null=True,
         choices = _make_choices_from_list(sorted(iana.get_all_scripts()))['choices'])
 
     region = models.CharField(
         verbose_name='Region',
-        help_text='Name of the region where the language of the resource i' \
-        's spoken (e.g. for English as spoken in the US or the UK etc.)',
+        help_text='For linguistic variations associated with or '
+                  'appropriate for a specific country or region, '
+                  'according to the IETF BCP47 specifications; '
+                  'the element is optional and should only be '
+                  'used for extraordinary cases (e.g. English '
+                  'as spoken in the United States etc.)',
         blank=True, max_length=100, null=True,
         choices =_make_choices_from_list(sorted(iana.get_all_regions()))['choices'])
 
     variants = MultiTextField(max_length=500, widget=MultiChoiceWidget(widget_id=65, choices = _make_choices_from_list(sorted(iana.get_all_variants()))['choices']),
          verbose_name='Variants',
-         help_text='Name of the variant of the language of the resource is ' \
-         'spoken (according to IETF BCP47)',
+         help_text='For linguistic variants, according to the IETF BCP47 '
+                   'specifications; the element is optional and '
+                   'should only be used for extraordinary cases '
+                   '(e.g. polytonic Greek)',
          blank=True,
          null = True,
          # max_length=1 + len(VARIANT_CHOICES['choices']) / 4,
@@ -3853,11 +3832,8 @@ class languageInfoType_model(SchemaModel):
 
     languageId = XmlCharField(
         verbose_name='Language id',
-        help_text='The identifier of the language that is included in the ' \
-                  'resource or supported by the tool/service; an autocompletion mech' \
-                  'anism with values from the ISO 639 is provided in the editor, but' \
-                  ' the values can be subsequently edited for further specification ' \
-                  '(according to the IETF BCP47 guidelines)',
+        help_text='The identifier of the language that is included in the '
+                  'resource according to the IETF BCP47 standard',
         max_length=100,
         editable=False,)
 
@@ -4000,7 +3976,7 @@ class projectInfoType_model(SchemaModel):
 
     projectEndDate = models.DateField(
       verbose_name='Project end date',
-      help_text='The end date of a project related to the resources',
+      help_text='The end date of a project related to the resource',
       blank=True, null=True, )
 
 
@@ -5003,7 +4979,7 @@ class textFormatInfoType_model(SchemaModel):
                   'one of the pre-defined values or add a value, PREFERABLY FROM ' \
                   'THE IANA MEDIA MIMETYPE RECOMMENDED VALUES ' \
                   '(http://www.iana.org/assignments/media-types/media-types.xhtml)',
-        max_length=50,
+        max_length=100,
         choices=TEXTFORMATINFOTYPE_MIMETYPE_CHOICES['choices'],
     )
 
@@ -6814,7 +6790,7 @@ class lexicalConceptualResourceEncodingInfoType_model(SchemaModel):
         help_text='An indication of the extratextual information contained' \
                   ' in the lexicalConceptualResouce; can be used as an alternative t' \
                   'o audio, image, videos etc. for cases where these are not conside' \
-                  'red an important part of the lcr',
+                  'red an important part of the lcr (lexical/conceptual resource)',
         blank=True,
         max_length=1 + len(LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_EXTRATEXTUALINFORMATION_CHOICES['choices']) / 4,
         choices=LEXICALCONCEPTUALRESOURCEENCODINGINFOTYPE_EXTRATEXTUALINFORMATION_CHOICES['choices'],
@@ -8515,3 +8491,59 @@ class documentUnstructuredString_model(InvisibleStringModel, documentationInfoTy
             # pylint: disable-msg=W0201
             self.id = _compute_documentationInfoType_key()
         super(documentUnstructuredString_model, self).save(*args, **kwargs)
+
+
+class LrQuality(models.Model):
+
+    class Meta:
+        verbose_name = "LR Quality"
+        verbose_name_plural = "LR Qualities"
+
+    # Add a foreign key to resourceInfoType_model
+
+    # source_quality
+    source_creator = models.CharField(max_length=1000, null=True)
+    creation_time = models.DateTimeField(null=True)
+    source_document_format = models.CharField(max_length=1000, null=True)
+
+    #translation_quality: OneToMany
+
+    # technical_quality
+    segmentation_quality = models.CharField(max_length=1000, null=True)
+    alignment_quality = models.CharField(max_length=1000, null=True)
+    annotation = models.CharField(max_length=1000, null=True)
+
+    # volume
+    total = models.IntegerField(null=True)
+    quality = models.IntegerField(null=True)
+
+    # focus
+    domain = models.CharField(max_length=1000, null=True)
+
+    # legal_readiness
+    ipr_cleared = models.NullBooleanField()
+    anonymization_required = models.NullBooleanField()
+
+    # def real_unicode_(self):
+    #     # pylint: disable-msg=C0301
+    #     formatargs = ['resource',]
+    #     formatstring = u'{}'
+    #     return self.unicode_(formatstring, formatargs)
+
+
+class TranslationQuality(models.Model):
+    class Meta:
+        verbose_name = "Translation Quality"
+        verbose_name_plural = "Translation Qualities"
+
+    language = models.CharField(max_length=100,)
+    source = models.CharField(max_length=1000)
+    document_format = models.CharField(max_length=1000)
+    #text_quality
+    parent_quality = models.ForeignKey("LrQuality", blank=True, null=True, editable=False)
+
+    def real_unicode_(self):
+        # pylint: disable-msg=C0301
+        formatargs = ['language',]
+        formatstring = u'{} {}'
+        return self.unicode_(formatstring, formatargs)

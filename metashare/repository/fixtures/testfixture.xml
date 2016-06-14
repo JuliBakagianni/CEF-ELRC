@@ -10,50 +10,50 @@
 	<distributionInfo>
 		<availability>available-restrictedUse</availability>
 		<licenceInfo>
-			<licence>ELRA_END_USER</licence>
-			<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+			<licence>CC-BY</licence>
+			<restrictionsOfUse>attribution</restrictionsOfUse>
 			<distributionAccessMedium>CD-ROM</distributionAccessMedium>
 			<fee>Academic org. ELRA Members: 2000.00€</fee>
 		</licenceInfo>
 		<licenceInfo>
-			<licence>ELRA_END_USER</licence>
-			<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+			<licence>CC-BY</licence>
+			<restrictionsOfUse>attribution</restrictionsOfUse>
 			<distributionAccessMedium>CD-ROM</distributionAccessMedium>
 			<fee>Academic org. Non ELRA Members: 3500.00€</fee>
 		</licenceInfo>
 		<licenceInfo>
-			<licence>ELRA_END_USER</licence>
-			<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+			<licence>CC-BY</licence>
+			<restrictionsOfUse>attribution</restrictionsOfUse>
 			<distributionAccessMedium>CD-ROM</distributionAccessMedium>
 			<fee>Commercial org. ELRA Members: 9000.00€</fee>
 		</licenceInfo>
 		<licenceInfo>
-			<licence>ELRA_END_USER</licence>
-			<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+			<licence>CC-BY</licence>
+			<restrictionsOfUse>attribution</restrictionsOfUse>
 			<distributionAccessMedium>CD-ROM</distributionAccessMedium>
 			<fee>Commercial org. Non ELRA Members: 11000.00€</fee>
 		</licenceInfo>
 		<licenceInfo>
-			<licence>ELRA_VAR</licence>
-			<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+			<licence>ODC-BY</licence>
+			<restrictionsOfUse>attribution</restrictionsOfUse>
 			<distributionAccessMedium>CD-ROM</distributionAccessMedium>
 			<fee>Academic org. ELRA Members: 9000.00€</fee>
 		</licenceInfo>
 		<licenceInfo>
-			<licence>ELRA_VAR</licence>
-			<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+			<licence>ODC-BY</licence>
+			<restrictionsOfUse>attribution</restrictionsOfUse>
 			<distributionAccessMedium>CD-ROM</distributionAccessMedium>
 			<fee>Academic org. Non ELRA Members: 11000.00€</fee>
 		</licenceInfo>
 		<licenceInfo>
-			<licence>ELRA_VAR</licence>
-			<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+			<licence>ODC-BY</licence>
+			<restrictionsOfUse>attribution</restrictionsOfUse>
 			<distributionAccessMedium>CD-ROM</distributionAccessMedium>
 			<fee>Commercial org. ELRA Members: 9000.00€</fee>
 		</licenceInfo>
 		<licenceInfo>
-			<licence>ELRA_VAR</licence>
-			<restrictionsOfUse>academic-nonCommercialUse</restrictionsOfUse>
+			<licence>ODC-BY</licence>
+			<restrictionsOfUse>attribution</restrictionsOfUse>
 			<distributionAccessMedium>CD-ROM</distributionAccessMedium>
 			<fee>Commercial org. Non ELRA Members: 11000.00€</fee>
 		</licenceInfo>
