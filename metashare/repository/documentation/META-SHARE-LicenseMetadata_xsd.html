@@ -1,0 +1,1886 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Schema documentation for META-SHARE-LicenseMetadata.xsd</title>
+      <link rel="stylesheet" href="docHtml.css" type="text/css" /><script type="text/javascript">
+         <!--
+        var facetsBoxes= new Array('facets_distributionInfoType_availability', 
+				'facets_licenceInfoType_licence', 
+				'facets_licenceInfoType_otherLicence_TermsURL', 
+				'facets_licenceInfoType_restrictionsOfUse', 
+				'facets_licenceInfoType_fee', 
+				'facets_membershipInfoType_membershipInstitution');
+var diagramBoxes= new Array('diagram_distributionInfo', 
+				'diagram_distributionInfoType_availability', 
+				'diagram_licenceInfo', 
+				'diagram_licenceInfoType_licence', 
+				'diagram_licenceInfoType_otherLicenceName', 
+				'diagram_licenceInfoType_otherLicence_TermsText', 
+				'diagram_licenceInfoType_otherLicence_TermsURL', 
+				'diagram_licenceInfoType_personalDataIncluded', 
+				'diagram_licenceInfoType_personalDataAdditionalInfo', 
+				'diagram_licenceInfoType_sensitiveDataIncluded', 
+				'diagram_licenceInfoType_sensitiveDataAdditionalInfo', 
+				'diagram_licenceInfoType_restrictionsOfUse', 
+				'diagram_licenceInfoType_fee', 
+				'diagram_licenceInfoType_attributionText', 
+				'diagram_distributionInfoType_allowsUsesBesidesDGT', 
+				'diagram_distributionInfoType_iprHolder', 
+				'diagram_membershipInfoType_member', 
+				'diagram_membershipInfoType_membershipInstitution', 
+				'diagram_distributionInfoType', 
+				'diagram_licenceInfoType', 
+				'diagram_membershipInfoType');
+var annotationBoxes= new Array('annotations_distributionInfo', 
+				'annotations_distributionInfoType_availability', 
+				'annotations_licenceInfo', 
+				'annotations_licenceInfoType_licence', 
+				'annotations_licenceInfoType_otherLicenceName', 
+				'annotations_licenceInfoType_otherLicence_TermsText', 
+				'annotations_licenceInfoType_otherLicence_TermsURL', 
+				'annotations_licenceInfoType_personalDataIncluded', 
+				'annotations_licenceInfoType_personalDataAdditionalInfo', 
+				'annotations_licenceInfoType_sensitiveDataIncluded', 
+				'annotations_licenceInfoType_sensitiveDataAdditionalInfo', 
+				'annotations_licenceInfoType_restrictionsOfUse', 
+				'annotations_licenceInfoType_fee', 
+				'annotations_licenceInfoType_attributionText', 
+				'annotations_distributionInfoType_allowsUsesBesidesDGT', 
+				'annotations_distributionInfoType_iprHolder', 
+				'annotations_membershipInfoType_member', 
+				'annotations_membershipInfoType_membershipInstitution', 
+				'annotations_distributionInfoType', 
+				'annotations_licenceInfoType', 
+				'annotations_membershipInfoType');
+var attributesBoxes= new Array('attributes_licenceInfoType_otherLicence_TermsText', 
+				'attributes_licenceInfoType_attributionText');
+
+      
+        var button_prefix = 'button_';
+        
+        /**
+        * Returns an element in the current HTML document.
+        *
+        * @param elementID Identifier of HTML element
+        * @return               HTML element object
+        */
+        function getElementObject(elementID) {
+            var elemObj = null;
+            if (document.getElementById) {
+                elemObj = document.getElementById(elementID);
+            }
+            return elemObj;
+        }
+        
+        /**
+        * Switches the state of a collapseable box, e.g.
+        * if it's opened, it'll be closed, and vice versa.
+        *
+        * @param boxID Identifier of box
+        */
+        function switchState(boxID) {
+            var boxObj = getElementObject(boxID);
+            var buttonObj = getElementObject(button_prefix + boxID);
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else if (boxObj.style.display == "none") {
+                // Box is closed, so open it
+                openBox(boxObj, buttonObj);
+            } else if (boxObj.style.display == "block") {
+                // Box is opened, so close it
+                closeBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+        * Opens a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function openBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "block";
+                
+                // Change text of button
+                if (boxObj.style.display == "block") {
+                    buttonObj.src = "img/btM.gif";
+                }
+            }
+        }
+        
+        /**
+        * Closes a collapseable box.
+        *
+        * @param boxObj       Collapseable box
+        * @param buttonObj Button controlling box
+        */
+        function closeBox(boxObj, buttonObj) {
+            if (boxObj == null || buttonObj == null) {
+                // Box or button not found
+            } else {
+                // Change 'display' CSS property of box
+                boxObj.style.display = "none";
+                
+                // Change text of button
+                if (boxObj.style.display == "none") {
+                    buttonObj.src = "img/btP.gif";
+                }
+            }
+        }
+    
+       function switchStateForAll(buttonObj, boxList) {
+            if (buttonObj == null) {
+                // button not found
+            } else if (buttonObj.value == "+") {
+                // Expand all
+                expandAll(boxList);
+                buttonObj.value = "-";
+            } else if (buttonObj.value == "-") {
+                // Collapse all
+                collapseAll(boxList);
+                buttonObj.value = "+";
+            }
+        }
+        
+        /**
+        * Closes all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function collapseAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                closeBox(boxObj, buttonObj);
+            }
+        }
+            
+        /**
+        * Open all boxes in a given list.
+        *
+        * @param boxList Array of box IDs
+        */
+        function expandAll(boxList) {
+            var idx;
+            for (idx = 0; idx < boxList.length; idx++) {
+                var boxObj = getElementObject(boxList[idx]);
+                var buttonObj = getElementObject(button_prefix + boxList[idx]);
+                openBox(boxObj, buttonObj);
+            }
+        }
+        
+        /**
+         * Update the message presented in the title of the html page.
+         * - If the documentation was splited by namespace we present something like: "Documentation for namespace 'ns'"
+         * - If the documentation was splited by location we present somehing like: "Documentation for 'Schema.xsd'"
+         * - If no split we always present: "Documentation for 'MainSchema.xsd'"
+         */
+        function updatePageTitle(message) {
+            top.document.title = message;
+        }
+        
+          
+                    
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function findAndFloat(id, x_displacement, y_displacement){
+
+            var element = getElementObject(id);            
+            
+            window[id + "_obj"] = element;
+            
+            if(document.layers) {
+               element.style = element;
+            }
+            
+            element.current_y = y_displacement;      
+            element.first_time = true;
+         
+            element.floatElement = function(){
+               // It may be closed by an user action.
+                
+               // Target X and Y coordinates.
+               var x, y;
+               
+               var myWidth = 0, myHeight = 0;
+               if( typeof( window.innerWidth ) == 'number' ) {
+                  //Non-IE
+                  myWidth = window.innerWidth;
+                  myHeight = window.innerHeight;
+               } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+                  //IE 6+ in 'standards compliant mode'
+                  myWidth = document.documentElement.clientWidth;
+                  myHeight = document.documentElement.clientHeight;
+               } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+                  //IE 4 compatible
+                  myWidth = document.body.clientWidth;
+                  myHeight = document.body.clientHeight;
+               }
+               
+               
+               x = myWidth - x_displacement;
+               
+               var ns = (navigator.appName.indexOf("Netscape") != -1);               
+               y = ns ? pageYOffset : document.documentElement && document.documentElement.scrollTop ? 
+                  document.documentElement.scrollTop : document.body.scrollTop;               
+               y = y + y_displacement;               
+               
+               // The current y is the current coordinate of the floating element.
+               // This should be at the limit the y target coordinate.
+               this.current_y += (y - this.current_y)/1.25;
+               
+               // Add the pixels constant after the values
+               // and move the element.
+               var px = document.layers ? "" : "px";
+               this.style.left =  x + px;
+               this.style.top =  this.current_y + px;
+                              
+               setTimeout(this.id + "_obj.floatElement()", 100);
+            }
+            
+            element.floatElement();
+            return element;
+          }
+
+         /**
+          * Finds an HTML element by its ID and makes it floatable over the normal content.
+          *
+          * @param x_displacement The difference in pixels to the right side of the window from 
+          *           the left side of the element.
+          * @param y_displacement The difference in pixels to the right side of the window from 
+          *           the top of the element.          
+          */
+         function selectTOCGroupBy(id, isChunked, indexFileLocation, indexFileNamespace, indexFileComponent){
+
+            if (!isChunked) {
+             var selectIds = new Array('toc_group_by_namespace', 'toc_group_by_location', 'toc_group_by_component_type');
+             // Make all the tabs invisible.
+               for (i = 0; i < 3; i++){
+                  var tab = getElementObject(selectIds[i]);
+                  tab.style.display = 'none';
+               }
+               var selTab = getElementObject(id);
+               selTab.style.display = 'block';
+            } else {
+             if (id == 'toc_group_by_namespace') {
+               parent.indexFrame.location = indexFileNamespace;
+             } else  if (id == 'toc_group_by_location') {
+               parent.indexFrame.location = indexFileLocation;
+             } else  if (id == 'toc_group_by_component_type') {
+              parent.indexFrame.location = indexFileComponent;
+             }
+            }
+         }
+          
+
+    
+                    //--></script></head>
+   <body>
+      <div id="global_controls" class="globalControls" style="position:absolute;right:0;">
+         <table class="rt">
+            <tr>
+               <td class="rt_cornerTopLeft"></td>
+               <td class="rt_lineTop"></td>
+               <td class="rt_cornerTopRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_lineLeft"></td>
+               <td class="rt_content">
+                  <h3>Showing:</h3>
+                  <table>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, annotationBoxes);" class="control" /></span><span class="globalControlName">Annotations</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, attributesBoxes);" class="control" /></span><span class="globalControlName">Attributes </span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, diagramBoxes);" class="control" /></span><span class="globalControlName">Diagrams</span></td>
+                     </tr>
+                     <tr>
+                        <td><span><input type="checkbox" value="-" checked="checked" onclick="switchStateForAll(this, facetsBoxes);" class="control" /></span><span class="globalControlName">Facets </span></td>
+                     </tr>
+                  </table>
+                  <div align="right"><span><input type="button" onclick="getElementObject('global_controls').style.display = 'none';" value="Close" /></span></div>
+               </td>
+               <td class="rt_lineRight"></td>
+            </tr>
+            <tr>
+               <td class="rt_cornerBottomLeft"></td>
+               <td class="rt_lineBottom"></td>
+               <td class="rt_cornerBottomRight"></td>
+            </tr>
+         </table>
+      </div><a id="META-SHARE-LicenseMetadata.xsd"></a><div class="componentTitle">Included schema <span class="qname">META-SHARE-LicenseMetadata.xsd</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody></tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="distributionInfo"></a><div class="componentTitle">Element <span class="qname">ms:distributionInfo</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_distributionInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_distributionInfo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_distributionInfo" style="display:block">
+                              <div class="annotation">Groups information on the distribution of the resource</div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_distributionInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_distributionInfo');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_distributionInfo" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Element_ms_distributionInfo.jpeg" usemap="#META-SHARE-LicenseMetadata_xsd_Element_ms_distributionInfo" /><map name="META-SHARE-LicenseMetadata_xsd_Element_ms_distributionInfo" id="META-SHARE-LicenseMetadata_xsd_Element_ms_distributionInfo">
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#distributionInfoType_availability" href="META-SHARE-LicenseMetadata_xsd.html#distributionInfoType_availability" coords="234,42,314,67" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfo" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfo" coords="234,77,334,102" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#distributionInfoType_allowsUsesBesidesDGT" href="META-SHARE-LicenseMetadata_xsd.html#distributionInfoType_allowsUsesBesidesDGT" coords="234,112,382,137" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#distributionInfoType_iprHolder" href="META-SHARE-LicenseMetadata_xsd.html#distributionInfoType_iprHolder" coords="234,147,308,172" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#distributionInfoType" href="META-SHARE-LicenseMetadata_xsd.html#distributionInfoType" coords="132,5,379,27" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="META-SHARE-LicenseMetadata_xsd.html#distributionInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-LicenseMetadata.xsd')">ms:distributionInfoType</a></b></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="distributionInfoType_availability"></a><div class="componentTitle">Element <span class="qname"><b><a href="META-SHARE-LicenseMetadata_xsd.html#distributionInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-LicenseMetadata.xsd')">ms:distributionInfoType</a></b> / ms:availability</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_distributionInfoType_availability" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_distributionInfoType_availability');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_distributionInfoType_availability" style="display:block">
+                              <div class="annotation">Specifies the availability status of the resource; restrictionsOfUse can be further
+                                 used to indicate the specific terms of availability
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_distributionInfoType_availability" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_distributionInfoType_availability');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_distributionInfoType_availability" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Element_ms_availability.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>restriction of <b>xs:string</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_distributionInfoType_availability" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_distributionInfoType_availability');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_distributionInfoType_availability" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>40</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>available</b></td>
+                                    <td>
+                                       <div class="annotation">For resources available with no restrictions of use</div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>underReview</b></td>
+                                    <td>
+                                       <div class="annotation">for resources that their availability is still pending</div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="licenceInfo"></a><div class="componentTitle">Element <span class="qname">ms:licenceInfo</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_licenceInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_licenceInfo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_licenceInfo" style="display:block">
+                              <div class="annotation">Groups information on licences for the resource; can be repeated to allow for different
+                                 modes of access and conditions of use (e.g. free for academic use, on-a-fee basis
+                                 for commercial use,
+                                 download of a sample for free use etc.)
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_licenceInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_licenceInfo');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_licenceInfo" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Element_ms_licenceInfo.jpeg" usemap="#META-SHARE-LicenseMetadata_xsd_Element_ms_licenceInfo" /><map name="META-SHARE-LicenseMetadata_xsd_Element_ms_licenceInfo" id="META-SHARE-LicenseMetadata_xsd_Element_ms_licenceInfo">
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_licence" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_licence" coords="216,42,281,67" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_otherLicenceName" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_otherLicenceName" coords="216,77,337,102" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_otherLicence_TermsText" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_otherLicence_TermsText" coords="216,112,367,137" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_otherLicence_TermsURL" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_otherLicence_TermsURL" coords="216,147,366,172" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_personalDataIncluded" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_personalDataIncluded" coords="216,182,351,207" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_personalDataAdditionalInfo" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_personalDataAdditionalInfo" coords="216,217,376,242" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_sensitiveDataIncluded" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_sensitiveDataIncluded" coords="216,252,352,277" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_sensitiveDataAdditionalInfo" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_sensitiveDataAdditionalInfo" coords="216,287,377,312" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_restrictionsOfUse" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_restrictionsOfUse" coords="216,322,332,347" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_fee" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_fee" coords="216,357,267,382" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_attributionText" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_attributionText" coords="216,392,315,417" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType" coords="114,5,343,27" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>extension of <b><a href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-LicenseMetadata.xsd')">ms:licenceInfoType</a></b></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="licenceInfoType_licence"></a><div class="componentTitle">Element <span class="qname"><b><a href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-LicenseMetadata.xsd')">ms:licenceInfoType</a></b> / ms:licence</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_licenceInfoType_licence" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_licenceInfoType_licence');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_licenceInfoType_licence" style="display:block">
+                              <div class="annotation">The licence of use for the resource; for an overview of licences, please visit: https://elrc-share.ilsp.gr/info/#Licensing_LRs</div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_licenceInfoType_licence" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_licenceInfoType_licence');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_licenceInfoType_licence" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Element_ms_licence.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>restriction of <b>xs:string</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_licenceInfoType_licence" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_licenceInfoType_licence');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_licenceInfoType_licence" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>100</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>CC-BY</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>CC-BY-NC</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>CC-BY-NC-ND</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>CC-BY-NC-SA</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>CC-BY-ND</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>CC-BY-SA</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>CC-ZERO</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>PDDL</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>ODC-BY</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>ODbL</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>openForReuseWithRestrictions</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>FreeOpenDataLicence_Belgium</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>OpenDataLicenceAtAFairCost_Belgium</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>FreeOpenDataLicenceForNon-CommercialRe-use_Belgium</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>OpenDataLicenceAtAFairCostForCommercialRe-use_Belgium</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>NLSOpenDataLicence_Finland</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>LicenceOuverte-OpenLicence_France</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>DL-DE-BY_Germany</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>DL-DE-ZERO_Germany</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>PSI-licence_Ireland</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>IODL_Italy</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>NLOD_Norway</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>OGL_UK</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>NCGL_UK</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>non-standard/Other_Licence/Terms</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>underReview</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="licenceInfoType_otherLicenceName"></a><div class="componentTitle">Element <span class="qname"><b><a href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-LicenseMetadata.xsd')">ms:licenceInfoType</a></b> / ms:otherLicenceName</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_licenceInfoType_otherLicenceName" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_licenceInfoType_otherLicenceName');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_licenceInfoType_otherLicenceName" style="display:block">
+                              <div class="annotation">The name with which a licence is known; to be used for licences not included in the
+                                 pre-defined list of recommended licences
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_licenceInfoType_otherLicenceName" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_licenceInfoType_otherLicenceName');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_licenceInfoType_otherLicenceName" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Element_ms_otherLicenceName.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xs:string</b></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="licenceInfoType_otherLicence_TermsText"></a><div class="componentTitle">Element <span class="qname"><b><a href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-LicenseMetadata.xsd')">ms:licenceInfoType</a></b> / ms:otherLicence_TermsText</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_licenceInfoType_otherLicence_TermsText" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_licenceInfoType_otherLicence_TermsText');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_licenceInfoType_otherLicence_TermsText" style="display:block">
+                              <div class="annotation">Used for inputting the text of licences that are not included in the pre-defined list
+                                 or terms of use statements associated with a resource
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_licenceInfoType_otherLicence_TermsText" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_licenceInfoType_otherLicence_TermsText');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_licenceInfoType_otherLicence_TermsText" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Element_ms_otherLicence_TermsText.jpeg" usemap="#META-SHARE-LicenseMetadata_xsd_Element_ms_otherLicence_TermsText" /><map name="META-SHARE-LicenseMetadata_xsd_Element_ms_otherLicence_TermsText" id="META-SHARE-LicenseMetadata_xsd_Element_ms_otherLicence_TermsText">
+                                 <area alt="META-SHARE-SimpleTypes_xsd.tmp#myString_lang" href="META-SHARE-SimpleTypes_xsd.html#myString_lang" coords="207,117,277,142" />
+                                 <area alt="META-SHARE-SimpleTypes_xsd.tmp#myString" href="META-SHARE-SimpleTypes_xsd.html#myString" coords="182,5,378,27" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>restriction of <b><a href="META-SHARE-SimpleTypes_xsd.html#myString" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-SimpleTypes.xsd')">ms:myString</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_licenceInfoType_otherLicence_TermsText" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_licenceInfoType_otherLicence_TermsText');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_licenceInfoType_otherLicence_TermsText" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="META-SHARE-SimpleTypes_xsd.html#myString_lang" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for META-SHARE-SimpleTypes.xsd')">lang</a></b></td>
+                                    <td><b>xs:language</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="licenceInfoType_otherLicence_TermsURL"></a><div class="componentTitle">Element <span class="qname"><b><a href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-LicenseMetadata.xsd')">ms:licenceInfoType</a></b> / ms:otherLicence_TermsURL</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_licenceInfoType_otherLicence_TermsURL" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_licenceInfoType_otherLicence_TermsURL');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_licenceInfoType_otherLicence_TermsURL" style="display:block">
+                              <div class="annotation">Used to provide a hyperlink to a url containing the text of a licence not included
+                                 in the predefined list or describing the terms of use for a language resource
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_licenceInfoType_otherLicence_TermsURL" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_licenceInfoType_otherLicence_TermsURL');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_licenceInfoType_otherLicence_TermsURL" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Element_ms_otherLicence_TermsURL.jpeg" usemap="#META-SHARE-LicenseMetadata_xsd_Element_ms_otherLicence_TermsURL" /><map name="META-SHARE-LicenseMetadata_xsd_Element_ms_otherLicence_TermsURL" id="META-SHARE-LicenseMetadata_xsd_Element_ms_otherLicence_TermsURL">
+                                 <area alt="META-SHARE-SimpleTypes_xsd.tmp#httpURI" href="META-SHARE-SimpleTypes_xsd.html#httpURI" coords="178,0,284,26" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="META-SHARE-SimpleTypes_xsd.html#httpURI" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-SimpleTypes.xsd')">ms:httpURI</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_licenceInfoType_otherLicence_TermsURL" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_licenceInfoType_otherLicence_TermsURL');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_licenceInfoType_otherLicence_TermsURL" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">pattern</td>
+                                    <td width="30%"><b>(http://.*)|(https://.*)|(ftp://.*)|(www.*)</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="licenceInfoType_personalDataIncluded"></a><div class="componentTitle">Element <span class="qname"><b><a href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-LicenseMetadata.xsd')">ms:licenceInfoType</a></b> / ms:personalDataIncluded</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_licenceInfoType_personalDataIncluded" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_licenceInfoType_personalDataIncluded');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_licenceInfoType_personalDataIncluded" style="display:block">
+                              <div class="annotation">Specifies whether the resource contains or not personal data; this might mean that
+                                 special handling of the resource is required (e.g. anonymisation)
+                                 
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_licenceInfoType_personalDataIncluded" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_licenceInfoType_personalDataIncluded');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_licenceInfoType_personalDataIncluded" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Element_ms_personalDataIncluded.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xs:boolean</b></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="licenceInfoType_personalDataAdditionalInfo"></a><div class="componentTitle">Element <span class="qname"><b><a href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-LicenseMetadata.xsd')">ms:licenceInfoType</a></b> / ms:personalDataAdditionalInfo</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_licenceInfoType_personalDataAdditionalInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_licenceInfoType_personalDataAdditionalInfo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_licenceInfoType_personalDataAdditionalInfo" style="display:block">
+                              <div class="annotation">If the resource includes personal data, this field can be used for entering more information,
+                                 e.g. whether special handling of the resource is required (e.g. anonymisation, further
+                                 request for use etc.)
+                                 
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_licenceInfoType_personalDataAdditionalInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_licenceInfoType_personalDataAdditionalInfo');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_licenceInfoType_personalDataAdditionalInfo" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Element_ms_personalDataAdditionalInfo.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xs:string</b></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="licenceInfoType_sensitiveDataIncluded"></a><div class="componentTitle">Element <span class="qname"><b><a href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-LicenseMetadata.xsd')">ms:licenceInfoType</a></b> / ms:sensitiveDataIncluded</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_licenceInfoType_sensitiveDataIncluded" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_licenceInfoType_sensitiveDataIncluded');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_licenceInfoType_sensitiveDataIncluded" style="display:block">
+                              <div class="annotation">Specifies whether the resource contains or not sensitive data; this might mean that
+                                 special handling of the resource is required (e.g. anonymisation)
+                                 
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_licenceInfoType_sensitiveDataIncluded" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_licenceInfoType_sensitiveDataIncluded');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_licenceInfoType_sensitiveDataIncluded" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Element_ms_sensitiveDataIncluded.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xs:boolean</b></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="licenceInfoType_sensitiveDataAdditionalInfo"></a><div class="componentTitle">Element <span class="qname"><b><a href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-LicenseMetadata.xsd')">ms:licenceInfoType</a></b> / ms:sensitiveDataAdditionalInfo</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_licenceInfoType_sensitiveDataAdditionalInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_licenceInfoType_sensitiveDataAdditionalInfo');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_licenceInfoType_sensitiveDataAdditionalInfo" style="display:block">
+                              <div class="annotation">If the resource includes sensitive data, this field can be used for entering more
+                                 information, e.g. whether special handling of the resource is required (e.g. anonymisation)
+                                 
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_licenceInfoType_sensitiveDataAdditionalInfo" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_licenceInfoType_sensitiveDataAdditionalInfo');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_licenceInfoType_sensitiveDataAdditionalInfo" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Element_ms_sensitiveDataAdditionalInfo.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xs:string</b></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="licenceInfoType_restrictionsOfUse"></a><div class="componentTitle">Element <span class="qname"><b><a href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-LicenseMetadata.xsd')">ms:licenceInfoType</a></b> / ms:restrictionsOfUse</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_licenceInfoType_restrictionsOfUse" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_licenceInfoType_restrictionsOfUse');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_licenceInfoType_restrictionsOfUse" style="display:block">
+                              <div class="annotation">Specifies terms and conditions of use (e.g. attribution, payment etc.) imposed by
+                                 the licence
+                                 
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_licenceInfoType_restrictionsOfUse" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_licenceInfoType_restrictionsOfUse');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_licenceInfoType_restrictionsOfUse" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Element_ms_restrictionsOfUse.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>restriction of <b>xs:string</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_licenceInfoType_restrictionsOfUse" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_licenceInfoType_restrictionsOfUse');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_licenceInfoType_restrictionsOfUse" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>100</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>nonCommercialUse</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>commercialUse</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>attribution</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>shareAlike</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>noDerivatives</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>research</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>education</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>compensate</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>other</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="licenceInfoType_fee"></a><div class="componentTitle">Element <span class="qname"><b><a href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-LicenseMetadata.xsd')">ms:licenceInfoType</a></b> / ms:fee</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_licenceInfoType_fee" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_licenceInfoType_fee');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_licenceInfoType_fee" style="display:block">
+                              <div class="annotation">Specifies the costs that are required to access the resource, a fragment of the resource
+                                 or to use a tool or service
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_licenceInfoType_fee" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_licenceInfoType_fee');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_licenceInfoType_fee" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Element_ms_fee.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>restriction of <b>xs:string</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_licenceInfoType_fee" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_licenceInfoType_fee');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_licenceInfoType_fee" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>100</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="licenceInfoType_attributionText"></a><div class="componentTitle">Element <span class="qname"><b><a href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-LicenseMetadata.xsd')">ms:licenceInfoType</a></b> / ms:attributionText</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_licenceInfoType_attributionText" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_licenceInfoType_attributionText');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_licenceInfoType_attributionText" style="display:block">
+                              <div class="annotation">The text that must be quoted for attribution purposes when using a resource - for
+                                 cases where a resource is provided with a request for attribution; you can use a standard
+                                 text such as "Resource X by Resource Creator Y used under licence Z"
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_licenceInfoType_attributionText" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_licenceInfoType_attributionText');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_licenceInfoType_attributionText" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Element_ms_attributionText.jpeg" usemap="#META-SHARE-LicenseMetadata_xsd_Element_ms_attributionText" /><map name="META-SHARE-LicenseMetadata_xsd_Element_ms_attributionText" id="META-SHARE-LicenseMetadata_xsd_Element_ms_attributionText">
+                                 <area alt="META-SHARE-SimpleTypes_xsd.tmp#myString_lang" href="META-SHARE-SimpleTypes_xsd.html#myString_lang" coords="155,117,225,142" />
+                                 <area alt="META-SHARE-SimpleTypes_xsd.tmp#myString" href="META-SHARE-SimpleTypes_xsd.html#myString" coords="130,5,326,27" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>restriction of <b><a href="META-SHARE-SimpleTypes_xsd.html#myString" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-SimpleTypes.xsd')">ms:myString</a></b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Attributes</b></div>
+                           <div class="floatRight"><input id="button_attributes_licenceInfoType_attributionText" type="image" src="img/btM.gif" value="-" onclick="switchState('attributes_licenceInfoType_attributionText');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="attributes_licenceInfoType_attributionText" style="display:block">
+                              <table class="attributesTable">
+                                 <thead>
+                                    <tr>
+                                       <th>QName</th>
+                                       <th width="10%">Type</th>
+                                       <th width="5%">Use</th>
+                                       <th></th>
+                                    </tr>
+                                 </thead>
+                                 <tr>
+                                    <td class="firstColumn"><b><a href="META-SHARE-SimpleTypes_xsd.html#myString_lang" target="mainFrame" title="No namespace" onclick="updatePageTitle('Schema documentation for META-SHARE-SimpleTypes.xsd')">lang</a></b></td>
+                                    <td><b>xs:language</b></td>
+                                    <td>optional</td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="distributionInfoType_allowsUsesBesidesDGT"></a><div class="componentTitle">Element <span class="qname"><b><a href="META-SHARE-LicenseMetadata_xsd.html#distributionInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-LicenseMetadata.xsd')">ms:distributionInfoType</a></b> / ms:allowsUsesBesidesDGT</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_distributionInfoType_allowsUsesBesidesDGT" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_distributionInfoType_allowsUsesBesidesDGT');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_distributionInfoType_allowsUsesBesidesDGT" style="display:block">
+                              <div class="annotation">Whether the resource can be used for purposes other than those of the DGT
+                                 
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_distributionInfoType_allowsUsesBesidesDGT" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_distributionInfoType_allowsUsesBesidesDGT');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_distributionInfoType_allowsUsesBesidesDGT" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Element_ms_allowsUsesBesidesDGT.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xs:boolean</b></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="distributionInfoType_iprHolder"></a><div class="componentTitle">Element <span class="qname"><b><a href="META-SHARE-LicenseMetadata_xsd.html#distributionInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-LicenseMetadata.xsd')">ms:distributionInfoType</a></b> / ms:iprHolder</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_distributionInfoType_iprHolder" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_distributionInfoType_iprHolder');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_distributionInfoType_iprHolder" style="display:block">
+                              <div class="annotation">Groups information on a person or an organization who holds the full Intellectual
+                                 Property Rights (Copyright, trademark etc.) that subsist in the resource. The IPR
+                                 holder could be different from the creator that may have assigned the rights to the
+                                 IPR holder (e.g. an author as a creator assigns her rights to the publisher who is
+                                 the IPR holder) and the distributor that holds a specific licence (i.e. a permission)
+                                 to distribute the work
+                                 
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_distributionInfoType_iprHolder" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_distributionInfoType_iprHolder');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_distributionInfoType_iprHolder" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Element_ms_iprHolder.jpeg" usemap="#META-SHARE-LicenseMetadata_xsd_Element_ms_iprHolder" /><map name="META-SHARE-LicenseMetadata_xsd_Element_ms_iprHolder" id="META-SHARE-LicenseMetadata_xsd_Element_ms_iprHolder">
+                                 <area alt="META-SHARE-RoleTypes_xsd.tmp#personInfo" href="META-SHARE-RoleTypes_xsd.html#personInfo" coords="187,40,287,65" />
+                                 <area alt="META-SHARE-RoleTypes_xsd.tmp#organizationInfo" href="META-SHARE-RoleTypes_xsd.html#organizationInfo" coords="187,75,312,100" />
+                                 <area alt="META-SHARE-RoleTypes_xsd.tmp#actorInfoType" href="META-SHARE-RoleTypes_xsd.html#actorInfoType" coords="105,3,240,25" /></map></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b><a href="META-SHARE-RoleTypes_xsd.html#actorInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-RoleTypes.xsd')">ms:actorInfoType</a></b></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="membershipInfoType_member"></a><div class="componentTitle">Element <span class="qname"><b><a href="META-SHARE-LicenseMetadata_xsd.html#membershipInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-LicenseMetadata.xsd')">ms:membershipInfoType</a></b> / ms:member</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_membershipInfoType_member" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_membershipInfoType_member');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_membershipInfoType_member" style="display:block">
+                              <div class="annotation">Whether the user is a member or not</div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_membershipInfoType_member" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_membershipInfoType_member');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_membershipInfoType_member" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Element_ms_member.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td><b>xs:boolean</b></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="membershipInfoType_membershipInstitution"></a><div class="componentTitle">Element <span class="qname"><b><a href="META-SHARE-LicenseMetadata_xsd.html#membershipInfoType" target="mainFrame" title="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" onclick="updatePageTitle('Schema documentation for META-SHARE-LicenseMetadata.xsd')">ms:membershipInfoType</a></b> / ms:membershipInstitution</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_membershipInfoType_membershipInstitution" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_membershipInfoType_membershipInstitution');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_membershipInfoType_membershipInstitution" style="display:block">
+                              <div class="annotation">This lists the different institutions releasing the resources and establishing membership
+                                 conditions
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_membershipInfoType_membershipInstitution" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_membershipInfoType_membershipInstitution');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_membershipInfoType_membershipInstitution" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Element_ms_membershipInstitution.jpeg" /></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn"><b>Type</b></td>
+                        <td>restriction of <b>xs:string</b></td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Facets</b></div>
+                           <div class="floatRight"><input id="button_facets_membershipInfoType_membershipInstitution" type="image" src="img/btM.gif" value="-" onclick="switchState('facets_membershipInfoType_membershipInstitution');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="facets_membershipInfoType_membershipInstitution" style="display:block">
+                              <table class="facetsTable">
+                                 <tr>
+                                    <td class="firstColumn">maxLength</td>
+                                    <td width="30%"><b>50</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>ELRA</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>LDC</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>TST-CENTRALE</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td class="firstColumn">enumeration</td>
+                                    <td width="30%"><b>other</b></td>
+                                    <td>
+                                       <div class="annotation"></div>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="distributionInfoType"></a><div class="componentTitle">Complex Type <span class="qname">ms:distributionInfoType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_distributionInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_distributionInfoType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_distributionInfoType" style="display:block">
+                              <div class="annotation">Groups information on the distribution of the resource</div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_distributionInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_distributionInfoType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_distributionInfoType" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Complex_Type_ms_distributionInfoType.jpeg" usemap="#META-SHARE-LicenseMetadata_xsd_Complex_Type_ms_distributionInfoType" /><map name="META-SHARE-LicenseMetadata_xsd_Complex_Type_ms_distributionInfoType" id="META-SHARE-LicenseMetadata_xsd_Complex_Type_ms_distributionInfoType">
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#distributionInfoType_availability" href="META-SHARE-LicenseMetadata_xsd.html#distributionInfoType_availability" coords="268,0,348,25" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfo" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfo" coords="268,35,368,60" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#distributionInfoType_allowsUsesBesidesDGT" href="META-SHARE-LicenseMetadata_xsd.html#distributionInfoType_allowsUsesBesidesDGT" coords="268,70,416,95" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#distributionInfoType_iprHolder" href="META-SHARE-LicenseMetadata_xsd.html#distributionInfoType_iprHolder" coords="268,105,342,130" /></map></div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="licenceInfoType"></a><div class="componentTitle">Complex Type <span class="qname">ms:licenceInfoType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_licenceInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_licenceInfoType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_licenceInfoType" style="display:block">
+                              <div class="annotation">Groups information on licences for the resource; can be repeated to allow for different
+                                 modes of access and restrictions of use (e.g. free for academic use, on-a-fee basis
+                                 for commercial use, download of a sample for free use etc.)
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_licenceInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_licenceInfoType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_licenceInfoType" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Complex_Type_ms_licenceInfoType.jpeg" usemap="#META-SHARE-LicenseMetadata_xsd_Complex_Type_ms_licenceInfoType" /><map name="META-SHARE-LicenseMetadata_xsd_Complex_Type_ms_licenceInfoType" id="META-SHARE-LicenseMetadata_xsd_Complex_Type_ms_licenceInfoType">
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_licence" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_licence" coords="250,0,315,25" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_otherLicenceName" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_otherLicenceName" coords="250,35,371,60" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_otherLicence_TermsText" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_otherLicence_TermsText" coords="250,70,401,95" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_otherLicence_TermsURL" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_otherLicence_TermsURL" coords="250,105,400,130" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_personalDataIncluded" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_personalDataIncluded" coords="250,140,385,165" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_personalDataAdditionalInfo" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_personalDataAdditionalInfo" coords="250,175,410,200" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_sensitiveDataIncluded" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_sensitiveDataIncluded" coords="250,210,386,235" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_sensitiveDataAdditionalInfo" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_sensitiveDataAdditionalInfo" coords="250,245,411,270" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_restrictionsOfUse" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_restrictionsOfUse" coords="250,280,366,305" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_fee" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_fee" coords="250,315,301,340" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#licenceInfoType_attributionText" href="META-SHARE-LicenseMetadata_xsd.html#licenceInfoType_attributionText" coords="250,350,349,375" /></map></div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table><a id="membershipInfoType"></a><div class="componentTitle">Complex Type <span class="qname">ms:membershipInfoType</span></div>
+      <table class="rt">
+         <tr>
+            <td class="rt_cornerTopLeft"></td>
+            <td class="rt_lineTop"></td>
+            <td class="rt_cornerTopRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_lineLeft"></td>
+            <td class="rt_content">
+               <table class="component">
+                  <tbody>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Annotations</b></div>
+                           <div class="floatRight"><input id="button_annotations_membershipInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('annotations_membershipInfoType');" class="control" /></div>
+                        </td>
+                        <td>
+                           <div id="annotations_membershipInfoType" style="display:block">
+                              <div class="annotation">The conditions imposed by the user being member of some association/institution (e.g.,
+                                 ELRA, LDC) distributing the resource. This indicates the availability conditions (and
+                                 prices) for users who are members or not.
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="firstColumn">
+                           <div class="floatLeft"><b>Diagram</b></div>
+                           <div class="floatRight"><input id="button_diagram_membershipInfoType" type="image" src="img/btM.gif" value="-" onclick="switchState('diagram_membershipInfoType');" class="control" /></div>
+                        </td>
+                        <td class="diagram">
+                           <div id="diagram_membershipInfoType" style="display:block"><img alt="Diagram" border="0" src="img/META-SHARE-LicenseMetadata_xsd_Complex_Type_ms_membershipInfoType.jpeg" usemap="#META-SHARE-LicenseMetadata_xsd_Complex_Type_ms_membershipInfoType" /><map name="META-SHARE-LicenseMetadata_xsd_Complex_Type_ms_membershipInfoType" id="META-SHARE-LicenseMetadata_xsd_Complex_Type_ms_membershipInfoType">
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#membershipInfoType_member" href="META-SHARE-LicenseMetadata_xsd.html#membershipInfoType_member" coords="274,0,343,25" />
+                                 <area alt="META-SHARE-LicenseMetadata_xsd.tmp#membershipInfoType_membershipInstitution" href="META-SHARE-LicenseMetadata_xsd.html#membershipInfoType_membershipInstitution" coords="274,35,408,60" /></map></div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+            <td class="rt_lineRight"></td>
+         </tr>
+         <tr>
+            <td class="rt_cornerBottomLeft"></td>
+            <td class="rt_lineBottom"></td>
+            <td class="rt_cornerBottomRight"></td>
+         </tr>
+      </table>
+      <div class="footer">
+         <hr />
+         <div align="center">XML Schema documentation generated by <a href="http://www.oxygenxml.com" target="_parent"><span class="oXygenLogo"><span class="redX">&lt;</span>o<span class="redX">X</span>ygen<span class="redX">/&gt;</span></span></a><sup>®</sup> XML Editor.
+         </div>
+      </div><script type="text/javascript">
+         <!--
+                     // The namespace is the selected option in the TOC combo.
+                    
+                     // Floats the toolbar.
+                     var globalControls = getElementObject("global_controls"); 
+                     
+                     if(globalControls != null){
+	                     var browser=navigator.appName;
+						 var version = parseFloat(navigator.appVersion.split('MSIE')[1]);
+						 
+						 var IE6 = false;
+						 if ((browser=="Microsoft Internet Explorer") && (version < 7)){
+						 	IE6 = true;
+						 }
+	
+	                     //alert (IE6 + " |V| " + version);
+	                     
+	                     if(IE6){
+	                     	// On IE 6 the 'fixed' property is not supported. We must use javascript. 
+	                         globalControls.style.position='absolute';                         
+	                         // The global controls will do not exist in the TOC frame, when chunking.
+	                         findAndFloat("global_controls", 225, 30);    
+	                     } else {
+	                      	  globalControls.style.position='fixed';                     	
+	                     }
+	                     
+	                     globalControls.style.right='0';                       
+                     }
+                //--></script></body>
+</html>

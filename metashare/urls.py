@@ -1,8 +1,7 @@
 from django.conf.urls.defaults import patterns, include
 from django.contrib import admin
 from django.views.generic.simple import direct_to_template
-from metashare.local_settings import SCHEMA_ROOT
-
+from metashare.local_settings import SCHEMA_ROOT, DOCUMENTATION_ROOT
 from metashare.repository.editor import admin_site as editor_site
 from metashare.repository.sitemap import RepositorySitemap
 from metashare.settings import MEDIA_ROOT, DEBUG, DJANGO_BASE, SITEMAP_URL
@@ -72,6 +71,11 @@ if DJANGO_BASE == "":
 urlpatterns += patterns('',
       (r'^{0}ELRC-SHARE_SCHEMA/v1.0/(?P<path>.*)$'.format(DJANGO_BASE),
         'django.views.static.serve', {'document_root': SCHEMA_ROOT})
+    )
+
+urlpatterns += patterns('',
+      (r'^{0}documentation/(?P<path>.*)$'.format(DJANGO_BASE),
+        'django.views.static.serve', {'document_root': DOCUMENTATION_ROOT})
     )
 
 urlpatterns += patterns('',
