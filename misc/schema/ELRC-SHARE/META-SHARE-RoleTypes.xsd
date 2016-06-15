@@ -3,7 +3,6 @@
 <xs:schema xmlns:ms="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xml:lang="en">
 	<xs:include schemaLocation="META-SHARE-SimpleTypes.xsd"/>
 	<!-- definition of complex types -->
-	<!-- media type info TextInfo/imageInfo/AudioInfo/VideInfo etc-->
 	<xs:complexType name="communicationInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups information on communication details of a person or an organization</xs:documentation>
@@ -198,18 +197,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="personListType">
-		<xs:sequence>
-			<xs:element name="personInfo" type="ms:personInfoType" maxOccurs="unbounded"/>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="organizationListType">
-		<xs:sequence>
-			<xs:element name="organizationInfo" type="ms:personInfoType" maxOccurs="unbounded"/>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="personList" type="ms:personListType"/>
-	<xs:element name="organizationList" type="ms:organizationListType"/>
 	<xs:element name="organizationInfo" type="ms:organizationInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups information on organizations related to the resource</xs:documentation>

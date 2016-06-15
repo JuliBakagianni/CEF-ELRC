@@ -4,7 +4,6 @@
 	<xs:include schemaLocation="META-SHARE-SimpleTypes.xsd"/>
 	<xs:include schemaLocation="META-SHARE-RoleTypes.xsd"/>
 	<!-- definition of complex types -->
-	<!-- media type info TextInfo/imageInfo/AudioInfo/VideInfo etc-->
 	<xs:complexType name="distributionInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups information on the distribution of the resource</xs:documentation>
@@ -33,13 +32,6 @@
 								<xs:documentation>for resources that their availability is still pending</xs:documentation>
 							</xs:annotation>
 						</xs:enumeration>
-						<!--
-                        <xs:enumeration value="availableThroughOtherDistributor">
-                            <xs:annotation>
-                                <xs:documentation>For resources that are not available through META-SHARE</xs:documentation>
-                            </xs:annotation>
-                        </xs:enumeration>
--->
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -156,28 +148,6 @@
 							</xs:annotation>
 						</xs:enumeration>
 						<xs:enumeration value="underReview"/>
-						<!--
-                        <xs:enumeration value="IGCYL-NC_Spain"/>
-                        <xs:enumeration value="ColorIURIS_Spain"/>
--->
-						<!---
-                        <xs:enumeration value="MS-NoReD"/>
-                        <xs:enumeration value="MS-NoReD-FF"/>
-                        <xs:enumeration value="MS-NoReD-ND"/>
-                        <xs:enumeration value="MS-NoReD-ND-FF"/>
-                        <xs:enumeration value="MS-NC-NoReD"/>
-                        <xs:enumeration value="MS-NC-NoReD-FF"/>
-                        <xs:enumeration value="MS-NC-NoReD-ND"/>
-                        <xs:enumeration value="MS-NC-NoReD-ND-FF"/>
-                        <xs:enumeration value="AGPL"/>
-                        <xs:enumeration value="ApacheLicence_2.0"/>
-                        <xs:enumeration value="BSD"/>
-                        <xs:enumeration value="BSD-style"/>
-                        <xs:enumeration value="GFDL"/>
-                        <xs:enumeration value="GPL"/>
-                        <xs:enumeration value="LGPL"/>
-                        <xs:enumeration value="Princeton_Wordnet"/>
--->
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
@@ -237,47 +207,6 @@
                     </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<!--
-            <xs:element name="distributionAccessMedium" minOccurs="0" maxOccurs="unbounded">
-                <xs:annotation>
-                    <xs:documentation>Specifies the medium (channel) used for delivery or providing access to the resource</xs:documentation>
-                    <xs:appinfo>
-                        <recommended>true</recommended>
-                        <relation>one-to-many</relation>
-                    </xs:appinfo>
-                </xs:annotation>
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:maxLength value="30"/>
-                        <xs:enumeration value="webExecutable"/>
-                        <xs:enumeration value="paperCopy"/>
-                        <xs:enumeration value="hardDisk"/>
-                        <xs:enumeration value="bluRay"/>
-                        <xs:enumeration value="DVD-R"/>
-                        <xs:enumeration value="CD-ROM"/>
-                        <xs:enumeration value="downloadable"/>
-                        <xs:enumeration value="accessibleThroughInterface"/>
-                        <xs:enumeration value="other"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="downloadLocation" type="ms:httpURI" minOccurs="0" maxOccurs="unbounded">
-                <xs:annotation>
-                    <xs:documentation>Any url where the resource can be downloaded from</xs:documentation>
-                    <xs:appinfo>
-                        <relation>one-to-many</relation>
-                    </xs:appinfo>
-                </xs:annotation>
-            </xs:element>
-            <xs:element name="executionLocation" type="ms:httpURI" minOccurs="0" maxOccurs="unbounded">
-                <xs:annotation>
-                    <xs:documentation>Any url where the service providing access to a resource is being executed</xs:documentation>
-                    <xs:appinfo>
-                        <relation>one-to-many</relation>
-                    </xs:appinfo>
-                </xs:annotation>
-            </xs:element>
--->
 			<xs:element name="restrictionsOfUse" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Specifies terms and conditions of use (e.g. attribution, payment etc.) imposed by the licence
@@ -437,12 +366,6 @@
 					<xs:assert test="if (ms:licence = 'DL-DE-ZERO_Germany') then count(ms:restrictionsOfUse) = 0
 					else true()" xerces:message="The licence ''DL-DE-ZERO_Germany' should not include any conditions of use'"/>
 				</xs:extension>
-				<!--					<xs:assert test="if (ms:licence = 'IGCYL-NC_Spain') then
-					ms:restrictionsOfUse = 'attribution' and ms:restrictionsOfUse = 'nonCommercialUse' and count(ms:restrictionsOfUse) = 2
-					else true()" xerces:message="The licence 'IGCYL-NC_Spain' can only contain the following conditions (restrictionsOfUse = attribution, nonCommercialUse)'"/>
--->
-				<!-- ASSERTIONS FOR LICENCES WITH PREDEFINED SETS OF RESTRICTIONS OF USE-->
-				<!--THE FOLLOWING LICENCES PERMIT NO CONDITIONS OF USE-->
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>

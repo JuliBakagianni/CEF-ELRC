@@ -237,7 +237,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<!-- components that should not be for lexicalconceptual resources  but are in the editor: textCreationInfo, annotationInfo -->
 	<xs:element name="lexicalConceptualResourceInfo" type="ms:lexicalConceptualResourceInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups together information specific to lexical/conceptual resources</xs:documentation>

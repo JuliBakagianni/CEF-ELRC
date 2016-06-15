@@ -5,7 +5,6 @@
 	<xs:include schemaLocation="../META-SHARE-BaseTypes.xsd"/>
 	<!-- media type possible choices -->
 	<xs:include schemaLocation="mediaTypes/Corpus/corpusTextInfo.xsd"/>
-	<xs:include schemaLocation="mediaTypes/Corpus/corpusTextNgramInfo.xsd"/>
 	<xs:complexType name="corpusInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups together information on corpora of all media types </xs:documentation>

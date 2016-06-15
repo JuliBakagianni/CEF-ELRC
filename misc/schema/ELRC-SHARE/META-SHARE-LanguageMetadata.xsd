@@ -6,7 +6,6 @@
 	<xs:include schemaLocation="META-SHARE-LicenseMetadata.xsd"/>
 	<xs:include schemaLocation="META-SHARE-bcp47_LanguageValues.xsd"/>
 	<!-- definition of complex types -->
-	<!-- media type info TextInfo/imageInfo/AudioInfo/VideInfo etc-->
 	<xs:complexType name="characterEncodingInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups together information on character encoding of the resource</xs:documentation>
@@ -20,73 +19,9 @@
 					</xs:appinfo>
 				</xs:annotation>
 			</xs:element>
-			<!--
-			<xs:element name="characterSet" type="xs:string" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:appinfo>
-						<relation>one-to-many</relation>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-			-->
 			<xs:element name="sizePerCharacterEncoding" type="ms:sizeInfoType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Provides information on the size of the resource parts with different character encoding</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-						<inline-type>tabular</inline-type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="timeCoverageInfoType">
-		<xs:annotation>
-			<xs:documentation>Groups together information on time classification of the resource</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="timeCoverage">
-				<xs:annotation>
-					<xs:documentation>The time period that the content of a resource is about</xs:documentation>
-				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="100"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
-			<xs:element name="sizePerTimeCoverage" type="ms:sizeInfoType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Provides information on size per time period represented in the resource</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-						<inline-type>tabular</inline-type>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="geographicCoverageInfoType">
-		<xs:annotation>
-			<xs:documentation>Groups information on geographic classification of the resource</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="geographicCoverage">
-				<xs:annotation>
-					<xs:documentation>The geographic region that the content of a resource is about; for countries, recommended use of ISO-3166</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-one</relation>
-					</xs:appinfo>
-				</xs:annotation>
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="100"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
-			<xs:element name="sizePerGeographicCoverage" type="ms:sizeInfoType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Provides information on size per geographically distinct section of the resource</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-one</relation>
 						<inline-type>tabular</inline-type>
@@ -156,16 +91,6 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<!--
-			<xs:element ref="ms:modalityType" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>information on modality</xs:documentation>
-					<xs:appinfo>
-						<relation>one-to-many</relation>
-					</xs:appinfo>
-				</xs:annotation>
-			</xs:element>
-            -->
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="languageVarietyInfoType">
@@ -293,22 +218,6 @@
 	<xs:element name="characterEncodingInfo" type="ms:characterEncodingInfoType">
 		<xs:annotation>
 			<xs:documentation>Groups together information on character encoding of the resource</xs:documentation>
-			<xs:appinfo>
-				<relation>one-to-one</relation>
-			</xs:appinfo>
-		</xs:annotation>
-	</xs:element>
-	<xs:element name="timeCoverageInfo" type="ms:timeCoverageInfoType">
-		<xs:annotation>
-			<xs:documentation>Groups together information on time classification of the resource</xs:documentation>
-			<xs:appinfo>
-				<relation>one-to-one</relation>
-			</xs:appinfo>
-		</xs:annotation>
-	</xs:element>
-	<xs:element name="geographicCoverageInfo" type="ms:geographicCoverageInfoType">
-		<xs:annotation>
-			<xs:documentation>Groups information on geographic classification of the resource</xs:documentation>
 			<xs:appinfo>
 				<relation>one-to-one</relation>
 			</xs:appinfo>
