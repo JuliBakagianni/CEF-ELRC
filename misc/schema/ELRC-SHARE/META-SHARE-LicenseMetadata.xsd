@@ -108,7 +108,7 @@
 		<xs:sequence>
 			<xs:element name="licence">
 				<xs:annotation>
-					<xs:documentation>The licence of use for the resource; for an overview of licences, please visit: </xs:documentation>
+					<xs:documentation>The licence of use for the resource; for an overview of licences, please visit: https://elrc-share.ilsp.gr/info/#Licensing_LRs</xs:documentation>
 					<xs:appinfo>
 						<relation>one-to-many</relation>
 					</xs:appinfo>
