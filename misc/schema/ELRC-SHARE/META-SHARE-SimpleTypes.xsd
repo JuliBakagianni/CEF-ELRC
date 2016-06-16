@@ -461,7 +461,7 @@
 				<xs:enumeration value="text/csv">
 					<xs:annotation>
 						<xs:appinfo>
-							<xs:label>CSV</xs:label>
+							<xs:label>text with comma-separated values</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>
@@ -490,6 +490,20 @@
 					<xs:annotation>
 						<xs:appinfo>
 							<xs:label>PDF</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="application/vnd.ms-excel">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>MS-Excel xls</xs:label>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+					<xs:annotation>
+						<xs:appinfo>
+							<xs:label>MS-Excel xlsx</xs:label>
 						</xs:appinfo>
 					</xs:annotation>
 				</xs:enumeration>

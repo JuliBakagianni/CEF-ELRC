@@ -46,6 +46,8 @@ MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/vnd.openxmlformats-officedocument.w
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/msword'] = u"MS-Word doc"
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/rdf+xml'] = u"RDF"
 MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/x-xces+xml'] = u"XCES"
+MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/vnd.ms-excel'] = u"MS-Excel xls"
+MIMETYPEVALUE_TO_MIMETYPELABEL[u'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'] = u"MS-Excel xlsx"
 
 TEXTFORMATINFOTYPE_MIMETYPE_CHOICES = _make_choices_from_list_alt([
 u'text/plain',u'application/vnd.xmi+xml',
@@ -57,4 +59,5 @@ u'application/rtf', u'application/x-latex',
 u'text/csv',u'text/tab-separated-values',
 u'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 u'application/msword',
-u'application/pdf',u'application/x-msaccess'],MIMETYPEVALUE_TO_MIMETYPELABEL)
+u'application/pdf',u'application/x-msaccess',
+u'application/vnd.ms-excel', u'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'],MIMETYPEVALUE_TO_MIMETYPELABEL)
