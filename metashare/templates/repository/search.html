@@ -155,15 +155,10 @@
                 (Page {{ page.number }}  of {{ paginator.num_pages }}) {% endif %}</h3>
 
             {% if page.object_list %}
-
                 <p>
                     {% if page.has_other_pages %}
-                        {% if page.has_previous %}<a href="?q=
-                                {{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key == 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key == 'sort' %}&amp;sort={{ values.0 }}{% endif %}{% endfor %}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo;
-                    &nbsp;Previous{% if page.has_previous %}</a>{% endif %} |
-                        {% if page.has_next %}<a href="?q=
-                                {{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key == 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key == 'sort' %}&amp;sort={{ values.0 }}{% endif %}{% endfor %}&amp;page={{ page.next_page_number }}">{% endif %}
-                    Next&nbsp;&raquo;{% if page.has_next %}</a>{% endif %}
+                        {% if page.has_previous %}<a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key == 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo;&nbsp;Previous{% if page.has_previous %}</a>{% endif %} |
+                        {% if page.has_next %}<a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key == 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}&amp;page={{ page.next_page_number }}">{% endif %}Next&nbsp;&raquo;{% if page.has_next %}</a>{% endif %}
                     {% endif %}
                     <span style="float:right;">Order by:
       <select name="ordering" onChange="window.location.href=this.value;">
@@ -188,15 +183,11 @@
                 </div>
 
                 {% if page.has_other_pages %}
-                    <p>
-                        {% if page.has_previous %}<a href="?q=
-                                {{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key == 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key == 'sort' %}&amp;sort={{ values.0 }}{% endif %}{% endfor %}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo;
-                        &nbsp;Previous{% if page.has_previous %}</a>{% endif %} |
-                        {% if page.has_next %}<a href="?q=
-                                {{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key == 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key == 'sort' %}&amp;sort={{ values.0 }}{% endif %}{% endfor %}&amp;page={{ page.next_page_number }}">{% endif %}
-                        Next&nbsp;&raquo;{% if page.has_next %}</a>{% endif %}
-                    </p>
-                {% endif %}
+      <p>
+        {% if page.has_previous %}<a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo;&nbsp;Previous{% if page.has_previous %}</a>{% endif %} |
+        {% if page.has_next %}<a href="?q={{ query|urlencode }}{% for key, values in request.GET.iterlists %}{% if key = 'selected_facets' %}{% for facet in values %}&amp;selected_facets={{ facet|urlencode }}{% endfor %}{% endif %}{% if key = 'sort' %}&amp;sort={{values.0}}{% endif %}{% endfor %}&amp;page={{ page.next_page_number }}">{% endif %}Next&nbsp;&raquo;{% if page.has_next %}</a>{% endif %}
+      </p>
+    {% endif %}
 
             {% else %}
                 <p>No results were found for search
