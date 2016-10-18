@@ -1,6 +1,7 @@
+import json
 import logging
-
 from django.core.exceptions import PermissionDenied
+from metashare.local_settings import TMP
 
 try:
     import cStringIO as StringIO
@@ -31,7 +32,7 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.contrib import messages
 from django.template.loader import render_to_string
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.utils.translation import ugettext as _
 
 from haystack.views import FacetedSearchView
@@ -44,11 +45,13 @@ from metashare.accounts.models import UserProfile
 from metashare.repository import model_utils
 
 from metashare.repository.models import licenceInfoType_model, \
-    resourceInfoType_model, identificationInfoType_model, distributionInfoType_model, corpusInfoType_model, corpusTextInfoType_model, corpusMediaTypeType_model, \
+    resourceInfoType_model, identificationInfoType_model, distributionInfoType_model, corpusInfoType_model, \
+    corpusTextInfoType_model, corpusMediaTypeType_model, \
     languageDescriptionMediaTypeType_model, languageDescriptionInfoType_model, \
     lexicalConceptualResourceMediaTypeType_model, lexicalConceptualResourceInfoType_model, metadataInfoType_model, \
     languageDescriptionTextInfoType_model, lingualityInfoType_model, languageInfoType_model, \
-    lexicalConceptualResourceTextInfoType_model, User, organizationInfoType_model, communicationInfoType_model, personInfoType_model
+    lexicalConceptualResourceTextInfoType_model, User, organizationInfoType_model, communicationInfoType_model, \
+    personInfoType_model
 
 from metashare.repository.search_indexes import resourceInfoType_modelIndex, \
     update_lr_index_entry
@@ -58,6 +61,7 @@ from metashare.stats.model_utils import getLRStats, saveLRStats, \
 from metashare.storage.models import PUBLISHED
 from metashare.recommendations.recommendations import SessionResourcesTracker, \
     get_download_recommendations, get_view_recommendations
+
 # get_more_from_same_creators_qs
 # get_more_from_same_projects_qs
 
@@ -67,6 +71,7 @@ MAXIMUM_READ_BLOCK_SIZE = 4096
 # Setup logging support.
 LOGGER = logging.getLogger(__name__)
 LOGGER.addHandler(LOG_HANDLER)
+
 
 def get_all_logged_in_users():
     # Query all non-expired sessions
@@ -81,6 +86,7 @@ def get_all_logged_in_users():
 
     # Query all logged in users based on id list
     return User.objects.filter(id__in=uid_list)
+
 
 def _convert_to_template_tuples(element_tree):
     """
@@ -120,7 +126,6 @@ def _convert_to_template_tuples(element_tree):
 
 # a type providing an enumeration of META-SHARE member types
 MEMBER_TYPES = type('MemberEnum', (), dict(GOD=100, FULL=3, ASSOCIATE=2, NON=1))
-
 
 # a dictionary holding a URL for each download licence and a member type which
 # is required at a minimum to be able to download the associated resource
@@ -286,43 +291,40 @@ def _get_licences(resource, user_membership):
 
 
 def datadl(request, resource):
-        print "enter"
-        # return HttpResponse("OK")
-        """
-        Returns an HTTP response with a download of the given resource.
-        """
+    # return HttpResponse("OK")
+    """
+    Returns an HTTP response with a download of the given resource.
+    """
 
-
-        storage_object = resource.storage_object
-        print storage_object
-        dl_path = storage_object.get_download()
-        if dl_path:
-            try:
-                def dl_stream_generator():
-                    with open(dl_path, 'rb') as _local_data:
+    storage_object = resource.storage_object
+    dl_path = storage_object.get_download()
+    if dl_path:
+        try:
+            def dl_stream_generator():
+                with open(dl_path, 'rb') as _local_data:
+                    _chunk = _local_data.read(4096)
+                    while _chunk:
+                        yield _chunk
                         _chunk = _local_data.read(4096)
-                        while _chunk:
-                            yield _chunk
-                            _chunk = _local_data.read(4096)
 
-                # build HTTP response with a guessed mime type; the response
-                # content is a stream of the download file
-                filemimetype = guess_type(dl_path)[0] or "application/octet-stream"
-                response = HttpResponse(dl_stream_generator(),
-                    mimetype=filemimetype)
-                response['Content-Length'] = getsize(dl_path)
-                response['Content-Disposition'] = 'attachment; filename={0}' \
-                    .format(split(dl_path)[1])
-                # LOGGER.info("Offering a local editor download of resource #{0}." \
-                #             .format(object_id))
-                return response
-            except:
-                pass
+            # build HTTP response with a guessed mime type; the response
+            # content is a stream of the download file
+            filemimetype = guess_type(dl_path)[0] or "application/octet-stream"
+            response = HttpResponse(dl_stream_generator(),
+                                    mimetype=filemimetype)
+            response['Content-Length'] = getsize(dl_path)
+            response['Content-Disposition'] = 'attachment; filename={0}' \
+                .format(split(dl_path)[1])
+            # LOGGER.info("Offering a local editor download of resource #{0}." \
+            #             .format(object_id))
+            return response
+        except:
+            pass
 
-        # no download could be provided
-        return render_to_response('repository/lr_not_downloadable.html',
-                                  {'resource': resource, 'reason': 'internal'},
-                                  context_instance=RequestContext(request))
+    # no download could be provided
+    return render_to_response('repository/lr_not_downloadable.html',
+                              {'resource': resource, 'reason': 'internal'},
+                              context_instance=RequestContext(request))
 
 
 @user_passes_test(lambda u: u.is_superuser or u.groups.filter(name="ecmembers").exists())
@@ -343,7 +345,7 @@ def download(request, object_id):
         raise PermissionDenied
 
     if request.user.groups.filter(name='ecmembers').exists() or request.user.is_superuser:
-                return datadl(request, resource)
+        return datadl(request, resource)
 
     licences = _get_licences(resource, user_membership)
     # Check whether the resource is from the current node, or whether it must be
@@ -440,7 +442,7 @@ def _provide_download(request, resource, download_urls):
             # content is a stream of the download file
             filemimetype = guess_type(dl_path)[0] or "application/octet-stream"
             response = HttpResponse(dl_stream_generator(),
-                mimetype=filemimetype)
+                                    mimetype=filemimetype)
             response['Content-Length'] = getsize(dl_path)
             response['Content-Disposition'] = 'attachment; filename={0}' \
                 .format(split(dl_path)[1])
@@ -591,11 +593,11 @@ def has_view_permission(request, res_obj):
     Returns `True` if the given request has permission to view the description
     of the current resource, `False` otherwise.
     """
-    if res_obj.storage_object.publication_status==PUBLISHED:
+    if res_obj.storage_object.publication_status == PUBLISHED:
         return True
     else:
-        if request.user.is_authenticated() and (request.user.groups.filter(name='ecmembers').exists() or request.user.is_superuser):
-
+        if request.user.is_authenticated() and (
+            request.user.groups.filter(name='ecmembers').exists() or request.user.is_superuser):
             return True
 
         return False
@@ -605,6 +607,7 @@ def view(request, resource_name=None, object_id=None):
     """
     Render browse or detail view for the repository application.
     """
+    # only published resources may be viewed
     resource = get_object_or_404(resourceInfoType_model,
                                  storage_object__identifier=object_id,
                                  storage_object__deleted=False)
@@ -1031,12 +1034,12 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                         item[0][0].capitalize() + item[0][1:]))[:-1]
                                     removable.append({'label': lab_item,
                                                       'count': item[1], 'targets':
-                                        [u'{0}:{1}'.format(name, value)
-                                         for name, values in
-                                         sel_facets.iteritems() for value in
-                                         values if (name != name_exact
-                                                    or value != item[0]) and name \
-                                         not in subfacets_exactname_list], \
+                                                          [u'{0}:{1}'.format(name, value)
+                                                           for name, values in
+                                                           sel_facets.iteritems() for value in
+                                                           values if (name != name_exact
+                                                                      or value != item[0]) and name \
+                                                           not in subfacets_exactname_list], \
                                                       'subresults': subresults})
                             else:
                                 targets = [u'{0}:{1}'.format(name, value)
@@ -1124,11 +1127,11 @@ class MetashareFacetedSearchView(FacetedSearchView):
                                                            item[0][0].capitalize() + item[0][1:]))[:-1]
                             removable.append({'label': lab_item,
                                               'count': item[1], 'targets':
-                                [u'{0}:{1}'.format(name, value)
-                                 for name, values in
-                                 sel_facets.iteritems() for value in
-                                 values if name != name_exact
-                                 or value != item[0]]})
+                                                  [u'{0}:{1}'.format(name, value)
+                                                   for name, values in
+                                                   sel_facets.iteritems() for value in
+                                                   values if name != name_exact
+                                                   or value != item[0]]})
                     else:
                         targets = [u'{0}:{1}'.format(name, value)
                                    for name, values in
@@ -1167,12 +1170,12 @@ class MetashareFacetedSearchView(FacetedSearchView):
         return results
 
     def build_form(self, form_kwargs=None):
-       """
-      Instantiates the form the class should use to process the search query.
-       """
-       form = super(MetashareFacetedSearchView, self).build_form()
-       form.request = self.request
-       return form
+        """
+       Instantiates the form the class should use to process the search query.
+        """
+        form = super(MetashareFacetedSearchView, self).build_form()
+        form.request = self.request
+        return form
 
 
 @login_required
@@ -1211,10 +1214,11 @@ def simple_form(request):
         form_data = cgi.FieldStorage()
         # file_data = form_data['filebutton'].value
         filename = '{}_{}'.format(profile.country, id)
-        zipped = filename+".zip"
+        zipped = filename + ".zip"
 
         # for chunk in request.FILES['filebutton'].chunks():
         #     destination.write(chunk)
+        response = {}
         if not request.FILES['filebutton'].size > MAXIMUM_UPLOAD_SIZE:
             try:
                 if not os.path.isdir(dir1):
@@ -1228,35 +1232,25 @@ def simple_form(request):
             destination.close()
             import zipfile
             file = '{}/{}'.format(dir1, zipped)
-            try:
-                zipf = zipfile.ZipFile('{}/{}'.format(dir1, zipped))
-                if zipf.testzip() is not None:
+            if not zipfile.is_zipfile(file) or not str(request.FILES['filebutton']).endswith(".zip"):
                     os.remove(file)
-                    return render_to_response('repository/editor/simple_form/simple_form.html',
-                                          {'type': 'failure', 'message': 'The file you are trying to upload '
-                                                                         'is corrupted or it is not a zip file. '
-                                                                         'Please check that you have properly zipped your '
-                                                                         'data and try again.'}, \
-                                          context_instance=RequestContext(request))
-            except:
-                os.remove(file)
-                return render_to_response('repository/editor/simple_form/simple_form.html',
-                                          {'type': 'failure', 'message': 'The file you are trying to upload '
-                                                                         'is corrupted or it is not a zip file. '
-                                                                         'Please check that you have properly zipped your '
-                                                                         'data and try again.'}, \
-                                          context_instance=RequestContext(request))
+                    response['status'] = "failed"
+                    response['message'] = "Your request could not be completed. " \
+                                          "The file you tried to upload is corrupted or it is not a valid '.zip' file. " \
+                                          "Please make sure that you have compressed your data properly."
+                    return HttpResponse(json.dumps(response), mimetype="application/json")
+
         else:
-            return render_to_response('repository/editor/simple_form/simple_form.html',
-                                          {'type': 'failure', 'message': 'The file you are trying to upload '
-                                                                         'is larger than the maximum upload file size ({:.5} ' \
-                                                                         'MB)!'.format(
-                                              float(MAXIMUM_UPLOAD_SIZE) / (1024 * 1024))}, \
-                                          context_instance=RequestContext(request))
-        data['administration']['resource_file'] = filename+'.xml'
+            response['status'] = "failed"
+            response['message'] = "The file you are trying to upload " \
+                                      "is larger than the maximum upload file size ({:.5} MB)!".format(
+                                                  float(MAXIMUM_UPLOAD_SIZE) / (1024 * 1024))
+            return HttpResponse(json.dumps(response), mimetype="application/json")
+
+        data['administration']['resource_file'] = filename + '.xml'
         data['administration']['dataset'] = zipped
         xml = dicttoxml.dicttoxml(data, custom_root='resource', attr_type=False)
-        xml_file = filename+".xml"
+        xml_file = filename + ".xml"
         with open('{}/{}'.format(dir1, xml_file), 'w') as f:
             xml_file = File(f)
             xml_file.write(xml)
@@ -1264,16 +1258,16 @@ def simple_form(request):
             f.closed
         try:
             send_mail("New unmanaged contributions",
-                "You have new unmanaged contributed resources", \
-                'no-reply@elrc-share.ilsp.gr', ["penny@ilsp.gr"], \
-                fail_silently=False)
+                      "You have new unmanaged contributed resources", \
+                      'no-reply@elrc-share.ilsp.gr', ["penny@ilsp.gr"], \
+                      fail_silently=False)
         except:
             pass
 
-        return render_to_response('repository/editor/simple_form/simple_form.html',
-                                  {'type': 'success', 'message': 'Your data has been successfully submitted. '
-                                    'You can continue uploading more resources if you want.'}, \
-                                  context_instance=RequestContext(request))
+        response['status'] = "succeded"
+        response['message'] = "Thank you for sharing! Your data have been successfully submitted. " \
+                              "You can now go on and contribute more data."
+        return HttpResponse(json.dumps(response), mimetype="application/json")
 
     return render_to_response('repository/editor/simple_form/simple_form.html', \
                               context_instance=RequestContext(request))
@@ -1290,7 +1284,7 @@ def manage_contributed_data(request):
 
     info = list()
     for xml_file in xml_files:
-        doc =  etree.parse('{}/{}'.format(base,xml_file))
+        doc = etree.parse('{}/{}'.format(base, xml_file))
         info.append({
             "title": doc.xpath("//resourceTitle//text()"),
             "description": doc.xpath("//shortDescription//text()"),
@@ -1319,8 +1313,8 @@ def manage_contributed_data(request):
 
 @staff_member_required
 def addtodb(request):
-    recipients=[]
-    total_res= 0
+    recipients = []
+    total_res = 0
     # get the list of maintainers from the dat file
     maintainers = {}
     with open('{}/maintainers.dat'.format(WEB_FORM_STORAGE)) as f:
@@ -1339,14 +1333,19 @@ def addtodb(request):
 
     # we will create descriptions only for those resources that have a
     # resource type specified
-    valid={}
+    valid = {}
     recipients_resources = {}
     for key, value in dictionary.items():
         if dictionary[key] != "":
-            valid[key]= dictionary[key]
+            valid[key] = dictionary[key]
     for file, type in valid.iteritems():
         d = create_description(file, type, request.user)
         # d[0]: resource, d[1]:person, d[2]: country
+
+        # add the contributor to owners nevertheless
+        contributor = User.objects.get(first_name=request.POST['contributor_fname'],
+                                       last_name=request.POST['contributor_lname'])
+        d[0].owners.add(contributor.id)
 
         res_maintainers = maintainers[d[2]].split(",")
         users = []
@@ -1360,15 +1359,15 @@ def addtodb(request):
                    "Last Name: {}\n" \
                    "Email: {}\n" \
                    "Tel No: {}\n" \
-                   "Organization: {}".format\
-                    (d[1].givenName,d[1].surname,d[1].communicationInfo.email,
-                     d[1].communicationInfo.telephoneNumber, d[1].affiliation)
+                   "Organization: {}".format \
+                (d[1].givenName, d[1].surname, d[1].communicationInfo.email,
+                 d[1].communicationInfo.telephoneNumber, d[1].affiliation)
 
-            if not rm_user.first_name+" "+rm_user.last_name in recipients:
-                recipients.append(rm_user.first_name+" "+rm_user.last_name)
+            if not rm_user.first_name + " " + rm_user.last_name in recipients:
+                recipients.append(rm_user.first_name + " " + rm_user.last_name)
 
         if not recipients_resources.has_key(maintainers[d[2]]):
-            recipients_resources[maintainers[d[2]]] = {"count" : 1}
+            recipients_resources[maintainers[d[2]]] = {"count": 1}
             recipients_resources[maintainers[d[2]]]["email"] = [rm.email for rm in users]
         else:
             recipients_resources[maintainers[d[2]]]["count"] += 1
@@ -1380,21 +1379,22 @@ def addtodb(request):
             if recipients_resources[recipient]["count"] > 1:
                 title = "{} new resources from contributors".format(recipients_resources[recipient]["count"])
                 text = "You have received {} new resources from contributors. " \
-                          "Please check your ELRC-SHARE repository account.".format(recipients_resources[recipient]["count"])
+                       "Please check your ELRC-SHARE repository account.".format(
+                    recipients_resources[recipient]["count"])
             else:
                 title = "1 new resource from contributors"
                 text = "You have received 1 new resource from contributors. " \
-                          "Please check your ELRC-SHARE repository account."
+                       "Please check your ELRC-SHARE repository account."
 
             try:
                 send_mail(title, text, \
-                        'no-reply@elrc-share.ilsp.gr', recipients_resources[recipient]["email"], fail_silently=False)
+                          'no-reply@elrc-share.ilsp.gr', recipients_resources[recipient]["email"], fail_silently=False)
             except:
                 if total_res > 1:
                     msg = '{} resources have been successfully imported into the database. '.format(total_res)
                 else:
                     msg = '1 resource has been successfully imported into the database. '
-                messages.error(request, msg+'However, there was a problem sending email to the maintainers.')
+                messages.error(request, msg + 'However, there was a problem sending email to the maintainers.')
                 return redirect(manage_contributed_data)
 
     if total_res > 1:
@@ -1403,85 +1403,83 @@ def addtodb(request):
               u'the database. ' \
               u'A notification email has been sent to the maintainers ({})'.format(total_res, u", ".join(recipients))
     else:
-         msg = u'1 resource has been successfully imported into ' \
-               u'the database. ' \
-               u'A notification email has been sent to ' \
-               u'{}'.format(u", ".join(recipients))
+        msg = u'1 resource has been successfully imported into ' \
+              u'the database. ' \
+              u'A notification email has been sent to ' \
+              u'{}'.format(u", ".join(recipients))
     messages.success(request, msg)
     return redirect(manage_contributed_data)
 
 
 def create_description(xml_file, type, user):
-
     base = '{}/unprocessed'.format(WEB_FORM_STORAGE)
-    doc =  etree.parse('{}/{}'.format(base,xml_file))
+    doc = etree.parse('{}/{}'.format(base, xml_file))
     info = {
-            "title": ''.join(doc.xpath("//resourceTitle//text()")),
-            "description": ''.join(doc.xpath("//shortDescription//text()")),
-            "languages": doc.xpath("//languages/item/text()"),
-            "userInfo": {
-                "firstname": ''.join(doc.xpath("//userInfo/first_name/text()")),
-                "lastname": ''.join(doc.xpath("//userInfo/last_name/text()")),
-                "country": ''.join(doc.xpath("//userInfo/country/text()")),
-                "phoneNumber": ''.join(doc.xpath("//userInfo/phoneNumber/text()")),
-                "email": ''.join(doc.xpath("//userInfo/email/text()")),
-                "user": ''.join(doc.xpath("//userInfo/user/text()")),
-                "institution": ''.join(doc.xpath("//userInfo/institution/text()")),
+        "title": ''.join(doc.xpath("//resourceTitle//text()")),
+        "description": ''.join(doc.xpath("//shortDescription//text()")),
+        "languages": doc.xpath("//languages/item/text()"),
+        "userInfo": {
+            "firstname": ''.join(doc.xpath("//userInfo/first_name/text()")),
+            "lastname": ''.join(doc.xpath("//userInfo/last_name/text()")),
+            "country": ''.join(doc.xpath("//userInfo/country/text()")),
+            "phoneNumber": ''.join(doc.xpath("//userInfo/phoneNumber/text()")),
+            "email": ''.join(doc.xpath("//userInfo/email/text()")),
+            "user": ''.join(doc.xpath("//userInfo/user/text()")),
+            "institution": ''.join(doc.xpath("//userInfo/institution/text()")),
 
-            },
-            "resource_file": ''.join(doc.xpath("//resource/administration/resource_file/text()")),
-            "dataset": ''.join(doc.xpath("//resource/administration/dataset/text()"))
-        }
+        },
+        "resource_file": ''.join(doc.xpath("//resource/administration/resource_file/text()")),
+        "dataset": ''.join(doc.xpath("//resource/administration/dataset/text()"))
+    }
     # Create a new Identification object
-    identification = identificationInfoType_model.objects.create(\
-        resourceName= {'en':info['title']}, description = {'en':info['description']}, createdUsingELRCServices=False)
+    identification = identificationInfoType_model.objects.create( \
+        resourceName={'en': info['title']}, description={'en': info['description']}, createdUsingELRCServices=False)
 
     # CONTACT PERSON:
 
-    #COMMUNICATION
+    # COMMUNICATION
     email = info["userInfo"]["email"]
     if not communicationInfoType_model.objects.filter \
-        (email = [email]).exists():
-            communication = communicationInfoType_model.objects.create \
-            (email = [email], country = info["userInfo"]["country"],
-             telephoneNumber = [info["userInfo"]["phoneNumber"]])
+                (email=[email]).exists():
+        communication = communicationInfoType_model.objects.create \
+            (email=[email], country=info["userInfo"]["country"],
+             telephoneNumber=[info["userInfo"]["phoneNumber"]])
     else:
         communication = communicationInfoType_model.objects.filter \
-            (email = [email])[:1][0]
+                            (email=[email])[:1][0]
     # ORGANIZATION
     if not organizationInfoType_model.objects.filter \
-        (organizationName = {'en':info["userInfo"]["institution"]},
-        communicationInfo = communication).exists():
+                (organizationName={'en': info["userInfo"]["institution"]},
+                 communicationInfo=communication).exists():
         organization = organizationInfoType_model.objects.create \
-            (organizationName = {'en':info["userInfo"]["institution"]},
-            communicationInfo = communicationInfoType_model.objects.create \
-                (email = [email], country = info["userInfo"]["country"], \
-                telephoneNumber = [info["userInfo"]["phoneNumber"]]))
+            (organizationName={'en': info["userInfo"]["institution"]},
+             communicationInfo=communicationInfoType_model.objects.create \
+                 (email=[email], country=info["userInfo"]["country"], \
+                  telephoneNumber=[info["userInfo"]["phoneNumber"]]))
 
     else:
         organization = organizationInfoType_model.objects.filter \
-            (organizationName = {'en':info["userInfo"]["institution"]},
-            communicationInfo = communication)[0]
-
+            (organizationName={'en': info["userInfo"]["institution"]},
+             communicationInfo=communication)[0]
 
     # PERSON
     if not personInfoType_model.objects.filter \
-        (surname = {'en':info["userInfo"]["lastname"]},
-         givenName = {'en':info["userInfo"]["firstname"]},
-        ).exists():
+                (surname={'en': info["userInfo"]["lastname"]},
+                 givenName={'en': info["userInfo"]["firstname"]},
+                 ).exists():
         cperson = personInfoType_model.objects.create \
-            (surname = {'en':info["userInfo"]["lastname"]},
-             givenName = {'en':info["userInfo"]["firstname"]},
-             communicationInfo = \
+            (surname={'en': info["userInfo"]["lastname"]},
+             givenName={'en': info["userInfo"]["firstname"]},
+             communicationInfo= \
                  communicationInfoType_model.objects.create \
-                    (email = [email], country = info["userInfo"]["country"], \
-                     telephoneNumber = [info["userInfo"]["phoneNumber"]]))
+                     (email=[email], country=info["userInfo"]["country"], \
+                      telephoneNumber=[info["userInfo"]["phoneNumber"]]))
         cperson.affiliation.add(organization)
 
     else:
         cperson = personInfoType_model.objects.filter \
-            (surname = {'en':info["userInfo"]["lastname"]},
-             givenName = {'en':info["userInfo"]["firstname"]},
+            (surname={'en': info["userInfo"]["lastname"]},
+             givenName={'en': info["userInfo"]["firstname"]},
              )[0]
     resource = None
 
@@ -1489,14 +1487,15 @@ def create_description(xml_file, type, user):
     if type == 'corpus':
         corpus_media_type = corpusMediaTypeType_model.objects.create()
 
-        corpus_text = corpusTextInfoType_model.objects.create(mediaType='text', back_to_corpusmediatypetype_model_id = corpus_media_type.id, \
-        lingualityInfo = lingualityInfoType_model.objects.create())
+        corpus_text = corpusTextInfoType_model.objects.create(mediaType='text',
+                                                              back_to_corpusmediatypetype_model_id=corpus_media_type.id, \
+                                                              lingualityInfo=lingualityInfoType_model.objects.create())
 
         # create language Infos
         if info['languages']:
             for lang in info['languages']:
-                languageInfoType_model.objects.create(languageName = lang, \
-                    back_to_corpustextinfotype_model = corpus_text)
+                languageInfoType_model.objects.create(languageName=lang, \
+                                                      back_to_corpustextinfotype_model=corpus_text)
         if len(info['languages']) == 1:
             corpus_text.lingualityInfo.lingualityType = u'monolingual'
             corpus_text.lingualityInfo.save()
@@ -1507,24 +1506,27 @@ def create_description(xml_file, type, user):
             corpus_text.lingualityInfo.lingualityType = u'multilingual'
             corpus_text.lingualityInfo.save()
 
-
         corpus_info = corpusInfoType_model.objects.create(corpusMediaType=corpus_media_type)
 
-        resource = resourceInfoType_model.objects.create(identificationInfo = identification, resourceComponentType = corpus_info, metadataInfo = metadataInfoType_model.objects.create \
-                    (metadataCreationDate = datetime.date.today(),
-                     metadataLastDateUpdated = datetime.date.today()))
+        resource = resourceInfoType_model.objects.create(identificationInfo=identification,
+                                                         resourceComponentType=corpus_info,
+                                                         metadataInfo=metadataInfoType_model.objects.create \
+                                                             (metadataCreationDate=datetime.date.today(),
+                                                              metadataLastDateUpdated=datetime.date.today()))
 
 
     elif type == 'langdesc':
-        langdesc_text = languageDescriptionTextInfoType_model.objects.create(mediaType='text', lingualityInfo = lingualityInfoType_model.objects.create())
+        langdesc_text = languageDescriptionTextInfoType_model.objects.create(mediaType='text',
+                                                                             lingualityInfo=lingualityInfoType_model.objects.create())
 
-        language_description_media_type = languageDescriptionMediaTypeType_model.objects.create(languageDescriptionTextInfo = langdesc_text)
+        language_description_media_type = languageDescriptionMediaTypeType_model.objects.create(
+            languageDescriptionTextInfo=langdesc_text)
 
         # create language Infos
         if info['languages']:
             for lang in info['languages']:
-                languageInfoType_model.objects.create(languageName = lang, \
-                    back_to_languagedescriptiontextinfotype_model = langdesc_text)
+                languageInfoType_model.objects.create(languageName=lang, \
+                                                      back_to_languagedescriptiontextinfotype_model=langdesc_text)
 
         if len(info['languages']) == 1:
             langdesc_text.lingualityInfo.lingualityType = u'monolingual'
@@ -1537,20 +1539,24 @@ def create_description(xml_file, type, user):
             langdesc_text.lingualityInfo.save()
 
         langdesc_info = languageDescriptionInfoType_model.objects.create(
-                languageDescriptionMediaType=language_description_media_type)
+            languageDescriptionMediaType=language_description_media_type)
 
-        resource = resourceInfoType_model.objects.create(identificationInfo = identification, resourceComponentType = langdesc_info, metadataInfo = metadataInfoType_model.objects.create \
-                    (metadataCreationDate = datetime.date.today(),
-                     metadataLastDateUpdated = datetime.date.today()))
+        resource = resourceInfoType_model.objects.create(identificationInfo=identification,
+                                                         resourceComponentType=langdesc_info,
+                                                         metadataInfo=metadataInfoType_model.objects.create \
+                                                             (metadataCreationDate=datetime.date.today(),
+                                                              metadataLastDateUpdated=datetime.date.today()))
 
     elif type == 'lexicon':
-        lexicalConceptual_text = lexicalConceptualResourceTextInfoType_model.objects.create(mediaType='text', lingualityInfo = lingualityInfoType_model.objects.create())
-        lexicon_media_type = lexicalConceptualResourceMediaTypeType_model.objects.create(lexicalConceptualResourceTextInfo=lexicalConceptual_text)
+        lexicalConceptual_text = lexicalConceptualResourceTextInfoType_model.objects.create(mediaType='text',
+                                                                                            lingualityInfo=lingualityInfoType_model.objects.create())
+        lexicon_media_type = lexicalConceptualResourceMediaTypeType_model.objects.create(
+            lexicalConceptualResourceTextInfo=lexicalConceptual_text)
 
         if info['languages']:
             for lang in info['languages']:
-                languageInfoType_model.objects.create(languageName = lang, \
-                    back_to_lexicalconceptualresourcetextinfotype_model = lexicalConceptual_text)
+                languageInfoType_model.objects.create(languageName=lang, \
+                                                      back_to_lexicalconceptualresourcetextinfotype_model=lexicalConceptual_text)
 
         if len(info['languages']) == 1:
             lexicalConceptual_text.lingualityInfo.lingualityType = u'monolingual'
@@ -1563,22 +1569,25 @@ def create_description(xml_file, type, user):
             lexicalConceptual_text.lingualityInfo.save()
 
         lexicon_info = lexicalConceptualResourceInfoType_model.objects.create(
-                lexicalConceptualResourceMediaType=lexicon_media_type)
+            lexicalConceptualResourceMediaType=lexicon_media_type)
 
-        resource = resourceInfoType_model.objects.create(identificationInfo = identification, resourceComponentType = lexicon_info, metadataInfo = metadataInfoType_model.objects.create \
-                    (metadataCreationDate = datetime.date.today(),
-                     metadataLastDateUpdated = datetime.date.today()))
+        resource = resourceInfoType_model.objects.create(identificationInfo=identification,
+                                                         resourceComponentType=lexicon_info,
+                                                         metadataInfo=metadataInfoType_model.objects.create \
+                                                             (metadataCreationDate=datetime.date.today(),
+                                                              metadataLastDateUpdated=datetime.date.today()))
 
     # add licence and attributionText for greek contributions
     if info['userInfo']['country'] == u'Greece':
         if info["userInfo"]["institution"]:
-            attrText = u"{} by {} licensed under CC-BY 4.0".format(resource.__unicode__(), info["userInfo"]["institution"])
+            attrText = u"{} by {} licensed under CC-BY 4.0".format(resource.__unicode__(),
+                                                                   info["userInfo"]["institution"])
         else:
-            attrText = u"{} by {} {} licensed under CC-BY 4.0".format(info['title'], info["userInfo"]["firstname"], info["userInfo"]["lastname"])
+            attrText = u"{} by {} {} licensed under CC-BY 4.0".format(info['title'], info["userInfo"]["firstname"],
+                                                                      info["userInfo"]["lastname"])
         distribution = distributionInfoType_model.objects.create()
         licenceInfoType_model.objects.create(licence=u"CC-BY", attributionText={'en': attrText}, \
-                                                       back_to_distributioninfotype_model = distribution)
-
+                                             back_to_distributioninfotype_model=distribution)
 
         resource.distributionInfo = distribution
         resource.save()
@@ -1607,12 +1616,17 @@ def create_description(xml_file, type, user):
 
     return (resource, cperson, info['userInfo']['country'])
 
-status = {"p":"PUBLISHED", "g":"INGESTED", "i":"INTERNAL"}
+
+status = {"p": "PUBLISHED", "g": "INGESTED", "i": "INTERNAL"}
+
 
 def repo_report(request):
     '''
-    Returns the resources published within the last to weeks
+    Returns all resources in the repository as an excel file with
+    predefined data to include.
+    Get from url the 'email_to' variable
     '''
+    email_to = request.GET.get('email_to', '')
     now = datetime.datetime.now()
     then = now - datetime.timedelta(days=15)
     resources = resourceInfoType_model.objects.filter(
@@ -1623,96 +1637,155 @@ def repo_report(request):
         workbook = xlsxwriter.Workbook(output)
 
         ## formating
-        heading = workbook.add_format({'font_size':13, 'font_color':'white', 'bold': True, 'bg_color':"#058DBE", 'border':1})
-        bold = workbook.add_format({'bold':True})
+        heading = workbook.add_format(
+            {'font_size': 13, 'font_color': 'white', 'bold': True, 'bg_color': "#058DBE", 'border': 1})
+        bold = workbook.add_format({'bold': True})
         date_format = workbook.add_format({'num_format': 'yyyy, mmmm d'})
-        published = workbook.add_format({'bg_color': '#C4D79B'})
-        ingested = workbook.add_format({'bg_color': '#FABF8F'})
-        internal = workbook.add_format({'bg_color': '#DA9694'})
-        title = "ELRC-SHARE_{}_{}".format(
-            datetime.datetime.now().strftime("%d-%m-%y"), datetime.datetime.now().strftime("%H.%M"))
+        title = "ELRC-SHARE_OVERVIEW_{}".format(
+            datetime.datetime.now().strftime("%d-%m-%y"))
         worksheet = workbook.add_worksheet(name=title)
 
         worksheet.write('A1', 'Resource Name', heading)
         worksheet.write('B1', 'Type', heading)
-        worksheet.write('C1', 'Languages (Size per language)', heading)
-        worksheet.write('D1', 'Sizes', heading)
-        worksheet.write('E1', 'Domains', heading)
-        worksheet.write('F1', 'Date', heading)
-        worksheet.write('G1', 'Status', heading)
-        worksheet.write('H1', 'Owners', heading)
-        worksheet.write('I1', 'Countries', heading)
+        worksheet.write('C1', 'Language(s)', heading)
+        worksheet.write('D1', 'Size per Language', heading)
+        worksheet.write_comment('D1', 'Delimited by "|" as per language')
+        worksheet.write('E1', 'Resource Size', heading)
+        worksheet.write('F1', 'Resource Size Unit(s)', heading)
+        worksheet.write_comment('F1', 'Delimited by "|" as per size')
+        worksheet.write('G1', 'Domain(s)', heading)
+        worksheet.write('H1', 'DSI Relevance', heading)
+        worksheet.write('I1', 'Date', heading)
+        worksheet.write('J1', 'Status', heading)
+        worksheet.write('K1', 'Editors', heading)
+        worksheet.write('L1', 'Countries', heading)
+        worksheet.write('M1', 'Legal Status', heading)
+        worksheet.write('N1', 'Contacts', heading)
+        worksheet.write('O1', 'ELRC Services', heading)
         link = True
 
-        j=1
+        j = 1
         for i in range(len(resources)):
 
             res = resources[i]
+            crawled = "YES" if res.identificationInfo.createdUsingELRCServices else "NO"
             countries = []
-            for cp in res.contactPerson.all():
-                countries.append(cp.communicationInfo.country)
+            contacts = []
+            licences = []
+            affiliations = []
+            try:
+                licenceInfos = res.distributionInfo.licenceinfotype_model_set.all()
+                # print res
+                for l in licenceInfos:
+                    licences.append(l.licence)
+            except:
+                licences.append("N/A")
 
+            for cp in res.contactPerson.all():
+                for afl in cp.affiliation.all():
+                    try:
+                        org_name = afl.organizationName['en']
+                    except KeyError:
+                        org_name = afl.organizationName[afl.organizationName.keys()[0]]
+                    affiliations.append(org_name)
+                countries.append(cp.communicationInfo.country)
+                contacts.append(u"{} {} ({}) {}".format(cp.surname.values()[0], cp.givenName.values()[0],
+                                ", ".join(cp.communicationInfo.email), ", ".join(affiliations)))
             # data to be reported
                 # resource name
-            res_name = res.identificationInfo.resourceName['en']
-            # print j, res_name
-                # date
+            try:
+                res_name = res.identificationInfo.resourceName['en']
+            except KeyError:
+                res_name = res.identificationInfo.resourceName[res.identificationInfo.resourceName.keys()[0]]
+
+            # date
             date = datetime.datetime.strptime(unicode(res.storage_object.modified).split(" ")[0], "%Y-%m-%d")
 
             worksheet.write(j, 0, res_name, bold)
             worksheet.write(j, 1, res.resource_type())
             lang_info = _get_resource_lang_info(res)
-            size_info = _get_resource_size_info(res)
+            size_info = _get_resource_sizes(res)
             domain_info = _get_resource_domain_info(res)
+            dsis = "N/A"
+            if res.identificationInfo.appropriatenessForDSI:
+                dsis = ", ".join(res.identificationInfo.appropriatenessForDSI)
 
             langs = []
+            lang_sizes = []
             for l in lang_info:
                 langs.append(l)
+                lang_sizes.extend(_get_resource_lang_sizes(res, l))
             worksheet.write(j, 2, " | ".join(langs))
 
+            worksheet.write(j, 3, " | ".join(lang_sizes))
+
             sizes = []
+            size_units = []
             for s in size_info:
                 sizes.append(s)
-            worksheet.write(j, 3, " | ".join(sizes))
+                size_units.extend(_get_resource_size_units(res, s))
+            worksheet.write(j, 4, " | ".join(sizes))
+
+            worksheet.write(j, 5, " | ".join(size_units))
 
             if domain_info:
                 domains = []
                 for d in domain_info:
                     domains.append(d)
-                worksheet.write(j, 4, " | ".join(domains))
+                worksheet.write(j, 6, " | ".join(domains))
             else:
-                worksheet.write(j, 4, "N/A")
-            worksheet.write_datetime(j, 5, date, date_format)
-            if res.storage_object.publication_status == 'p':
-                worksheet.write(j, 6, status[res.storage_object.publication_status], published)
-            elif res.storage_object.publication_status == 'g':
-                worksheet.write(j, 6, status[res.storage_object.publication_status], ingested)
-            else:
-                worksheet.write(j, 6, status[res.storage_object.publication_status], internal)
+                worksheet.write(j, 6, "N/A")
+
+            worksheet.write(j, 7, dsis)
+            worksheet.write_datetime(j, 8, date, date_format)
+            worksheet.write(j, 9, status[res.storage_object.publication_status])
             owners = []
             for o in res.owners.all():
                 owners.append(o.username)
-            worksheet.write(j, 7, ", ".join(owners))
+            worksheet.write(j, 10, ", ".join(owners))
 
             if countries:
-                worksheet.write(j, 8, ", ".join(countries))
+                worksheet.write(j, 11, ", ".join(countries))
             else:
-                worksheet.write(j, 8, "N/A")
-
-            j+=1
+                worksheet.write(j, 11, "N/A")
+            worksheet.write(j, 12, ", ".join(licences))
+            if contacts:
+                worksheet.write(j, 13, " | ".join(contacts))
+            else:
+                worksheet.write(j, 13, "N/A")
+            worksheet.write(j, 14, crawled)
+            j += 1
             # worksheet.write(i + 1, 3, _get_resource_size_info(res))
         # worksheet.write(len(resources)+2, 3, "Total Resources", bold)
         # worksheet.write_number(len(resources)+3, 3, len(resources))
         worksheet.freeze_panes(1, 0)
         workbook.close()
     if link:
-        output.seek(0)
-        response = HttpResponse(output.read(), mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-        response['Content-Disposition'] = "attachment; filename={}.xlsx".format(title)
-        return response
+        if not email_to == u'true':
+            output.seek(0)
+            response = HttpResponse(output.read(),
+                                    mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            response['Content-Disposition'] = "attachment; filename={}.xlsx".format(title)
+            return response
         # return HttpResponse(_get_resource_lang_info(res))
+        else:
+            rp = open('{}/report_recipients.dat'.format(TMP)).read().splitlines()
+
+            msg_body = "Dear all,\n" \
+                       "Please find attached an overview of the resources available in the ELRC-SHARE " \
+                       "repository and their status today, {}.\n" \
+                       "Best regards,\n\n" \
+                       "The ELRC-SHARE group".format(datetime.datetime.now().strftime("%d, %b %Y"))
+            msg = EmailMessage("[ELRC] ERLC-SHARE weekly report", msg_body,
+                               from_email='elrc-share@ilsp.gr', to=rp)
+            msg.attach("{}.xlsx".format(title), output.getvalue(),
+                       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            msg.send()
+            return HttpResponse("{}: Weekly repository report sent to: {}\n"
+                                .format(datetime.datetime.now().strftime("%a, %d %b %Y"), ", ".join(rp)))
     else:
-        return HttpResponse("No Language Resources published within the last two weeks")
+        return HttpResponse("No Language Resources published within the last two weeks\n")
+
 
 def _get_resource_lang_info(resource):
     result = []
@@ -1722,10 +1795,7 @@ def _get_resource_lang_info(resource):
             media_type = media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
                 for lang in corpus_info.languageinfotype_model_set.all():
-                    if _get_lang_sizes(lang):
-                        l = [lang.languageName + " ("+", ".join(_get_lang_sizes(lang))+")"]
-                    else:
-                        l = [lang.languageName + " (N/A)"]
+                    l = [lang.languageName]
                     result.extend(l)
 
     elif isinstance(media, lexicalConceptualResourceInfoType_model):
@@ -1733,10 +1803,7 @@ def _get_resource_lang_info(resource):
             if lcr_media_type.lexicalConceptualResourceTextInfo:
                 for lang in lcr_media_type \
                         .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all():
-                    if _get_lang_sizes(lang):
-                        l = [lang.languageName + " ("+", ".join(_get_lang_sizes(lang))+")"]
-                    else:
-                        l = [lang.languageName + " (N/A)"]
+                    l = [lang.languageName]
                     result.extend(l)
 
     elif isinstance(media, languageDescriptionInfoType_model):
@@ -1744,14 +1811,57 @@ def _get_resource_lang_info(resource):
             if ld_media_type.languageDescriptionTextInfo:
                 for lang in ld_media_type \
                         .languageDescriptionTextInfo.languageinfotype_model_set.all():
-                    if _get_lang_sizes(lang):
-                        l = [lang.languageName + " ("+", ".join(_get_lang_sizes(lang))+")"]
-                    else:
-                        l = [lang.languageName + " (N/A)"]
+                    l = [lang.languageName]
                     result.extend(l)
     result = list(set(result))
     result.sort()
     return result
+
+def _get_resource_lang_sizes(resource, language):
+    result = []
+    media = resource.resourceComponentType.as_subclass()
+
+    if isinstance(media, corpusInfoType_model):
+            media_type = media.corpusMediaType
+            for corpus_info in media_type.corpustextinfotype_model_set.all():
+                for lang in corpus_info.languageinfotype_model_set.all():
+                    l=[]
+                    if lang.languageName == language:
+                        if _get_lang_sizes(lang):
+                            l = [" - ".join(_get_lang_sizes(lang))]
+                        else:
+                            l = ["N/A"]
+                    result.extend(l)
+
+    elif isinstance(media, lexicalConceptualResourceInfoType_model):
+            lcr_media_type = media.lexicalConceptualResourceMediaType
+            if lcr_media_type.lexicalConceptualResourceTextInfo:
+                for lang in lcr_media_type \
+                        .lexicalConceptualResourceTextInfo.languageinfotype_model_set.all():
+                    l = []
+                    if lang.languageName == language:
+                        if _get_lang_sizes(lang):
+                            l = [" - ".join(_get_lang_sizes(lang))]
+                        else:
+                            l = ["N/A"]
+                    result.extend(l)
+
+    elif isinstance(media, languageDescriptionInfoType_model):
+            ld_media_type = media.languageDescriptionMediaType
+            if ld_media_type.languageDescriptionTextInfo:
+                for lang in ld_media_type \
+                        .languageDescriptionTextInfo.languageinfotype_model_set.all():
+                    l = []
+                    if lang.languageName == language:
+                        if _get_lang_sizes(lang):
+                            l = [" - ".join(_get_lang_sizes(lang))]
+                        else:
+                            l = ["N/A"]
+                    result.extend(l)
+    result = list(set(result))
+    result.sort()
+    return result
+
 
 def _get_lang_sizes(lang):
     return ['{:,}'.format(int(sp.size)) +" "+ prettify_camel_case_string(sp.sizeUnit) for sp in lang.sizePerLanguage.all()]
@@ -1761,54 +1871,87 @@ def _get_resource_domain_info(resource):
     media = resource.resourceComponentType.as_subclass()
 
     if isinstance(media, corpusInfoType_model):
-            media_type = media.corpusMediaType
-            for corpus_info in media_type.corpustextinfotype_model_set.all():
-                result.extend([prettify_camel_case_string(d.domain) + " ("+d.subdomain+")"
-                               if d.subdomain else prettify_camel_case_string(d.domain) for d in
-                               corpus_info.domaininfotype_model_set.all()])
+        media_type = media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            result.extend([prettify_camel_case_string(d.domain) + " (" + d.subdomain + ")"
+                           if d.subdomain else prettify_camel_case_string(d.domain) for d in
+                           corpus_info.domaininfotype_model_set.all()])
 
     elif isinstance(media, lexicalConceptualResourceInfoType_model):
-            lcr_media_type = media.lexicalConceptualResourceMediaType
-            if lcr_media_type.lexicalConceptualResourceTextInfo:
-                result.extend([prettify_camel_case_string(d.domain) + " ("+d.subdomain+")"
-                               if d.subdomain else prettify_camel_case_string(d.domain) for d in lcr_media_type \
-                        .lexicalConceptualResourceTextInfo.domaininfotype_model_set.all()])
+        lcr_media_type = media.lexicalConceptualResourceMediaType
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            result.extend([prettify_camel_case_string(d.domain) + " (" + d.subdomain + ")"
+                           if d.subdomain else prettify_camel_case_string(d.domain) for d in lcr_media_type \
+                          .lexicalConceptualResourceTextInfo.domaininfotype_model_set.all()])
 
     elif isinstance(media, languageDescriptionInfoType_model):
-            ld_media_type = media.languageDescriptionMediaType
-            if ld_media_type.languageDescriptionTextInfo:
-                result.extend([prettify_camel_case_string(d.domain) + " ("+d.subdomain+")"
-                               if d.subdomain else prettify_camel_case_string(d.domain) for d in ld_media_type \
-                        .languageDescriptionTextInfo.domaininfotype_model_set.all()])
+        ld_media_type = media.languageDescriptionMediaType
+        if ld_media_type.languageDescriptionTextInfo:
+            result.extend([prettify_camel_case_string(d.domain) + " (" + d.subdomain + ")"
+                           if d.subdomain else prettify_camel_case_string(d.domain) for d in ld_media_type \
+                          .languageDescriptionTextInfo.domaininfotype_model_set.all()])
     result = list(set(result))
     result.sort()
 
     return result
 
-def _get_resource_size_info(resource):
+def _get_resource_sizes(resource):
     result = []
     media = resource.resourceComponentType.as_subclass()
 
     if isinstance(media, corpusInfoType_model):
             media_type = media.corpusMediaType
             for corpus_info in media_type.corpustextinfotype_model_set.all():
-                result.extend(["{} {}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size)), prettify_camel_case_string(s.sizeUnit)) for s in
+                result.extend(["{}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size))) for s in
                                corpus_info.sizeinfotype_model_set.all()])
 
     elif isinstance(media, lexicalConceptualResourceInfoType_model):
             lcr_media_type = media.lexicalConceptualResourceMediaType
             if lcr_media_type.lexicalConceptualResourceTextInfo:
-                result.extend(["{} {}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size)), prettify_camel_case_string(s.sizeUnit))
+                result.extend(["{}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size)))
                                for s in lcr_media_type \
                         .lexicalConceptualResourceTextInfo.sizeinfotype_model_set.all()])
 
     elif isinstance(media, languageDescriptionInfoType_model):
             ld_media_type = media.languageDescriptionMediaType
             if ld_media_type.languageDescriptionTextInfo:
-                result.extend(["{} {}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size)), prettify_camel_case_string(s.sizeUnit))
+                result.extend(["{}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size)))
                                for s in ld_media_type \
                         .languageDescriptionTextInfo.sizeinfotype_model_set.all()])
     result = list(set(result))
     result.sort()
+    return result
 
+def _get_resource_size_units(resource, size):
+    result = []
+    media = resource.resourceComponentType.as_subclass()
+
+    if isinstance(media, corpusInfoType_model):
+            media_type = media.corpusMediaType
+            for corpus_info in media_type.corpustextinfotype_model_set.all():
+                for s in corpus_info.sizeinfotype_model_set.all():
+                    this_size = "{}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size)))
+                    if this_size == size:
+                        result.extend(["{}".format(prettify_camel_case_string(s.sizeUnit))])
+
+    elif isinstance(media, lexicalConceptualResourceInfoType_model):
+            lcr_media_type = media.lexicalConceptualResourceMediaType
+            if lcr_media_type.lexicalConceptualResourceTextInfo:
+                for s in lcr_media_type \
+                        .lexicalConceptualResourceTextInfo.sizeinfotype_model_set.all():
+                    this_size = "{}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size)))
+                    if this_size == size:
+                        result.extend(["{}".format(prettify_camel_case_string(s.sizeUnit))])
+
+    elif isinstance(media, languageDescriptionInfoType_model):
+            ld_media_type = media.languageDescriptionMediaType
+            if ld_media_type.languageDescriptionTextInfo:
+                for s in ld_media_type \
+                        .languageDescriptionTextInfo.sizeinfotype_model_set.all():
+                    this_size = "{}".format('{:,}'.format(int(s.size) if float(s.size).is_integer() else float(s.size)))
+                    if this_size == size:
+                        result.extend(["{}".format(prettify_camel_case_string(s.sizeUnit))])
+    result = list(set(result))
+    result.sort()
+    # print result
     return result
