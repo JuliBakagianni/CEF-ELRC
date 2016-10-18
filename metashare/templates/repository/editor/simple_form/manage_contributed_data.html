@@ -74,6 +74,8 @@
 {% for file in filelist %}
     <tr>
         <input name="file[]" type="hidden" value="{{ file.resource_file|join:"" }}">
+        <input name="contributor_fname" type="hidden" value="{{ file.userInfo.firstname|join:"" }}"/>
+        <input name="contributor_lname" type="hidden" value="{{ file.userInfo.lastname|join:"" }}"/>
 {#        <td name="resourceName">{{ file.title|join:"" }}</td>#}
         <td>{{ file.title|join:""}}</td>
         <td style="max-width:210px">{{ file.description|join:"" }}</td>
