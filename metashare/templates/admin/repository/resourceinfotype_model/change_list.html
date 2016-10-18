@@ -13,7 +13,7 @@
           {% block object-tools-items %}
             {% if user.get_profile.is_superuser %}
                 <li>
-                    <a href="/repository/repo_report">Generate Report</a>
+                    <a href="/repository/repo_report?email_to=false">Generate Report</a>
                 </li>
             {% endif %}
             <li>
