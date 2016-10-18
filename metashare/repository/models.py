@@ -771,7 +771,7 @@ class creationInfoType_model(SchemaModel):
     creationModeDetails = XmlCharField(
       verbose_name='Creation mode details',
       help_text='Provides further information on the creation methods and processes',
-      blank=True, max_length=1200, )
+      blank=True, max_length=1500, )
 
     creationTool = models.ManyToManyField("targetResourceInfoType_model",
       verbose_name='Creation tool',
