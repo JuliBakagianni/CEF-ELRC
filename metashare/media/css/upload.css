@@ -57,11 +57,11 @@
 
 .failure {
     text-align: center;
-    width: 800px;
+    width: 100%;
     margin: 10px auto;
     padding: 5px;
     border-radius: 5px;
-    background: #f2df00
+    background: #eee445
 }
 
 .success {

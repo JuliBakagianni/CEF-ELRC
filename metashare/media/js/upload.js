@@ -7,7 +7,8 @@ $(function () {
     $('form').submit(function (event) {
         if ($('#filebutton')[0].files[0].size > 52428800) {
             alert("The file you are trying to upload is larger " +
-            "than the maximum upload file size (50mb)");
+                "than the maximum upload file size (50mb).\n" +
+                "Please contact elrc-share@ilsp.gr");
             return false;
         }
         return true;
@@ -22,8 +23,14 @@ $(function () {
     var ok = $('#ok');
     $('form').ajaxForm({
 
-        beforeSend: function () {
+        beforeSend: function (xhr, opts) {
         var fileName = $('input[type=file]').val().split('/').pop().split('\\').pop();
+            if (!fileName.endsWith(".zip")){
+                xhr.abort();
+                alert("The file you are trying to upload does not have a .zip extension.\n" +
+                    "Please make sure that you properly compress your data into a valid .zip file before uploading.");
+                return false
+            }
             status.removeClass("success");
             status.html("Uploading file: \""+fileName+"\".\nPlease wait...");
             ok.hide();
@@ -41,15 +48,24 @@ $(function () {
         error: function () {
             $('.uploadWin').hide();
             $('.overlay').hide();
-            alert("There was an error uploading this file. " +
-            "Please try again later.");
+            alert("There was an error uploading this file.\n" +
+                "Please make sure that you are trying to upload a valid '.zip' file.\n" +
+                "If the problem persists please try again later.");
         },
-        complete: function () {
-            status.addClass("success");
-            status.html("Your data has been successfully submitted. " +
-            "You can continue uploading more resources if you want.");
+        complete: function (response) {
+            var json_response = JSON.parse(response.responseText);
+            if(json_response.status == 'failed'){
+                status.addClass("failure")
+                bar.hide();
+                percent.hide();
+                $(".progress").hide();
+            } else {
+                status.removeClass("failure");
+                status.addClass("success");
+                $('form').clearForm();
+            }
+            status.html(json_response.message);
             ok.show();
-            $('form').clearForm();
             //location.reload();
         }
     });
