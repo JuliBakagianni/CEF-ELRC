@@ -249,7 +249,7 @@ def has_publish_permission(request, queryset):
     #                    for mgr_group in EditorGroupManagers.objects.filter(name__in=
     #                        request.user.groups.values_list('name', flat=True))):
     #             return False
-    if not request.user.is_staff:
+    if not request.user.is_staff or request.user.groups.filter(name='naps').exists():
             return False
     return True
 
@@ -1193,6 +1193,9 @@ class ResourceModelAdmin(SchemaModelAdmin):
             if not request.user.is_staff:
                 for action in (self.publish_action, self.unpublish_action,):
                     del result[action.__name__]
+        if request.user.groups.filter(name='naps').exists():
+            del result['publish_action']
+            del result['unpublish_action']
         return result
 
     def create_hidden_structures(self, request):
@@ -1424,4 +1427,4 @@ class LicenceForm(forms.ModelForm):
 class LicenceModelAdmin(SchemaModelAdmin):
     form = LicenceForm
 
-    
+
