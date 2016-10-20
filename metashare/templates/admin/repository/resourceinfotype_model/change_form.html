@@ -35,7 +35,7 @@
    {% block object-tools-items %}
    {% if user.get_profile.has_editor_permission %}
 {#       <li><a href="lrquality/" class="lrqualitylink">{% trans "LR Quality"%}</a></li>#}
-       <li><a href="#" class="lrqualitylink" title="Currently not available">{% trans "LR Quality"%}</a></li>
+{#       <li><a href="#" class="lrqualitylink" title="Currently not available">{% trans "LR Quality"%}</a></li>#}
    {% endif %}
    {% if original.storage_object.get_download %}
        <li><a href="datadl/" class="downloadresourcelink">{% trans "Download resource"%}</a></li>
