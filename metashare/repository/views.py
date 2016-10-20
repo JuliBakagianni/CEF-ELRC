@@ -160,63 +160,6 @@ LICENCEINFOTYPE_URLS_LICENCE_CHOICES = {
     'IGCYL-NC_Spain': ('http://ftp.itacyl.es/cartografia/LICENCIA-IGCYL-NC-2012.pdf', MEMBER_TYPES.NON),
     'underReview': ('', MEMBER_TYPES.GOD),
     'non-standard/Other_Licence/Terms': ('', MEMBER_TYPES.NON),
-    # 'openForReuseWithRestrictions': ('', MEMBER_TYPES.NON),
-    # 'proprietary': ('', MEMBER_TYPES.NON),
-    # 'other': ('', MEMBER_TYPES.GOD)
-    # 'MSCommons-BY': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BY_v1.0.htm',
-    # MEMBER_TYPES.FULL),
-    # 'MSCommons-BY-NC': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNC_v1.0.htm',
-    # MEMBER_TYPES.FULL),
-    # 'MSCommons-BY-NC-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCND_' \
-    # 'v1.0.htm', MEMBER_TYPES.FULL),
-    # 'MSCommons-BY-NC-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYNCSA' \
-    #                        '_v1.0.htm', MEMBER_TYPES.FULL),
-    # 'MSCommons-BY-ND': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYND_v1.0.htm',
-    #                     MEMBER_TYPES.FULL),
-    # 'MSCommons-BY-SA': (MEDIA_URL + 'licences/META-SHARE_COMMONS_BYSA_v1.0.htm',
-    #                     MEMBER_TYPES.FULL),
-    # 'MS-C-NoReD-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
-    #       'NoRedistribution_For-a-Fee_v1.0.htm', MEMBER_TYPES.GOD),
-    # 'MS-C-NoReD': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
-    #       'NoRedistribution_v1.0.htm', MEMBER_TYPES.GOD),
-    # 'MS-C-NoReD-ND-FF': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
-    #       'NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.GOD),
-    # 'MS-C-NoReD-ND': (MEDIA_URL + 'licences/META-SHARE_Commercial_' \
-    #       'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.GOD),
-    # 'MS-NC-NoReD-ND-FF': (MEDIA_URL + 'licences/META-SHARE_NonCommercial' \
-    #       '_NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.GOD),
-    # 'MS-NC-NoReD-ND': (MEDIA_URL + 'licences/META-SHARE_NonCommercial_' \
-    #       'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.GOD),
-    # 'MS-NC-NoReD-FF': (MEDIA_URL + 'licences/META-SHARE_NonCommercial' \
-    #       '_NoRedistribution_For-a-Fee-v1.0.htm', MEMBER_TYPES.GOD),
-    # 'MS-NC-NoReD': (MEDIA_URL + 'licences/META-SHARE_NonCommercial_' \
-    #       'NoRedistribution-v1.0.htm', MEMBER_TYPES.GOD),
-
-    # TODO: mdel
-    # 'MS-NoReD-ND-FF': (MEDIA_URL + 'licences/META-SHARE_NonCommercial' \
-    #       '_NoRedistribution_NoDerivatives_For-a-fee-v1.0.htm', MEMBER_TYPES.GOD),
-    # 'MS-NoReD-ND': (MEDIA_URL + 'licences/META-SHARE_NonCommercial_' \
-    #       'NoRedistribution_NoDerivatives-v1.0.htm', MEMBER_TYPES.GOD),
-    # 'MS-NoReD-FF': (MEDIA_URL + 'licences/META-SHARE_NonCommercial' \
-    #       '_NoRedistribution_For-a-Fee-v1.0.htm', MEMBER_TYPES.GOD),
-    # 'MS-NoReD': (MEDIA_URL + 'licences/META-SHARE_NonCommercial_' \
-    #       'NoRedistribution-v1.0.htm', MEMBER_TYPES.GOD),
-
-    # 'ELRA_EVALUATION': (MEDIA_URL + 'licences/EVALUATION.htm', MEMBER_TYPES.GOD),
-    # 'ELRA_VAR': (MEDIA_URL + 'licences/VAR-v3_2007.htm', MEMBER_TYPES.GOD),
-    # 'ELRA_END_USER': (MEDIA_URL + 'licences/ENDUSER-v3_2007.htm', MEMBER_TYPES.GOD),
-    # 'CLARIN_PUB': (MEDIA_URL + 'licences/CLARIN_PUB.html', MEMBER_TYPES.GOD),
-    # 'CLARIN_ACA-NC': (MEDIA_URL + 'licences/CLARIN_ACA.html', MEMBER_TYPES.GOD),
-    # 'CLARIN_ACA': (MEDIA_URL + 'licences/CLARIN_ACA.html', MEMBER_TYPES.GOD),
-    # 'CLARIN_RES': (MEDIA_URL + 'licences/CLARIN_RES.html', MEMBER_TYPES.GOD),
-    # 'Princeton_Wordnet': (MEDIA_URL + 'licences/WordNet-3.0.txt',
-    #                       MEMBER_TYPES.NON),
-    # 'GPL': (MEDIA_URL + 'licences/GNU_gpl-3.0.htm', MEMBER_TYPES.NON),
-    # 'GFDL': (MEDIA_URL + 'licences/GNU_fdl-1.3.htm', MEMBER_TYPES.NON),
-    # 'ApacheLicence_2.0': (MEDIA_URL + 'licences/Apache-2.0.htm',
-    #                       MEMBER_TYPES.NON),
-    # 'BSD': (MEDIA_URL + 'licences/BSD_licence.htm', MEMBER_TYPES.NON),
-    # 'BSD-style': ('', MEMBER_TYPES.NON),
 
 }
 
@@ -1180,6 +1123,7 @@ class MetashareFacetedSearchView(FacetedSearchView):
 
 @login_required
 def simple_form(request):
+    tmp_dir = '{}/tmp'.format(WEB_FORM_STORAGE) # temp dir for resources downloaded from user provided url
     if request.method == "POST":
         id = str(uuid.uuid4())
         profile = UserProfile.objects.get(user=request.user)
@@ -1206,6 +1150,11 @@ def simple_form(request):
         if 'languages[]' in request.POST:
             data['resourceInfo']['languages'] = request.POST.getlist('languages[]')
 
+        try:
+            data['resourceInfo']['resourceUrl'] = request.POST['resourceUrl']
+        except:
+            pass
+
         dir1 = '{}/unprocessed'.format(WEB_FORM_STORAGE)
         # dir2 = '{}/{}'.format(dir1, id)
 
@@ -1214,41 +1163,50 @@ def simple_form(request):
         form_data = cgi.FieldStorage()
         # file_data = form_data['filebutton'].value
         filename = '{}_{}'.format(profile.country, id)
-        zipped = filename + ".zip"
 
+        zipped = ""
         # for chunk in request.FILES['filebutton'].chunks():
         #     destination.write(chunk)
         response = {}
-        if not request.FILES['filebutton'].size > MAXIMUM_UPLOAD_SIZE:
-            try:
-                if not os.path.isdir(dir1):
-                    os.makedirs(dir1)
-            except:
-                raise OSError, "STORAGE_PATH and LOCK_DIR must exist and be writable!"
+        if request.POST['mode']=='uploadzip':
+            zipped = filename + ".zip"
+            if not request.FILES['filebutton'].size > MAXIMUM_UPLOAD_SIZE:
+                try:
+                    if not os.path.isdir(dir1):
+                        os.makedirs(dir1)
+                except:
+                    raise OSError, "STORAGE_PATH and LOCK_DIR must exist and be writable!"
 
-            destination = open('{}/{}'.format(dir1, zipped), 'wb+')
-            for chunk in request.FILES['filebutton'].chunks():
-                destination.write(chunk)
-            destination.close()
-            import zipfile
-            file = '{}/{}'.format(dir1, zipped)
-            if not zipfile.is_zipfile(file) or not str(request.FILES['filebutton']).endswith(".zip"):
+                destination = open('{}/{}'.format(dir1, zipped), 'wb+')
+                for chunk in request.FILES['filebutton'].chunks():
+                    destination.write(chunk)
+                destination.close()
+                import zipfile
+                file = '{}/{}'.format(dir1, zipped)
+                if not zipfile.is_zipfile(file) or not str(request.FILES['filebutton']).endswith(".zip"):
                     os.remove(file)
                     response['status'] = "failed"
                     response['message'] = "Your request could not be completed. " \
-                                          "The file you tried to upload is corrupted or it is not a valid '.zip' file. " \
+                                          "The file you tried to upload is corrupted or it is not a valid '.zip' file." \
                                           "Please make sure that you have compressed your data properly."
                     return HttpResponse(json.dumps(response), mimetype="application/json")
 
-        else:
-            response['status'] = "failed"
-            response['message'] = "The file you are trying to upload " \
+            else:
+                response['status'] = "failed"
+                response['message'] = "The file you are trying to upload " \
                                       "is larger than the maximum upload file size ({:.5} MB)!".format(
                                                   float(MAXIMUM_UPLOAD_SIZE) / (1024 * 1024))
-            return HttpResponse(json.dumps(response), mimetype="application/json")
+                return HttpResponse(json.dumps(response), mimetype="application/json")
 
-        data['administration']['resource_file'] = filename + '.xml'
-        data['administration']['dataset'] = zipped
+        data['administration']['resource_file'] = filename+'.xml'
+        if zipped:
+            data['administration']['dataset'] = {"zip": zipped}
+        else:
+            try:
+                data['administration']['dataset'] = {"url": data['resourceInfo']['resourceUrl']}
+            except KeyError:
+                data['administration']['dataset'] = "None"
+
         xml = dicttoxml.dicttoxml(data, custom_root='resource', attr_type=False)
         xml_file = filename + ".xml"
         with open('{}/{}'.format(dir1, xml_file), 'w') as f:
@@ -1258,16 +1216,20 @@ def simple_form(request):
             f.closed
         try:
             send_mail("New unmanaged contributions",
-                      "You have new unmanaged contributed resources", \
-                      'no-reply@elrc-share.ilsp.gr', ["penny@ilsp.gr"], \
-                      fail_silently=False)
+                "You have new unmanaged contributed resources", \
+                'no-reply@elrc-share.ilsp.gr', ["penny@ilsp.gr"], \
+                fail_silently=False)
         except:
             pass
 
         response['status'] = "succeded"
         response['message'] = "Thank you for sharing! Your data have been successfully submitted. " \
                               "You can now go on and contribute more data."
-        return HttpResponse(json.dumps(response), mimetype="application/json")
+        if request.POST['mode'] == 'uploadzip':
+            return HttpResponse(json.dumps(response), mimetype="application/json")
+        else:
+            return render_to_response('repository/editor/simple_form/simple_form.html', \
+                            response, context_instance=RequestContext(request))
 
     return render_to_response('repository/editor/simple_form/simple_form.html', \
                               context_instance=RequestContext(request))
@@ -1284,7 +1246,18 @@ def manage_contributed_data(request):
 
     info = list()
     for xml_file in xml_files:
-        doc = etree.parse('{}/{}'.format(base, xml_file))
+        doc =  etree.parse('{}/{}'.format(base,xml_file))
+        dataset = {}
+        if doc.xpath("//resource/administration/dataset/zip"):
+            dataset = {
+                "zip": doc.xpath("//resource/administration/dataset/zip/text()")
+            }
+
+        elif doc.xpath("//resource/administration/dataset/url"):
+            dataset = {
+                "url": doc.xpath("//resource/administration/dataset/url/text()")
+            }
+
         info.append({
             "title": doc.xpath("//resourceTitle//text()"),
             "description": doc.xpath("//shortDescription//text()"),
@@ -1300,7 +1273,7 @@ def manage_contributed_data(request):
 
             },
             "resource_file": doc.xpath("//resource/administration/resource_file/text()"),
-            "dataset": doc.xpath("//resource/administration/dataset/text()"),
+            "dataset": dataset
 
         })
     context = {
@@ -1310,6 +1283,46 @@ def manage_contributed_data(request):
 
     return render_to_response(template, context, context_instance=ctx)
 
+@staff_member_required
+def get_data(request, filename):
+        dl_path = "{}/unprocessed/{}".format(WEB_FORM_STORAGE, filename)
+        if dl_path:
+            try:
+                def dl_stream_generator():
+                    with open(dl_path, 'rb') as _local_data:
+                        _chunk = _local_data.read(4096)
+                        while _chunk:
+                            yield _chunk
+                            _chunk = _local_data.read(4096)
+
+                # build HTTP response with a guessed mime type; the response
+                # content is a stream of the download file
+                filemimetype = guess_type(dl_path)[0] or "application/octet-stream"
+                response = HttpResponse(dl_stream_generator(),
+                    mimetype=filemimetype)
+                response['Content-Length'] = getsize(dl_path)
+                response['Content-Disposition'] = 'attachment; filename={0}' \
+                    .format(split(dl_path)[1])
+                # LOGGER.info("Offering a local editor download of resource #{0}." \
+                #             .format(object_id))
+                return response
+            except:
+                pass
+
+@staff_member_required
+def remove(request, record):
+    record = record.split(".xml")[0]
+    path = "{}/unprocessed/{}".format(WEB_FORM_STORAGE, record)
+    # if xml exists, flag it and move it to the processed
+    if os.path.exists(path+".xml"):
+        xml_destination = '{}/processed/{}'.format(WEB_FORM_STORAGE,
+                                                   "REMOVED_{}.xml".format(record))
+        shutil.move(path+".xml", xml_destination)
+    if os.path.exists(path+".zip"):
+        xml_destination = '{}/processed/{}'.format(WEB_FORM_STORAGE,
+                                                   "REMOVED_{}.zip".format(record))
+        shutil.move(path+".zip", xml_destination)
+    return redirect(manage_contributed_data)
 
 @staff_member_required
 def addtodb(request):
@@ -1402,12 +1415,16 @@ def addtodb(request):
         msg = u'{} resources have been successfully imported into ' \
               u'the database. ' \
               u'A notification email has been sent to the maintainers ({})'.format(total_res, u", ".join(recipients))
-    else:
+        messages.success(request, msg)
+    elif total_res == 1:
         msg = u'1 resource has been successfully imported into ' \
               u'the database. ' \
               u'A notification email has been sent to ' \
               u'{}'.format(u", ".join(recipients))
-    messages.success(request, msg)
+        messages.success(request, msg)
+    else:
+        msg = u'No Resources Selected'
+        messages.warning(request, msg)
     return redirect(manage_contributed_data)
 
 
@@ -1427,10 +1444,10 @@ def create_description(xml_file, type, user):
             "user": ''.join(doc.xpath("//userInfo/user/text()")),
             "institution": ''.join(doc.xpath("//userInfo/institution/text()")),
 
-        },
-        "resource_file": ''.join(doc.xpath("//resource/administration/resource_file/text()")),
-        "dataset": ''.join(doc.xpath("//resource/administration/dataset/text()"))
-    }
+            },
+            "resource_file": ''.join(doc.xpath("//resource/administration/resource_file/text()")),
+            "dataset": ''.join(doc.xpath("//resource/administration/dataset/zip/text()"))
+        }
     # Create a new Identification object
     identification = identificationInfoType_model.objects.create( \
         resourceName={'en': info['title']}, description={'en': info['description']}, createdUsingELRCServices=False)
@@ -1505,6 +1522,7 @@ def create_description(xml_file, type, user):
         elif len(info['languages']) > 2:
             corpus_text.lingualityInfo.lingualityType = u'multilingual'
             corpus_text.lingualityInfo.save()
+
 
         corpus_info = corpusInfoType_model.objects.create(corpusMediaType=corpus_media_type)
 
@@ -1602,14 +1620,17 @@ def create_description(xml_file, type, user):
     except:
         raise OSError, "STORAGE_PATH and LOCK_DIR must exist and be writable!"
 
-    data_source = '{}/{}'.format(base, info['dataset'])
+    # finally, if the user has provided a zip file dataset,
+    # move the dataset to the respective storage folder
+    if info['dataset'] != '':
+        data_source = '{}/{}'.format(base, info['dataset'])
 
-    shutil.move(data_source, '{}/{}'.format(data_destination, "archive.zip"))
-    resource.storage_object.compute_checksum()
-    resource.storage_object.save()
-    resource.storage_object.update_storage()
+        shutil.move(data_source, '{}/{}'.format(data_destination, "archive.zip"))
+        resource.storage_object.compute_checksum()
+        resource.storage_object.save()
+        resource.storage_object.update_storage()
 
-    # and move the processed xml file to the web_form/processed folder
+    # move the processed xml file to the web_form/processed folder
     xml_source = '{}/{}'.format(base, xml_file)
     xml_destination = '{}/processed/{}'.format(WEB_FORM_STORAGE, xml_file)
     shutil.move(xml_source, xml_destination)
@@ -1675,7 +1696,7 @@ def repo_report(request):
             affiliations = []
             try:
                 licenceInfos = res.distributionInfo.licenceinfotype_model_set.all()
-                # print res
+
                 for l in licenceInfos:
                     licences.append(l.licence)
             except:
@@ -1953,5 +1974,5 @@ def _get_resource_size_units(resource, size):
                         result.extend(["{}".format(prettify_camel_case_string(s.sizeUnit))])
     result = list(set(result))
     result.sort()
-    # print result
+
     return result

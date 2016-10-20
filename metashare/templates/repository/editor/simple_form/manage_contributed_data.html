@@ -1,5 +1,6 @@
 {% load analytical %}
 {% load adminmedia %}
+{% load url_valid %}
 <html>
 <head>
     {% analytical_head_top %}
@@ -31,11 +32,13 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
           integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-<style type="text/css">
+    <style type="text/css">
         .error {text-align: center; width: 500px; margin: 10px auto;
             padding: 5px; border-radius: 5px; background: #fbc2c4}
-
-        .success {text-align: center; width: 800px; margin: 10px auto; padding: 5px; border-radius: 5px;}
+        .warning {text-align: center; width: 100%; margin: 10px auto;
+            padding: 3px; border-radius: 5px; background: #eee445}
+        .success {text-align: center; width: 800px; margin: 10px auto;
+            padding: 5px; border-radius: 5px;}
     </style>
 </head>
 <body>
@@ -68,7 +71,11 @@
              <th class="sorting">Country</th>
              <th>Phone Number</th>
              <th class="sorting">Organization</th>
-             {% if user.get_profile.is_superuser %}<th>Import as</th>{% endif %}
+             {% if user.get_profile.is_superuser %}
+                 <th>Data</th>
+                 <th>Import as</th>
+                 <th></th>
+             {% endif %}
          </tr>
     </thead>
 {% for file in filelist %}
@@ -87,14 +94,30 @@
         <td>{{ file.userInfo.country|join:", "}}</td>
         <td>{{ file.userInfo.phoneNumber|join:", "}}</td>
         <td>{{ file.userInfo.institution|join:", "}}</td>
-        {% if user.get_profile.is_superuser %}<td>
-            <select name="resourceType[]">
-                <option value="">------------</option>
-                <option value="corpus">Corpus</option>
-                <option value="langdesc">Language description</option>
-                <option value="lexicon">Lexical conceptual resource</option>
-            </select>
-        </td>{% endif %}
+        {% if user.get_profile.is_superuser %}
+            <td>
+                {% if file.dataset.zip %}
+                    <a href="/repository/get_data/{{ file.dataset.zip|join:"" }}">{{ file.dataset.zip|join:"" }}</a>
+                    {% else %}
+                        {% if file.dataset.url %}
+                            <a href="{{ file.dataset.url|join:""|url_valid }}" target="_blank">{{ file.dataset.url|join:"" }}</a>
+                            {% else %}
+                                No Data Available
+                        {% endif %}
+                {%  endif %}
+            </td>
+            <td>
+                <select name="resourceType[]">
+                    <option value="">------------</option>
+                    <option value="corpus">Corpus</option>
+                    <option value="langdesc">Language description</option>
+                    <option value="lexicon">Lexical conceptual resource</option>
+                </select>
+            </td>
+            <td><a class="btn btn-warning" style = "color:#FFF" href="remove/{{ file.resource_file|join:"" }}"
+            onclick="return confirm('Are you sure you want to remove this record? The contribution will ' +
+             'no longer be available for import into the database!')">Remove</a></td>
+        {% endif %}
     </tr>
 {% endfor %}
 </table>

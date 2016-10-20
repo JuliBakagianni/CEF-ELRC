@@ -60,7 +60,7 @@
 </div>
 <div class="overlay"></div>
 {% if message %}
-    <div class="{{ type }}">{{ message }}</div>
+    <div class="{{ status }}">{{ message }}</div>
 {% endif %}
 {% for message in messages %}
 <div class="{{ message.tags }}">{{ message|linebreaksbr }}</div>
@@ -94,11 +94,12 @@
         </div>
 
         <!-- Text input-->
-        <div class="form-group languages">
+        <div class="form-group required">
             <label class="col-md-4 control-label" for="languages">Language(s)</label>
 
             <div class="col-md-4">
-                <div class="language"><select multiple style="padding: 6px; height:200px" name="languages[]" id="languages">
+                <div class="language">
+                    <select required class="form-control" multiple style="padding: 6px; height:200px" name="languages[]" id="languages">
                     <option value="Bulgarian">Bulgarian</option>
                     <option value="Czech">Czech</option>
                     <option value="Croatian">Croatian</option>
@@ -129,19 +130,41 @@
             </div>
         </div>
 
+        <div class="form-group required" id="contributionmode">
+            <label class="col-md-4 control-label" for="contributionmode">Contribution Mode</label>
+
+            <div class="col-md-4">
+                <input type="radio" name="mode" value="uploadzip" checked> Upload ZIP archive<br>
+                <input type="radio" name="mode" value="url"> Provide URL of resources<br>
+                <span class="help-block">Please select the way you wish to contribute your data. Uploading a ZIP archive is recommended.</span>
+            </div>
+        </div>
+
+
         <!-- File Button -->
-        <div class="form-group required">
+        <div class="form-group required" id="fileupload">
             <label class="col-md-4 control-label" for="filebutton">Upload Resource</label>
 
             <div class="col-md-4">
                 <input accept=".zip" id="filebutton" name="filebutton" class="input-file" type="file" required="">
                 <span class="help-block">Please upload a <strong>.zip file</strong> up to 50MB.
                 </br>
-                    In case the <strong>.zip file</strong> file you wish to upload is bigger than 50MB, please contact
+                    In case the <strong>.zip file</strong> file you wish to upload is larger than 50MB, please contact
                     <a href="mailto:elrc-share@ilsp.gr">elrc-share@ilsp.gr</a>
                 </span>
             </div>
         </div>
+
+         <div class="form-group required" id="resourceurl" style="display: none">
+            <label class="col-md-4 control-label" for="resourceUrl">Resource URL</label>
+
+            <div class="col-md-4">
+                <input id="resourceUrl" name="resourceUrl" placeholder="" class="form-control input-md" required=""
+                       type="text">
+                <span class="help-block">Please provide a URL containing the files you wish to contribute</span>
+            </div>
+        </div>
+
         <!-- Button (Double) -->
         <div class="form-group">
             <label class="col-md-4 control-label" for="submit"></label>

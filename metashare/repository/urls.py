@@ -52,4 +52,6 @@ urlpatterns = patterns('metashare.repository.views',
   url(r'contributions','manage_contributed_data'),
   (r'addtodb/$', 'addtodb'),
   url(r'repo_report', 'repo_report'),
+  url(r'get_data/(?P<filename>.+\.zip)', 'get_data'),
+  url(r'remove/(?P<record>.*)$', 'remove'),
 )

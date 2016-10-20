@@ -3,6 +3,42 @@ var donotclose = function () {
     $('.uploadWin').show();
 }
 
+var disable_input = function (container) {
+    container.find("input").prop('disabled', true);
+    container.hide();
+}
+
+var enable_input = function (container) {
+    container.find("input").prop('disabled', false);
+    container.show();
+}
+
+$(document).ready(function () {
+        var mode = $("#contributionmode input[type='radio']:checked").val();
+        if (mode == "uploadzip") {
+            disable_input($("#resourceurl"));
+            enable_input($("#fileupload"));
+        } else if (mode == "url") {
+            disable_input($("#fileupload"));
+            enable_input($("#resourceurl"));
+        }
+    }
+);
+
+$(function () {
+        $("#contributionmode input[type='radio']").change(function () {
+            mode = $(this).val();
+            if (mode == "uploadzip") {
+                disable_input($("#resourceurl"));
+                enable_input($("#fileupload"));
+            } else if (mode == "url") {
+                disable_input($("#fileupload"));
+                enable_input($("#resourceurl"));
+            }
+        })
+    }
+)
+
 $(function () {
     $('form').submit(function (event) {
         if ($('#filebutton')[0].files[0].size > 52428800) {
@@ -32,7 +68,7 @@ $(function () {
                 return false
             }
             status.removeClass("success");
-            status.html("Uploading file: \""+fileName+"\".\nPlease wait...");
+            status.html("Uploading file: \"" + fileName + "\".\nPlease wait...");
             ok.hide();
             donotclose();
             var percentVal = '0%';
