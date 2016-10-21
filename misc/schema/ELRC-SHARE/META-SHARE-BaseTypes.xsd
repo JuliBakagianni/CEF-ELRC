@@ -126,6 +126,7 @@
                         <xs:enumeration value="Cybersecurity"/>
                         <xs:enumeration value="eHealth"/>
                         <xs:enumeration value="eProcurement"/>
+                        <xs:enumeration value="BusinessRegistersInterconnectionSystem"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
