@@ -381,7 +381,7 @@ APPROPRIATENESS_FOR_DSI_CHOICES = _make_choices_from_list([
     u'OnlineDisputeResolution', u'Europeana',
     u'OpenDataPortal', u'eJustice',
     u'ElectronicExchangeOfSocialSecurityInformation',
-    u'saferInternet',
+    u'saferInternet', u'Cybersecurity', u'eHealth', u'eProcurement',
 ])
 
 # pylint: disable-msg=C0103
