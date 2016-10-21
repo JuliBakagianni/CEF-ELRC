@@ -85,7 +85,9 @@ def schema_validate_xml(value):
                          stdout=subprocess.PIPE,
                          stderr=subprocess.STDOUT)
     _msg = p.communicate()[0]
-    if not _msg == "\nPassed\n":
+
+    # Raise ValidationError if xsd validation fails
+    if "Passed" not in _msg:
         raise ValidationError(mark_safe('<b>Schema Validation</b><br/>{}'.format(_msg,)))
     return value
 
