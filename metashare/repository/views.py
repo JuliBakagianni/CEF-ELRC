@@ -1235,7 +1235,7 @@ def simple_form(request):
                               context_instance=RequestContext(request))
 
 
-@staff_member_required
+@user_passes_test(lambda u: u.is_superuser)
 def manage_contributed_data(request):
     template = 'repository/editor/simple_form/manage_contributed_data.html'
     xml_files = list()
@@ -1324,7 +1324,7 @@ def remove(request, record):
         shutil.move(path+".zip", xml_destination)
     return redirect(manage_contributed_data)
 
-@staff_member_required
+@user_passes_test(lambda u: u.is_superuser)
 def addtodb(request):
     recipients = []
     total_res = 0
@@ -1594,7 +1594,8 @@ def create_description(xml_file, type, user):
                                                          metadataInfo=metadataInfoType_model.objects.create \
                                                              (metadataCreationDate=datetime.date.today(),
                                                               metadataLastDateUpdated=datetime.date.today()))
-
+    # create distributionInfo object
+    distribution = distributionInfoType_model.objects.create()
     # add licence and attributionText for greek contributions
     if info['userInfo']['country'] == u'Greece':
         if info["userInfo"]["institution"]:
@@ -1603,12 +1604,14 @@ def create_description(xml_file, type, user):
         else:
             attrText = u"{} by {} {} licensed under CC-BY 4.0".format(info['title'], info["userInfo"]["firstname"],
                                                                       info["userInfo"]["lastname"])
-        distribution = distributionInfoType_model.objects.create()
+
         licenceInfoType_model.objects.create(licence=u"CC-BY", attributionText={'en': attrText}, \
                                              back_to_distributioninfotype_model=distribution)
-
-        resource.distributionInfo = distribution
-        resource.save()
+    else:
+        licenceInfoType_model.objects.create(licence=u"underReview", \
+                                             back_to_distributioninfotype_model=distribution)
+    resource.distributionInfo = distribution
+    resource.save()
 
         # also add the designated maintainer, based on the country of the country of the donor
     resource.owners.add(user.id)
@@ -1683,6 +1686,7 @@ def repo_report(request):
         worksheet.write('M1', 'Legal Status', heading)
         worksheet.write('N1', 'Contacts', heading)
         worksheet.write('O1', 'ELRC Services', heading)
+        worksheet.write('P1', 'PSI', heading)
         link = True
 
         j = 1
@@ -1690,6 +1694,7 @@ def repo_report(request):
 
             res = resources[i]
             crawled = "YES" if res.identificationInfo.createdUsingELRCServices else "NO"
+            psi = "YES" if res.identificationInfo.publicSectorInformation else "NO"
             countries = []
             contacts = []
             licences = []
@@ -1700,7 +1705,7 @@ def repo_report(request):
                 for l in licenceInfos:
                     licences.append(l.licence)
             except:
-                licences.append("N/A")
+                licences.append("underReview")
 
             for cp in res.contactPerson.all():
                 for afl in cp.affiliation.all():
@@ -1775,6 +1780,7 @@ def repo_report(request):
             else:
                 worksheet.write(j, 13, "N/A")
             worksheet.write(j, 14, crawled)
+            worksheet.write(j, 15, psi)
             j += 1
             # worksheet.write(i + 1, 3, _get_resource_size_info(res))
         # worksheet.write(len(resources)+2, 3, "Total Resources", bold)
