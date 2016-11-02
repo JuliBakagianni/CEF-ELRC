@@ -1126,7 +1126,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         result = result.distinct().filter(storage_object__deleted=False)
         # all users but the superusers may only see resources for which they are
         # either owner or editor group member:
-        if not request.user.is_superuser:
+        if not request.user.is_superuser and not request.user.groups.filter(name='legalReviewers').exists():
             result = result.distinct().filter(Q(owners=request.user)
                     | Q(editor_groups__name__in=
                            request.user.groups.values_list('name', flat=True)))
