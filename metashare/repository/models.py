@@ -406,6 +406,7 @@ class identificationInfoType_model(SchemaModel):
         ( u'identifier', u'identifier', OPTIONAL ),
         ( u'appropriatenessForDSI', u'appropriatenessForDSI', OPTIONAL ),
         ( u'createdUsingELRCServices', u'createdUsingELRCServices', OPTIONAL ),
+        (u'publicSectorInformation', u'publicSectorInformation', OPTIONAL),
     )
 
     resourceName = DictField(validators=[validate_lang_code_keys, validate_dict_values],
@@ -486,6 +487,10 @@ class identificationInfoType_model(SchemaModel):
         blank=True,
         max_length=1 + len(APPROPRIATENESS_FOR_DSI_CHOICES['choices']) / 4,
         choices=APPROPRIATENESS_FOR_DSI_CHOICES['choices'],
+    )
+
+    publicSectorInformation = models.BooleanField(
+        verbose_name='PSI - Public Sector Information',
     )
 
     createdUsingELRCServices = models.BooleanField(
