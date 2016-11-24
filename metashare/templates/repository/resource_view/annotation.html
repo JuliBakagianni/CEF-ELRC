@@ -77,7 +77,7 @@
 	{% if annotations.Annotation_start_date %}
 		<div>
 			<label class="dataline indented">
-				<strong>Start date:</strong> {{ annotations.Annotation_start_date|date:"SHORT_DATE_FORMAT" }}
+				<strong>Start date:</strong> {{ annotations.Annotation_start_date|date:"DATE_FORMAT" }}
 			</label>
 		</div>
 	{% endif %}
@@ -85,7 +85,7 @@
 	{% if annotations.Annotation_end_date %}
 		<div>
 			<label class="dataline indented">
-				<strong>End date:</strong> {{ annotations.Annotation_end_date|date:"SHORT_DATE_FORMAT" }}
+				<strong>End date:</strong> {{ annotations.Annotation_end_date|date:"DATE_FORMAT" }}
 			</label>
 		</div>
 	{% endif %}

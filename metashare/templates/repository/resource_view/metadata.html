@@ -5,7 +5,7 @@
 	{% if metadata_dict.Metadata.Metadata_creation_date %}
 		 <div class="dataline">
 			<label>
-				<strong>Created: </strong>{{ metadata_dict.Metadata.Metadata_creation_date|date:"SHORT_DATE_FORMAT" }}
+				<strong>Created: </strong>{{ metadata_dict.Metadata.Metadata_creation_date|date:"DATE_FORMAT" }}
 			</label>
 		</div>
 	{% endif %}
@@ -13,7 +13,7 @@
 	{% if metadata_dict.Metadata.Metadata_last_date_updated %}
 		 <div class="dataline">
 			<label>
-				<strong>Last Updated: </strong>{{ metadata_dict.Metadata.Metadata_last_date_updated|date:"SHORT_DATE_FORMAT" }}
+				<strong>Last Updated: </strong>{{ metadata_dict.Metadata.Metadata_last_date_updated|date:"DATE_FORMAT" }}
 			</label>
 		</div>
 	{% endif %}

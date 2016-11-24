@@ -52,14 +52,14 @@
 	{% if project.Project_start_date and project.Project_end_date %}
 		<div class="dataline indented">
 			<label>
-				<strong>Project duration:</strong> {{ project.Project_start_date|date:"SHORT_DATE_FORMAT" }} - {{ project.Project_end_date|date:"SHORT_DATE_FORMAT" }}
+				<strong>Project duration:</strong> {{ project.Project_start_date|date:"DATE_FORMAT" }} - {{ project.Project_end_date|date:"DATE_FORMAT" }}
 			</label>
 		</div>
 	{% else %}
 		{% if project.Project_start_date %}
 			<div class="dataline indented">
 				<label>					
-					<strong>Project started: </strong>{{ project.Project_start_date|date:"SHORT_DATE_FORMAT" }}					
+					<strong>Project started: </strong>{{ project.Project_start_date|date:"DATE_FORMAT" }}
 				</label>
 			</div>
 		{% endif %}
@@ -67,7 +67,7 @@
 		{% if project.Project_end_date %}
 			<div class="dataline indented">
 				<label>				
-					<strong>Project ended: </strong>{{ project.Project_end_date|date:"SHORT_DATE_FORMAT" }}
+					<strong>Project ended: </strong>{{ project.Project_end_date|date:"DATE_FORMAT" }}
 				</label>
 			</div>
 		{% endif %}

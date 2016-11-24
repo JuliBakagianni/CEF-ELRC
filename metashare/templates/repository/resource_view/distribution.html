@@ -17,7 +17,7 @@
         <div class="dataline indented">
             <label>
                 <strong>Start
-                    date: </strong>{{ distribution.Distribution.Availability_start_date|date:"SHORT_DATE_FORMAT" }}
+                    date: </strong>{{ distribution.Distribution.Availability_start_date|date:"DATE_FORMAT" }}
             </label>
         </div>
     {% endif %}
@@ -26,7 +26,7 @@
         <div class="dataline indented">
             <label>
                 <strong>End
-                    date: </strong>{{ distribution.Distribution.Availability_end_date|date:"SHORT_DATE_FORMAT" }}
+                    date: </strong>{{ distribution.Distribution.Availability_end_date|date:"DATE_FORMAT" }}
             </label>
         </div>
     {% endif %}
