@@ -1,135 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resourceInfo xmlns="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/ https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/META-SHARE-Resource.xsd">
-	<identificationInfo>
-		<resourceName lang="en">Parallel Global Voices (EL-EN)</resourceName>
-		<description lang="en">Parallel Global Voices EL-EN is a parallel corpus generated from the Global Voices multilingual group of websites (http://globalvoices.org/), where volunteers publish and translate news stories in more than 40 languages. The original content from the Global Voices websites is available by the authors and publishers under a Creative Commons Attribution license. The content was crawled in July-August 2015 by researchers at the NLP group of the Institute for Language and Speech Processing. Documents that are translations of each other were paired on the basis of their link information. After document pairing, segment alignments were automatically extracted. The results of the automatic alignment at document and segment level are distributed  under a Creative Commons Attribution license.</description>
-		<resourceShortName lang="en">PGV</resourceShortName>
-		<landingPage>http://nlp.ilsp.gr/pgv/</landingPage>
-		<metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
-		<identifier>http://hdl.grnet.gr/11500/ATHENA-0000-0000-25DD-E</identifier>
-		<createdUsingELRCServices>false</createdUsingELRCServices>
-	</identificationInfo>
-	<distributionInfo>
-		<availability>available</availability>
-		<licenceInfo>
-			<licence>CC-BY</licence>
-			<personalDataIncluded>false</personalDataIncluded>
-			<sensitiveDataIncluded>false</sensitiveDataIncluded>
-			<restrictionsOfUse>attribution</restrictionsOfUse>
-		</licenceInfo>
-		<allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
-	</distributionInfo>
-	<contactPerson>
-		<surname lang="und">Prokopidis</surname>
-		<givenName lang="und">Prokopis</givenName>
-		<sex>male</sex>
-		<communicationInfo>
-			<email>prokopis@ilsp.athena-innovation.gr</email>
-			<url>http://nlp.ilsp.gr/~prokopis/</url>
-			<address>Artemidos 6 &amp; Epidavrou</address>
-			<zipCode>GR-151 25 </zipCode>
-			<city>Maroussi</city>
-			<country>Greece</country>
-			<telephoneNumber>+30 2106875432</telephoneNumber>
-			<faxNumber>+30 2106854270</faxNumber>
-		</communicationInfo>
-		<affiliation>
-			<organizationName lang="und">Institute for Language and Speech Processing / Athena Research Center</organizationName>
-			<organizationShortName lang="und">ILSP-Athena R.C.</organizationShortName>
-			<departmentName lang="und">Natural Language and Knowledge Extraction Department</departmentName>
-			<communicationInfo>
-				<email>prokopis@ilsp.athena-innovation.gr</email>
-				<url>http://www.ilsp.gr/</url>
-				<address>Artemidos 6 &amp; Epidavrou</address>
-				<zipCode>GR-151 25 </zipCode>
-				<city>Maroussi</city>
-				<country>Greece</country>
-				<telephoneNumber>+30 2106875432</telephoneNumber>
-				<faxNumber>+30 2106854270</faxNumber>
-			</communicationInfo>
-		</affiliation>
-	</contactPerson>
-	<metadataInfo>
-		<metadataCreationDate>2015-12-17</metadataCreationDate>
-		<metadataCreator>
-			<surname lang="und">Prokopidis</surname>
-			<givenName lang="und">Prokopis</givenName>
-			<sex>male</sex>
-			<communicationInfo>
-				<email>prokopis@ilsp.athena-innovation.gr</email>
-				<url>http://nlp.ilsp.gr/~prokopis/</url>
-				<address>Artemidos 6 &amp; Epidavrou</address>
-				<zipCode>GR-151 25 </zipCode>
-				<city>Maroussi</city>
-				<country>Greece</country>
-				<telephoneNumber>+30 2106875432</telephoneNumber>
-				<faxNumber>+30 2106854270</faxNumber>
-			</communicationInfo>
-			<affiliation>
-				<organizationName lang="und">Institute for Language and Speech Processing / Athena Research Center</organizationName>
-				<organizationShortName lang="und">ILSP-Athena R.C.</organizationShortName>
-				<departmentName lang="und">Natural Language and Knowledge Extraction Department</departmentName>
-				<communicationInfo>
-					<email>prokopis@ilsp.athena-innovation.gr</email>
-					<url>http://www.ilsp.gr/</url>
-					<address>Artemidos 6 &amp; Epidavrou</address>
-					<zipCode>GR-151 25 </zipCode>
-					<city>Maroussi</city>
-					<country>Greece</country>
-					<telephoneNumber>+30 2106875432</telephoneNumber>
-					<faxNumber>+30 2106854270</faxNumber>
-				</communicationInfo>
-			</affiliation>
-		</metadataCreator>
-		<metadataLanguageName>English</metadataLanguageName>
-		<metadataLanguageId>en</metadataLanguageId>
-		<metadataLastDateUpdated>2015-12-30</metadataLastDateUpdated>
-	</metadataInfo>
-	<resourceDocumentationInfo>
-		<documentation>
-			<documentInfo>
-				<documentType>inProceedings</documentType>
-				<title lang="en">Parallel Global Voices: a collection of multilingual corpora with citizen media stories (Sumitted to LREC 2016)</title>
-				<author>Prokopis Prokopidis, Vassilis Papavassiliou and Stelios Piperidis </author>
-			</documentInfo>
-		</documentation>
-	</resourceDocumentationInfo>
-	<resourceCreationInfo>
-		<creationStartDate>2015-07-01</creationStartDate>
-		<creationEndDate>2015-08-31</creationEndDate>
-	</resourceCreationInfo>
-	<resourceComponentType>
-		<corpusInfo>
-			<resourceType>corpus</resourceType>
-			<corpusMediaType>
-				<corpusTextInfo>
-					<mediaType>text</mediaType>
-					<lingualityInfo>
-						<lingualityType>bilingual</lingualityType>
-						<multilingualityType>parallel</multilingualityType>
-					</lingualityInfo>
-					<languageInfo>
-						<languageName>Modern Greek (1453-)</languageName>
-						<languageScript>Greek</languageScript>
-						<languageId>el</languageId>
-					</languageInfo>
-					<languageInfo>
-						<languageName>English</languageName>
-						<languageScript>Latin</languageScript>
-						<languageId>en</languageId>
-					</languageInfo>
-					<sizeInfo>
-						<size>64200</size>
-						<sizeUnit>translationUnits</sizeUnit>
-					</sizeInfo>
-					<textFormatInfo>
-						<mimeType>application/x-tmx+xml</mimeType>
-					</textFormatInfo>
-					<characterEncodingInfo>
-						<characterEncoding>UTF-8</characterEncoding>
-					</characterEncodingInfo>
-				</corpusTextInfo>
-			</corpusMediaType>
-		</corpusInfo>
-	</resourceComponentType>
+<resourceInfo xmlns="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/ https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/META-SHARE-Resource.xsd">
+    <identificationInfo>
+        <resourceName lang="en">test resource url</resourceName>
+        <description lang="en">test resource url</description>
+        <createdUsingELRCServices>true</createdUsingELRCServices>
+        <publicSectorInformation>false</publicSectorInformation>
+    </identificationInfo>
+    <distributionInfo>
+        <availability>available</availability>
+        <licenceInfo>
+        	<licence>CC-BY</licence>
+            <personalDataIncluded>false</personalDataIncluded>
+            <sensitiveDataIncluded>false</sensitiveDataIncluded>
+            <restrictionsOfUse>attribution</restrictionsOfUse>
+            <attributionText lang="en">test resource url by ILSP licensed under CC-BY
+                4.0</attributionText>
+        </licenceInfo>
+        <allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
+    </distributionInfo>
+    <contactPerson>
+        <surname lang="en">Deligiannis</surname>
+        <givenName lang="en">Miltos</givenName>
+        <communicationInfo>
+            <email>mdel@windowslive.com</email>
+            <country>Greece</country>
+            <telephoneNumber/>
+        </communicationInfo>
+        <affiliation>
+            <organizationName lang="en">ILSP</organizationName>
+            <communicationInfo>
+                <email>mdel@windowslive.com</email>
+                <country>Greece</country>
+            </communicationInfo>
+        </affiliation>
+    </contactPerson>
+    <metadataInfo>
+        <metadataCreationDate>2016-07-28</metadataCreationDate>
+        <metadataLanguageName>English</metadataLanguageName>
+        <metadataLanguageId>en</metadataLanguageId>
+        <metadataLastDateUpdated>2016-07-28</metadataLastDateUpdated>
+    </metadataInfo>
+    <resourceComponentType>
+        <corpusInfo>
+            <resourceType>corpus</resourceType>
+            <corpusMediaType>
+                <corpusTextInfo>
+                    <mediaType>text</mediaType>
+                    <lingualityInfo>
+                        <lingualityType>monolingual</lingualityType>
+                    </lingualityInfo>
+                    <languageInfo>
+                        <languageName>Danish</languageName>
+                        <languageScript>Latin</languageScript>
+                        <languageId>da</languageId>
+                    </languageInfo>
+                    <sizeInfo>
+                        <size>100</size>
+                        <sizeUnit>words</sizeUnit>
+                    </sizeInfo>
+                    <textFormatInfo>
+                        <mimeType>application/x-xces+xml</mimeType>
+                    </textFormatInfo>
+                    <characterEncodingInfo>
+                        <characterEncoding>UTF-8</characterEncoding>
+                    </characterEncodingInfo>
+                </corpusTextInfo>
+            </corpusMediaType>
+        </corpusInfo>
+    </resourceComponentType>
 </resourceInfo>
