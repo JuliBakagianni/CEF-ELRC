@@ -7,7 +7,15 @@
 	{% for key1, value1 in value.items %}
 		<div>			
 			{% if key1 == "Domain"  %}
-				<label class='subtitle'>{{ value1}} {% if "Size_per_domain" in value %}{% include "repository/resource_view/size.html" with size=value.Size_per_domain type="sub" %}{% endif %}</label>
+				<label class='subtitle'>
+                    {{ value1}}
+                    {% if "Size_per_domain" in value %}
+                        {% include "repository/resource_view/size.html" with size=value.Size_per_domain type="sub" %}
+                    {% endif %}
+                    {% if "Subdomain" in value %}
+                        ({{ value.Subdomain }})
+                    {% endif %}
+                </label>
 				<label class="dataline indented">
 				{% if "Conformance_to_classification_scheme" in value %}
 					Conforms to {{ value.Conformance_to_classification_scheme }}
