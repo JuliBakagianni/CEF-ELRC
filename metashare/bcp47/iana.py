@@ -13,11 +13,11 @@ def get_all_languages():
     return registry.xpath(xpath)
 
 def get_most_used_languages():
-    xpath = u"//language[position()<25]/description/text()"
+    xpath = u"//language[position()<27]/description/text()"
     return registry.xpath(xpath)
 
 def get_rest_of_languages():
-    xpath = u"//language[position()>25]/description/text()"
+    xpath = u"//language[position()>27]/description/text()"
     return registry.xpath(xpath)
 
 def get_languages_by_substring():

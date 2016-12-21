@@ -121,6 +121,16 @@
 				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
 			</variants>
 		</language>
+		<language subtag="is">
+			<description>Icelandic</description>
+			<suppress-script>Latn</suppress-script>
+			<variants>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
 		<language subtag="ga">
 			<description>Irish</description>
 			<suppress-script>Latn</suppress-script>
@@ -179,6 +189,17 @@
 			<variants>
 				<variant subtag="monoton">Monotonic Greek</variant>
 				<variant subtag="polyton">Polytonic Greek</variant>
+				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
+				<variant subtag="fonipa">International Phonetic Alphabet</variant>
+				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
+				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
+			</variants>
+		</language>
+		<language subtag="no">
+			<description>Norwegian</description>
+			<suppress-script>Latn</suppress-script>
+			<scope>macrolanguage</scope>
+			<variants>
 				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
 				<variant subtag="fonipa">International Phonetic Alphabet</variant>
 				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
@@ -835,16 +856,6 @@
 				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
 			</variants>
 		</language>
-		<language subtag="is">
-			<description>Icelandic</description>
-			<suppress-script>Latn</suppress-script>
-			<variants>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
 		<language subtag="iu">
 			<description>Inuktitut</description>
 			<scope>macrolanguage</scope>
@@ -1245,17 +1256,6 @@
 			<macrolanguage>no</macrolanguage>
 			<variants>
 				<variant subtag="hognorsk">Norwegian in Høgnorsk (High Norwegian) orthography</variant>
-				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
-				<variant subtag="fonipa">International Phonetic Alphabet</variant>
-				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
-				<variant subtag="fonxsamp">X-SAMPA transcription</variant>
-			</variants>
-		</language>
-		<language subtag="no">
-			<description>Norwegian</description>
-			<suppress-script>Latn</suppress-script>
-			<scope>macrolanguage</scope>
-			<variants>
 				<variant subtag="alalc97">ALA-LC Romanization, 1997 edition</variant>
 				<variant subtag="fonipa">International Phonetic Alphabet</variant>
 				<variant subtag="fonupa">Uralic Phonetic Alphabet</variant>
