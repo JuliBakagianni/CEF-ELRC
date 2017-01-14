@@ -10,26 +10,40 @@ from metashare.repository.editor.resource_editor import ResourceModelAdmin, \
     LicenceModelAdmin
 from metashare.repository.editor.superadmin import SchemaModelAdmin
 from metashare.repository.models import resourceInfoType_model, \
-    identificationInfoType_model, metadataInfoType_model, \
-    communicationInfoType_model, validationInfoType_model, \
-    relationInfoType_model, foreseenUseInfoType_model, \
+    metadataInfoType_model, \
+    communicationInfoType_model, \
     corpusMediaTypeType_model, corpusTextInfoType_model, \
-    corpusVideoInfoType_model, textNumericalFormatInfoType_model, \
-    videoClassificationInfoType_model, imageClassificationInfoType_model, \
-    participantInfoType_model, corpusAudioInfoType_model, \
-    corpusImageInfoType_model, corpusTextNumericalInfoType_model, \
-    corpusTextNgramInfoType_model, languageDescriptionInfoType_model, \
-    languageDescriptionTextInfoType_model, actualUseInfoType_model, \
-    languageDescriptionVideoInfoType_model, \
-    languageDescriptionImageInfoType_model, \
+    languageDescriptionInfoType_model, \
+    languageDescriptionTextInfoType_model, \
     lexicalConceptualResourceInfoType_model, \
     lexicalConceptualResourceTextInfoType_model, \
-    lexicalConceptualResourceAudioInfoType_model, \
-    lexicalConceptualResourceVideoInfoType_model, \
-    lexicalConceptualResourceImageInfoType_model, toolServiceInfoType_model, \
-    licenceInfoType_model, personInfoType_model, projectInfoType_model, \
+    licenceInfoType_model, personInfoType_model, \
     documentInfoType_model, organizationInfoType_model, \
-    documentUnstructuredString_model
+    identificationInfoType_model, \
+    documentUnstructuredString_model, \
+    projectInfoType_model, \
+    LrQuality
+
+    # actualUseInfoType_model, \
+    # videoClassificationInfoType_model, \
+    # validationInfoType_model, \
+    # textNumericalFormatInfoType_model, \
+    # toolServiceInfoType_model, \
+    # relationInfoType_model, \
+    # languageDescriptionImageInfoType_model, \
+    # participantInfoType_model, \
+    # lexicalConceptualResourceVideoInfoType_model, \
+    # languageDescriptionVideoInfoType_model, \
+    # corpusAudioInfoType_model, \
+    # lexicalConceptualResourceImageInfoType_model, \
+    # corpusImageInfoType_model, \
+    # corpusTextNgramInfoType_model, \
+    # lexicalConceptualResourceAudioInfoType_model, \
+    # corpusTextNumericalInfoType_model, \
+    # corpusVideoInfoType_model, \
+    # foreseenUseInfoType_model, \
+    # imageClassificationInfoType_model, \
+
 from metashare.repository.editor.related_mixin import RelatedAdminMixin
 from django.views.decorators.csrf import csrf_protect
 from django.db import transaction
@@ -204,44 +218,46 @@ class DocumentUnstructuredStringModelAdmin(admin.ModelAdmin, RelatedAdminMixin):
         context.update(extra_context or {})
         return self.render_change_form(request, context, change=True, obj=obj)
 
+
 # Models which are always rendered inline so they don't need their own admin form:
 purely_inline_models = (
-    actualUseInfoType_model,
+    # actualUseInfoType_model,
     identificationInfoType_model,
     metadataInfoType_model,
     communicationInfoType_model,
-    validationInfoType_model,
-    relationInfoType_model,
-    foreseenUseInfoType_model,
+    # validationInfoType_model,
+    # relationInfoType_model,
+    # foreseenUseInfoType_model,
     corpusMediaTypeType_model,
-    textNumericalFormatInfoType_model,
-    videoClassificationInfoType_model,
-    imageClassificationInfoType_model,
-    participantInfoType_model,
+
+    # textNumericalFormatInfoType_model,
+    # videoClassificationInfoType_model,
+    # imageClassificationInfoType_model,
+    # participantInfoType_model,
 )
 
 custom_admin_classes = {
     resourceInfoType_model: ResourceModelAdmin,
-    corpusAudioInfoType_model: CorpusAudioModelAdmin,
+    # corpusAudioInfoType_model: CorpusAudioModelAdmin,
     corpusTextInfoType_model: CorpusTextInfoAdmin,
-    corpusVideoInfoType_model: CorpusVideoInfoAdmin,
-    corpusImageInfoType_model: GenericTabbedAdmin,
-    corpusTextNumericalInfoType_model: GenericTabbedAdmin,
-    corpusTextNgramInfoType_model: GenericTabbedAdmin,
+    # corpusVideoInfoType_model: CorpusVideoInfoAdmin,
+    # corpusImageInfoType_model: GenericTabbedAdmin,
+    # corpusTextNumericalInfoType_model: GenericTabbedAdmin,
+    # corpusTextNgramInfoType_model: GenericTabbedAdmin,
     languageDescriptionInfoType_model: LanguageDescriptionInfoAdmin,
     languageDescriptionTextInfoType_model: GenericTabbedAdmin,
-    languageDescriptionVideoInfoType_model: GenericTabbedAdmin,
-    languageDescriptionImageInfoType_model: GenericTabbedAdmin,
+    # languageDescriptionVideoInfoType_model: GenericTabbedAdmin,
+    # languageDescriptionImageInfoType_model: GenericTabbedAdmin,
     lexicalConceptualResourceInfoType_model: LexicalConceptualResourceInfoAdmin,
     lexicalConceptualResourceTextInfoType_model: GenericTabbedAdmin,
-    lexicalConceptualResourceAudioInfoType_model: GenericTabbedAdmin,
-    lexicalConceptualResourceVideoInfoType_model: GenericTabbedAdmin,
-    lexicalConceptualResourceImageInfoType_model: GenericTabbedAdmin,
-    toolServiceInfoType_model: GenericTabbedAdmin,
+    # lexicalConceptualResourceAudioInfoType_model: GenericTabbedAdmin,
+    # lexicalConceptualResourceVideoInfoType_model: GenericTabbedAdmin,
+    # lexicalConceptualResourceImageInfoType_model: GenericTabbedAdmin,
+    # toolServiceInfoType_model: GenericTabbedAdmin,
     licenceInfoType_model: LicenceModelAdmin,
     personInfoType_model: PersonModelAdmin, 
     organizationInfoType_model: OrganizationModelAdmin, 
-    projectInfoType_model: ProjectModelAdmin, 
+    projectInfoType_model: ProjectModelAdmin,
     documentInfoType_model: DocumentModelAdmin,
     documentUnstructuredString_model: DocumentUnstructuredStringModelAdmin, 
 }

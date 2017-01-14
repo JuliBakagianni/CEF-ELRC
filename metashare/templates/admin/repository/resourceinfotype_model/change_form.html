@@ -33,6 +33,13 @@
 {% if change %}{% if not is_popup %}
  <ul class="object-tools">
    {% block object-tools-items %}
+   {% if user.get_profile.has_editor_permission %}
+{#       <li><a href="lrquality/" class="lrqualitylink">{% trans "LR Quality"%}</a></li>#}
+{#       <li><a href="#" class="lrqualitylink" title="Currently not available">{% trans "LR Quality"%}</a></li>#}
+   {% endif %}
+   {% if original.storage_object.get_download %}
+       <li><a href="datadl/" class="downloadresourcelink">{% trans "Download resource"%}</a></li>
+   {% endif %}
    <li><a href="upload-data/" class="uploadresourcelink">{% trans "Upload resource"%}</a></li>
    <li><a href="export-xml/" class="exportxmllink">{% trans "Export Resource Description to XML"%}</a></li>
    <li><a href="history/" class="historylink">{% trans "History" %}</a></li>
@@ -73,20 +80,19 @@
     </p>
     {{ adminform.form.non_field_errors }}
 {% endif %}
-
 <div>
+
 	<div id="tabs_container">
 		<div id="firstlevel" class="accordion">
-			<h1><a href="#">Administrative Information</a></h1>
-			<div class="fields">
-				<ul>
-					{% for fieldset in adminform %}
-						{% if "administration" in fieldset.name %}						
-							<li{% if "Required" in fieldset.name %} class= "active"	{% endif %}><a href="#field-{{forloop.counter}}">{{fieldset.name|truncatewords:1|slice:":-4"}}</a></li>
-						{% endif %}
-					{% endfor %}	
-				</ul>		
-			</div>
+{#			<div class="fields">#}
+{#				<ul>#}
+{#					{% for fieldset in adminform %}#}
+{#						{% if "administration" in fieldset.name %}						#}
+{#							<li{% if "Required" in fieldset.name %} class= "active"	{% endif %}><a href="#field-{{forloop.counter}}">{{fieldset.name|truncatewords:1|slice:":-4"}}</a></li>#}
+{#						{% endif %}#}
+{#					{% endfor %}	#}
+{#				</ul>		#}
+{#			</div>#}
 	
 		<script type="text/javascript">
 
@@ -101,15 +107,14 @@
 	</div>
 
 	<div id="tabs_content_container">
-		{% for fieldset in adminform %}		
-
-				<div id="field-{{forloop.counter}}" class="tab_content" {% if "Required administration" in fieldset.name %} style="display:inline;" {% endif %}>
+        <h1>Administrative Information</h1>
+		{% for fieldset in adminform %}
+				<div id="field-{{forloop.counter}}" class="tab_content" {% if "Required administration" in fieldset.name or "Recommended administration" in fieldset.name or "Optional administration" in fieldset.name %} style="display:inline;" {% endif %}>
 					{% include "admin/repository/fieldset.html" %}
 				</div>	
 				
 		{% endfor %}		
 	</div>
-
 
 </div>
 	<script>	

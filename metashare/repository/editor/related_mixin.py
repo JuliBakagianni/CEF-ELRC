@@ -15,17 +15,25 @@ from selectable.forms.widgets import AutoCompleteSelectMultipleWidget
 from django.db import models
 from metashare.repository.models import actorInfoType_model, \
     documentationInfoType_model, \
-    organizationInfoType_model, projectInfoType_model,\
-    membershipInfoType_model, \
+    organizationInfoType_model, \
     personInfoType_model, \
     targetResourceInfoType_model, documentInfoType_model, \
+    sizeInfoType_model, \
     languageVarietyInfoType_model, \
-    sizeInfoType_model, resolutionInfoType_model, audioSizeInfoType_model
+    projectInfoType_model
+
+    # audioSizeInfoType_model
+    # resolutionInfoType_model
+    # membershipInfoType_model, \
+
+
 from metashare.repository.editor.lookups import ActorLookup, \
-    OrganizationLookup, ProjectLookup, MembershipDummyLookup, \
+    OrganizationLookup, ProjectLookup, \
     PersonLookup, TargetResourceLookup, DocumentLookup, \
-    DocumentationLookup, LanguageVarietyDummyLookup, SizeDummyLookup, \
-    ResolutionDummyLookup, AudioSizeDummyLookup
+    DocumentationLookup, SizeDummyLookup, LanguageVarietyDummyLookup
+    # ResolutionDummyLookup
+    # AudioSizeDummyLookup, \
+    #  MembershipDummyLookup, \
 from metashare.repository.editor.widgets import AutoCompleteSelectMultipleSubClsWidget
 from metashare.repository.editor.widgets import AutoCompleteSelectMultipleEditWidget
 from metashare.repository.editor.widgets import AutoCompleteSelectSingleWidget
@@ -35,11 +43,11 @@ class RelatedAdminMixin(object):
     Group the joint logic for the related widget to be used in both
     the ModelAdmin and the Inline subclasses.
     '''
-    
+
     kwargs = {'position':'top'}
     custom_m2m_widget_overrides = {
         # Reusable types with actual ajax search:
-        actorInfoType_model: AutoCompleteSelectMultipleSubClsWidget(lookup_class=ActorLookup, **kwargs), 
+        actorInfoType_model: AutoCompleteSelectMultipleSubClsWidget(lookup_class=ActorLookup, **kwargs),
         documentationInfoType_model: AutoCompleteSelectMultipleSubClsWidget(lookup_class=DocumentationLookup, **kwargs),
         documentInfoType_model: AutoCompleteSelectMultipleEditWidget(lookup_class=DocumentLookup, **kwargs),
         personInfoType_model: AutoCompleteSelectMultipleEditWidget(lookup_class=PersonLookup, **kwargs),
@@ -47,18 +55,18 @@ class RelatedAdminMixin(object):
         projectInfoType_model: AutoCompleteSelectMultipleEditWidget(lookup_class=ProjectLookup, **kwargs),
         targetResourceInfoType_model: AutoCompleteSelectMultipleEditWidget(lookup_class=TargetResourceLookup, **kwargs),
         # Custom one-to-many widgets needed to avoid nested inlines:
-        membershipInfoType_model: OneToManyWidget(lookup_class=MembershipDummyLookup),
+        # membershipInfoType_model: OneToManyWidget(lookup_class=MembershipDummyLookup),
         languageVarietyInfoType_model: OneToManyWidget(lookup_class=LanguageVarietyDummyLookup),
         sizeInfoType_model: OneToManyWidget(lookup_class=SizeDummyLookup),
-        resolutionInfoType_model: OneToManyWidget(lookup_class=ResolutionDummyLookup),
-        audioSizeInfoType_model: OneToManyWidget(lookup_class=AudioSizeDummyLookup),
+        # resolutionInfoType_model: OneToManyWidget(lookup_class=ResolutionDummyLookup),
+        # audioSizeInfoType_model: OneToManyWidget(lookup_class=AudioSizeDummyLookup),
     }
-    
+
     custom_m2o_widget_overrides = {
         documentationInfoType_model: AutoCompleteSelectSingleWidget(lookup_class=DocumentationLookup),
         targetResourceInfoType_model: AutoCompleteSelectSingleWidget(lookup_class=TargetResourceLookup),
     }
-    
+
     def hide_hidden_fields(self, db_field, kwargs):
         '''
         Return True if db_field is marked as a hidden field, False otherwise.
@@ -127,7 +135,7 @@ class RelatedAdminMixin(object):
                         related_modeladmin.has_add_permission(request))
             wrapper_class = self.is_subclassable(db_field) and SubclassableRelatedFieldWidgetWrapper \
                 or admin.widgets.RelatedFieldWidgetWrapper
-            
+
             formfield.widget = wrapper_class(
                         formfield.widget, db_field.rel, self.admin_site,
                         can_add_related=can_add_related)
@@ -161,15 +169,15 @@ class RelatedAdminMixin(object):
         if self.is_related_widget_appropriate(kwargs, formfield):
             request = kwargs.pop('request', None)
             related_modeladmin = self.admin_site._registry.get(db_field.rel.to)
-            can_change_related = bool(related_modeladmin and 
+            can_change_related = bool(related_modeladmin and
                 related_modeladmin.has_change_permission(request))
-            can_delete_related = bool(related_modeladmin and 
+            can_delete_related = bool(related_modeladmin and
                 related_modeladmin.has_delete_permission(request))
-            widget = RelatedFieldWidgetWrapper.from_contrib_wrapper(formfield.widget, 
-                can_change_related, 
+            widget = RelatedFieldWidgetWrapper.from_contrib_wrapper(formfield.widget,
+                can_change_related,
                 can_delete_related)
             formfield.widget = widget
-            
+
     def save_and_continue_in_popup(self, obj, request):
         '''
         For related popups, send the javascript that triggers
@@ -178,7 +186,7 @@ class RelatedAdminMixin(object):
         '''
         pk_value = obj._get_pk_val()
         msg = _('The %(name)s "%(obj)s" was saved successfully. You may edit ' \
-            'it again below.') % {'name': obj._meta.verbose_name, 'obj': obj} 
+            'it again below.') % {'name': obj._meta.verbose_name, 'obj': obj}
         self.message_user(request, msg)
         post_url_continue = '../%s/?_popup=1'
         return HttpResponse('<script type="text/javascript">opener.saveAndContinuePopup(window, "%s", "%s", "%s");</script>' % \

@@ -75,8 +75,9 @@
             .addClass('selectable-deck-item')
             .appendTo(this.deck)
             .append(
-                $('<div>')
+                $('<span>')
                 .addClass('selectable-deck-remove')
+                .append("&nbsp;")
                 .append(
                     $('<a>')
                     .attr('href', '#')
@@ -86,6 +87,7 @@
                     	.attr('width', '10px')
                     	.attr('height', '10px')
                     	.attr('alt', 'Delete related model')
+                        .attr('title', 'Delete related model')
                     )
                     .click(function() {
                         if(self.allowEditing)
@@ -117,8 +119,9 @@
             if(self.allowEditing && ((self.baseEditingUrl != null) || self.isSubclassable))
             {
                 jqItem.append(
-                        $('<div>')
+                        $('<span>')
                         .addClass('selectable-deck-edit')
+                        .append("&nbsp;")
                         .append(
                             $('<a>')
                             .attr('href', '#')
@@ -129,6 +132,7 @@
                             	.attr('width', '10px')
                             	.attr('height', '10px')
                             	.attr('alt', 'Edit related model')
+                                .attr('title', 'Edit related model')
                             )
                             .click(function() {
                                 var recId = $(input).attr('value');

@@ -98,6 +98,12 @@ class MultiTextField(models.Field):
         if 'label' in kwargs:
             self.label = kwargs.pop('label')
 
+        if 'choices' in kwargs:
+            self.widget.choices = kwargs.pop('choices')
+
+
+
+
         super(MultiTextField, self).__init__(*args, **kwargs)
 
     def validate(self, value, model_instance):
@@ -578,3 +584,93 @@ def best_lang_value_retriever(_dict):
     else:
         _result = ''
     return force_unicode(_result, strings_only=True)
+
+class MutuallyExclusiveValueModelField(models.Field):
+    """
+    A model field that uses the AdminMutuallyExclusiveValueField form field,
+    to either select a value from the choices list or type a string
+    """
+
+    def formfield(self, form_class=None, choices_form_class=None, **kwargs):
+
+        """
+        Returns a AdminMutuallyExclusiveValueField instance for this
+        database Field.
+        This follows closely the base implementation from Django 1.6.6's
+        django.db.models.fields.Field, with the explicitly marked modifications.
+        """
+
+        #### begin modification ####
+        form_class = form_fields.AdminMutuallyExclusiveValueField
+        #### end modification ####
+        defaults = {'required': not self.blank,
+                    'label': capfirst(self.verbose_name),
+                    'help_text': self.help_text}
+        if self.has_default():
+            if callable(self.default):
+                defaults['initial'] = self.default
+                defaults['show_hidden_initial'] = True
+            else:
+                defaults['initial'] = self.get_default()
+        if self.choices:
+            # Fields with choices get special treatment.
+            include_blank = (self.blank or
+                             not (self.has_default() or 'initial' in kwargs))
+            defaults['choices'] = self.get_choices(include_blank=include_blank)
+            #### begin modification ####
+            # Remove adding to defaults the 'coerce' key
+            # defaults['coerce'] = self.to_python
+            #### end modification ####
+            if self.null:
+                defaults['empty_value'] = None
+            #===================================================================
+            # #### begin modification ####
+            # # Do not let the form class to be overriden
+            # if choices_form_class is not None:
+            #     form_class = choices_form_class
+            # else:
+            #     form_class = forms.TypedChoiceField
+            # #### end modification ####
+            #===================================================================
+
+            # Many of the subclass-specific formfield arguments (min_value,
+             # max_value) don't apply for choice fields, so be sure to only pass
+            # the values that TypedChoiceField will understand.
+            for k in list(kwargs):
+                #### begin modification ####
+                # Remove the coerce argument from the list
+                if k not in ('empty_value', 'choices', 'required',
+                             'widget', 'label', 'initial', 'help_text',
+                             'error_messages', 'show_hidden_initial'):
+                    del kwargs[k]
+                #### end modification ####
+        defaults.update(kwargs)
+        if form_class is None:
+            form_class = forms.CharField
+        return form_class(**defaults)
+
+    def validate(self, value, model_instance):
+        """
+        Validates value and throws ValidationError.
+        Override the validate method to not let the choices to raise
+        a Validation Error.
+        """
+        if not self.editable:
+            # Skip validation for non-editable fields.
+            return
+
+        if value is None and not self.null:
+            raise exceptions.ValidationError(self.error_messages['null'], code='null')
+
+        if not self.blank and value in validators.EMPTY_VALUES:
+            raise exceptions.ValidationError(self.error_messages['blank'], code='blank')
+    def get_prep_value(self, value):
+        """
+       Takes a Python value and converts it into a database String.
+        """
+        if not value:
+            value = ''
+        return super(MutuallyExclusiveValueModelField, self).get_prep_value(value)
+
+    def get_internal_type(self):
+        return 'CharField'

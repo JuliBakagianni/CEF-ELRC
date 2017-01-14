@@ -6,7 +6,7 @@
 <fieldset class="module">
    <h2 class="customtitle">
    	<span class="formset_title">{{ inline_admin_formset.opts.verbose_name_plural|capfirst }}</span>
-  	<span class="helpLink" kbbase="{{ kb_link }}" kbcomp="{{ inline_admin_formset.opts.verbose_name_plural }}"><img class="help_icon" src="{{ help_icon_url }}" kbbase="{{ kb_link }}" kbcomp="{{ inline_admin_formset.opts.verbose_name_plural }}"></img></span>
+{#  	<span class="helpLink" kbbase="{{ kb_link }}" kbcomp="{{ inline_admin_formset.opts.verbose_name_plural }}"><img class="help_icon" src="{{ help_icon_url }}" kbbase="{{ kb_link }}" kbcomp="{{ inline_admin_formset.opts.verbose_name_plural }}"></img></span>#}
    </h2>
    {{ inline_admin_formset.formset.non_form_errors }}
    <table>
@@ -15,9 +15,9 @@
        {% if not field.widget.is_hidden %}
          <th{% if forloop.first %} colspan="2"{% endif %}{% if field.required %} class="required"{% endif %}>
 	         {{ field.label|capfirst }}
-	         <span class="helpLink" kblink="{{ kb_link }}{{ field.label }}">
-	         	<img class="help_icon" src="{{ help_icon_url }}" kblink="{{ kb_link }}{{ field.label|to_field_name }}"></img>
-	         </span>
+{#	         <span class="helpLink" kblink="{{ kb_link }}{{ field.label }}">#}
+{#	         	<img class="help_icon" src="{{ help_icon_url }}" kblink="{{ kb_link }}{{ field.label|to_field_name }}"></img>#}
+{#	         </span>#}
          </th>
        {% endif %}
      {% endfor %}
@@ -51,12 +51,12 @@
         {% for fieldset in inline_admin_form %}
           {% for line in fieldset %}
             {% for field in line %}
-              <td class="{{ field.field.name }}">
+              <td class="{{ field.field.name }}" {% if field.field.help_text %} title="{{ field.field.help_text|safe }}"{% endif %}>
               {% if field.is_readonly %}
                   <p>{{ field.contents }}</p>
               {% else %}
                   {{ field.field.errors.as_ul }}
-                  <span{% if field.field.help_text %} title="{{ field.field.help_text|safe }}"{% endif %}>{{ field.field }}</span>
+                  {{ field.field }}
               {% endif %}
               </td>
             {% endfor %}

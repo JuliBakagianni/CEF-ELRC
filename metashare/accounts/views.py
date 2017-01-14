@@ -1,6 +1,7 @@
 import logging
 from smtplib import SMTPException
 
+from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
@@ -16,7 +17,7 @@ from metashare.accounts.forms import RegistrationRequestForm, ResetRequestForm, 
     UserProfileForm, EditorGroupApplicationForm, UpdateDefaultEditorGroupForm, \
     OrganizationApplicationForm, ContactForm
 from metashare.accounts.models import RegistrationRequest, ResetRequest, \
-    EditorGroupApplication, EditorGroupManagers, EditorGroup, \
+    EditorGroupApplication, EditorGroupManagers, EditorGroup, UserProfile, \
     OrganizationApplication, OrganizationManagers, Organization
 from metashare.settings import DJANGO_URL, LOG_HANDLER
 
@@ -36,6 +37,9 @@ def confirm(request, uuid):
     # Activate the corresponding User instance.
     user = registration_request.user
     user.is_active = True
+    # Do not set user as staff/ editor
+    user.is_staff = False
+    user.groups.add(Group.objects.get(name='contributors'))
     # For convenience, log user in:
     # (We would actually have to authenticate the user before logging in,
     # however, as we don't know the password, we manually set the authenication
@@ -53,17 +57,18 @@ def confirm(request, uuid):
     email = render_to_string('accounts/activation.email', data)
     try:
         # Send an activation email.
-        send_mail(_('Your META-SHARE user account has been activated'),
-        email, 'no-reply@meta-share.eu', [user.email], fail_silently=False)
+        send_mail(_('Your ELRC-SHARE user account has been activated'),
+        email, 'no-reply@elrc-share.ilsp.gr', [user.email], fail_silently=False)
     except: # SMTPException:
         # there was a problem sending the activation e-mail -- not too bad
         pass
 
     # Add a message to the user after successful creation.
-    messages.success(request, _("We have activated your user account."))
+    messages.success(request, _("Your account has been activated. \n" \
+                                "You can now proceed to contributing resources."))
     
     # Redirect the user to the front page.
-    return redirect('metashare.views.frontpage')
+    return redirect('metashare.repository.views.simple_form')
 
 
 @login_required
@@ -84,12 +89,13 @@ def contact(request):
             email_msg = render_to_string('accounts/contact_maintainers.email',
                                          data)
             # send out the email to all superusers
+            # TODO or send to lr-coordination helpdesk help@cef-at-helpdesk.org
             superuser_emails = User.objects.filter(is_superuser=True) \
                 .values_list('email', flat=True)
             try:
-                send_mail(_('[META-SHARE] Contact Form Request: %s')
+                send_mail(_('[ELRC-SHARE] Contact Form Request: %s')
                         % (data['subject'],), email_msg,
-                    'no-reply@meta-share.eu', superuser_emails,
+                    'no-reply@elrc-share.ilsp.gr', superuser_emails,
                     fail_silently=False)
             except:
                 # if the email could not be sent successfully, tell the user
@@ -99,14 +105,14 @@ def contact(request):
                     "again later: <pre>%s</pre>") % (escape(data['message']),))
             else:
                 # show a message to the user after successfully sending the mail
-                messages.success(request, _("We have received your message and "
-                    "successfully sent it to the node maintainers. Please give "
-                    "them some days to get back to you."))
+                messages.success(request, _("We have received your message " \
+                                            "and will get back to you as soon " \
+                                            "as possible"))
             # redirect the user to the front page
             return redirect('metashare.views.frontpage')
     else:
         form = ContactForm()
-    dictionary = {'title': 'Contact Node Maintainers', 'form': form}
+    dictionary = {'title': 'Contact Us', 'form': form}
     return render_to_response('accounts/contact_maintainers.html', dictionary,
                               context_instance=RequestContext(request))
 
@@ -131,6 +137,15 @@ def create(request):
             _user.last_name = form.cleaned_data['last_name']
             _user.is_active = False
             _user.save()
+
+            _profile = UserProfile.objects.create(user= _user, \
+                        affiliation = form.cleaned_data['organization'], \
+                        country = form.cleaned_data['country'],
+                        )
+            if 'phone_number' in form.cleaned_data:
+                _profile.phone_number = form.cleaned_data['phone_number']
+            _profile.save()
+            # UserProfileForm
             # Create new RegistrationRequest instance.
             new_object = RegistrationRequest(user=_user)
             # Save new RegistrationRequest instance to django database.
@@ -146,8 +161,8 @@ def create(request):
             
             try:
                 # Send out confirmation email to the given email address.
-                send_mail(_('Please confirm your META-SHARE user account'),
-                email, 'no-reply@meta-share.eu', [_user.email],
+                send_mail(_('Please confirm your ELRC-SHARE user account'),
+                email, 'no-reply@elrc-share.ilsp.gr', [_user.email],
                 fail_silently=False)
             except: #SMTPException:
                 # If the email could not be sent successfully, tell the user
@@ -163,8 +178,11 @@ def create(request):
             
             # Add a message to the user after successful creation.
             messages.success(request,
-              _("We have received your registration data and sent you an " \
-                "email with further activation instructions."))
+              _("We have received your registration data and sent you an email " \
+                "with further activation instructions. If you do not see the " \
+                "message in your Inbox within the next 5 minutes, please " \
+                "check your Spam/Junk folder, or contact us at " \
+                "elrc-share@ilsp.gr."))
             
             # Redirect the user to the front page.
             return redirect('metashare.views.frontpage')
@@ -185,7 +203,6 @@ def edit_profile(request):
     """
     # Get UserProfile instance corresponding to the current user.
     profile = request.user.get_profile()
-
     # Check if the edit form has been submitted.
     if request.method == "POST":
         # If so, bind the creation form to HTTP POST values.
@@ -220,7 +237,7 @@ def edit_profile(request):
     # Otherwise, fill UserProfileForm instance from current UserProfile.
     else:
         form = UserProfileForm({'birthdate': profile.birthdate,
-          'affiliation': profile.affiliation, 'position': profile.position,
+          'affiliation': profile.affiliation, 'phone_number': profile.phone_number, 'country': profile.country, 'position': profile.position,
           'homepage': profile.homepage})
 
     if request.user.has_perm('accounts.ms_full_member'):
@@ -297,7 +314,7 @@ def editor_group_application(request):
                     # Send out notification email to the managers and superusers
                     send_mail('New editor membership request',
                         render_to_string('accounts/notification_editor_group_managers_application.email', data),
-                        'no-reply@meta-share.eu', emails, fail_silently=False)
+                        'no-reply@elrc-share.ilsp.gr', emails, fail_silently=False)
                 except: #SMTPException:
                     # If the email could not be sent successfully, tell the user
                     # about it.
@@ -451,7 +468,7 @@ def organization_application(request):
                     # Send out notification email to the organization managers and superusers
                     send_mail('New organization membership request',
                         render_to_string('accounts/notification_organization_managers_application.email', data),
-                        'no-reply@meta-share.eu', emails, fail_silently=False)
+                        'no-reply@elrc-share.ilsp.gr', emails, fail_silently=False)
                 except: #SMTPException:
                     # If the email could not be sent successfully, tell the user
                     # about it.
@@ -512,8 +529,8 @@ def reset(request, uuid=None):
                 
                 try:
                     # Send out reset email to the given email address.
-                    send_mail(_('Please confirm your META-SHARE reset request'),
-                    email, 'no-reply@meta-share.eu', [user.email],
+                    send_mail(_('Please confirm your ELRC-SHARE reset request'),
+                    email, 'no-reply@elrc-share.ilsp.gr', [user.email],
                     fail_silently=False)
                 
                 except SMTPException:
@@ -560,7 +577,7 @@ def reset(request, uuid=None):
     try:
         # Send out re-activation email to the given email address.
         send_mail(_('Your META-SHARE user account has been re-activated'),
-        email, 'no-reply@meta-share.eu', [user.email], fail_silently=False)
+        email, 'no-reply@elrc-share.ilsp.gr', [user.email], fail_silently=False)
     
     except SMTPException:
         # If the email could not be sent successfully, tell the user about it.

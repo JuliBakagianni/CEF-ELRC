@@ -7,12 +7,18 @@ from selectable.base import ModelLookup
 from selectable.registry import registry
 from metashare.repository.models import personInfoType_model, \
     actorInfoType_model, documentInfoType_model, documentationInfoType_model,\
-    projectInfoType_model, organizationInfoType_model,\
-    membershipInfoType_model, \
-    targetResourceInfoType_model, languageVarietyInfoType_model, \
-    sizeInfoType_model, annotationInfoType_model, videoFormatInfoType_model, \
-    imageFormatInfoType_model, resolutionInfoType_model, \
-    audioSizeInfoType_model
+    organizationInfoType_model,\
+    targetResourceInfoType_model, sizeInfoType_model, \
+    annotationInfoType_model, \
+    languageVarietyInfoType_model, \
+    projectInfoType_model
+    # videoFormatInfoType_model
+    # audioSizeInfoType_model \
+    # membershipInfoType_model, \
+    # imageFormatInfoType_model, \
+
+    # resolutionInfoType_model
+
 from metashare.storage.models import MASTER
 import logging
 from metashare.settings import LOG_HANDLER
@@ -123,13 +129,13 @@ class DocumentationLookup(GenericUnicodeLookup):
         filtered_results = [p for p in results if p.as_subclass().__class__ == documentInfoType_model]
         return filtered_results
 
-class MembershipDummyLookup(ModelLookup):
-    '''
-        Dummy class for use with OneToOneWidget.
-        Should be removed when unnecessary dependencies are
-        removed from OneToOneWidget
-    '''
-    model = membershipInfoType_model
+# class MembershipDummyLookup(ModelLookup):
+#     '''
+#         Dummy class for use with OneToOneWidget.
+#         Should be removed when unnecessary dependencies are
+#         removed from OneToOneWidget
+#     '''
+#     model = membershipInfoType_model
 
 class AnnotationLookup(ModelLookup):
     '''
@@ -139,29 +145,29 @@ class AnnotationLookup(ModelLookup):
     '''
     model = annotationInfoType_model
 
-class VideoFormatLookup(ModelLookup):
-    '''
-        Dummy class for use with OneToOneWidget.
-        Should be removed when unnecessary dependencies are
-        removed from OneToOneWidget
-    '''
-    model = videoFormatInfoType_model
+# class VideoFormatLookup(ModelLookup):
+#     '''
+#         Dummy class for use with OneToOneWidget.
+#         Should be removed when unnecessary dependencies are
+#         removed from OneToOneWidget
+#     '''
+#     model = videoFormatInfoType_model
 
-class ImageFormatLookup(ModelLookup):
-    '''
-        Dummy class for use with OneToOneWidget.
-        Should be removed when unnecessary dependencies are
-        removed from OneToOneWidget
-    '''
-    model = imageFormatInfoType_model
+# class ImageFormatLookup(ModelLookup):
+#     '''
+#         Dummy class for use with OneToOneWidget.
+#         Should be removed when unnecessary dependencies are
+#         removed from OneToOneWidget
+#     '''
+#     model = imageFormatInfoType_model
 
-class ResolutionDummyLookup(ModelLookup):
-    '''
-        Dummy class for use with OneToOneWidget.
-        Should be removed when unnecessary dependencies are
-        removed from OneToOneWidget
-    '''
-    model = resolutionInfoType_model
+# class ResolutionDummyLookup(ModelLookup):
+#     '''
+#         Dummy class for use with OneToOneWidget.
+#         Should be removed when unnecessary dependencies are
+#         removed from OneToOneWidget
+#     '''
+#     model = resolutionInfoType_model
 
 class LanguageVarietyDummyLookup(ModelLookup):
     '''
@@ -179,8 +185,8 @@ class SizeDummyLookup(ModelLookup):
     '''
     model = sizeInfoType_model
 
-class AudioSizeDummyLookup(ModelLookup):
-    model = audioSizeInfoType_model
+# class AudioSizeDummyLookup(ModelLookup):
+#     model = audioSizeInfoType_model
 
 
 class ProjectLookup(ModelLookup):
@@ -264,7 +270,7 @@ registry.register(PersonLookup)
 registry.register(ActorLookup)
 registry.register(DocumentationLookup)
 registry.register(DocumentLookup)
-registry.register(ProjectLookup)
+# registry.register(ProjectLookup)
 registry.register(OrganizationLookup)
 registry.register(TargetResourceLookup)
 

@@ -237,7 +237,7 @@ fieldset.monospace textarea {
 }
 
 .vTextField {
-    width: 20em;
+    width: 40em;
 }
 
 .vIntegerField {
@@ -388,7 +388,7 @@ fieldset.monospace textarea {
     font-size: 11px;
     color: #666;
     background-color: #eee;
-    width: 200px;
+    /*width: auto;*/
     margin: 10px 0px 10px 0px;
-    
+    display: inline-block
 }

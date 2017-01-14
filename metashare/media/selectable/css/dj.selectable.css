@@ -16,11 +16,17 @@ ul.ui-autocomplete li.ui-menu-item {
     list-style-type: none;
 }
 ul.selectable-deck li.selectable-deck-item .selectable-deck-remove {
-    float: right;
+    float: none;
 }
 ul.selectable-deck li.selectable-deck-item .selectable-deck-edit {
-    float: right;
+    float: none;
 }
+
+/*.selectable-deck-edit > a > img, .selectable-deck-remove > a > img{*/
+    /*width: 10px;*/
+    /*height: 10px;*/
+/*}*/
+
 ul.selectable-deck-bottom-inline,
 ul.selectable-deck-top-inline {
     padding: 0;

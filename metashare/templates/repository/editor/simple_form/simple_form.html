@@ -1,0 +1,193 @@
+{% load analytical %}
+{% load adminmedia %}
+<!DOCTYPE html>
+<html>
+<head>
+    {% analytical_head_top %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{% spaceless %}{% block title %}ELRC-SHARE Repository{% endblock %}{% endspaceless %}</title>
+    <meta name="description" content="{% spaceless %}{% block description %}META-SHARE: a sustainable network of repositories of language resources documented with high-quality metadata, allowing for uniform search and access to resources.{% endblock %}{% endspaceless %}"/>
+    <meta name="keywords" content="{% spaceless %}{% block keywords %}META-SHARE, language resources, language tools, META-NET{% endblock %}{% endspaceless %}"/>
+    <link rel="shortcut icon" href="/site_media/images/favicon.ico"/>
+    <link rel="stylesheet" href="/site_media/css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="/site_media/css/blueprint/print.css" type="text/css" media="print">
+
+    <!--[if lt IE 8]><link rel="stylesheet" href="/site_media/css/blueprint/ie.css" type="text/css" media="screen, projection">
+    <![endif]-->
+    <link rel="stylesheet" href="/site_media/css/upload.css" type="text/css">
+    <link rel="stylesheet" href="/site_media/css/screen.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/site_media/css/typo.css" type="text/css" media="screen">
+
+    <script src="/site_media/js/jquery-1.7.1.min.js"></script>
+    <script src="/site_media/js/jquery.form.js"></script>
+    <script src="/site_media/js/upload.js"></script>
+    <script type="text/javascript" src="/site_media/js/metashare.js"></script>
+    {% block links %}{% endblock %}{% analytical_head_bottom %}
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-36199711-1']);
+        _gaq.push(['_gat._anonymizeIp']);
+        _gaq.push(['_setDomainName', 'none']);
+        _gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+{#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"#}
+{#            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"#}
+{#            crossorigin="anonymous"></script>#}
+</head>
+<body style="position: relative;">
+{% include 'header.html' %}
+<div class="back" style="margin-top: 20px">
+    <div style="width: 100% !important; height:450px; text-align: center; background-image: url('{{ MEDIA_URL }}images/iStock_000055931356_XXXLarge_web.jpg'); background-position: center; background-repeat: no-repeat; border-bottom: 1px solid; "><h2 style=" text-align: left; left: 10%; color: white;  font-size: 45px;position:relative;top:170px; text-shadow: 1px 1px #000;">Data Contribution Form</h2></div>
+</div>
+<div class="overlay"></div>
+{% if message %}
+    <div class="{{ status }}">{{ message }}</div>
+{% endif %}
+{% for message in messages %}
+<div class="{{ message.tags }}">{{ message|linebreaksbr }}</div>
+{% endfor %}
+<form class="form-horizontal" action="{% url metashare.repository.views.simple_form %}" method="post"
+      data-toggle="validator" enctype="multipart/form-data">
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend style="padding:20px">New Resource</legend>
+
+        <!-- Text input-->
+        <div class="form-group required">
+            <label class="col-md-4 control-label" for="resourceTitle">Resource Title</label>
+
+            <div class="col-md-4">
+                <input id="resourceTitle" name="resourceTitle" placeholder="" class="form-control input-md" required=""
+                       type="text">
+                <span class="help-block">The name by which the resource is already known or by which you would like it to be known; e.g. "The GSRT bilingual corpus of Greek-English bulletins"</span>
+            </div>
+        </div>
+
+        <!-- Textarea -->
+        <div class="form-group required">
+            <label class="col-md-4 control-label" for="shortDescription">Resource short description</label>
+
+            <div class="col-md-4">
+                <textarea class="form-control" id="shortDescription" name="shortDescription" required=""></textarea>
+                <span class="help-block">A short description, including any information considered useful about the resource, e.g. whether it's a dataset (collection of documents) or a lexicon, glossary, terminological resource, etc., its size, language(s), classification information (e.g. health reports, news bulletins, lexicon of sports terminology etc.)</span>
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group required">
+            <label class="col-md-4 control-label" for="languages">Language(s)</label>
+
+            <div class="col-md-4">
+                <div class="language">
+                    <select required class="form-control" multiple style="padding: 6px; height:200px" name="languages[]" id="languages">
+                    <option value="Bulgarian">Bulgarian</option>
+                    <option value="Czech">Czech</option>
+                    <option value="Croatian">Croatian</option>
+                    <option value="Danish">Danish</option>
+                    <option value="Dutch; Flemish">Dutch; Flemish</option>
+                    <option value="English">English</option>
+                    <option value="Estonian">Estonian</option>
+                    <option value="Finnish">Finnish</option>
+                    <option value="French">French</option>
+                    <option value="German">German</option>
+                    <option value="Hungarian">Hungarian</option>
+                    <option value="Icelandic">Icelandic</option>
+                    <option value="Irish">Irish</option>
+                    <option value="Italian">Italian</option>
+                    <option value="Latvian">Latvian</option>
+                    <option value="Lithuanian">Lithuanian</option>
+                    <option value="Maltese">Maltese</option>
+                    <option value="Modern Greek (1453-)">Modern Greek (1453-)</option>
+                    <option value="Norwegian">Norwegian</option>
+                    <option value="Polish">Polish</option>
+                    <option value="Portuguese">Portuguese</option>
+                    <option value="Romanian; Moldavian; Moldovan">Romanian; Moldavian; Moldovan</option>
+                    <option value="Slovak">Slovak</option>
+                    <option value="Slovenian">Slovenian</option>
+                    <option value="Spanish; Castilian">Spanish; Castilian</option>
+                    <option value="Swedish">Swedish</option>
+                </select>
+                    <span class="help-block">The language(s) of the resource; for resources with multiple languages, hold down CTRL key to select multiple values</span>
+
+                    </div>
+            </div>
+        </div>
+
+        <div class="form-group required" id="contributionmode">
+            <label class="col-md-4 control-label" for="contributionmode">Contribution Mode</label>
+
+            <div class="col-md-4">
+                <input type="radio" name="mode" value="uploadzip" checked> Upload ZIP archive<br>
+                <input type="radio" name="mode" value="url"> Provide URL of resources<br>
+                <span class="help-block">Please select the way you wish to contribute your data. Uploading a ZIP archive is recommended.</span>
+            </div>
+        </div>
+
+
+        <!-- File Button -->
+        <div class="form-group required" id="fileupload">
+            <label class="col-md-4 control-label" for="filebutton">Upload Resource</label>
+
+            <div class="col-md-4">
+                <input accept=".zip" id="filebutton" name="filebutton" class="input-file" type="file" required="">
+                <span class="help-block">Please upload a <strong>.zip file</strong> up to 50MB.
+                </br>
+                    In case the <strong>.zip file</strong> file you wish to upload is larger than 50MB, please contact
+                    <a href="mailto:elrc-share@ilsp.gr">elrc-share@ilsp.gr</a>
+                </span>
+            </div>
+        </div>
+
+         <div class="form-group required" id="resourceurl" style="display: none">
+            <label class="col-md-4 control-label" for="resourceUrl">Resource URL</label>
+
+            <div class="col-md-4">
+                <input id="resourceUrl" name="resourceUrl" placeholder="" class="form-control input-md" required=""
+                       type="text">
+                <span class="help-block">Please provide a URL containing the files you wish to contribute</span>
+            </div>
+        </div>
+
+        <!-- Button (Double) -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="submit"></label>
+
+            <div class="col-md-8">
+                <button id="submit" type="submit" class="btn btn-success">Submit</button>
+                <button id="reset" type="reset" class="btn btn-warning">Reset</button>
+            </div>
+        </div>
+        {% csrf_token %}
+    </fieldset>
+</form>
+
+<div class="uploadWin">
+    <div id="status" style="padding: 3px;"></div>
+    <div class="progress">
+        <div class="bar"></div>
+        <div class="percent">0%</div>
+    </div>
+    <div id="okbtn"><button class="btn btn-success btn-sm" id="ok" onclick="$('.uploadWin').hide();$('.overlay').hide();">OK</button></div>
+</div>
+</body>
+</html>

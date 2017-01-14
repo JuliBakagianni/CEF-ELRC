@@ -6,8 +6,11 @@ from metashare.repository.supermodel import SchemaModel, RECOMMENDED, OPTIONAL
 from django.core.exceptions import ObjectDoesNotExist
 from metashare.utils import get_class_by_name
 from metashare.repository.models import organizationInfoType_model, \
-    projectInfoType_model, targetResourceInfoType_model, personInfoType_model, \
-    documentInfoType_model, documentationInfoType_model, actorInfoType_model
+    targetResourceInfoType_model, personInfoType_model, \
+    documentInfoType_model, documentationInfoType_model, actorInfoType_model, \
+    projectInfoType_model
+
+
 
 GROUP_GLOBAL_EDITORS = 'globaleditors'
 

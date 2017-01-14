@@ -1,4 +1,5 @@
 import datetime
+from mimetypes import guess_type
 
 from django import forms
 from django.contrib import admin, messages
@@ -7,8 +8,8 @@ from django.contrib.admin.views.main import ChangeList
 from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.db.models import Q
-from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.http import Http404, HttpResponseRedirect, HttpResponse
+from django.shortcuts import render_to_response, redirect, render
 from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_unicode
@@ -17,29 +18,34 @@ from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _, ungettext
 from django.views.decorators.csrf import csrf_protect
+# from django.contrib.admin.views.decorators import staff_member_required
 
 from metashare import settings
 from metashare.accounts.models import EditorGroup, EditorGroupManagers
+from metashare.repository.models import LrQuality, TranslationQuality
 from metashare.repository.editor.editorutils import FilteredChangeList
 from metashare.repository.editor.forms import StorageObjectUploadForm
 from metashare.repository.editor.inlines import ReverseInlineFormSet, \
     ReverseInlineModelAdmin
-from metashare.repository.editor.lookups import MembershipDummyLookup
+# from metashare.repository.editor.lookups import MembershipDummyLookup
 from metashare.repository.editor.schemamodel_mixin import encode_as_inline
 from metashare.repository.editor.superadmin import SchemaModelAdmin
-from metashare.repository.editor.widgets import OneToManyWidget
+# from metashare.repository.editor.widgets import OneToManyWidget
 from metashare.repository.models import resourceComponentTypeType_model, \
     corpusInfoType_model, languageDescriptionInfoType_model, \
-    lexicalConceptualResourceInfoType_model, toolServiceInfoType_model, \
+    lexicalConceptualResourceInfoType_model, \
     corpusMediaTypeType_model, languageDescriptionMediaTypeType_model, \
     lexicalConceptualResourceMediaTypeType_model, resourceInfoType_model, \
     licenceInfoType_model, User
+
 from metashare.repository.supermodel import SchemaModel
+# from metashare.repository.views import MAXIMUM_READ_BLOCK_SIZE
 from metashare.stats.model_utils import saveLRStats, UPDATE_STAT, INGEST_STAT, DELETE_STAT
 from metashare.storage.models import PUBLISHED, INGESTED, INTERNAL, \
     ALLOWED_ARCHIVE_EXTENSIONS
 from metashare.utils import verify_subclass, create_breadcrumb_template_params
 
+from os.path import split, getsize
 
 csrf_protect_m = method_decorator(csrf_protect)
 
@@ -58,8 +64,8 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
             error_list = error_list + self.clean_langdesc(actual_instance)
         elif isinstance(actual_instance, lexicalConceptualResourceInfoType_model):
             error_list = error_list + self.clean_lexicon(actual_instance)
-        elif isinstance(actual_instance, toolServiceInfoType_model):
-            error_list = error_list + self.clean_toolservice(actual_instance)
+        # elif isinstance(actual_instance, toolServiceInfoType_model):
+        #     error_list = error_list + self.clean_toolservice(actual_instance)
         else:
             raise Exception, "unexpected resource component class type: {}".format(actual_instance.__class__.__name__)
         try:
@@ -172,8 +178,8 @@ class ResourceComponentInlineFormSet(ReverseInlineFormSet):
             self.save_langdesc(actual_instance, commit)
         elif isinstance(actual_instance, lexicalConceptualResourceInfoType_model):
             self.save_lexicon(actual_instance, commit)
-        elif isinstance(actual_instance, toolServiceInfoType_model):
-            self.save_toolservice(actual_instance, commit)
+        # elif isinstance(actual_instance, toolServiceInfoType_model):
+        #     self.save_toolservice(actual_instance, commit)
         else:
             raise Exception, "unexpected resource component class type: {}".format(actual_instance.__class__.__name__)
         super(ResourceComponentInlineFormSet, self).save(commit)
@@ -233,18 +239,82 @@ def has_publish_permission(request, queryset):
     Returns `True` if the given request has permission to change the publication
     status of all given language resources, `False` otherwise.
     """
-    if not request.user.is_superuser:
-        for obj in queryset:
-            res_groups = obj.editor_groups.all()
-            # we only allow a user to ingest/publish/unpublish a resource if she
-            # is a manager of one of the resource's `EditorGroup`s
-            if not any(res_group.name == mgr_group.managed_group.name
-                       for res_group in res_groups
-                       for mgr_group in EditorGroupManagers.objects.filter(name__in=
-                           request.user.groups.values_list('name', flat=True))):
-                return False
+    # if not request.user.is_superuser:
+    #     for obj in queryset:
+    #         res_groups = obj.editor_groups.all()
+    #         # we only allow a user to ingest/publish/unpublish a resource if she
+    #         # is a manager of one of the resource's `EditorGroup`s
+    #         if not any(res_group.name == mgr_group.managed_group.name
+    #                    for res_group in res_groups
+    #                    for mgr_group in EditorGroupManagers.objects.filter(name__in=
+    #                        request.user.groups.values_list('name', flat=True))):
+    #             return False
+    if not request.user.is_staff or request.user.groups.filter(name='naps').exists():
+            return False
     return True
 
+# Check if resource is valid for contributed resources that are imported
+# in the repository as internal and can be published by mistake
+# without the remaining required data filled in
+def resourceIsValid(res):
+    dist_ok = False
+    linguality_ok = False
+    lang_ok = False
+    size_ok = False
+    lcrt_ok = False
+    ldt_ok = False
+    from django.core.exceptions import ObjectDoesNotExist
+    try:
+        if res.distributionInfo:
+            dist_ok = True
+    except ObjectDoesNotExist:
+        pass
+
+    ## based on resource type:
+    corpus_media = res.resourceComponentType.as_subclass()
+    # 2. check if lingualityType exists
+    if isinstance(corpus_media, corpusInfoType_model):
+        media_type = corpus_media.corpusMediaType
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            if corpus_info.lingualityInfo.lingualityType:
+                linguality_ok = True
+                break
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            if corpus_info.languageinfotype_model_set.all().count() > 0:
+                lang_ok = True
+                break
+        for corpus_info in media_type.corpustextinfotype_model_set.all():
+            if corpus_info.sizeinfotype_model_set.all().count() > 0:
+                size_ok = True
+                break
+        return dist_ok and linguality_ok and lang_ok and size_ok
+
+    elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+        lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
+        if corpus_media.lexicalConceptualResourceType:
+            lcrt_ok = True
+        if lcr_media_type.lexicalConceptualResourceTextInfo:
+            if lcr_media_type.lexicalConceptualResourceTextInfo.lingualityInfo.lingualityType:
+                linguality_ok = True
+            if lcr_media_type.lexicalConceptualResourceTextInfo.languageinfotype_model_set.all().count() > 0:
+                lang_ok = True
+            if lcr_media_type.lexicalConceptualResourceTextInfo.sizeinfotype_model_set.all().count() > 0:
+                size_ok = True
+        return dist_ok and lcrt_ok and linguality_ok and lang_ok and size_ok
+
+    elif isinstance(corpus_media, languageDescriptionInfoType_model):
+        ld_media_type = corpus_media.languageDescriptionMediaType
+        if corpus_media.languageDescriptionType:
+            ldt_ok = True
+        if ld_media_type.languageDescriptionTextInfo:
+            if ld_media_type.languageDescriptionTextInfo.lingualityInfo.lingualityType:
+                linguality_ok = True
+            if ld_media_type.languageDescriptionTextInfo.languageinfotype_model_set.all().count() > 0:
+                lang_ok = True
+            if ld_media_type.languageDescriptionTextInfo.sizeinfotype_model_set.all().count() > 0:
+                size_ok = True
+            return dist_ok and ldt_ok and linguality_ok and lang_ok and size_ok
+        return dist_ok and ldt_ok
 
 class MetadataForm(forms.ModelForm):
     def save(self, commit=True):
@@ -267,7 +337,8 @@ class ResourceModelAdmin(SchemaModelAdmin):
                               'metadataInfo':MetadataInline, }
 
     content_fields = ('resourceComponentType',)
-    list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
+    # list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_Owners', 'editor_Groups',)
+    list_display = ('__unicode__', 'resource_type', 'publication_status', 'resource_Owners',)
     list_filter = ('storage_object__publication_status',)
     actions = ('publish_action', 'unpublish_action', 'ingest_action',
         'export_xml_action', 'delete', 'add_group', 'remove_group',
@@ -278,10 +349,16 @@ class ResourceModelAdmin(SchemaModelAdmin):
         if has_publish_permission(request, queryset):
             successful = 0
             for obj in queryset:
-                if change_resource_status(obj, status=PUBLISHED,
-                                          precondition_status=INGESTED):
-                    successful += 1
-                    saveLRStats(obj, UPDATE_STAT, request)
+                if resourceIsValid(obj):
+                    if change_resource_status(obj, status=PUBLISHED,
+                                              precondition_status=INGESTED):
+                        successful += 1
+                        saveLRStats(obj, UPDATE_STAT, request)
+                else:
+                    messages.error(request,
+                        _('Only valid resources can be published; '
+                          'please, edit the resource and re-try'))
+                    return
             if successful > 0:
                 messages.info(request, ungettext(
                     'Successfully published %(ingested)s ingested resource.',
@@ -320,13 +397,19 @@ class ResourceModelAdmin(SchemaModelAdmin):
         _("Unpublish selected published resources")
 
     def ingest_action(self, request, queryset):
-        if has_publish_permission(request, queryset):
+        if has_publish_permission(request, queryset) or request.user.is_staff:
             successful = 0
             for obj in queryset:
-                if change_resource_status(obj, status=INGESTED,
-                                          precondition_status=INTERNAL):
-                    successful += 1
-                    saveLRStats(obj, INGEST_STAT, request)
+                if resourceIsValid(obj):
+                    if change_resource_status(obj, status=INGESTED,
+                                              precondition_status=INTERNAL):
+                        successful += 1
+                        saveLRStats(obj, INGEST_STAT, request)
+                else:
+                    messages.error(request,
+                        _('Only valid resources can be ingested; '
+                          'please, edit the resource and re-try'))
+                    return
             if successful > 0:
                 messages.info(request, ungettext(
                     'Successfully ingested %(internal)s internal resource.',
@@ -694,19 +777,25 @@ class ResourceModelAdmin(SchemaModelAdmin):
         info = self.model._meta.app_label, self.model._meta.module_name
         
         urlpatterns = patterns('',
-            url(r'^(.+)/upload-data/$',
-                wrap(self.uploaddata_view),
-                name='%s_%s_uploaddata' % info),
-           url(r'^my/$',
-                wrap(self.changelist_view_filtered),
-                name='%s_%s_myresources' % info),
-            url(r'^(.+)/export-xml/$',
-                wrap(self.exportxml),
-                name='%s_%s_exportxml' % info),
+                               url(r'^(.+)/upload-data/$',
+                                   wrap(self.uploaddata_view),
+                                   name='%s_%s_uploaddata' % info),
+                               url(r'^(.+)/datadl/$',
+                                   wrap(self.datadl),
+                                   name='%s_%s_datadl' % info),
+                               url(r'^(.+)/lrquality/$',
+                                   wrap(self.lrquality),
+                                   name='%s_%s_lrquality' % info),
+                               url(r'^my/$',
+                                   wrap(self.changelist_view_filtered),
+                                   name='%s_%s_myresources' % info),
+                               url(r'^(.+)/export-xml/$',
+                                   wrap(self.exportxml),
+                                   name='%s_%s_exportxml' % info),
         ) + urlpatterns
         return urlpatterns
-    
-    
+
+
     @csrf_protect_m
     def changelist_view_filtered(self, request, extra_context=None):
         '''
@@ -827,6 +916,64 @@ class ResourceModelAdmin(SchemaModelAdmin):
         return render_to_response(
           ['admin/repository/resourceinfotype_model/upload_resource.html'], context,
           context_instance)
+
+
+    @csrf_protect_m
+    def datadl(self, request, object_id, extra_context=None):
+
+        # return HttpResponse("OK")
+        """
+        Returns an HTTP response with a download of the given resource.
+        """
+
+        model = self.model
+        opts = model._meta
+
+        obj = self.get_object(request, unquote(object_id))
+        storage_object = obj.storage_object
+        dl_path = storage_object.get_download()
+        if dl_path:
+            try:
+                def dl_stream_generator():
+                    with open(dl_path, 'rb') as _local_data:
+                        _chunk = _local_data.read(4096)
+                        while _chunk:
+                            yield _chunk
+                            _chunk = _local_data.read(4096)
+
+                # build HTTP response with a guessed mime type; the response
+                # content is a stream of the download file
+                filemimetype = guess_type(dl_path)[0] or "application/octet-stream"
+                response = HttpResponse(dl_stream_generator(),
+                    mimetype=filemimetype)
+                response['Content-Length'] = getsize(dl_path)
+                response['Content-Disposition'] = 'attachment; filename={0}' \
+                    .format(split(dl_path)[1])
+                # LOGGER.info("Offering a local editor download of resource #{0}." \
+                #             .format(object_id))
+                return response
+            except:
+                pass
+        # redirect to a download location, if available
+        # elif download_urls:
+        #     for url in download_urls:
+        #         status_code = urlopen(url).getcode()
+        #         if not status_code or status_code < 400:
+        #             LOGGER.info("Redirecting to {0} for the download of resource " \
+        #                         "#{1}.".format(url, resource.id))
+        #             return redirect(url)
+        #     LOGGER.warn("No download could be offered for resource #{0}. These " \
+        #                 "URLs were tried: {1}".format(resource.id, download_urls))
+        # else:
+        #     LOGGER.error("No download could be offered for resource #{0} with " \
+        #                  "storage object identifier #{1} although our code " \
+        #                  "considered it to be downloadable!".format(resource.id,
+        #                                                             resource.storage_object.identifier))
+
+        # no download could be provided
+        return render_to_response('repository/lr_not_downloadable.html',
+                                  {'resource': obj, 'reason': 'internal'},
+                                  context_instance=RequestContext(request))
 
     @csrf_protect_m
     def exportxml(self, request, object_id, extra_context=None):
@@ -979,7 +1126,7 @@ class ResourceModelAdmin(SchemaModelAdmin):
         result = result.distinct().filter(storage_object__deleted=False)
         # all users but the superusers may only see resources for which they are
         # either owner or editor group member:
-        if not request.user.is_superuser:
+        if not request.user.is_superuser and not request.user.groups.filter(name='legalReviewers').exists():
             result = result.distinct().filter(Q(owners=request.user)
                     | Q(editor_groups__name__in=
                            request.user.groups.values_list('name', flat=True)))
@@ -1022,23 +1169,33 @@ class ResourceModelAdmin(SchemaModelAdmin):
         # it hasn't previously been removed, yet)
         if 'delete_selected' in result:
             del result['delete_selected']
+        # if request.user.is_staff:
+        #     del result['remove_group']
+        #     del result['remove_owner']
+        #     if not 'myresources' in request.POST:
+        #         del result['add_group']
+        #         del result['add_owner']
+        del result['remove_group']
+        del result['add_group']
         if not request.user.is_superuser:
-            del result['remove_group']
             del result['remove_owner']
-            if not 'myresources' in request.POST:
-                del result['add_group']
-                del result['add_owner']
+            del result['add_owner']
             # only users with delete permissions can see the delete action:
             if not self.has_delete_permission(request):
                 del result['delete']
             # only users who are the manager of some group can see the
             # ingest/publish/unpublish actions:
-            if EditorGroupManagers.objects.filter(name__in=
-                        request.user.groups.values_list('name', flat=True)) \
-                    .count() == 0:
-                for action in (self.publish_action, self.unpublish_action,
-                               self.ingest_action):
+            # if EditorGroupManagers.objects.filter(name__in=
+            #             request.user.groups.values_list('name', flat=True)) \
+            #         .count() == 0:
+            #     for action in (self.publish_action, self.unpublish_action,):
+            #         del result[action.__name__]
+            if not request.user.is_staff:
+                for action in (self.publish_action, self.unpublish_action,):
                     del result[action.__name__]
+        if request.user.groups.filter(name='naps').exists():
+            del result['publish_action']
+            del result['unpublish_action']
         return result
 
     def create_hidden_structures(self, request):
@@ -1063,10 +1220,10 @@ class ResourceModelAdmin(SchemaModelAdmin):
             lexicon_info = lexicalConceptualResourceInfoType_model.objects.create(lexicalConceptualResourceMediaType=lexicon_media_type)
             structures['resourceComponentType'] = lexicon_info
             structures['lexicalConceptualResourceMediaType'] = lexicon_media_type
-        elif resource_type == 'toolservice':
-            tool_info = toolServiceInfoType_model.objects.create()
-            structures['resourceComponentType'] = tool_info
-            structures['toolServiceInfoId'] = tool_info.pk
+        # elif resource_type == 'toolservice':
+        #     tool_info = toolServiceInfoType_model.objects.create()
+        #     structures['resourceComponentType'] = tool_info
+        #     structures['toolServiceInfoId'] = tool_info.pk
         else:
             raise NotImplementedError, "Cannot deal with '{}' resource types just yet".format(resource_type)
         return structures
@@ -1089,32 +1246,32 @@ class ResourceModelAdmin(SchemaModelAdmin):
         structures['resourceComponentType'] = content_info
         if isinstance(content_info, corpusInfoType_model):
             structures['corpusMediaType'] = content_info.corpusMediaType
-            structures['corpusAudioInfoId'] = get_mediatype_id('corpusAudioInfo', \
-                content_info.corpusMediaType.corpusAudioInfo)
-            structures['corpusImageInfoId'] = get_mediatype_id('corpusImageInfo', \
-                content_info.corpusMediaType.corpusImageInfo)
-            structures['corpusTextNumericalInfoId'] = get_mediatype_id('corpusTextNumericalInfo', \
-                content_info.corpusMediaType.corpusTextNumericalInfo)
-            structures['corpusTextNgramInfoId'] = get_mediatype_id('corpusTextNgramInfo', \
-                content_info.corpusMediaType.corpusTextNgramInfo)
+            # structures['corpusAudioInfoId'] = get_mediatype_id('corpusAudioInfo', \
+            #     content_info.corpusMediaType.corpusAudioInfo)
+            # structures['corpusImageInfoId'] = get_mediatype_id('corpusImageInfo', \
+            #     content_info.corpusMediaType.corpusImageInfo)
+            # structures['corpusTextNumericalInfoId'] = get_mediatype_id('corpusTextNumericalInfo', \
+            #     content_info.corpusMediaType.corpusTextNumericalInfo)
+            # structures['corpusTextNgramInfoId'] = get_mediatype_id('corpusTextNgramInfo', \
+            #     content_info.corpusMediaType.corpusTextNgramInfo)
         elif isinstance(content_info, languageDescriptionInfoType_model):
             structures['langdescTextInfoId'] = get_mediatype_id('languageDescriptionTextInfo', \
                 content_info.languageDescriptionMediaType.languageDescriptionTextInfo)
-            structures['langdescVideoInfoId'] = get_mediatype_id('languageDescriptionVideoInfo', \
-                content_info.languageDescriptionMediaType.languageDescriptionVideoInfo)
-            structures['langdescImageInfoId'] = get_mediatype_id('languageDescriptionImageInfo', \
-                content_info.languageDescriptionMediaType.languageDescriptionImageInfo)
+            # structures['langdescVideoInfoId'] = get_mediatype_id('languageDescriptionVideoInfo', \
+            #     content_info.languageDescriptionMediaType.languageDescriptionVideoInfo)
+            # structures['langdescImageInfoId'] = get_mediatype_id('languageDescriptionImageInfo', \
+            #     content_info.languageDescriptionMediaType.languageDescriptionImageInfo)
         elif isinstance(content_info, lexicalConceptualResourceInfoType_model):
             structures['lexiconTextInfoId'] = get_mediatype_id('lexicalConceptualResourceTextInfo', \
                 content_info.lexicalConceptualResourceMediaType.lexicalConceptualResourceTextInfo)
-            structures['lexiconAudioInfoId'] = get_mediatype_id('lexicalConceptualResourceAudioInfo', \
-                content_info.lexicalConceptualResourceMediaType.lexicalConceptualResourceAudioInfo)
-            structures['lexiconVideoInfoId'] = get_mediatype_id('lexicalConceptualResourceVideoInfo', \
-                content_info.lexicalConceptualResourceMediaType.lexicalConceptualResourceVideoInfo)
-            structures['lexiconImageInfoId'] = get_mediatype_id('lexicalConceptualResourceImageInfo', \
-                content_info.lexicalConceptualResourceMediaType.lexicalConceptualResourceImageInfo)
-        elif isinstance(content_info, toolServiceInfoType_model):
-            structures['toolServiceInfoId'] = content_info.pk
+            # structures['lexiconAudioInfoId'] = get_mediatype_id('lexicalConceptualResourceAudioInfo', \
+            #     content_info.lexicalConceptualResourceMediaType.lexicalConceptualResourceAudioInfo)
+            # structures['lexiconVideoInfoId'] = get_mediatype_id('lexicalConceptualResourceVideoInfo', \
+            #     content_info.lexicalConceptualResourceMediaType.lexicalConceptualResourceVideoInfo)
+            # structures['lexiconImageInfoId'] = get_mediatype_id('lexicalConceptualResourceImageInfo', \
+            #     content_info.lexicalConceptualResourceMediaType.lexicalConceptualResourceImageInfo)
+        # elif isinstance(content_info, toolServiceInfoType_model):
+        #     structures['toolServiceInfoId'] = content_info.pk
             
         else:
             raise NotImplementedError, "Cannot deal with '{}' resource types just yet".format(content_info.__class__.__name__)
@@ -1188,6 +1345,22 @@ class ResourceModelAdmin(SchemaModelAdmin):
         
 
     def save_model(self, request, obj, form, change):
+        # Automatically add metadataCreator.
+        # If the person exists, use that person, else create a new person object
+        # from request user values.
+        # try:
+        #     comm = communicationInfoType_model.objects.filter(email = [request.user.email])[0]
+        # except IndexError:
+        #     comm = communicationInfoType_model.objects.create(email = [request.user.email])
+        # try:
+        #     person = personInfoType_model.objects.filter(surname = {'en':request.user.last_name},
+        #         givenName = {'en':request.user.first_name}, communicationInfo = comm)[0]
+        # except IndexError:
+        #     person = personInfoType_model.objects.create(surname = {'en':request.user.last_name},
+        #         givenName = {'en':request.user.first_name}, communicationInfo = comm)
+        #
+        # obj.metadataInfo.metadataCreator.add(person)
+
         super(ResourceModelAdmin, self).save_model(request, obj, form, change)
         # update statistics
         if hasattr(obj, 'storage_object') and obj.storage_object is not None:
@@ -1208,12 +1381,50 @@ class ResourceModelAdmin(SchemaModelAdmin):
         _extra_context.update(_structures)
         return super(ResourceModelAdmin, self).change_view(request, object_id, _extra_context)
 
+    @csrf_protect_m
+    def lrquality(self, request, object_id):
+        model = self.model
+        opts = model._meta
+        obj = self.get_object(request, unquote(object_id))
+        if not obj.lr_quality:
+            obj.lr_quality = LrQuality.objects.create()
+        corpus_media = obj.resourceComponentType.as_subclass()
+        result = []
+        if isinstance(corpus_media, corpusInfoType_model):
+            media_type = corpus_media.corpusMediaType
+            for corpus_info in media_type.corpustextinfotype_model_set.all():
+                for language_info in corpus_info.languageinfotype_model_set.all():
+                    result.append(language_info.get_languageName_display())
+        elif isinstance(corpus_media, lexicalConceptualResourceInfoType_model):
+            lcr_media_type = corpus_media.lexicalConceptualResourceMediaType
+
+            if lcr_media_type.lexicalConceptualResourceTextInfo:
+                for language_info in lcr_media_type \
+                        .lexicalConceptualResourceTextInfo \
+                        .languageinfotype_model_set.all():
+                    result.append(language_info.get_languageName_display())
+
+        elif isinstance(corpus_media, languageDescriptionInfoType_model):
+            ld_media_type = corpus_media.languageDescriptionMediaType
+            if ld_media_type.languageDescriptionTextInfo:
+                for language_info in ld_media_type \
+                        .languageDescriptionTextInfo.languageinfotype_model_set.all():
+                    result.append(language_info.get_languageName_display())
+
+        for r in result:
+            if not TranslationQuality.objects.filter \
+                            (parent_quality=obj.lr_quality, language=r).exists():
+                TranslationQuality.objects.create(parent_quality=obj.lr_quality,
+                language = r)
+        return result
+
+
 class LicenceForm(forms.ModelForm):
     class Meta:
         model = licenceInfoType_model
-        widgets = {'membershipInfo': OneToManyWidget(lookup_class=MembershipDummyLookup)}
+        # widgets = {'membershipInfo': OneToManyWidget(lookup_class=MembershipDummyLookup)}
 
 class LicenceModelAdmin(SchemaModelAdmin):
     form = LicenceForm
 
-    
+

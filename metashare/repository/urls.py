@@ -5,62 +5,35 @@ from haystack.query import SearchQuerySet
 from metashare.repository.forms import FacetedBrowseForm
 from metashare.repository.views import MetashareFacetedSearchView
 
-sqs = SearchQuerySet() \
-  .facet("languageNameFilter") \
-  .facet("resourceTypeFilter") \
-  .facet("mediaTypeFilter") \
-  .facet("availabilityFilter") \
-  .facet("licenceFilter") \
-  .facet("restrictionsOfUseFilter") \
-  .facet("validatedFilter") \
-  .facet("foreseenUseFilter") \
-  .facet("useNlpSpecificFilter") \
-  .facet("lingualityTypeFilter") \
-  .facet("multilingualityTypeFilter") \
-  .facet("modalityTypeFilter") \
-  .facet("mimeTypeFilter") \
-  .facet("bestPracticesFilter") \
-  .facet("domainFilter") \
-  .facet("geographicCoverageFilter") \
-  .facet("timeCoverageFilter") \
-  .facet("subjectFilter") \
-  .facet("corpusAnnotationTypeFilter") \
-  .facet("corpusAnnotationFormatFilter") \
-  .facet("languageDescriptionLDTypeFilter") \
-  .facet("languageDescriptionEncodingLevelFilter") \
-  .facet("languageDescriptionGrammaticalPhenomenaCoverageFilter") \
-  .facet("lexicalConceptualResourceLRTypeFilter") \
-  .facet("lexicalConceptualResourceEncodingLevelFilter") \
-  .facet("lexicalConceptualResourceLinguisticInformationFilter") \
-  .facet("toolServiceToolServiceTypeFilter") \
-  .facet("toolServiceToolServiceSubTypeFilter") \
-  .facet("toolServiceLanguageDependentTypeFilter") \
-  .facet("toolServiceInputOutputResourceTypeFilter") \
-  .facet("toolServiceInputOutputMediaTypeFilter") \
-  .facet("toolServiceAnnotationTypeFilter") \
-  .facet("toolServiceAnnotationFormatFilter") \
-  .facet("toolServiceEvaluatedFilter") \
-  .facet("textTextGenreFilter") \
-  .facet("textTextTypeFilter") \
-  .facet("textRegisterFilter") \
-  .facet("audioAudioGenreFilter") \
-  .facet("audioSpeechGenreFilter") \
-  .facet("audioRegisterFilter") \
-  .facet("audioSpeechItemsFilter") \
-  .facet("audioNaturalityFilter") \
-  .facet("audioConversationalTypeFilter") \
-  .facet("audioScenarioTypeFilter") \
-  .facet("videoVideoGenreFilter") \
-  .facet("videoTypeOfVideoContentFilter") \
-  .facet("videoNaturalityFilter") \
-  .facet("videoConversationalTypeFilter") \
-  .facet("videoScenarioTypeFilter") \
-  .facet("imageImageGenreFilter") \
-  .facet("imageTypeOfImageContentFilter") \
-  .facet("textnumericalTypeOfTnContentFilter") \
-  .facet("textngramBaseItemFilter") \
-  .facet("textngramOrderFilter") \
-  .facet("languageVarietyFilter")
+def get_SearchQuerySet():
+  sqs = SearchQuerySet() \
+    .facet("languageNameFilter") \
+    .facet("languageScriptFilter") \
+    .facet("languageRegionFilter") \
+    .facet("languageVariantFilter") \
+    .facet("resourceTypeFilter") \
+    .facet("availabilityFilter") \
+    .facet("licenceFilter") \
+    .facet("restrictionsOfUseFilter") \
+    .facet("lingualityTypeFilter") \
+    .facet("multilingualityTypeFilter") \
+    .facet("mimeTypeFilter") \
+    .facet("bestPracticesFilter") \
+    .facet("domainFilter") \
+    .facet("corpusAnnotationTypeFilter") \
+    .facet("corpusAnnotationFormatFilter") \
+    .facet("languageDescriptionLDTypeFilter") \
+    .facet("languageDescriptionEncodingLevelFilter") \
+    .facet("lexicalConceptualResourceLRTypeFilter") \
+    .facet("lexicalConceptualResourceEncodingLevelFilter") \
+    .facet("lexicalConceptualResourceLinguisticInformationFilter") \
+    .facet("textTextGenreFilter") \
+    .facet("textTextTypeFilter") \
+    .facet("languageVarietyFilter") \
+    .facet("appropriatenessForDSIFilter") \
+    .facet("publicationStatusFilter")
+  return sqs
+
 
 urlpatterns = patterns('metashare.repository.views',
   (r'^browse/(?P<resource_name>[\w\-]*)/(?P<object_id>\w+)/$',
@@ -71,9 +44,14 @@ urlpatterns = patterns('metashare.repository.views',
     'download'),
   (r'^download_contact/(?P<object_id>\w+)/$',
     'download_contact'),
-  url(r'^search/$',
-    search_view_factory(view_class=MetashareFacetedSearchView,
+  url(r'^search/$',search_view_factory(view_class=MetashareFacetedSearchView,
                         form_class=FacetedBrowseForm,
                         template='repository/search.html',
-                        searchqueryset=sqs)),
+                        searchqueryset=get_SearchQuerySet())),
+  url(r'simple_form', 'simple_form'),
+  url(r'contributions','manage_contributed_data'),
+  (r'addtodb/$', 'addtodb'),
+  url(r'repo_report', 'repo_report'),
+  url(r'get_data/(?P<filename>.+\.zip)', 'get_data'),
+  # url(r'remove/(?P<record>.*)$', 'remove'),
 )

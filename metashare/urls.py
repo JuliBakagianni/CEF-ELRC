@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, include
 from django.contrib import admin
 from django.views.generic.simple import direct_to_template
-
+from metashare.local_settings import SCHEMA_ROOT, DOCUMENTATION_ROOT
 from metashare.repository.editor import admin_site as editor_site
 from metashare.repository.sitemap import RepositorySitemap
 from metashare.settings import MEDIA_ROOT, DEBUG, DJANGO_BASE, SITEMAP_URL
@@ -13,7 +13,9 @@ urlpatterns = patterns('',
   (r'^{0}$'.format(DJANGO_BASE),
     'metashare.views.frontpage'),
   (r'^{0}info/$'.format(DJANGO_BASE),
-     direct_to_template, {'template': 'metashare-info.html'}, "info"),
+     direct_to_template, {'template': 'elrc-info.html'}, "info"),
+  (r'^{0}help/$'.format(DJANGO_BASE),
+     direct_to_template, {'template': 'help.html'}, "help"),
   (r'^{0}login/$'.format(DJANGO_BASE),
     'metashare.views.login', {'template_name': 'login.html'}),
   (r'^{0}logout/$'.format(DJANGO_BASE),
@@ -22,6 +24,14 @@ urlpatterns = patterns('',
     include(admin.site.urls)),
   (r'^{0}editor/'.format(DJANGO_BASE),
     include(editor_site.urls)),
+  (r'^{0}update_lang_variants/'.format(DJANGO_BASE),
+    'metashare.bcp47.views.update_lang_variants'),
+  (r'^{0}update_var_variants/'.format(DJANGO_BASE),
+    'metashare.bcp47.views.update_var_variants'),
+  (r'^{0}update_lang_variants_with_script/'.format(DJANGO_BASE),
+    'metashare.bcp47.views.update_lang_variants_with_script'),
+  (r'^{0}update_subdomains/'.format(DJANGO_BASE),
+    'metashare.eurovoc.views.update_subdomains'),
 )
 
 urlpatterns += patterns('metashare.accounts.views',
@@ -36,9 +46,9 @@ urlpatterns += patterns('metashare.repository.views',
   (r'^{0}repository/'.format(DJANGO_BASE), include('metashare.repository.urls')),
 )
 
-urlpatterns += patterns('metashare.sync.views',
-  (r'^{0}sync/'.format(DJANGO_BASE), include('metashare.sync.urls')),
-)
+# urlpatterns += patterns('metashare.sync.views',
+#   (r'^{0}sync/'.format(DJANGO_BASE), include('metashare.sync.urls')),
+# )
 
 urlpatterns += patterns('',
   (r'^{0}selectable/'.format(DJANGO_BASE), include('selectable.urls')),
@@ -56,6 +66,21 @@ if DJANGO_BASE == "":
     urlpatterns += patterns('',
       (r'^{}robots\.txt$'.format(DJANGO_BASE), direct_to_template, 
         {'template': 'robots.txt', 'mimetype': 'text/plain', 'extra_context' : { 'sitemap_url' : SITEMAP_URL }}),
+    )
+
+urlpatterns += patterns('',
+      (r'^{0}ELRC-SHARE_SCHEMA/v1.0/(?P<path>.*)$'.format(DJANGO_BASE),
+        'django.views.static.serve', {'document_root': SCHEMA_ROOT})
+    )
+
+urlpatterns += patterns('',
+      (r'^{0}documentation/(?P<path>.*)$'.format(DJANGO_BASE),
+        'django.views.static.serve', {'document_root': DOCUMENTATION_ROOT})
+    )
+
+urlpatterns += patterns('',
+      (r'^{0}ToS/$'.format(DJANGO_BASE),
+        'django.views.static.serve', {'document_root': SCHEMA_ROOT})
     )
 
 if DEBUG:

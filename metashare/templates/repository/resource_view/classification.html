@@ -2,7 +2,7 @@
 
 {% spaceless %}
 
-<label class='title'>Classification</label>
+{% if "classification" in key %}<label class='title'>Classification</label>{% endif %}
 <div class="dataline">
 {% for key, value in classifications.items %}
 	{% if "classification" in key %}

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ title }} &ndash; META-SHARE{% endblock %}
+{% block title %}{{ title }} &ndash; ELRC-SHARE{% endblock %}
 
 {% block messages %}
 {% if form.errors %}
@@ -11,13 +11,15 @@
 {% block content %}
 {% spaceless %}
 <h2>Create Account</h2>
+    <h3>Fields marked with an asterisk (<span style='color:red'>*</span>) are required</h3>
 <div class="content_box">
   <form class="form_helper" method="post" action="{% url metashare.accounts.views.create %}">
     {% csrf_token %}
     {% for field in form %}
       {{ field.errors }}
       {% if field.html_name == "accepted_tos" %}
-        {{ field }} <label for="{{ field.auto_id }}">I accept the <a target="_blank" href="{{ MEDIA_URL }}terms_of_service_reg.pdf">META-SHARE Terms of Service for registered users</a>.</label>
+{#        {{ field }} <label for="{{ field.auto_id }}">I accept the <a target="_blank" href="{{ MEDIA_URL }}terms_of_service_reg.pdf">ELRC Terms of Service for registered users</a>.</label>#}
+        {{ field }} <label for="{{ field.auto_id }}">I accept the <a target="_blank" href="/ToS">ELRC Terms of Service for registered users</a>.</label>
       {% else %}
         {{ field.label_tag }} {{ field }}
       {% endif %}

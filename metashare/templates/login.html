@@ -1,13 +1,16 @@
 {% extends "base.html" %}
 
-{% block title %}{% if title %}{{ title }}{% else %}Log in{% endif %} &ndash; META-SHARE{% endblock %}
-
+{% block title %}{% if title %}{{ title }}{% else %}Log in{% endif %} &ndash; ELRC-SHARE{% endblock %}
 {% block messages %}
 {% if form.errors %}
 <p class="error">Your username and password didn't match. Please try again.</p>
 {% endif %}
 {% endblock %}
-
+{% block back %}
+     <div class="back" style="margin-top: 20px">
+        <div style="width: 100% !important; height:450px; text-align: center; background-image: url('{{ MEDIA_URL }}/images/iStock_000055931356_XXXLarge_web.jpg'); background-position: center; background-repeat: no-repeat; border-bottom: 1px solid;"/>
+</div>
+{% endblock %}
 {% block content %}
 <h2>User Authentication</h2>
 <div class="content_box">

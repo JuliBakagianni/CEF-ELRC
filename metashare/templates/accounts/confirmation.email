@@ -1,11 +1,13 @@
 Dear {{firstname}} {{lastname}},
 
-we have received a registration request for a new META-SHARE user account "{{shortname}}" at [1]. You can confirm that registration request and create your account by clicking the following link:
+we have received a registration request for a new ELRC-SHARE user account "{{shortname}}" at [1] with this email. You can activate the account by clicking the following link or or by copying and pasting it to your browser:
 
   {{confirmation_url}}
 
-Please make sure to follow the link within three days. If you do not wish to create an account with this e-mail address, then please simply disregard this message.
+Please note that this link will expire in 3 days. 
 
-Welcome to META-SHARE!
+If you have not signed up for ELRC-SHARE, please ignore this message.
+
+The ELRC-SHARE team
 
 [1] {{ node_url }}

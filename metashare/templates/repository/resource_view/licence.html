@@ -1,12 +1,13 @@
 {% load replace %}
 {% load humanize %}
+{% load resource_distribution %}
 
 {% spaceless %}
 
 {% if "Licence" in key %}
 
 	{% for key1, value1 in value.items %}
-		{% if "Licence" in key1 %}
+		{% if "Licence" in key1 and not "Non-standard" in value1 %}
 			<div class="subtitle">
 				<label class="licence">
 					<strong><i>{{ value1|rep }}</i></strong>
@@ -16,16 +17,54 @@
 	{% endfor %}
 
 	{% for key1, value1 in value.items %}
-		{% if "Restrictions_of_use" in key1 %}
+		{% if "Conditions_of_use" in key1 %}
 			<div class="dataline indented">
 				<label>
-					<strong>Restrictions: </strong>{{ value1 }}
+					<strong>Conditions: </strong>{{ value1 }}
 				</label>
 			</div>
 		{% endif %}
 	{% endfor %}
 
-	{% for key1, value1 in value.items %}
+    {% for key1, value1 in value.items %}
+		{% if "Personal_Data_Included" in key1 and value1 == 'true' %}
+			<div class="dataline indented">
+				<label>
+					<strong>Personal Data Included</strong>
+				</label>
+                {% for key1, value1 in value.items %}
+                {% if "Personal_Data_Additional_Information" in key1 %}
+                    <div class="dataline indented">
+				        <label>
+					        <strong>Additional Information: </strong>{{ value1 }}
+				        </label>
+                    </div>
+                {% endif %}
+            {% endfor %}
+			</div>
+		{% endif %}
+	{% endfor %}
+
+{% for key1, value1 in value.items %}
+		{% if "Sensitive_Data_Included" in key1 and value1 == 'true' %}
+			<div class="dataline indented">
+				<label>
+					<strong>Sensitive Data Included</strong>
+				</label>
+                {% for key1, value1 in value.items %}
+                {% if "Sensitive_Data_Additional_Information" in key1 %}
+                    <div class="dataline indented">
+				        <label>
+					        <strong>Additional Information: </strong>{{ value1 }}
+				        </label>
+                    </div>
+                {% endif %}
+            {% endfor %}
+			</div>
+		{% endif %}
+	{% endfor %}
+
+   	{% for key1, value1 in value.items %}
 
 		{% if "Distribution_access_medium" in key1 %}
 			<div class="dataline indented">

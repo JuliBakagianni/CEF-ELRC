@@ -24,31 +24,23 @@
 			{% if documentation.Author %}
 				{{ documentation.Author }}, 			
 			{% endif %}
-			<strong><i>{{ documentation.Title }}</i></strong>, 
-			{% if documentation.Url %}
+			<strong><i>{{ documentation.Title }}</i></strong>
+			{% if documentation.Url %},
 				{% for key, value in documentation.items %}
 					{% if "Url" in key %}
 						{{ value|urlizetrunc:23 }}
 					{% endif %}
 				{% endfor %}
 			{% endif %}
-			{% if documentation.Journal %}
-				. In: {{ documentation.Journal }}
-			{% endif %}
+			{% if documentation.Journal %}. In: {{ documentation.Journal }}{% endif %}
 			{% if documentation.Volume %}
 				{{ documentation.Volume }}
 			{% endif %}
-			{% if documentation.Pages %}
-				, pp. {{ documentation.Pages }}
-			{% endif %}
+			{% if documentation.Pages %}, pp. {{ documentation.Pages }}{% endif %}
 			
-			{% if documentation.Conference %}
-				, {{ documentation.Conference }}
-			{% endif %}
+			{% if documentation.Conference %}, {{ documentation.Conference }}{% endif %}
 			
-			{% if documentation.Year %}
-				, {{ documentation.Year }}
-			{% endif %}		
+			{% if documentation.Year %}, {{ documentation.Year }}{% endif %}
 			
 		</label>
 	</div>

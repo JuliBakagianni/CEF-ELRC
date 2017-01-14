@@ -32,11 +32,11 @@ LOG_HANDLER.setFormatter(LOG_FORMATTER)
 # init root logger
 logging.basicConfig(format=LOG_FORMAT, datefmt=LOG_DATE, level=LOG_LEVEL)
 
-# Maximum size of files uploaded as resrouce data.
+# Maximum size of files uploaded as resource data.
 # The default is a cautious value in order to protect the server
 # against resource starvation; if you think your server can handle
 # bigger files, feel free to try and increase this value.
-MAXIMUM_UPLOAD_SIZE = 10 * 1024 * 1024
+MAXIMUM_UPLOAD_SIZE = 50 * 1024 * 1024
 
 # Synchronization info:
 SYNC_NEEDS_AUTHENTICATION = True

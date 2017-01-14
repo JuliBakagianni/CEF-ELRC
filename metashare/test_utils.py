@@ -16,8 +16,10 @@ from metashare.repository import supermodel
 from metashare.repository.management import GROUP_GLOBAL_EDITORS
 from metashare.repository.models import resourceInfoType_model, \
     personInfoType_model, actorInfoType_model, documentationInfoType_model, \
-    documentInfoType_model, targetResourceInfoType_model, organizationInfoType_model, \
+    documentInfoType_model, targetResourceInfoType_model, \
+    organizationInfoType_model, \
     projectInfoType_model
+
 from metashare.settings import LOGIN_URL
 from metashare.storage.models import PUBLISHED, MASTER, StorageObject, INTERNAL
 from metashare.xml_utils import import_from_file

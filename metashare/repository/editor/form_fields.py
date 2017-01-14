@@ -1,9 +1,12 @@
+from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import fields as django_fields
 from django.utils.translation import ugettext_lazy as _
 
 from metashare.repository import validators
-from metashare.repository.editor.widgets import LangDictWidget
+from xorformfields.forms import MutuallyExclusiveValueField
+from metashare.repository.editor.widgets import LangDictWidget, \
+    AdminMutuallyExclusiveRadioWidget
 
 
 class DictField(django_fields.Field):
@@ -18,7 +21,7 @@ class DictField(django_fields.Field):
         'duplicate_key': _(u'There may be only one entry with key "{}".'),
     }
 
-    def __init__(self, max_key_length=None, max_val_length=None, **kwargs):
+    def __init__(self, max_key_length=None, max_val_length=None , **kwargs):
         """
         Initializes a new `DictField`.
         
@@ -73,3 +76,22 @@ class XmlCharField(django_fields.CharField):
             u'http://www.w3.org/TR/2000/WD-xml-2e-20000814#NT-Char.'),
     }
     default_validators = [validators.validate_matches_xml_char_production]
+
+class AdminMutuallyExclusiveValueField(MutuallyExclusiveValueField):
+    """
+    A MultiValueField that aggregates two CharFields. It uses
+    the AdminMutuallyExclusiveRadioWidget, which has a Select
+    widget and a TextInput widget.
+    """
+    def __init__(self, fields=(), *args, **kwargs):
+        self.choices = kwargs.pop('choices', [])
+        if 'widget' not in kwargs:
+            kwargs['widget'] = AdminMutuallyExclusiveRadioWidget(widgets=[
+                    forms.Select(choices=self.choices),
+                    forms.TextInput()])
+
+        if len(fields)==0:
+            fields = (forms.CharField(), forms.CharField())
+
+        super(AdminMutuallyExclusiveValueField, self).__init__(
+            fields, *args, **kwargs)

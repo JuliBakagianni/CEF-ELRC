@@ -1,0 +1,135 @@
+{% load analytical %}
+{% load adminmedia %}
+{% load url_valid %}
+<html>
+<head>
+    {% analytical_head_top %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>{% spaceless %}{% block title %}ELRC-SHARE Repository{% endblock %}{% endspaceless %}</title>
+    <meta name="description" content="{% spaceless %}{% block description %}ELRC-SHARE: a sustainable network of repositories of language resources documented with high-quality metadata, allowing for uniform search and access to resources.{% endblock %}{% endspaceless %}" />
+    <meta name="keywords" content="{% spaceless %}{% block keywords %}ELRC-SHARE, META-SHARE, language resources, language tools, META-NET{% endblock %}{% endspaceless %}" />
+    <link rel="shortcut icon" href="/site_media/images/favicon.ico" />
+    <link rel="stylesheet" href="/site_media/css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="/site_media/css/blueprint/print.css" type="text/css" media="print">
+    <!--[if lt IE 8]><link rel="stylesheet" href="/site_media/css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    <link rel="stylesheet" href="/site_media/css/sexybuttons/sexybuttons.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/site_media/css/screen.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/site_media/css/typo.css" type="text/css" media="screen">
+    <script type="text/javascript" src="/site_media/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/site_media/js/metashare.js"></script>
+    {% block links %}{% endblock %}{% analytical_head_bottom %}
+    <script type="text/javascript">
+    var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-36199711-1']); _gaq.push(['_gat._anonymizeIp']);
+    _gaq.push(['_setDomainName', 'none']); _gaq.push(['_setAllowLinker', true]); _gaq.push(['_trackPageview']);
+    (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();
+  	</script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <style type="text/css">
+        .error {text-align: center; width: 500px; margin: 10px auto;
+            padding: 5px; border-radius: 5px; background: #fbc2c4}
+        .warning {text-align: center; width: 100%; margin: 10px auto;
+            padding: 3px; border-radius: 5px; background: #eee445}
+        .success {text-align: center; width: 800px; margin: 10px auto;
+            padding: 5px; border-radius: 5px;}
+    </style>
+</head>
+<body>
+{% include 'header.html' %}
+<div style="display:block; margin-top:100px; padding:20px">
+ {% if user.get_profile.is_superuser %}
+    <h3>Manage contributed resources</h3>
+ {% else %}
+    <h3>Unmanaged Contributed Resources</h3>
+ {% endif %}
+{% for message in messages %}
+<div class="{{ message.tags }}">{{ message|linebreaksbr }}</div>
+{% endfor %}
+
+<style type="text/css">
+    td, th {
+        padding: 5px;
+        vertical-align: text-top;
+    }
+</style>
+<form method="post" action="{% url metashare.repository.views.addtodb %}">
+{% if filelist|length != 0 %}
+<table class="table table-striped table-bordered">
+    <thead>
+         <tr>
+             <th class="sorting">Resource Title</th>
+             <th>Short Description</th>
+             <th class="sorting">Languages</th>
+             <th class="sorting">Contributor</th>
+             <th class="sorting">Country</th>
+             <th>Phone Number</th>
+             <th class="sorting">Organization</th>
+             {% if user.get_profile.is_superuser %}
+                 <th>Data</th>
+                 <th>Import as</th>
+                 <th></th>
+             {% endif %}
+         </tr>
+    </thead>
+{% for file in filelist %}
+    <tr>
+        <input name="file[]" type="hidden" value="{{ file.resource_file|join:"" }}">
+        <input name="contributor_fname" type="hidden" value="{{ file.userInfo.firstname|join:"" }}"/>
+        <input name="contributor_lname" type="hidden" value="{{ file.userInfo.lastname|join:"" }}"/>
+{#        <td name="resourceName">{{ file.title|join:"" }}</td>#}
+        <td>{{ file.title|join:""}}</td>
+        <td style="max-width:210px">{{ file.description|join:"" }}</td>
+        <td>{{ file.languages|join:", "}}</td>
+        <td>
+            <span>{{ file.userInfo.firstname|join:"" }} </span>
+            <span>{{ file.userInfo.lastname|join:"" }}</span>
+        </td>
+        <td>{{ file.userInfo.country|join:", "}}</td>
+        <td>{{ file.userInfo.phoneNumber|join:", "}}</td>
+        <td>{{ file.userInfo.institution|join:", "}}</td>
+        {% if user.get_profile.is_superuser %}
+            <td>
+                {% if file.dataset.zip %}
+                    <a href="/repository/get_data/{{ file.dataset.zip|join:"" }}">{{ file.dataset.zip|join:"" }}</a>
+                    {% else %}
+                        {% if file.dataset.url %}
+                            <a href="{{ file.dataset.url|join:""|url_valid }}" target="_blank">{{ file.dataset.url|join:"" }}</a>
+                            {% else %}
+                                No Data Available
+                        {% endif %}
+                {%  endif %}
+            </td>
+            <td>
+                <select name="resourceType[]">
+                    <option value="">------------</option>
+                    <option value="corpus">Corpus</option>
+                    <option value="langdesc">Language description</option>
+                    <option value="lexicon">Lexical conceptual resource</option>
+                </select>
+            </td>
+{#            <td><a class="btn btn-warning" style = "color:#FFF" href="remove/{{ file.resource_file|join:"" }}"#}
+{#            onclick="return confirm('Are you sure you want to remove this record? The contribution will ' +#}
+{#             'no longer be available for import into the database!')">Remove</a></td>#}
+        {% endif %}
+    </tr>
+{% endfor %}
+</table>
+     {% if user.get_profile.is_superuser %}
+        <button type="submit" class="btn btn-success" value="submit" style="float: right">Import Resources to Database</button>
+     {% endif %}
+</form>
+    {% else %}
+<div>
+    No New Resources
+</div>
+{% endif %}
+</div>
+</body>
+</html>

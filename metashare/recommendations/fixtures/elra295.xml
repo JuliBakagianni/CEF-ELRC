@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+<resourceInfo xmlns="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/ https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/META-SHARE-Resource.xsd">
   <identificationInfo>
     <resourceName lang="en">VERBA Polytechnic and Plurilingual
       Terminological Database - I-MN Outfitting</resourceName>
@@ -48,15 +50,20 @@
       une abréviation, une information sur l'usage et des étiquettes
       grammaticales.Format: ASCIISupport : disquette</description>
     <resourceShortName/>
-    <url>http://catalog.elra.info/product_info.php?products_id=293</url>
+    <landingPage>http://catalog.elra.info/product_info.php?products_id=293</landingPage>
     <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
     <identifier>ELRA-T0218</identifier>
+    <createdUsingELRCServices>false</createdUsingELRCServices>
+    <publicSectorInformation>false</publicSectorInformation>
   </identificationInfo>
   <distributionInfo>
-    <availability>available-unrestrictedUse</availability>
-    <licenceInfo>
-      <licence>AGPL</licence>
+    <availability>available</availability><licenceInfo>
+      <licence>CC-BY</licence>
+      <personalDataIncluded>false</personalDataIncluded>
+      <sensitiveDataIncluded>false</sensitiveDataIncluded>
+      <restrictionsOfUse>attribution</restrictionsOfUse>
     </licenceInfo>
+    <allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
   </distributionInfo>
   <contactPerson>
     <surname>Test</surname>
@@ -79,10 +86,6 @@
       </communicationInfo>
     </metadataCreator>
   </metadataInfo>
-  <versionInfo>
-    <version>1.0</version>
-    <lastDateUpdated>2006-09-27</lastDateUpdated>
-  </versionInfo>
   <resourceComponentType>
     <lexicalConceptualResourceInfo>
       <resourceType>lexicalConceptualResource</resourceType>
@@ -91,15 +94,15 @@
         <lexicalConceptualResourceTextInfo>
           <mediaType>text</mediaType>
           <lingualityInfo>
-            <lingualityType>monolingual</lingualityType>
+            <lingualityType>bilingual</lingualityType>
           </lingualityInfo>
           <languageInfo>
-            <languageId>eng</languageId>
             <languageName>English</languageName>
+            <languageId>en</languageId>
           </languageInfo>
           <languageInfo>
-            <languageId>spa</languageId>
-            <languageName>Spanish</languageName>
+            <languageName>Spanish; Castilian</languageName>
+            <languageId>es</languageId>
             <languageVarietyInfo>
               <languageVarietyType>dialect</languageVarietyType>
               <languageVarietyName>Castilian</languageVarietyName>
@@ -111,7 +114,7 @@
           </languageInfo>
           <sizeInfo>
             <size>123</size>
-            <sizeUnit>elements</sizeUnit>
+            <sizeUnit>tokens</sizeUnit>
           </sizeInfo>
         </lexicalConceptualResourceTextInfo>
       </lexicalConceptualResourceMediaType>

@@ -6,7 +6,7 @@ from django.template import RequestContext
 
 from metashare.repository.models import resourceInfoType_model
 from metashare.settings import LOG_HANDLER
-from metashare.storage.models import PUBLISHED
+from metashare.storage.models import PUBLISHED, INGESTED
 
 
 # Setup logging support.
@@ -18,10 +18,15 @@ def frontpage(request):
     """Renders the front page view."""
     LOGGER.info('Rendering frontpage view for user "{0}".'
                 .format(request.user.username or "Anonymous"))
-    lr_count = resourceInfoType_model.objects.filter(
-        storage_object__publication_status=PUBLISHED,
+    if request.user.is_superuser or request.user.groups.filter(name='ecmembers'):
+        lr_count = resourceInfoType_model.objects.filter(
+        storage_object__publication_status__in=[INGESTED,PUBLISHED],
         storage_object__deleted=False).count()
-    dictionary = {'title': 'Welcome to META-SHARE!', 'resources': lr_count}
+    else:
+        lr_count = resourceInfoType_model.objects.filter(
+            storage_object__publication_status=PUBLISHED,
+            storage_object__deleted=False).count()
+    dictionary = {'title': 'Welcome to ELRC-SHARE!', 'resources': lr_count}
     return render_to_response('frontpage.html', dictionary,
       context_instance=RequestContext(request))
 

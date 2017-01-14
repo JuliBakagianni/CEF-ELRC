@@ -2,22 +2,21 @@
     DJANGO Admin styles
 */
 @font-face {
-    font-family: 'TitilliumText';
-    src: url('../../fonts/TitilliumTextRegular.woff') format('woff');
+    font-family: 'Arimo';
+    src: url('../../fonts/Arimo-Regular.ttf') format('ttf');
 }
 
 @font-face {
-    font-family: 'TitilliumText';
-    src: url('../../fonts/TitilliumTextBold.woff') format('woff');
+    font-family: 'Arimo';
+    src: url('../../fonts/Arimo-Bold.ttf') format('ttf');
     font-weight: bold;
 }
-
 
 body {
     margin: 0;
     padding: 0;
     font-size: 12px;
-    font-family: "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+    font-family: Arimo,Arial,sans-serif;
     color: #333;
     background: #fff;
 }
@@ -25,7 +24,7 @@ body {
 /* LINKS */
 
 a:link, a:visited {
-    color: #5b80b2;
+    color: #46648c;
     text-decoration: none;
 }
 
@@ -366,6 +365,8 @@ input, textarea, select, .form-row p {
 
 textarea {
     vertical-align: top !important;
+    height: 16px;
+
 }
 
 input[type=text], input[type=password], textarea, select, .vTextField {
@@ -419,6 +420,7 @@ input[type=text], input[type=password], textarea, select, .vTextField {
     border: 1px solid #ccc;
     margin-bottom: 5px;
     background: white;
+    margin-top: 10px;
 }
 
 .module p, .module ul, .module h3, .module h4, .module dl, .module pre {
@@ -710,7 +712,7 @@ table#change-history tbody th {
 }
 
 .popup .colM {
-    width: 95%;
+    width: 96%;
 }
 
 .subcol {

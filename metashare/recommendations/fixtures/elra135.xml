@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<resourceInfo xmlns:xslt="http://xml.apache.org/xsltm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ilsp.gr/META-XMLSchema" xsi:schemaLocation="http://www.ilsp.gr/META-XMLSchema http://metashare.ilsp.gr/META-XMLSchema/v3.0/META-SHARE-Resource.xsd">
+<resourceInfo xmlns="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/ https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v1.0/META-SHARE-Resource.xsd">
   <identificationInfo>
     <resourceName lang="en">The CINTIL Corpus – International
       Corpus of Portuguese
@@ -120,16 +120,18 @@
       d’annotation est fourni avec le corpus.Une recherche dans le
       corpus peut être effectuée en ligne: http://cintil.ul.pt/
     </description>
-    <resourceShortName/>
-    <url>http://catalog.elra.info/product_info.php?products_id=1102</url>
-    <metaShareId>NOT_DEFINED_FOR_V2</metaShareId>
-    <identifier>ELRA-W0050</identifier>
+    <createdUsingELRCServices>false</createdUsingELRCServices>
+    <publicSectorInformation>false</publicSectorInformation>
   </identificationInfo>
   <distributionInfo>
-    <availability>available-unrestrictedUse</availability>
+    <availability>available</availability>
     <licenceInfo>
-      <licence>AGPL</licence>
+      <licence>CC-BY</licence>
+      <personalDataIncluded>false</personalDataIncluded>
+      <sensitiveDataIncluded>false</sensitiveDataIncluded>
+      <restrictionsOfUse>attribution</restrictionsOfUse>
     </licenceInfo>
+    <allowsUsesBesidesDGT>true</allowsUsesBesidesDGT>
   </distributionInfo>
   <contactPerson>
     <surname>Test</surname>
@@ -152,10 +154,6 @@
       </communicationInfo>
     </metadataCreator>
   </metadataInfo>
-  <versionInfo>
-    <version>1.0</version>
-    <lastDateUpdated>2009-06-09</lastDateUpdated>
-  </versionInfo>
   <resourceComponentType>
     <corpusInfo>
       <resourceType>corpus</resourceType>
@@ -166,15 +164,15 @@
             <lingualityType>monolingual</lingualityType>
           </lingualityInfo>
           <languageInfo>
-            <languageId>por</languageId>
             <languageName>Portuguese</languageName>
+            <languageId>pt</languageId>
           </languageInfo>
           <sizeInfo>
             <size>123</size>
-            <sizeUnit>elements</sizeUnit>
+            <sizeUnit>tokens</sizeUnit>
           </sizeInfo>
           <textFormatInfo>
-            <mimeType>Plain text</mimeType>
+            <mimeType>text/plain</mimeType>
           </textFormatInfo>
         </corpusTextInfo>
       </corpusMediaType>

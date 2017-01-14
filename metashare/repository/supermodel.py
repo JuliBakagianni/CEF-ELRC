@@ -15,7 +15,8 @@ from django.db.models.fields import related
 from django.db.models.fields.related import ForeignRelatedObjectsDescriptor, \
     OneToOneField
 
-import metashare.repository.models
+# import metashare.repository.models
+
 from metashare.repository.fields import MultiSelectField, MultiTextField, \
     MetaBooleanField, DictField
 from metashare.settings import LOG_HANDLER, \
@@ -41,7 +42,7 @@ OPTIONAL = 2
 RECOMMENDED = 3
 
 # template of a META-SHARE metadata XML schema URL
-SCHEMA_URL = 'http://metashare.ilsp.gr/META-XMLSchema/v{0}/' \
+SCHEMA_URL = 'https://elrc-share.ilsp.gr/ELRC-SHARE_SCHEMA/v{0}/' \
   'META-SHARE-Resource.xsd'
 
 METASHARE_ID_REGEXP = re.compile('<metashareId>.+</metashareId>',
@@ -88,6 +89,25 @@ def _make_choices_from_list(source_list):
     for value in source_list:
         _choices.append((value, prettify_camel_case_string(value)))
         _max_len = max(_max_len, len(value))
+    return {'max_length': _max_len, 'choices': tuple(_choices)}
+
+def _make_choices_from_list_alt(source_list,dic):
+    """
+    Converts a given list of Strings to tuple choices.
+
+    The Dictionary argument "dic" is used for mapping & displaying a desired label
+    for every value in the source_list that should be stored in the db. The label
+    is prettified when displayed.
+
+    Returns a dictionary containing two keys:
+    - max_length: the maximum char length for this source list,
+    - choices: the list of (value, pretty_print_value) tuple choices.
+    """
+    _choices = []
+    _max_len = 1
+    for key in source_list:
+        _choices.append((key ,prettify_camel_case_string(dic[key])))
+        _max_len = max(_max_len, len(dic[key]))
     return {'max_length': _max_len, 'choices': tuple(_choices)}
 
 def _make_choices_from_int_list(source_list):
@@ -244,7 +264,8 @@ class SchemaModel(models.Model):
 
             # xs:anyURI values are internally stored as valid URIs which may
             # contain escaped characters; unescape them again for the export
-            if field and metashare.repository.models.HTTPURI_VALIDATOR in \
+            from metashare.repository.models import HTTPURI_VALIDATOR
+            if field and HTTPURI_VALIDATOR in \
                     field.validators and value:
                 try:
                     value = urllib.unquote(str(value)).decode('utf8')
@@ -307,7 +328,8 @@ class SchemaModel(models.Model):
         # If we have an xs:anyURI value, then it must be a URI according to RFC
         # 2396 or it must result in such a URI after applying the algorithm from
         # <http://www.w3.org/TR/2001/REC-xlink-20010627/#link-locators>.
-        if metashare.repository.models.HTTPURI_VALIDATOR in field.validators \
+        from metashare.repository.models import HTTPURI_VALIDATOR
+        if HTTPURI_VALIDATOR in field.validators \
                 and result is not None:
             result = urllib.quote(result.encode('utf8'),
                 r'''!#$%&'()*+,/:;=?@[]~''')
